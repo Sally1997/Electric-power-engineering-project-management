@@ -1,8 +1,8 @@
-package com.blackstar0412.Dao;
+package com.holyshit.Dao;
 
 import java.sql.SQLException;
 
-import com.blackstar0412.domain.Account;
+import com.holyshit.domain.Account;
 
 public interface AccountDao {
 	/**

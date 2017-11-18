@@ -1,4 +1,4 @@
-package com.blackstar0412.utils;
+package com.holyshit.utils;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

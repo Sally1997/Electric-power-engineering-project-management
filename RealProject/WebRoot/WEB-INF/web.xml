@@ -3,15 +3,15 @@
   <display-name>RealProject</display-name>
   <servlet>
     <servlet-name>ValidateCode</servlet-name>
-    <servlet-class>com.blackstar0412.web.servlet.ValidateCode</servlet-class>
+    <servlet-class>com.holyshit.web.servlet.ValidateCode</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>StaffLogin</servlet-name>
-    <servlet-class>com.blackstar0412.web.servlet.StaffLogin</servlet-class>
+    <servlet-class>com.holyshit.web.servlet.StaffLogin</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>GetUserLogoById</servlet-name>
-    <servlet-class>com.blackstar0412.web.servlet.GetUserLogoById</servlet-class>
+    <servlet-class>com.holyshit.web.servlet.GetUserLogoById</servlet-class>
   </servlet>
 
 

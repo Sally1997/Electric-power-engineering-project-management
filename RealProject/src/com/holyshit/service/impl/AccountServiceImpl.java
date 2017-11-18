@@ -1,15 +1,15 @@
-package com.blackstar0412.service.impl;
+package com.holyshit.service.impl;
 
 import java.sql.SQLException;
 
-import com.blackstar0412.Dao.AccountDao;
-import com.blackstar0412.Dao.StaffDao;
-import com.blackstar0412.Dao.impl.AccountDaoImpl;
-import com.blackstar0412.Dao.impl.StaffDaoImpl;
-import com.blackstar0412.domain.Account;
-import com.blackstar0412.domain.Staff;
-import com.blackstar0412.service.AccountService;
-import com.blackstar0412.utils.ConnectionManager;
+import com.holyshit.Dao.AccountDao;
+import com.holyshit.Dao.StaffDao;
+import com.holyshit.Dao.impl.AccountDaoImpl;
+import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.domain.Account;
+import com.holyshit.domain.Staff;
+import com.holyshit.service.AccountService;
+import com.holyshit.utils.ConnectionManager;
 
 public class AccountServiceImpl implements AccountService {
 	//Account表操作接口

@@ -1,13 +1,13 @@
-package com.blackstar0412.Dao.impl;
+package com.holyshit.Dao.impl;
 
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
-import com.blackstar0412.Dao.StaffDao;
-import com.blackstar0412.domain.Staff;
-import com.blackstar0412.utils.ConnectionManager;
+import com.holyshit.Dao.StaffDao;
+import com.holyshit.domain.Staff;
+import com.holyshit.utils.ConnectionManager;
 
 public class StaffDaoImpl implements StaffDao {
 

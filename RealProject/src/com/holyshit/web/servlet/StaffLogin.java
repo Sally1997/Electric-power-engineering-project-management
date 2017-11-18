@@ -1,4 +1,4 @@
-package com.blackstar0412.web.servlet;
+package com.holyshit.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,9 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
-import com.blackstar0412.domain.Account;
-import com.blackstar0412.service.AccountService;
-import com.blackstar0412.service.impl.AccountServiceImpl;
+import com.holyshit.domain.Account;
+import com.holyshit.service.AccountService;
+import com.holyshit.service.impl.AccountServiceImpl;
 
 public class StaffLogin extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

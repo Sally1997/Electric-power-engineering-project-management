@@ -1,6 +1,6 @@
-package com.blackstar0412.service;
+package com.holyshit.service;
 
-import com.blackstar0412.domain.Account;
+import com.holyshit.domain.Account;
 
 public interface AccountService {
 	/**

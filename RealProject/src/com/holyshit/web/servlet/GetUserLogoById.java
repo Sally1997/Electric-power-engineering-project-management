@@ -1,4 +1,4 @@
-package com.blackstar0412.web.servlet;
+package com.holyshit.web.servlet;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.blackstar0412.service.AccountService;
-import com.blackstar0412.service.impl.AccountServiceImpl;
+import com.holyshit.service.AccountService;
+import com.holyshit.service.impl.AccountServiceImpl;
 
 public class GetUserLogoById extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -1,4 +1,4 @@
-package com.blackstar0412.domain;
+package com.holyshit.domain;
 
 import java.sql.Date;
 

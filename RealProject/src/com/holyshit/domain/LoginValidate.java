@@ -1,4 +1,4 @@
-package com.blackstar0412.domain;
+package com.holyshit.domain;
 
 public class LoginValidate {
 	private String staffno;

@@ -1,14 +1,17 @@
-package com.blackstar0412.Dao.impl;
+package com.holyshit.Dao.impl;
 
 import java.sql.SQLException;
+
+
+
 
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
-import com.blackstar0412.Dao.AccountDao;
-import com.blackstar0412.domain.Account;
-import com.blackstar0412.utils.ConnectionManager;
+import com.holyshit.Dao.AccountDao;
+import com.holyshit.domain.Account;
+import com.holyshit.utils.ConnectionManager;
 
 public class AccountDaoImpl implements AccountDao{
 
