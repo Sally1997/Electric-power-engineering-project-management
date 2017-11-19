@@ -22,6 +22,8 @@ public class StageServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setHeader("text/html", "charset=UTF-8");
+		
 		ProjectStage pro_stage = new ProjectStage();
 		TaskIndexs task_index = new TaskIndexs();
 		

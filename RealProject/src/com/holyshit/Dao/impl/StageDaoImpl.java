@@ -14,13 +14,13 @@ public class StageDaoImpl implements StageDao {
 		
 		
 		
-		qr.update(ConnectionManager.getConnection(), "insert into ProjectStage"
+		qr.update(ConnectionManager.getConnection(), "insert into ProjectStage "
 				+ "values (?,?,?,?,?,?,?)",
 				pro_stage.getStageNo(),pro_stage.getProjectNo(),
 				pro_stage.getStageName(),pro_stage.getPublisherNo(),
 				pro_stage.getChargePerNo(),pro_stage.getStartDate(),
 				pro_stage.getEndDate());
-		qr.update(ConnectionManager.getConnection(), "insert into taskindexes"
+		qr.update(ConnectionManager.getConnection(), "insert into taskindexes "
 				+ "values (?,?,?,?)",
 				task_index.getIndexNo(),task_index.getTaskNo(),
 				task_index.getIndexInfo(),task_index.getAttachPath());
