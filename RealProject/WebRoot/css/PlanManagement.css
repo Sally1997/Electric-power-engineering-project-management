@@ -1,0 +1,111 @@
+html{
+	height:100%;
+	width:100%;
+}
+body{
+	height:100%;
+	width:100%;
+
+	background-color: #f7f5e6;
+	font-family: SimHei;
+	color:white;
+	margin:0px;
+
+}
+
+
+header{
+	height: 12%;
+	width:100%;
+	background-color: #333A56;
+	overflow: hidden;
+}
+#notifNum{
+	color:#fff;
+	border-radius: 40%;
+	padding:1px 4px;
+	background-color: red;
+}
+
+#headerLeft{
+	float:left;
+	margin:25px 0px 25px 30px;
+	padding-top: 5px;
+
+}
+
+#headerRight{
+	float:right;
+	margin:18px 100px 0px 0px;
+
+}
+#headerUser{
+	padding-bottom: 15px;
+} 
+
+
+nav{
+	float:left;
+	background-color:#52658f;
+	height:7%;
+	width: 100%;
+}
+
+.menu{
+	border-radius: 15%;
+	border:solid black 1px;
+	background-color: #333A56;
+	padding:4px 5px;
+	margin: 0px 40px 0px 30px;
+	text-align: center;
+	position: relative;
+	top:10px;
+
+}
+#MPageLink{
+	padding:9px;
+}
+
+a{
+	text-decoration: none;
+}
+a{
+	color: white;
+}
+a:hover{
+	color:blue;
+}
+
+section{
+	width:100%;
+	color:#333A56;
+}
+
+ 
+
+#addTask{
+	width:50%;
+    margin:15% 25%;
+    padding:2% 0% 2% 0%;
+	background-color: #f7f5e6; 
+	background-color: #e8e8e8;
+	font: 60px thin;
+	color:#333a56;
+	text-align: center;
+	border-radius: 5%;
+}
+
+
+footer{
+	height:9%;
+	width:100%;
+	font-size: 120%;
+	background-color: #333A56;
+	text-align: center;
+	padding-top: 10px;
+	position: absolute;
+	right:0px;
+	bottom: 0px;
+
+}
+		 
