@@ -1,0 +1,212 @@
+*{
+			margin: 0px;
+			padding: 0px;
+		}
+		#top{
+			color:white;
+			background-color:#24292e;
+			height: 100px;
+			width: 100%;
+			line-height: 100px;
+			font-size: 30px;
+			text-align: center;
+			font-weight: bold;
+		}
+		#left_main{
+			width: 60%;
+			/* background-color: #f9f9f9; */
+			float: left;
+			height: 600px;
+		}
+		#right_main{
+			width: 40%;
+		/* 	background-color: #f9f9f9; */
+			float: left;
+			height: 600px;
+
+		}
+		
+		#top_main{
+			width: 100%;
+			height: 100px;
+		}
+		#content{
+			width: 100%;
+			height: 500px;
+			position: relative;
+			z-index: 1;
+		}
+		#bottom{
+			line-height:100px;
+			width: 100%;
+			height: 100px;
+			text-align: center;
+			background-color: black;
+		}
+		#capital{
+			display: inline-block;
+			width: 100%;
+			color:black;
+			height: 50px;
+			line-height: 100px;
+			font-size: 20px;
+			
+			text-align: center;
+		}
+		#login_form{
+			width: 50%;
+			height: 350px;
+			background-color: white;
+	/* 		margin-left: 25%; */
+			border-radius:20px;
+			margin-top:10px;
+			margin-bottom: 10px;
+			border: 1px solid gray;
+		}
+		#find_passwd{
+			width: 50%;
+			height: 80px;
+			background-color: white;
+			/* margin-left: 25%; */
+			border-radius:20px;
+			border: 1px solid gray;
+			text-align: center;
+			line-height: 80px;
+			font-family: 宋体;
+			font-size: 17px;
+		}
+		#find_passwd a{
+			text-decoration: none;
+			font-weight:bold;
+			font-family: 宋体;
+			color: #0366d6;
+			
+		}	
+		#userid{
+			display: block;
+		}
+		#meihua{
+			opacity:0.7;
+			width: 100%;
+			height: 700px;
+			position: absolute;
+			top: 100px;
+			background-color: black;
+		}
+		#img{
+			display:inline-block;
+			width: 100px;
+			height: 40px;
+			position: relative;
+			top: 10px;
+		}
+		#admin_detail{
+			width: 50%;
+			height: 100px;
+			background-color: white;
+			/* margin-left: 25%; */
+			border-radius:20px;
+			border: 1px solid gray;
+			display: none;
+		}
+		.input_font{
+			font-family：黑体;
+			font-weight:bold;
+			margin-left: 10%;
+			width:20%;
+			display:inline-block;
+			height: 50px;
+			line-height: 50px;
+		}
+		.input_frame{
+			height: 30px;
+			line-height:30px;
+			font-size:20px;
+			width: 80%;
+			margin-left: 10%;
+			border-radius:5px;
+			border: 1px solid gray;
+		}
+		.submit_font{
+			margin-top:30px;
+			height: 35px;
+			width: 80%;
+			font-size:15px;
+			color:white;
+			font-weight:bold;
+			margin-left: 10%;
+			border-radius:5px;
+			border: 1px solid gray;
+			background-color: #28a745;
+		}
+		.cr_font{
+			font-size: 15px;
+			color: #838B83;
+		}
+		.logo{
+			display: block;
+			overflow:hidden;
+			background-color: white;
+			width: 80px;
+			height: 80px;
+			border-radius:80px;
+			margin-left: 18%;
+			position: relative;
+			top: 20px;
+			z-index: 1;
+		}
+		.clear{
+			clear: both;
+		}
+		.main_label{
+			display: block;
+			height: 200px;
+			width: 350px;
+			position: relative;
+			z-index: 1;
+			color: white;
+			font-family: 黑体;
+			font-weight: bold;
+			font-size: 60px;
+			top: 150px;
+			left: 200px;
+		}
+		.decri_label{
+			display: block;
+			width: 600px;
+			height: 400px;
+			color:gray;
+			position: absolute;
+			z-index: 1;
+			font-size: 20px;
+			left: 200px;
+			top: 400px;
+		}
+		.detail_left{
+			margin-left:20px;
+			display:inline-block;
+			height: 30px;
+			line-height: 30px;
+			font-family: 宋体;
+			font-weight: bold;
+			width: 20%;
+		}
+		.detail_right{
+			width:60%;
+			display:inline-block;
+			height: 30px;
+			line-height: 30px;
+			font-family: 宋体;
+		}
+		.admin_font{
+			font-weight: bold;
+			font-family: 黑体;
+			font-size: 15px;
+			color: red;
+		}
+		.error{
+			display:inline-block;
+			color:red;
+			width:20%;
+			font-size:10px;
+		}
