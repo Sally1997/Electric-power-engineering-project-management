@@ -40,13 +40,13 @@ public class StageServlet extends HttpServlet {
 			
 			//阶段编号（7），发布（12），负责人（12）null
 			//指标编号（11），任务编号（10）null
-			pro_stage.setStageNo("2015260");
-			pro_stage.setProjectNo("10429");
-			pro_stage.setPublisherNo("201526010429");
-			pro_stage.setChargePerNo("201526010430");
+			pro_stage.setStageNo("2015261");
+			pro_stage.setProjectNo("10422");
+			pro_stage.setPublisherNo("201526010422");
+			pro_stage.setChargePerNo("201526010431");
 			
-			task_index.setIndexNo("15111214725");
-			task_index.setTaskNo("1142265151");
+			task_index.setIndexNo("15111214722");
+			task_index.setTaskNo("1142265153");
 			//指标
 			task_index.setIndexInfo(request.getParameter("IndexInfo"));
 			
@@ -64,8 +64,8 @@ public class StageServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		//分发转向
-		/*response.getWriter().print("<script>新建成功！</script>");*/
-//		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManagement_NewMilestone.jsp");
+		response.getWriter().print("<script>新建成功！</script>");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManagement_NewMilestone.jsp");
 //	
 	}
 
