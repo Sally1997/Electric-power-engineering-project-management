@@ -1,2 +1,4 @@
 # Electric-power-engineering-project-management
-study
+good good study
+day day up
+go go go！
