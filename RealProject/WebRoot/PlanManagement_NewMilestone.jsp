@@ -26,10 +26,10 @@
 		<section >
 			<p id="TaskShow"></p>
 			<div id="MileStone">
-			<form id="addMileStone"  method="post">
+			<form id="addMileStone"  method="post" action="">
 				<div class="tableRow">
 				<p class="tableAttribute">阶段名称: </p>
-				<p class="tableContent"><input type="text" name="MileStone" value="阶段XXX"></p>
+				<p class="tableContent"><input type="text" name="StageName" value="阶段XXX"></p>
 				</div>
 
 
@@ -58,13 +58,15 @@
 				<p class="tableAttribute"><!--记得改成列表-->
 				指标：
 				</p>
-				<p class="tableContent"><textarea></textarea></p>
+				<p class="tableContent">
+				<textarea name="IndexInfo"></textarea></p>
 				</div>
-				<input type="button" onclick="upload()" value="新建阶段">
 			</form>
 				<p>
-					<span class="submit"><a    href="PlanManagement_NewMilestone.html">新建阶段</a></span>
-					<span class="submit"><a   href="PlanManagement_Newed.html">结束新建</a></span>
+					<!-- <input class="submit" id="new_class_1" type="button" onclick="upload()" value="新建阶段"> -->
+					<!-- <a href="PlanManagement_NewMilestone.html">新建阶段</a> -->
+					<span class="submit"><a style="cursor:pointer" onclick="upload()">新建阶段</a></span>
+					<span class="submit"><a   href="PlanManagement_Newed.jsp">结束新建</a></span>
 				</p>
 			</div>
 		</section>
@@ -83,7 +85,7 @@
 	function upload(){
 		/* method = "post";
 		action = "/servlet/StageServlet"; */
-		action="${pageContext.request.contextPath}/servlet/StageServlet";
+		document.getElementById("addMileStone").action="${pageContext.request.contextPath}/servlet/StageServlet";
 		document.getElementById("addMileStone").submit();
 	}
 </script>

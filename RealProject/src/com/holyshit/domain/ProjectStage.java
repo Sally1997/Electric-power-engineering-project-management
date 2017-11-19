@@ -14,6 +14,7 @@ public class ProjectStage {
 	public String getStageNo() {
 		return StageNo;
 	}
+	
 	public void setStageNo(String stageNo) {
 		StageNo = stageNo;
 	}
@@ -53,6 +54,10 @@ public class ProjectStage {
 	public void setEndDate(Date endDate) {
 		EndDate = endDate;
 	}
-	
+	public String toString() {
+		return "ProjectStage [StageNo=" + StageNo + ", ProjectNo=" + ProjectNo + ", StageName=" + StageName
+				+ ", PublisherNo=" + PublisherNo + ", ChargePerNo=" + ChargePerNo +", StartDate=" + StartDate
+						+ ", EndDate=" + EndDate + " ]";
+	}
 	
 }

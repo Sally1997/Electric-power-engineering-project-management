@@ -23,7 +23,7 @@ public class StaffLogin extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		//»ñÈ¡±íµ¥
+		//ï¿½ï¿½È¡ï¿½ï¿½
 		Account account=new Account();
 		
 		try {
@@ -34,7 +34,7 @@ public class StaffLogin extends HttpServlet {
 			e.printStackTrace();
 		}
 		String code=request.getParameter("validatecode");
-		//ÊÇ·ñµÇÂ½³É¹¦
+		//ï¿½Ç·ï¿½ï¿½Â½ï¿½É¹ï¿½
 		AccountService as=new AccountServiceImpl();
 		boolean res=false;
 		Map<String, String> error=new HashMap<String, String>();
@@ -47,28 +47,28 @@ public class StaffLogin extends HttpServlet {
 			}
 			else {
 			
-				error.put("username", "ÓÃ»§Ãû»òÕßÃÜÂë´íÎó");
+				error.put("username", "ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 		}else {
 		
-			error.put("validatecode", "ÑéÖ¤Âë´íÎó");
+			error.put("validatecode", "ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}	
-		//·Ö·¢×ªÏò
+		//ï¿½Ö·ï¿½×ªï¿½ï¿½
 		if(res){
-			//ÉèÖÃsession
+			//ï¿½ï¿½ï¿½ï¿½session
 			session.removeAttribute("validatecode");
 			session.setAttribute("account", account);
 			response.setContentType("text/html;charset=UTF-8");
-			response.getWriter().write("µÇÂ½³É¹¦");
+			response.getWriter().write("ï¿½ï¿½Â½ï¿½É¹ï¿½");
 			//cookie
-			//Ìø×ªÊ×Ò³
+			//ï¿½ï¿½×ªï¿½ï¿½Ò³
 		}else{
 		
 			request.setAttribute("error", error);
 			request.setAttribute("account", account);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-	System.out.println("µÇÂ½¹ý³Ì½áÊø");
+	System.out.println("ï¿½ï¿½Â½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½");
 	}
 
 }
