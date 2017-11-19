@@ -32,7 +32,6 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>login.jsp</welcome-file>
->>>>>>> branch 'master' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 
   </welcome-file-list>
 </web-app>
