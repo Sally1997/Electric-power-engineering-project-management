@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.holyshit.domain.Account;
+import com.holyshit.domain.Staff;
 import com.holyshit.service.AccountService;
 import com.holyshit.service.impl.AccountServiceImpl;
 
@@ -47,19 +48,22 @@ public class StaffLogin extends HttpServlet {
 			}
 			else {
 			
-				error.put("username", "�û��������������");
+				error.put("username", "用户名或者密码错误");
 			}
 		}else {
 		
-			error.put("validatecode", "��֤�����");
+			error.put("validatecode", "验证码错误");
 		}	
 		//�ַ�ת��
 		if(res){
 			//����session
 			session.removeAttribute("validatecode");
-			session.setAttribute("account", account);
-			response.setContentType("text/html;charset=UTF-8");
-			response.getWriter().write("��½�ɹ�");
+			//获取用户的信息
+			Staff staff = as.getUserById(account.getStaffno());
+			session.setAttribute("staff", staff);
+			
+			//转向到主页
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 			//cookie
 			//��ת��ҳ
 		}else{
@@ -68,7 +72,6 @@ public class StaffLogin extends HttpServlet {
 			request.setAttribute("account", account);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-	System.out.println("��½���̽���");
 	}
 
 }

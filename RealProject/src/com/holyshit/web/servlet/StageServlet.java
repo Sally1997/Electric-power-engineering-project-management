@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.holyshit.domain.ProjectStage;
 import com.holyshit.domain.TaskIndexs;
@@ -38,15 +39,21 @@ public class StageServlet extends HttpServlet {
 			pro_stage.setStartDate(sdf.parse(request.getParameter("StartDate")));
 			pro_stage.setEndDate(sdf.parse(request.getParameter("EndDate")));
 			
+			//ss.getAttribute
+			HttpSession session = request.getSession();
+			String pub_no = (String)session.getAttribute("u");
+			
 			//阶段编号（7），发布（12），负责人（12）null
 			//指标编号（11），任务编号（10）null
-			pro_stage.setStageNo("2015261");
-			pro_stage.setProjectNo("10422");
-			pro_stage.setPublisherNo("201526010422");
-			pro_stage.setChargePerNo("201526010431");
+			pro_stage.setStageNo("2015262");
+			pro_stage.setProjectNo("10423");
+			pro_stage.setPublisherNo(pub_no);//发布人
+			pro_stage.setChargePerNo("20152601043g");
 			
-			task_index.setIndexNo("15111214722");
-			task_index.setTaskNo("1142265153");
+			task_index.setIndexNo("1511121472g");
+			task_index.setTaskNo("114226515g");
+			
+			
 			//指标
 			task_index.setIndexInfo(request.getParameter("IndexInfo"));
 			

@@ -41,6 +41,12 @@
   			req.send(null);
   		}
   	}
+  	window.onload=function(){
+  		if("${account.staffno}"!=""){
+  			//获取用户头像
+  			getUserLogo();
+  		}
+  	}
   </script>
   <body>
   		<div id="top">X&nbsp;X&nbsp;X&nbsp;X&nbsp;X&nbsp;系&nbsp;统&nbsp;员&nbsp;工&nbsp;登&nbsp;陆</div>
@@ -54,7 +60,7 @@
 	  		<!-- 头部logo -->
 	  		<div id="top_main">
 	  			<span class="logo">
-	  				<img src="" id="user_logo" width="80px" height="80px">
+	  				<img src="${pageContext.request.contextPath }/image/unlogin.jpg" id="user_logo" width="80px" height="80px">
 	  			</span>
 	  		</div>
 	  		
