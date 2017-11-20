@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.holyshit.domain.ProjectStage;
+import com.holyshit.domain.Staff;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.service.PlanManageService;
 import com.holyshit.service.impl.PlanManageServiceImpl;
@@ -41,13 +42,13 @@ public class StageServlet extends HttpServlet {
 			
 			//ss.getAttribute
 			HttpSession session = request.getSession();
-			String pub_no = (String)session.getAttribute("u");
+			Staff staff = (Staff)session.getAttribute("staff");
 			
 			//阶段编号（7），发布（12），负责人（12）null
 			//指标编号（11），任务编号（10）null
 			pro_stage.setStageNo("2015262");
 			pro_stage.setProjectNo("10423");
-			pro_stage.setPublisherNo(pub_no);//发布人
+			pro_stage.setPublisherNo(staff.getStaffno());//发布人
 			pro_stage.setChargePerNo("20152601043g");
 			
 			task_index.setIndexNo("1511121472g");
