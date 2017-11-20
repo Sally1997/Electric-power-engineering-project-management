@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.holyshit.domain.Account;
+import com.holyshit.domain.Staff;
 import com.holyshit.service.AccountService;
 import com.holyshit.service.impl.AccountServiceImpl;
 
@@ -58,9 +59,11 @@ public class StaffLogin extends HttpServlet {
 			//����session
 			session.removeAttribute("validatecode");
 			//获取用户的信息
+			Staff staff = as.getUserById(account.getStaffno());
+			session.setAttribute("staff", staff);
 			
-			session.setAttribute("account", account);
-			
+			//转向到主页
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 			//cookie
 			//��ת��ҳ
 		}else{
