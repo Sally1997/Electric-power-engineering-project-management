@@ -2,7 +2,7 @@ package com.holyshit.domain;
 
 import java.sql.Date;
 
-public class StageTasks {
+public class StageTask {
 	private String taskno;
 	private String taskname;
 	private Date stime;
