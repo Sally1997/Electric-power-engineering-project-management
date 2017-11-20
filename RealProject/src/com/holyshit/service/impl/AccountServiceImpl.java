@@ -12,16 +12,16 @@ import com.holyshit.service.AccountService;
 import com.holyshit.utils.ConnectionManager;
 
 public class AccountServiceImpl implements AccountService {
-	//Account±í²Ù×÷½Ó¿Ú
+	//Accountï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
 	private AccountDao ad=new AccountDaoImpl();
-	//Staff±í²Ù×÷½Ó¿Ú
+	//Staffï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
 	private StaffDao sd=new StaffDaoImpl();
 	@Override
 	public boolean login(Account account) {
 		// TODO Auto-generated method stub
 		Account res=null;
 		try {
-			//¿ªÆôÒ»¸öÊÂÎñ£¬µÇÂ½Ê±ÉèÖÃ×îºóµÇÂ½Ê±¼ä
+			//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ñ£¬µï¿½Â½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½Ê±ï¿½ï¿½
 			ConnectionManager.startTransaction();
 			res = ad.selectAccountById(account.getStaffno());
 			ad.updateLltime(account);
@@ -45,7 +45,7 @@ public class AccountServiceImpl implements AccountService {
 		return false;
 	}
 	@Override
-	public String getUserLogoLinkById(String id) {
+	public Staff getUserById(String id) {
 		// TODO Auto-generated method stub
 		Staff staff=null;
 		try {
@@ -54,10 +54,7 @@ public class AccountServiceImpl implements AccountService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(staff==null){
-			return "user_not_found";
-		}
-		return staff.getImagelink();
+		return staff;
 	}
 
 }
