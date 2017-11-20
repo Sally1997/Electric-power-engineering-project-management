@@ -1,6 +1,7 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -201,12 +202,18 @@
   				<div id="project_label"><br>项<br>目<br>进<br>度</div>	
   				<div id="project_detail">
   					<div class="task_top">
-  						<span class="num_info">当前正在参与的项目数量：           </span><span>    15</span>
+  						<c:if test="${empty projectSize }">
+  							<span class="num_info">当前正在参与的项目数量：           </span><span>    0</span>
+  						</c:if>
+  						<c:if test="${not empty projectSize }">
+  							<span class="num_info">当前正在参与的项目数量：           </span><span>    ${projectSize}</span>
+  						</c:if>
   						<span class="time_sort">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
   											&nbsp;&nbsp;&nbsp;&nbsp;	按时间排序</span>
   					</div>
+  					
   					<div id="project_bott">
   						<div>
   							<div class="task_def_head">项目名称</div>
@@ -216,66 +223,34 @@
   							<div class="task_def_head">状态</div>
   							<div class="clear"></div>
   						</div>
-  						<div>
-  							<div class="task_def_main"><a href="PlanManagement_newed.html" class="task_href">项目A</a></div>
-  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
-  								<div class="process_60"></div>
-  							</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main">处于第二阶段</div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main"><a class="task_href">项目B</a></div>
-  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
-  								<div class="process_60"></div>
-  							</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main">处于第二阶段</div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main"><a class="task_href">项目C</a></div>
-  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
-  								<div class="process_30"></div>
-  							</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main">处于第一阶段</div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main"><a class="task_href">项目D</a></div>
-  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
-  								<div class="process_60"></div>
-  							</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main">处于第二阶段</div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main"><a class="task_href">项目E</a></div>
-  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
-  								<div class="process_30"></div>
-  							</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main">处于第一阶段</div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main"><a class="task_href">项目F</a></div>
-  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
-  								<div class="process_60"></div>
-  							</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main">处于第二阶段</div>
-  							<div class="clear"></div>
-  						</div>
+  						<c:forEach items="${projects }" var="project">
+	  						<div>
+	  							<div class="task_def_main"><a href="PlanManagement_newed.html" class="task_href">${project.pname }</a></div>
+	  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
+	  								<div class="process_60" style="width: ${project.pstage*100}%;"></div>
+	  							</div>
+	  							<div class="task_def_main">${project.stime }</div>
+	  							<div class="task_def_main">${project.etime }</div>
+	  							<div class="task_def_main">
+	  								<c:choose>
+	  									<c:when test="${project.pstate=='0' }"><span style="color: red;">项目还未开始</span></c:when>
+	  								</c:choose>
+	  								<c:choose>
+	  									<c:when test="${project.pstate=='1' }"><span style="color: green;">正处于第一阶段</span></c:when>
+	  								</c:choose>
+	  								<c:choose>
+	  									<c:when test="${project.pstate=='2' }"><span style="color: green;">正处于第二阶段</span></c:when>
+	  								</c:choose>
+	  								<c:choose>
+	  									<c:when test="${project.pstate=='3' }"><span style="color: green;">正处于第三阶段</span></c:when>
+	  								</c:choose>
+	  								<c:choose>
+	  									<c:when test="${project.pstate=='4' }"><span style="color: blue;">项目已经完成</span></c:when>
+	  								</c:choose>
+	  							</div>
+	  							<div class="clear"></div>
+	  						</div>
+  						</c:forEach>
   						<div class="moredata">
   							<a href="#">更多>></a>
   						</div>
