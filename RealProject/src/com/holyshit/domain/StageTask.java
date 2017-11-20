@@ -10,6 +10,8 @@ public class StageTask {
 	private String pubno;
 	private String charpno;
 	private String ptaskno;
+	private String tstate;
+	private String taskcontent;
 	public String getTaskno() {
 		return taskno;
 	}
@@ -51,6 +53,18 @@ public class StageTask {
 	}
 	public void setPtaskno(String ptaskno) {
 		this.ptaskno = ptaskno;
+	}
+	public String getTstate() {
+		return tstate;
+	}
+	public void setTstate(String tstate) {
+		this.tstate = tstate;
+	}
+	public String getTaskcontent() {
+		return taskcontent;
+	}
+	public void setTaskcontent(String taskcontent) {
+		this.taskcontent = taskcontent;
 	}
 	
 }

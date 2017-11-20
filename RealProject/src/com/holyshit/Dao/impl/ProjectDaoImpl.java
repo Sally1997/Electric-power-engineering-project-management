@@ -16,7 +16,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<Project> selectProjectsById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"select * from psrelation join project where psrelation.pno=project.pno and staffno=?",new BeanListHandler<Project>(Project.class),id);
+		return qr.query(ConnectionManager.getConnection(),"select * from psrelation join project where psrelation.pno=project.pno and staffno=? and pstate!='4'",new BeanListHandler<Project>(Project.class),id);
 	}
 
 }

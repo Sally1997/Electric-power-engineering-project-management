@@ -107,7 +107,12 @@
   				<div id="tasklist_label">项<br>目<br>任<br>务<br>列<br>表</div>	
   				<div id="tasklist_detail">
   					<div class="task_top">
-  						<span class="num_info">当前任务数量：           </span><span>    15</span>
+  						<c:if test="${empty taskSize }">
+  							<span class="num_info">当前正在参与的项目数量：           </span><span>    0</span>
+  						</c:if>
+  						<c:if test="${not empty taskSize }">
+  							<span class="num_info">当前正在参与的项目数量：           </span><span>    ${taskSize}</span>
+  						</c:if>
   						<span class="time_sort">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
@@ -123,72 +128,40 @@
   							<div class="task_def_head">状态</div>
   							<div class="clear"></div>
   						</div>
-  						<div>
-  							<div class="task_def_main">
-  								<a href="PlanManagement_newed.html"class="task_href">项目A</a>
-  								<span class="new_task_blank"></span>
-  							</div>
-  							<div class="task_def_main">任务为XXXXX [查看]</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main"><span class="propmt_green">正在进行中</span></div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main">
-	  							<a class="task_href">项目B</a>
-	  							<span class="new_task_blank"></span>
-  							</div>
-  							<div class="task_def_main">任务为XXXXX [查看]</div>
-  							<div class="task_def_main">2017/9/12</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main"><span class="propmt_green">正在进行中</span></div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main">
-	  							<a class="task_href">项目C</a>
-	  							<span class="new_task_blank"></span>
-  							</div>
-  							<div class="task_def_main">任务为XXXXX [查看]</div>
-  							<div class="task_def_main">2017/10/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main"><span class="propmt_green">正在进行中</span></div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main">
-  								<a class="task_href">项目D</a>
-  								<span class="new_task">new</span>
-  							</div>
-  							<div class="task_def_main">任务为XXXXX [查看]</div>
-  							<div class="task_def_main">2017/10/20</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main"><span class="propmt_red">还未开始</span></div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main">
-  								<a class="task_href">项目D</a>
-  								<span class="new_task">new</span>
-  							</div>
-  							<div class="task_def_main">任务为XXXXX [查看]</div>
-  							<div class="task_def_main">2017/11/21</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main"><span class="propmt_red">还未开始</span></div>
-  							<div class="clear"></div>
-  						</div>
-  						<div>
-  							<div class="task_def_main">
-  								<a class="task_href">项目D</a>
-  								<span class="new_task">new</span>
-  							</div>
-  							<div class="task_def_main">任务为XXXXX [查看]</div>
-  							<div class="task_def_main">2017/9/10</div>
-  							<div class="task_def_main">2017/10/29</div>
-  							<div class="task_def_main"><span class="propmt_red">还未开始</span></div>
-  							<div class="clear"></div>
-  						</div>
+  						<c:forEach items="${tasks }" var="task">
+	  						<div>
+  								<c:choose>
+  									<c:when test="${task.tstate=='0' }">
+  										<div class="task_def_main">
+			  								<a href="PlanManagement_newed.html"class="task_href">${task.taskname }</a>
+			  								<span class="new_task_blank"></span>
+			  							</div>
+			  							<div class="task_def_main"><span class="task_content_1">${task.taskcontent }</span><span class="task_content_1">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
+			  							<div class="task_def_main">${task.stime }</div>
+			  							<div class="task_def_main">${task.etime }</div>
+  										<div class="task_def_main">
+  											<span style="color: red;">还未开始</span>
+  										</div>
+  										<div class="clear"></div>
+  									</c:when>
+  									
+  									<c:when test="${task.tstate=='1' }">
+  										<div class="task_def_main">
+			  								<a href="PlanManagement_newed.html"class="task_href">${task.taskname }</a>
+			  								<span class="new_task_blank"></span>
+			  							</div>
+			  							<div class="task_def_main"><span style="display: inline-block;width: 40%;height: 30px;overflow: hidden;">${task.taskcontent }</span><span style="display: inline-block;width: 40%;height: 30px;">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
+			  							<div class="task_def_main">${task.stime }</div>
+			  							<div class="task_def_main">${task.etime }</div>
+  										<div class="task_def_main">
+  											<span style="color: green;">正在进行</span>
+  										</div>
+  										<div class="clear"></div>
+  									</c:when>
+  								</c:choose>
+	  							
+	  						</div>
+  						</c:forEach>
 						<div class="moredata">
 							<a href="#">更多>></a>
 						</div>
