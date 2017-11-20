@@ -25,6 +25,10 @@ public class GetUserLogoById extends HttpServlet {
 		AccountService as=new AccountServiceImpl();
 //		String res=as.getUserLogoLinkById(id);
 		Staff staff=as.getUserById(id);
+		if(staff==null||staff.getImagelink()==null){
+			response.setStatus(404);
+			return;
+		}
 		//�������
 		OutputStream out= response.getOutputStream();
 		

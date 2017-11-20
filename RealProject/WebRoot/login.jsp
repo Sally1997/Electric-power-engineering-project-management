@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>员工登陆</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/login.css" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/yqz.js"></script>
 </head>
 <script type="text/javascript">
   	function sign_in_check(e){
@@ -22,23 +23,7 @@
   	function getUserLogo(){
   		var id=document.getElementById("userid").value;
   		if(id!=""){
-  			//创建请求
-  			var req=new XMLHttpRequest();
-  			req.responseType="blob";
-  			req.onreadystatechange=function(){
-  				if(req.readyState==4){
-  					var res=req.response;
-  					if(res=="user_not_found"){
-  						document.getElementById("userid").focus();
-  					}else{
-  						document.getElementById("user_logo").src=window.URL.createObjectURL(res);
-  					}
-  				}
-  			};
-  			//连接服务器
-  			req.open("get", "${pageContext.request.contextPath}/web/servlet/getuserlogobyid?id="+id);
-  			//发送请求
-  			req.send(null);
+  			getUserLogoUrl(id,document.getElementById("user_logo"));
   		}
   	}
   	window.onload=function(){
@@ -70,9 +55,9 @@
 		  			<span id="capital"></span>
 		  			<div id="login_form">
 		  				<label for="userid" class="input_font" id="ui_label" >账号</label><span class="error">${error['username'] }</span>
-		  				<input type="text" id="userid" name="staffno" class="input_frame" value="${account.staffno }" onclick="userinputCheck(this)">
+		  				<input type="text" id="userid" name="staffno" class="input_frame" value="${account.staffno }" onblur="getUserLogo();">
 		  				<label for="passwd" class="input_font">密码</label>
-		  				<input type="password" id="passwd" name="password" class="input_frame" onclick="getUserLogo();">
+		  				<input type="password" id="passwd" name="password" class="input_frame" >
 		  				
 		  				<label for="validate" class="input_font">验证码</label><span class="error">${error['validatecode'] }</span>
 		  				<img alt="验证码" id="img" src="${pageContext.request.contextPath }/web/servlet/validatecode"  onclick="updateCode();">
