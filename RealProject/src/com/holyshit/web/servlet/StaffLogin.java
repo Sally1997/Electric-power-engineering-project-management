@@ -47,19 +47,20 @@ public class StaffLogin extends HttpServlet {
 			}
 			else {
 			
-				error.put("username", "�û��������������");
+				error.put("username", "用户名或者密码错误");
 			}
 		}else {
 		
-			error.put("validatecode", "��֤�����");
+			error.put("validatecode", "验证码错误");
 		}	
 		//�ַ�ת��
 		if(res){
 			//����session
 			session.removeAttribute("validatecode");
+			//获取用户的信息
+			
 			session.setAttribute("account", account);
-			response.setContentType("text/html;charset=UTF-8");
-			response.getWriter().write("��½�ɹ�");
+			
 			//cookie
 			//��ת��ҳ
 		}else{
@@ -68,7 +69,6 @@ public class StaffLogin extends HttpServlet {
 			request.setAttribute("account", account);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
-	System.out.println("��½���̽���");
 	}
 
 }
