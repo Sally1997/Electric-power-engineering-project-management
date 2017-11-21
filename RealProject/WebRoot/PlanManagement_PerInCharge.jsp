@@ -286,8 +286,8 @@ div.tableRow p:first-child{
 	color:#333A56;
 }		 
 		 
-#fozza_1{
-	width:60px;
+#fozza{
+	height:428px;
 }
 		</style>
 		
@@ -352,51 +352,9 @@ div.tableRow p:first-child{
 
     </div>
 		
-	 <section >
-			<p id="TaskShow"></p>
-			<div id="MileStone">
-			<form id="addMileStone">
-				<div class="tableRow">
-				<p class="tableAttribute">阶段名称: </p>
-				<p class="tableContent"><input type="text" name="StageName" value="阶段XXX"></p>
-				</div>
-
-
-				<div class="tableRow">
-				<p class="tableAttribute">负责人：</p>
-				<p class="tableContent">	<a href="PlanManagement_PerInCharge.jsp">
-				<input id="fozza_1" type="button" value="选择"></a></p>
-				</div>
-
-
-				<div class="tableRow">
-				<p class="tableAttribute">开始日期：</p>
-				<p class="tableContent"><input type="date" name="StartDate"></p>
-				</div>
-
-				<div class="tableRow">
-				<p class="tableAttribute">截止日期：</p>
-				<p class="tableContent"><input type="date" name="EndDate"></p>
-                </div>
-
-                <div class="tableRow">
-				<p class="tableAttribute">预算：</p>
-				<p class="tableContent"><input type="number" name="budget"><span>元</span></p>
-				</div>
-
-				<div class="tableRow">
-				<p class="tableAttribute"><!--记得改成列表-->
-				指标：
-				</p>
-				<p class="tableContent"><input type="text" name="IndexInfo"><span id="addIndex"> + </span> </p>
-				</div>
-			</form>
-				<p>
-					<span class="submit"><a style="cursor:pointer" onclick="upload()">新建阶段</a></span>
-					<span class="submit"><a   href="PlanManagement_Newed.jsp">结束新建</a></span>
-				</p>
-			</div>
-		</section>
+	<div id="fozza">
+	<p id="TaskShow"></p>
+	</div>
 
 	  
 		
