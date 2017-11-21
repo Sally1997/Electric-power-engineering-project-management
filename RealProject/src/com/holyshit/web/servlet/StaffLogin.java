@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,9 +18,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.holyshit.domain.Account;
+import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
+import com.holyshit.domain.StageTask;
 import com.holyshit.service.AccountService;
+import com.holyshit.service.ProjectService;
+import com.holyshit.service.StageTasksService;
 import com.holyshit.service.impl.AccountServiceImpl;
+import com.holyshit.service.impl.ProjectServiceImpl;
+import com.holyshit.service.impl.StageTasksServiceImpl;
 
 public class StaffLogin extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -61,6 +69,25 @@ public class StaffLogin extends HttpServlet {
 			//获取用户的信息
 			Staff staff = as.getUserById(account.getStaffno());
 			session.setAttribute("staff", staff);
+			//获取当前用户的项目列表
+			List<Project> projects;
+			ProjectService ps=new ProjectServiceImpl();
+			projects=ps.findAllProjectsById(account.getStaffno());
+			
+			//获取当前用户的任务列表
+			List<StageTask> tasks;
+			StageTasksService sts=new StageTasksServiceImpl();
+			tasks=sts.findAllTasksByid(account.getStaffno());
+			
+			if(projects!=null){
+				request.setAttribute("projects", projects);
+				request.setAttribute("projectSize", projects.size());
+			}
+			
+			if(tasks!=null){
+				request.setAttribute("tasks", tasks);
+				request.setAttribute("taskSize", tasks.size());
+			}
 			
 			//转向到主页
 			request.getRequestDispatcher("/main.jsp").forward(request, response);

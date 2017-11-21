@@ -53,6 +53,8 @@ public class AccountServiceImpl implements AccountService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		return staff;
 	}

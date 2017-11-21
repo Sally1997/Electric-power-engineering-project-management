@@ -3,18 +3,22 @@ package com.holyshit.Dao;
 import java.sql.SQLException;
 
 import com.holyshit.domain.Account;
-
+/**
+ * 
+ * @author yuan
+ *
+ */
 public interface AccountDao {
 	/**
-	 * Í¨¹ýÔ±¹¤±àºÅ²éÑ¯
-	 * @param id  Ô±¹¤±àºÅ
+	 * Í¨ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½Å²ï¿½Ñ¯
+	 * @param id  Ô±ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 * @throws SQLException
 	 */
 	Account selectAccountById(String id)throws SQLException;
 	/**
-	 * µÇÂ½ÒÔºóË¢ÐÂ×îºóµÄµÇÂ½Ê±¼ä
-	 * @param account  µÇÂ½ÕË»§
+	 * ï¿½ï¿½Â½ï¿½Ôºï¿½Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Â½Ê±ï¿½ï¿½
+	 * @param account  ï¿½ï¿½Â½ï¿½Ë»ï¿½
 	 * @throws SQLException
 	 */  
 	void updateLltime(Account account)throws SQLException;

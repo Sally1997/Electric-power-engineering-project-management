@@ -1,0 +1,470 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+#top_fixed {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+}
+
+#top {
+	height: 100px;
+	width: 100%;
+	background-color: #24292e;
+	color: white;
+	overflow: hidden;
+}
+
+#copyright {
+	width: 100%;
+	height: 50px;
+	background-color: #0F243E;
+	color: white;
+	text-align: center;
+}
+
+#top_left {
+	float: left;
+	height: 100px;
+	width: 50%;
+	margin-top: 30px;
+	padding-left: 50px;
+}
+
+#top_right {
+	float: right;
+	height: 100px;
+	margin-top: 30px;
+	margin-right: 6%;
+}
+
+.top_font {
+	font-size: 20px;
+	display: inline-block;
+	width: 100%;
+}
+
+.top_font_fuben {
+	font-size: 20px;
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+}
+
+.top_font a {
+	text-decoration: none;
+	color: white;
+}
+
+.top_font a:LINK {
+	color: white;
+}
+
+.top_font a:HOVER {
+	color: blue;
+}
+
+.top_font_fuben a {
+	text-decoration: none;
+	color: white;
+}
+
+.top_font_fuben a:LINK {
+	color: white;
+}
+
+.top_font_fuben a:HOVER {
+	color: blue;
+}
+
+#menu {
+	background-color: #24292e;
+	width: 100%;
+	height: 42px;
+	overflow: hidden;
+	font-family: 黑体;
+	font-weight: bold;
+}
+
+.menu_1 {
+	float: left;
+	height: 36px;
+	width: 13%;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	line-height: 36px;
+}
+
+.menu_font {
+	position: relative;
+	top: 5px;
+}
+
+#content_left {
+	float: left;
+	width: 75%;
+	background-color: #F2F2F2;
+	height: 1250px;
+}
+
+#content_right {
+	float: left;
+	width: 25%;
+	background-color: #F2F2F2;
+	height: 1250px;
+}
+
+#userinfo {
+	background-color: white;
+	height: 200px;
+	width: 100%;
+	margin: 10px;
+	padding: 10px;
+}
+
+#tasklist {
+	background-color: white;
+	height: 500px;
+	width: 100%;
+	margin: 10px;
+	overflow: hidden;
+}
+
+#project {
+	background-color: white;
+	height: 500px;
+	width: 100%;
+	margin: 10px;
+	overflow: hidden;
+}
+
+#tasklist_label {
+	float: left;
+	background-color: #9BBB59;
+	color: white;
+	height: 350px;
+	font-weight: bold;
+	font-size: 30px;
+	width: 10%;
+	border: 4px solid white;
+	text-align: center;
+	padding-top: 100px;
+}
+
+#project_label {
+	float: left;
+	background-color: #9BBB59;
+	color: white;
+	height: 350px;
+	font-weight: bold;
+	font-size: 30px;
+	width: 10%;
+	border: 4px solid white;
+	text-align: center;
+	padding-top: 100px;
+}
+
+#project_detail {
+	float: left;
+	width: 88%;
+	height: 500px;
+	background-color: white;
+}
+
+#tasklist_detail {
+	float: left;
+	width: 88%;
+	height: 500px;
+	background-color: white;
+}
+
+.num_info {
+	color: #974706;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.task_top {
+	height: 50px;
+	padding-left: 50px;
+	padding-top: 20px;
+	background-color: white;
+}
+
+.time_sort {
+	color: #808080;
+	font-size: 15px;
+}
+
+.task_def_head {
+	float: left;
+	width: 20%;
+	height: 50px;
+	color: black;
+	padding-top: 5px;
+	font-family: 黑体;
+	font-weight: bold;
+	text-align: center;
+	line-height: 50px;
+}
+
+.task_def_main {
+	float: left;
+	width: 19.9%;
+	height: 30px;
+	color: black;
+	line-height: 50px;
+	font-family: 宋体;
+	text-align: center;
+}
+
+.process_60 {
+	float: left;
+	width: 60%;
+	height: 30px;
+	background-color: green;
+}
+
+.process_30 {
+	float: left;
+	width: 30%;
+	height: 30px;
+	background-color: red;
+}
+
+#information {
+	background-color: white;
+	height: 500px;
+	margin: 10px;
+	padding-left: 20px;
+	overflow: hidden;
+}
+
+#message {
+	background-color: white;
+	height: 500px;
+	margin: 10px;
+	padding-left: 20px;
+	overflow: hidden;
+}
+
+#info_content {
+	height: 400px;
+	background-color: white;
+}
+
+#mess_content {
+	height: 400px;
+	background-color: white;
+}
+
+.moredata {
+	height: 50px;
+	text-align: right;
+	background-color: white;
+	margin-top: 100px;
+}
+
+.moredata a {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.center_label {
+	padding-top: 10px;
+	height: 50px;
+	font-weight: bold;
+	font-size: 18px;
+	background-color: white;
+	text-align: center;
+}
+
+.uf_font {
+	display: inline-block;
+	color: green;
+	font-size: 15px;
+	width: 28%;
+	height: 25px;
+	text-align: center;
+}
+
+.uf_ans_font {
+	display: inline-block;
+	color: red;
+	font-size: 15px;
+	width: 50%;
+	height: 25px;
+	text-align: center;
+}
+
+.counter {
+	border-radius: 15px;
+	width: 40px;
+	text-align: center;
+	font-size: 12px;
+	display: inline-block;
+	background-color: red;
+	color: white;
+}
+
+.clear {
+	clear: both;
+}
+
+.user_photo {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	overflow: hidden;
+}
+
+.user_photo img {
+	width: 50px;
+	height: 50px;
+}
+
+.frame_top {
+	height: 50px;
+	border-bottom: 1px solid #d0d7dd;
+}
+
+.left_label {
+	display: inline-block;
+	height: 50px;
+	width: 80px;
+	line-height: 50px;
+	font-size: 18px;
+	letter-spacing: 2px;
+	color: #333;
+	border-bottom: 4px solid #349ae8;
+}
+
+.more {
+	display: inline-block;
+	height: 20px;
+	width: 45px;
+	text-align: center;
+	font-size: 13px;
+	color: white;
+	background-color: gray;
+}
+
+.frame_ul {
+	height: 450px;
+	list-style: none;
+}
+
+.frame_li {
+	font-size: 15px;
+	height: 50px;
+	width: 80%;
+}
+
+.frame_li a {
+	text-decoration: none;
+	width: 100%;
+	display: block;
+	float: left;
+	padding: 4px 0 3px;
+	color: #333;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.frame_li a:HOVER {
+	text-decoration: underline;
+	color: #00FA9A;
+}
+
+.frame_li span {
+	background: url(http://cdnpic.mgyun.com//Content/HomeV5/images/time.png)
+		no-repeat 0 0;
+	font-size: 12px;
+	padding-left: 15px;
+	font-family: "宋体";
+	float: left;
+	line-height: 10px;
+	color: #999;
+}
+
+.new_task {
+	display: inline-block;
+	height: 15px;
+	width: 30px;
+	background-color: red;
+	line-height: 15px;
+	overflow: hide;
+	border-radius: 5px;
+	color: white;
+}
+
+.new_task_blank {
+	display: inline-block;
+	height: 15px;
+	width: 28px;
+}
+
+.task_href {
+	display: inline-block;
+	height: 30px;
+	text-decoration: none;
+}
+
+.task_href:HOVER {
+	text-decoration: underline;
+	color: #00008B;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.propmt_green {
+	font-weight: bold;
+	color: green;
+}
+
+.propmt_red {
+	font-weight: bold;
+	color: red;
+}
+
+#contex {
+	width: 200px;
+	height: 500px;
+	position: fixed;
+	right: 0px;
+	top: 142px;
+	outline: 0;
+}
+
+#logo {
+	float: left;
+	background-color: #EEE9E9;
+	width: 72%;
+	height: 500px;
+}
+
+#jiantou {
+	width: 0;
+	height: 0;
+	border: 30px solid transparent;
+	border-right: 15px solid gray;
+	position: fixed;
+}
+
+#fuck_your_mother_BUG {
+	float: left;
+	width: 28%;
+	height: 500px;
+}
+.task_content_1 {
+	display: inline-block;
+	width: 40%;
+	height: 30px;
+	overflow: hidden;
+	line-height:30px;
+}
