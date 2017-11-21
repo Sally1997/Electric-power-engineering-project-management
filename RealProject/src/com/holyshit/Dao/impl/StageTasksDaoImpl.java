@@ -9,7 +9,11 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.holyshit.Dao.StageTasksDao;
 import com.holyshit.domain.StageTask;
 import com.holyshit.utils.ConnectionManager;
-
+/**
+ * 
+ * @author yuan
+ *
+ */
 public class StageTasksDaoImpl implements StageTasksDao {
 
 	@Override

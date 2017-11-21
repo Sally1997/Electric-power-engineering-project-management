@@ -9,7 +9,11 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.domain.Project;
 import com.holyshit.utils.ConnectionManager;
-
+/**
+ * 
+ * @author yuan
+ *
+ */
 public class ProjectDaoImpl implements ProjectDao {
 
 	@Override

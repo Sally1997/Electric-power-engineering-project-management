@@ -8,7 +8,11 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import com.holyshit.Dao.StaffDao;
 import com.holyshit.domain.Staff;
 import com.holyshit.utils.ConnectionManager;
-
+/**
+ * 
+ * @author yuan
+ *
+ */
 public class StaffDaoImpl implements StaffDao {
 
 	@Override
