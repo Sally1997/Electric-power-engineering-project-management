@@ -7,6 +7,7 @@ import com.holyshit.Dao.StageTasksDao;
 import com.holyshit.Dao.impl.StageTasksDaoImpl;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.StageTasksService;
+import com.holyshit.utils.ConnectionManager;
 
 public class StageTasksServiceImpl implements StageTasksService{
 
@@ -20,6 +21,8 @@ public class StageTasksServiceImpl implements StageTasksService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		
 		return tasks;
