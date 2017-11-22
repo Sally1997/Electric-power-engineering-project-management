@@ -1,6 +1,7 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.holyshit.Dao.AccountDao;
 import com.holyshit.Dao.StaffDao;
@@ -57,6 +58,11 @@ public class AccountServiceImpl implements AccountService {
 			ConnectionManager.closeConnection();
 		}
 		return staff;
+	}
+	@Override
+	public List<Staff> getNameNoByName(String msg) throws Exception {
+		// TODO Auto-generated method stub
+		return sd.selectNameNoByname(msg);
 	}
 
 }
