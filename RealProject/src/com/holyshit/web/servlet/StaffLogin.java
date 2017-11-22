@@ -34,7 +34,6 @@ public class StaffLogin extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//��ȡ��
 		Account account=new Account();
-		
 		try {
 			BeanUtils.populate(account, request.getParameterMap());
 			account.setLltime(new Date(new java.util.Date().getTime()));
