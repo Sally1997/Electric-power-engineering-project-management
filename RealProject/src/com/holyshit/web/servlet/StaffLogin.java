@@ -63,11 +63,13 @@ public class StaffLogin extends HttpServlet {
 		}	
 		//�ַ�ת��
 		if(res){
+
 			//����session
 			session.removeAttribute("validatecode");
 			//获取用户的信息
 			Staff staff = as.getUserById(account.getStaffno());
 			session.setAttribute("staff", staff);
+					
 			//获取当前用户的项目列表
 			List<Project> projects;
 			ProjectService ps=new ProjectServiceImpl();
