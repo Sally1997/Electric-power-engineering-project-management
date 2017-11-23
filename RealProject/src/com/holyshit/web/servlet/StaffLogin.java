@@ -1,5 +1,4 @@
 package com.holyshit.web.servlet;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
@@ -32,9 +31,9 @@ public class StaffLogin extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+
 		//��ȡ��
 		Account account=new Account();
-		
 		try {
 			BeanUtils.populate(account, request.getParameterMap());
 			account.setLltime(new Date(new java.util.Date().getTime()));
@@ -64,11 +63,13 @@ public class StaffLogin extends HttpServlet {
 		}	
 		//�ַ�ת��
 		if(res){
+
 			//����session
 			session.removeAttribute("validatecode");
 			//获取用户的信息
 			Staff staff = as.getUserById(account.getStaffno());
 			session.setAttribute("staff", staff);
+					
 			//获取当前用户的项目列表
 			List<Project> projects;
 			ProjectService ps=new ProjectServiceImpl();
