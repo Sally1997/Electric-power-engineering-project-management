@@ -1,0 +1,15 @@
+/* 新建阶段审核人文本框 */
+#fozza1{
+	background-color:white;
+	border: 1px solid red;
+	width: 173px;
+	position: absolute;
+	left: 45.69%;
+	top: 404px;
+	display: block;
+}
+
+/* 审核人下拉列表 */
+#fozza2{
+	cursor:default;
+}

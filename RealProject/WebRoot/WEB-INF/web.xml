@@ -8,18 +8,7 @@
   	
   </filter>
   
-  
-  <filter-mapping>
-  	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>/main.jsp</url-pattern>
-  	<url-pattern>/AddUser.jsp</url-pattern>
-  	<url-pattern>/PlanManagement_Newed.jsp</url-pattern>
-  	<url-pattern>/PlanManagement_PerInCharge.jsp</url-pattern>
-  	<url-pattern>/PlanManagement_NewMilestone.jsp</url-pattern>
-  	<dispatcher>REQUEST</dispatcher>
-  	<dispatcher>FORWARD</dispatcher>
-  	<!-- <dispatcher>FORWARD</dispatcher> -->
-  </filter-mapping>
+
   <!-- 监听器 -->
   <listener>
   	<listener-class>com.holyshit.listener.CountLivingListener</listener-class>

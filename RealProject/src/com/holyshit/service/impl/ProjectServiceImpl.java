@@ -28,4 +28,10 @@ public class ProjectServiceImpl implements ProjectService {
 		return projects;
 	}
 
+	@Override
+	public List<Object> getNewStageNo(String pn) throws SQLException {
+		ProjectDao pjd = new ProjectDaoImpl();
+		return pjd.selectProjectStageNoByPN(pn);
+	}
+
 }
