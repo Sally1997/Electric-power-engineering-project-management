@@ -25,7 +25,7 @@ public class DocumentDaoImpl implements DocumentDao{
 		//获取大小
 		//
 		List<Document> list=qr.query(ConnectionManager.getConnection(),
-				"SELECT * FROM psrelation JOIN document ON psrelation.pno=document.pno WHERE staffno=? order by desc limit ?,?",
+				"SELECT * FROM psrelation JOIN document ON psrelation.pno=document.pno WHERE staffno=? order by uploadtime desc limit ?,?",
 				new BeanListHandler<Document>(Document.class),
 				id,(cur-1)*pageSize,pageSize);
 		return list;
