@@ -244,42 +244,13 @@
   				</div>
   				<div style="height: 10px;"></div>
   				<ul class="frame_ul">
+  				
+  				
   					<li class="frame_li">
   						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
   						<span>2017.10.26 17:59</span>
   					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
+  					
   				</ul>
   			</div>
   			<div style="height: 10px;background-color: #F2F2F2;"></div>
@@ -297,38 +268,7 @@
   						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
   						<span>2017.10.26 17:59</span>
   					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
+  					
   				</ul>
   			</div>
   		</div>

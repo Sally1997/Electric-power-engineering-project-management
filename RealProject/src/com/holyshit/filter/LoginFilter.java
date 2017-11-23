@@ -30,18 +30,11 @@ public class LoginFilter implements Filter{
 			
 			chain.doFilter(request, response);
 		}else{
+			request.setAttribute("locError", "请先登录");
+//			res.sendRedirect(req.getContextPath()+"/login.jsp");
+			request.setAttribute("uri", req.getRequestURI());
 			
-			//没登录
-			//直接界面登陆
-			if(path.indexOf("/login.jsp")!=-1){
-				System.out.println("path:  "+path);
-				chain.doFilter(request, response);
-			}
-			//其他页面转发
-			else {
-				
-				res.sendRedirect(req.getContextPath()+"/login.jsp");
-			}
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		
 	}

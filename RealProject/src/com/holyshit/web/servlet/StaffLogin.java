@@ -69,31 +69,17 @@ public class StaffLogin extends HttpServlet {
 			//获取用户的信息
 			Staff staff = as.getUserById(account.getStaffno());
 			session.setAttribute("staff", staff);
-					
-			//获取当前用户的项目列表
-			List<Project> projects;
-			ProjectService ps=new ProjectServiceImpl();
-			projects=ps.findAllProjectsById(account.getStaffno());
-			
-			//获取当前用户的任务列表
-			List<StageTask> tasks;
-			StageTasksService sts=new StageTasksServiceImpl();
-			tasks=sts.findAllTasksByid(account.getStaffno());
-			
-			if(projects!=null){
-				request.setAttribute("projects", projects);
-				request.setAttribute("projectSize", projects.size());
+			//跳转到相应的uri
+			String uri=request.getParameter("uri");
+			if(uri!=null){
+				//跳入相应的界面
+				response.sendRedirect(uri);
 			}
-			
-			if(tasks!=null){
-				request.setAttribute("tasks", tasks);
-				request.setAttribute("taskSize", tasks.size());
+			else {
+				//进入主页
+				request.setAttribute("staffno", account.getStaffno());
+				request.getRequestDispatcher("/web/servlet/mainServlet").forward(request, response);
 			}
-			
-			//转向到主页
-			request.getRequestDispatcher("/main.jsp").forward(request, response);
-			//cookie
-			//��ת��ҳ
 		}else{
 		
 			request.setAttribute("error", error);

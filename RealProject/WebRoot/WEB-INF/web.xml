@@ -41,6 +41,11 @@
     <servlet-name>GetUserLogoById</servlet-name>
     <servlet-class>com.holyshit.web.servlet.GetUserLogoById</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.MainServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -55,6 +60,10 @@
   <servlet-mapping>
     <servlet-name>GetUserLogoById</servlet-name>
     <url-pattern>/web/servlet/getuserlogobyid</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>/web/servlet/mainServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
