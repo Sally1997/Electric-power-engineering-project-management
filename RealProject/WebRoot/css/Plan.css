@@ -1,0 +1,116 @@
+html{
+	height:100%;
+	width:100%;
+}
+body{
+	height:100%;
+	width:100%;
+
+	background-color: #f7f5e6;
+	font-family: SimHei;
+	color:white;
+	margin:0px;
+
+}
+ 
+
+header{
+	height: 12%;
+	width:100%;
+	background-color: #333A56;
+	overflow: hidden;
+}
+#notifNum{
+	color:#fff;
+	border-radius: 40%;
+	padding:1px 4px;
+	background-color: red;
+}
+
+#headerLeft{
+	float:left;
+	margin:25px 0px 25px 30px;
+	padding-top: 5px;
+
+}
+
+#headerRight{
+	float:right;
+	margin:18px 100px 0px 0px;
+
+}
+#headerUser{
+	padding-bottom: 15px;
+} 
+
+
+nav{
+	float:left;
+	background-color:#52658f;
+	height:7%;
+	width: 100%;
+}
+
+
+.menu{
+	border-radius: 15%;
+	border:solid black 1px;
+	background-color: #333A56;
+	padding:4px 5px;
+	margin: 0px 40px 0px 30px;
+	text-align: center;
+	position: relative;
+	top:10px;
+
+}
+#MPageLink{
+	padding:9px;
+}
+
+a{
+	text-decoration: none;
+}
+a{
+	color: white;
+}
+a:hover{
+	color:blue;
+}
+
+section{
+	width:100%;
+	color:#333A56;
+}
+
+.Management{
+	border:thin solid ;
+	width:80px;
+	height:80px;
+	background-color:  #333A56;
+	text-align: center;
+	padding:50px 25px 0px 25px;
+	border-radius: 10%;
+
+}
+#PersonalManagement{
+	float: right;
+	margin:120px 370px 40px 0px;
+}
+#PlanManagement{
+	float: left;
+	margin:120px 0px 40px 370px;
+}
+ 
+footer{
+	height:9%;
+	width:100%;
+	font-size: 120%;
+	background-color: #333A56;
+	text-align: center;
+	padding-top: 10px;
+	position: absolute;
+	right:0px;
+	bottom: 0px;
+
+}
+		 
