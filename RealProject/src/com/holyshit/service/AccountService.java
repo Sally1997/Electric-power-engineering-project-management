@@ -1,6 +1,7 @@
 package com.holyshit.service;
 
 import com.holyshit.domain.Account;
+<<<<<<< HEAD
 
 public interface AccountService {
 	/**
@@ -15,4 +16,23 @@ public interface AccountService {
 	 * @return  用户头像的存储地址
 	 */
 	String getUserLogoLinkById(String id);
+=======
+import com.holyshit.domain.Staff;
+
+public interface AccountService {
+	/**
+	 * 鐢ㄦ埛鐧婚檰
+	 * @param account
+	 * @return
+	 */
+	boolean login(Account account);
+	
+	
+	/**
+	 * 鑾峰彇鐢ㄦ埛淇℃伅
+	 * @param id
+	 * @return
+	 */
+	Staff getUserById(String id);
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 }

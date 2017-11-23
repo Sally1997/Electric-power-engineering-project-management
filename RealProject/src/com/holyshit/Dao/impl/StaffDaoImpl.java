@@ -8,7 +8,15 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import com.holyshit.Dao.StaffDao;
 import com.holyshit.domain.Staff;
 import com.holyshit.utils.ConnectionManager;
+<<<<<<< HEAD
 
+=======
+/**
+ * 
+ * @author yuan
+ *
+ */
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 public class StaffDaoImpl implements StaffDao {
 
 	@Override
