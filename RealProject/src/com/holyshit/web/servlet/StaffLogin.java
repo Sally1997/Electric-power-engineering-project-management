@@ -1,5 +1,4 @@
 package com.holyshit.web.servlet;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
@@ -32,6 +31,7 @@ public class StaffLogin extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+
 		//��ȡ��
 		Account account=new Account();
 		try {
