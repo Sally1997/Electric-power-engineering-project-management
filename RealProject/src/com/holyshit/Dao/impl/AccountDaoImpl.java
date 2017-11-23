@@ -12,15 +12,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import com.holyshit.Dao.AccountDao;
 import com.holyshit.domain.Account;
 import com.holyshit.utils.ConnectionManager;
-<<<<<<< HEAD
 
-=======
-/**
- * 
- * @author yuan
- *
- */
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 public class AccountDaoImpl implements AccountDao{
 
 	@Override

@@ -14,49 +14,7 @@ public class ProjectStage {
 	public String getStageNo() {
 		return StageNo;
 	}
-<<<<<<< HEAD
-	public void setStageNo(String stageNo) {
-		StageNo = stageNo;
-	}
-	public String getProjectNo() {
-		return ProjectNo;
-	}
-	public void setProjectNo(String projectNo) {
-		ProjectNo = projectNo;
-	}
-	public String getStageName() {
-		return StageName;
-	}
-	public void setStageName(String stageName) {
-		StageName = stageName;
-	}
-	public String getPublisherNo() {
-		return PublisherNo;
-	}
-	public void setPublisherNo(String publisherNo) {
-		PublisherNo = publisherNo;
-	}
-	public String getChargePerNo() {
-		return ChargePerNo;
-	}
-	public void setChargePerNo(String chargePerNo) {
-		ChargePerNo = chargePerNo;
-	}
-	public Date getStartDate() {
-		return StartDate;
-	}
-	public void setStartDate(Date startDate) {
-		StartDate = startDate;
-	}
-	public Date getEndDate() {
-		return EndDate;
-	}
-	public void setEndDate(Date endDate) {
-		EndDate = endDate;
-	}
-	
-=======
-	
+
 	public void setStageNo(String stageNo) {
 		StageNo = stageNo;
 	}
@@ -101,6 +59,5 @@ public class ProjectStage {
 				+ ", PublisherNo=" + PublisherNo + ", ChargePerNo=" + ChargePerNo +", StartDate=" + StartDate
 						+ ", EndDate=" + EndDate + " ]";
 	}
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 	
 }
