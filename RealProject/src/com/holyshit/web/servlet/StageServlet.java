@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.holyshit.domain.ProjectStage;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.TaskIndexs;
+import com.holyshit.service.ProjectStageSercvice;
+import com.holyshit.service.impl.ProjectStageServiceImpl;
 import com.holyshit.utils.AutoNumber;
 
 /**
@@ -39,32 +41,57 @@ public class StageServlet extends HttpServlet {
 			pro_stage.setStartDate(sdf.parse(request.getParameter("StartDate")));
 			pro_stage.setEndDate(sdf.parse(request.getParameter("EndDate")));
 			
-			//ss.getAttribute
-			HttpSession session = request.getSession();
+			//pro_stage.setPublisherNo("201526010429");//测试用
+			HttpSession session = request.getSession();//ss.getAttribute
 			Staff staff = (Staff)session.getAttribute("staff");
-			//发布人是当前用户
-			pro_stage.setPublisherNo(staff.getStaffno());
-			
+			pro_stage.setPublisherNo(staff.getStaffno());//发布人是当前用户
+		
 			//指标
 			task_index.setIndexInfo(request.getParameter("IndexInfo"));
 			
 			//阶段编号（7），发布（12），负责人（12）null
 			//指标编号（11），任务编号（10）null
+			
+			/*Project project = (Project) request.getAttribute("project");
+			String pn1 = project.getPno();*/
+			//暂时还未商榷项目编号的获取方式先用10001暂时代替使用
 			String pn="10001";
+			
+			pro_stage.setProjectNo(pn);
 			AutoNumber an = new AutoNumber();
-			pro_stage.setStageNo(an.PNtoSN(pn));
+			String sn = an.PNtoSN(pn);
+			System.out.println(sn);
+			pro_stage.setStageNo(sn);
+			
+			//审批人
+			String rcpn = request.getParameter("PersonInCharge");
+			String cpn = "";
+			for(int i=0;i<12;i++){
+				cpn+=rcpn.charAt(rcpn.length()-13+i);
+			}
+			pro_stage.setChargePerNo(cpn);
+			
+			String tn = an.CreateNewTaskNo(sn);
+			task_index.setTaskNo(tn);
+			String in1 = an.TNtoIN(tn);
+			task_index.setIndexNo(in1);
+			
+			//添加新阶段以及新的任务指标
+			ProjectStageSercvice pss = new ProjectStageServiceImpl();
+			pss.AddStageandTask(pro_stage, task_index);
 			
 			System.out.println(pro_stage);
 			System.out.println(task_index);
+			
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//分发转向新建成功！
-//		response.getWriter().print("<script></script>");
-//		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManagement_NewMilestone.jsp");
-////	
+		response.getWriter().print("<script></script>");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManagement_NewMilestone.jsp");	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

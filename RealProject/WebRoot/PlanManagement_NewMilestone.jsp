@@ -394,6 +394,7 @@ div.tableRow p:first-child{
 				</p>
 				<p class="tableContent"><input type="text" name="IndexInfo"><span id="addIndex"> + </span> </p>
 				</div>
+				
 			</form>
 				<p>
 					<span class="submit"><a style="cursor:pointer" onclick="upload()">新建阶段</a></span>

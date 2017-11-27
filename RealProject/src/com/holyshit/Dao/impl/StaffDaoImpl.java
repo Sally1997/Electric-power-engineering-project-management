@@ -29,8 +29,8 @@ public class StaffDaoImpl implements StaffDao {
 
 	@Override
 	public List<Staff> selectNameNoByname(String msg) throws Exception {
-		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select name,staffno from staff "
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(),"select name,staffno from staff "
 				+"where name like ?",new BeanListHandler<Staff>(Staff.class),msg+"%"
 				);
 	}

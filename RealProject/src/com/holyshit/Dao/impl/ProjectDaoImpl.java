@@ -29,7 +29,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<Object> selectProjectStageNoByPN(String pn) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT stageno FROM realproject.psplan order by stageno desc;", new ColumnListHandler());
+		return qr.query("SELECT stageno FROM psplan where stageno like ? order by stageno desc;", new ColumnListHandler(),pn+"%");
 	}
 
 }

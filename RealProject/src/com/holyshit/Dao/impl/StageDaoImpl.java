@@ -12,9 +12,7 @@ public class StageDaoImpl implements StageDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
 		
-		
-		
-		qr.update(ConnectionManager.getConnection(), "insert into ProjectStage "
+		qr.update(ConnectionManager.getConnection(), "insert into psplan "
 				+ "values (?,?,?,?,?,?,?)",
 				pro_stage.getStageNo(),pro_stage.getProjectNo(),
 				pro_stage.getStageName(),pro_stage.getPublisherNo(),

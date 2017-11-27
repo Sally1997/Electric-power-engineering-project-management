@@ -15,4 +15,12 @@ public interface StageTasksDao {
 	 * @return 任务列表
 	 */
 	List<StageTask> selectAllTasksById(String id)throws SQLException;
+	
+	/**
+	 * 根据任务编号生成新的指标编号
+	 * @param tn
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> selectIndexNobyTN(String tn) throws SQLException;
 }
