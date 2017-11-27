@@ -10,6 +10,7 @@ import com.holyshit.domain.Account;
 import com.holyshit.domain.Staff;
 import com.holyshit.service.AccountService;
 import com.holyshit.utils.ConnectionManager;
+import com.holyshit.utils.MD5Util;
 
 public class AccountServiceImpl implements AccountService {
 	//Account������ӿ�
@@ -37,9 +38,17 @@ public class AccountServiceImpl implements AccountService {
 		if(res==null){
 			return false;
 		}else {
-			if(res.getPassword().equals(account.getPassword())){
+			//进行md5加密
+			String s1=res.getPassword();
+			String s2=MD5Util.md5(account.getPassword());
+			System.out.println("机密以后: "+s2);
+			System.out.println("数据库    : "+s1);
+			if(res.getPassword().equals(MD5Util.md5(account.getPassword()))){
 				return true;
 			}
+//			if(res.getPassword().equals(account.getPassword())){
+//				return true;
+//			}
 		}
 		
 		return false;
