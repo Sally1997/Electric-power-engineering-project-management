@@ -22,17 +22,17 @@ public class ValidateCode extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		//ä¯ÀÀÆ÷²»»º´æ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		response.setHeader("pragma", "no-cache");
 		response.setHeader("cache-contrl", "no-cache");
 		response.setHeader("expires", "0");
-		//ÉèÖÃÍøÒ³Ë¢ÐÂ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³Ë¢ï¿½ï¿½
 //		response.setIntHeader("refresh", 1);
 //		
-		//½¨Á¢Í¼Ïñ
-		int width=100,height=40;
+		//ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
+		int width=100,height=34;
 		BufferedImage image = createCode(width, height,request);
-		//·¢ËÍä¯ÀÀÆ÷
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		OutputStream out=response.getOutputStream();
 		ImageIO.write(image, "jpg", out);
 	}
@@ -42,14 +42,14 @@ public class ValidateCode extends HttpServlet {
 		HttpSession session=request.getSession();
 		BufferedImage image=new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics graphics=image.getGraphics();
-		//»ñÈ¡±³¾°É«
+		//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½É«
 		Color bg=getRandColor(150, 255);
 		
 		
 		graphics.setColor(bg);
 		graphics.fillRect(1, 1, width-2, height-2);
 		
-		//»ñÈ¡±ß¿òÑÕÉ«
+		//ï¿½ï¿½È¡ï¿½ß¿ï¿½ï¿½ï¿½É«
 		Color fg=getRandColor(0, 150);
 		graphics.setColor(fg);
 		graphics.drawRect(1, 1, width-1, height-1);
@@ -59,12 +59,12 @@ public class ValidateCode extends HttpServlet {
 			int num=randnumber.nextInt(10);
 			number+=num;
 			Color fontColor=getRandColor(50, 100);
-			graphics.setFont(new Font("ºÚÌå",Font.BOLD,30));
+			graphics.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.BOLD,30));
 			graphics.drawString(Integer.toString(num), 10+20*i, 30);
 		}
-		//ÉèÖÃÑéÖ¤Âëµ½session
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ëµ½session
 		session.setAttribute("validatecode", number);
-		//Ìí¼ÓÈÅÂÒÏß
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for(int i=0;i<50;i++){
 			int x1=randnumber.nextInt(100);
 			int y1=randnumber.nextInt(50);

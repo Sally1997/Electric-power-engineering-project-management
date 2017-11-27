@@ -40,6 +40,9 @@ public class AccountServiceImpl implements AccountService {
 		}else {
 			//进行md5加密
 			String s1=res.getPassword();
+			if(s1==null){
+				return false;
+			}
 			String s2=MD5Util.md5(account.getPassword());
 			System.out.println("机密以后: "+s2);
 			System.out.println("数据库    : "+s1);
