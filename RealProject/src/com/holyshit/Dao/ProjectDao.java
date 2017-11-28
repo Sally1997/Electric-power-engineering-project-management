@@ -10,6 +10,12 @@ import com.holyshit.domain.Project;
  *
  */
 public interface ProjectDao {
+	//根据项目ID获取整个项目的DAO和SERVICE写在DTREEDAO和DTREENODE里面
+	//get all paoject info by id impl in Dtree(in case wrong encording)
+	//	^	Look at there
+	//	|	My son
+	//	|	Dog Yuan
+	
 	/**
 	 * 获取用户正在参与的所有项目的列表
 	 * @param id 用户id
@@ -25,6 +31,7 @@ public interface ProjectDao {
 	 * @throws SQLException
 	 */
 	List<Object> selectProjectStageNoByPN(String pn) throws SQLException;
+	
 } 
 
 

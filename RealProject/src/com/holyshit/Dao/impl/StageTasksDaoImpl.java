@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
 
 import com.holyshit.Dao.StageTasksDao;
+import com.holyshit.domain.DTree;
 import com.holyshit.domain.StageTask;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
@@ -30,7 +31,5 @@ public class StageTasksDaoImpl implements StageTasksDao {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT IndexNo FROM taskindexes where IndexNo like ? order by indexno desc", new ColumnListHandler(), tn+"%");
 	}
-
-	
 
 }

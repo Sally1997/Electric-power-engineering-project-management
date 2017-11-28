@@ -3,6 +3,7 @@ package com.holyshit.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.holyshit.domain.DTree;
 import com.holyshit.domain.StageTask;
 /**
  * 
@@ -23,4 +24,5 @@ public interface StageTasksDao {
 	 * @throws SQLException 
 	 */
 	List<Object> selectIndexNobyTN(String tn) throws SQLException;
+	
 }
