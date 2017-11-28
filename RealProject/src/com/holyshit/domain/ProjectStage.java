@@ -5,59 +5,73 @@ import java.util.Date;
 
 public class ProjectStage {
 	private String StageNo;//阶段编号
-	private String ProjectNo;
-	private String StageName;
-	private String PublisherNo;
-	private String ChargePerNo;
-	private Date StartDate;
-	private Date EndDate;
+	private String PNo;
+	private String SName;
+	private String PubNo;
+	private String CharPNo;
+	private Date STime;
+	private Date ETime;
+	
 	public String getStageNo() {
 		return StageNo;
 	}
-	
+
 	public void setStageNo(String stageNo) {
 		StageNo = stageNo;
 	}
-	public String getProjectNo() {
-		return ProjectNo;
+
+	public String getPNo() {
+		return PNo;
 	}
-	public void setProjectNo(String projectNo) {
-		ProjectNo = projectNo;
+
+	public void setPNo(String pNo) {
+		PNo = pNo;
 	}
-	public String getStageName() {
-		return StageName;
+
+	public String getSName() {
+		return SName;
 	}
-	public void setStageName(String stageName) {
-		StageName = stageName;
+
+	public void setSName(String sName) {
+		SName = sName;
 	}
-	public String getPublisherNo() {
-		return PublisherNo;
+
+	public String getPubNo() {
+		return PubNo;
 	}
-	public void setPublisherNo(String publisherNo) {
-		PublisherNo = publisherNo;
+
+	public void setPubNo(String pubNo) {
+		PubNo = pubNo;
 	}
-	public String getChargePerNo() {
-		return ChargePerNo;
+
+	public String getCharPNo() {
+		return CharPNo;
 	}
-	public void setChargePerNo(String chargePerNo) {
-		ChargePerNo = chargePerNo;
+
+	public void setCharPNo(String charPNo) {
+		CharPNo = charPNo;
 	}
-	public Date getStartDate() {
-		return StartDate;
+
+	public Date getSTime() {
+		return STime;
 	}
-	public void setStartDate(Date startDate) {
-		StartDate = startDate;
+
+	public void setSTime(Date sTime) {
+		STime = sTime;
 	}
-	public Date getEndDate() {
-		return EndDate;
+
+	public Date getETime() {
+		return ETime;
 	}
-	public void setEndDate(Date endDate) {
-		EndDate = endDate;
+
+	public void setETime(Date eTime) {
+		ETime = eTime;
 	}
+
 	public String toString() {
-		return "ProjectStage [StageNo=" + StageNo + ", ProjectNo=" + ProjectNo + ", StageName=" + StageName
-				+ ", PublisherNo=" + PublisherNo + ", ChargePerNo=" + ChargePerNo +", StartDate=" + StartDate
-						+ ", EndDate=" + EndDate + " ]";
+		return "ProjectStage [StageNo=" + StageNo + ", ProjectNo=" + PNo + ", StageName=" + SName
+				+ ", PublisherNo=" + PubNo + ", ChargePerNo=" + CharPNo +", StartDate=" + STime
+						+ ", EndDate=" + ETime + " ]";
 	}
 	
 }

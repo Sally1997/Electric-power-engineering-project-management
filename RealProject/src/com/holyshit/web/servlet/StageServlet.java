@@ -35,16 +35,16 @@ public class StageServlet extends HttpServlet {
 			 * 获取表单数据
 			 */
 			//getParameterMap用不了
-			pro_stage.setStageName(request.getParameter("StageName"));
+			pro_stage.setSName(request.getParameter("StageName"));
 			//日期转换
 			SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-			pro_stage.setStartDate(sdf.parse(request.getParameter("StartDate")));
-			pro_stage.setEndDate(sdf.parse(request.getParameter("EndDate")));
+			pro_stage.setSTime(sdf.parse(request.getParameter("StartDate")));
+			pro_stage.setETime(sdf.parse(request.getParameter("EndDate")));
 			
 			//pro_stage.setPublisherNo("201526010429");//测试用
 			HttpSession session = request.getSession();//ss.getAttribute
 			Staff staff = (Staff)session.getAttribute("staff");
-			pro_stage.setPublisherNo(staff.getStaffno());//发布人是当前用户
+			pro_stage.setPubNo(staff.getStaffno());//发布人是当前用户
 		
 			//指标
 			task_index.setIndexInfo(request.getParameter("IndexInfo"));
@@ -57,7 +57,7 @@ public class StageServlet extends HttpServlet {
 			//暂时还未商榷项目编号的获取方式先用10001暂时代替使用
 			String pn="10001";
 			
-			pro_stage.setProjectNo(pn);
+			pro_stage.setPNo(pn);
 			AutoNumber an = new AutoNumber();
 			String sn = an.PNtoSN(pn);
 			System.out.println(sn);
@@ -69,7 +69,7 @@ public class StageServlet extends HttpServlet {
 			for(int i=0;i<12;i++){
 				cpn+=rcpn.charAt(rcpn.length()-13+i);
 			}
-			pro_stage.setChargePerNo(cpn);
+			pro_stage.setCharPNo(cpn);
 			
 			String tn = an.CreateNewTaskNo(sn);
 			task_index.setTaskNo(tn);

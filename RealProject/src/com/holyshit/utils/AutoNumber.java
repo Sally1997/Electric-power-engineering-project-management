@@ -20,7 +20,7 @@ public class AutoNumber {
 	public String PNtoSN(String pn) throws SQLException{
 		ProjectStage pro_stage = new ProjectStage();
 		
-		pro_stage.setProjectNo(pn);
+		pro_stage.setPNo(pn);
 		//根据项目编号获取阶段编号
 		ProjectService pros = new ProjectServiceImpl();
 		List<Object> list = pros.getNewStageNo(pn);

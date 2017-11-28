@@ -11,9 +11,24 @@
 <meta name="keywords" content="电力工程项目管理,PM2">
     <meta name="description" content="这是一个项目工程管理软件">
     <meta name="content-type" content="text/html; charset=gb2312">
-    
 </head>
-
+<script type="text/javascript">
+	window.onload = function(){
+		var aja = XMLHttpRequest();
+		aja.onreadystatechange = function(){
+			if(aja.readyState==4){
+				if(aja.status==200){
+					var str = eval("("+aja.responseText+")");
+				}
+			}
+		}
+		
+		//创建连接
+		aja.open("get","${pageContext.request.contextPage }/servlet/DTreeNodeServlet");
+		//发送请求
+		aja.send(null);
+	}
+</script>
 <body>
     <div id="top_fixed">
 		  <!-- 顶端-->
@@ -43,14 +58,17 @@
     </div>
 		
 	<div id="dTree">
+	<%
+		
+	 %>
 	<script type="text/javascript">
 	function fun(){
 		alert("hehe");
 	}
 	
 	d=new dTree('d');
-	d.add(0,-1,'This is myTree','javascript:fun()');
-	d.add(1,0,'hehe');
+	d.add(10001,-1,'This is myTree','javascript:fun()');
+	
 	document.write(d);
 	</script>
 	</div>	
