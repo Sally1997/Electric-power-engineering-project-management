@@ -128,9 +128,9 @@
                           <small>&nbsp;&nbsp;点击图片刷新验证码</small>
                           </label>
                          
-						  <div class="input-group">
-							  <span class="input-group-addon"><img alt="验证码" id="img" src="${pageContext.request.contextPath }/web/servlet/validatecode"  onclick="updateCode();"></span>
-							  <input type="text" class="form-control" id="validateCode" placeholder="四位字符验证码" name="validatecode">
+						  <div class="input-group" >
+							  <span class="input-group-addon" style="z-index: 3"><img alt="验证码" id="img" src="${pageContext.request.contextPath }/web/servlet/validatecode"  onclick="updateCode();"></span>
+							  <input type="text" style="z-index: 0" class="form-control" id="validateCode" placeholder="四位字符验证码" name="validatecode">
                           </div>
                           </div>
                           <div class="checkbox">
