@@ -1,8 +1,11 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="com.holyshit.domain.Document"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@page language="java" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -261,7 +264,7 @@
   						<c:forEach items="${staffDoc['docs'] }" begin="0" end="7" step="1" var="doc">
   							<li class="frame_li">
   								<a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}">${doc.dtitle }</a>
-  								<span>${doc.uploadtime }</span>
+  								<span><fmt:formatDate value="${doc.uploadtime }" type="both"/></span>
   							</li>
   						</c:forEach>
   					</c:if>
@@ -270,7 +273,7 @@
   						<c:forEach items="${staffDoc['docs'] }" var="doc">
   							<li class="frame_li">
   								<a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}">${doc.dtitle }</a>
-  								<span>${doc.uploadtime }</span>
+  								<span><fmt:formatDate value="${doc.uploadtime }" type="both"/></span>
   							</li>
   						</c:forEach>
   					</c:if>
