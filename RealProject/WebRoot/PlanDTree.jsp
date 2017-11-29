@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.holyshit.domain.DTree" %>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="java.util.Iterator" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,24 +45,44 @@
 
     </div>
 		
-	<div id="dTree">
+	<%-- <div id="dTree">
 	<script type="text/javascript">
 	d=new dTree("d");
 	d.add("1",-1,'项目');
+	var str = "";
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
-			
+			var pdt = document.getElementById("plantdtree");
+			pdt.innerHTML = aja.responseText;
 		}
 	}
 	//创建连接
-	aja.open("get","${pageContext.request.contextPath }/servlet/DTreeNodeServlet");
+	aja.open("get","${pageContext.request.contextPath }/servlet/DTreeNodeServlet",true);
 	//发送请求
 	aja.send(null);
 	document.write(d);
 	</script>
 	</div>	
-	<div id="plantdtree"></div>
+	<div id="plantdtree"></div> --%>
+	
+	<%
+		List<DTree> dlist = (ArrayList)request.getAttribute("list");
+	 %>
+	<script type="text/javascript">
+		tree = new dTree('tree');
+	<%
+		Iterator<DTree> it = dlist.iterator();
+		while(it.hasNext()){
+		DTree dt = it.next();
+		System.out.println(dt);
+	%>
+		tree.add('<%=dt.getCurrentNode()%>','<%=dt.getParentNode()%>','<%=dt.getNodeName()%>','javascript: showthisnode(<%=dt.getCurrentNode()%>)');
+	<% 
+		}
+	 %>
+	 document.write(tree);
+	</script>
 	
 	
 	<br><br><br><br><br><br><br><br><br><br>
@@ -90,23 +115,24 @@
 
 </body>
 <script type="text/javascript">
-		function user_info_ap(){
-			
-			var kz=document.getElementById("uf");
-			kz.style.display="block";
-		}
-		function user_info_dis(){
-			var kz=document.getElementById("uf");
-			kz.style.display="none";
-		}
-		function ms_info_ap(){
-			
-			var kz=document.getElementById("ms");
-			kz.style.display="block";
-		}
-		function ms_info_dis(){
-			var kz=document.getElementById("ms");
-			kz.style.display="none";
-		}
+	function user_info_ap(){
+		var kz=document.getElementById("uf");
+		kz.style.display="block";
+	}
+	function user_info_dis(){
+		var kz=document.getElementById("uf");
+		kz.style.display="none";
+	}
+	function ms_info_ap() {
+		var kz = document.getElementById("ms");
+		kz.style.display = "block";
+	}
+	function ms_info_dis() {
+		var kz = document.getElementById("ms");
+		kz.style.display = "none";
+	}
+	function showthisnode(no){
+		var aja = new XMLHttpRequest();
+	}
 </script>
 </html>

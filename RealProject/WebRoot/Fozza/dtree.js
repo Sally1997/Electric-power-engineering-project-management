@@ -63,33 +63,33 @@ function dTree(objName) {
 
 	this.icon = {
 
-		root				: '../image/tree/base.gif',
+		root				: 'image/tree/base.gif',
 
-		folder			: '../image/tree/folder.gif',
+		folder			: 'image/tree/folder.gif',
 
-		folderOpen	: '../image/tree/folderopen.gif',
+		folderOpen	: 'image/tree/folderopen.gif',
 
-		node				: '../image/tree/page.gif',
+		node				: 'image/tree/page.gif',
 
-		empty				: '../image/tree/empty.gif',
+		empty				: 'image/tree/empty.gif',
 
-		line				: '../image/tree/line.gif',
+		line				: 'image/tree/line.gif',
 
-		join				: '../image/tree/join.gif',
+		join				: 'image/tree/join.gif',
 
-		joinBottom	: '../image/tree/joinbottom.gif',
+		joinBottom	: 'image/tree/joinbottom.gif',
 
-		plus				: '../image/tree/plus.gif',
+		plus				: 'image/tree/plus.gif',
 
-		plusBottom	: '../image/tree/plusbottom.gif',
+		plusBottom	: 'image/tree/plusbottom.gif',
 
-		minus				: '../image/tree/minus.gif',
+		minus				: 'image/tree/minus.gif',
 
-		minusBottom	: '../image/tree/minusbottom.gif',
+		minusBottom	: 'image/tree/minusbottom.gif',
 
-		nlPlus			: '../image/tree/nolines_plus.gif',
+		nlPlus			: 'image/tree/nolines_plus.gif',
 
-		nlMinus			: '../image/tree/nolines_minus.gif'
+		nlMinus			: 'image/tree/nolines_minus.gif'
 
 	};
 

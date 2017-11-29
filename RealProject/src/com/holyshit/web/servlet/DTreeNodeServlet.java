@@ -17,8 +17,6 @@ import com.holyshit.domain.StageTask;
 import com.holyshit.service.DTreeNodeService;
 import com.holyshit.service.impl.DTreeNodeServiceImpl;
 
-import net.sf.json.JSONArray;
-
 public class DTreeNodeServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +36,7 @@ public class DTreeNodeServlet extends HttpServlet {
 			dt.setCurrentNode(pro.getPno());
 			dt.setParentNode("-1");
 			dt.setNodeName(pro.getPname());
-			//list.add(dt);
+			list.add(dt);
 			
 			//加入阶段节点
 			for(int i=0;i<slist.size();i++){
@@ -57,10 +55,11 @@ public class DTreeNodeServlet extends HttpServlet {
 				dt2.setNodeName(tlist.get(i).getTaskname());
 				list.add(dt2);
 			}
-			String str = JSONArray.fromObject(list).toString();
-			
-			//输出
-			response.getWriter().write(str);
+			//String str = JSONArray.fromObject(list).toString();
+//			//输出
+//			response.getWriter().write(str);
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("/PlanDTree.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
