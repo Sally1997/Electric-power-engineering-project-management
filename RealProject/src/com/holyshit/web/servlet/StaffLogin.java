@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,7 +52,6 @@ public class StaffLogin extends HttpServlet {
 		if(code.equals(session.getAttribute("validatecode"))){
 			if(as.login(account)){
 				res=true;
-			
 			}
 			else {
 			
@@ -63,37 +63,36 @@ public class StaffLogin extends HttpServlet {
 		}	
 		//�ַ�ת��
 		if(res){
-
+			//是否记住密码
+			String remember=request.getParameter("remember");
+			if(remember!=null&&request.getParameter("remember").equals("remember")){
+				Cookie cname=new Cookie("staffno", account.getStaffno());
+				Cookie cpassword=new Cookie("password", account.getPassword());
+				cname.setMaxAge(Integer.MAX_VALUE);
+				cpassword.setMaxAge(Integer.MAX_VALUE);
+				cname.setPath("/");
+				cpassword.setPath("/");
+				
+				response.addCookie(cname);
+				response.addCookie(cpassword);
+			
+			}
 			//����session
 			session.removeAttribute("validatecode");
 			//获取用户的信息
 			Staff staff = as.getUserById(account.getStaffno());
 			session.setAttribute("staff", staff);
-					
-			//获取当前用户的项目列表
-			List<Project> projects;
-			ProjectService ps=new ProjectServiceImpl();
-			projects=ps.findAllProjectsById(account.getStaffno());
-			
-			//获取当前用户的任务列表
-			List<StageTask> tasks;
-			StageTasksService sts=new StageTasksServiceImpl();
-			tasks=sts.findAllTasksByid(account.getStaffno());
-			
-			if(projects!=null){
-				request.setAttribute("projects", projects);
-				request.setAttribute("projectSize", projects.size());
+			//跳转到相应的uri
+			String uri=request.getParameter("uri");
+			if(uri!=null){
+				//跳入相应的界面
+				response.sendRedirect(uri);
 			}
-			
-			if(tasks!=null){
-				request.setAttribute("tasks", tasks);
-				request.setAttribute("taskSize", tasks.size());
+			else {
+				//进入主页
+				response.sendRedirect(request.getContextPath()+"/web/servlet/mainServlet");
+				
 			}
-			
-			//转向到主页
-			request.getRequestDispatcher("/main.jsp").forward(request, response);
-			//cookie
-			//��ת��ҳ
 		}else{
 		
 			request.setAttribute("error", error);

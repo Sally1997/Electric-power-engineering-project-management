@@ -12,23 +12,6 @@
     <meta name="description" content="这是一个项目工程管理软件">
     <meta name="content-type" content="text/html; charset=gb2312">
 </head>
-<script type="text/javascript">
-	window.onload = function(){
-		var aja = XMLHttpRequest();
-		aja.onreadystatechange = function(){
-			if(aja.readyState==4){
-				if(aja.status==200){
-					var str = eval("("+aja.responseText+")");
-				}
-			}
-		}
-		
-		//创建连接
-		aja.open("get","${pageContext.request.contextPage }/servlet/DTreeNodeServlet");
-		//发送请求
-		aja.send(null);
-	}
-</script>
 <body>
     <div id="top_fixed">
 		  <!-- 顶端-->
@@ -58,28 +41,30 @@
     </div>
 		
 	<div id="dTree">
-	<%
-		
-	 %>
 	<script type="text/javascript">
-	function fun(){
-		alert("hehe");
+	d=new dTree("d");
+	d.add("1",-1,'项目');
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			
+		}
 	}
-	
-	d=new dTree('d');
-	d.add(10001,-1,'This is myTree','javascript:fun()');
-	
+	//创建连接
+	aja.open("get","${pageContext.request.contextPath }/servlet/DTreeNodeServlet");
+	//发送请求
+	aja.send(null);
 	document.write(d);
 	</script>
 	</div>	
+	<div id="plantdtree"></div>
 	
 	
-		
 	<br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br>
 
 	<!-- 版权声明 -->
   	<div id="copyright" style="position:fixed;bottom:0px">
@@ -101,7 +86,7 @@
         <div class="triangle"></div>
         <div class="uf_font">反正这里有通知</div>
    	</div>
-
+	
 
 </body>
 <script type="text/javascript">

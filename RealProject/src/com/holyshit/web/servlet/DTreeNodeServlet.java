@@ -38,7 +38,7 @@ public class DTreeNodeServlet extends HttpServlet {
 			dt.setCurrentNode(pro.getPno());
 			dt.setParentNode("-1");
 			dt.setNodeName(pro.getPname());
-			list.add(dt);
+			//list.add(dt);
 			
 			//加入阶段节点
 			for(int i=0;i<slist.size();i++){

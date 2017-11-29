@@ -12,11 +12,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import com.holyshit.Dao.AccountDao;
 import com.holyshit.domain.Account;
 import com.holyshit.utils.ConnectionManager;
-/**
- * 
- * @author yuan
- *
- */
+
 public class AccountDaoImpl implements AccountDao{
 
 	@Override

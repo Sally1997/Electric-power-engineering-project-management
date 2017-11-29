@@ -1,7 +1,11 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="com.holyshit.domain.Document"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page language="java" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -100,6 +104,7 @@
   			<!-- 个人信息模块 -->
   			<div id="userinfo">
   				<span>个人信息模块</span><br><br>
+  				
   				<span style="font-weight: bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的${staff.name }，您好！今天是<%=Calendar.getInstance().get(Calendar.YEAR)%>年<%=Calendar.getInstance().get(Calendar.MONTH)+1 %>月<%=Calendar.getInstance().get(Calendar.DATE) %>日。</span>
   			</div>
   			<!-- 任务列表 -->
@@ -107,12 +112,8 @@
   				<div id="tasklist_label">项<br>目<br>任<br>务<br>列<br>表</div>	
   				<div id="tasklist_detail">
   					<div class="task_top">
-  						<c:if test="${empty taskSize }">
-  							<span class="num_info">当前正在参与的项目数量：           </span><span>    0</span>
-  						</c:if>
-  						<c:if test="${not empty taskSize }">
-  							<span class="num_info">当前正在参与的项目数量：           </span><span>    ${taskSize}</span>
-  						</c:if>
+
+  						<span class="num_info">当前正在参与的项目数量：           </span><span>    ${fn:length(projects)} </span>
   						<span class="time_sort">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
@@ -175,12 +176,8 @@
   				<div id="project_label"><br>项<br>目<br>进<br>度</div>	
   				<div id="project_detail">
   					<div class="task_top">
-  						<c:if test="${empty projectSize }">
-  							<span class="num_info">当前正在参与的项目数量：           </span><span>    0</span>
-  						</c:if>
-  						<c:if test="${not empty projectSize }">
-  							<span class="num_info">当前正在参与的项目数量：           </span><span>    ${projectSize}</span>
-  						</c:if>
+  						<span class="num_info">当前正在参与的项目数量：           </span><span>    ${fn:length(projects) }</span>
+
   						<span class="time_sort">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
@@ -244,42 +241,13 @@
   				</div>
   				<div style="height: 10px;"></div>
   				<ul class="frame_ul">
+  				
+  				
   					<li class="frame_li">
   						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
   						<span>2017.10.26 17:59</span>
   					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
+  					
   				</ul>
   			</div>
   			<div style="height: 10px;background-color: #F2F2F2;"></div>
@@ -293,42 +261,24 @@
   				<div style="height: 10px;"></div>
   				
   				<ul class="frame_ul">
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
+  					<c:if test="${fn:length(staffDoc['docs'])>8 }">
+  						<c:forEach items="${staffDoc['docs'] }" begin="0" end="7" step="1" var="doc">
+  							<li class="frame_li">
+  								<a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}">${doc.dtitle }</a>
+  								<span><fmt:formatDate value="${doc.uploadtime }" type="both"/></span>
+  							</li>
+  						</c:forEach>
+  					</c:if>
+  						
+  					<c:if test="${fn:length(staffDoc['docs'])<=8 }">
+  						<c:forEach items="${staffDoc['docs'] }" var="doc">
+  							<li class="frame_li">
+  								<a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}">${doc.dtitle }</a>
+  								<span><fmt:formatDate value="${doc.uploadtime }" type="both"/></span>
+  							</li>
+  						</c:forEach>
+  					</c:if>
+  				
   				</ul>
   			</div>
   		</div>

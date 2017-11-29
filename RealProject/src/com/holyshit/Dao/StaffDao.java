@@ -4,14 +4,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.Staff;
-/**
- * 
- * @author yuan
- *
- */
+
 public interface StaffDao {
 	/**
-	 * ���Ա��id��ѯԱ������Ϣ
+	 * ����Ա��id��ѯԱ������Ϣ
 	 * @param id Ա��id
 	 * @return  Ա������Ϣ
 	 * @throws SQLException
@@ -28,5 +24,7 @@ public interface StaffDao {
 	 * @throws Exception
 	 */
 	List<Staff> selectNameNoByname(String msg)throws Exception;
+
+
 }   
  
