@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,7 +30,24 @@ public class LoginFilter implements Filter{
 		if(session.getAttribute("staff")!=null){
 			
 			chain.doFilter(request, response);
-		}else{
+		}else if(req.getRequestURI().indexOf("login.jsp")!=-1){
+			
+			Cookie[] cookies = req.getCookies();
+			String name=null;
+			String password=null;
+			for (Cookie cookie : cookies) {
+				if(cookie.getName().equals("staffno"))
+					name=cookie.getValue();
+				if(cookie.getName().equals("password"))
+					password=cookie.getValue();
+				
+			}
+			request.setAttribute("staffno", name);
+			request.setAttribute("password", password);
+		
+			chain.doFilter(request, response);
+		}
+		else{
 			request.setAttribute("locError", "请先登录");
 //			res.sendRedirect(req.getContextPath()+"/login.jsp");
 			request.setAttribute("uri", req.getRequestURI());

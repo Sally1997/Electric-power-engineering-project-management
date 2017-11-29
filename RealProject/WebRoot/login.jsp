@@ -117,11 +117,25 @@
               	          <div class="form-group">
                           <label for="account" id=ui_label>账号</label>
                          
-                          <input type="text" class="form-control" id="user-id" name="staffno" value="${account.staffno }"  onblur="getUserLogo();" placeholder="请输入账号">
+                          
+                          <c:if test="${empty staffno }">
+                          	<input type="text" class="form-control" id="user-id" name="staffno" value="${account.staffno }"  onblur="getUserLogo();" placeholder="请输入账号">
+                          </c:if>
+                          <c:if test="${not empty staffno }">
+                          	<input type="text" class="form-control" id="user-id" name="staffno" value="${staffno }"  onblur="getUserLogo();">
+                          </c:if>
+                          
                           </div>
                           <div class="form-group">
                           <label for="password">密码</label>
-                          <input type="password" class="form-control" id="passwd" name="password"  placeholder="请输入密码">
+                          
+                          <c:if test="${empty password }">
+                          	<input type="password" class="form-control" id="passwd" name="password"  placeholder="请输入密码">
+                          </c:if>
+                          <c:if test="${not empty password }">
+                          	<input type="password" class="form-control" id="passwd" name="password" value="${password }">
+                          </c:if>
+                          
                           </div>
                           <div class="form-group">
                           <label for="validate">验证码
@@ -134,7 +148,15 @@
                           </div>
                           </div>
                           <div class="checkbox">
-                          <label><input type="checkbox"> 记住密码</label></span>
+                          <label>
+                          	
+                          	<c:if test="${empty staffno }">
+                          		<input type="checkbox" name="remember" value="remember"> 记住密码
+                          	</c:if>
+                          	<c:if test="${not empty staffno }">
+                          		<input type="checkbox" name="remember" value="remember" checked="checked"> 记住密码
+                          	</c:if>
+                          </label></span>
                           <!--显示错误信息-->
                           <div>
                           <p style="color:red"> ${error['username'] } ${error['validatecode'] }${locError } </p>

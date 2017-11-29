@@ -12,6 +12,7 @@
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>
   	<url-pattern>/main.jsp</url-pattern>
+  	<url-pattern>/login.jsp</url-pattern>
   	<url-pattern>/AddUser.jsp</url-pattern>
   	<url-pattern>/PlanManagement_Newed.jsp</url-pattern>
   	<url-pattern>/PlanManagement_PerInCharge.jsp</url-pattern>
@@ -45,6 +46,11 @@
     <servlet-name>MainServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.MainServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>SecurityLogout</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SecurityLogout</servlet-class>
+  </servlet>
+
 
 
 
@@ -64,6 +70,10 @@
   <servlet-mapping>
     <servlet-name>MainServlet</servlet-name>
     <url-pattern>/web/servlet/mainServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SecurityLogout</servlet-name>
+    <url-pattern>/web/servlet/logout</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

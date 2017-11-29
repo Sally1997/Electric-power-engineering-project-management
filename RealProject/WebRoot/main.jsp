@@ -104,6 +104,7 @@
   			<!-- 个人信息模块 -->
   			<div id="userinfo">
   				<span>个人信息模块</span><br><br>
+  				
   				<span style="font-weight: bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的${staff.name }，您好！今天是<%=Calendar.getInstance().get(Calendar.YEAR)%>年<%=Calendar.getInstance().get(Calendar.MONTH)+1 %>月<%=Calendar.getInstance().get(Calendar.DATE) %>日。</span>
   			</div>
   			<!-- 任务列表 -->

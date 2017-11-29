@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.holyshit.domain.Project;
+import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.DocumentService;
 import com.holyshit.service.ProjectService;
@@ -22,13 +23,13 @@ import com.holyshit.service.impl.StageTasksServiceImpl;
 public class MainServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//获取当前用户的项目列表
 				List<Project> projects;
 				ProjectService ps=new ProjectServiceImpl();
-				String staffno=(String) request.getAttribute("staffno");
+				String staffno=((Staff) request.getSession().getAttribute("staff")).getStaffno();
 				projects=ps.findAllProjectsById(staffno);
 				System.out.println();
 				//获取当前用户的任务列表

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,7 +52,6 @@ public class StaffLogin extends HttpServlet {
 		if(code.equals(session.getAttribute("validatecode"))){
 			if(as.login(account)){
 				res=true;
-			
 			}
 			else {
 			
@@ -63,7 +63,20 @@ public class StaffLogin extends HttpServlet {
 		}	
 		//�ַ�ת��
 		if(res){
-
+			//是否记住密码
+			String remember=request.getParameter("remember");
+			if(remember!=null&&request.getParameter("remember").equals("remember")){
+				Cookie cname=new Cookie("staffno", account.getStaffno());
+				Cookie cpassword=new Cookie("password", account.getPassword());
+				cname.setMaxAge(Integer.MAX_VALUE);
+				cpassword.setMaxAge(Integer.MAX_VALUE);
+				cname.setPath("/");
+				cpassword.setPath("/");
+				
+				response.addCookie(cname);
+				response.addCookie(cpassword);
+			
+			}
 			//����session
 			session.removeAttribute("validatecode");
 			//获取用户的信息
@@ -77,8 +90,8 @@ public class StaffLogin extends HttpServlet {
 			}
 			else {
 				//进入主页
-				request.setAttribute("staffno", account.getStaffno());
-				request.getRequestDispatcher("/web/servlet/mainServlet").forward(request, response);
+				response.sendRedirect(request.getContextPath()+"/web/servlet/mainServlet");
+				
 			}
 		}else{
 		
