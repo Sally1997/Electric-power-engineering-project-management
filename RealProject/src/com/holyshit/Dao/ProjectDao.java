@@ -15,6 +15,7 @@ public interface ProjectDao {
 	//	^	Look at there
 	//	|	My son
 	//	|	Dog Yuan
+	//get task info and stage info --> DTreeDao
 	
 	/**
 	 * 获取用户正在参与的所有项目的列表

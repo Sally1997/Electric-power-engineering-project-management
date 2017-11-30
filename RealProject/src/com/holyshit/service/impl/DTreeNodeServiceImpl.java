@@ -27,4 +27,14 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 		return dtd.selectProjectInfo(pn);
 	}
 
+	@Override
+	public ProjectStage GetStageInfo(String sn) throws SQLException {
+		return dtd.selectStageInfo(sn);
+	}
+
+	@Override
+	public StageTask GetTaskInfo(String tn) throws SQLException {
+		return dtd.selectTaskInfo(tn);
+	}
+
 }

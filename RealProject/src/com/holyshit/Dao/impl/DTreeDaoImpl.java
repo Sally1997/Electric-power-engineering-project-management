@@ -41,4 +41,20 @@ public class DTreeDaoImpl implements DTreeDao {
 		
 	}
 
+	@Override
+	public ProjectStage selectStageInfo(String sn) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("select * from psplan where stageNo = ?",
+				new BeanHandler<ProjectStage>(ProjectStage.class), sn);
+	}
+
+	@Override
+	public StageTask selectTaskInfo(String tn) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("select * from stagetasks where taskno = ?",
+				new BeanHandler<StageTask>(StageTask.class), tn);
+	}
+
 }

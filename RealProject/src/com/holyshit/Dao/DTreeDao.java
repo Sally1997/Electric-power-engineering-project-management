@@ -29,4 +29,20 @@ public interface DTreeDao {
 	 * @throws SQLException 
 	 */
 	Project selectProjectInfo(String pn) throws SQLException;
+	
+	/**
+	 * 根据阶段编号获取整个阶段信息
+	 * @param pn
+	 * @return
+	 * @throws SQLException 
+	 */
+	ProjectStage selectStageInfo(String sn) throws SQLException;
+	
+	/**
+	 * 根据任务编号获取整个任务信息
+	 * @param pn
+	 * @return
+	 * @throws SQLException 
+	 */
+	StageTask selectTaskInfo(String tn) throws SQLException;
 }

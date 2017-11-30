@@ -66,30 +66,80 @@
 	</div>	
 	<div id="plantdtree"></div> --%>
 	
-	<%
-		List<DTree> dlist = (ArrayList)request.getAttribute("list");
-	 %>
-	<script type="text/javascript">
-		tree = new dTree('tree');
-	<%
-		Iterator<DTree> it = dlist.iterator();
-		while(it.hasNext()){
-		DTree dt = it.next();
-		System.out.println(dt);
-	%>
-		tree.add('<%=dt.getCurrentNode()%>','<%=dt.getParentNode()%>','<%=dt.getNodeName()%>','javascript: showthisnode(<%=dt.getCurrentNode()%>)');
-	<% 
-		}
-	 %>
-	 document.write(tree);
-	</script>
+	<div id="fozza_2">
+		<p> 计划树状图</p>
+		<%
+			List<DTree> dlist = (ArrayList)request.getAttribute("list");
+	 	%>
+			<script type="text/javascript">
+			tree = new dTree('tree');
+		<%
+			Iterator<DTree> it = dlist.iterator();
+			while(it.hasNext()){
+				DTree dt = it.next();
+		%>
+			tree.add('<%=dt.getCurrentNode()%>','<%=dt.getParentNode()%>','<%=dt.getNodeName()%>','javascript: showthisnode(<%=dt.getCurrentNode()%>)');
+		<% 
+			}
+		 %>
+		 	document.write(tree);
+		</script>
+	</div>
+	
+	
+	<section>
+            <div id="TaskDetails">
+			<p id="TaskNote"> 您当前处于<span id="fozza_where">任务节点</span><span id="TaskName">Child2.2.2</span>,详细信息如下：</p>
+			<form id="MileStone">
+				<div class="tableRow">
+				<p class="tableAttribute">	任务名称: </p>
+				<p class="tableContent"><input type="text" name="MileStone" value="Child2.2.2"></p>
+				</div>
+
+
+				<div class="tableRow">
+				<p class="tableAttribute">负责人：</p>
+				<p class="tableContent">	<input type="text" name="PersonInCharge" value="李维"></p>
+				</div>
+
+
+				<div class="tableRow">
+				<p class="tableAttribute">	开始日期：</p>
+				<p class="tableContent"><input type="date" name="StartDate" value="2017-10-26"></p>
+				</div>
+
+				<div class="tableRow">
+				<p class="tableAttribute">截止日期：</p>
+				<p class="tableContent"><input type="date" name="EndDate" value="2018-02-24"></p>
+                </div>
+
+                <div class="tableRow">
+				<p class="tableAttribute">预算：</p>
+				<p class="tableContent"><input type="number" name="budget" value="3000"><span>元</span></p>
+				</div>
+
+				<div class="tableRow" id="fozza_tablerow">
+				<p class="tableAttribute"><!--记得改成列表-->
+				指标：
+				</p>
+				<p class="tableContent">
+					<textarea id="fozza_area"> 
+				    1.上传施工现场勘查报告 
+				    2.上传施工图纸 
+				    3.购买施工材料
+					</textarea>
+				</p>
+				</div>
+			</form>
+				<p id="addSubTask">
+					<a href="PlanManagement_NewTask.html" id="A">新建子任务</a>
+				</p>
+	        </div>
+		</section>
 	
 	
 	<br><br><br><br><br><br><br><br><br><br>
 	<br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br><br><br><br>
-	<br><br><br>
 
 	<!-- 版权声明 -->
   	<div id="copyright" style="position:fixed;bottom:0px">
@@ -131,8 +181,71 @@
 		var kz = document.getElementById("ms");
 		kz.style.display = "none";
 	}
-	function showthisnode(no){
-		var aja = new XMLHttpRequest();
+	var aja = new XMLHttpRequest();
+	window.onload = function(){
+		aja.onreadystatechange = function(){
+			if(aja.readyState==4&&aja.status==200){
+				var str = aja.responseText;
+				var ss = str.split(",");
+				var p = document.getElementById("fozza_where");
+				p.innerHTML = ss[0];
+				p = document.getElementById("TaskName");
+				p.innerHTML = ss[1];
+				p = document.getElementsByName("MileStone")[0];
+				p.value = ss[2];
+				p = document.getElementsByName("PersonInCharge")[0];
+				p.value = ss[3];
+				p = document.getElementsByName("StartDate")[0];
+				p.value = ss[4];
+				p = document.getElementsByName("EndDate")[0];
+				p.value = ss[5];
+				p = document.getElementsByName("budget")[0];
+				p.value = ss[6];
+				p = document.getElementById("fozza_tablerow");
+				p.style.display = "none";
+			}
+		}
+		//创建连接
+		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+'<%=dlist.get(0).getCurrentNode()%>');
+		//发送请求
+		aja.send(null);
 	}
+	function showthisnode(no){
+		aja.onreadystatechange = function(){
+			if(aja.readyState==4&&aja.status==200){
+				var str = aja.responseText;
+				var ss = str.split(",");
+				var p = document.getElementById("fozza_where");
+				p.innerHTML = ss[0];
+				p = document.getElementById("TaskName");
+				p.innerHTML = ss[1];
+				p = document.getElementsByName("MileStone")[0];
+				p.value = ss[2];
+				p = document.getElementsByName("PersonInCharge")[0];
+				p.value = ss[3];
+				p = document.getElementsByName("StartDate")[0];
+				p.value = ss[4];
+				p = document.getElementsByName("EndDate")[0];
+				p.value = ss[5];
+				p = document.getElementsByName("budget")[0];
+				p.value = ss[6];
+				if(ss[7]==null){
+					p = document.getElementById("fozza_tablerow");
+					p.style.display="none";
+				}
+				else{
+					p = document.getElementById("fozza_tablerow");
+					p.style.display="block";
+					p = document.getElementById("fozza_area");
+					p.innerHTML = ss[7];
+				}
+			}
+		}
+		//创建连接
+		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+no);
+		//发送请求
+		aja.send(null);
+	}
+	
 </script>
 </html>

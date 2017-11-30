@@ -31,4 +31,20 @@ public interface DTreeNodeService {
 	 * @throws SQLException 
 	 */
 	public Project GetProjectInfo(String pn) throws SQLException;
+	
+	/**
+	 * 查找到阶段下所有阶段信息
+	 * @param pn
+	 * @return
+	 * @throws SQLException 
+	 */
+	public ProjectStage GetStageInfo(String sn) throws SQLException;
+	
+	/**
+	 * 查找到任务下所有任务信息
+	 * @param pn
+	 * @return
+	 * @throws SQLException 
+	 */
+	public StageTask GetTaskInfo(String tn) throws SQLException;
 }
