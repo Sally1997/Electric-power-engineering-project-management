@@ -89,7 +89,7 @@
 		  	<!-- 菜单栏 -->
 		  	<div id="menu">
 				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='#';"><span class="menu_font">首页</span></div>
-				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='./01-projectmanagerfirst.html';"><span class="menu_font">项目管理</span></div>
+				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='/RealProject/01-projectmanagerfirst.jsp';"><span class="menu_font">项目管理</span></div>
 				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='./money.html';"><span class="menu_font">资金管理</span></div>
 				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='document2.html';"><span class="menu_font">文档管理</span></div>
 				

@@ -8,7 +8,6 @@
   	
   </filter>
   
-  
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>
   	<url-pattern>/main.jsp</url-pattern>
@@ -21,6 +20,7 @@
   	<dispatcher>FORWARD</dispatcher>
   	<!-- <dispatcher>FORWARD</dispatcher> -->
   </filter-mapping>
+
   <!-- 监听器 -->
   <listener>
   	<listener-class>com.holyshit.listener.CountLivingListener</listener-class>
@@ -43,13 +43,28 @@
     <servlet-class>com.holyshit.web.servlet.GetUserLogoById</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>MainServlet</servlet-name>
+    <servlet-name>ListNameNoServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ListNameNoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DTreeNodeServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DTreeNodeServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>MainServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.MainServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>SecurityLogout</servlet-name>
     <servlet-class>com.holyshit.web.servlet.SecurityLogout</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowNodeServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowNodeServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -68,12 +83,24 @@
     <url-pattern>/web/servlet/getuserlogobyid</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>MainServlet</servlet-name>
+    <servlet-name>ListNameNoServlet</servlet-name>
+    <url-pattern>/servlet/ListNameNoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DTreeNodeServlet</servlet-name>
+    <url-pattern>/servlet/DTreeNodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MainServlet</servlet-name>
     <url-pattern>/web/servlet/mainServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>SecurityLogout</servlet-name>
+  	<servlet-name>SecurityLogout</servlet-name>
     <url-pattern>/web/servlet/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowNodeServlet</servlet-name>
+    <url-pattern>/servlet/ShowNodeServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

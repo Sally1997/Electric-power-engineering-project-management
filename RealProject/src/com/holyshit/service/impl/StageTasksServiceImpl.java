@@ -28,4 +28,10 @@ public class StageTasksServiceImpl implements StageTasksService{
 		return tasks;
 	}
 
+	@Override
+	public List<Object> getNewIndexNo(String tn) throws SQLException {
+		StageTasksDao st = new StageTasksDaoImpl();
+		return st.selectIndexNobyTN(tn);
+	}
+
 }

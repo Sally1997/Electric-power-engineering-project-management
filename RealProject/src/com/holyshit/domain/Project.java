@@ -1,6 +1,6 @@
 package com.holyshit.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Project {
 	private String pno;

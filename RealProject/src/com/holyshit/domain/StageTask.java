@@ -1,6 +1,6 @@
 package com.holyshit.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class StageTask {
 	private String taskno;
@@ -12,6 +12,12 @@ public class StageTask {
 	private String ptaskno;
 	private String tstate;
 	private String taskcontent;
+	public String toString() {
+		return "StageTask [taskno=" + taskno + ", taskname=" + taskname + ", stime=" + stime
+				+ ", etime=" + etime + ", pubno=" + pubno +", charpno=" + charpno
+						+ ", ptaskno=" + ptaskno + ", tstate=" + tstate +", taskcontent="+taskcontent+" ]";
+	}
+	
 	public String getTaskno() {
 		return taskno;
 	}

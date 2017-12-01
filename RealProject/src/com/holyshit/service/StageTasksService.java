@@ -1,5 +1,6 @@
 package com.holyshit.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.StageTask;
@@ -11,5 +12,13 @@ public interface StageTasksService {
 	 * @return
 	 */
 	List<StageTask> findAllTasksByid(String id);
+	
+	/**
+	 * 根据任务编号对已有的（空的）指标编号排序后返回
+	 * @param tn
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> getNewIndexNo(String tn) throws SQLException;
 
 }

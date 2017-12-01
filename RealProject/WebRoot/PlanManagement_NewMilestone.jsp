@@ -294,18 +294,16 @@ div.tableRow p:first-child{
 		
 </head>
 <script type="text/javascript">
-  		function change_1(ele){
-  			ele.style.color="white";
+  		/* function change_1(ele){
+  			ele.style.backgroundColor="#333a56";
   			//ele.style.fontSize="25px";
-		    ele.style.fontWeight="bold";
   		
   		}
   		function change_2(ele){
-  			ele.style.backgroundColor="#333a56";
+  			ele.style.backgroundColor="";
   			//ele.style.fontSize="17px";
-			ele.style.fontWeight="normal";
   		
-  		}
+  		} */
 	//此处是一个没法用的当前页面高亮，因为没有引入jq文件
 	    function change_3(){
 			var navLi=$('menu_1') //此处填写你的导航html对象
@@ -359,14 +357,19 @@ div.tableRow p:first-child{
 			<form id="addMileStone">
 				<div class="tableRow">
 				<p class="tableAttribute">阶段名称: </p>
-				<p class="tableContent"><input type="text" name="StageName" value="阶段XXX"></p>
+				<p class="tableContent"><input type="text" name="StageName" value=""></p>
 				</div>
 
 
-				<div class="tableRow">
+				<%-- <div class="tableRow">
 				<p class="tableAttribute">负责人：</p>
 				<p class="tableContent">	<a href="PlanManagement_PerInCharge.jsp">
 				<input id="fozza_1" type="button" value="选择"></a></p>
+				</div>
+				--%>
+				<div class="tableRow">
+				<p class="tableAttribute">负责人：</p>
+				<p class="tableContent">	<input type="text" name="PersonInCharge" value=""></p>
 				</div>
 
 
@@ -391,6 +394,7 @@ div.tableRow p:first-child{
 				</p>
 				<p class="tableContent"><input type="text" name="IndexInfo"><span id="addIndex"> + </span> </p>
 				</div>
+				
 			</form>
 				<p>
 					<span class="submit"><a style="cursor:pointer" onclick="upload()">新建阶段</a></span>
