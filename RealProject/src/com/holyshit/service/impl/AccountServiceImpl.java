@@ -44,8 +44,7 @@ public class AccountServiceImpl implements AccountService {
 				return false;
 			}
 			String s2=MD5Util.md5(account.getPassword());
-			System.out.println("机密以后: "+s2);
-			System.out.println("数据库    : "+s1);
+
 			if(res.getPassword().equals(MD5Util.md5(account.getPassword()))){
 				return true;
 			}

@@ -30,7 +30,7 @@ public class LoginFilter implements Filter{
 		if(session.getAttribute("staff")!=null){
 			
 			chain.doFilter(request, response);
-		}else if(req.getRequestURI().indexOf("login.jsp")!=-1){
+		}else if(path.indexOf("login.jsp")!=-1||path.equals(req.getContextPath()+"/")){
 			
 			Cookie[] cookies = req.getCookies();
 			String name=null;
