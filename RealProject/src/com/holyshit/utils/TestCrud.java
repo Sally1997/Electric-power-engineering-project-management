@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.holyshit.domain.DTree;
 import com.holyshit.domain.Project;
-import com.holyshit.domain.ProjectStage;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.service.DTreeNodeService;
@@ -31,7 +31,7 @@ public class TestCrud {
 		List<DTree> list = new ArrayList<DTree>();
 		try {
 			Project pro = dtns.GetProjectInfo(pn);
-			List<ProjectStage> slist = dtns.GetSNByPn(pn);
+			List<PSPlan> slist = dtns.GetSNByPn(pn);
 			List<StageTask> tlist = dtns.GetTNByPn(pn);
 			
 			//加入项目阶段节点

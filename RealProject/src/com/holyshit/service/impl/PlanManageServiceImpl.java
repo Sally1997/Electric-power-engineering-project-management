@@ -1,17 +1,17 @@
 package com.holyshit.service.impl;
 
-import com.holyshit.Dao.StageDao;
+import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.Dao.impl.StageDaoImpl;
-import com.holyshit.domain.ProjectStage;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.service.PlanManageService;
 
 public class PlanManageServiceImpl implements PlanManageService {
 	//调用dao层
-	StageDao stagedao =  new StageDaoImpl();
+	PSPlanDao stagedao =  new StageDaoImpl();
 	
 	@Override
-	public void NewStage(ProjectStage pro_stage, TaskIndexs task_index) throws Exception {
+	public void NewStage(PSPlan pro_stage, TaskIndexs task_index) throws Exception {
 		// TODO Auto-generated method stub
 		stagedao.addStage(pro_stage, task_index);
 	}
