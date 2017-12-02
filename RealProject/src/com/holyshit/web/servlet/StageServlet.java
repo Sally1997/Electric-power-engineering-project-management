@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.holyshit.domain.ProjectStage;
+import com.holyshit.domain.PsPlan;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.service.ProjectStageSercvice;
@@ -27,7 +27,7 @@ public class StageServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("text/html", "charset=UTF-8");
 		
-		ProjectStage pro_stage = new ProjectStage();
+		PsPlan pro_stage = new PsPlan();
 		TaskIndexs task_index = new TaskIndexs();
 		
 		try {
@@ -60,7 +60,6 @@ public class StageServlet extends HttpServlet {
 			pro_stage.setPNo(pn);
 			AutoNumber an = new AutoNumber();
 			String sn = an.PNtoSN(pn);
-			System.out.println(sn);
 			pro_stage.setStageNo(sn);
 			
 			//审批人
@@ -80,11 +79,8 @@ public class StageServlet extends HttpServlet {
 			ProjectStageSercvice pss = new ProjectStageServiceImpl();
 			pss.AddStageandTask(pro_stage, task_index);
 			
-			System.out.println(pro_stage);
-			System.out.println(task_index);
-			
-			
-			
+			//System.out.println(pro_stage);
+			//System.out.println(task_index);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

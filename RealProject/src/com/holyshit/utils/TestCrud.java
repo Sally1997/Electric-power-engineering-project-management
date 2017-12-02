@@ -1,66 +1,75 @@
 package com.holyshit.utils;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.junit.Test;
 
-import com.holyshit.domain.DTree;
-import com.holyshit.domain.Project;
-import com.holyshit.domain.ProjectStage;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
-import com.holyshit.service.DTreeNodeService;
-import com.holyshit.service.ProjectService;
-import com.holyshit.service.impl.DTreeNodeServiceImpl;
-import com.holyshit.service.impl.ProjectServiceImpl;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.holyshit.service.StageTasksService;
+import com.holyshit.service.impl.StageTasksServiceImpl;
 
 
 public class TestCrud {
 	@Test
 	public void TestUpdate() throws SQLException{
-		String pn = "10001";
-		DTreeNodeService dtns = new DTreeNodeServiceImpl();
-		List<DTree> list = new ArrayList<DTree>();
+		StageTask stage_task = new StageTask();
+		TaskIndexs task_index = new TaskIndexs();
+		
 		try {
-			Project pro = dtns.GetProjectInfo(pn);
-			List<ProjectStage> slist = dtns.GetSNByPn(pn);
-			List<StageTask> tlist = dtns.GetTNByPn(pn);
+			/**
+			 * 获取表单数据
+			 */
+			System.out.println("在搞我");
+			//getParameterMap用不了
+			stage_task.setTaskname("就这个吧");
 			
-			//加入项目阶段节点
-			DTree dt = new DTree();
-			dt.setCurrentNode(pro.getPno());
-			dt.setParentNode("-1");
-			dt.setNodeName(pro.getPname());
-			list.add(dt);
+			//预算
+			stage_task.setBudget("1000.20");
+			//日期转换
+			SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+			stage_task.setStime(sdf.parse("2015-16-05"));
+			stage_task.setEtime(sdf.parse("2015-16-20"));
 			
-			//加入阶段节点
-			for(int i=0;i<slist.size();i++){
-				DTree dt1 = new DTree();
-				dt1.setCurrentNode(slist.get(i).getStageNo());
-				dt1.setParentNode(slist.get(i).getPNo());
-				dt1.setNodeName(slist.get(i).getSName());
-				list.add(dt1);
+			//pro_stage.setPublisherNo("201526010429");//测试用
+			
+			stage_task.setPubno("201526010412");
+			
+			String tno = "";
+			//点击新建子任务，阶段任务的编号会setAttribute转发到NewTask.jsp页面
+			//tno = (String) request.getAttribute("taskno");
+			tno = "1000110001";//测试用
+			
+			//父节点
+			stage_task.setPtaskno(tno);
+			
+			//生成新节点便号
+			AutoNumber an = new AutoNumber();
+			String ntn = an.TrueNewTaskNo(tno);
+			stage_task.setTaskno(ntn);
+			
+			//审批人
+			String rcpn = "爱丽丝(201526010002)";
+			String cpn = "";
+			for(int i=0;i<12;i++){
+				cpn+=rcpn.charAt(rcpn.length()-13+i);
 			}
+			stage_task.setCharpno(cpn);
+			stage_task.setTstate(0);
 			
-			//加入任务节点
-			for(int i=0;i<tlist.size();i++){
-				DTree dt2 = new DTree();
-				dt2.setCurrentNode(tlist.get(i).getTaskno());
-				dt2.setParentNode(tlist.get(i).getPtaskno());
-				dt2.setNodeName(tlist.get(i).getTaskname());
-				list.add(dt2);
-			}
-			String str = JSONArray.fromObject(list).toString();
-			System.out.println(str);
-		} catch (SQLException e) {
+			//任务指标表
+			task_index.setTaskNo(ntn);
+			task_index.setIndexNo(an.TNtoIN(ntn));
+			
+			//指标内容
+			task_index.setIndexInfo("我真是想");
+			System.out.println(task_index);
+			
+			//插入
+			StageTasksService sts = new StageTasksServiceImpl();
+			sts.AddTaskandIndex(stage_task, task_index);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

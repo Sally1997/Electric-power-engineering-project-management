@@ -6,14 +6,14 @@ import java.util.List;
 import com.holyshit.Dao.DTreeDao;
 import com.holyshit.Dao.impl.DTreeDaoImpl;
 import com.holyshit.domain.Project;
-import com.holyshit.domain.ProjectStage;
+import com.holyshit.domain.PsPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.DTreeNodeService;
 
 public class DTreeNodeServiceImpl implements DTreeNodeService {
 	DTreeDao dtd = new DTreeDaoImpl();
 	@Override
-	public List<ProjectStage> GetSNByPn(String pn) throws SQLException {
+	public List<PsPlan> GetSNByPn(String pn) throws SQLException {
 		return dtd.selectAllSNByPn(pn);
 	}
 
@@ -28,7 +28,7 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 	}
 
 	@Override
-	public ProjectStage GetStageInfo(String sn) throws SQLException {
+	public PsPlan GetStageInfo(String sn) throws SQLException {
 		return dtd.selectStageInfo(sn);
 	}
 

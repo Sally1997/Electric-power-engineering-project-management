@@ -3,7 +3,7 @@ package com.holyshit.utils;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.holyshit.domain.ProjectStage;
+import com.holyshit.domain.PsPlan;
 import com.holyshit.service.ProjectService;
 import com.holyshit.service.StageTasksService;
 import com.holyshit.service.impl.ProjectServiceImpl;
@@ -18,7 +18,7 @@ public class AutoNumber {
 	 * @throws SQLException 
 	 */
 	public String PNtoSN(String pn) throws SQLException{
-		ProjectStage pro_stage = new ProjectStage();
+		PsPlan pro_stage = new PsPlan();
 		
 		pro_stage.setPNo(pn);
 		//根据项目编号获取阶段编号
@@ -57,19 +57,56 @@ public class AutoNumber {
 	}
 	
 	/**
-	 * 根据阶段或者任务获取心得任务编号
+	 * 任务指标表，当存入阶段编号时，用zzzz填充阶段编号的后四位
 	 * @param pn1
 	 * @return
 	 */
 	public String CreateNewTaskNo(String pn1){
 		String tn = pn1;
-		if(pn1.length()==6){
-			tn+="zzzz";
+		tn += "zzzz";
+		return tn;
+	}
+	
+	/**
+	 * 根据阶段编号或任务编号生成新的任务编号
+	 * @param tno
+	 * @return
+	 * @throws SQLException 
+	 */
+	public String TrueNewTaskNo(String tno) throws SQLException{
+		String ntn = tno.substring(0,6);
+		//阶段生成
+		if(tno.length()==6){
+			ntn += "000";
 		}
 		else{
-			
+			//任务编号的子任务编号规则：
+			//最后一位表示序数，从0开始
+			//倒数第二位表示层数
+			//倒数三四位记录父节点的尾数
+			//按照********（++）_前八位固定，第九位+1，第十位任意值查询数据库，生成新的编号
+			String s2 = tno.substring(8, 10);
+			ntn += s2;
+			char x8 = (char) (tno.charAt(8)+1);
+			ntn += x8;
 		}
-		return tn;
+		StageTasksService sts = new StageTasksServiceImpl();
+		List<Object> list1 = sts.getNewTaskNo9(ntn);
+		if(list1.isEmpty()){
+			ntn += "0";
+		}
+		else{
+			String newno9 = list1.get(0).toString();
+			char x = newno9.charAt(9);
+			if(x=='9'){
+				x = 'a';
+			}
+			else{
+				x++;
+			}
+			ntn += x;
+		}
+		return ntn;
 	}
 	
 	/**

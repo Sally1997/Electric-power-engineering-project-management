@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.holyshit.domain.Project;
-import com.holyshit.domain.ProjectStage;
+import com.holyshit.domain.PsPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.DTreeNodeService;
 import com.holyshit.service.impl.DTreeNodeServiceImpl;
@@ -26,7 +26,7 @@ public class ShowNodeServlet extends HttpServlet {
 		
 		//新建四个对象
 		Project p = new Project();
-		ProjectStage ps = new ProjectStage();
+		PsPlan ps = new PsPlan();
 		StageTask st = new StageTask();
 		DTreeNodeService dtns = new DTreeNodeServiceImpl();
 		

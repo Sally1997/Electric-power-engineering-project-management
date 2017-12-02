@@ -10,12 +10,13 @@ public class StageTask {
 	private String pubno;
 	private String charpno;
 	private String ptaskno;
-	private String tstate;
+	private int tstate;
+	private String budget;
 	private String taskcontent;
 	public String toString() {
 		return "StageTask [taskno=" + taskno + ", taskname=" + taskname + ", stime=" + stime
 				+ ", etime=" + etime + ", pubno=" + pubno +", charpno=" + charpno
-						+ ", ptaskno=" + ptaskno + ", tstate=" + tstate +", taskcontent="+taskcontent+" ]";
+						+ ", ptaskno=" + ptaskno + ", tstate=" + tstate +"]";
 	}
 	
 	public String getTaskno() {
@@ -60,15 +61,24 @@ public class StageTask {
 	public void setPtaskno(String ptaskno) {
 		this.ptaskno = ptaskno;
 	}
-	public String getTstate() {
+	public int getTstate() {
 		return tstate;
 	}
-	public void setTstate(String tstate) {
+	public void setTstate(int tstate) {
 		this.tstate = tstate;
 	}
+	public String getBudget() {
+		return budget;
+	}
+
+	public void setBudget(String budget) {
+		this.budget = budget;
+	}
+
 	public String getTaskcontent() {
 		return taskcontent;
 	}
+
 	public void setTaskcontent(String taskcontent) {
 		this.taskcontent = taskcontent;
 	}
