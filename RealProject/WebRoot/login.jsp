@@ -27,13 +27,6 @@
   				var img=document.getElementById("img");
   				img.src="${pageContext.request.contextPath}/web/servlet/validatecode?"+new Date();
   			}
- 			//	获取用户头像 	
-  			function getUserLogo(){
-  				var id=document.getElementById("user-id").value;
-  				if(id!=""){
-  					getUserLogoUrl(id,document.getElementById("user_logo"));
-  				}
-  			}
   			window.onload=function(){
   				if("${account.staffno}"!=""){
   					//获取用户头像
@@ -106,8 +99,6 @@
                       <div class="panel-body" style="margin-top: 20px;margin-bottom: 10px">
                       <div class="col-lg-12">
                       <span>
-                      <img class="round-img center-block"  src="${pageContext.request.contextPath }/image/unlogin.jpg" id="user_logo">
-                      </span>  
               	      <c:if test="${empty uri}">
  	  				  <form action="${pageContext.request.contextPath }/web/servlet/login" method="post">
  	  			      </c:if>
