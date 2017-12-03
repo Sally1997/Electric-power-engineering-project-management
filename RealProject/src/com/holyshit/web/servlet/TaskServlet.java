@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.holyshit.domain.PsPlan;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;

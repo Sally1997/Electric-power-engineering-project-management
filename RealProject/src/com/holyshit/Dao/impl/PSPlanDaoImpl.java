@@ -2,17 +2,17 @@ package com.holyshit.Dao.impl;
 
 import org.apache.commons.dbutils.QueryRunner;
 
-import com.holyshit.Dao.PsPlanDao;
-import com.holyshit.domain.PsPlan;
+import com.holyshit.Dao.PSPlanDao;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.utils.ConnectionManager;
 
-public class PsPlanDaoImpl implements PsPlanDao {
-	public void addStage(PsPlan pro_stage, TaskIndexs task_index) throws Exception {
+public class PSPlanDaoImpl implements PSPlanDao {
+	public void addStage(PSPlan pro_stage, TaskIndexs task_index) throws Exception {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
 		
-		qr.update(ConnectionManager.getConnection(), "insert into psplan "
+		qr.update(ConnectionManager.getConnection(), "insert into PSPlan "
 				+ "values (?,?,?,?,?,?,?)",
 				pro_stage.getStageNo(),pro_stage.getPNo(),
 				pro_stage.getSName(),pro_stage.getPubNo(),
