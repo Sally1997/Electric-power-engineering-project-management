@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,7 +13,7 @@
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/echarts.min.js"></script>
-    
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/yqz.js"></script>
     <style type="text/css">
 		*{
 			font-family: "微软雅黑";
@@ -47,7 +48,7 @@
 			color: red;
 		}
 		.copyright{
-			background-image: url(topbk.png);
+			background-image: url(${pageContext.request.contextPath}/image/topbk.png);
 			text-align: center;
 			font-family: "微软雅黑";
 			color: white;
@@ -57,7 +58,7 @@
 			margin-top: 100px;
 		}
 		header{
-			background-image: url(topbk.png);
+			background-image: url(${pageContext.request.contextPath}/image/topbk.png);
 		}
 		table th{
 			text-align: center;
@@ -135,370 +136,385 @@
                 <div class="col-lg-12" style="margin-top: 20px;margin-left: 5%"> 
                     <div class="row">
 					<div class="col-lg-12">
+					<!-- 获取json对象 -->
+						 <script type="text/javascript">
+						  	var dataJson=eval('('+'${projects["budgets"]}'+")");
+						 	
+						 </script>
+					<!-- 循环显示结果 -->
+					<c:if test="${projects['projectnum']>=1 }">
+						<div class="digramchart" id="chart1" style="margin-bottom: 20px">
+								<script type="text/javascript">
+				// 基于准备好的dom，初始化echarts实例
+
+				var myChart1 = echarts.init(document.getElementById('chart1'));
+
+				// 指定图表的配置项和数据
+
+				var option1 = {
+					textStyle: {
+						fontFamily:'微软雅黑',
+						fontSize:15
+					},
+                    title: {text:dataJson[0].pname,
+							backgroundColor:'#e8e8e8',
+							link:'login.html',
+							textStyle:{
+								fontWeight:'lighter',
+								fontSize: 15
+							},
+							padding:[10,10,10,10],
+							borderRadius:[15,15,15,15]
+						   },
+					tooltip : {
+					},
+					toolbox: {
+						feature: {
+							magicType: {
+								type: ['stack', 'tiled']
+							},
+							dataView: {
+								show:true,
+								readOnly:true,
+								buttonColor:'#52658f',
+								backgroundColor:'#dddddd',
+								textareaBorderColor:'#c8c8c8'
+							}
+						},
+	                    top:'3%',
+						right:'10%'
+					},
+					legend: {
+						data:['已报账','剩余预算','超标金额'],
+						top:'3%',
+						left:'20%',
+						itemGap:15
+					},
+
+
+					grid: {
+						left: '20%',
+						right: '20%',
+						containLabel: true
+					},
+					xAxis : [
+						{
+							type : 'category',
+							data : dataJson[0].stages
+						}
+					],
+					yAxis : [
+						{
+							type : 'value'
+						}
+					],
+					color:['#52658f','#c8c8c8','#e34953'],
+					dataZoom:[
+						{
+							id:'dataZoomX',
+							type:'slider',
+							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+                            handleSize: 20,
+							handleStyle: {
+								shadowBlur: 6,
+								shadowOffsetX: 1,
+								shadowOffsetY: 2,
+								shadowColor: '#aaa'
+							},
+							xAxisIndex:[0],
+							filterMode:'filter',
+							start:0,
+							end:60
+						}
+					],
+
+					series: [
+						{
+							name:'已报账',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[0].hasaudit,
+							barMaxWidth:40
+
+						},
+						{
+							name:'剩余预算',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[0].surplus,
+							itemStyle: {
+								normal:'#e8e8e8',
+								emphasis:'#a8a8a8'
+							}
+						},
+						{
+							name:'超标金额',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[0].over
+							
+
+						}
+						]
+
+				};
+
+				// 使用刚指定的配置项和数据显示图表。
+				 myChart1.setOption(option1);
+				</script>
+						 </div>					
+					</c:if>
+					
+					<!-- 第二个项目 -->
+					<c:if test="${projects['projectnum']>=2 }">
+						<div class="digramchart" id="chart2" style="margin-bottom: 20px">
+								<script type="text/javascript">
+				// 基于准备好的dom，初始化echarts实例
+
+				var myChart2 = echarts.init(document.getElementById('chart2'));
+
+				// 指定图表的配置项和数据
+
+				var option2 = {
+					textStyle: {
+						fontFamily:'微软雅黑',
+						fontSize:15
+					},
+                    title: {text:dataJson[1].pname,
+							backgroundColor:'#e8e8e8',
+							link:'login.html',
+							textStyle:{
+								fontWeight:'lighter',
+								fontSize: 15
+							},
+							padding:[10,10,10,10],
+							borderRadius:[15,15,15,15]
+						   },
+					tooltip : {
+					},
+					toolbox: {
+						feature: {
+							magicType: {
+								type: ['stack', 'tiled']
+							},
+							dataView: {
+								show:true,
+								readOnly:true,
+								buttonColor:'#52658f',
+								backgroundColor:'#dddddd',
+								textareaBorderColor:'#c8c8c8'
+							}
+						},
+	                    top:'3%',
+						right:'10%'
+					},
+					legend: {
+						data:['已报账','剩余预算','超标金额'],
+						top:'3%',
+						left:'20%',
+						itemGap:15
+					},
+
+
+					grid: {
+						left: '20%',
+						right: '20%',
+						containLabel: true
+					},
+					xAxis : [
+						{
+							type : 'category',
+							data : dataJson[1].stages
+						}
+					],
+					yAxis : [
+						{
+							type : 'value'
+						}
+					],
+					color:['#52658f','#c8c8c8','#e34953'],
+					dataZoom:[
+						{
+							id:'dataZoomX',
+							type:'slider',
+							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+                            handleSize: 20,
+							handleStyle: {
+								shadowBlur: 6,
+								shadowOffsetX: 1,
+								shadowOffsetY: 2,
+								shadowColor: '#aaa'
+							},
+							xAxisIndex:[0],
+							filterMode:'filter',
+							start:0,
+							end:60
+						}
+					],
+
+					series: [
+						{
+							name:'已报账',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[1].hasaudit,
+							barMaxWidth:40
+
+						},
+						{
+							name:'剩余预算',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[1].surplus,
+							itemStyle: {
+								normal:'#e8e8e8',
+								emphasis:'#a8a8a8'
+							}
+						},
+						{
+							name:'超标金额',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[1].over
+							
+
+						}
+						]
+
+				};
+
+				// 使用刚指定的配置项和数据显示图表。
+				 myChart2.setOption(option2);
+				</script>
+						 </div>					
+					</c:if>
+					
+					
+				<c:if test="${projects['projectnum']>=3 }">
+						<div class="digramchart" id="chart3" style="margin-bottom: 20px">
+								<script type="text/javascript">
+				// 基于准备好的dom，初始化echarts实例
+
+				var myChart3 = echarts.init(document.getElementById('chart3'));
+
+				// 指定图表的配置项和数据
+
+				var option3 = {
+					textStyle: {
+						fontFamily:'微软雅黑',
+						fontSize:15
+					},
+                    title: {text:dataJson[2].pname,
+							backgroundColor:'#e8e8e8',
+							link:'login.html',
+							textStyle:{
+								fontWeight:'lighter',
+								fontSize: 15
+							},
+							padding:[10,10,10,10],
+							borderRadius:[15,15,15,15]
+						   },
+					tooltip : {
+					},
+					toolbox: {
+						feature: {
+							magicType: {
+								type: ['stack', 'tiled']
+							},
+							dataView: {
+								show:true,
+								readOnly:true,
+								buttonColor:'#52658f',
+								backgroundColor:'#dddddd',
+								textareaBorderColor:'#c8c8c8'
+							}
+						},
+	                    top:'3%',
+						right:'10%'
+					},
+					legend: {
+						data:['已报账','剩余预算','超标金额'],
+						top:'3%',
+						left:'20%',
+						itemGap:15
+					},
+
+
+					grid: {
+						left: '20%',
+						right: '20%',
+						containLabel: true
+					},
+					xAxis : [
+						{
+							type : 'category',
+							data : dataJson[2].stages
+						}
+					],
+					yAxis : [
+						{
+							type : 'value'
+						}
+					],
+					color:['#52658f','#c8c8c8','#e34953'],
+					dataZoom:[
+						{
+							id:'dataZoomX',
+							type:'slider',
+							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+                            handleSize: 20,
+							handleStyle: {
+								shadowBlur: 6,
+								shadowOffsetX: 1,
+								shadowOffsetY: 2,
+								shadowColor: '#aaa'
+							},
+							xAxisIndex:[0],
+							filterMode:'filter',
+							start:0,
+							end:60
+						}
+					],
+
+					series: [
+						{
+							name:'已报账',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[2].hasaudit,
+							barMaxWidth:40
+
+						},
+						{
+							name:'剩余预算',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[2].surplus,
+							itemStyle: {
+								normal:'#e8e8e8',
+								emphasis:'#a8a8a8'
+							}
+						},
+						{
+							name:'超标金额',
+							type:'bar',
+							stack: '金额',
+							data:dataJson[2].over
+							
+
+						}
+						]
+
+				};
+
+				// 使用刚指定的配置项和数据显示图表。
+				 myChart3.setOption(option3);
+				</script>
+						 </div>					
+					</c:if>
 						 
-						 <div class="digramchart" id="chart1" style="margin-bottom: 20px">
-								<script type="text/javascript">
-				// 基于准备好的dom，初始化echarts实例
-
-				var myChart = echarts.init(document.getElementById('chart1'));
-
-				// 指定图表的配置项和数据
-
-				var option = {
-					textStyle: {
-						fontFamily:'微软雅黑',
-						fontSize:15
-					},
-                    title: {text:'项目A',
-							backgroundColor:'#e8e8e8',
-							link:'login.html',
-							textStyle:{
-								fontWeight:'lighter',
-								fontSize: 15
-							},
-							padding:[10,10,10,10],
-							borderRadius:[15,15,15,15]
-						   },
-					tooltip : {
-					},
-					toolbox: {
-						feature: {
-							magicType: {
-								type: ['stack', 'tiled']
-							},
-							dataView: {
-								show:true,
-								readOnly:true,
-								buttonColor:'#52658f',
-								backgroundColor:'#dddddd',
-								textareaBorderColor:'#c8c8c8'
-							}
-						},
-	                    top:'3%',
-						right:'10%'
-					},
-					legend: {
-						data:['已报账','剩余预算','超标金额'],
-						top:'3%',
-						left:'20%',
-						itemGap:15
-					},
-
-
-					grid: {
-						left: '20%',
-						right: '20%',
-						containLabel: true
-					},
-					xAxis : [
-						{
-							type : 'category',
-							data : ['阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
-						}
-					],
-					yAxis : [
-						{
-							type : 'value'
-						}
-					],
-					color:['#52658f','#c8c8c8','#e34953'],
-					dataZoom:[
-						{
-							id:'dataZoomX',
-							type:'slider',
-							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-                            handleSize: 20,
-							handleStyle: {
-								shadowBlur: 6,
-								shadowOffsetX: 1,
-								shadowOffsetY: 2,
-								shadowColor: '#aaa'
-							},
-							xAxisIndex:[0],
-							filterMode:'filter',
-							start:0,
-							end:60
-						}
-					],
-
-					series: [
-						{
-							name:'已报账',
-							type:'bar',
-							stack: '金额',
-							data:[120, 132, 101, 134, 0, 0, 0, 0],
-							barMaxWidth:40,
-
-						},
-						{
-							name:'剩余预算',
-							type:'bar',
-							stack: '金额',
-							data:[0, 182, 152, 0, 522, 348, 421, 255],
-							itemStyle: {
-								normal:'#e8e8e8',
-								emphasis:'#a8a8a8'
-							}
-						},
-						{
-							name:'超标金额',
-							type:'bar',
-							stack: '金额',
-							data:[150, 0, 0, 154, 0, 0, 0, 0],
-							
-
-						}
-						]
-
-				};
-
-				// 使用刚指定的配置项和数据显示图表。
-				myChart.setOption(option);
-				</script>
-
-						 </div>
-						 <div class="digramchart" id="chart2" style="margin-bottom: 20px">
-								<script type="text/javascript">
-				// 基于准备好的dom，初始化echarts实例
-
-				var myChart = echarts.init(document.getElementById('chart2'));
-
-				// 指定图表的配置项和数据
-
-				var option = {
-					textStyle: {
-						fontFamily:'微软雅黑',
-						fontSize:15
-					},
-                    title: {text:'项目A',
-							backgroundColor:'#e8e8e8',
-							link:'login.html',
-							textStyle:{
-								fontWeight:'lighter',
-								fontSize: 15
-							},
-							padding:[10,10,10,10],
-							borderRadius:[15,15,15,15]
-						   },
-					tooltip : {
-					},
-					toolbox: {
-						feature: {
-							magicType: {
-								type: ['stack', 'tiled']
-							},
-							dataView: {
-								show:true,
-								readOnly:true,
-								buttonColor:'#52658f',
-								backgroundColor:'#dddddd',
-								textareaBorderColor:'#c8c8c8'
-							}
-						},
-	                    top:'3%',
-						right:'10%'
-					},
-					legend: {
-						data:['已报账','剩余预算','超标金额'],
-						top:'3%',
-						left:'20%',
-						itemGap:15
-					},
-
-
-					grid: {
-						left: '20%',
-						right: '20%',
-						containLabel: true
-					},
-					xAxis : [
-						{
-							type : 'category',
-							data : ['阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
-						}
-					],
-					yAxis : [
-						{
-							type : 'value'
-						}
-					],
-					color:['#52658f','#c8c8c8','#e34953'],
-					dataZoom:[
-						{
-							id:'dataZoomX',
-							type:'slider',
-							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-                            handleSize: 20,
-							handleStyle: {
-								shadowBlur: 6,
-								shadowOffsetX: 1,
-								shadowOffsetY: 2,
-								shadowColor: '#aaa'
-							},
-							xAxisIndex:[0],
-							filterMode:'filter',
-							start:0,
-							end:60
-						}
-					],
-
-					series: [
-						{
-							name:'已报账',
-							type:'bar',
-							stack: '金额',
-							data:[120, 132, 101, 134, 0, 0, 0, 0],
-							barMaxWidth:40,
-
-						},
-						{
-							name:'剩余预算',
-							type:'bar',
-							stack: '金额',
-							data:[0, 182, 152, 0, 522, 348, 421, 255],
-							itemStyle: {
-								normal:'#e8e8e8',
-								emphasis:'#a8a8a8'
-							}
-						},
-						{
-							name:'超标金额',
-							type:'bar',
-							stack: '金额',
-							data:[150, 0, 0, 154, 0, 0, 0, 0],
-							
-
-						}
-						]
-
-				};
-
-				// 使用刚指定的配置项和数据显示图表。
-				myChart.setOption(option);
-				</script>
-
-						 </div>
-						 <div class="digramchart" id="chart3" style="margin-bottom: 20px">
-								<script type="text/javascript">
-				// 基于准备好的dom，初始化echarts实例
-
-				var myChart = echarts.init(document.getElementById('chart3'));
-
-				// 指定图表的配置项和数据
-
-				var option = {
-					textStyle: {
-						fontFamily:'微软雅黑',
-						fontSize:15
-					},
-                    title: {text:'项目A',
-							backgroundColor:'#e8e8e8',
-							link:'login.html',
-							textStyle:{
-								fontWeight:'lighter',
-								fontSize: 15
-							},
-							padding:[10,10,10,10],
-							borderRadius:[15,15,15,15]
-						   },
-					tooltip : {
-					},
-					toolbox: {
-						feature: {
-							magicType: {
-								type: ['stack', 'tiled']
-							},
-							dataView: {
-								show:true,
-								readOnly:true,
-								buttonColor:'#52658f',
-								backgroundColor:'#dddddd',
-								textareaBorderColor:'#c8c8c8'
-							}
-						},
-	                    top:'3%',
-						right:'10%'
-					},
-					legend: {
-						data:['已报账','剩余预算','超标金额'],
-						top:'3%',
-						left:'20%',
-						itemGap:15
-					},
-
-
-					grid: {
-						left: '20%',
-						right: '20%',
-						containLabel: true
-					},
-					xAxis : [
-						{
-							type : 'category',
-							data : ['阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
-						}
-					],
-					yAxis : [
-						{
-							type : 'value'
-						}
-					],
-					color:['#52658f','#c8c8c8','#e34953'],
-					dataZoom:[
-						{
-							id:'dataZoomX',
-							type:'slider',
-							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-                            handleSize: 20,
-							handleStyle: {
-								shadowBlur: 6,
-								shadowOffsetX: 1,
-								shadowOffsetY: 2,
-								shadowColor: '#aaa'
-							},
-							xAxisIndex:[0],
-							filterMode:'filter',
-							start:0,
-							end:60
-						}
-					],
-
-					series: [
-						{
-							name:'已报账',
-							type:'bar',
-							stack: '金额',
-							data:[120, 132, 101, 134, 0, 0, 0, 0],
-							barMaxWidth:40,
-
-						},
-						{
-							name:'剩余预算',
-							type:'bar',
-							stack: '金额',
-							data:[0, 182, 152, 0, 522, 348, 421, 255],
-							itemStyle: {
-								normal:'#e8e8e8',
-								emphasis:'#a8a8a8'
-							}
-						},
-						{
-							name:'超标金额',
-							type:'bar',
-							stack: '金额',
-							data:[150, 0, 0, 154, 0, 0, 0, 0],
-							
-
-						}
-						]
-
-				};
-
-				// 使用刚指定的配置项和数据显示图表。
-				myChart.setOption(option);
-				</script>
-
-						 </div>
+						
+						 
 					</div> 
 					 
                     </div>

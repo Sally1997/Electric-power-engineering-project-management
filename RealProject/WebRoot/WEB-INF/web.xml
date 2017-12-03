@@ -10,12 +10,7 @@
   
   <filter-mapping>
   	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>/main.jsp</url-pattern>
-  	<url-pattern>/login.jsp</url-pattern>
-  	<url-pattern>/AddUser.jsp</url-pattern>
-  	<url-pattern>/PlanManagement_Newed.jsp</url-pattern>
-  	<url-pattern>/PlanManagement_PerInCharge.jsp</url-pattern>
-  	<url-pattern>/PlanManagement_NewMilestone.jsp</url-pattern>
+  	<url-pattern>*.jsp</url-pattern>
   	<dispatcher>REQUEST</dispatcher>
   	<dispatcher>FORWARD</dispatcher>
   	<!-- <dispatcher>FORWARD</dispatcher> -->
@@ -64,6 +59,11 @@
     <servlet-name>ShowNodeServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowNodeServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ShowPageProjectBudget</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowPageProjectBudget</servlet-class>
+  </servlet>
+
 
 
 
@@ -101,6 +101,10 @@
   <servlet-mapping>
     <servlet-name>ShowNodeServlet</servlet-name>
     <url-pattern>/servlet/ShowNodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowPageProjectBudget</servlet-name>
+    <url-pattern>/web/servlet/showbudgetpage</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

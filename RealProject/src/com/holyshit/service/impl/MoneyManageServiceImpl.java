@@ -37,31 +37,34 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			projects=pd.showPage(cur, pagesize, id);
 			
 			for(Project p:projects){
-				//阶段预算   阶段已经使用    阶段超标
+				//阶段已经使用  剩余预算  阶段超标
 				String pname=p.getPname();
 				JSONObject project=new JSONObject();
 				project.put("pname", pname);
+				JSONArray stages=new JSONArray();
+				JSONArray hasaudit=new JSONArray();
+				JSONArray surplus=new JSONArray();
+				JSONArray over=new JSONArray();
 				
 				List<ProjectStageBudget> res=fd.selectProjectStageBudget(p.getPno());
-				//阶段数组
-				JSONArray stages=new JSONArray();
 				for(ProjectStageBudget psb:res){
-					JSONObject jb=new JSONObject();
-					jb.put("sname", psb.getSname());
-					jb.put("hasaudit", psb.getHasaudit());
+					stages.add(psb.getSname());
+					hasaudit.add(psb.getHasaudit());
 					//报账剩余
 					double tmp=0;
 					if((tmp=psb.getBudget()-psb.getHasaudit())>0)
 					{
-						jb.put("surplus", tmp);
-						jb.put("over", 0);
+						surplus.add(tmp);
+						over.add(0);
 					}else {
-						jb.put("surplus", 0);
-						jb.put("over", -tmp);
+						surplus.add(0);
+						over.add(-tmp);
 					}
 					//添加到数组
-					stages.add(jb);
 					project.put("stages", stages);
+					project.put("hasaudit", hasaudit);
+					project.put("surplus", surplus);
+					project.put("over", over);
 				}
 				//添加到budget
 				projectbudget.add(project);	
@@ -73,6 +76,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		}finally{
 			ConnectionManager.closeConnection();
 		}
+
 		System.out.println(projectbudget.toString());
 		
 		//封装返回的map
@@ -82,6 +86,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		resMap.put("currentPage", cur);
 		resMap.put("pageSize", pagesize);
 		resMap.put("pagenum", totalSize%pagesize==0?totalSize/pagesize:totalSize/pagesize+1);
+		resMap.put("projectnum", projects.size());
 		return resMap;
 	}
 	

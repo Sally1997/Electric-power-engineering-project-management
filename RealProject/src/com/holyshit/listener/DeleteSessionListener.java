@@ -46,7 +46,7 @@ public class DeleteSessionListener implements ServletContextListener{
 					HttpSession session = iterator.next();
 					long last=session.getLastAccessedTime();
 					//超过5分钟没有操作  失效
-					if(new Date().getTime()-last>5000)
+					if(new Date().getTime()-last>300000)
 					{
 						int num=Integer.parseInt((String)application.getAttribute("livingcount"));
 						application.setAttribute("livingcount", Integer.toString(num-1));
@@ -55,7 +55,7 @@ public class DeleteSessionListener implements ServletContextListener{
 					}
 				}
 			}
-		}, 0, 300000);
+		}, 0, 60000);
 		
 		
 	}
