@@ -81,12 +81,12 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		
 		//封装返回的map
 		Map<String, Object> resMap=new HashMap<String, Object>();
-		resMap.put("totalnum", totalSize);
+		resMap.put("totalNum", totalSize);
 		resMap.put("budgets", projectbudget.toString());
 		resMap.put("currentPage", cur);
 		resMap.put("pageSize", pagesize);
-		resMap.put("pagenum", totalSize%pagesize==0?totalSize/pagesize:totalSize/pagesize+1);
-		resMap.put("projectnum", projects.size());
+		resMap.put("pageNum", totalSize%pagesize==0?totalSize/pagesize:totalSize/pagesize+1);
+		resMap.put("projectNum", projects.size());
 		return resMap;
 	}
 	

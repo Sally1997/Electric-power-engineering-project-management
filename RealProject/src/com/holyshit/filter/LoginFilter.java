@@ -35,16 +35,17 @@ public class LoginFilter implements Filter{
 			Cookie[] cookies = req.getCookies();
 			String name=null;
 			String password=null;
-			for (Cookie cookie : cookies) {
-				if(cookie.getName().equals("staffno"))
-					name=cookie.getValue();
-				if(cookie.getName().equals("password"))
-					password=cookie.getValue();
-				
+			if(cookies!=null){
+				for (Cookie cookie : cookies) {
+					if(cookie.getName().equals("staffno"))
+						name=cookie.getValue();
+					if(cookie.getName().equals("password"))
+						password=cookie.getValue();
+					
+				}
+				request.setAttribute("staffno", name);
+				request.setAttribute("password", password);
 			}
-			request.setAttribute("staffno", name);
-			request.setAttribute("password", password);
-		
 			chain.doFilter(request, response);
 		}
 		else{
