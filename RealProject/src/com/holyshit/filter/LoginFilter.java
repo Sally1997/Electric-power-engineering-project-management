@@ -30,21 +30,22 @@ public class LoginFilter implements Filter{
 		if(session.getAttribute("staff")!=null){
 			
 			chain.doFilter(request, response);
-		}else if(req.getRequestURI().indexOf("login.jsp")!=-1){
+		}else if(path.indexOf("login.jsp")!=-1||path.equals(req.getContextPath()+"/")){
 			
 			Cookie[] cookies = req.getCookies();
 			String name=null;
 			String password=null;
-			for (Cookie cookie : cookies) {
-				if(cookie.getName().equals("staffno"))
-					name=cookie.getValue();
-				if(cookie.getName().equals("password"))
-					password=cookie.getValue();
-				
+			if(cookies!=null){
+				for (Cookie cookie : cookies) {
+					if(cookie.getName().equals("staffno"))
+						name=cookie.getValue();
+					if(cookie.getName().equals("password"))
+						password=cookie.getValue();
+					
+				}
+				request.setAttribute("staffno", name);
+				request.setAttribute("password", password);
 			}
-			request.setAttribute("staffno", name);
-			request.setAttribute("password", password);
-		
 			chain.doFilter(request, response);
 		}
 		else{

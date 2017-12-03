@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.holyshit.domain.PsPlan;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.service.ProjectStageSercvice;
@@ -27,7 +27,7 @@ public class StageServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("text/html", "charset=UTF-8");
 		
-		PsPlan pro_stage = new PsPlan();
+		PSPlan pro_stage = new PSPlan();
 		TaskIndexs task_index = new TaskIndexs();
 		
 		try {

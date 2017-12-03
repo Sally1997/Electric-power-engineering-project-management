@@ -32,6 +32,22 @@ public interface ProjectDao {
 	 * @throws SQLException
 	 */
 	List<Object> selectProjectStageNoByPN(String pn) throws SQLException;
+	/**
+	 * 查询用户正在参与项目的数量
+	 * @param id  用户id
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectWorkingProjectNumberById(String id) throws SQLException;
+	/**
+	 * 显示当前页的项目的信息
+	 * @param cur  当前页面
+	 * @param pagesize  页面大小
+	 * @param staffno  员工编号
+	 * @return
+	 * @throws SQLException
+	 */
+	List<Project> showPage(int cur,int pagesize,String staffno) throws SQLException;
 	
 } 
 

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.holyshit.domain.DTree;
 import com.holyshit.domain.Project;
-import com.holyshit.domain.PsPlan;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.DTreeNodeService;
 import com.holyshit.service.impl.DTreeNodeServiceImpl;
@@ -28,7 +28,7 @@ public class DTreeNodeServlet extends HttpServlet {
 		List<DTree> list = new ArrayList<DTree>();
 		try {
 			Project pro = dtns.GetProjectInfo(pn);
-			List<PsPlan> slist = dtns.GetSNByPn(pn);
+			List<PSPlan> slist = dtns.GetSNByPn(pn);
 			List<StageTask> tlist = dtns.GetTNByPn(pn);
 			
 			//加入项目阶段节点

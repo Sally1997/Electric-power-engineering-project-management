@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.Project;
-import com.holyshit.domain.PsPlan;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 
 public interface DTreeNodeService {
@@ -14,7 +14,7 @@ public interface DTreeNodeService {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public List<PsPlan> GetSNByPn(String pn) throws SQLException;
+	public List<PSPlan> GetSNByPn(String pn) throws SQLException;
 	
 	/**
 	 * 查找到项目下所有的任务ID
@@ -38,7 +38,7 @@ public interface DTreeNodeService {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public PsPlan GetStageInfo(String sn) throws SQLException;
+	public PSPlan GetStageInfo(String sn) throws SQLException;
 	
 	/**
 	 * 查找到任务下所有任务信息

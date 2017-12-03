@@ -4,7 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.Project;
-import com.holyshit.domain.PsPlan;
+
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 
 public interface DTreeDao {
@@ -13,7 +14,8 @@ public interface DTreeDao {
 	 * @return
 	 * @throws SQLException 
 	 */
-	List<PsPlan> selectAllSNByPn(String pn) throws SQLException;
+
+	List<PSPlan> selectAllSNByPn(String pn) throws SQLException;
 	
 	/**
 	 * 根据项目编号查找该项目下所有的任务编号
@@ -36,7 +38,7 @@ public interface DTreeDao {
 	 * @return
 	 * @throws SQLException 
 	 */
-	PsPlan selectStageInfo(String sn) throws SQLException;
+	PSPlan selectStageInfo(String sn) throws SQLException;
 	
 	/**
 	 * 根据任务编号获取整个任务信息

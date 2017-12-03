@@ -3,7 +3,7 @@ package com.holyshit.utils;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.holyshit.domain.PsPlan;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.service.ProjectService;
 import com.holyshit.service.StageTasksService;
 import com.holyshit.service.impl.ProjectServiceImpl;
@@ -18,7 +18,7 @@ public class AutoNumber {
 	 * @throws SQLException 
 	 */
 	public String PNtoSN(String pn) throws SQLException{
-		PsPlan pro_stage = new PsPlan();
+		PSPlan pro_stage = new PSPlan();
 		
 		pro_stage.setPNo(pn);
 		//根据项目编号获取阶段编号

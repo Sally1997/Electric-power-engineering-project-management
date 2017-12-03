@@ -9,17 +9,17 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.holyshit.Dao.DTreeDao;
 import com.holyshit.domain.Project;
-import com.holyshit.domain.PsPlan;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.utils.C3P0Util;
 
 public class DTreeDaoImpl implements DTreeDao {
 
 	@Override
-	public List<PsPlan> selectAllSNByPn(String pn) throws SQLException {
+	public List<PSPlan> selectAllSNByPn(String pn) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("select * from psplan "
-				+"where stageno like ?", new BeanListHandler<PsPlan>(PsPlan.class)
+				+"where stageno like ?", new BeanListHandler<PSPlan>(PSPlan.class)
 				, pn+"%");
 	}
 	
@@ -42,11 +42,11 @@ public class DTreeDaoImpl implements DTreeDao {
 	}
 
 	@Override
-	public PsPlan selectStageInfo(String sn) throws SQLException {
+	public PSPlan selectStageInfo(String sn) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("select * from psplan where stageNo = ?",
-				new BeanHandler<PsPlan>(PsPlan.class), sn);
+				new BeanHandler<PSPlan>(PSPlan.class), sn);
 	}
 
 	@Override

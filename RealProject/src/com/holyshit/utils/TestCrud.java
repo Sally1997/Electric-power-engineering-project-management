@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 
 import org.junit.Test;
 
+import com.holyshit.domain.DTree;
+import com.holyshit.domain.Project;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.service.StageTasksService;
@@ -18,12 +21,9 @@ public class TestCrud {
 		TaskIndexs task_index = new TaskIndexs();
 		
 		try {
-			/**
-			 * 获取表单数据
-			 */
-			System.out.println("在搞我");
-			//getParameterMap用不了
-			stage_task.setTaskname("就这个吧");
+			Project pro = dtns.GetProjectInfo(pn);
+			List<PSPlan> slist = dtns.GetSNByPn(pn);
+			List<StageTask> tlist = dtns.GetTNByPn(pn);
 			
 			//预算
 			stage_task.setBudget("1000.20");
