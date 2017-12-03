@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="echarts.min.js"></script>
+	<link rel="stylesheet" href="public.css">
+</head>
+<body>
+    	<div class="col-lg-8 xumode">
+   	        <div class="panel panel-primary">
+    	        <div class="panel-heading">项目审批</div>
+      	        <div class="panel-body">
+                <div class="col-lg-12" >
+                        <form class="form-horizontal">
+							<!-- 同意 -->
+							<div id="responsible_per" class="form-group">
+								<div id="first_left">
+								<input type="radio" name="是否同意" value="同意" checked >同意
+								</div>
+								<div id="first_right">
+								<input type="radio" name="是否同意" value="不同意">不同意
+								</div>
+							</div>
+
+							<!-- 审批意见 -->
+							<div id="start_date" class="form-group">
+							<div id="first_left">
+							<font class="text">审批意见：</font>
+							</div>
+							<div id="first_right">
+							<input type="text" name="" size="40px;">
+							</div>
+							<div class="clear"></div>
+							</div>
+
+							<!-- 是否继续 -->
+							<div id="responsible_per" class="block">
+							<form>
+							<div id="first_left">
+							<input type="radio" name="sex" value="male" checked>继续审批
+							</div>
+							<div id="first_right">
+							<input type="radio" name="sex" value="female">结束审批
+							</div>
+							</form> 
+							<div class="clear"></div>
+							</div>
+
+							<!-- 审批人 -->
+							<div id="end_date" class="block">
+							<div id="first_left">
+							<font class="text">审批人:</font>
+							</div>
+							<div id="first_right">
+							<input type="text" name="" size="40px;">
+							</div>
+							<div class="clear"></div>
+							</div>
+
+							<!-- 备注 -->
+							<div id="budget" class="block">
+							<div id="first_left">
+							<font class="text">备注:</font>
+							</div>
+							<div id="first_right">
+							<input type="text" name="" size="40px;">
+							</div>
+							</div>
+
+							<div>
+							<button type="button" class="btn btn-primary" style="float: right;">确定</button>
+							<br/><br/>
+							</div>
+                       </form>
+                </div>
+                </div>
+            </div> 
+    		</div>					
+
+
+</body>
+
+
+</html>

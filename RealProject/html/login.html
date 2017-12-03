@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>login.html</title>
+    <meta name="description" content="this is login page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="login.css">
+   <!--jsp-->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/login.css" type="text/css">
+   
+    <meta charset=UTF-8>
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <script type="text/javascript">
+  			function sign_in_check(e){
+   				return false;
+  			}
+  			 //更新验证码
+  			function updateCode(){
+  				var img=document.getElementById("img");
+  				img.src="${pageContext.request.contextPath}/web/servlet/validatecode?"+new Date();
+  			}
+  			window.onload=function(){
+  				if("${account.staffno}"!=""){
+  					//获取用户头像
+  					getUserLogo();
+  				}
+  			}	
+    	</script>
+  
+  </head>
+
+  <body>
+  <section>
+      <div class="container-fluid">
+          <div class="row">
+              <main>
+              <div class="col-lg-8">
+              	  <div class="jumbotron" style="background-color: transparent;text-align:right">
+              	  	<h1>面向电力项目工程管理</h1>
+              	  	<p>一个快捷，方便的项目管理网站，专门为电力工程设计</p>
+              	  </div>
+              </div>
+              <div class="col-lg-3">
+              	  <div class="panel panel-primary" style="margin-top: 10px;background-color: rgba(255,255,255,0.70);border-radius: 5%">
+                      <div class="panel-body" style="margin-top: 20px;margin-bottom: 10px">
+                      <div class="col-lg-12"> 
+              	      <c:if test="${empty uri}">
+ 	  				  <form action="${pageContext.request.contextPath }/web/servlet/login" method="post">
+ 	  			      </c:if>
+ 	  			      <c:if test="${not empty uri }">
+ 	  				  <form action="${pageContext.request.contextPath }/web/servlet/login?uri=${uri}" method="post">
+ 	  			      </c:if>
+              	          <div class="form-group">
+                          <label for="account" id=ui_label>账号</label>
+                          <span class="error">${error['username'] }</span>
+                          <input type="text" class="form-control" id="user-id" name="staffno" value="${account.staffno }"  onblur="getUserLogo();" placeholder="请输入账号">
+                          </div>
+                          <div class="form-group">
+                          <label for="password">密码</label>
+                          <input type="password" class="form-control" id="passwd" name="password"  placeholder="请输入密码">
+                          </div>
+                          <div class="form-group">
+                          <label for="validate">验证码
+                          <small>&nbsp;&nbsp;点击图片刷新验证码</small>
+                          </label>
+						  <div class="input-group">
+							  <span><img alt="验证码" id="img" src="code.png"  onclick="updateCode();"></span>
+							  <input type="text" class="form-control" id="validateCode" placeholder="四位字符验证码" name="validatecode" style="z-index: 0">
+                          
+                          </div>
+                          <!--显示错误信息-->
+                          <div>
+                          <p style="color:red"> ${error['username'] } ${error['validatecode'] }${locError } </p>
+                          </div>
+                          <div style="text-align: right;margin-top: 30px">
+                          <a href="javascript:putAdmin()" rel="联系管理员" class="btn btn-link" data-toggle="modal" data-target="#forget">忘记密码？</a>
+                          <button type="submit" class="btn btn-primary">登录</button>
+                          </div>
+              	      </form>
+              	      </div>
+              	      </div>
+              	  </div>
+              </div>
+              </main>
+          </div>
+      </div>
+  </section>
+  <!--默认隐藏的内容-->
+  <div class="modal fade bs-example-modal-sm" id="forget" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">联系管理员</h4>
+      </div>
+      <div class="modal-body">
+          <dl>
+		  <dt>电话</dt><dd class="detail_right">15823145263</dd>
+		  <dt>邮箱</dt><dd class="detail_right">fuck@gmail.com</dd>
+		  <dt>QQ</dt><dd class="detail_right">952412532</dd>
+          </dl>
+      </div>
+    </div>
+  </div>
+  </div>
+  </body>
+  <script type="text/javascript">
+    var username=document.getElementById("userid");
+  	username.style.color="gray";
+  	function updateCode(){
+  		var img=document.getElementById("img");
+  		img.src="/HelloJavaee/validateCode?"+new Date();
+  	}
+  	function putAdmin(){
+  		var ele=document.getElementById("admin_detail");
+  		var ele_2=document.getElementById("find_passwd");
+  		ele.style.display="block";
+  		ele_2.style.display="none";
+  	}
+  </script>
+</html>
