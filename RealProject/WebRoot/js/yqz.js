@@ -14,12 +14,12 @@ function jmpPage(cur){
 	currentPage=cur;
 	//设置禁止
 	if(currentPage==1){
-		nodes[0].style.display="none";
+		nodes[0].className="disabled";
 	}else if(currentPage==pageNum){
-		nodes[nodes.length-1].style.display="none";		
+		nodes[nodes.length-1].className="disabled";
 	}else{
-		nodes[0].style.display="inline";
-		nodes[nodes.length-1].style.display="inline";	
+		nodes[0].className="";
+		nodes[nodes.length-1].className="";
 	}
 	
 	/**
@@ -34,7 +34,7 @@ function jmpPage(cur){
 function getPreviousOnBudget(e){
 	//进行节点回复
 	var nodes=e.getElementsByTagName("li");
-	nodes[nodes.length-1].style.display="inline";
+	nodes[nodes.length-1].className="";
 	if(currentPage>1){
 		//获取子节点数组
 		var nodes=e.getElementsByTagName("li");
@@ -85,7 +85,7 @@ function getPreviousOnBudget(e){
 		//看是否为第一页
 		if(currentPage==1){
 			var nodes=e.getElementsByTagName("li");
-			nodes[0].style.display="none";
+			nodes[0].className="disabled";
 		}
 		
 		/**
@@ -99,7 +99,7 @@ function getPreviousOnBudget(e){
 //显示下一页==资金管理
 function getNextOnBudget(e){
 	var nodes=e.getElementsByTagName("li");
-	nodes[0].style.display="inline";
+	nodes[0].className="";
 	if(currentPage<pageNum){
 		//获取子节点数组
 		var nodes=e.getElementsByTagName("li");
@@ -168,7 +168,7 @@ function getNextOnBudget(e){
 		//看是否为最后一页
 		if(currentPage==pageNum){
 			var nodes=e.getElementsByTagName("li");
-			nodes[nodes.length-1].style.display="none";
+			nodes[nodes.length-1].className="disabled";
 			
 		}
 		
