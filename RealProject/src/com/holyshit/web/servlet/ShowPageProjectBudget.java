@@ -36,7 +36,7 @@ public class ShowPageProjectBudget extends HttpServlet {
 		request.setAttribute("projects", res);
 		
 		//分发
-		request.getRequestDispatcher("/moneymanage.jsp").forward(request, response);
+		request.getRequestDispatcher("/money/moneymanage.jsp").forward(request, response);
 	}
 
 	/**

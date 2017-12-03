@@ -27,7 +27,7 @@ public class DeleteSessionListener implements ServletContextListener{
 		//新建livingcount存储系统在线人数
 		int num=0;
 		final ServletContext application= arg0.getServletContext();
-		application.setAttribute("livingcount", Integer.toString(num));
+		application.setAttribute("livingcount", num);
 		
 		//新建安全链表
 		final List<HttpSession> list=Collections.synchronizedList(new LinkedList<HttpSession>());
@@ -48,10 +48,11 @@ public class DeleteSessionListener implements ServletContextListener{
 					//超过5分钟没有操作  失效
 					if(new Date().getTime()-last>300000)
 					{
-						int num=Integer.parseInt((String)application.getAttribute("livingcount"));
-						application.setAttribute("livingcount", Integer.toString(num-1));
+						int num=(Integer) application.getAttribute("livingcount");
+						application.setAttribute("livingcount", num-1);
 						session.invalidate();
 						iterator.remove();
+						System.out.println("1人被系统强制踢出，当前在线人数："+(Integer)application.getAttribute("livingcount"));
 					}
 				}
 			}

@@ -19,10 +19,10 @@ public class CountLivingListener implements HttpSessionListener{
 		
 		ServletContext application=session.getServletContext();
 
-		int count=Integer.parseInt((String)application.getAttribute("livingcount"));
+		int count=(Integer) application.getAttribute("livingcount");
 		count++;
-		application.setAttribute("livingcount", Integer.toString(count));
-		
+		application.setAttribute("livingcount", count);
+		System.out.println("1人登陆，当前在线人数："+(Integer)application.getAttribute("livingcount"));
 	}
 
 	@Override
