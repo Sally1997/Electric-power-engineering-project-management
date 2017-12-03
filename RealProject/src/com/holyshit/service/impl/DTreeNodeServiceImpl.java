@@ -13,6 +13,7 @@ import com.holyshit.service.DTreeNodeService;
 public class DTreeNodeServiceImpl implements DTreeNodeService {
 	DTreeDao dtd = new DTreeDaoImpl();
 	@Override
+
 	public List<PSPlan> GetSNByPn(String pn) throws SQLException {
 		return dtd.selectAllSNByPn(pn);
 	}

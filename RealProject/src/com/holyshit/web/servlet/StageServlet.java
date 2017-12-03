@@ -60,7 +60,6 @@ public class StageServlet extends HttpServlet {
 			pro_stage.setPNo(pn);
 			AutoNumber an = new AutoNumber();
 			String sn = an.PNtoSN(pn);
-			System.out.println(sn);
 			pro_stage.setStageNo(sn);
 			
 			//审批人
@@ -80,11 +79,8 @@ public class StageServlet extends HttpServlet {
 			ProjectStageSercvice pss = new ProjectStageServiceImpl();
 			pss.AddStageandTask(pro_stage, task_index);
 			
-			System.out.println(pro_stage);
-			System.out.println(task_index);
-			
-			
-			
+			//System.out.println(pro_stage);
+			//System.out.println(task_index);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

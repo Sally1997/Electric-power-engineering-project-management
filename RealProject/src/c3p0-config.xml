@@ -12,6 +12,8 @@
 
   </default-config>
 
-  
+  <!-- <property name="jdbcUrl">jdbc:mysql://111.230.140.27:3306/realproject</property>
+  <property name="user">root</property>
+  <property name="password">19970915</property> -->
 
 </c3p0-config>
