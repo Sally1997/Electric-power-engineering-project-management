@@ -34,6 +34,9 @@ public class StageServlet extends HttpServlet {
 			/**
 			 * 获取表单数据
 			 */
+			System.out.println(pro_stage);
+			System.out.println(task_index);
+			
 			//getParameterMap用不了
 			pro_stage.setSName(request.getParameter("StageName"));
 			//日期转换
@@ -45,6 +48,13 @@ public class StageServlet extends HttpServlet {
 			HttpSession session = request.getSession();//ss.getAttribute
 			Staff staff = (Staff)session.getAttribute("staff");
 			pro_stage.setPubNo(staff.getStaffno());//发布人是当前用户
+			
+			//预算
+			String bg = request.getParameter("budget");
+			pro_stage.setBudget(bg);
+			
+			//最开始状态都是0
+			pro_stage.setState(0);
 		
 			//指标
 			task_index.setIndexInfo(request.getParameter("IndexInfo"));
@@ -79,15 +89,15 @@ public class StageServlet extends HttpServlet {
 			ProjectStageSercvice pss = new ProjectStageServiceImpl();
 			pss.AddStageandTask(pro_stage, task_index);
 			
-			//System.out.println(pro_stage);
-			//System.out.println(task_index);
+			System.out.println(pro_stage);
+			System.out.println(task_index);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//分发转向新建成功！
 		response.getWriter().print("<script></script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManagement_NewMilestone.jsp");	
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManage/PlanManagement_NewMilestone.jsp");	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
