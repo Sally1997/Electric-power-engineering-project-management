@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>首页</title>
+    <!-- Bootstrap -->
+    
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <link href="public.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<!-- 页眉-->   
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- start logo -->
+                    <span class="blanding"><img src="src/logo.png" width="100px">面向电力工程项目管理</span>
+                    
+                    <!-- end logo -->
+                    
+                </div>
+            </div>
+        </div>
+      </header>
+ <!--   导航栏-->
+  	<div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+    <!-- 导航栏-->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active nav-current" role="presentation"><a href="#">首页</a><span class="sr-only">(current)</span></li>
+              <li><a href="01-projectmanagerfirst 01.html">项目管理</a></li>
+              <li><a href="#">文档管理</a></li>
+              <li><a href="moneymanage.html">资金管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer"></a></li>
+              <li><a href="#">用户XXX</a></li>
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="#">任务消息<span class="badge" style="float: right">4</span></a></li>
+					<li><a href="#">系统信息<span class="badge" style="float: right">4</span></a></li>
+		            <li><a href="#">审批消息<span class="badge" style="float: right">2</span></a></li>
+			      </ul>
+              </li>
+            </ul>
+         </div><!-- /.navbar-collapse -->
+       </div><!-- /.container-fluid -->
+     </nav>
+  </div>
+    <section>
+    	<div class="container-fluid">
+    	  <div class="row">
+    	    <div class="col-lg-12">  
+    	      <div class="col-lg-8">
+    	        <div class="panel panel-primary">
+    	            <div class="panel-heading">任务跟踪事项<span class="more">more..</span></div>
+    	            <div class="panel-body">
+    	              <div class="row">
+					  <div class="col-lg-12">
+							<span>当前跟踪事务数量：</span><span>4</span>
+							<span class="more">
+							 <a href="#" style="margin-right: 15px" onclick = "">按时间排序</a>
+							</span>
+						</div>
+   	                  <div class="col-lg-10 jimode">
+    	              <table class="table table-striped">
+    	                <tr>
+    	                <th>项目名称</th>
+    	                <th>任务</th>
+    	                <th>跟踪事项</th>
+    	                <th>状态</th>
+    	                </tr>
+    	                <tr>
+    	                <td onClick="window.open()">项目A</td>
+    	                <td>任务三</td>
+    	                <td>任务二</td>	
+    	                <td class="text-danger">未完成</td>	
+    	                </tr>
+    	                <tr>
+    	                <td onClick="window.open()">项目A</td>
+    	                <td>任务三</td>
+    	                <td>任务二</td>	
+    	                <td class="text-danger">未完成</td>	
+    	                </tr>   	              
+    	                <tr>
+    	                <td onClick="window.open()">项目A</td>
+    	                <td>任务三</td>
+    	                <td>任务二</td>	
+    	                <td class="text-danger">未完成</td>	
+    	                </tr>
+    	                <tr>
+    	                <td onClick="window.open()">项目B</td>
+    	                <td>任务四</td>
+    	                <td>任务一</td>	
+    	                <td class="text-success">已完成</td>	
+    	                </tr>
+    	              </table>
+    	              </div>
+    	            </div>
+    	        </div>
+    	      </div>
+    	        <div class="panel panel-primary">
+    	            <div class="panel-heading">项目任务列表<span class="more">more..</span></div>
+    	            <div class="panel-body">
+    	              <div class="row">
+					  <div class="col-lg-12">
+							<span>当前任务数量：</span><span>15</span>
+							<span class="more">
+							 <a href="#" style="margin-right: 15px" onclick = "">按时间排序</a>
+							</span>
+						</div>
+   	                  <div class="col-lg-10 jimode">
+    	              <table class="table table-striped">
+    	                <tr>
+    	                <th>项目名称</th>
+    	                <th>任务</th>
+    	                <th>开始时间</th>
+    	                <th>截止时间</th>
+    	                <th>状态</th>
+    	                </tr>
+    	                <tr>
+    	                <td onClick="window.open()">项目A<span class="badge">new</td>
+    	                <td>任务三</td>
+    	                <td>2017-12-04</td>
+    	                <td>2017-01-08</td>	
+    	                <td class="text-danger">未开始</td>	
+    	                </tr>
+    	                <tr>
+    	                <td onClick="window.open()">项目A<span class="badge">new</td>
+    	                <td>任务三</td>
+    	                <td>2017-12-04</td>
+    	                <td>2017-01-08</td>	
+    	                <td class="text-danger">未开始</td>	
+    	                </tr>
+    	                <tr>
+    	                <td onClick="window.open()">项目A</td>
+    	                <td>任务三</td>
+    	                <td>2017-10-11</td>
+    	                <td>2017-01-08</td>	
+    	                <td class="text-info">进行中</td>	
+    	                </tr>
+    	                <tr>
+    	                <td onClick="window.open()">项目A</td>
+    	                <td>任务三</td>
+    	                <td>2017-10-11</td>
+    	                <td>2017-01-08</td>	
+    	                <td class="text-info">进行中</td>	
+    	                </tr>   	              
+    	                <tr>
+    	                <td onClick="window.open()">项目A</td>
+    	                <td>任务三</td>
+    	                <td>2017-10-11</td>
+    	                <td>2017-01-08</td>	
+    	                <td class="text-info">进行中</td>	
+    	                </tr>
+    	                
+    	              </table>
+    	              </div>
+    	            </div>
+    	        </div>
+    	      </div>
+    	        <div class="panel panel-primary">
+						<div class="panel-heading">项目进度列表<span class="more">more..</span></div>
+						<div class="panel-body">
+						  <div class="row">
+						  <div class="col-lg-12">
+								<span>当前参与的项目数量：</span><span>4</span>
+								<span class="more">
+								 <a href="#" style="margin-right: 15px" onclick = "">按时间排序</a>
+								</span>
+							</div>
+						  <div class="col-lg-10 jimode">
+					<!--	  进度条的占比需要修改标签内的style:width属性-->
+						  <table class="table table-striped">
+							<tr>
+							<th>项目名称</th>
+							<th>项目进度</th>
+							<th>开始时间</th>
+							<th>截止时间</th>
+							<th>状态</th>
+							</tr>
+							<tr>
+							<td onClick="window.open()">项目A
+							<td><div class="progress">
+							  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;min-width: 2em;">
+							 100%
+							  </div>
+							</div></td>
+							<td>2017-12-04</td>
+							<td>2017-01-08</td>	
+							<td>已完成</td>	
+							</tr>
+							<tr>
+							<td onClick="window.open()">项目A
+							<td><div class="progress">
+							  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;min-width: 2em;">
+							 60%
+							  </div>
+							</div></td>
+							<td>2017-12-04</td>
+							<td>2017-01-08</td>	
+							<td>处于第四阶段</td>	
+							</tr>
+							<tr>
+							<td onClick="window.open()">项目A
+							<td><div class="progress">
+							  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;min-width: 2em;">
+							 60%
+							  </div>
+							</div></td>
+							<td>2017-12-04</td>
+							<td>2017-01-08</td>	
+							<td>处于第四阶段</td>	
+							</tr>
+							<tr>
+							<td onClick="window.open()">项目A
+							<td><div class="progress">
+							  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;min-width: 2em;">
+							 2%
+							  </div>
+							</div></td>
+							<td>2017-12-04</td>
+							<td>2017-01-08</td>	
+							<td>处于第一阶段</td>	
+							</tr>   	              
+
+						  </table>
+						  </div>
+						</div>
+					</div>
+				  </div>
+    	      </div>
+    	      <div class="col-lg-4">
+    	        <div class="panel panel-primary">
+    	        	<div class="panel panel-heading">公告中心<span class="more">more..</span></div>
+						<div class="list-group">
+						  <a href="#" class="list-group-item">第五次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第四次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第三次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第二次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第一次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						</div>
+    	        </div>
+    	    <!--    你们先做成这个地方点击就能直接下载文件吧……-->
+    	        <div class="panel panel-primary">
+    	        	<div class="panel panel-heading">最新消息<span class="more">more..</span></div>
+						<div class="list-group">
+						  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-file"></span>第五次会议记录<br><div class="small"><span class="uptime">2017/10/24</span>&nbsp;&nbsp;&nbsp;<span>上传者：甲</span></div></a>
+						  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-file"></span>第四次会议记录<br><span class="uptime small">2017/10/24</span>&nbsp;&nbsp;&nbsp;<span>上传者：甲</span></a>
+						  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-file"></span>第三次会议记录<br><span class="uptime small">2017/10/24</span>&nbsp;&nbsp;&nbsp;<span>上传者：甲</span></a>
+						  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-file"></span>第二次会议记录<br><span class="uptime small">2017/10/24</span>&nbsp;&nbsp;&nbsp;<span>上传者：甲</span></a>
+						  <a href="#" class="list-group-item"><span class="glyphicon glyphicon-file"></span>第一次会议记录<br><span class="uptime small">2017/10/24</span>&nbsp;&nbsp;&nbsp;<span>上传者：甲</span></a>
+						</div>
+    	        </div>
+    	        </div>
+    	      </div>
+    	    </div>
+    	  </div>
+    	</div>
+    </section>
+    <footer class="copyright">
+    <div class="container-fluid">
+      	<p>©版权归谭莹小组所有</p>
+   
+	</div>
+	</footer>
+</body>
+</html>

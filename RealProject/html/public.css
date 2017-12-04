@@ -21,7 +21,10 @@
 			width: 700px;
 		}
 
-		table th td{
+		table th{
+			text-align: center;
+		}
+		table td{
 			text-align: center;
 		}
 		.copyright{
@@ -37,6 +40,9 @@
 		.xumode{
 			float:none;
 			margin: 20px auto;
+		}
+		.jimode{
+			margin-top: 20px;margin-left: 5%
 		}
         header{
 			background-image: url(src/topbk.png);
@@ -56,21 +62,6 @@
         .block{
 			padding-top: 15px;
 		}
-        .text_danger{
-	        color: #d9534f;
-        }
-        .text_success{
-	        color: #5cb85c;
-        }
-        .text_info{
-	        color: #5bc0de;
-        }
-        .text_warning{
-	        color: #f0ad4e;
-        }
-        .text_primary{
-	        color: #52658f;
-        }
 		.more{
 			float: right;
 		    color: white;
