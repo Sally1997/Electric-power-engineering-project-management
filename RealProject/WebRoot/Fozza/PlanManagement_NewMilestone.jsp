@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>面向电力的项目管理系统/计划管理</title>
-		<link rel="stylesheet" href="css/PlanManagement_NewMilestone.css" type="text/css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/PlanManagement_NewMilestone.css" type="text/css">
 	</head>
 	
 	<body>
