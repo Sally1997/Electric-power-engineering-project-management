@@ -492,7 +492,7 @@
 	        <div class="panel panel-primary">
 		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/jsp/moneyManage/moneyAccount.jsp')">more..</span></div>
 		        <div class="panel-body">
-		        <table class="table table-striped table-condensed" style="font-size: 15px">
+		        <table class="table table-striped table-condensed" style="font-size: 15px" id="feetable">
  		    <tr>
 			    <th>项目名称</th>
 			    <th>报销人</th>
@@ -500,20 +500,55 @@
 			    <th>状态</th>
 			    <th> </th>
 		    </tr>
-		    <tr>
+		    
+		    <script type="text/javascript">
+    			var feeData=eval('('+'${fee["feeaudits"]}'+')');
+    			var feetable=document.getElementById("feetable");
+    			for(var i=0;i<feeData.length;i++){
+    				var trNode=document.createElement("tr");
+    				
+    				var tdNode1=document.createElement("td");
+    				var pname=feeData[i].pname.substring(0,8)+"...";
+    				tdNode1.innerHTML=pname;
+    				
+    				var tdNode2=document.createElement("td");
+    				tdNode2.innerHTML=feeData[i].appname;
+    				
+    				var tdNode3=document.createElement("td");
+    				tdNode3.innerHTML=feeData[i].stime;
+    				
+    				var tdNode4=document.createElement("td");
+    				if(feeData[i].auditstate=="0"){
+    					tdNode4.className="text-danger";
+    					tdNode4.innerHTML="未审批";
+    				}else if(feeData[i].auditstate=="1"){
+    					tdNode4.className="text-danger";
+    					tdNode4.innerHTML="未通过";
+    				}else{
+    					tdNode4.className="text-success";
+    					tdNode4.innerHTML="通过审批";
+    				}
+    				
+    				var tdNode5=document.createElement("td");
+    				tdNode5.innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>';
+    			
+    				//压入数据
+    				trNode.appendChild(tdNode1);
+    				trNode.appendChild(tdNode2);
+    				trNode.appendChild(tdNode3);
+    				trNode.appendChild(tdNode4);
+    				trNode.appendChild(tdNode5);
+    				
+    				feetable.appendChild(trNode);
+    			}
+    		</script>
+		    
+		    
+		   <!--  <tr>
 			    <td >项目A</td>
 			    <td >甲</td>
 			    <td >2017-10-11</td>
-			    <td style="color:#d9534f">未审批</td>
-			    <td >
-			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
-			    </td>
-		    </tr>
-		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text_danger">未审批</td>
+			    <td  class="text-danger">未审批</td>
 			    <td >			    
 			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
 		    </tr>
@@ -521,19 +556,10 @@
 			    <td >项目A</td>
 			    <td >甲</td>
 			    <td >2017-10-11</td>
-			    <td  class="text_danger">未审批</td>
+			    <td  class="text-success">审批通过</td>
 			    <td >			    
 			   <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
-		    </tr>
-		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text_danger">未审批</td>
-			    <td >			    
-			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
-		    </tr>
-
+		    </tr> -->
 	        </table>
 				
                 <div>
@@ -731,6 +757,7 @@
       	<p>©版权归谭莹小组所有</p>
    
   </div>
+
   </footer>
   </body>
 </html>

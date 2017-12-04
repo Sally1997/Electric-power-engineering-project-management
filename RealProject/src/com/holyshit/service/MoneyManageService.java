@@ -11,4 +11,12 @@ public interface MoneyManageService {
 	 * @return
 	 */
 	Map<String, Object> showProjectMoneyPage(int cur,int pagesize,String id);
+	/**
+	 * 分页显示最近所有项目的报账情况
+	 * @param cur
+	 * @param pagesize
+	 * @param id
+	 * @return
+	 */
+	Map<String, Object> showFeeAuditInfoPage(int cur,int pagesize,String id);
 }

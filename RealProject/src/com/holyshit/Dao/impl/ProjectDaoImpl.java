@@ -27,7 +27,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<Project> selectProjectsById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"select * from psrelation join project where psrelation.pno=project.pno and staffno=? and (pstate='正常进行中' or pstate='延期进行中')",new BeanListHandler<Project>(Project.class),id);
+		return qr.query(ConnectionManager.getConnection(),"select * from psrelation join project where psrelation.pno=project.pno and staffno=? and (pstate='1' or pstate='2')",new BeanListHandler<Project>(Project.class),id);
 	}
 
 	@Override
@@ -41,14 +41,14 @@ public class ProjectDaoImpl implements ProjectDao {
 	public long selectWorkingProjectNumberById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return (Long) qr.query(ConnectionManager.getConnection(),"SELECT COUNT(*) FROM psrelation ps JOIN project pr ON ps.PNo=pr.PNo WHERE staffno=? AND (pstate='正常进行中' OR pstate='延期进行中')",new ScalarHandler(),id);
+		return (Long) qr.query(ConnectionManager.getConnection(),"SELECT COUNT(*) FROM psrelation ps JOIN project pr ON ps.PNo=pr.PNo WHERE staffno=? AND (pstate='1' OR pstate='2')",new ScalarHandler(),id);
 	}
 
 	@Override
 	public List<Project> showPage(int cur, int pagesize,String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"SELECT * FROM psrelation JOIN project WHERE psrelation.pno=project.pno AND staffno=? AND (pstate='正常进行中' OR pstate='延期进行中') LIMIT ?,?",new BeanListHandler<Project>(Project.class),id,(cur-1)*pagesize,pagesize);
+		return qr.query(ConnectionManager.getConnection(),"SELECT * FROM psrelation JOIN project WHERE psrelation.pno=project.pno AND staffno=? AND (pstate='1' OR pstate='2') LIMIT ?,?",new BeanListHandler<Project>(Project.class),id,(cur-1)*pagesize,pagesize);
 	}
 
 	@Override

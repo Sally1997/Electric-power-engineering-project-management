@@ -2,9 +2,11 @@ package com.holyshit.Dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
+import com.holyshit.domain.TaskInfo;
 /**
  * 
  * @author yuan
@@ -16,6 +18,14 @@ public interface StageTaskDao {
 	 * @return 任务列表
 	 */
 	List<StageTask> selectAllTasksById(String id)throws SQLException;
+	
+	/***
+	 * 根据任务id获取任务的相关信息
+	 * @param taskno
+	 * @return
+	 * @throws SQLException
+	 */
+	TaskInfo selectTaskInfoByTaskNo(String taskno)throws SQLException;
 	
 	/**
 	 * 根据任务编号生成新的指标编号

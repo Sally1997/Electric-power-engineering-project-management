@@ -3,10 +3,14 @@ package com.holyshit.Dao.impl;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.enterprise.inject.New;
+
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.holyshit.Dao.FeeAuditDao;
+import com.holyshit.domain.FeeAudit;
 import com.holyshit.domain.ProjectStageBudget;
 import com.holyshit.utils.ConnectionManager;
 
@@ -18,6 +22,21 @@ public class FeeAuditDaoImpl implements FeeAuditDao{
 		QueryRunner qr=new QueryRunner();
 		return qr.query(ConnectionManager.getConnection(),"select * from projectstagebudget where pno=? order by stageno",new BeanListHandler<ProjectStageBudget>(ProjectStageBudget.class),id);
 //		return null;
+	}
+
+	@Override
+	public List<FeeAudit> selectAllFeeInfoPageById(int cur, int pageSize,
+			String staffno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(), "select * from feeaudit where applicantno=? order by stime desc limit ?,?",new BeanListHandler<FeeAudit>(FeeAudit.class),staffno,(cur-1)*pageSize,pageSize );
+	}
+
+	@Override
+	public long selectTotalNumById(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return (Long)qr.query(ConnectionManager.getConnection(),"select count(*) from feeaudit where applicantno=?",new ScalarHandler(),id);
 	}
 
 }

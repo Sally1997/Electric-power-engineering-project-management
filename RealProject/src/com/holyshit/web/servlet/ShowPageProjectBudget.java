@@ -34,9 +34,8 @@ public class ShowPageProjectBudget extends HttpServlet {
 		Map<String, Object> res=ms.showProjectMoneyPage(cur, pagesize, staffno);
 		
 		request.setAttribute("projects", res);
-		
 		//分发
-		request.getRequestDispatcher("/jsp/moneyManage/moneymanage.jsp").forward(request, response);
+		request.getRequestDispatcher("/web/servlet/showPageFee").forward(request, response);
 	}
 
 	/**
