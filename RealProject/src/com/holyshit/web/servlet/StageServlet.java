@@ -99,7 +99,7 @@ public class StageServlet extends HttpServlet {
 		}
 		//分发转向新建成功！
 		response.getWriter().print("<script></script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManage/PlanManagement_NewMilestone.jsp");	
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/jsp/projectManage/PlanManagement_NewMilestone.jsp");	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

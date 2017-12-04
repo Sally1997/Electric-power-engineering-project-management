@@ -59,4 +59,22 @@ public class ProjectDaoImpl implements ProjectDao {
 		
 	}
 
+	@Override
+	public void addProject(Project pro) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		qr.update("INSERT INTO project(Pno,PMNo,PName,PType,PBudget,PStage,PState,STime,Etime) "
+				+"VALUES(?,?,?,?,?,?,?,?,?)",pro.getPno(),
+				pro.getPmno(),pro.getPname(),
+				pro.getPtype(),pro.getPbudget(),
+				pro.getPstage(),pro.getPstate(),
+				pro.getStime(),pro.getEtime());
+	}
+
+	@Override
+	public List<Object> getMaxProNo(String pro_first_no) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT PNo FROM Project WHERE Pno LIKE ? ORDER BY Pno DESC",
+				new ColumnListHandler(),pro_first_no+"%");
+	}
+
 }

@@ -56,6 +56,20 @@ public interface ProjectDao {
 	 */
 	Project selectProjetById(String id)throws SQLException;
 	
+	/**
+	 * 新建项目
+	 * @param pro
+	 * @throws SQLException 
+	 */
+	public void addProject(Project pro) throws SQLException;
+	
+	/**
+	 * 根据项目编号第一位，即项目类型，获取降序排列后的项目编号第一位
+	 * @param pro_first_no
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> getMaxProNo(String pro_first_no) throws SQLException;
 } 
 
 

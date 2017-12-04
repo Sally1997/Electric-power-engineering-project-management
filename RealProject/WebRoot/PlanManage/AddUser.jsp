@@ -12,12 +12,12 @@
 		InputWord.value = div.innerHTML;
 		div.parentNode.style.display = "none";
 	}
-  	function change_1(ele){
-  			ele.style.backgroundColor="#3388FF";
-  		}
-  		function change_2(ele){
-  			ele.style.backgroundColor="";
-  		}
+	function change_1(ele) {
+		ele.style.backgroundColor = "#3388FF";
+	}
+	function change_2(ele) {
+		ele.style.backgroundColor = "";
+	}
 	window.onload = function(){
 	//输入文本框
 	var InputWord = document.getElementsByName("PersonInCharge")[0];

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap.min.css">
 	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath }/echarts.min.js"></script>
+    <script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/css/public.css">
     
 	<script type="text/javascript" src="${pageContext.request.contextPath }/js/dtree.js"></script>

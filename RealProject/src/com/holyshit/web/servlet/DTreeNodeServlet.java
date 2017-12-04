@@ -59,7 +59,7 @@ public class DTreeNodeServlet extends HttpServlet {
 //			//输出
 //			response.getWriter().write(str);
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("/PlanManage/PlanManagement_Newed.jsp").forward(request, response);
+			request.getRequestDispatcher("/jsp/projectManage/PlanManagement_Newed.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -88,7 +88,7 @@ public class TaskServlet extends HttpServlet {
 		}
 		//分发转向新建成功！
 		//response.getWriter().print("<script></script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManage/PlanManagement_NewTask.jsp");	
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/jsp/projectManage/PlanManagement_NewTask.jsp");	
 		
 	}
 
