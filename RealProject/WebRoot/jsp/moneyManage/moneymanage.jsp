@@ -407,6 +407,10 @@
   <body> 
    <!-- 包含头部内容 -->
    <%@ include file="/head.jsp"%>
+   <script type="text/javascript">
+		menus[3].className="active nav-current";
+		menus[3].role="presentation";	
+	</script>
 <!--  主要内容-->
   <section>
     <div class=container-fluid>
@@ -486,7 +490,7 @@
     	<!--	报账-->
     		<div id="account" class="col-lg-4" style="padding-left: 30px">
 	        <div class="panel panel-primary">
-		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/moneyAccount.jsp')">more..</span></div>
+		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/jsp/moneyManage/moneyAccount.jsp')">more..</span></div>
 		        <div class="panel-body">
 		        <table class="table table-striped table-condensed" style="font-size: 15px">
  		    <tr>
@@ -542,7 +546,7 @@
     	    <!--审批-->
     	    <div id="accountPass" class="col-lg-4" style="padding-left: 30px">
 	        <div class="panel panel-primary">
-		        <div class="panel-heading"><span>相关项目审批信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/moneyPass.jsp')">more..</span></div>
+		        <div class="panel-heading"><span>相关项目审批信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/jsp/moneyManage/moneyPass.jsp')">more..</span></div>
 		        <div class="panel-body">
 		        <table class="table table-striped table-condensed" style="font-size: 15px">
  		    <tr>

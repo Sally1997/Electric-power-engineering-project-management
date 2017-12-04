@@ -55,7 +55,7 @@ public class MainServlet extends HttpServlet {
 				}
 				
 				//转向到主页
-				request.getRequestDispatcher("/main.jsp").forward(request, response);
+				request.getRequestDispatcher("/jsp/homeManage/main.jsp").forward(request, response);
 	}
 
 }

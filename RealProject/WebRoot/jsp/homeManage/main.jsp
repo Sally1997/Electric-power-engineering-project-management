@@ -115,6 +115,10 @@
 
 
 	<%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[0].className="active nav-current";
+		menus[0].role="presentation";	
+	</script>
   	<!-- 详细内容模块 -->
   	<div id="content">
   		<!-- 左边 -->
