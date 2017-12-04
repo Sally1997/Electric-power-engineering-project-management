@@ -67,7 +67,7 @@ public class TaskServlet extends HttpServlet {
 				cpn+=rcpn.charAt(rcpn.length()-13+i);
 			}
 			stage_task.setCharpno(cpn);
-			stage_task.setTstate(0);
+			stage_task.setTstate("0");
 			
 			//任务指标表
 			task_index.setTaskNo(ntn);

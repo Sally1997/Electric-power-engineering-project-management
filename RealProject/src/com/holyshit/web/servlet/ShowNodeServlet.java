@@ -41,11 +41,11 @@ public class ShowNodeServlet extends HttpServlet {
 			}
 			else if(len==6){
 				ps = dtns.GetStageInfo(no);
-				s = "项目阶段,"+ps.getStageNo()+","+ps.getSName()+","+ps.getCharPNo()+","+ps.getSTime()+","+ps.getETime()+","+"2200"+",我不知道";
+				s = "项目阶段,"+ps.getStageNo()+","+ps.getSName()+","+ps.getCharPNo()+","+ps.getSTime()+","+ps.getETime()+","+ps.getBudget()+",我不知道";
 			}
 			else{
 				st = dtns.GetTaskInfo(no);
-				s = "任务节点,"+st.getTaskno()+","+st.getTaskname()+","+st.getCharpno()+","+st.getStime()+","+st.getEtime()+","+"2200"+",我不知道";
+				s = "任务节点,"+st.getTaskno()+","+st.getTaskname()+","+st.getCharpno()+","+st.getStime()+","+st.getEtime()+","+st.getBudget()+",谁知道呢";
 			}
 			response.getWriter().write(s);
 		} catch (SQLException e) {

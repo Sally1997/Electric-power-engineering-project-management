@@ -5,6 +5,13 @@ public class TaskIndexs {
 	private String TaskNo;
 	private String IndexInfo;
 	private String AttachPath;
+	private String IndexState;
+	public String getIndexState() {
+		return IndexState;
+	}
+	public void setIndexState(String indexState) {
+		IndexState = indexState;
+	}
 	public String getIndexNo() {
 		return IndexNo;
 	}

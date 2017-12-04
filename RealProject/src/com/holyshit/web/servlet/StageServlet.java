@@ -45,7 +45,8 @@ public class StageServlet extends HttpServlet {
 			HttpSession session = request.getSession();//ss.getAttribute
 			Staff staff = (Staff)session.getAttribute("staff");
 			pro_stage.setPubNo(staff.getStaffno());//发布人是当前用户
-		
+			pro_stage.setSState("0");
+			
 			//指标
 			task_index.setIndexInfo(request.getParameter("IndexInfo"));
 			
@@ -74,6 +75,7 @@ public class StageServlet extends HttpServlet {
 			task_index.setTaskNo(tn);
 			String in1 = an.TNtoIN(tn);
 			task_index.setIndexNo(in1);
+			task_index.setIndexState("0");
 			
 			//添加新阶段以及新的任务指标
 			ProjectStageSercvice pss = new ProjectStageServiceImpl();

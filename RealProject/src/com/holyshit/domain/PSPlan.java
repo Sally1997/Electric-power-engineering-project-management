@@ -11,7 +11,25 @@ public class PSPlan {
 	private String CharPNo;
 	private Date STime;
 	private Date ETime;
+	private String budget;
+	private String SState;
 	
+	public String getBudget() {
+		return budget;
+	}
+
+	public void setBudget(String budget) {
+		this.budget = budget;
+	}
+
+	public String getSState() {
+		return SState;
+	}
+
+	public void setSState(String sState) {
+		SState = sState;
+	}
+
 	public String getStageNo() {
 		return StageNo;
 	}
