@@ -7,15 +7,31 @@ import java.util.Map;
 
 
 
+
+
+
+
+
+
+
+
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.holyshit.Dao.FeeAuditDao;
 import com.holyshit.Dao.ProjectDao;
+import com.holyshit.Dao.StaffDao;
+import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.impl.FeeAuditDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
+import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.Dao.impl.StageTaskDaoImpl;
+import com.holyshit.domain.FeeAudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectStageBudget;
+import com.holyshit.domain.StageTask;
+import com.holyshit.domain.TaskInfo;
 import com.holyshit.service.MoneyManageService;
 import com.holyshit.utils.ConnectionManager;
 
@@ -89,10 +105,53 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		resMap.put("projectNum", projects.size());
 		return resMap;
 	}
-	
-	public static void main(String[] args) {
-		MoneyManageService ms=new MoneyManageServiceImpl();
-		ms.showProjectMoneyPage(1, 3, "201526010001");
+
+
+	@Override
+	public Map<String, Object> showFeeAuditInfoPage(int cur, int pagesize,
+			String id) {
+		// TODO Auto-generated method stub
+		//dao操作对象
+		ProjectDao pd=new ProjectDaoImpl();   //项目表
+		FeeAuditDao fd=new FeeAuditDaoImpl();  //报账表
+		StaffDao sd=new StaffDaoImpl();    //员工表
+		StageTaskDao std=new StageTaskDaoImpl();   //阶段任务表
+		long totalNum=0;
+		List<FeeAudit> fees=null;
+		JSONArray feeaudits=new JSONArray();
+		try {
+			//保存报账信息的详细内容json
+			JSONObject fad=new JSONObject();
+			fees = fd.selectAllFeeInfoPageById(cur, pagesize, id);
+			totalNum=fd.selectTotalNumById(id);
+			String appname = sd.selectStaffById(id).getName();
+			for(FeeAudit fa:fees){
+				//遍历取得任务编号相关的所有其他信息
+				TaskInfo t=std.selectTaskInfoByTaskNo(fa.getTaskno());
+				fad.put("pname", t.getPname());
+				fad.put("sname", t.getSname());
+				fad.put("taskname", t.getTaskname());
+				fad.put("appname", appname);
+				fad.put("stime", fa.getStime().toString());
+				fad.put("fee", fa.getFee());
+				fad.put("auditstate", fa.getAuditstate());
+				//压入数组
+				feeaudits.add(fad);	
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		Map<String, Object> resMap=new HashMap<String, Object>();
+		resMap.put("totalNum", totalNum);  //数据库总的记录数
+		resMap.put("feeaudits", feeaudits.toString());   //数据库记录的json数组
+		resMap.put("currentPage", cur);     //当前页
+		resMap.put("pageSize", pagesize);   //页大小
+		resMap.put("pageNum", totalNum%pagesize==0?totalNum/pagesize:totalNum/pagesize+1);  //总页数
+		resMap.put("feeauditNum", fees.size());   //目前获得的记录数
+		return resMap;
 	}
 
 }

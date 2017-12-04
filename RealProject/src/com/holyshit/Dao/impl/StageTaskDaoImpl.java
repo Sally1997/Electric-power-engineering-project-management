@@ -2,8 +2,10 @@ package com.holyshit.Dao.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
 
@@ -11,6 +13,7 @@ import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.domain.DTree;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
+import com.holyshit.domain.TaskInfo;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 /**
@@ -24,7 +27,7 @@ public class StageTaskDaoImpl implements StageTaskDao {
 	public List<StageTask> selectAllTasksById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"select * from stagetasks where charpno=? and tstate!='2'",new BeanListHandler<StageTask>(StageTask.class),id);
+		return qr.query(ConnectionManager.getConnection(),"select * from stagetasks where charpno=? and (tstate='2' or tstate='1')",new BeanListHandler<StageTask>(StageTask.class),id);
 	}
 
 	@Override
@@ -54,6 +57,14 @@ public class StageTaskDaoImpl implements StageTaskDao {
 	public List<Object> selectTaskNoby9TN(String ntn) throws SQLException {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT TaskNo FROM StageTasks where TaskNo like ? order by TaskNo desc", new ColumnListHandler(), ntn+"%");
+	}
+
+	@Override
+	public TaskInfo selectTaskInfoByTaskNo(String taskno)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName FROM stagetasks JOIN psplan ON stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE taskno=?",new BeanHandler<TaskInfo>(TaskInfo.class),taskno);
 	}
 
 }
