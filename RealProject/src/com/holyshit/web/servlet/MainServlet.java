@@ -55,8 +55,10 @@ public class MainServlet extends HttpServlet {
 				//放入用户项目任务
 				if(tasks!=null){
 					request.setAttribute("tasks", tasks);
+					
 					request.setAttribute("projectNames", projectNames);
-				
+					
+					
 				}
 				
 				//转向到主页
