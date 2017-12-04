@@ -3,7 +3,10 @@ package com.holyshit.Dao.impl;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.enterprise.inject.New;
+
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -46,6 +49,14 @@ public class ProjectDaoImpl implements ProjectDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return qr.query(ConnectionManager.getConnection(),"SELECT * FROM psrelation JOIN project WHERE psrelation.pno=project.pno AND staffno=? AND (pstate='正常进行中' OR pstate='延期进行中') LIMIT ?,?",new BeanListHandler<Project>(Project.class),id,(cur-1)*pagesize,pagesize);
+	}
+
+	@Override
+	public Project selectProjetById(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(), "select * from project where pno=?", new BeanHandler<Project>(Project.class),id);
+		
 	}
 
 }

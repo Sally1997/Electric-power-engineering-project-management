@@ -135,7 +135,7 @@
   				<div id="tasklist_detail">
   					<div class="task_top">
 
-  						<span class="num_info">当前正在参与的项目数量：           </span><span>    ${fn:length(projects)} </span>
+  						<span class="num_info">当前正在参与的项目数量：           </span><span>    ${fn:length(projectNames)} </span>
   						<span class="time_sort">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
@@ -151,15 +151,15 @@
   							<div class="task_def_head">状态</div>
   							<div class="clear"></div>
   						</div>
-  						<c:forEach items="${tasks }" var="task">
+  						<c:forEach items="${tasks }" var="task" varStatus="hehe">
 	  						<div>
   								<c:choose>
   									<c:when test="${task.tstate=='0' }">
   										<div class="task_def_main">
-			  								<a href="PlanManagement_newed.html"class="task_href">${task.taskname }</a>
+			  								<a href="PlanManagement_newed.html"class="task_href">${projectNames[hehe.index] }</a>
 			  								<span class="new_task_blank"></span>
 			  							</div>
-			  							<div class="task_def_main"><span class="task_content_1">${task.taskcontent }</span><span class="task_content_1">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
+			  							<div class="task_def_main"><span class="task_content_1">${task.taskname }</span><span class="task_content_1">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
 			  							<div class="task_def_main">${task.stime }</div>
 			  							<div class="task_def_main">${task.etime }</div>
   										<div class="task_def_main">
@@ -170,10 +170,10 @@
   									
   									<c:when test="${task.tstate=='1' }">
   										<div class="task_def_main">
-			  								<a href="PlanManagement_newed.html"class="task_href">${task.taskname }</a>
+			  								<a href="PlanManagement_newed.html"class="task_href">${projectNames[hehe.index]}</a>
 			  								<span class="new_task_blank"></span>
 			  							</div>
-			  							<div class="task_def_main"><span style="display: inline-block;width: 40%;height: 30px;overflow: hidden;">${task.taskcontent }</span><span style="display: inline-block;width: 40%;height: 30px;">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
+			  							<div class="task_def_main"><span style="display: inline-block;width: 40%;height: 30px;overflow: hidden;">${task.taskname }</span><span style="display: inline-block;width: 40%;height: 30px;">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
 			  							<div class="task_def_main">${task.stime }</div>
 			  							<div class="task_def_main">${task.etime }</div>
   										<div class="task_def_main">
