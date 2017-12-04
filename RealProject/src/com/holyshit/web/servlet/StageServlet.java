@@ -49,13 +49,14 @@ public class StageServlet extends HttpServlet {
 			Staff staff = (Staff)session.getAttribute("staff");
 			pro_stage.setPubNo(staff.getStaffno());//发布人是当前用户
 			
+			//最开始状态都是0
+			pro_stage.setSState("0");
+			
+			
 			//预算
 			String bg = request.getParameter("budget");
 			pro_stage.setBudget(bg);
 			
-			//最开始状态都是0
-			pro_stage.setState(0);
-		
 			//指标
 			task_index.setIndexInfo(request.getParameter("IndexInfo"));
 			
@@ -84,6 +85,7 @@ public class StageServlet extends HttpServlet {
 			task_index.setTaskNo(tn);
 			String in1 = an.TNtoIN(tn);
 			task_index.setIndexNo(in1);
+			task_index.setIndexState("0");
 			
 			//添加新阶段以及新的任务指标
 			ProjectStageSercvice pss = new ProjectStageServiceImpl();
@@ -97,7 +99,7 @@ public class StageServlet extends HttpServlet {
 		}
 		//分发转向新建成功！
 		response.getWriter().print("<script></script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManage/PlanManagement_NewMilestone.jsp");	
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/jsp/projectManage/PlanManagement_NewMilestone.jsp");	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

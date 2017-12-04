@@ -5,8 +5,14 @@ public class TaskIndexs {
 	private String TaskNo;
 	private String IndexInfo;
 	private String AttachPath;
-	private int IndexState;
+	private String IndexState;
 	
+	public String getIndexState() {
+		return IndexState;
+	}
+	public void setIndexState(String indexState) {
+		IndexState = indexState;
+	}
 	public String getIndexNo() {
 		return IndexNo;
 	}
@@ -35,11 +41,5 @@ public class TaskIndexs {
 	public String toString() {
 		return "TaskIndexs [IndexNo=" + IndexNo + ", TaskNo=" + TaskNo + ", IndexInfo=" + IndexInfo
 				+ ", AttachPath=" + AttachPath + "]";
-	}
-	public int getIndexState() {
-		return IndexState;
-	}
-	public void setIndexState(int indexState) {
-		IndexState = indexState;
 	}
 }

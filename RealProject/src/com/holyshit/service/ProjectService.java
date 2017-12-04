@@ -20,4 +20,18 @@ public interface ProjectService {
 	 * @throws SQLException
 	 */
 	List<Object> getNewStageNo(String pn) throws SQLException;
+	
+	/**
+	 * 根据servlet新建一个项目
+	 * @param pro
+	 */
+	public void NewProject(Project pro);
+	
+	/**
+	 * 将项目编号降序排列，则第一个项目编号为最大编号，在这个基础上加一则得到最新编号
+	 * @param pn_1
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> getNewProjectNo(String pn_1);
 }

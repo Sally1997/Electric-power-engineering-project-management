@@ -12,13 +12,13 @@ public class PSPlanDaoImpl implements PSPlanDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
 		
-		qr.update(ConnectionManager.getConnection(), "insert into PSPlan (stageno,PNo,SName,PubPNo,CharPNo,STime,ETime,budget,sstate) "
+		qr.update(ConnectionManager.getConnection(), "insert into PSPlan(stageno,PNo,SName,PubPNo,CharPNo,STime,ETime,SState,budget) "
 				+ "values (?,?,?,?,?,?,?,?,?)",
 				pro_stage.getStageNo(),pro_stage.getPNo(),
 				pro_stage.getSName(),pro_stage.getPubNo(),
 				pro_stage.getCharPNo(),pro_stage.getSTime(),
 				pro_stage.getETime(),pro_stage.getBudget(),
-				pro_stage.getState());
+				pro_stage.getSState());
 		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath,IndexState) "
 				+ "values (?,?,?,?,?)",
 				task_index.getIndexNo(),task_index.getTaskNo(),

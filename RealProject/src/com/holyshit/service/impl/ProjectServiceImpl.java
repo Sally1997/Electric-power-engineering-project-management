@@ -1,6 +1,7 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.holyshit.Dao.ProjectDao;
@@ -32,6 +33,30 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Object> getNewStageNo(String pn) throws SQLException {
 		ProjectDao pjd = new ProjectDaoImpl();
 		return pjd.selectProjectStageNoByPN(pn);
+	}
+
+	@Override
+	public void NewProject(Project pro) {
+		ProjectDao pd = new ProjectDaoImpl();
+		try {
+			pd.addProject(pro);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<Object> getNewProjectNo(String pn_1) {
+		ProjectDao pd = new ProjectDaoImpl();
+		List<Object> list = new ArrayList<Object>();
+		try {
+			list = pd.getMaxProNo(pn_1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

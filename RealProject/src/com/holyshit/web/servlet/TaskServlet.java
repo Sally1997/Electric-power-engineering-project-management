@@ -69,7 +69,7 @@ public class TaskServlet extends HttpServlet {
 				cpn+=rcpn.charAt(rcpn.length()-13+i);
 			}
 			stage_task.setCharpno(cpn);
-			stage_task.setTstate(0);
+			stage_task.setTstate("0");
 			
 			//任务指标表
 			task_index.setTaskNo(ntn);
@@ -88,7 +88,7 @@ public class TaskServlet extends HttpServlet {
 		}
 		//分发转向新建成功！
 		//response.getWriter().print("<script></script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManage/PlanManagement_NewTask.jsp");	
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/jsp/projectManage/PlanManagement_NewTask.jsp");	
 		
 	}
 

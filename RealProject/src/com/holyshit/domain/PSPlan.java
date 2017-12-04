@@ -12,14 +12,22 @@ public class PSPlan {
 	private Date STime;
 	private Date ETime;
 	private String budget;
-	private int state;
-	
+	private String SState;
+
 	public String getBudget() {
 		return budget;
 	}
 
 	public void setBudget(String budget) {
 		this.budget = budget;
+	}
+
+	public String getSState() {
+		return SState;
+	}
+
+	public void setSState(String sState) {
+		SState = sState;
 	}
 
 	public String getStageNo() {
@@ -83,13 +91,4 @@ public class PSPlan {
 				+ ", PublisherNo=" + PubNo + ", ChargePerNo=" + CharPNo +", StartDate=" + STime
 						+ ", EndDate=" + ETime + " ]";
 	}
-
-	public int getState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-	
 }

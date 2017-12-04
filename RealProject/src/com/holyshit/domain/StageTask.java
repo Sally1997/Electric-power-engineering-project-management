@@ -10,7 +10,7 @@ public class StageTask {
 	private String pubno;
 	private String charpno;
 	private String ptaskno;
-	private int tstate;
+	private String tstate;
 	private String budget;
 	private String taskcontent;
 	public String toString() {
@@ -61,10 +61,10 @@ public class StageTask {
 	public void setPtaskno(String ptaskno) {
 		this.ptaskno = ptaskno;
 	}
-	public int getTstate() {
+	public String getTstate() {
 		return tstate;
 	}
-	public void setTstate(int tstate) {
+	public void setTstate(String tstate) {
 		this.tstate = tstate;
 	}
 	public String getBudget() {

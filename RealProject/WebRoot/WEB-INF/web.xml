@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>RealProject</display-name>
-  <!-- 过滤器 -->
   <filter>
-  	<filter-name>LoginFilter</filter-name>
-  	<filter-class>com.holyshit.filter.LoginFilter</filter-class>
-  	
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.holyshit.filter.LoginFilter</filter-class>
   </filter>
-  
   <filter-mapping>
-  	<filter-name>LoginFilter</filter-name>
-  	<url-pattern>*.jsp</url-pattern>
-  	<dispatcher>REQUEST</dispatcher>
-  	<dispatcher>FORWARD</dispatcher>
-  	<!-- <dispatcher>FORWARD</dispatcher> -->
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
-
-  <!-- 监听器 -->
   <listener>
-  	<listener-class>com.holyshit.listener.CountLivingListener</listener-class>
+    <listener-class>com.holyshit.listener.CountLivingListener</listener-class>
   </listener>
   <listener>
-  	<listener-class>com.holyshit.listener.DeleteSessionListener</listener-class>
+    <listener-class>com.holyshit.listener.DeleteSessionListener</listener-class>
   </listener>
-  
-  <!-- servlet -->
   <servlet>
     <servlet-name>ValidateCode</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ValidateCode</servlet-class>
@@ -42,7 +34,7 @@
     <servlet-class>com.holyshit.web.servlet.DTreeNodeServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>MainServlet</servlet-name>
+    <servlet-name>MainServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.MainServlet</servlet-class>
   </servlet>
   <servlet>
@@ -64,13 +56,6 @@
     <servlet-class>com.holyshit.web.servlet.showPageFee</servlet-class>
   </servlet>
 
-
-
-
-
-
-
-
   <servlet-mapping>
     <servlet-name>ValidateCode</servlet-name>
     <url-pattern>/web/servlet/validatecode</url-pattern>
@@ -88,11 +73,11 @@
     <url-pattern>/servlet/DTreeNodeServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>MainServlet</servlet-name>
+    <servlet-name>MainServlet</servlet-name>
     <url-pattern>/web/servlet/mainServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>SecurityLogout</servlet-name>
+    <servlet-name>SecurityLogout</servlet-name>
     <url-pattern>/web/servlet/logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -111,16 +96,13 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>login.jsp</welcome-file>
-
   </welcome-file-list>
-  
-  <!--  -->
   <error-page>
-  	<error-code>500</error-code>
-  	<location>/jsp/error/error_500.jsp</location>
+    <error-code>500</error-code>
+    <location>/jsp/error/error_500.jsp</location>
   </error-page>
   <error-page>
-  	<error-code>404</error-code>
-  	<location>/jsp/error/error_404.jsp</location>
+    <error-code>404</error-code>
+    <location>/jsp/error/error_404.jsp</location>
   </error-page>
 </web-app>

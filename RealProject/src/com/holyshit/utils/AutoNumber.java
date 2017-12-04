@@ -1,6 +1,7 @@
 package com.holyshit.utils;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.holyshit.domain.PSPlan;
@@ -134,5 +135,24 @@ public class AutoNumber {
 			in+=x;
 		}
 		return in;
+	}
+	
+	//项目编号生成 0/1 获取降序后的第一个项目编号，即最大的那个
+	public String PTypeToPNo(String x){
+		String Pno = "";
+		ProjectService ps = new ProjectServiceImpl();
+		List<Object> list = new ArrayList<Object>();
+		list = ps.getNewProjectNo(x);
+		String str = list.get(0).toString();
+		Pno = str.substring(0, str.length()-1);
+		char c = str.charAt(str.length()-1);
+		if(c=='9'){
+			c='a';
+		}
+		else{
+			c++;
+		}
+		Pno += c;
+		return Pno;
 	}
 }

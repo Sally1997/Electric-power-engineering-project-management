@@ -46,7 +46,7 @@ public class StageTaskDaoImpl implements StageTaskDao {
 				stage_task.getEtime(),stage_task.getPubno(),
 				stage_task.getCharpno(),stage_task.getPtaskno(),
 				stage_task.getTstate(),stage_task.getBudget());
-		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath) "
+		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath,IndexState) "
 				+ "values (?,?,?,?,?)",
 				task_index.getIndexNo(),task_index.getTaskNo(),
 				task_index.getIndexInfo(),task_index.getAttachPath(),
