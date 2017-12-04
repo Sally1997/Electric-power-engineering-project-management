@@ -14,6 +14,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import com.holyshit.Dao.DTreeDao;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.domain.Project;
+import com.holyshit.domain.ProjectInfo;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 /**
@@ -75,6 +76,15 @@ public class ProjectDaoImpl implements ProjectDao {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT PNo FROM Project WHERE Pno LIKE ? ORDER BY Pno DESC",
 				new ColumnListHandler(),pro_first_no+"%");
+	}
+
+	@Override
+	public List<ProjectInfo> selectProjectInfo() throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT Project.Pno,PName,NAME,duty,PType,PState "+
+				"FROM (Project LEFT JOIN psrelation ON Project.PNo=psrelation.PNo) "+
+				"LEFT JOIN staff ON psrelation.StaffNo=staff.StaffNo", 
+				new BeanListHandler<ProjectInfo>(ProjectInfo.class));
 	}
 
 }
