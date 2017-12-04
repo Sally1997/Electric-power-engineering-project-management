@@ -10,6 +10,7 @@ import org.apache.commons.dbutils.handlers.ColumnListHandler;
 
 import com.holyshit.Dao.StaffDao;
 import com.holyshit.domain.Staff;
+import com.holyshit.domain.StaffDuty;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 public class StaffDaoImpl implements StaffDao {
@@ -28,6 +29,23 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.query(ConnectionManager.getConnection(),"select name,staffno from staff "
 				+"where name like ?",new BeanListHandler<Staff>(Staff.class),msg+"%"
 				);
+	}
+	
+	public List<StaffDuty> findAllStaffs(String pno) throws SQLException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("select * from psrelation join  staff on psrelation.staffno=staff.staffno where pno=?", new BeanListHandler<StaffDuty>(StaffDuty.class),pno);
+		
+	}
+
+	@Override
+	public void delAllStaffs(String[] staffnos, String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		Object[][] params = new Object[staffnos.length][];
+		for (int i = 0; i < params.length; i++) {
+			 params[i] = new Object[]{staffnos[i],pno};
+		}
+		qr.batch("delete from psrelation where staffno = ? and pno=?", params);
 	}
 
 }

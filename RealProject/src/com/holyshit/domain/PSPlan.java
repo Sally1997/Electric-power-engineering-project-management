@@ -13,7 +13,7 @@ public class PSPlan {
 	private Date ETime;
 	private String budget;
 	private String SState;
-	
+
 	public String getBudget() {
 		return budget;
 	}
@@ -91,5 +91,4 @@ public class PSPlan {
 				+ ", PublisherNo=" + PubNo + ", ChargePerNo=" + CharPNo +", StartDate=" + STime
 						+ ", EndDate=" + ETime + " ]";
 	}
-	
 }

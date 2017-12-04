@@ -5,27 +5,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/fozza.css" type="text/css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/fozza.js"></script>
 <script type="text/javascript">
-	//改变颜色
-		function change_1(ele){
-  			ele.style.backgroundColor="#333a56";
-  			//ele.style.fontSize="25px";
-  		
-  		}
-  		function change_2(ele){
-  			ele.style.backgroundColor="";
-  			//ele.style.fontSize="17px";
-  		
-  		}
-  		
   		//如果下拉信息被点击
 	function ifclick(div){
 		var InputWord = document.getElementsByName("PersonInCharge")[0];
 		InputWord.value = div.innerHTML;
 		div.parentNode.style.display = "none";
 	}
-  		
+  	function change_1(ele){
+  			ele.style.backgroundColor="#3388FF";
+  		}
+  		function change_2(ele){
+  			ele.style.backgroundColor="";
+  		}
 	window.onload = function(){
 	//输入文本框
 	var InputWord = document.getElementsByName("PersonInCharge")[0];
@@ -53,9 +45,11 @@
 		var fozza_handsome = document.getElementById("fozza1");
 		if(msg==""){
 			fozza1.style.display = "none";
+			fozza1.style.border = "1px";
 		}
 		else{
 			fozza1.style.display = "block";
+			fozza1.style.border = "1px solid grey";
 		}
 		//创建链接
 		aja.open("get","${pageContext.request.contextPath }/servlet/ListNameNoServlet?msg="+msg);
@@ -67,7 +61,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="fozza1">
-	</div>
+	
 </body>
 </html>

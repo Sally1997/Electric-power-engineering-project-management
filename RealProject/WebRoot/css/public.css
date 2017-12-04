@@ -27,8 +27,14 @@
 		table th td{
 			text-align: center;
 		}
+<<<<<<< HEAD
 		.copyright{
 			background-image: url(../src/topbk.png);
+=======
+		.copyright{
+			background-image: url(/RealProject/image/topbk.png);
+
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 			text-align: center;
 			font-family: "微软雅黑";
 			color: white;
@@ -42,7 +48,13 @@
 			margin: 20px auto;
 		}
         header{
+<<<<<<< HEAD
 			background-image: url(../src/topbk.png);
+=======
+
+			background-image: url(/RealProject/image/topbk.png);
+
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 		}
 		#first_left{
 			padding-left: 50px;

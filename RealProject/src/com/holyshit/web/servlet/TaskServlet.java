@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import com.holyshit.service.impl.ProjectStageServiceImpl;
 import com.holyshit.service.impl.StageTasksServiceImpl;
 import com.holyshit.utils.AutoNumber;
 
+@WebServlet({ "/TaskServlet", "/servlet/TaskServlet" })
 public class TaskServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +52,7 @@ public class TaskServlet extends HttpServlet {
 			String tno = "";
 			//点击新建子任务，阶段任务的编号会setAttribute转发到NewTask.jsp页面
 			//tno = (String) request.getAttribute("taskno");
-			tno = "1000110001";//测试用
+			tno = "1000100001";//测试用
 			
 			//父节点
 			stage_task.setPtaskno(tno);
@@ -86,7 +88,7 @@ public class TaskServlet extends HttpServlet {
 		}
 		//分发转向新建成功！
 		//response.getWriter().print("<script></script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManagement_NewTask.jsp");	
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/PlanManage/PlanManagement_NewTask.jsp");	
 		
 	}
 

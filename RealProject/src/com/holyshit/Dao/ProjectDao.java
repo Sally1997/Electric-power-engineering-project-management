@@ -48,6 +48,13 @@ public interface ProjectDao {
 	 * @throws SQLException
 	 */
 	List<Project> showPage(int cur,int pagesize,String staffno) throws SQLException;
+	/**
+	 * 根据id查询项目
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	Project selectProjetById(String id)throws SQLException;
 	
 } 
 

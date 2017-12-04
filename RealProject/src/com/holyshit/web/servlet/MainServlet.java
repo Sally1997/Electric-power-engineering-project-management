@@ -34,8 +34,12 @@ public class MainServlet extends HttpServlet {
 				System.out.println();
 				//获取当前用户的任务列表
 				List<StageTask> tasks;
+				List<StageTask> projectNames;
+				
 				StageTasksService sts=new StageTasksServiceImpl();
-				tasks=sts.findAllTasksByid(staffno);
+				Map<String, Object> res = sts.findAllTasksByid(staffno);
+				tasks=(List<StageTask>) res.get("tasks");
+				projectNames=(List<StageTask>) res.get("projectNames");
 				
 				//获取用户的文档信息
 				DocumentService ds=new DocumentServiceImpl();
@@ -51,11 +55,12 @@ public class MainServlet extends HttpServlet {
 				//放入用户项目任务
 				if(tasks!=null){
 					request.setAttribute("tasks", tasks);
+					request.setAttribute("projectNames", projectNames);
 				
 				}
 				
 				//转向到主页
-				request.getRequestDispatcher("/main.jsp").forward(request, response);
+				request.getRequestDispatcher("/jsp/homeManage/main.jsp").forward(request, response);
 	}
 
 }

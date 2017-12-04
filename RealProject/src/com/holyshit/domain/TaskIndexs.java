@@ -6,6 +6,7 @@ public class TaskIndexs {
 	private String IndexInfo;
 	private String AttachPath;
 	private String IndexState;
+	
 	public String getIndexState() {
 		return IndexState;
 	}

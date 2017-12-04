@@ -1,9 +1,14 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StageTaskDao;
+import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
@@ -13,9 +18,11 @@ import com.holyshit.utils.ConnectionManager;
 public class StageTasksServiceImpl implements StageTasksService{
 
 	@Override
-	public List<StageTask> findAllTasksByid(String id) {
+	public Map<String, Object> findAllTasksByid(String id) {
 		// TODO Auto-generated method stub
 		List<StageTask> tasks=null;
+		ProjectDao pd=new ProjectDaoImpl();
+		String pname=null;
 		StageTaskDao std=new StageTaskDaoImpl();
 		try {
 			tasks=std.selectAllTasksById(id);
@@ -25,8 +32,22 @@ public class StageTasksServiceImpl implements StageTasksService{
 		}finally{
 			ConnectionManager.closeConnection();
 		}
-		
-		return tasks;
+		List<String> projectNames=new ArrayList<String>();
+		try {
+			for(StageTask st : tasks){
+				String pno=st.getTaskno().substring(0, 5);
+				System.out.println("取到了"+pno);
+				pname = pd.selectProjetById(pno).getPname();
+				projectNames.add(pname);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Map<String, Object> res=new HashMap<String, Object>();
+		res.put("tasks", tasks);
+		res.put("projectNames", projectNames);
+		return res;
 	}
 
 	@Override

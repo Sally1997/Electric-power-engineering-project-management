@@ -9,7 +9,6 @@ public class Staff {
 	private Date birthday;
 	private String te;
 	private String email;
-	private String imagelink;
 	public String getStaffno() {
 		return staffno;
 	}
@@ -46,12 +45,6 @@ public class Staff {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getImagelink() {
-		return imagelink;
-	}
-	public void setImagelink(String imagelink) {
-		this.imagelink = imagelink;
-	}
-	
+
 	
 }

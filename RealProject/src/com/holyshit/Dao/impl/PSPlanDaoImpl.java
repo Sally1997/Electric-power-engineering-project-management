@@ -17,10 +17,10 @@ public class PSPlanDaoImpl implements PSPlanDao {
 				pro_stage.getStageNo(),pro_stage.getPNo(),
 				pro_stage.getSName(),pro_stage.getPubNo(),
 				pro_stage.getCharPNo(),pro_stage.getSTime(),
-				pro_stage.getETime(),pro_stage.getSState(),
-				pro_stage.getBudget());
+				pro_stage.getETime(),pro_stage.getBudget(),
+				pro_stage.getSState());
 		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath,IndexState) "
-				+ "values (?,?,?,?)",
+				+ "values (?,?,?,?,?)",
 				task_index.getIndexNo(),task_index.getTaskNo(),
 				task_index.getIndexInfo(),task_index.getAttachPath(),
 				task_index.getIndexState());

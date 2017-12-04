@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+       
+       *{
+			font-family: "微软雅黑";
+		}
+		body{
+			font-family: "微软雅黑";
+		}
+		.blanding{
+			font-family: "微软雅黑";
+			font-size: 17px;
+			letter-spacing: 3px;
+			color: white;
+		}
+		.nav-current{
+		    border-bottom: 2px solid #333a56;
+		}
+		.digramchart{
+			height: 400px;
+			width: 600px;
+		}
+		.nopassing{
+			color: red;
+		}
+
+		table th td{
+			text-align: center;
+		}
+		.copyright{
+			background-image: url(src/topbk.png);
+			text-align: center;
+			font-family: "微软雅黑";
+			color: white;
+			font-size: 15px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			margin-top: 100px;
+		}
+		.xumode{
+			float:none;
+			margin: 20px auto;
+		}
+        header{
+			background-image: url(src/topbk.png);
+		}
+		#first_left{
+			padding-left: 50px;
+			float: left;
+			width: 200px;
+			height: 25px;
+		}
+		#first_right{
+			float: left;
+		}
+		.clear{
+			clear: both;
+		}
+        .block{
+			padding-top: 15px;
+		}

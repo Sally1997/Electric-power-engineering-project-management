@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/AddUser.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>项目管理</title>
 <meta name="keywords" content="电力工程项目管理,PM2">
     <meta name="description" content="这是一个项目工程管理软件">
-    <meta name="content-type" content="text/html; charset=gb2312">
+    <meta name="content-type" content="text/html; charset=UTF-8">
     
     <style type="text/css">
 		*{
@@ -282,44 +281,18 @@ div.tableRow p:first-child{
 	border-radius: 15%;
 }
 		
-		
 #addIndex{
 	color:#333A56;
 }		 
 		 
-#fozza_1{
-	width:60px;
-}
+
 		</style>
-		
 </head>
 <script type="text/javascript">
-  		/* function change_1(ele){
-  			ele.style.backgroundColor="#333a56";
-  			//ele.style.fontSize="25px";
-  		
-  		}
-  		function change_2(ele){
-  			ele.style.backgroundColor="";
-  			//ele.style.fontSize="17px";
-  		
-  		} */
-	//此处是一个没法用的当前页面高亮，因为没有引入jq文件
-	    function change_3(){
-			var navLi=$('menu_1') //此处填写你的导航html对象
-            var windowUrl=window.location.href; //获取当前url链接
-            navLi.each(function(){
-                var t=$(this).find('a').attr('href');
-                if(t==windowUrl){
-                    $(this).addClass('menu_on');  //添加当前位置样式 
-                } 
-		    })
-	    }
-	    
-	function upload(){
+	function upload() {
 		/* method = "post";
 		action = "/servlet/StageServlet"; */
-		document.getElementById("addMileStone").action="${pageContext.request.contextPath}/servlet/StageServlet";
+		document.getElementById("addMileStone").action = "${pageContext.request.contextPath}/servlet/TaskServlet";
 		document.getElementById("addMileStone").submit();
 	}
 </script>
@@ -328,7 +301,7 @@ div.tableRow p:first-child{
 		  <!-- 顶端-->
 		  	<div id="top">
 		  		<div id="top_left">
-		  			<span class="top_font">  <a href="main.html">首页</a>  >> <a href="01-projectmanagerfirst.html"> 项目管理</a> >> XXX项目>>计划管理>>新建阶段</span>
+		  			<span class="top_font">  <a href="main.html">首页</a>  >> <a href="01-projectmanagerfirst.html"> 项目管理</a> >> XXX项目>>计划管理>>新建任务</span>
 		  		</div>
 		  	 	<div id="top_right">
 		  			<span class="user_photo"><img  src="1.png"></span>
@@ -356,17 +329,11 @@ div.tableRow p:first-child{
 			<div id="MileStone">
 			<form id="addMileStone" method="post">
 				<div class="tableRow">
-				<p class="tableAttribute">阶段名称: </p>
-				<p class="tableContent"><input type="text" name="StageName" value=""></p>
+				<p class="tableAttribute">任务名称: </p>
+				<p class="tableContent"><input type="text" name="TaskName" value=""></p>
 				</div>
 
 
-				<%-- <div class="tableRow">
-				<p class="tableAttribute">负责人：</p>
-				<p class="tableContent">	<a href="PlanManagement_PerInCharge.jsp">
-				<input id="fozza_1" type="button" value="选择"></a></p>
-				</div>
-				--%>
 				<div class="tableRow">
 				<p class="tableAttribute">负责人：</p>
 				<p class="tableContent">	<input type="text" name="PersonInCharge" value=""></p>
@@ -374,7 +341,7 @@ div.tableRow p:first-child{
 
 
 				<div class="tableRow">
-				<p class="tableAttribute">开始日期：</p>
+				<p class="tableAttribute">	开始日期：</p>
 				<p class="tableContent"><input type="date" name="StartDate"></p>
 				</div>
 
@@ -394,11 +361,10 @@ div.tableRow p:first-child{
 				</p>
 				<p class="tableContent"><input type="text" name="IndexInfo"><span id="addIndex"> + </span> </p>
 				</div>
-				
 			</form>
 				<p>
-					<span class="submit"><a style="cursor:pointer" onclick="upload()">新建阶段</a></span>
-					<span class="submit"><a   href="PlanManagement_Newed.jsp">结束新建</a></span>
+					<span class="submit"><a style="cursor:pointer" onclick="upload()">新建任务</a></span>
+					<span class="submit"><a   href="PlanManagement_Newed.html">结束新建</a></span>
 				</p>
 			</div>
 		</section>
@@ -450,3 +416,4 @@ div.tableRow p:first-child{
 		}
 </script>
 </html>
+    
