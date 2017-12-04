@@ -83,7 +83,7 @@
 			bottom: 0;
 		}
 		 
-
+  
 
 		.menu_1 {
 			float:left;
@@ -95,8 +95,6 @@
 			letter-spacing: 2px;
 			border-radius: 5px;
 			cursor: pointer;
-			
-	
 		}
 		.menu_1 a{
 			color: #cccccc;

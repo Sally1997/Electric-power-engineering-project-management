@@ -18,7 +18,6 @@
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
   </head>
-  <script type="text/javascript" src="${pageContext.request.contextPath}/js/yqz.js"></script>
   <script type="text/javascript">
   	$(document).ready(function(){
   		var hide_flag=1;
@@ -70,33 +69,56 @@
   		getUserLogoUrl("${staff.staffno}",document.getElementById("user_logo"));
   	};
   </script>
+  <script type="text/javascript">
+	  	var frame_width=200;
+	  	var height=document.documentElement.clientHeight-142;
+	  	var width=document.documentElement.clientWidth;
+	  	$("#contex").css("height",height+"px");
+	  	$("#contex").css("width",frame_width+"px");
+	  	$("#logo").css("height",height+"px");
+	  	$("#fuck_your_mother_BUG").css("height",height+"px");
+	  	$("#jiantou").css("bottom",height/2+"px");
+	   	var str=(frame_width*0.72/width*100).toString();
+		$("#contex").css("right","-"+str+"%");		
+		function user_info_ap(){
+			
+			var kz=document.getElementById("uf");
+			kz.style.display="block";
+		}
+		function user_info_dis(){
+			var kz=document.getElementById("uf");
+			kz.style.display="none";
+		}
+		function ms_info_ap(){
+			
+			var kz=document.getElementById("ms");
+			kz.style.display="block";
+		}
+		function ms_info_dis(){
+			var kz=document.getElementById("ms");
+			kz.style.display="none";
+		}
+		function change_1(ele){
+		ele.style.borderWidth="0 0 3px 0";
+		ele.style.borderColor="blue";
+		ele.style.borderStyle="solid";
+		ele.style.color="#CDCDC1";
+		ele.style.fontSize="30px";
+		}
+		function change_2(ele){
+			ele.style.borderWidth="0 0 0 0";
+			ele.style.color="white";
+			ele.style.fontSize="20px";
+		}
+</script>
 <body style="background-color: #F2F2F2;">
 
 
-	  <div id="top_fixed">
-		  <!-- 顶端 -->
-		  	<div id="top">
-		  		<div id="top_left">
-		  			<span class="top_font"><a href="main.html">首页</a></span>
-		  		</div>
-		  	 	<div id="top_right">
-		  	 		<span class="user_photo" onmouseover="user_info_ap()" onmouseout="user_info_dis()"><img id="user_logo"></span>
-		  			<span class="top_font_fuben" style="position: relative;top:-20px;"><a href="#" >${staff.name }</a> | <a href="#">通知</a><span class="counter" onmouseover="ms_info_ap()" onmouseout="ms_info_dis()">10</span></span>
-		  		</div>
-		  		<div class="clear"></div>
-		  	</div>
-		  	
-		  	<!-- 菜单栏 -->
-		  	<div id="menu">
-				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='#';"><span class="menu_font">首页</span></div>
-				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='/RealProject/01-projectmanagerfirst.jsp';"><span class="menu_font">项目管理</span></div>
-				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='${pageContext.request.contextPath}/web/servlet/showbudgetpage?currentPage=1&pageSize=3';"><span class="menu_font">资金管理</span></div>
-				<div class="menu_1" onmouseover="change_1(this);" onmouseout="change_2(this);" onclick="window.location.href='document2.html';"><span class="menu_font">文档管理</span></div>
-				
-				<div class="clear"></div>
-		  	</div>
-	  	</div>
-	 <div style="height: 140px;width: 100%;"></div> 	
+	<%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[0].className="active nav-current";
+		menus[0].role="presentation";	
+	</script>
   	<!-- 详细内容模块 -->
   	<div id="content">
   		<!-- 左边 -->
@@ -284,85 +306,13 @@
   		</div>
   		<div class="clear"></div>
   	</div>
-  	<!-- 隐藏内容    右边框 -->
-    <div id="contex" tabindex="0">
-   		<div id="fuck_your_mother_BUG">
-   			<div id="jiantou">
-    		</div>
-   		</div>
-   		<div id="logo" style="text-align: center;font-size: 40px;">
-			神<br>龙<br>护<br>体<br>，<br>B<br>U<br>G<br>速<br>退<br>！
-    	</div>
- 		<div class="clear"></div>
-    </div>
+  	
   	<!-- 版权说明 -->
   	<div id="copyright">
   		<span style="font-size: 25px;">版权说明</span>
   	</div>
-  	<!-- 默认隐藏内容 -->
-  	<div id="uf" style="background-color:#FFF68F;display:none; overflow: hidden;width: 23%;height: 300px;position: fixed;left: 73%;top: 80px;border-radius:20px;">
-<!--    		<span style="font-size: 20px;font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;个人信息</span><br> -->
-   		<div style="width: 100%;height: 27px;text-align: center;">
-   			<span style="font-size: 20px;font-weight: bold;">个人信息</span><br>
-   		</div>
-   		<span class="uf_font">账户</span> :<span class="uf_ans_font">${staff.staffno }</span> <br>
-   		<span class="uf_font">姓名</span> :<span class="uf_ans_font">${staff.name }</span> <br>
-   		<span class="uf_font">性别</span> :<span class="uf_ans_font">${staff.sex }</span> <br>
-   		<span class="uf_font">出生日期</span> :<span class="uf_ans_font">${staff.birthday }</span> <br>
-   		<span class="uf_font">邮箱</span> :<span class="uf_ans_font">${staff.email }</span> <br>
-   		<span class="uf_font">项目数量</span> :<span class="uf_ans_font">5</span> <br>
-   		<span class="uf_font">任务数量</span> :<span class="uf_ans_font">10</span> <br>
-   		<span class="uf_font">上次登录</span> :<span class="uf_ans_font">2017-10-18 22:25:20</span> <br>
-   	</div>
-   	
-  	<div id="ms" style="background-color:#FFF68F;display:none;width: 13%;height: 300px;position: fixed;left: 86%;top: 80px;border-radius:20px">
-  		<div style="width: 100%;height: 50px;text-align: center;">
-   			<span style="font-size: 20px;font-weight: bold;">通知</span><br>
-   		</div>
-   	</div>
 
 </body>
 
-<script type="text/javascript">
-	  	var frame_width=200;
-	  	var height=document.documentElement.clientHeight-142;
-	  	var width=document.documentElement.clientWidth;
-	  	$("#contex").css("height",height+"px");
-	  	$("#contex").css("width",frame_width+"px");
-	  	$("#logo").css("height",height+"px");
-	  	$("#fuck_your_mother_BUG").css("height",height+"px");
-	  	$("#jiantou").css("bottom",height/2+"px");
-	   	var str=(frame_width*0.72/width*100).toString();
-		$("#contex").css("right","-"+str+"%");		
-		function user_info_ap(){
-			
-			var kz=document.getElementById("uf");
-			kz.style.display="block";
-		}
-		function user_info_dis(){
-			var kz=document.getElementById("uf");
-			kz.style.display="none";
-		}
-		function ms_info_ap(){
-			
-			var kz=document.getElementById("ms");
-			kz.style.display="block";
-		}
-		function ms_info_dis(){
-			var kz=document.getElementById("ms");
-			kz.style.display="none";
-		}
-		function change_1(ele){
-		ele.style.borderWidth="0 0 3px 0";
-		ele.style.borderColor="blue";
-		ele.style.borderStyle="solid";
-		ele.style.color="#CDCDC1";
-		ele.style.fontSize="30px";
-		}
-		function change_2(ele){
-			ele.style.borderWidth="0 0 0 0";
-			ele.style.color="white";
-			ele.style.fontSize="20px";
-		}
-</script>
+
 </html>

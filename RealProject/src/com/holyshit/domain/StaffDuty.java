@@ -1,14 +1,13 @@
 package com.holyshit.domain;
-
 import java.sql.Date;
-
-public class Staff {
+public class StaffDuty {
 	private String staffno;
 	private String name;
 	private String sex;
 	private Date birthday;
 	private String te;
 	private String email;
+	private String duty;
 	public String getStaffno() {
 		return staffno;
 	}
@@ -45,6 +44,12 @@ public class Staff {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getDuty() {
+		return duty;
+	}
+	public void setDuty(String duty) {
+		this.duty = duty;
+	}
 
-	
+
 }

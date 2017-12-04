@@ -28,7 +28,8 @@
 			text-align: center;
 		}
 		.copyright{
-			background-image: url(../src/topbk.png);
+			background-image: url(/RealProject/image/topbk.png);
+
 			text-align: center;
 			font-family: "微软雅黑";
 			color: white;
@@ -42,7 +43,9 @@
 			margin: 20px auto;
 		}
         header{
-			background-image: url(../src/topbk.png);
+
+			background-image: url(/RealProject/image/topbk.png);
+
 		}
 		#first_left{
 			padding-left: 50px;
