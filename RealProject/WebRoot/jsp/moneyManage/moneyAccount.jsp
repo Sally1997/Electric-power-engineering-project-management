@@ -15,6 +15,85 @@
 		menus[3].className="active nav-current";
 		menus[3].role="presentation";	
 	</script>
+	
+	<script type="text/javascript">
+		function getFunction(cur){
+			var req = new XMLHttpRequest();
+   			req.onreadystatechange=function(){
+   				if(req.readyState==4){
+   					if(req.status==200){
+   						var res=req.responseText;
+   						//数据刷新
+   						var data=eval('('+res+')');
+   					
+   						dataJson=eval(data.feeaudits);
+   					
+   						currentPage=data.currentPage;
+					 	pageSize=data.pageSize;
+					    pageNum=data.pageNum;  
+					 	totalNum=data.totalNum; 
+   						feeauditNum=data.feeauditNum;	
+   						refreshData();	
+   					}
+   				}
+   			};
+   			
+   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=10");
+   			req.send(null);
+		}
+		function refreshData(){
+			//删除所有节点
+			maintable.innerHTML="";
+			
+			//新建表头
+			var tr=document.createElement("tr");
+			tr.innerHTML="<th>项目名称</th><th>项目阶段</th><th>任务阶段</th><th>报销人</th><th>报账时间</th><th>报账金额</th><th>状态</th><th> </th>";
+			maintable.appendChild(tr);
+			//插入数据
+			for(var i=0;i<feeauditNum;i++){
+				var tr=document.createElement("tr");
+				
+				var td1=document.createElement("td");
+				td1.innerHTML=dataJson[i].pname;
+				
+				var td2=document.createElement("td");
+				td2.innerHTML=dataJson[i].sname;
+				
+				var td3=document.createElement("td");
+				td3.innerHTML=dataJson[i].taskname;
+				
+				var td4=document.createElement("td");
+				td4.innerHTML=dataJson[i].appname;
+				
+				var td5=document.createElement("td");
+				td5.innerHTML=dataJson[i].stime;
+				
+				var td6=document.createElement("td");
+				td6.innerHTML="￥"+dataJson[i].fee;
+				
+				var td7=document.createElement("td");
+				if(dataJson[i].auditstate=="0"){
+   					td7.className="text-danger";
+   					td7.innerHTML="未审批";
+   				}else if(dataJson[i].auditstate=="1"){
+   					td7.className="text-danger";
+   					td7.innerHTML="未通过";
+   				}else{
+   					td7.className="text-success";
+   					td7.innerHTML="通过审批";
+   				}
+   				tr.appendChild(td1);
+   				tr.appendChild(td2);
+   				tr.appendChild(td3);
+   				tr.appendChild(td4);
+   				tr.appendChild(td5);
+   				tr.appendChild(td6);
+   				tr.appendChild(td7);
+   				maintable.appendChild(tr);
+			}
+		}
+	</script>
+	
     <section>
         <div class="container-fluid">
             <div class="row">
@@ -22,7 +101,7 @@
               <div class="panel panel-primary">
 		        <div class="panel-heading"><span>相关项目报账信息</span><span class="noRight"  data-toggle="modal" data-target="#handupAc">报账</span></div>
 		        <div class="panel-body">
-		        <table class="table table-striped table-condensed" style="font-size: 15px">
+		        <table class="table table-striped table-condensed" style="font-size: 15px" id="maintable">
 					<tr>
 						<th>项目名称</th>
 						<th>项目阶段</th>
@@ -33,134 +112,57 @@
 						<th>状态</th>
 						<th> </th>
 					</tr>
-					<tr>
-						<td >项目A</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >甲</td>
-						<td >2017-10-11</td>
-						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目A</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >甲</td>
-						<td >2017-10-11</td>
-						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目A</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >甲</td>
-						<td >2017-10-11</td>
-						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目A</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >甲</td>
-						<td >2017-10-11</td>
-						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目A</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >甲</td>
-						<td >2017-10-11</td>
-						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-	                <tr>
-						<td >项目C</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥200.00元</td>
-						<td  class="text_warning">未通过</td>
-						<td class="text-danger">超标</td>
-					</tr>
+				</table>
+					<!-- 复用前面的代码 -->
+					<script type="text/javascript">
+							var maintable=document.getElementById("maintable");
+						 	var dataJson=eval('('+'${fee["feeaudits"]}'+')');
+						 	var currentPage=${fee['currentPage']};
+						 	var pageSize=${fee['pageSize']};
+						   	var pageNum=${fee['pageNum']};  
+						 	var totalNum=${fee['totalNum']};
+						 	var feeauditNum=${fee['feeauditNum']};
+						 	refreshData(); 
+					</script>
 	
 
-	        </table>
-                                <!--  分页栏-->
-				<nav aria-label="Page navigation" style="text-align: right">
-				  <ul class="pagination">
+	        
+        	<!--  分页栏-->
+				<nav aria-label="Page navigation" style="text-align: center">
+				  <ul class="pagination" id="showpage">
+				  	<script type="text/javascript">
+				  		var showpage=document.getElementById("showpage");
+				  	</script>
 					<li>
-					  <a href="#" aria-label="Previous">
+					  <a href="javascript:getPreviousOnBudget(showpage);" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
+					<li class="active"><a href="javascript:jmpPage(1)">1</a></li>
+					<script type="text/javascript">
+						if(pageNum<5){
+							for(var i=2;i<=pageNum;i++){
+								var node=document.createElement("li");
+								node.innerHTML='<a href="javascript:jmpPage('+i+')">'+i+'</a>';
+								showpage.appendChild(node);
+							}
+						}else{
+							for(var i=2;i<6;i++){
+								var node=document.createElement("li");
+								node.innerHTML='<a href="javascript:jmpPage('+i+')">'+i+'</a>';
+								showpage.appendChild(node);
+							}
+						}
+					</script>
 					<li>
-					  <a href="#" aria-label="Next">
+					  <a href="javascript:getNextOnBudget(showpage);" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					  </a>
 					</li>
 				  </ul>
 				</nav>	
-                </div>
-              </div>
-              </div>
-            </div>
-        </div>
+            </div> 		
+    		</div>
                 <!--      默认隐藏的内容:报账-->
 	    <div class="modal fade" id="handupAc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">

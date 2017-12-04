@@ -25,7 +25,7 @@ function jmpPage(cur){
 	/**
 	 * 自己的请求代码
 	 */
-	getProjectBudgetDetails(cur);
+	getFunction(cur);
 	
 }
 
@@ -91,7 +91,7 @@ function getPreviousOnBudget(e){
 		/**
 		 * 自己的代码执行
 		 */
-		getProjectBudgetDetails(currentPage);
+		getFunction(currentPage);
 	}	
 }
 
@@ -176,7 +176,7 @@ function getNextOnBudget(e){
 		/**
 		 * 自己的代码执行
 		 */
-		getProjectBudgetDetails(currentPage);
+		getFunction(currentPage);
 	}	
 }
 //关闭当前页面

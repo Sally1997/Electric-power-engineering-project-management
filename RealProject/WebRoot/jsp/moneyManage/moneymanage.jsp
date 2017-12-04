@@ -14,7 +14,7 @@
     <script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
    	<script type="text/javascript">
    		//ajax请求
-   		function getProjectBudgetDetails(cur){
+   		function getFunction(cur){
    			var req = new XMLHttpRequest();
    			req.onreadystatechange=function(){
    				if(req.readyState==4){
@@ -411,6 +411,56 @@
 		menus[3].className="active nav-current";
 		menus[3].role="presentation";	
 	</script>
+	
+ <!--      默认隐藏的内容:报账详细信息-->
+  <div class="modal fade bs-example-modal-sm" id="acInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document" style="width: 500px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">详细信息</h4>
+      </div>
+      <div>
+        <table class="table table-striped table-condensed">
+        	<tr><td>报账项目</td><td id="fee_pname">项目A</td></tr>       	
+        	<tr><td>项目阶段</td><td id="fee_sname">阶段一</td></tr>
+        	<tr><td>项目任务</td><td id="fee_taskname">任务一</td></tr>
+			<tr><td>报账人</td><td id="fee_appname">甲</td></tr>
+        	<tr><td>报账时间</td><td id="fee_stime">2017-10-11</td></tr>        	
+        	<tr><td>报账金额</td><td id="fee_fee">￥50.00元</td></tr>
+            <tr><td>当前状态</td>
+            <td class="text_danger"  id="fee_auditstate">未审批</td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	var feeData=eval('('+'${fee["feeaudits"]}'+')');
+	function updateFeeAuditDialog(index){
+		document.getElementById("fee_pname").innerHTML=feeData[index].pname;
+		document.getElementById("fee_sname").innerHTML=feeData[index].sname;
+		document.getElementById("fee_taskname").innerHTML=feeData[index].taskname;
+		document.getElementById("fee_appname").innerHTML=feeData[index].appname;
+		document.getElementById("fee_stime").innerHTML=feeData[index].stime;
+		document.getElementById("fee_fee").innerHTML="￥"+feeData[index].fee;
+		var code=feeData[index].auditstate;
+		if(code=="0"){
+			document.getElementById("fee_auditstate").innerHTML="未审核";
+			document.getElementById("fee_auditstate").className="text-danger";
+		}else if(code=="1"){
+			document.getElementById("fee_auditstate").innerHTML="未通过";
+			document.getElementById("fee_auditstate").className="text-danger";
+		}else{
+			document.getElementById("fee_auditstate").innerHTML="通过审核";
+			document.getElementById("fee_auditstate").className="text-success";
+		}
+	}
+</script>
+
 <!--  主要内容-->
   <section>
     <div class=container-fluid>
@@ -490,7 +540,7 @@
     	<!--	报账-->
     		<div id="account" class="col-lg-4" style="padding-left: 30px">
 	        <div class="panel panel-primary">
-		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/jsp/moneyManage/moneyAccount.jsp')">more..</span></div>
+		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage=1&pageSize=10')">more..</span></div>
 		        <div class="panel-body">
 		        <table class="table table-striped table-condensed" style="font-size: 15px" id="feetable">
  		    <tr>
@@ -500,14 +550,15 @@
 			    <th>状态</th>
 			    <th> </th>
 		    </tr>
-		    
+		    <!-- 动态生成表 -->
 		    <script type="text/javascript">
-    			var feeData=eval('('+'${fee["feeaudits"]}'+')');
+    			
     			var feetable=document.getElementById("feetable");
     			for(var i=0;i<feeData.length;i++){
     				var trNode=document.createElement("tr");
     				
     				var tdNode1=document.createElement("td");
+    				tdNode1.title=feeData[i].pname;
     				var pname=feeData[i].pname.substring(0,8)+"...";
     				tdNode1.innerHTML=pname;
     				
@@ -528,10 +579,9 @@
     					tdNode4.className="text-success";
     					tdNode4.innerHTML="通过审批";
     				}
-    				
     				var tdNode5=document.createElement("td");
-    				tdNode5.innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>';
-    			
+    				tdNode5.innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#acInfo" title="详细" style="cursor: pointer" onclick="updateFeeAuditDialog('+i+')"></span>';
+    				
     				//压入数据
     				trNode.appendChild(tdNode1);
     				trNode.appendChild(tdNode2);
@@ -541,25 +591,7 @@
     				
     				feetable.appendChild(trNode);
     			}
-    		</script>
-		    
-		    
-		   <!--  <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text-danger">未审批</td>
-			    <td >			    
-			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
-		    </tr>
-		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text-success">审批通过</td>
-			    <td >			    
-			   <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
-		    </tr> -->
+    		</script> 
 	        </table>
 				
                 <div>
@@ -699,32 +731,8 @@
     </div>
   </div>
 </div>
- <!--      默认隐藏的内容:报账详细信息-->
-  <div class="modal fade bs-example-modal-sm" id="acInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">详细信息</h4>
-      </div>
-      <div>
-        <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td>项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td>阶段一</td></tr>
-        	<tr><td>项目任务</td><td>任务一</td></tr>
-			<tr><td>报账人</td><td>甲</td></tr>
-        	<tr><td>报账时间</td><td>2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td>￥50.00元</td></tr>
-            <tr><td>当前状态</td>
-            <td class="text_danger">未审批</td></tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
   <!--      默认隐藏的内容:报账详细信息（审批）-->
   <div class="modal fade bs-example-modal-sm" id="acInfoPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
