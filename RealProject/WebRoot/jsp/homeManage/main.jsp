@@ -11,7 +11,8 @@
 <head>
 <meta charset="utf-8">
 <title>首页</title>
-
+    <!-- Bootstrap -->
+  
 </head>
 
 <body>
@@ -24,6 +25,7 @@
     	<div class="container-fluid">
     	  <div class="row">
     	    <div class="col-lg-12">  
+			  <div class="col-lg-8"> 
     	        <div class="panel panel-primary">
     	            <div class="panel-heading">项目任务列表<span class="more">more..</span></div>
     	            <div class="panel-body">
@@ -43,12 +45,11 @@
     	                <th>截止时间</th>
     	                <th>状态</th>
     	                </tr>
-    	                
 						<c:forEach items="${tasks }" var="task" varStatus="hehe">
 						  <c:choose>
   							<c:when test="${task.tstate=='0' }">
     	                      <tr>
-							  <td onClick="window.open()" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
+							  <td onClick="window.open(${pageContext.request.contextPath})" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
 							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
@@ -92,29 +93,76 @@
 							<th>状态</th>
 							</tr>
 							<c:forEach items="${projects }" var="project">
-							<tr>
-							<td onClick="window.open()">${project.pname }
-							<td><div class="progress">
-							  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
-							 ${project.pstage*100}%
-							  </div>
-							</div></td>
-							<td>${project.stime }</td>
-							<td>${project.etime }</td>
+							
 							<c:choose>
-	  							<c:when test="${project.pstate=='0' }"><td>立项中</td></c:when>
+	  							<c:when test="${project.pstate=='0' }">
+								<tr>
+							    <td onClick="window.open()">${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>立项中</td>
+								</c:when>
 	  						</c:choose>
 	  						<c:choose>
-	  							<c:when test="${project.pstate=='1' }"><td>正常进行中</td></c:when>
+	  							<c:when test="${project.pstate=='1' }">
+								<tr>
+							    <td onClick="window.open()">${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>正常进行中</td>
+								</c:when>
 	  						</c:choose>
 	  						<c:choose>
-	  							<c:when test="${project.pstate=='2' }"><td>延期进行中</td></c:when>
+	  							<c:when test="${project.pstate=='2' }">
+								<tr>
+							    <td onClick="window.open()">${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>延期进行中</td>
+								</c:when>
 	  						</c:choose>
 	  						<c:choose>
-	  							<c:when test="${project.pstate=='3' }"><td>正常完工</td></c:when>
+	  							<c:when test="${project.pstate=='3' }">
+								<tr>
+							    <td onClick="window.open()">${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>正常完工</td>
+								</c:when>
 	  						</c:choose>
 	  						<c:choose>
-	  							<c:when test="${project.pstate=='4' }"><td>延期竣工</td></c:when>
+	  							<c:when test="${project.pstate=='4' }">
+								<tr>
+							    <td onClick="window.open()">${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>延期竣工</td>
+								</c:when>
 	  						</c:choose>
 						  </c:forEach>   	          
 						  </table>

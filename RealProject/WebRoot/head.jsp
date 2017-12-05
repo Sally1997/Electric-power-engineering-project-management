@@ -39,7 +39,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="head_menu">
               <li><a href="${pageContext.request.contextPath}/web/servlet/mainServlet">首页</a></li>
-              <li><a href="../moneymanage1130_03/01-projectmanagerfirst 01.html">项目管理</a></li>
+              <li><a href="${pageContext.request.contextPath}/jsp/projectManage/projectmanagerfirst.jsp">项目管理</a></li>
               <li><a href="#">文档管理</a></li>
               <li><a href="${pageContext.request.contextPath}/web/servlet/showbudgetpage?currentPage=1&pageSize=3">资金管理</a></li>
             </ul>
