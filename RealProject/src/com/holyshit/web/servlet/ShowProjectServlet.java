@@ -56,13 +56,17 @@ public class ShowProjectServlet extends HttpServlet {
 		/*for(int i=0;i<list.size();i++){
 			System.out.println(list.get(i));
 		}*/
-		String s = JSONArray.fromObject(list).toString();
+		
+		/*
+		 * 以JSON数组的形式返回
+		 * String s = JSONArray.fromObject(list).toString();
 		response.getWriter().write(s);
-		System.out.println(s);
-		/*if(list!=null){
-			request.setAttribute("list",list);
+		System.out.println(s);*/
+		
+		if(list!=null){
+			request.setAttribute("dawdlist",list);
 			request.getRequestDispatcher("/jsp/projectManage/projectmanagerfirst.jsp").forward(request, response);
-		}*/
+		}
 		
 	}
 
