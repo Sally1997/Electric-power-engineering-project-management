@@ -55,6 +55,11 @@
     <servlet-name>showPageFee</servlet-name>
     <servlet-class>com.holyshit.web.servlet.showPageFee</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>StaffListServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffListServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>ValidateCode</servlet-name>
@@ -91,6 +96,10 @@
   <servlet-mapping>
     <servlet-name>showPageFee</servlet-name>
     <url-pattern>/web/servlet/showPageFee</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffListServlet</servlet-name>
+    <url-pattern>/web/servlet/staffListServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

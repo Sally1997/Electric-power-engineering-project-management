@@ -92,12 +92,12 @@
 							<th>截止时间</th>
 							<th>状态</th>
 							</tr>
-							<c:forEach items="${projects }" var="project">
+							<c:forEach items="${projects }" var="project" begin="0" end="4">
 							
 							<c:choose>
 	  							<c:when test="${project.pstate=='0' }">
 								<tr>
-							    <td onClick="window.open()">${project.pname }</td>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
 							    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
 							    ${project.pstage*100}%
@@ -111,7 +111,7 @@
 	  						<c:choose>
 	  							<c:when test="${project.pstate=='1' }">
 								<tr>
-							    <td onClick="window.open()">${project.pname }</td>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
 							    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
 							    ${project.pstage*100}%
@@ -125,7 +125,7 @@
 	  						<c:choose>
 	  							<c:when test="${project.pstate=='2' }">
 								<tr>
-							    <td onClick="window.open()">${project.pname }</td>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
 							    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
 							    ${project.pstage*100}%
@@ -139,7 +139,7 @@
 	  						<c:choose>
 	  							<c:when test="${project.pstate=='3' }">
 								<tr>
-							    <td onClick="window.open()">${project.pname }</td>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
 							    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
 							    ${project.pstage*100}%
@@ -153,7 +153,7 @@
 	  						<c:choose>
 	  							<c:when test="${project.pstate=='4' }">
 								<tr>
-							    <td onClick="window.open()">${project.pname }</td>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
 							    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
 							    ${project.pstage*100}%

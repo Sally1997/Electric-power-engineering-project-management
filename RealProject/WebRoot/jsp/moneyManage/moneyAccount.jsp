@@ -82,6 +82,7 @@
    					td7.className="text-success";
    					td7.innerHTML="通过审批";
    				}
+   				var hr=document.createElement("hr");
    				tr.appendChild(td1);
    				tr.appendChild(td2);
    				tr.appendChild(td3);
@@ -89,6 +90,7 @@
    				tr.appendChild(td5);
    				tr.appendChild(td6);
    				tr.appendChild(td7);
+   				maintable.appendChild(hr);
    				maintable.appendChild(tr);
 			}
 		}

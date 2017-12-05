@@ -542,7 +542,7 @@
 	        <div class="panel panel-primary">
 		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage=1&pageSize=10')">more..</span></div>
 		        <div class="panel-body">
-		        <table class="table table-striped table-condensed" style="font-size: 15px" id="feetable">
+		        <table class="table table-striped " style="font-size: 15px" id="feetable">
  		    <tr>
 			    <th>项目名称</th>
 			    <th>报销人</th>
@@ -556,7 +556,8 @@
     			var feetable=document.getElementById("feetable");
     			for(var i=0;i<feeData.length;i++){
     				var trNode=document.createElement("tr");
-    				
+    				var trHr=document.createElement("tr");
+    				trHr.innerHTML="<hr>";
     				var tdNode1=document.createElement("td");
     				tdNode1.title=feeData[i].pname;
     				var pname=feeData[i].pname.substring(0,8)+"...";
@@ -588,7 +589,7 @@
     				trNode.appendChild(tdNode3);
     				trNode.appendChild(tdNode4);
     				trNode.appendChild(tdNode5);
-    				
+    				feetable.appendChild(trHr);
     				feetable.appendChild(trNode);
     			}
     		</script> 

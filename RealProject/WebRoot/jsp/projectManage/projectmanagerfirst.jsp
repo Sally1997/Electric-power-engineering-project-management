@@ -22,6 +22,8 @@
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
+		
+		var ss;
 	</script>
  <section>
     <div class=container-fluid>
@@ -56,7 +58,7 @@
 			    	<div class="dropdown"><span id="pro2">${i.PName }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?pno=10001">人员管理</a></li>
     						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
   						</ul>
 					</div>
@@ -73,7 +75,7 @@
 			    	<div class="dropdown"><span id="pro1_2">${i.PName }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?pno=10001">人员管理</a></li>
     						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
   						</ul>
 					</div>
@@ -90,7 +92,7 @@
 			    	<div class="dropdown"><span id="pro2_2">${i.PName }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?pno=10001">人员管理</a></li>
     						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
   						</ul>
 					</div>
@@ -107,7 +109,7 @@
 			    	<div class="dropdown"><span id="pro3_2">${i.PName }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?pno=10001">人员管理</a></li>
     						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
   						</ul>
 					</div>
@@ -124,7 +126,7 @@
 			    	<div class="dropdown"><span id="pro4_2">${i.PName }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?pno=10001">人员管理</a></li>
     						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
   						</ul>
 					</div>
@@ -236,7 +238,7 @@
 	window.onload = function(){
 		aja.onreadystatechange = function(){
 			if(aja.readyState==4&&aja.status==200){
-				var ss = eval("("+aja.responseText+")")
+				ss = eval("("+aja.responseText+")")
 				var p = document.getElementById("pro1");
 				p.innerHTML = ss[0].pno;
 				var p = document.getElementById("pro2");
