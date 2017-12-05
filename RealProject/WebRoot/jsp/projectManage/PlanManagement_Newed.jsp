@@ -12,8 +12,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlanManagement_Newed</title>
 
-    <!-- Bootstrap -->
-    
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/dtree.js"></script>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/dtree.css">
+	   
 	
  </head>
  <body> 
@@ -133,7 +134,7 @@
                         
                         <div class="clear"></div>
 						<div>
-						<button type="button" class="btn btn-primary" style="float: right;"><a href="PlanManagement_NewTask.jsp" style="color:white">新建子任务</a></button>
+						<button type="button" class="btn btn-primary" style="float: right;"><a href="${pageContext.request.contextPath}/jsp/projectManage/PlanManagement_NewTask.jsp" style="color:white">新建子任务</a></button>
 						<br/><br/>
 						</div>
 

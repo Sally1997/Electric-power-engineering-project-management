@@ -49,7 +49,7 @@
 			    <th align="center">项目类型</th>
 			    <th align="center">状态</th>
 		    </tr>
-		    
+		    <c:forEach items="${list }" var="i">
 		    <tr>
 			    <td align="left" id="pro1">${i.Pno }</td>
 			    <td align="left">
@@ -66,74 +66,7 @@
 			    <td align="left" id="pro5">${i.PType }</td>
 			    <td align="left" id="pro6">${i.pState }</td>
 		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro1_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro1_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro1_3">${i.Name }</td>
-			    <td align="left" id="pro1_4">${i.PMDuty }</td>
-			    <td align="left" id="pro1_5">${i.PType }</td>
-			    <td align="left" id="pro1_6">${i.pState }</td>
-		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro2_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro2_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro2_3">${i.Name }</td>
-			    <td align="left" id="pro2_4">${i.PMDuty }</td>
-			    <td align="left" id="pro2_5">${i.PType }</td>
-			    <td align="left" id="pro2_6">${i.pState }</td>
-		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro3_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro3_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro3_2">${i.Name }</td>
-			    <td align="left" id="pro3_2">${i.PMDuty }</td>
-			    <td align="left" id="pro3_2">${i.PType }</td>
-			    <td align="left" id="pro3_2">${i.pState }</td>
-		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro4_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro4_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro4_3">${i.Name }</td>
-			    <td align="left" id="pro4_4">${i.PMDuty }</td>
-			    <td align="left" id="pro4_5">${i.PType }</td>
-			    <td align="left" id="pro4_6">${i.pState }</td>
-		    </tr>
+		    </c:forEach>
 	        </table> 
 					</div> 
                     </div>
@@ -232,7 +165,7 @@
   </footer>
   </body>
 <script type="text/javascript">
-	var aja = new XMLHttpRequest();
+	/* var aja = new XMLHttpRequest();
 	window.onload = function(){
 		aja.onreadystatechange = function(){
 			if(aja.readyState==4&&aja.status==200){
@@ -308,7 +241,7 @@
 	//发送请求
 	aja.send(null);
 	}
-	
+	 */
 </script>
   
 </html>
