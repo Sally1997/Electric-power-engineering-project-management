@@ -100,9 +100,9 @@
 			    <th align="center">状态</th>
 		    </tr>
 		    <tr>
-			    <td align="left">1111111111</td>
+			    <td align="left" id="pro1_1">1111111111</td>
 			    <td align="left">
-			    	<div class="dropdown">test01
+			    	<div class="dropdown"><span id="pro1_2"></span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="#">人员管理</a></li>
@@ -110,14 +110,14 @@
   						</ul>
 					</div>
 				</td>
-			    <td align="left">OO</td>
-			    <td align="left">开发人员</td>
-			    <td align="left">设计类</td>
-			    <td align="left">进行中</td>
+			    <td align="left" id="pro1_1">OO</td>
+			    <td align="left" id="pro1_1">开发人员</td>
+			    <td align="left" id="pro1_1">设计类</td>
+			    <td align="left" id="pro1_1">进行中</td>
 		    </tr>
 		    <tr>
-			    <td align="center">1111111112</td>
-			    <td align="center">
+			    <td align="left">1111111112</td>
+			    <td align="left">
 			    	<div class="dropdown">test02
 			    	<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -126,14 +126,14 @@
   						</ul>
 					</div>
 			    </td>
-			    <td align="center">yy</td>
-			    <td align="center">开发人员</td>
-			    <td align="center">工程类</td>
-			    <td align="center">进行中</td>
+			    <td align="left">yy</td>
+			    <td align="left">开发人员</td>
+			    <td align="left">工程类</td>
+			    <td align="left">进行中</td>
 		    </tr>
 		    <tr>
-			    <td align="center">1111111113</td>
-			    <td align="center">
+			    <td align="left">1111111113</td>
+			    <td align="left">
 			    	<div class="dropdown">test03
 			    	<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -142,14 +142,14 @@
   						</ul>
 					</div>
 			    </td>
-			    <td align="center">xx</td>
-			    <td align="center">开发人员</td>
-			    <td align="center">设计类</td>
-			    <td align="center">进行中</td>
+			    <td align="left">xx</td>
+			    <td align="left">开发人员</td>
+			    <td align="left">设计类</td>
+			    <td align="left">进行中</td>
 		    </tr>
 		    <tr>
-			    <td align="center">1111111114</td>
-			    <td align="center">
+			    <td align="left">1111111114</td>
+			    <td align="left">
 			    	<div class="dropdown">test04
 			    	<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -158,14 +158,14 @@
   						</ul>
 					</div>
 			    </td>
-			    <td align="center">OO</td>
-			    <td align="center">开发人员</td>
-			    <td align="center">设计类</td>
-			    <td align="center">进行中</td>
+			    <td align="left">OO</td>
+			    <td align="left">开发人员</td>
+			    <td align="left">设计类</td>
+			    <td align="left">进行中</td>
 		    </tr>
 		    <tr>
-			    <td align="center">1111111115</td>
-			    <td align="center">
+			    <td align="left">1111111115</td>
+			    <td align="left">
 			    	<div class="dropdown">test05
 			    	<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -174,10 +174,10 @@
   						</ul>
 					</div>
 			    </td>
-			    <td align="center">Ox</td>
-			    <td align="center">开发人员</td>
-			    <td align="center">设计类</td>
-			    <td align="center">进行中</td>
+			    <td align="left">Ox</td>
+			    <td align="left">开发人员</td>
+			    <td align="left">设计类</td>
+			    <td align="left">进行中</td>
 		    </tr>
 
 	        </table> 
@@ -280,4 +280,19 @@
   </div>
   </footer>
   </body>
+<script type="text/javascript">
+	var aja = new XMLHttpRequest();
+	window.onload = function(){
+		aja.onreadystatechange = function(){
+			if(aja.readyState==4&&aja.status==200){
+				var ss = eval("("+aja.responseText+")");
+				
+			}
+		}	
+	}
+	//创建链接
+	aja.open("get", "${pageContext.request.contextPath }/servlet/ShowProjectServlet");
+	//
+	aja.send(null);
+</script>
 </html>

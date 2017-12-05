@@ -104,24 +104,7 @@
 			    <th align="center">项目类型</th>
 			    <th align="center">状态</th>
 		    </tr>
-		    <c:forEach items="hehe" var="i">
-		    <tr>
-			    <td align="left">hehe</td>
-			    <td align="left">
-			    	<div class="dropdown">hehe
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left">hehe</td>
-			    <td align="left">hehe</td>
-			    <td align="left">hehe</td>
-			    <td align="left">he</td>
-		    </tr>
-		    </c:forEach>
+		    
 		    <tr>
 			    <td align="left" id="pro1">${i.Pno }</td>
 			    <td align="left">
@@ -137,6 +120,74 @@
 			    <td align="left" id="pro4">${i.PMDuty }</td>
 			    <td align="left" id="pro5">${i.PType }</td>
 			    <td align="left" id="pro6">${i.pState }</td>
+		    </tr>
+		    
+		    <tr>
+			    <td align="left" id="pro1_1">${i.Pno }</td>
+			    <td align="left">
+			    	<div class="dropdown"><span id="pro1_2">${i.PName }</span>
+  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
+  						</ul>
+					</div>
+				</td>
+			    <td align="left" id="pro1_3">${i.Name }</td>
+			    <td align="left" id="pro1_4">${i.PMDuty }</td>
+			    <td align="left" id="pro1_5">${i.PType }</td>
+			    <td align="left" id="pro1_6">${i.pState }</td>
+		    </tr>
+		    
+		    <tr>
+			    <td align="left" id="pro2_1">${i.Pno }</td>
+			    <td align="left">
+			    	<div class="dropdown"><span id="pro2_2">${i.PName }</span>
+  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
+  						</ul>
+					</div>
+				</td>
+			    <td align="left" id="pro2_3">${i.Name }</td>
+			    <td align="left" id="pro2_4">${i.PMDuty }</td>
+			    <td align="left" id="pro2_5">${i.PType }</td>
+			    <td align="left" id="pro2_6">${i.pState }</td>
+		    </tr>
+		    
+		    <tr>
+			    <td align="left" id="pro3_1">${i.Pno }</td>
+			    <td align="left">
+			    	<div class="dropdown"><span id="pro3_2">${i.PName }</span>
+  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
+  						</ul>
+					</div>
+				</td>
+			    <td align="left" id="pro3_2">${i.Name }</td>
+			    <td align="left" id="pro3_2">${i.PMDuty }</td>
+			    <td align="left" id="pro3_2">${i.PType }</td>
+			    <td align="left" id="pro3_2">${i.pState }</td>
+		    </tr>
+		    
+		    <tr>
+			    <td align="left" id="pro4_1">${i.Pno }</td>
+			    <td align="left">
+			    	<div class="dropdown"><span id="pro4_2">${i.PName }</span>
+  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    						<li><a href="#">人员管理</a></li>
+    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
+  						</ul>
+					</div>
+				</td>
+			    <td align="left" id="pro4_3">${i.Name }</td>
+			    <td align="left" id="pro4_4">${i.PMDuty }</td>
+			    <td align="left" id="pro4_5">${i.PType }</td>
+			    <td align="left" id="pro4_6">${i.pState }</td>
 		    </tr>
 	        </table> 
 					</div> 
@@ -242,17 +293,69 @@
 			if(aja.readyState==4&&aja.status==200){
 				var ss = eval("("+aja.responseText+")")
 				var p = document.getElementById("pro1");
-				p.innerHTML = ss[0].Pno;
+				p.innerHTML = ss[0].pno;
 				var p = document.getElementById("pro2");
 				p.innerHTML = ss[0].PName;
 				var p = document.getElementById("pro3");
-				p.innerHTML = ss[0].Name;
+				p.innerHTML = ss[0].name;
 				var p = document.getElementById("pro4");
 				p.innerHTML = ss[0].PMDuty;
 				var p = document.getElementById("pro5");
 				p.innerHTML = ss[0].PType;
 				var p = document.getElementById("pro6");
 				p.innerHTML = ss[0].pState;
+				
+				var p = document.getElementById("pro1_1");
+				p.innerHTML = ss[1].pno;
+				var p = document.getElementById("pro1_2");
+				p.innerHTML = ss[1].PName;
+				var p = document.getElementById("pro1_3");
+				p.innerHTML = ss[1].name;
+				var p = document.getElementById("pro1_4");
+				p.innerHTML = ss[1].PMDuty;
+				var p = document.getElementById("pro1_5");
+				p.innerHTML = ss[1].PType;
+				var p = document.getElementById("pro1_6");
+				p.innerHTML = ss[1].pState;
+				
+				var p = document.getElementById("pro2_1");
+				p.innerHTML = ss[2].pno;
+				var p = document.getElementById("pro2_2");
+				p.innerHTML = ss[2].PName;
+				var p = document.getElementById("pro2_3");
+				p.innerHTML = ss[2].name;
+				var p = document.getElementById("pro2_4");
+				p.innerHTML = ss[2].PMDuty;
+				var p = document.getElementById("pro2_5");
+				p.innerHTML = ss[2].PType;
+				var p = document.getElementById("pro2_6");
+				p.innerHTML = ss[2].pState;
+				
+				var p = document.getElementById("pro3_1");
+				p.innerHTML = ss[3].pno;
+				var p = document.getElementById("pro3_2");
+				p.innerHTML = ss[3].PName;
+				var p = document.getElementById("pro3_3");
+				p.innerHTML = ss[3].name;
+				var p = document.getElementById("pro3_4");
+				p.innerHTML = ss[3].PMDuty;
+				var p = document.getElementById("pro3_5");
+				p.innerHTML = ss[3].PType;
+				var p = document.getElementById("pro3_6");
+				p.innerHTML = ss[3].pState;
+				
+				var p = document.getElementById("pro4_1");
+				p.innerHTML = ss[4].pno;
+				var p = document.getElementById("pro4_2");
+				p.innerHTML = ss[4].PName;
+				var p = document.getElementById("pro4_3");
+				p.innerHTML = ss[4].name;
+				var p = document.getElementById("pro4_4");
+				p.innerHTML = ss[4].PMDuty;
+				var p = document.getElementById("pro4_5");
+				p.innerHTML = ss[4].PType;
+				var p = document.getElementById("pro4_6");
+				p.innerHTML = ss[4].pState;
 			}
 		}	
 		//创建连接

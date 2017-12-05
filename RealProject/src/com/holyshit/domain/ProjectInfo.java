@@ -4,7 +4,7 @@ public class ProjectInfo {
 	private String Pno;
 	private String PName;
 	private String Name;
-	private String PMDuty;
+	private String duty;
 	private String PType;
 	private String pState;
 	public String getPno() {
@@ -26,10 +26,10 @@ public class ProjectInfo {
 		Name = name;
 	}
 	public String getPMDuty() {
-		return PMDuty;
+		return duty;
 	}
 	public void setPMDuty(String pMDuty) {
-		PMDuty = pMDuty;
+		duty = pMDuty;
 	}
 	public String getPType() {
 		return PType;

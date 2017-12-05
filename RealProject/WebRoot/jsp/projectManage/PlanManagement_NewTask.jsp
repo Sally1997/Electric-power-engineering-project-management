@@ -178,7 +178,7 @@
                     <div id="responsible_per" class="block">
 						<div style="text-align: right">
 						    <input type = "submit" name = "submit" class="btn btn-primary" value = "新建任务" onClick="addElement();">	
-							<button type=""class="btn btn-primary" ><a href="PlanManagement_Newed" style="color:white;">结束新建</a></button>
+							<button type=""class="btn btn-primary" ><a href="${pageContext.request.contextPath }/servlet/DTreeNodeServlet" style="color:white;">结束新建</a></button>
 						</div>
 						<div class="clear"></div>
 						</div>
