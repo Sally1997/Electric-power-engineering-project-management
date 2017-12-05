@@ -1,5 +1,6 @@
 # Electric-power-engineering-project-management
 study
+
 12/2 19:52
 新搞了一个xumode类放徐玥特殊的居中+内补设置
 在不影响页面的情况下删改了一些代码
@@ -29,7 +30,7 @@ study
 bootstrapValidator←我打算抽空看一下这个插件，表单验证用
 当然还是先做首页
 ----------------------------------------------
-12/5 memo
+12/5 9:33 memo
 一些还没解决的问题
 资金管理的项目标签显示已完成（灰色）和进行中（绿色）←其实还没做
 bootstrap有个很好的fork table插件，想用，但是怕大改你们是要打我
