@@ -134,7 +134,7 @@
 				  		var showpage=document.getElementById("showpage");
 				  	</script>
 					<li>
-					  <a href="javascript:getPreviousOnBudget(showpage);" aria-label="Previous">
+					  <a href="javascript:getPrevious(showpage);" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
@@ -155,7 +155,7 @@
 						}
 					</script>
 					<li>
-					  <a href="javascript:getNextOnBudget(showpage);" aria-label="Next">
+					  <a href="javascript:getNext(showpage);" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					  </a>
 					</li>
