@@ -7,6 +7,7 @@ import java.util.List;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.domain.Project;
+import com.holyshit.domain.ProjectInfo;
 import com.holyshit.service.ProjectService;
 import com.holyshit.utils.ConnectionManager;
 
@@ -52,6 +53,19 @@ public class ProjectServiceImpl implements ProjectService {
 		List<Object> list = new ArrayList<Object>();
 		try {
 			list = pd.getMaxProNo(pn_1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<ProjectInfo> getProjectInfo() {
+		ProjectDao pd = new ProjectDaoImpl();
+		List<ProjectInfo> list = new ArrayList<ProjectInfo>();
+		try {
+			list = pd.selectProjectInfo();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

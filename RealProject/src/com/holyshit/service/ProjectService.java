@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.Project;
+import com.holyshit.domain.ProjectInfo;
 
 public interface ProjectService {
 	/**
@@ -34,4 +35,10 @@ public interface ProjectService {
 	 * @throws SQLException 
 	 */
 	List<Object> getNewProjectNo(String pn_1);
+
+	/**
+	 * 获得项目展示信息
+	 * @return
+	 */
+	List<ProjectInfo> getProjectInfo();
 }
