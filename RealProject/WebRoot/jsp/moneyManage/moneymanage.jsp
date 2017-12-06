@@ -680,7 +680,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">项目阶段</label>
                 <div class="col-sm-8">
-			    <select class="form-control">
+			    <select class="form-control" disabled="disabled">
 				  <option>阶段一</option>
 				  <option>阶段二</option>
 				  <option>阶段三</option>
@@ -695,7 +695,7 @@
 		      <div class="form-group">
 			    <label class="col-sm-2 control-label">报账任务</label>
 			    <div class="col-sm-8">
-			    <select class="form-control">
+			    <select class="form-control" disabled="disabled">
 			      <option>任务一</option>
 				  <option>任务二</option>
 				  <option>任务三</option>
@@ -712,7 +712,7 @@
 				<div class="col-sm-8">
 		          <div class="input-group">
 			      <div class="input-group-addon">￥</div>
-				  <input type="password" class="form-control" id="inputPassword3">
+				  <input type="password" class="form-control" id="inputPassword3" disabled="disabled">
 				  <div class="input-group-addon">（元）</div>
 				  </div>
 				</div>
@@ -720,7 +720,7 @@
              <div class="form-group">
 				<label  class="col-sm-2 control-label">超标原因</label>
 				<div class="col-lg-8">
-				  <textarea class="form-control" rows="4"></textarea>
+				  <textarea class="form-control" rows="4" disabled="disabled"></textarea>
 				</div>
 			  </div>
           </form>

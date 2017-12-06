@@ -3,6 +3,10 @@ package com.holyshit.domain;
 public class TaskInfo {
 	private String pname;
 	private String sname;
+	private String taskname;
+	private String pno;
+	private String stageno;
+	private String taskno;
 	public String getPname() {
 		return pname;
 	}
@@ -21,5 +25,23 @@ public class TaskInfo {
 	public void setTaskname(String taskname) {
 		this.taskname = taskname;
 	}
-	private String taskname;
+	public String getPno() {
+		return pno;
+	}
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
+	public String getStageno() {
+		return stageno;
+	}
+	public void setStageno(String stageno) {
+		this.stageno = stageno;
+	}
+	public String getTaskno() {
+		return taskno;
+	}
+	public void setTaskno(String taskno) {
+		this.taskno = taskno;
+	}
+	
 }

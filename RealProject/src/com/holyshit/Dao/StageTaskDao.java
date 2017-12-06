@@ -28,6 +28,13 @@ public interface StageTaskDao {
 	TaskInfo selectTaskInfoByTaskNo(String taskno)throws SQLException;
 	
 	/**
+	 * 获取用户的所有正在进行的任务的相关信息通过员工id
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	List<TaskInfo> selectTaskInfoById(String id)throws SQLException;
+	/**
 	 * 根据任务编号生成新的指标编号
 	 * @param tn
 	 * @return
