@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
        
        *{
@@ -18,17 +18,17 @@
 		}
 		.digramchart{
 			height: 400px;
-			width: 600px;
-		}
-		.nopassing{
-			color: red;
+			width: 700px;
 		}
 
-		table th td{
+		table th{
+			text-align: center;
+		}
+		table td{
 			text-align: center;
 		}
 		.copyright{
-			background-image: url(../src/topbk.png);
+			background-image: url(/RealProject/image/topbk.png);
 			text-align: center;
 			font-family: "微软雅黑";
 			color: white;
@@ -41,8 +41,11 @@
 			float:none;
 			margin: 20px auto;
 		}
+		.jimode{
+			margin-top: 20px;margin-left: 5%
+		}
         header{
-			background-image: url(../src/topbk.png);
+			background-image: url(/RealProject/image/topbk.png);
 		}
 		#first_left{
 			padding-left: 50px;
@@ -58,4 +61,15 @@
 		}
         .block{
 			padding-top: 15px;
+		}
+		.more{
+			float: right;
+		    color: white;
+			cursor: pointer;
+        }
+		.noRight{
+			margin-left: 2%;
+			cursor: pointer;
+			color: #e8e8e8;
+			text-decoration: underline;
 		}

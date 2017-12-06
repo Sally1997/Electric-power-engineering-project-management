@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/PlanManage/AddUser.jsp"%>
+<%@ include file="/jsp/projectManage/AddUser.jsp"%>
 <!DOCTYPE html>
 <html>
  <head>
@@ -8,69 +8,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlanManagement_NewTask</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap.min.css">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/public.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/css/fozza.css" type="text/css">
+    
 
 
  </head>
  <body> 
-   <!-- 页眉-->   
-     <header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- start logo -->
-                    <span class="blanding"><<img src="${pageContext.request.contextPath }/src/logo.png" width="100px">面向电力工程项目管理</span>
-                    
-                    <!-- end logo -->
-                    
-                </div>
-            </div>
-        </div>
-      </header>
- <!--   导航栏-->
-  	<div>
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Brand</a>
-            </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li><a href="#">首页</a></li>
-              <li class="active nav-current" role="presentation"><a href="01-projectmanagerfirst 01.html">项目管理</a></li>
-              <li><a href="#">文档管理</a></li>
-              <li><a href="moneymanage.html">资金管理</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">用户XXX</a></li>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
-				  <ul class="dropdown-menu">
-					<li><a href="#">聊天消息<span class="badge" style="float: right">4</span></a></li>
-					<li><a href="#">审核信息<span class="badge" style="float: right">4</span></a></li>
-		            <li><a href="#">任务<span class="badge" style="float: right">2</span></a></li>
-			      </ul>
-              </li>
-            </ul>
-         </div><!-- /.navbar-collapse -->
-       </div><!-- /.container-fluid -->
-     </nav>
-  </div>
+   <%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";	
+	</script>
 <!--  主要内容-->
 <section>
     <div class=container-fluid>

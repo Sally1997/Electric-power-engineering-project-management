@@ -7,78 +7,23 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.holyshit.domain.ProjectInfo" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
-<%@ include file="/PlanManage/AddUser.jsp"%>
+<%@ include file="/jsp/projectManage/AddUser.jsp"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>01-projectmanagerfirst</title>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap.min.css">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/public.css">
-   
-
+    <title>projectmanagerfirst</title>
   </head>
   <body> 
-   <!-- 页眉-->   
-     <header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- start logo -->
-                    <span class="blanding"><img src="${pageContext.request.contextPath }/src/logo.png" width="100px">面向电力工程项目管理</span>
-                    
-                    <!-- end logo -->
-                    
-                </div>
-            </div>
-        </div>
-      </header>
- <!--   导航栏-->
-  	<div>
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Brand</a>
-            </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li><a href="#">首页</a></li>
-              <li class="active nav-current" role="presentation"><a href="#">项目管理<span class="sr-only">(current)</span></a></li>
-              <li><a href="#">文档管理</a></li>
-              <li><a href="moneymanage.html">资金管理</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">用户XXX</a></li>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
-				  <ul class="dropdown-menu">
-					<li><a href="#">聊天消息<span class="badge" style="float: right">4</span></a></li>
-					<li><a href="#">审核信息<span class="badge" style="float: right">4</span></a></li>
-		            <li><a href="#">任务<span class="badge" style="float: right">2</span></a></li>
-			      </ul>
-              </li>
-            </ul>
-         </div><!-- /.navbar-collapse -->
-       </div><!-- /.container-fluid -->
-     </nav>
-  </div>
+   
 <!--  主要内容-->
-  <section>
+	<%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";	
+	</script>
+ <section>
     <div class=container-fluid>
     	<div class="row">
     		<main class="col-lg-12 main-content">
@@ -104,11 +49,15 @@
 			    <th align="center">项目类型</th>
 			    <th align="center">状态</th>
 		    </tr>
-		    
+		    <%--
+		    	List<ProjectInfo> plist = new ArrayList<ProjectInfo>(); 
+		    	plist = (ArrayList)request.getAttribute("ilist");
+		    --%>
+		    <c:forEach items="plist" var="pl">
 		    <tr>
-			    <td align="left" id="pro1">${i.Pno }</td>
+			    <td align="left" id="pro1">${pl.getPno() }</td>
 			    <td align="left">
-			    	<div class="dropdown"><span id="pro2">${i.PName }</span>
+			    	<div class="dropdown"><span id="pro2"></span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="#">人员管理</a></li>
@@ -116,79 +65,12 @@
   						</ul>
 					</div>
 				</td>
-			    <td align="left" id="pro3">${i.Name }</td>
-			    <td align="left" id="pro4">${i.PMDuty }</td>
-			    <td align="left" id="pro5">${i.PType }</td>
-			    <td align="left" id="pro6">${i.pState }</td>
+			    <td align="left" id="pro3"></td>
+			    <td align="left" id="pro4"></td>
+			    <td align="left" id="pro5"></td>
+			    <td align="left" id="pro6"></td>
 		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro1_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro1_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro1_3">${i.Name }</td>
-			    <td align="left" id="pro1_4">${i.PMDuty }</td>
-			    <td align="left" id="pro1_5">${i.PType }</td>
-			    <td align="left" id="pro1_6">${i.pState }</td>
-		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro2_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro2_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro2_3">${i.Name }</td>
-			    <td align="left" id="pro2_4">${i.PMDuty }</td>
-			    <td align="left" id="pro2_5">${i.PType }</td>
-			    <td align="left" id="pro2_6">${i.pState }</td>
-		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro3_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro3_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro3_2">${i.Name }</td>
-			    <td align="left" id="pro3_2">${i.PMDuty }</td>
-			    <td align="left" id="pro3_2">${i.PType }</td>
-			    <td align="left" id="pro3_2">${i.pState }</td>
-		    </tr>
-		    
-		    <tr>
-			    <td align="left" id="pro4_1">${i.Pno }</td>
-			    <td align="left">
-			    	<div class="dropdown"><span id="pro4_2">${i.PName }</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
-  						</ul>
-					</div>
-				</td>
-			    <td align="left" id="pro4_3">${i.Name }</td>
-			    <td align="left" id="pro4_4">${i.PMDuty }</td>
-			    <td align="left" id="pro4_5">${i.PType }</td>
-			    <td align="left" id="pro4_6">${i.pState }</td>
-		    </tr>
+		    </c:forEach>
 	        </table> 
 					</div> 
                     </div>
@@ -287,7 +169,7 @@
   </footer>
   </body>
 <script type="text/javascript">
-	var aja = new XMLHttpRequest();
+	/* var aja = new XMLHttpRequest();
 	window.onload = function(){
 		aja.onreadystatechange = function(){
 			if(aja.readyState==4&&aja.status==200){
@@ -299,7 +181,7 @@
 				var p = document.getElementById("pro3");
 				p.innerHTML = ss[0].name;
 				var p = document.getElementById("pro4");
-				p.innerHTML = ss[0].PMDuty;
+				p.innerHTML = ss[0].duty;
 				var p = document.getElementById("pro5");
 				p.innerHTML = ss[0].PType;
 				var p = document.getElementById("pro6");
@@ -312,7 +194,7 @@
 				var p = document.getElementById("pro1_3");
 				p.innerHTML = ss[1].name;
 				var p = document.getElementById("pro1_4");
-				p.innerHTML = ss[1].PMDuty;
+				p.innerHTML = ss[1].duty;
 				var p = document.getElementById("pro1_5");
 				p.innerHTML = ss[1].PType;
 				var p = document.getElementById("pro1_6");
@@ -325,7 +207,7 @@
 				var p = document.getElementById("pro2_3");
 				p.innerHTML = ss[2].name;
 				var p = document.getElementById("pro2_4");
-				p.innerHTML = ss[2].PMDuty;
+				p.innerHTML = ss[2].duty;
 				var p = document.getElementById("pro2_5");
 				p.innerHTML = ss[2].PType;
 				var p = document.getElementById("pro2_6");
@@ -338,7 +220,7 @@
 				var p = document.getElementById("pro3_3");
 				p.innerHTML = ss[3].name;
 				var p = document.getElementById("pro3_4");
-				p.innerHTML = ss[3].PMDuty;
+				p.innerHTML = ss[3].duty;
 				var p = document.getElementById("pro3_5");
 				p.innerHTML = ss[3].PType;
 				var p = document.getElementById("pro3_6");
@@ -351,7 +233,7 @@
 				var p = document.getElementById("pro4_3");
 				p.innerHTML = ss[4].name;
 				var p = document.getElementById("pro4_4");
-				p.innerHTML = ss[4].PMDuty;
+				p.innerHTML = ss[4].duty;
 				var p = document.getElementById("pro4_5");
 				p.innerHTML = ss[4].PType;
 				var p = document.getElementById("pro4_6");
@@ -363,7 +245,7 @@
 	//发送请求
 	aja.send(null);
 	}
-	
+	 */
 </script>
   
 </html>

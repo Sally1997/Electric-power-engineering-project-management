@@ -77,7 +77,14 @@ public interface ProjectDao {
 	 * @return
 	 * @throws SQLException 
 	 */
-	List<ProjectInfo> selectProjectInfo() throws SQLException;
+	List<ProjectInfo> selectProjectManageInfo(int current_page,int page_size) throws SQLException;
+	
+	/**
+	 * 查询项目管理首页的页数
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int PMPageCount() throws SQLException;
 }  
 
 

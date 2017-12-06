@@ -155,4 +155,7 @@ public class AutoNumber {
 		Pno += c;
 		return Pno;
 	}
+	
+	//state从数字映射到字符串
+	
 }

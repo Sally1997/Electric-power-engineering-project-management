@@ -79,12 +79,20 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public List<ProjectInfo> selectProjectInfo() throws SQLException {
+	public List<ProjectInfo> selectProjectManageInfo(int current_page,int page_size) throws SQLException {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT Project.Pno,PName,NAME,duty,PType,PState "+
-				"FROM (Project LEFT JOIN psrelation ON Project.PNo=psrelation.PNo) "+
-				"LEFT JOIN staff ON psrelation.StaffNo=staff.StaffNo", 
-				new BeanListHandler<ProjectInfo>(ProjectInfo.class));
+				"FROM (Project JOIN psrelation ON Project.PNo=psrelation.PNo) "+
+				"JOIN staff ON psrelation.StaffNo=staff.StaffNo limit ?,?", 
+				new BeanListHandler<ProjectInfo>(ProjectInfo.class),
+				(current_page-1)*page_size,page_size);
+	}
+
+	@Override
+	public int PMPageCount() throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		long l = (long) qr.query("SELECT COUNT(*) FROM project", new ScalarHandler(1));
+		return (int)l;
 	}
 
 }
