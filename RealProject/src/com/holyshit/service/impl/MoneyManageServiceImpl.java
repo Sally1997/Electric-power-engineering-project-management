@@ -194,6 +194,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				JSONObject atask=new JSONObject();
 				atask.put("taskname", task.getTaskname());
 				atask.put("taskno", task.getTaskno());
+				atask.put("budget", task.getBudget());
 				manytask.add(atask);
 				//很坑，getJsonObject这样的函数居然返回的是一个对象副本。。。。草泥马
 				//重新压入新的数据

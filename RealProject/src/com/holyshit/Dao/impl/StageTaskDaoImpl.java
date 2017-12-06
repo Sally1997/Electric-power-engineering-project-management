@@ -71,7 +71,7 @@ public class StageTaskDaoImpl implements StageTaskDao {
 	public List<TaskInfo> selectTaskInfoById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo FROM stagetasks JOIN psplan ON  stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE stagetasks.CharPNo=? AND (stagetasks.TState='1' OR stagetasks.TState='2')",new BeanListHandler<TaskInfo>(TaskInfo.class),id);
+		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget FROM stagetasks JOIN psplan ON  stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE stagetasks.CharPNo=? AND (stagetasks.TState='1' OR stagetasks.TState='2')",new BeanListHandler<TaskInfo>(TaskInfo.class),id);
 	}
 
 }

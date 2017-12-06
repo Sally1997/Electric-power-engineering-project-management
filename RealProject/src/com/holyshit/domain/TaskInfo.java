@@ -7,6 +7,13 @@ public class TaskInfo {
 	private String pno;
 	private String stageno;
 	private String taskno;
+	private double budget;
+	public double getBudget() {
+		return budget;
+	}
+	public void setBudget(double budget) {
+		this.budget = budget;
+	}
 	public String getPname() {
 		return pname;
 	}

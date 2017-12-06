@@ -13,6 +13,7 @@
 	
     <script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
    	<script type="text/javascript">
+   		var taskinfo="";
    		//ajax请求
    		function getFunction(cur){
    			var req = new XMLHttpRequest();
@@ -36,7 +37,23 @@
    			req.open("post", "${pageContext.request.contextPath}/web/servlet/showbudgetpage?currentPage="+cur+"&pageSize=3");
    			req.send(null);
    		}
-   		
+   		function getTaskInfo(){
+   			var req = new XMLHttpRequest();
+   			req.onreadystatechange=function(){
+   				if(req.readyState==4){
+   					if(req.status==200){
+   						var res=req.responseText;
+   						//数据刷新
+   						taskinfo=eval('('+res+')');
+   						showProject();
+   					}
+   				}
+   			};
+   			
+   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showWorkingTask?staffno=${staff.staffno}");
+   			req.send(null);
+   			
+   		}
    		//刷新数据
    		function refreshData(){
    			var chart1=document.getElementById("chart1");
@@ -596,7 +613,7 @@
 	        </table>
 				
                 <div>
-                <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupAc">报账</button>
+                <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupAc" onclick="getTaskInfo()">报账</button>
             </div>
                 </div>
             </div>
@@ -670,60 +687,160 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">报账项目</label>
 				<div class="col-sm-8">
-			    <select class="form-control">
-				  <option>项目A</option>
-				  <option>项目B</option>
-				  <option>项目C</option>
+			    <select class="form-control" id="project_select">
+				  <option>请选择</option>
 				</select>
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="col-sm-2 control-label">项目阶段</label>
+				<label class="col-sm-2 control-label" >项目阶段</label>
                 <div class="col-sm-8">
-			    <select class="form-control" disabled="disabled">
-				  <option>阶段一</option>
-				  <option>阶段二</option>
-				  <option>阶段三</option>
-				  <option>阶段四</option>
-				  <option>阶段五</option>
-				  <option>阶段六</option>
-				  <option>阶段七</option>
-				  <option>阶段八</option>
+			    <select class="form-control" disabled="disabled" id="stage_select">
+			      <option>请选择</option>
 				</select>
 				</div>
 			  </div>
 		      <div class="form-group">
-			    <label class="col-sm-2 control-label">报账任务</label>
+			    <label class="col-sm-2 control-label" >报账任务</label>
 			    <div class="col-sm-8">
-			    <select class="form-control" disabled="disabled">
-			      <option>任务一</option>
-				  <option>任务二</option>
-				  <option>任务三</option>
-				  <option>任务四</option>
-				  <option>任务五</option>
-				  <option>任务六</option>
-				  <option>任务七</option>
-				  <option>任务八</option>
+			    <select class="form-control" disabled="disabled" id="task_select">
+			      <option>请选择</option>
 			    </select>
 			    </div>
 			  </div>			  
 			  <div class="form-group">
-				<label class="col-sm-2 control-label">报账金额</label>
+				<label class="col-sm-2 control-label" >报账金额</label>
 				<div class="col-sm-8">
 		          <div class="input-group">
 			      <div class="input-group-addon">￥</div>
-				  <input type="password" class="form-control" id="inputPassword3" disabled="disabled">
+				  <input type="text" class="form-control" id="inputPassword3" disabled="disabled">
 				  <div class="input-group-addon">（元）</div>
 				  </div>
 				</div>
 			  </div>
+			  <div class="form-group" id="warnning_div" style="display: none;">
+				<label  class="col-sm-2 control-label" >提示</label>
+				<span style="color: red;font-size: 15px;font-weight: bold;" id="warnning">报账金额超出任务预算,请填写超标原因,等待审核</span>
+			  </div>
              <div class="form-group">
-				<label  class="col-sm-2 control-label">超标原因</label>
+				<label  class="col-sm-2 control-label" >超标原因</label>
 				<div class="col-lg-8">
-				  <textarea class="form-control" rows="4" disabled="disabled"></textarea>
+				  <textarea class="form-control" rows="4" disabled="disabled" id="over_cause"></textarea>
 				</div>
 			  </div>
           </form>
+          <script type="text/javascript">
+          		var project_pos=-1;  //项目位置
+          		var stage_pos=-1;   //阶段位置
+          		var task_pos=-1;   //任务位置
+          		var project_select=document.getElementById("project_select");
+          		var stage_select=document.getElementById("stage_select");
+          		var task_select=document.getElementById("task_select");
+          		var task_fee=document.getElementById("inputPassword3");
+          		var over_cause=document.getElementById("over_cause");
+          		var warnning=document.getElementById("warnning");
+          		project_select.onchange=function(){
+          			if(this.value=="请选择"){
+          				//取消禁用
+          				stage_select.disabled="disabled";
+          				task_select.disabled="disabled";
+          				task_fee.disabled="disabled";
+          				over_cause.disabled="disabled";
+          			}else{
+          				for(var i=0;i<taskinfo.length;i++)
+          					if(taskinfo[i].pname==project_select.value){
+          						project_pos=i;
+          						break;
+          					}
+          				//取消禁止
+          				stage_select.removeAttribute("disabled");
+          				//刷新阶段
+          				showStage();
+          			}
+          			
+          		};
+          	stage_select.onchange=function(){
+          		if(this.value=="请选择"){
+      				//取消禁用
+      				task_select.disabled="disabled";
+      				task_fee.disabled="disabled";
+      				over_cause.disabled="disabled";
+      			}else{
+      				for(var i=0;i<taskinfo[project_pos].stagelist.length;i++)
+      					if(taskinfo[project_pos].stagelist[i].sname==stage_select.value){
+      						stage_pos=i;
+      						break;
+      					}
+      				//取消禁止
+      				task_select.removeAttribute("disabled");
+      				//刷新阶段
+      				showTask();
+      			
+      			}
+          		
+          	};
+          	task_select.onchange=function(){
+          		if(this.value=="请选择"){
+      				//禁用
+      				task_fee.disabled="disabled";
+      				over_cause.disabled="disabled";
+      			}else{
+      				
+      				for(var i=0;i<taskinfo[project_pos].stagelist[stage_pos].tasklist.length;i++){
+      					if(taskinfo[project_pos].stagelist[stage_pos].tasklist[i].taskname==task_select.value){
+      						task_pos=i;
+      						break;
+      					}
+      				}
+      				//取消禁止
+      				task_fee.removeAttribute("disabled");
+      			}
+          		
+          	};
+          	task_fee.onblur=function(){
+          		var cur=window.parseFloat(task_fee.value);
+          		var budget=taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].budget;
+          		if(budget<cur){
+          			warnning.innerHTML="当前任务剩余预算为"+budget+",请填写超标原因";
+          			warnning_div.style.display="inline-block";
+          			over_cause.removeAttribute("disabled");
+          		}else{
+          			warnning_div.style.display="none";
+          			over_cause.disabled="disabled";
+          		}
+          	};
+          	function showProject(){
+          		//删除以前的
+          		project_select.innerHTML="<option>请选择</option>";
+          		for(var i=0;i<taskinfo.length;i++){
+          			var node=document.createElement("option");
+          			node.innerHTML=taskinfo[i].pname;
+          			project_select.appendChild(node);
+          		}	
+          	}
+          	function showStage(){
+          		//删除以前的
+          		stage_select.innerHTML="<option>请选择</option>";
+          		for(var i=0;i<taskinfo[project_pos].stagelist.length;i++){
+          			var node=document.createElement("option");
+          			node.innerHTML=taskinfo[project_pos].stagelist[i].sname;
+          			stage_select.appendChild(node);
+          		}	
+          		
+          	}
+          	function showTask(){
+          		//删除以前的
+          		task_select.innerHTML="<option>请选择</option>";
+          	
+          		for(var i=0;i<taskinfo[project_pos].stagelist[stage_pos].tasklist.length;i++){
+          			
+          			var node=document.createElement("option");
+          			node.innerHTML=taskinfo[project_pos].stagelist[stage_pos].tasklist[i].taskname;
+          			task_select.appendChild(node);
+          		}	
+          		
+          	}
+          </script>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
