@@ -6,313 +6,216 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title>main.html</title>
-	
-    <meta name="keywords" content="电力工程,项目管理,PM2">
-    <meta name="description" content="这是一个项目工程管理软件">
-    <meta name="content-type" content="text/html; charset=gb2312">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/main.css">
-  </head>
-  <script type="text/javascript">
-  	$(document).ready(function(){
-  		var hide_flag=1;
-  		var frame_width=200;
-  		var width=document.documentElement.clientWidth;
-  		var str=(frame_width*0.72/width).toString();
-  		str="-"+str;
-  		$("#jiantou").mouseover(function(){
-  			$(this).css("border-right","15px solid blue");
-  			if(hide_flag===1){
-  				$("#contex").animate({right:'-5px'},"slow");
-  				hide_flag=0;
-  			}
-  			$("#contex").focus();
-  		});
-  		$("#jiantou").mouseout(function(){
-  			$(this).css("border-right","15px solid gray");
-  		});
-  		$(".more").mouseover(function(){
-  			$(this).css("background-color","blue");
-  		});
-  		$(".more").mouseout(function(){
-  			$(this).css("background-color","gray");
-  		});
-  		$("#contex").blur(function(){
-  			var wd=document.documentElement.clientWidth;
-		  	var str=(frame_width*0.72/wd*100).toString();
-  			if(hide_flag===0){
-	  			$("#contex").animate({right:"-"+str+"%"},"slow");
-				hide_flag=1;
-			}
-  		}); 
-		$(window).resize(function(){
-			var hg=document.documentElement.clientHeight-142;
-			$("#contex").css("height",hg+"px");
-		  	$("#logo").css("height",hg+"px");
-		  	$("#fuck_your_mother_BUG").css("height",hg+"px");
-		  	$("#jiantou").css("bottom",hg/2+"px");
-		  	
-		  	var wd=document.documentElement.clientWidth;
-		  	var str=(frame_width*0.72/wd*100).toString();
-			
-		    $("#contex").css("right","-"+str+"%");
-		});
-  	});
-  </script>
-  <script type="text/javascript">
-  	window.onload=function(){
-  		getUserLogoUrl("${staff.staffno}",document.getElementById("user_logo"));
-  	};
-  </script>
-  <script type="text/javascript">
-	  	var frame_width=200;
-	  	var height=document.documentElement.clientHeight-142;
-	  	var width=document.documentElement.clientWidth;
-	  	$("#contex").css("height",height+"px");
-	  	$("#contex").css("width",frame_width+"px");
-	  	$("#logo").css("height",height+"px");
-	  	$("#fuck_your_mother_BUG").css("height",height+"px");
-	  	$("#jiantou").css("bottom",height/2+"px");
-	   	var str=(frame_width*0.72/width*100).toString();
-		$("#contex").css("right","-"+str+"%");		
-		function user_info_ap(){
-			
-			var kz=document.getElementById("uf");
-			kz.style.display="block";
-		}
-		function user_info_dis(){
-			var kz=document.getElementById("uf");
-			kz.style.display="none";
-		}
-		function ms_info_ap(){
-			
-			var kz=document.getElementById("ms");
-			kz.style.display="block";
-		}
-		function ms_info_dis(){
-			var kz=document.getElementById("ms");
-			kz.style.display="none";
-		}
-		function change_1(ele){
-		ele.style.borderWidth="0 0 3px 0";
-		ele.style.borderColor="blue";
-		ele.style.borderStyle="solid";
-		ele.style.color="#CDCDC1";
-		ele.style.fontSize="30px";
-		}
-		function change_2(ele){
-			ele.style.borderWidth="0 0 0 0";
-			ele.style.color="white";
-			ele.style.fontSize="20px";
-		}
-</script>
-<body style="background-color: #F2F2F2;">
+<head>
+<meta charset="utf-8">
+<title>首页</title>
+    <!-- Bootstrap -->
+  
+</head>
 
-
+<body>
 	<%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[0].className="active nav-current";
 		menus[0].role="presentation";	
 	</script>
-  	<!-- 详细内容模块 -->
-  	<div id="content">
-  		<!-- 左边 -->
-  		<div id="content_left">
-  			<!-- 个人信息模块 -->
-  			<div id="userinfo">
-  				<span>个人信息模块</span><br><br>
-  				
-  				<span style="font-weight: bold;font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;尊敬的${staff.name }，您好！今天是<%=Calendar.getInstance().get(Calendar.YEAR)%>年<%=Calendar.getInstance().get(Calendar.MONTH)+1 %>月<%=Calendar.getInstance().get(Calendar.DATE) %>日。</span>
-  			</div>
-  			<!-- 任务列表 -->
-  			<div id="tasklist">
-  				<div id="tasklist_label">项<br>目<br>任<br>务<br>列<br>表</div>	
-  				<div id="tasklist_detail">
-  					<div class="task_top">
-
-  						<span class="num_info">当前正在参与的项目数量：           </span><span>    ${fn:length(projectNames)} </span>
-  						<span class="time_sort">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-  											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-  												按时间排序</span>
-  					</div>
-  					<div id="task_bott">
-  						<div>
-  							<div class="task_def_head">项目名称</div>
-  							<div class="task_def_head">项目当前任务</div>
-  							<div class="task_def_head">开始时间</div>
-  							<div class="task_def_head">截止时间</div>
-  							<div class="task_def_head">状态</div>
-  							<div class="clear"></div>
-  						</div>
-  						<c:forEach items="${tasks }" var="task" varStatus="hehe">
-	  						<div>
-  								<c:choose>
-  									<c:when test="${task.tstate=='0' }">
-  										<div class="task_def_main">
-			  								<a href="PlanManagement_newed.html"class="task_href">${projectNames[hehe.index] }</a>
-			  								<span class="new_task_blank"></span>
-			  							</div>
-			  							<div class="task_def_main"><span class="task_content_1">${task.taskname }</span><span class="task_content_1">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
-			  							<div class="task_def_main">${task.stime }</div>
-			  							<div class="task_def_main">${task.etime }</div>
-  										<div class="task_def_main">
-  											<span style="color: red;">还未开始</span>
-  										</div>
-  										<div class="clear"></div>
-  									</c:when>
-  									
-  									<c:when test="${task.tstate=='1' }">
-  										<div class="task_def_main">
-			  								<a href="PlanManagement_newed.html"class="task_href">${projectNames[hehe.index]}</a>
-			  								<span class="new_task_blank"></span>
-			  							</div>
-			  							<div class="task_def_main"><span style="display: inline-block;width: 40%;height: 30px;overflow: hidden;">${task.taskname }</span><span style="display: inline-block;width: 40%;height: 30px;">[<a href="#" style="text-decoration: none;">查看</a>]</span></div>
-			  							<div class="task_def_main">${task.stime }</div>
-			  							<div class="task_def_main">${task.etime }</div>
-  										<div class="task_def_main">
-  											<span style="color: green;">正在进行</span>
-  										</div>
-  										<div class="clear"></div>
-  									</c:when>
-  								</c:choose>
-	  							
-	  						</div>
-  						</c:forEach>
-						<div class="moredata">
-							<a href="#">更多>></a>
+    <section>
+    	<div class="container-fluid">
+    	  <div class="row">
+    	    <div class="col-lg-12">  
+			  <div class="col-lg-8"> 
+    	        <div class="panel panel-primary">
+    	            <div class="panel-heading">项目任务列表<span class="more">more..</span></div>
+    	            <div class="panel-body">
+    	              <div class="row">
+					    <div class="col-lg-12">
+							<span>当前任务数量：</span><span>${fn:length(tasks)}</span>
+							<span class="more">
+							 <a href="#" style="margin-right: 15px" onclick = "">按时间排序</a>
+							</span>
 						</div>
-  						
-  					</div>
-  				</div>
-  				<div class="clear"></div>
-  			</div>
-  			<!-- 正在进行的项目 -->
-  			<div id="project">
-  				<div id="project_label"><br>项<br>目<br>进<br>度</div>	
-  				<div id="project_detail">
-  					<div class="task_top">
-  						<span class="num_info">当前正在参与的项目数量：           </span><span>    ${fn:length(projects) }</span>
-
-  						<span class="time_sort">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-  											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-  											&nbsp;&nbsp;&nbsp;&nbsp;	按时间排序</span>
-  					</div>
-  					
-  					<div id="project_bott">
-  						<div>
-  							<div class="task_def_head">项目名称</div>
-  							<div class="task_def_head">任务当前进度</div>
-  							<div class="task_def_head">开始时间</div>
-  							<div class="task_def_head">截止时间</div>
-  							<div class="task_def_head">状态</div>
-  							<div class="clear"></div>
-  						</div>
-  						<c:forEach items="${projects }" var="project">
-	  						<div>
-	  							<div class="task_def_main"><a href="PlanManagement_newed.html" class="task_href">${project.pname }</a></div>
-	  							<div class="task_def_main" style="border-radius:5px;border: 2px solid #A9A9A9;">
-	  								<div class="process_60" style="width: ${project.pstage*100}%;"></div>
-	  							</div>
-	  							<div class="task_def_main">${project.stime }</div>
-	  							<div class="task_def_main">${project.etime }</div>
-	  							<div class="task_def_main">
-	  								<c:choose>
-	  									<c:when test="${project.pstate=='0' }"><span style="color: red;">项目还未开始</span></c:when>
-	  								</c:choose>
-	  								<c:choose>
-	  									<c:when test="${project.pstate=='1' }"><span style="color: green;">正处于第一阶段</span></c:when>
-	  								</c:choose>
-	  								<c:choose>
-	  									<c:when test="${project.pstate=='2' }"><span style="color: green;">正处于第二阶段</span></c:when>
-	  								</c:choose>
-	  								<c:choose>
-	  									<c:when test="${project.pstate=='3' }"><span style="color: green;">正处于第三阶段</span></c:when>
-	  								</c:choose>
-	  								<c:choose>
-	  									<c:when test="${project.pstate=='4' }"><span style="color: blue;">项目已经完成</span></c:when>
-	  								</c:choose>
-	  							</div>
-	  							<div class="clear"></div>
-	  						</div>
+   	                  <div class="col-lg-10 jimode">
+    	              <table class="table table-striped">
+    	                <tr>
+    	                <th>项目名称</th>
+    	                <th>任务</th>
+    	                <th>开始时间</th>
+    	                <th>截止时间</th>
+    	                <th>状态</th>
+    	                </tr>
+						<c:forEach items="${tasks }" var="task" varStatus="hehe">
+						  <c:choose>
+  							<c:when test="${task.tstate=='0' }">
+    	                      <tr>
+							  <td onClick="window.open(${pageContext.request.contextPath})" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
+							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
+							  <td>${task.stime }</td>
+							  <td>${task.etime }</td>	
+							  <td class="text-danger">未开始</td>	
+							  </tr>
+							</c:when>
+							<c:when test="${task.tstate=='1' }">
+							  <tr>
+						      <td onClick="window.open()" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
+							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
+							  <td>${task.stime }</td>
+							  <td>${task.etime }</td>	
+							  <td class="text-danger">正在进行</td>	
+							  </tr>
+							  </c:when>
+  						  </c:choose>
   						</c:forEach>
-  						<div class="moredata">
-  							<a href="#">更多>></a>
-  						</div>
-  					</div>
-  				</div>
-  				<div class="clear"></div>
-  			</div>
-  		</div>
-  		
-  		<!-- 右边 -->
-  		<div id="content_right">
-  			<!-- 公告 -->
-  			<div id="information">
-  				<div class="frame_top">
-  					<span class="left_label">公告中心</span>
-  					<span style="display: inline-block;height: 20px;width: 45%;"></span>
-  					<span class="more">more+</span>
-  				</div>
-  				<div style="height: 10px;"></div>
-  				<ul class="frame_ul">
-  				
-  				
-  					<li class="frame_li">
-  						<a href="#">小米手机桌面还能这么玩：逼格满满的</a>
-  						<span>2017.10.26 17:59</span>
-  					</li>
-  					
-  				</ul>
-  			</div>
-  			<div style="height: 10px;background-color: #F2F2F2;"></div>
-  			<!-- 文件上传信息 -->
-  			<div id="message">
-  				<div class="frame_top">
-  					<span class="left_label">最新消息</span>
-  					<span style="display: inline-block;height: 20px;width: 45%;"></span>
-  					<span class="more">more+</span>
-  				</div>
-  				<div style="height: 10px;"></div>
-  				
-  				<ul class="frame_ul">
-  					<c:if test="${fn:length(staffDoc['docs'])>8 }">
-  						<c:forEach items="${staffDoc['docs'] }" begin="0" end="7" step="1" var="doc">
-  							<li class="frame_li">
-  								<a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}">${doc.dtitle }</a>
-  								<span><fmt:formatDate value="${doc.uploadtime }" type="both"/></span>
-  							</li>
-  						</c:forEach>
-  					</c:if>
-  						
-  					<c:if test="${fn:length(staffDoc['docs'])<=8 }">
-  						<c:forEach items="${staffDoc['docs'] }" var="doc">
-  							<li class="frame_li">
-  								<a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}">${doc.dtitle }</a>
-  								<span><fmt:formatDate value="${doc.uploadtime }" type="both"/></span>
-  							</li>
-  						</c:forEach>
-  					</c:if>
-  				
-  				</ul>
-  			</div>
-  		</div>
-  		<div class="clear"></div>
-  	</div>
-  	
-  	<!-- 版权说明 -->
-  	<div id="copyright">
-  		<span style="font-size: 25px;">版权说明</span>
-  	</div>
-
+    	              </table>
+    	              </div>
+    	            </div>
+    	        </div>
+    	      </div>
+    	        <div class="panel panel-primary">
+						<div class="panel-heading">项目进度列表<span class="more">more..</span></div>
+						<div class="panel-body">
+						  <div class="row">
+						  <div class="col-lg-12">
+								<span>当前参与的项目数量：</span><span>${fn:length(projects) }</span>
+								<span class="more">
+								 <a href="#" style="margin-right: 15px" onclick = "">按时间排序</a>
+								</span>
+							</div>
+						  <div class="col-lg-10 jimode">
+					<!--	  进度条的占比需要修改标签内的style:width属性-->
+						  <table class="table table-striped">
+							<tr>
+							<th>项目名称</th>
+							<th>项目进度</th>
+							<th>开始时间</th>
+							<th>截止时间</th>
+							<th>状态</th>
+							</tr>
+							<c:forEach items="${projects }" var="project" begin="0" end="4">
+							
+							<c:choose>
+	  							<c:when test="${project.pstate=='0' }">
+								<tr>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>立项中</td>
+								</c:when>
+	  						</c:choose>
+	  						<c:choose>
+	  							<c:when test="${project.pstate=='1' }">
+								<tr>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>正常进行中</td>
+								</c:when>
+	  						</c:choose>
+	  						<c:choose>
+	  							<c:when test="${project.pstate=='2' }">
+								<tr>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>延期进行中</td>
+								</c:when>
+	  						</c:choose>
+	  						<c:choose>
+	  							<c:when test="${project.pstate=='3' }">
+								<tr>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>正常完工</td>
+								</c:when>
+	  						</c:choose>
+	  						<c:choose>
+	  							<c:when test="${project.pstate=='4' }">
+								<tr>
+							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
+							    <td><div class="progress">
+							    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    ${project.pstage*100}%
+							    </div>
+							    </div></td>
+							    <td>${project.stime }</td>
+							    <td>${project.etime }</td>
+								<td>延期竣工</td>
+								</c:when>
+	  						</c:choose>
+						  </c:forEach>   	          
+						  </table>
+						  </div>
+						</div>
+					</div>
+				  </div>
+    	      </div>
+    	      <div class="col-lg-4">
+    	        <div class="panel panel-primary">
+    	        	<div class="panel panel-heading">公告中心<span class="more">more..</span></div>
+						<div class="list-group">
+						  <a href="#" class="list-group-item">第五次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第四次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第三次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第二次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a href="#" class="list-group-item">第一次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						</div>
+    	        </div>
+    	    <!--    你们先做成这个地方点击就能直接下载文件吧……-->
+    	        <div class="panel panel-primary">
+    	        	<div class="panel panel-heading">最新消息<span class="more">more..</span></div>
+						<div class="list-group">
+						  <c:if test="${fn:length(staffDoc['docs'])>8 }">
+  						    <c:forEach items="${staffDoc['docs'] }" begin="0" end="7" step="1" var="doc">
+						      <a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}" class="list-group-item"><span class="glyphicon glyphicon-file"></span>${doc.dtitle }<br><div class="small"><span class="uptime">><fmt:formatDate value="${doc.uploadtime }" type="both"/></</span>&nbsp;&nbsp;&nbsp;<span>上传者：${doc.uloadpno }</span></div></a>
+						    </c:forEach>
+  					      </c:if>
+						  <c:if test="${fn:length(staffDoc['docs'])<=8 }">
+  						    <c:forEach items="${staffDoc['docs'] }" var="doc">
+						      <a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}" class="list-group-item"><span class="glyphicon glyphicon-file"></span>${doc.dtitle }<br><div class="small"><span class="uptime">><fmt:formatDate value="${doc.uploadtime }" type="both"/></</span>&nbsp;&nbsp;&nbsp;<span>上传者：${doc.uloadpno }</span></div></a>
+						    </c:forEach>
+  					      </c:if>
+						</div>
+    	        </div>
+    	        </div>
+    	      </div>
+    	    </div>
+    	  </div>
+    	</div>
+    </section>
+    <footer class="copyright">
+    <div class="container-fluid">
+      	<p>©版权归谭莹小组所有</p>
+   
+	</div>
+	</footer>
+	<!--实现文本缩略-->
+	<script type="text/javascript"> 
+    var mylist = document.getElementsByName("myabbr");
+	for (var i = 0; i < mylist.length; i++){
+		mylist[i].innerHTML = mylist[i].innerHTML.substring(0, 8)+"...";
+	}
+	</script>
 </body>
-
-
 </html>
