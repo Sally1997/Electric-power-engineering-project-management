@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!--底边栏没改-->
 <!--还有一堆冗余没搞懂-->
 <%@ page import="java.util.List" %>
@@ -23,6 +24,64 @@
 		menus[1].role="presentation";	
 	</script>
  <section>
+ 	<script type="text/javascript">
+	 	var dataJson;
+	 
+	 	var currentPage=${info_map['current_page'] };
+	 	var pageSize=${info_map['page_size'] };
+	 	
+	  	var pageNum=${info_map['total_page'] };
+	 	var totalNum=${info_map['count'] };
+	 	var projectNum=${fn:length(info_map['pi_list']) };
+	 	var currentGroup=1;
+	 	var groupSize=5;
+	 	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1; 
+	</script>
+ 	<script type="text/javascript">
+ 		//更新数据
+ 		function refreshData(){
+ 			showtable.innerHTML="";
+ 			var first=document.createElement("tr");
+ 			first.innerHTML='<th align="center">项目编号</th><th align="center">项目名称</th><th align="center">项目经理</th><th align="center">职责</th><th align="center">项目类型</th><th align="center">状态</th>';
+ 			for(var i=0;i<dataJson.length;i++){
+ 				var tr=document.createElement("tr");
+ 				
+ 				var td1=document.createElement("td");
+ 				td1.align="left";
+ 				td1.innerHTML='<a href="javascript:goPlanManage(pno)" name="pro_no">'+dataJson[i].pno+'</a>';
+ 				
+ 				var td2=document.createElement("td");
+ 				td2.align="left";
+ 				td2.innerHTML='<div class="dropdown"><span name="pro_pname">'+dataJson[i].pname+'</span><span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><li><a href="/RealProject/web/servlet/staffListServlet?pno=10001">人员管理</a></li><li><a href="/RealProject/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li></ul></div>';
+ 				
+ 				var td3=document.createElement("td");
+ 				td3.align="left";
+ 				td3.innerHTML=dataJson[i].name;
+ 				
+ 				var td4=document.createElement("td");
+ 				td4.align="left";
+ 				td4.innerHTML=dataJson[i].duty;
+ 				
+ 				var td5=document.createElement("td");
+ 				td5.align="left";
+ 				td5.innerHTML=dataJson[i].ptype;
+ 				
+ 				var td6=document.createElement("td");
+ 				td6.align="left";
+ 				td6.innerHTML=dataJson[i].pstate;
+ 				tr.appendChild(td1);
+ 				tr.appendChild(td2);
+ 				tr.appendChild(td3);
+ 				tr.appendChild(td4);
+ 				tr.appendChild(td5);
+ 				tr.appendChild(td6);
+ 				showtable.appendChild(tr);
+ 			}
+ 			
+
+ 			
+ 		}
+ 	</script>
     <div class=container-fluid>
     	<div class="row">
     		<main class="col-lg-12 main-content">
@@ -39,7 +98,7 @@
         <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupAc">新建</button>
         <br/><br/>
     </div>
-		<table class="table table-striped table-condensed" style="font-size: 15px">
+		<table class="table table-striped table-condensed" style="font-size: 15px" id="showtable">
  		    <tr>
 			    <th align="center">项目编号</th>
 			    <th align="center">项目名称</th>
@@ -63,10 +122,10 @@
 					</div>
 				</td>
 
-			    <td align="left" name="pro_name">${pl.name }</td>
-			    <td align="left" name="pro_duty">${pl.duty }</td>
-			    <td align="left" name="pro_ptype">${pl.ptype }</td>
-			    <td align="left" name="pro_pstate">${pl.pstate }</td>
+			    <td align="left">${pl.name }</td>
+			    <td align="left">${pl.duty }</td>
+			    <td align="left" >${pl.ptype }</td>
+			    <td align="left">${pl.pstate }</td>
 		    </tr>
 
 			</c:forEach>
@@ -77,25 +136,43 @@
                 </div>
                 </div>
                 <!--  分页栏-->
+				
 				<nav aria-label="Page navigation" style="text-align: center">
-				  <ul class="pagination">
+				  <ul class="pagination" id="showpage">
+				  	<script type="text/javascript">
+				  		var showtable=document.getElementById("showtable");
+				  		var showpage=document.getElementById("showpage");
+				  	</script>
 					<li>
-					  <a href="#" aria-label="Previous">
+					  <a href="javascript:getPrevious(showpage);" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li name="fozza_li"><a onclick="ifclick(this)">1</a></li>
-					<li name="fozza_li"><a onclick="ifclick(this)">2</a></li>
-					<li name="fozza_li"><a onclick="ifclick(this)">3</a></li>
-					<li name="fozza_li"><a onclick="ifclick(this)">4</a></li>
-					<li name="fozza_li"><a onclick="ifclick(this)">5</a></li>
+					<li class="active"><a href="javascript:jmpPage(1)">1</a></li>
+					<script type="text/javascript">
+						if(pageNum<5){
+							for(var i=2;i<=pageNum;i++){
+								var node=document.createElement("li");
+								node.innerHTML='<a href="javascript:jmpPage('+i+')">'+i+'</a>';
+								showpage.appendChild(node);
+							}
+						}else{
+							for(var i=2;i<6;i++){
+								var node=document.createElement("li");
+								node.innerHTML='<a href="javascript:jmpPage('+i+')">'+i+'</a>';
+								showpage.appendChild(node);
+							}
+						}
+					</script>
 					<li>
-					  <a href="#" aria-label="Next">
+					  <a href="javascript:getNext(showpage);" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					  </a>
 					</li>
 				  </ul>
-				</nav>
+				</nav>	
+				
+				
 
             </div> 
 				<button type="button" class="btn btn-primary" style="float: right;"><a href="main.html"></a>返回</button>	
@@ -169,52 +246,28 @@
   </footer>
   </body>
 <script type="text/javascript">
-	var aja = new XMLHttpRequest();
-	var curr_page = 1;
-	var i=0;
-	
-	function ifclick(a){
-		curr_page = a.innerHTML;
-		/* var pos = curr_page%5;
-		var fozza_li = document.getElementsByName("fozza_li");
-		fozza_li[pos].className = "active"; */
-		aja.onreadystatechange = function() {
-		
-			if (aja.readyState == 4 && aja.status == 200) {
-			alert(curr_page);
-			var str = eval("(" + aja.responseText + ")");
-			alert(aja.responseText);
-			var plist = str.pi_list;//获取链表
-			//设置tr的block和none display属性
-			var fozza_tr = document.getElementsByName("fozza_tr");
+	function getFunction(cur){
+			var req = new XMLHttpRequest();
+			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						var res=req.responseText;
+						//数据刷新
+						var data=eval('('+res+')');
+						dataJson=data.pi_list;
+						currentPage=data.current_page;
+					 	pageSize=data.page_size;
+					    pageNum=data.total_page;  
+					 	totalNum=data.count; 
+						projectNum=dataJson.length;	
+						refreshData();	
+					}
+				}
+			};
 			
-			//内容
-			var pro_no = document.getElementsByName("pro_no");
-			var pro_pname = document.getElementsByName("pro_pname");
-			var pro_name = document.getElementsByName("pro_name");
-			var pro_duty = document.getElementsByName("pro_duty");
-			var pro_ptype = document.getElementsByName("pro_ptype");
-			var pro_pstate = document.getElementsByName("pro_pstate");
-
-			for (i = 0; i < 5; i++) {
-				if (plist[i] != null) {
-					pro_no[i].innerHTML = plist[i].pno;
-					pro_pname[i].innerHTML = plist[i].pname;
-					pro_name[i].innerHTML = plist[i].name;
-					pro_duty[i].innerHTML = plist[i].duty;
-					pro_ptype[i].innerHTML = plist[i].ptype;
-					pro_pstate[i].innerHTML = plist[i].pstate;
-				} else {
-					fozza_tr[i].style.display = "none";
-				} 
-
-			}
-
+			req.open("get", "/RealProject/servlet/ShowProjectServlet2?current_page="+cur);
+			req.send(null);
 		}
-		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowProjectServlet2?current_page="+curr_page);
-		aja.send(null);
-	}
-	}
 
 </script>
 </html>
