@@ -38,7 +38,7 @@
    				}
    			};
    			
-   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=10");
+   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=5");
    			req.send(null);
 		}
 		function refreshData(){
@@ -124,6 +124,9 @@
 						   	var pageNum=${fee['pageNum']};  
 						 	var totalNum=${fee['totalNum']};
 						 	var feeauditNum=${fee['feeauditNum']};
+						 	var currentGroup=1;
+						 	var groupSize=5;
+						 	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1;
 						 	refreshData(); 
 					</script>
 	

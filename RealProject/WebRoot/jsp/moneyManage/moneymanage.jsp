@@ -109,9 +109,14 @@
 						 
 						 	var currentPage=${projects['currentPage']};
 						 	var pageSize=${projects['pageSize']};
-						   	var pageNum=${projects['pageNum']};  
+						 	
+						  	var pageNum=${projects['pageNum']};  
+						 	var totalNum=${projects['totalNum']}; 
 						 	var totalNum=${projects['totalNum']};
 						 	var projectNum=${projects['projectNum']};
+						 	var currentGroup=1;
+						 	var groupSize=5;
+						 	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1;
 						 	refreshData(); 
 						 </script>
 						 
@@ -159,7 +164,7 @@
     	<!--	报账-->
     		<div id="account" class="col-lg-4" style="padding-left: 30px">
 	        <div class="panel panel-primary">
-		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage=1&pageSize=10')">more..</span></div>
+		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage=1&pageSize=5')">more..</span></div>
 		        <div class="panel-body">
 		        <table class="table table-striped " style="font-size: 15px" id="feetable">
  		    <tr>
@@ -412,14 +417,17 @@
           			if(tmp.indexOf(".")!=-1){
           				if(tmp.indexOf(".")!=tmp.length-1){
 		          			task_fee.value="";
+		          			submit.disabled="disabled";
 		          			alert("请输入正确的金额");
           				}
           			}else{
           				task_fee.value="";
+          				submit.disabled="disabled";
 	          			alert("请输入正确的金额");
           			}
           		}else{
           			task_feeaudit=window.parseFloat(tmp);
+          			submit.removeAttribute("disabled");
 	          		task_budget=taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].budget;
 	          		if(task_budget<task_feeaudit){
 	          			warnning.innerHTML="当前任务剩余预算为￥"+task_budget+"元,请填写超标原因";
