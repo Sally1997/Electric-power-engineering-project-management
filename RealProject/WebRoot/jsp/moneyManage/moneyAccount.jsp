@@ -42,57 +42,40 @@
    			req.send(null);
 		}
 		function refreshData(){
-			//删除所有节点
-			maintable.innerHTML="";
 			
-			//新建表头
-			var tr=document.createElement("tr");
-			tr.innerHTML="<th>项目名称</th><th>项目阶段</th><th>任务阶段</th><th>报销人</th><th>报账时间</th><th>报账金额</th><th>状态</th><th> </th>";
-			maintable.appendChild(tr);
-			//插入数据
-			for(var i=0;i<feeauditNum;i++){
-				var tr=document.createElement("tr");
+			var nodes=document.getElementById("maintable").getElementsByTagName("tr");
+			for(var i=0;i<dataJson.length;i++){
 				
-				var td1=document.createElement("td");
-				td1.innerHTML=dataJson[i].pname;
+				var tds=nodes[i+1].getElementsByTagName("td");
+				tds[0].innerHTML=dataJson[i].pname;
+				tds[1].innerHTML=dataJson[i].sname;
+				tds[2].innerHTML=dataJson[i].taskname;
+				tds[3].innerHTML=dataJson[i].appname;
+				tds[4].innerHTML=dataJson[i].stime;
+				tds[5].innerHTML=dataJson[i].fee;
+				var state=dataJson[i].auditstate;
 				
-				var td2=document.createElement("td");
-				td2.innerHTML=dataJson[i].sname;
-				
-				var td3=document.createElement("td");
-				td3.innerHTML=dataJson[i].taskname;
-				
-				var td4=document.createElement("td");
-				td4.innerHTML=dataJson[i].appname;
-				
-				var td5=document.createElement("td");
-				td5.innerHTML=dataJson[i].stime;
-				
-				var td6=document.createElement("td");
-				td6.innerHTML="￥"+dataJson[i].fee;
-				
-				var td7=document.createElement("td");
-				if(dataJson[i].auditstate=="0"){
-   					td7.className="text-danger";
-   					td7.innerHTML="未审批";
-   				}else if(dataJson[i].auditstate=="1"){
-   					td7.className="text-danger";
-   					td7.innerHTML="未通过";
-   				}else{
-   					td7.className="text-success";
-   					td7.innerHTML="通过审批";
-   				}
-   				var hr=document.createElement("hr");
-   				tr.appendChild(td1);
-   				tr.appendChild(td2);
-   				tr.appendChild(td3);
-   				tr.appendChild(td4);
-   				tr.appendChild(td5);
-   				tr.appendChild(td6);
-   				tr.appendChild(td7);
-   				maintable.appendChild(hr);
-   				maintable.appendChild(tr);
-			}
+				if(state==0){
+					tds[6].innerHTML="未审批";
+					tds[6].className="text-danger";
+				}
+				else{
+					tds[6].innerHTML="审批通过";
+					tds[6].className="text-success";
+				}
+			} 
+			for(var i=dataJson.length;i<5;i++){	
+				var tds=nodes[i+1].getElementsByTagName("td");
+				tds[0].innerHTML="-";
+				tds[1].innerHTML="-";
+				tds[2].innerHTML="-";
+				tds[3].innerHTML="-";
+				tds[4].innerHTML="-";
+				tds[5].innerHTML="-";
+				tds[6].innerHTML="-";
+			} 
+			
+			
 		}
 	</script>
 	
@@ -114,6 +97,57 @@
 						<th>状态</th>
 						<th> </th>
 					</tr>
+					<tr>
+						<td >项目A</td>
+						<td >阶段一</td>
+						<td >任务一</td>
+						<td >甲</td>
+						<td >2017-10-11</td>
+						<td >￥50.00元</td>
+						<td >未审批</td>
+						<td ></td>
+					</tr>
+					<tr>
+						<td >项目A</td>
+						<td >阶段一</td>
+						<td >任务一</td>
+						<td >甲</td>
+						<td >2017-10-11</td>
+						<td >￥50.00元</td>
+						<td >未审批</td>
+						<td ></td>
+					</tr>
+					<tr>
+						<td >项目A</td>
+						<td >阶段一</td>
+						<td >任务一</td>
+						<td >甲</td>
+						<td >2017-10-11</td>
+						<td >￥50.00元</td>
+						<td >未审批</td>
+						<td ></td>
+					</tr>
+					<tr>
+						<td >项目A</td>
+						<td >阶段一</td>
+						<td >任务一</td>
+						<td >甲</td>
+						<td >2017-10-11</td>
+						<td >￥50.00元</td>
+						<td >未审批</td>
+						<td ></td>
+					</tr>
+					<tr>
+						<td >项目A</td>
+						<td >阶段一</td>
+						<td >任务一</td>
+						<td >甲</td>
+						<td >2017-10-11</td>
+						<td >￥50.00元</td>
+						<td >未审批</td>
+						<td ></td>
+					</tr>
+					
 				</table>
 					<!-- 复用前面的代码 -->
 					<script type="text/javascript">

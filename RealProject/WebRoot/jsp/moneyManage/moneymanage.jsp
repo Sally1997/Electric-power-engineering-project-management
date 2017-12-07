@@ -106,7 +106,6 @@
 					<!-- 获取json对象 -->
 						 <script type="text/javascript">
 						 	var dataJson=eval('('+'${projects["budgets"]}'+')');
-						 
 						 	var currentPage=${projects['currentPage']};
 						 	var pageSize=${projects['pageSize']};
 						 	
@@ -174,48 +173,80 @@
 			    <th>状态</th>
 			    <th> </th>
 		    </tr>
-		    <!-- 动态生成表 -->
-		    <script type="text/javascript">
-    			
-    			var feetable=document.getElementById("feetable");
-    			for(var i=0;i<feeData.length;i++){
-    				var trNode=document.createElement("tr");
-    				var trHr=document.createElement("tr");
-    				trHr.innerHTML="<hr>";
-    				var tdNode1=document.createElement("td");
-    				tdNode1.title=feeData[i].pname;
-    				var pname=feeData[i].pname.substring(0,8)+"...";
-    				tdNode1.innerHTML=pname;
-    				
-    				var tdNode2=document.createElement("td");
-    				tdNode2.innerHTML=feeData[i].appname;
-    				
-    				var tdNode3=document.createElement("td");
-    				tdNode3.innerHTML=feeData[i].stime;
-    				
-    				var tdNode4=document.createElement("td");
-    				if(feeData[i].auditstate=="0"){
-    					tdNode4.className="text-danger";
-    					tdNode4.innerHTML="未审批";
-    				}else if(feeData[i].auditstate=="1"){
-    					tdNode4.className="text-danger";
-    					tdNode4.innerHTML="未通过";
-    				}else{
-    					tdNode4.className="text-success";
-    					tdNode4.innerHTML="通过审批";
-    				}
-    				var tdNode5=document.createElement("td");
-    				tdNode5.innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal" data-target="#acInfo" title="详细" style="cursor: pointer" onclick="updateFeeAuditDialog('+i+')"></span>';
-    				
-    				//压入数据
-    				trNode.appendChild(tdNode1);
-    				trNode.appendChild(tdNode2);
-    				trNode.appendChild(tdNode3);
-    				trNode.appendChild(tdNode4);
-    				trNode.appendChild(tdNode5);
-    				feetable.appendChild(trHr);
-    				feetable.appendChild(trNode);
-    			}
+		    <tr>
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">
+			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+			    </td>
+		    </tr>
+		    <tr>
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">			    
+			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+		   		</td>
+		    </tr>
+		    <tr>
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">			    
+			   <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+		    	</td>
+		    </tr>
+		    <tr>
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">			    
+			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+		    	</td>
+		    </tr>
+			<script type="text/javascript">
+			    var nodes=document.getElementById("feetable").getElementsByTagName("tr");
+				for(var i=0;i<feeData.length;i++){
+					
+					var tds=nodes[i+1].getElementsByTagName("td");
+					var name1=feeData[i].pname;
+					if(name1.length>8)
+						name1=name1.substr(0,8)+"...";
+					
+					var name2=feeData[i].sname;
+					
+					if(name2.length>4)
+						name2=name2.substr(0,4)+"...";
+					tds[0].innerHTML=name1;
+					tds[1].innerHTML=name2;
+					tds[2].innerHTML=feeData[i].stime;
+					var state=feeData[i].auditstate;
+					
+					if(state==0){
+						tds[3].innerHTML="未审批";
+						tds[3].className="text-danger";
+					}
+					else{
+						tds[3].innerHTML="审批通过";
+						tds[3].className="text-success";
+					}
+					tds[4].innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer" onclick="updateFeeAuditDialog('+i+')"></span>';
+				} 
+				for(var i=feeData.length;i<4;i++){	
+					var tds=nodes[i+1].getElementsByTagName("td");
+					tds[0].innerHTML="-";
+					tds[1].innerHTML="-";
+					tds[2].innerHTML="-";
+					tds[3].innerHTML="-";
+					tds[4].innerHTML="-";
+				} 
+			</script>
+		    
     		</script> 
 	        </table>
 				
