@@ -246,4 +246,52 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			return 0;
 		}
 	}
+
+
+	@Override
+	public String showAuditInfoPageById(int cur, int pagesize, String id) {
+		// TODO Auto-generated method stub
+//		resMap.put("totalNum", totalNum);  //数据库总的记录数
+//		resMap.put("feeaudits", feeaudits.toString());   //数据库记录的json数组
+//		resMap.put("currentPage", cur);     //当前页
+//		resMap.put("pageSize", pagesize);   //页大小
+//		resMap.put("pageNum", totalNum%pagesize==0?totalNum/pagesize:totalNum/pagesize+1);  //总页数
+//		resMap.put("feeauditNum", fees.size());   //目前获得的记录数
+		long totalNum=0;
+		FeeAuditDao fd=new FeeAuditDaoImpl();
+		StageTaskDao std=new StageTaskDaoImpl();
+		StaffDao sd=new StaffDaoImpl();
+		List<FeeAudit> list=null;
+		JSONObject res=new JSONObject();
+		JSONArray audits=new JSONArray();
+		try {
+			totalNum=fd.selectTotalAuditById(id);
+			//获取
+			list=fd.selectFeeAuditInfoPageById(cur, pagesize, id);
+			//循环遍历
+			
+			for(FeeAudit f:list){
+				TaskInfo task=std.selectTaskInfoByTaskNo(f.getTaskno());
+				JSONObject t=new JSONObject();
+				t.put("pname", task.getPname());
+				t.put("sname", task.getSname());
+				t.put("taskname", task.getTaskname());
+				String name = sd.selectStaffById(f.getApplicantno()).getName();
+				t.put("appname", name);
+				t.put("stime", f.getStime());
+				t.put("fee", f.getFee());
+				t.put("auditstate", f.getAuditstate());
+				audits.add(t);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		res.put("totalNum", totalNum);
+		res.put("currentPage", cur);
+		res.put("pageSize", pagesize);
+		res.put("pageNum", totalNum%pagesize==0?totalNum/pagesize:totalNum/pagesize+1);
+		res.put("audits", audits);
+		return res.toString();
+	}
 }

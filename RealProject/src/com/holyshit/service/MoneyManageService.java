@@ -7,6 +7,14 @@ import com.holyshit.domain.TaskInfo;
 import net.sf.json.JSONArray;
 
 public interface MoneyManageService {
+	/**
+	 * 分页显示报账审核信息，json传递数据
+	 * @param cur
+	 * @param pagesize
+	 * @param id
+	 * @return
+	 */
+	String showAuditInfoPageById(int cur,int pagesize,String id);
 	/***
 	 * 分页显示项目资金情况
 	 * @param cur 当前页

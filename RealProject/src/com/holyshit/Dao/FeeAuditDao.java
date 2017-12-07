@@ -22,6 +22,24 @@ public interface FeeAuditDao {
 	 * @throws SQLException
 	 */
 	List<FeeAudit> selectAllFeeInfoPageById(int cur,int pageSize,String staffno)throws SQLException;
+	
+	/**
+	 * 获取审核信息分页
+	 * @param cur
+	 * @param pageSize
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	List<FeeAudit> selectFeeAuditInfoPageById(int cur,int pageSize,String staffno) throws SQLException;
+	
+	/**
+	 * 查询某人的审核信息总数
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectTotalAuditById(String id)throws SQLException;
 	/**
 	 * 根据用户id查询相应用户的所有的报账信息
 	 * @param id

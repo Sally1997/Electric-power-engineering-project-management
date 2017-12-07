@@ -55,4 +55,19 @@ public class FeeAuditDaoImpl implements FeeAuditDao{
 		return qr.update(ConnectionManager.getConnection(), "INSERT INTO feeaudit(applicantno,auditorno,pno,auditstate,fee,taskno,stime,ofeereason) VALUES(?,?,?,'0',?,?,?,?)",applicantno,auditor,pno,fee,taskno,new Date(new java.util.Date().getTime()),cause);
 	}
 
+	@Override
+	public List<FeeAudit> selectFeeAuditInfoPageById(int cur, int pageSize,
+			String staffno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(),"select * from feeaudit where auditorno=? order by stime desc limit ?,?",new BeanListHandler<FeeAudit>(FeeAudit.class),staffno,(cur-1)*pageSize,pageSize);
+	}
+
+	@Override
+	public long selectTotalAuditById(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return (long) qr.query(ConnectionManager.getConnection(),"select count(*) from feeaudit where auditorno=?",new ScalarHandler(),id);
+	}
+
 }
