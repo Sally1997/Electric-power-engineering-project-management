@@ -1,8 +1,8 @@
 package com.holyshit.web.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,63 +10,43 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.holyshit.domain.ProjectInfo;
 import com.holyshit.service.ProjectService;
 import com.holyshit.service.impl.ProjectServiceImpl;
 
-import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 
 @WebServlet("/servlet/ShowProjectServlet")
 public class ShowProjectServlet extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		response.setHeader("text/html", "charset=UTF-8");
-		
-		List<ProjectInfo> list = new ArrayList<ProjectInfo>();
-		ProjectService ps = new ProjectServiceImpl();
-		list = ps.getProjectInfo();
-		//一类为设计类，对应字符''0'',一类为工程类,对应字符''1''
-		//项目状态有''0''——立项审核中；''1''正常进行中,''2''逾期进行中,''3’按时完工，''4''逾期竣工。。'
-		for(int i=0;i<list.size();i++){
-			if(list.get(i).getPType().equals("0")){
-				list.get(i).setPType("设计类");
-			}
-			else{
-				list.get(i).setPType("工程类");
-			}
-			switch(list.get(i).getpState()){
-			case "0":
-				list.get(i).setpState("立项审核中");
-				break;
-			case "1":
-				list.get(i).setpState("正常进行中");
-				break;
-			case "2":
-				list.get(i).setpState("逾期进行中");
-				break;
-			case "3":
-				list.get(i).setpState("按时完工");
-				break;
-			case "4":
-				list.get(i).setpState("逾期竣工");
-				break;
-			}
+		//定义当前页和页大小
+		int current_page = 1;
+		int page_size = 5;
+		String curr_page = request.getParameter("current_page");
+		if(curr_page!=null){
+			current_page = Integer.parseInt(curr_page);
 		}
-		/*for(int i=0;i<list.size();i++){
-			System.out.println(list.get(i));
-		}*/
-		String s = JSONArray.fromObject(list).toString();
-		response.getWriter().write(s);
+		
+		ProjectService ps = new ProjectServiceImpl();
+		Map<String,Object> info_map = new HashMap<String, Object>();
+		info_map = ps.getProjectManageInfo(current_page, page_size);
+		
+		/*//转换成JSON数组
+		String s = JSONObject.fromObject(info_map).toString();
 		System.out.println(s);
-		/*if(list!=null){
-			request.setAttribute("list",list);
-			request.getRequestDispatcher("/jsp/projectManage/projectmanagerfirst.jsp").forward(request, response);
-		}*/
+		
+		response.getWriter().write(s);*/
+		
+		
+		request.setAttribute("info_map", info_map);
+		request.getRequestDispatcher("/jsp/projectManage/projectmanagerfirst.jsp").forward(request, response);;
 		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 

@@ -1,49 +1,63 @@
 package com.holyshit.domain;
 
 public class ProjectInfo {
-	private String Pno;
-	private String PName;
-	private String Name;
+	private String pno;
+	private String pname;
+	private String name;
 	private String duty;
-	private String PType;
-	private String pState;
+	private String ptype;
+	private String pstate;
+	
 	public String getPno() {
-		return Pno;
+		return pno;
 	}
+
 	public void setPno(String pno) {
-		Pno = pno;
+		this.pno = pno;
 	}
-	public String getPName() {
-		return PName;
+
+	public String getPname() {
+		return pname;
 	}
-	public void setPName(String pName) {
-		PName = pName;
+
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
+
 	public String getName() {
-		return Name;
+		return name;
 	}
+
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
-	public String getPMDuty() {
+
+	public String getDuty() {
 		return duty;
 	}
-	public void setPMDuty(String pMDuty) {
-		duty = pMDuty;
+
+	public void setDuty(String duty) {
+		this.duty = duty;
 	}
-	public String getPType() {
-		return PType;
+
+	public String getPtype() {
+		return ptype;
 	}
-	public void setPType(String pType) {
-		PType = pType;
+
+	public void setPtype(String ptype) {
+		this.ptype = ptype;
 	}
-	public String getpState() {
-		return pState;
+
+	public String getPstate() {
+		return pstate;
 	}
-	public void setpState(String pState) {
-		this.pState = pState;
+
+	public void setPstate(String pstate) {
+		this.pstate = pstate;
 	}
+
 	public String toString() {
-		return "Project[Pno="+Pno+", PName="+PName+", Name="+Name+"]";
+		return "project[pno="+pno+", pname="+pname+", name="+name+", duty="+duty+
+				", ptype="+ptype+", pstate="+pstate+"]";
 	}
 }
