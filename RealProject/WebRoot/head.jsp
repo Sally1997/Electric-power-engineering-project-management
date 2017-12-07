@@ -40,6 +40,7 @@
             <ul class="nav navbar-nav" id="head_menu">
               <li><a href="${pageContext.request.contextPath}/web/servlet/mainServlet">首页</a></li>
               <li><a href="">项目管理</a></li>
+              <li><a href="${pageContext.request.contextPath}/servlet/ShowProjectServlet">项目管理</a></li>
               <li><a href="#">文档管理</a></li>
               <li><a href="${pageContext.request.contextPath}/web/servlet/showbudgetpage?currentPage=1&pageSize=3">资金管理</a></li>
             </ul>
