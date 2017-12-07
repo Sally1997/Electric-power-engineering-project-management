@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div id="error">对不起，您访问的页面不存在或已被删除</div> 
     	<div id="returnS">
     		<div class="return"><a href="javascript:history.go(-1)"> 返回上一页</a></div> 
-    		<div class="return"><a href="${pageContext.request.contextPath}/jsp/homeManage/main.jsp" >返回主页</a></div>
+    		<div class="return"><a href="${pageContext.request.contextPath}/web/servlet/mainServlet" >返回主页</a></div>
     	</div>
    
   	

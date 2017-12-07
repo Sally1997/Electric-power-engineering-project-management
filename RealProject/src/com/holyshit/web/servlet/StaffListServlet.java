@@ -29,7 +29,7 @@ public class StaffListServlet extends HttpServlet {
 		List<StaffDuty> Staffs = ssi.findAllStaffs(pno);
 		request.setAttribute("Staff", Staffs);
 		request.setAttribute("pno", pno);
-		request.getRequestDispatcher("/jsp/planManage/hr_main.jsp").forward(request,response);
+		request.getRequestDispatcher("/jsp/projectManage/hr_main.jsp").forward(request,response);
 		
 	}
 

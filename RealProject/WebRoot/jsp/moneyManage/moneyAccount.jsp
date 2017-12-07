@@ -38,7 +38,7 @@
    				}
    			};
    			
-   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=10");
+   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=5");
    			req.send(null);
 		}
 		function refreshData(){
@@ -82,6 +82,7 @@
    					td7.className="text-success";
    					td7.innerHTML="通过审批";
    				}
+   				var hr=document.createElement("hr");
    				tr.appendChild(td1);
    				tr.appendChild(td2);
    				tr.appendChild(td3);
@@ -89,6 +90,7 @@
    				tr.appendChild(td5);
    				tr.appendChild(td6);
    				tr.appendChild(td7);
+   				maintable.appendChild(hr);
    				maintable.appendChild(tr);
 			}
 		}
@@ -122,6 +124,9 @@
 						   	var pageNum=${fee['pageNum']};  
 						 	var totalNum=${fee['totalNum']};
 						 	var feeauditNum=${fee['feeauditNum']};
+						 	var currentGroup=1;
+						 	var groupSize=5;
+						 	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1;
 						 	refreshData(); 
 					</script>
 	

@@ -1,5 +1,6 @@
 package com.holyshit.Dao.impl;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,6 +38,21 @@ public class FeeAuditDaoImpl implements FeeAuditDao{
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return (Long)qr.query(ConnectionManager.getConnection(),"select count(*) from feeaudit where applicantno=?",new ScalarHandler(),id);
+	}
+
+	@Override
+	public int addFeeAudit(String taskno,double fee,String applicantno,String auditor,String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(), "INSERT INTO feeaudit(applicantno,auditorno,pno,auditstate,fee,taskno,stime) VALUES(?,?,?,'0',?,?,?)",applicantno,auditor,pno,fee,taskno,new Date(new java.util.Date().getTime()));
+	}
+
+	@Override
+	public int addFeeAuditOver(String taskno,double fee,String cause,String applicantno,String auditor,String pno)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(), "INSERT INTO feeaudit(applicantno,auditorno,pno,auditstate,fee,taskno,stime,ofeereason) VALUES(?,?,?,'0',?,?,?,?)",applicantno,auditor,pno,fee,taskno,new Date(new java.util.Date().getTime()),cause);
 	}
 
 }

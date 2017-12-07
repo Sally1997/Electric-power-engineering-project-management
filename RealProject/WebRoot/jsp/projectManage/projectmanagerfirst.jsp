@@ -17,7 +17,6 @@
   </head>
   <body> 
    
-<!--  主要内容-->
 	<%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
@@ -58,18 +57,20 @@
 			    	<div class="dropdown"><span name="pro_pname">${pl.pname }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="#">人员管理</a></li>
-    						<li><a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
+    						<li><a href="/RealProject/web/servlet/staffListServlet?pno=10001">人员管理</a></li>
+    						<li><a href="/RealProject/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
   						</ul>
 					</div>
 				</td>
+
 			    <td align="left" name="pro_name">${pl.name }</td>
 			    <td align="left" name="pro_duty">${pl.duty }</td>
 			    <td align="left" name="pro_ptype">${pl.ptype }</td>
 			    <td align="left" name="pro_pstate">${pl.pstate }</td>
 		    </tr>
+
 			</c:forEach>
-		   
+		
 	        </table> 
 					</div> 
                     </div>
@@ -206,13 +207,17 @@
 				} else {
 					fozza_tr[i].style.display = "none";
 				} 
+
 			}
+
 		}
 		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowProjectServlet2?current_page="+curr_page);
 		aja.send(null);
 	}
 	}
-	
-	
+
 </script>
+</html>
+
+  
 </html>

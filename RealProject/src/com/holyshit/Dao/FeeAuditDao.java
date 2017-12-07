@@ -29,4 +29,23 @@ public interface FeeAuditDao {
 	 * @throws SQLException
 	 */
 	long selectTotalNumById(String id)throws SQLException;
+	
+	/**
+	 * 添加未超标报账信息
+	 * @param taskno
+	 * @param fee
+	 * @return
+	 * @throws SQLException
+	 */
+	int addFeeAudit(String taskno,double fee,String applicantno,String auditor,String pno)throws SQLException;
+	
+	/**
+	 * 添加以超标报账信息
+	 * @param taskno
+	 * @param fee
+	 * @param cause
+	 * @return
+	 * @throws SQLException
+	 */
+	int addFeeAuditOver(String taskno,double fee,String cause,String applicantno,String auditor,String pno)throws SQLException;
 }

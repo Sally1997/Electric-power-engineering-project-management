@@ -2,6 +2,10 @@ package com.holyshit.service;
 
 import java.util.Map;
 
+import com.holyshit.domain.TaskInfo;
+
+import net.sf.json.JSONArray;
+
 public interface MoneyManageService {
 	/***
 	 * 分页显示项目资金情况
@@ -19,4 +23,21 @@ public interface MoneyManageService {
 	 * @return
 	 */
 	Map<String, Object> showFeeAuditInfoPage(int cur,int pagesize,String id);
+	
+	/**
+	 * 查找可以报账的任务信息
+	 * @param id
+	 * @return
+	 */
+	String findFeeAbledTask(String id);
+
+	/**
+	 * 报账
+	 * @param task
+	 * @param fee
+	 * @param cause
+	 * @param over
+	 * @return
+	 */
+	int handleFee(TaskInfo task,double fee,String cause,boolean over);
 }

@@ -1,20 +1,17 @@
 package com.holyshit.service.impl;
 
+import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.inject.New;
 
-
-
-
-
-
-
-
-
-
+import org.junit.Test;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -154,4 +151,99 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		return resMap;
 	}
 
+
+	@Override
+	public String findFeeAbledTask(String id) {
+		// TODO Auto-generated method stub
+		StageTaskDao std=new StageTaskDaoImpl();
+		JSONArray projects=new JSONArray();
+		try {
+			//得到任务信息
+			//正在参与的所有任务
+			List<TaskInfo> tasks= std.selectTaskInfoById(id);
+			//将数据拆分封装成json
+			Map<String, Integer> project_flag=new HashMap<String, Integer>();
+			Map<String, Integer> stage_flag=new HashMap<String, Integer>();
+			for(TaskInfo task:tasks){
+				//project
+				JSONObject project=null;
+				if(project_flag.containsKey(task.getPno())){
+					project=projects.getJSONObject(project_flag.get(task.getPno()));
+				}else {
+					project=new JSONObject();
+					project.put("pname", task.getPname());
+					project.put("stagelist", new JSONArray());
+					project_flag.put(task.getPno(), projects.size());
+					projects.add(project);
+				}
+				
+				//stage
+				JSONArray stages=project.getJSONArray("stagelist");
+				JSONObject stage=null;
+				if(stage_flag.containsKey(task.getStageno())){
+					stage=stages.getJSONObject(stage_flag.get(task.getStageno()));
+				}else {
+					stage=new JSONObject();
+					stage.put("sname", task.getSname());
+					stage.put("tasklist", new JSONArray());
+					stage_flag.put(task.getStageno(), stages.size());
+					stages.add(stage);
+					
+				}
+				//task
+				JSONArray manytask=stage.getJSONArray("tasklist");
+				JSONObject atask=new JSONObject();
+				double used=0;
+				BigDecimal hasused = std.selectFeeUsedByTaskno(task.getTaskno());
+				if(hasused!=null)
+					used=Double.parseDouble(hasused.toString());
+				atask.put("taskname", task.getTaskname());
+				atask.put("taskno", task.getTaskno());
+				atask.put("budget", task.getBudget()-used);
+				manytask.add(atask);
+				//很坑，getJsonObject这样的函数居然返回的是一个对象副本。。。。草泥马
+				//重新压入新的数据
+				stage.put("tasklist", manytask);  
+				stages.set(stage_flag.get(task.getStageno()), stage);
+		
+				project.put("stagelist", stages);
+				
+				projects.set(project_flag.get(task.getPno()), project);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String res=projects.toString();
+		return res;
+	}
+
+
+	@Override
+	public int handleFee(TaskInfo task, double fee,String cause,boolean over) {
+		// TODO Auto-generated method stub
+		//String taskno,double fee,String cause,String applicantno,String auditor,String pno
+		FeeAuditDao fd=new FeeAuditDaoImpl();
+		if(over){
+			try {
+				return fd.addFeeAuditOver(task.getTaskno(), fee, cause, task.getCharpno(), task.getPubpno(), task.getPno());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;
+		}else{
+			fd=new FeeAuditDaoImpl();
+			try {
+				return fd.addFeeAudit(task.getTaskno(), fee, task.getCharpno(), task.getPubpno(), task.getPno());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;
+		}
+	}
 }
