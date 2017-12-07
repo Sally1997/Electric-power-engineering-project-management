@@ -16,6 +16,8 @@
    	<script type="text/javascript">
    		var taskinfo="";
    		var feeData=eval('('+'${fee["feeaudits"]}'+')');
+   		var auditData;
+   		
    		//ajax请求
    		function submitFeeInfo(){
    			if(task_fee.value==""){
@@ -42,6 +44,65 @@
    				req.send(null);
    			}
    		}
+
+   		function showAuditData(){
+   			var nodes=audittable.getElementsByTagName("tr");
+			for(var i=0;i<auditData.length;i++){
+				
+				var tds=nodes[i+1].getElementsByTagName("td");
+				var name1=auditData[i].pname;
+				if(name1.length>8)
+					name1=name1.substr(0,8)+"...";
+				
+				var name2=auditData[i].sname;
+				
+				if(name2.length>4)
+					name2=name2.substr(0,4)+"...";
+				tds[0].innerHTML=name1;
+				tds[1].innerHTML=name2;
+				tds[2].innerHTML=auditData[i].stime;
+				var state=auditData[i].auditstate;
+				
+				if(state=="0"){
+					tds[3].innerHTML="未审批";
+					tds[3].className="text-danger";
+				}
+				else if(state=="2"){
+					tds[3].innerHTML="审批通过";
+					tds[3].className="text-success";
+				}else{
+					tds[3].innerHTML="不通过";
+					tds[3].className="text-danger";
+					
+				}
+				tds[4].innerHTML='<span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer" onclick="updateAuditDialog('+i+')"></span>';
+			} 
+			for(var i=auditData.length;i<4;i++){
+				var tds=nodes[i+1].getElementsByTagName("td");
+				tds[0].innerHTML="-";
+				tds[1].innerHTML="-";
+				tds[2].innerHTML="-";
+				tds[3].innerHTML="-";
+				tds[4].innerHTML="-";
+			} 
+		
+   		}
+   		function getAuditInfo(){
+   			var req=new XMLHttpRequest();
+   			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						var res=req.responseText;
+						var hehe=eval('('+res+')');
+						auditData=hehe.audits;
+						showAuditData();
+					}
+					
+				}
+			};
+			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=4");
+			req.send(null);
+  		}
    	</script>
 
   </head>
@@ -117,6 +178,9 @@
 						 	var groupSize=5;
 						 	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1;
 						 	refreshData(); 
+						 	
+						 	//获取审核信息
+					   		getAuditInfo();
 						 </script>
 						 
 					</div> 
@@ -262,7 +326,7 @@
 	        <div class="panel panel-primary">
 		        <div class="panel-heading"><span>相关项目审批信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/jsp/moneyManage/moneyPass.jsp')">more..</span></div>
 		        <div class="panel-body">
-		        <table class="table table-striped table-condensed" style="font-size: 15px">
+		        <table class="table table-striped table-condensed" style="font-size: 15px" id="audittable">
  		    <tr>
 			    <th>项目名称</th>
 			    <th>报销人</th>
@@ -286,6 +350,7 @@
 			    <td  class="text_danger">未审批</td>
 			    <td >			    
 			    <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+			    </td>
 		    </tr>
 		    <tr>
 			    <td >项目A</td>
@@ -294,6 +359,7 @@
 			    <td  class="text_danger">未审批</td>
 			    <td >			    
 			   <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+		     </td>
 		    </tr>
 		    <tr>
 			    <td >项目A</td>
@@ -302,8 +368,12 @@
 			    <td  class="text_danger">未审批</td>
 			    <td >			    
 			    <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+		     </td>
 		    </tr>
-
+			<script type="text/javascript">
+				var audittable=document.getElementById("audittable");
+				
+			</script>
 	        </table>
                 </div>
             </div>
@@ -496,15 +566,38 @@
       </div>
       <div>
         <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td>项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td>阶段一</td></tr>
-        	<tr><td>项目任务</td><td>任务一</td></tr>
-			<tr><td>报账人</td><td>甲</td></tr>
-        	<tr><td>报账时间</td><td>2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td>￥50.00元</td></tr>
+        	<tr><td>报账项目</td><td id="audit_pname">项目A</td></tr>       	
+        	<tr><td>项目阶段</td><td id="audit_sname">阶段一</td></tr>
+        	<tr><td>项目任务</td><td id="audit_taskname">任务一</td></tr>
+			<tr><td>报账人</td><td id="audit_appname">甲</td></tr>
+        	<tr><td>报账时间</td><td id="audit_stime">2017-10-11</td></tr>        	
+        	<tr><td>报账金额</td><td id="audit_fee">￥50.00元</td></tr>
             <tr><td>当前状态</td>
-            <td class="text_danger">未审批</td></tr>
+            <td id="audit_auditstate">未审批</td></tr>
         </table>
+        <script type="text/javascript">
+	   		//刷新审核框内容
+	   		function updateAuditDialog(e){
+	   			document.getElementById("audit_pname").innerHTML=auditData[e].pname;
+	   			document.getElementById("audit_sname").innerHTML=auditData[e].sname;
+	   			document.getElementById("audit_taskname").innerHTML=auditData[e].taskname;
+	   			document.getElementById("audit_appname").innerHTML=auditData[e].appname;
+	   			document.getElementById("audit_stime").innerHTML=auditData[e].stime;
+	   			document.getElementById("audit_fee").innerHTML=auditData[e].fee;
+	   			var state=document.getElementById("audit_auditstate");
+	   			var tmp=auditData[e].auditstate;
+	   			if(tmp=="0"){
+	   				state.className="text-danger";
+	   				state.innerHTML="未审批";
+	   			}else if(tmp="1"){
+	   				state.className="text-danger";
+	   				state.innerHTML="不通过";
+	   			}else{
+	   				state.className="text-success";
+	   				state.innerHTML="审批通过";
+	   			}
+	   		}
+        </script>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>

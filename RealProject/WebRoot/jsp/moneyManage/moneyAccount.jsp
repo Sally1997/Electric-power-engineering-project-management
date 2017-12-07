@@ -55,13 +55,16 @@
 				tds[5].innerHTML=dataJson[i].fee;
 				var state=dataJson[i].auditstate;
 				
-				if(state==0){
+				if(state=="0"){
 					tds[6].innerHTML="未审批";
 					tds[6].className="text-danger";
 				}
-				else{
+				else if(state=="2"){
 					tds[6].innerHTML="审批通过";
 					tds[6].className="text-success";
+				}else{
+					tds[6].innerHTML="不通过";
+					tds[6].className="text-danger";
 				}
 			} 
 			for(var i=dataJson.length;i<5;i++){	

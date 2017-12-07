@@ -69,6 +69,11 @@
     <servlet-name>SubmitFee</servlet-name>
     <servlet-class>com.holyshit.web.servlet.SubmitFee</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ShowAuditPage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowAuditPage</servlet-class>
+  </servlet>
+
 
 
 
@@ -120,6 +125,10 @@
   <servlet-mapping>
     <servlet-name>SubmitFee</servlet-name>
     <url-pattern>/web/servlet/submitFee</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowAuditPage</servlet-name>
+    <url-pattern>/web/servlet/showAuditPage</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

@@ -278,9 +278,20 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				t.put("taskname", task.getTaskname());
 				String name = sd.selectStaffById(f.getApplicantno()).getName();
 				t.put("appname", name);
-				t.put("stime", f.getStime());
+				t.put("stime", f.getStime().toString());
 				t.put("fee", f.getFee());
 				t.put("auditstate", f.getAuditstate());
+				//查询是否超标
+				double hasused=0;
+				BigDecimal ss = std.selectFeeUsedByTaskno(f.getTaskno());
+				if(ss!=null)
+					hasused=Double.parseDouble(ss.toString());
+				if(hasused>task.getBudget()){
+					t.put("over", 1);
+				}else {
+					t.put("over", 0);
+				}
+				
 				audits.add(t);
 			}
 		} catch (SQLException e) {
@@ -292,6 +303,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		res.put("pageSize", pagesize);
 		res.put("pageNum", totalNum%pagesize==0?totalNum/pagesize:totalNum/pagesize+1);
 		res.put("audits", audits);
+		System.out.println("哈哈"+res.toString());
 		return res.toString();
 	}
 }
