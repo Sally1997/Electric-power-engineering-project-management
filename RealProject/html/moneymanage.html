@@ -146,7 +146,7 @@
 					xAxis : [
 						{
 							type : 'category',
-							data : ['阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
+							data : ['总金额','阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
 						}
 					],
 					yAxis : [
@@ -179,7 +179,7 @@
 							name:'已报账',
 							type:'bar',
 							stack: '金额',
-							data:[120, 132, 101, 134, 0, 0, 0, 0],
+							data:[500, 120, 132, 101, 134, 0, 0, 0, 0],
 							barMaxWidth:40,
 
 						},
@@ -187,7 +187,7 @@
 							name:'剩余预算',
 							type:'bar',
 							stack: '金额',
-							data:[0, 182, 152, 0, 522, 348, 421, 255],
+							data:[1500, 0, 182, 152, 0, 522, 348, 421, 255],
 							itemStyle: {
 								normal:'#e8e8e8',
 								emphasis:'#a8a8a8'
@@ -197,7 +197,7 @@
 							name:'超标金额',
 							type:'bar',
 							stack: '金额',
-							data:[150, 0, 0, 154, 0, 0, 0, 0],
+							data:[304,150, 0, 0, 154, 0, 0, 0, 0],
 							
 
 						}
@@ -210,249 +210,249 @@
 				</script>
 						 </div>
 						 <div class="digramchart" id="chart2" style="margin-bottom: 20px">
-										<script type="text/javascript">
-						// 基于准备好的dom，初始化echarts实例
+								<script type="text/javascript">
+				// 基于准备好的dom，初始化echarts实例
 
-						var myChart = echarts.init(document.getElementById('chart2'));
+				var myChart = echarts.init(document.getElementById('chart2'));
 
-						// 指定图表的配置项和数据
+				// 指定图表的配置项和数据
 
-						var option = {
-							textStyle: {
-								fontFamily:'微软雅黑',
-								fontSize:15
+				var option = {
+					textStyle: {
+						fontFamily:'微软雅黑',
+						fontSize:15
+					},
+                    title: {text:'这个项目的名字其实特别长',
+							backgroundColor:'#e8e8e8',
+							link:'login.html',
+							textStyle:{
+								fontWeight:'lighter',
+								fontSize: 15,
+								align:'center'
 							},
-							title: {text:'这个项目的名字其实特别长',
-									backgroundColor:'#e8e8e8',
-									link:'login.html',
-									textStyle:{
-										fontWeight:'lighter',
-										fontSize: 15,
-										align:'center'
-									},
-									padding:[10,10,10,10],
-									borderRadius:[15,15,15,15],
-								   },
-							tooltip : {
+							padding:[10,10,10,10],
+							borderRadius:[15,15,15,15],
+						   },
+					tooltip : {
+					},
+					toolbox: {
+						feature: {
+							magicType: {
+								type: ['stack', 'tiled']
 							},
-							toolbox: {
-								feature: {
-									magicType: {
-										type: ['stack', 'tiled']
-									},
-									dataView: {
-										show:true,
-										readOnly:true,
-										buttonColor:'#52658f',
-										backgroundColor:'#dddddd',
-										textareaBorderColor:'#c8c8c8'
-									}
-								},
-								top:'3%',
-								right:'10%'
+							dataView: {
+								show:true,
+								readOnly:true,
+								buttonColor:'#52658f',
+								backgroundColor:'#dddddd',
+								textareaBorderColor:'#c8c8c8'
+							}
+						},
+	                    top:'3%',
+						right:'10%'
+					},
+					legend: {
+						data:['已报账','剩余预算','超标金额'],
+						top:'10%',
+						left:'2%',
+						orient:'vertical',
+						itemGap:15
+					},
+
+
+					grid: {
+						left: '25%',
+						right: '15%',
+						containLabel: true
+					},
+					xAxis : [
+						{
+							type : 'category',
+							data : ['总金额','阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
+						}
+					],
+					yAxis : [
+						{
+							type : 'value'
+						}
+					],
+					color:['#52658f','#c8c8c8','#e34953'],
+					dataZoom:[
+						{
+							id:'dataZoomX',
+							type:'slider',
+							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+                            handleSize: 20,
+							handleStyle: {
+								shadowBlur: 6,
+								shadowOffsetX: 1,
+								shadowOffsetY: 2,
+								shadowColor: '#aaa'
 							},
-							legend: {
-								data:['已报账','剩余预算','超标金额'],
-								top:'10%',
-								left:'2%',
-								orient:'vertical',
-								itemGap:15
-							},
+							xAxisIndex:[0],
+							filterMode:'filter',
+							start:0,
+							end:60
+						}
+					],
 
+					series: [
+						{
+							name:'已报账',
+							type:'bar',
+							stack: '金额',
+							data:[500, 120, 132, 101, 134, 0, 0, 0, 0],
+							barMaxWidth:40,
 
-							grid: {
-								left: '25%',
-								right: '15%',
-								containLabel: true
-							},
-							xAxis : [
-								{
-									type : 'category',
-									data : ['阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
-								}
-							],
-							yAxis : [
-								{
-									type : 'value'
-								}
-							],
-							color:['#52658f','#c8c8c8','#e34953'],
-							dataZoom:[
-								{
-									id:'dataZoomX',
-									type:'slider',
-									handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-									handleSize: 20,
-									handleStyle: {
-										shadowBlur: 6,
-										shadowOffsetX: 1,
-										shadowOffsetY: 2,
-										shadowColor: '#aaa'
-									},
-									xAxisIndex:[0],
-									filterMode:'filter',
-									start:0,
-									end:60
-								}
-							],
+						},
+						{
+							name:'剩余预算',
+							type:'bar',
+							stack: '金额',
+							data:[1500, 0, 182, 152, 0, 522, 348, 421, 255],
+							itemStyle: {
+								normal:'#e8e8e8',
+								emphasis:'#a8a8a8'
+							}
+						},
+						{
+							name:'超标金额',
+							type:'bar',
+							stack: '金额',
+							data:[304,150, 0, 0, 154, 0, 0, 0, 0],
+							
 
-							series: [
-								{
-									name:'已报账',
-									type:'bar',
-									stack: '金额',
-									data:[120, 132, 101, 134, 0, 0, 0, 0],
-									barMaxWidth:40,
+						}
+						]
 
-								},
-								{
-									name:'剩余预算',
-									type:'bar',
-									stack: '金额',
-									data:[0, 182, 152, 0, 522, 348, 421, 255],
-									itemStyle: {
-										normal:'#e8e8e8',
-										emphasis:'#a8a8a8'
-									}
-								},
-								{
-									name:'超标金额',
-									type:'bar',
-									stack: '金额',
-									data:[150, 0, 0, 154, 0, 0, 0, 0],
+				};
 
-
-								}
-								]
-
-						};
-
-						// 使用刚指定的配置项和数据显示图表。
-						myChart.setOption(option);
-						</script>
-								 </div>
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+				</script>
+						 </div>
 						 <div class="digramchart" id="chart3" style="margin-bottom: 20px">
-										<script type="text/javascript">
-						// 基于准备好的dom，初始化echarts实例
+								<script type="text/javascript">
+				// 基于准备好的dom，初始化echarts实例
 
-						var myChart = echarts.init(document.getElementById('chart3'));
+				var myChart = echarts.init(document.getElementById('chart3'));
 
-						// 指定图表的配置项和数据
+				// 指定图表的配置项和数据
 
-						var option = {
-							textStyle: {
-								fontFamily:'微软雅黑',
-								fontSize:15
+				var option = {
+					textStyle: {
+						fontFamily:'微软雅黑',
+						fontSize:15
+					},
+                    title: {text:'这个项目的名字其实特别长',
+							backgroundColor:'#e8e8e8',
+							link:'login.html',
+							textStyle:{
+								fontWeight:'lighter',
+								fontSize: 15,
+								align:'center'
 							},
-							title: {text:'这个项目的名字其实特别长',
-									backgroundColor:'#e8e8e8',
-									link:'login.html',
-									textStyle:{
-										fontWeight:'lighter',
-										fontSize: 15,
-										align:'center'
-									},
-									padding:[10,10,10,10],
-									borderRadius:[15,15,15,15],
-								   },
-							tooltip : {
+							padding:[10,10,10,10],
+							borderRadius:[15,15,15,15],
+						   },
+					tooltip : {
+					},
+					toolbox: {
+						feature: {
+							magicType: {
+								type: ['stack', 'tiled']
 							},
-							toolbox: {
-								feature: {
-									magicType: {
-										type: ['stack', 'tiled']
-									},
-									dataView: {
-										show:true,
-										readOnly:true,
-										buttonColor:'#52658f',
-										backgroundColor:'#dddddd',
-										textareaBorderColor:'#c8c8c8'
-									}
-								},
-								top:'3%',
-								right:'10%'
+							dataView: {
+								show:true,
+								readOnly:true,
+								buttonColor:'#52658f',
+								backgroundColor:'#dddddd',
+								textareaBorderColor:'#c8c8c8'
+							}
+						},
+	                    top:'3%',
+						right:'10%'
+					},
+					legend: {
+						data:['已报账','剩余预算','超标金额'],
+						top:'10%',
+						left:'2%',
+						orient:'vertical',
+						itemGap:15
+					},
+
+
+					grid: {
+						left: '25%',
+						right: '15%',
+						containLabel: true
+					},
+					xAxis : [
+						{
+							type : 'category',
+							data : ['总金额','阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
+						}
+					],
+					yAxis : [
+						{
+							type : 'value'
+						}
+					],
+					color:['#52658f','#c8c8c8','#e34953'],
+					dataZoom:[
+						{
+							id:'dataZoomX',
+							type:'slider',
+							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+                            handleSize: 20,
+							handleStyle: {
+								shadowBlur: 6,
+								shadowOffsetX: 1,
+								shadowOffsetY: 2,
+								shadowColor: '#aaa'
 							},
-							legend: {
-								data:['已报账','剩余预算','超标金额'],
-								top:'10%',
-								left:'2%',
-								orient:'vertical',
-								itemGap:15
-							},
+							xAxisIndex:[0],
+							filterMode:'filter',
+							start:0,
+							end:60
+						}
+					],
 
+					series: [
+						{
+							name:'已报账',
+							type:'bar',
+							stack: '金额',
+							data:[500, 120, 132, 101, 134, 0, 0, 0, 0],
+							barMaxWidth:40,
 
-							grid: {
-								left: '25%',
-								right: '15%',
-								containLabel: true
-							},
-							xAxis : [
-								{
-									type : 'category',
-									data : ['阶段一','阶段二','阶段三','阶段四','阶段五','阶段六','阶段七','阶段八']
-								}
-							],
-							yAxis : [
-								{
-									type : 'value'
-								}
-							],
-							color:['#52658f','#c8c8c8','#e34953'],
-							dataZoom:[
-								{
-									id:'dataZoomX',
-									type:'slider',
-									handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-									handleSize: 20,
-									handleStyle: {
-										shadowBlur: 6,
-										shadowOffsetX: 1,
-										shadowOffsetY: 2,
-										shadowColor: '#aaa'
-									},
-									xAxisIndex:[0],
-									filterMode:'filter',
-									start:0,
-									end:60
-								}
-							],
+						},
+						{
+							name:'剩余预算',
+							type:'bar',
+							stack: '金额',
+							data:[1500, 0, 182, 152, 0, 522, 348, 421, 255],
+							itemStyle: {
+								normal:'#e8e8e8',
+								emphasis:'#a8a8a8'
+							}
+						},
+						{
+							name:'超标金额',
+							type:'bar',
+							stack: '金额',
+							data:[304,150, 0, 0, 154, 0, 0, 0, 0],
+							
 
-							series: [
-								{
-									name:'已报账',
-									type:'bar',
-									stack: '金额',
-									data:[120, 132, 101, 134, 0, 0, 0, 0],
-									barMaxWidth:40,
+						}
+						]
 
-								},
-								{
-									name:'剩余预算',
-									type:'bar',
-									stack: '金额',
-									data:[0, 182, 152, 0, 522, 348, 421, 255],
-									itemStyle: {
-										normal:'#e8e8e8',
-										emphasis:'#a8a8a8'
-									}
-								},
-								{
-									name:'超标金额',
-									type:'bar',
-									stack: '金额',
-									data:[150, 0, 0, 154, 0, 0, 0, 0],
+				};
 
-
-								}
-								]
-
-						};
-
-						// 使用刚指定的配置项和数据显示图表。
-						myChart.setOption(option);
-						</script>
-								 </div>
+				// 使用刚指定的配置项和数据显示图表。
+				myChart.setOption(option);
+				</script>
+						 </div>
 					</div> 
 					 
                     </div>
@@ -694,7 +694,7 @@
 </div>
   <!--      默认隐藏的内容:报账详细信息（审批）-->
   <div class="modal fade bs-example-modal-sm" id="acInfoPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -710,11 +710,12 @@
         	<tr><td>报账金额</td><td>￥50.00元</td></tr>
             <tr><td>当前状态</td>
             <td class="text-danger">未审批</td></tr>
+            <tr><td>审批意见</td><td>暂无</td><tr>
         </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary">审批</button>
+        <button type="button" class="btn btn-primary" onClick="window.open('moneycheck.html')">审批</button>
       </div>
     </div>
   </div>
