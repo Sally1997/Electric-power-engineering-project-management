@@ -17,7 +17,31 @@
    		var taskinfo="";
    		var feeData=eval('('+'${fee["feeaudits"]}'+')');
    		//ajax请求
-   		
+   		function submitFeeInfo(){
+   			if(task_fee.value==""){
+   				alert("金额不得为空");
+   			}else if(task_feeaudit>task_budget && document.getElementById("fee_cause").value==""){
+   				alert("超标原因不得为空");
+   			}else{
+   				//发送请求
+   				var req=new XMLHttpRequest();
+   				req.onreadystatechange=function(){
+   					if(req.readyState==4){
+   						if(req.status==200){
+   							if(req.responseText=="ok"){
+   								alert("报账成功");
+   								location.reload(true);
+   							}else{
+   								alert("报账失败");
+   							}
+   						}
+   						
+   					}
+   				};
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
+   				req.send(null);
+   			}
+   		}
    	</script>
 
   </head>
@@ -413,7 +437,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary" onclick="submitFeeInfo()" id="submit">报账</button>
+        <button type="button" class="btn btn-primary" onclick="submitFeeInfo();" id="submit">报账</button>
         <script type="text/javascript">
         	var submit=document.getElementById("submit");
         </script>

@@ -2,6 +2,7 @@ package com.holyshit.service.impl;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -192,9 +193,13 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				//task
 				JSONArray manytask=stage.getJSONArray("tasklist");
 				JSONObject atask=new JSONObject();
+				double used=0;
+				BigDecimal hasused = std.selectFeeUsedByTaskno(task.getTaskno());
+				if(hasused!=null)
+					used=Double.parseDouble(hasused.toString());
 				atask.put("taskname", task.getTaskname());
 				atask.put("taskno", task.getTaskno());
-				atask.put("budget", task.getBudget());
+				atask.put("budget", task.getBudget()-used);
 				manytask.add(atask);
 				//很坑，getJsonObject这样的函数居然返回的是一个对象副本。。。。草泥马
 				//重新压入新的数据
