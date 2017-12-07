@@ -8,6 +8,20 @@ public class TaskInfo {
 	private String stageno;
 	private String taskno;
 	private double budget;
+	private String charpno;
+	private String pubpno;
+	public String getCharpno() {
+		return charpno;
+	}
+	public void setCharpno(String charpno) {
+		this.charpno = charpno;
+	}
+	public String getPubpno() {
+		return pubpno;
+	}
+	public void setPubpno(String pubpno) {
+		this.pubpno = pubpno;
+	}
 	public double getBudget() {
 		return budget;
 	}

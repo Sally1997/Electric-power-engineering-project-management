@@ -1,5 +1,6 @@
 package com.holyshit.Dao;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,14 @@ import com.holyshit.domain.TaskInfo;
  *
  */
 public interface StageTaskDao {
+	/**
+	 * 查询某个任务已经报销的金额
+	 * @param taskno
+	 * @return
+	 * @throws SQLException
+	 */
+	BigDecimal selectFeeUsedByTaskno(String taskno) throws SQLException;
+	
 	/**
 	 * 根据id获取员工的所有正在进行的任务
 	 * @return 任务列表
@@ -56,5 +65,5 @@ public interface StageTaskDao {
 	 * @param task_index 任务指标
 	 * @throws SQLException 
 	 */
-	public void addTask(StageTask stage_task,TaskIndexs task_index) throws SQLException;
+	void addTask(StageTask stage_task,TaskIndexs task_index) throws SQLException;
 }

@@ -215,4 +215,30 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		String res=projects.toString();
 		return res;
 	}
+
+
+	@Override
+	public int handleFee(TaskInfo task, double fee,String cause,boolean over) {
+		// TODO Auto-generated method stub
+		//String taskno,double fee,String cause,String applicantno,String auditor,String pno
+		FeeAuditDao fd=new FeeAuditDaoImpl();
+		if(over){
+			try {
+				return fd.addFeeAuditOver(task.getTaskno(), fee, cause, task.getCharpno(), task.getPubpno(), task.getPno());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;
+		}else{
+			fd=new FeeAuditDaoImpl();
+			try {
+				return fd.addFeeAudit(task.getTaskno(), fee, task.getCharpno(), task.getPubpno(), task.getPno());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;
+		}
+	}
 }

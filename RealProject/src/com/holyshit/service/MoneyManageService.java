@@ -2,6 +2,8 @@ package com.holyshit.service;
 
 import java.util.Map;
 
+import com.holyshit.domain.TaskInfo;
+
 import net.sf.json.JSONArray;
 
 public interface MoneyManageService {
@@ -28,4 +30,14 @@ public interface MoneyManageService {
 	 * @return
 	 */
 	String findFeeAbledTask(String id);
+
+	/**
+	 * 报账
+	 * @param task
+	 * @param fee
+	 * @param cause
+	 * @param over
+	 * @return
+	 */
+	int handleFee(TaskInfo task,double fee,String cause,boolean over);
 }

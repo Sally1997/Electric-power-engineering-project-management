@@ -383,10 +383,17 @@
           	};
           	task_fee.oninput=function(){
           		var tmp=task_fee.value;
-          		var rep=/^\d+(\.\d+)?$/;
+          		var rep=/^\d+((\.)?\d+)?$/;
           		if(!rep.test(tmp)){
-          			task_fee.value="";
-          			alert("请输入正确的金额");
+          			if(tmp.indexOf(".")!=-1){
+          				if(tmp.indexOf(".")!=tmp.length-1){
+		          			task_fee.value="";
+		          			alert("请输入正确的金额");
+          				}
+          			}else{
+          				task_fee.value="";
+	          			alert("请输入正确的金额");
+          			}
           		}else{
           			task_feeaudit=window.parseFloat(tmp);
 	          		task_budget=taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].budget;

@@ -1,13 +1,17 @@
 package com.holyshit.Dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+
+import javax.enterprise.inject.New;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.domain.DTree;
@@ -64,14 +68,21 @@ public class StageTaskDaoImpl implements StageTaskDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName FROM stagetasks JOIN psplan ON stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE taskno=?",new BeanHandler<TaskInfo>(TaskInfo.class),taskno);
+		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget,stagetasks.charpno,stagetasks.pubpno FROM stagetasks JOIN psplan ON stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE taskno=?",new BeanHandler<TaskInfo>(TaskInfo.class),taskno);
 	}
 
 	@Override
 	public List<TaskInfo> selectTaskInfoById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget FROM stagetasks JOIN psplan ON  stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE stagetasks.CharPNo=? AND (stagetasks.TState='1' OR stagetasks.TState='2')",new BeanListHandler<TaskInfo>(TaskInfo.class),id);
+		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget,stagetasks.charpno,stagetasks.pubpno FROM stagetasks JOIN psplan ON  stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE stagetasks.CharPNo=? AND (stagetasks.TState='1' OR stagetasks.TState='2')",new BeanListHandler<TaskInfo>(TaskInfo.class),id);
+	}
+
+	@Override
+	public BigDecimal selectFeeUsedByTaskno(String taskno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return (BigDecimal) qr.query(ConnectionManager.getConnection(), "SELECT SUM(fee) FROM feeaudit WHERE taskno=? AND auditstate='2'",new ScalarHandler(),taskno);
 	}
 
 }

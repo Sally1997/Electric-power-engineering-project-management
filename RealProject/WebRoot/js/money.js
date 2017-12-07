@@ -58,7 +58,21 @@
    			}else{
    				//发送请求
    				var req=new XMLHttpRequest();
-   				
+   				req.onreadystatechange=function(){
+   					if(req.readyState==4){
+   						if(req.status==200){
+   							if(req.responseText=="ok"){
+   								
+   								alert("报账成功");
+   							}else{
+   								alert("报账失败");
+   							}
+   						}
+   						
+   					}
+   				};
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
+   				req.send(null);
    			}
    		}
    		//刷新数据
