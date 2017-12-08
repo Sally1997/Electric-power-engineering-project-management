@@ -8,7 +8,9 @@
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>*.jsp</url-pattern>
+    <servlet-name>MainServlet</servlet-name>
     <dispatcher>REQUEST</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
   <listener>
@@ -56,6 +58,7 @@
     <servlet-class>com.holyshit.web.servlet.showPageFee</servlet-class>
   </servlet>
   <servlet>
+<<<<<<< HEAD
     <servlet-name>InfoMoreServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.InfoMoreServlet</servlet-class>
   </servlet>
@@ -72,6 +75,29 @@
     <servlet-name>HrMainJumpaddServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.HrMainJumpaddServlet</servlet-class>
   </servlet>
+=======
+    <servlet-name>StaffListServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>showWorkingTask</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.showWorkingTask</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SubmitFee</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SubmitFee</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowAuditPage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowAuditPage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SubmitAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SubmitAudit</servlet-class>
+  </servlet>
+
+
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 
 
 
@@ -113,6 +139,7 @@
     <url-pattern>/web/servlet/showPageFee</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+<<<<<<< HEAD
     <servlet-name>InfoMoreServlet</servlet-name>
     <url-pattern>/servlet/infoMoreServlet</url-pattern>
   </servlet-mapping>
@@ -127,6 +154,26 @@
   <servlet-mapping>
     <servlet-name>HrMainJumpaddServlet</servlet-name>
     <url-pattern>/servlet/hrMainJumpaddServlet</url-pattern>
+=======
+    <servlet-name>StaffListServlet</servlet-name>
+    <url-pattern>/web/servlet/staffListServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>showWorkingTask</servlet-name>
+    <url-pattern>/web/servlet/showWorkingTask</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubmitFee</servlet-name>
+    <url-pattern>/web/servlet/submitFee</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowAuditPage</servlet-name>
+    <url-pattern>/web/servlet/showAuditPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubmitAudit</servlet-name>
+    <url-pattern>/web/servlet/submitAudit</url-pattern>
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

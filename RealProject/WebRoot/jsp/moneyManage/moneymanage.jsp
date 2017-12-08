@@ -12,395 +12,118 @@
 	
 	
     <script src="${pageContext.request.contextPath }/js/echarts.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/js/money.js"></script>
    	<script type="text/javascript">
+   		var taskinfo="";
+   		var feeData=eval('('+'${fee["feeaudits"]}'+')');
+   		var auditData;
+   		var fauditno;  //报账表编号 --审核
    		//ajax请求
-   		function getProjectBudgetDetails(cur){
-   			var req = new XMLHttpRequest();
-   			req.onreadystatechange=function(){
-   				if(req.readyState==4){
-   					if(req.status==200){
-   						var res=req.responseText;
-   						//数据刷新
-   						var data=eval('('+res+')');
-   						dataJson=data.budgets;
-   						currentPage=data.currentPage;
-					 	pageSize=data.pageSize;
-					    pageNum=data.pageNum;  
-					 	totalNum=data.totalNum; 
-   						projectNum=data.projectNum;	
-   						refreshData();	
+   		function submitFeeInfo(){
+   			if(task_fee.value==""){
+   				alert("金额不得为空");
+   			}else if(task_feeaudit>task_budget && document.getElementById("fee_cause").value==""){
+   				alert("超标原因不得为空");
+   			}else{
+   				//发送请求
+   				var req=new XMLHttpRequest();
+   				req.onreadystatechange=function(){
+   					if(req.readyState==4){
+   						if(req.status==200){
+   							if(req.responseText=="ok"){
+   								alert("报账成功");
+   								location.reload(true);
+   							}else{
+   								alert("报账失败");
+   							}
+   						}
+   						
    					}
-   				}
-   			};
-   			
-   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showbudgetpage?currentPage="+cur+"&pageSize=3");
-   			req.send(null);
-   		}
-   		
-   		//刷新数据
-   		function refreshData(){
-   			var chart1=document.getElementById("chart1");
-   			var chart2=document.getElementById("chart2");
-   			var chart3=document.getElementById("chart3");
-   			if(projectNum>=1){
-   				//显示输出
-   				chart1.style.display="block";
-   				chart2.style.display="none";
-   				chart3.style.display="none";
-   				var myChart1 = echarts.init(document.getElementById('chart1'));
-
-				// 指定图表的配置项和数据
-
-				var option1 = {
-					textStyle: {
-						fontFamily:'微软雅黑',
-						fontSize:15
-					},
-                    title: {text:dataJson[0].pname,
-							backgroundColor:'#e8e8e8',
-							link:'login.html',
-							textStyle:{
-								fontWeight:'lighter',
-								fontSize: 15,
-								align:'center'
-							},
-							padding:[10,10,10,10],
-							borderRadius:[15,15,15,15],
-						   },
-					tooltip : {
-					},
-					toolbox: {
-						feature: {
-							magicType: {
-								type: ['stack', 'tiled']
-							},
-							dataView: {
-								show:true,
-								readOnly:true,
-								buttonColor:'#52658f',
-								backgroundColor:'#dddddd',
-								textareaBorderColor:'#c8c8c8'
-							}
-						},
-	                    top:'3%',
-						right:'10%'
-					},
-					legend: {
-						data:['已报账','剩余预算','超标金额'],
-						top:'10%',
-						left:'2%',
-						orient:'vertical',
-						itemGap:15
-					},
-
-
-					grid: {
-						left: '25%',
-						right: '15%',
-						containLabel: true
-					},
-					xAxis : [
-						{
-							type : 'category',
-							data : dataJson[0].stages
-						}
-					],
-					yAxis : [
-						{
-							type : 'value'
-						}
-					],
-					color:['#52658f','#c8c8c8','#e34953'],
-					dataZoom:[
-						{
-							id:'dataZoomX',
-							type:'slider',
-							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-                            handleSize: 20,
-							handleStyle: {
-								shadowBlur: 6,
-								shadowOffsetX: 1,
-								shadowOffsetY: 2,
-								shadowColor: '#aaa'
-							},
-							xAxisIndex:[0],
-							filterMode:'filter',
-							start:0,
-							end:60
-						}
-					],
-
-					series: [
-						{
-							name:'已报账',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[0].hasaudit,
-							barMaxWidth:40,
-
-						},
-						{
-							name:'剩余预算',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[0].surplus,
-							itemStyle: {
-								normal:'#e8e8e8',
-								emphasis:'#a8a8a8'
-							}
-						},
-						{
-							name:'超标金额',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[0].over,
-							
-
-						}
-						]
-				};
-
-				// 使用刚指定的配置项和数据显示图表。
-				 myChart1.setOption(option1);		
+   				};
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
+   				req.send(null);
    			}
-   			if(projectNum>=2){
-   				chart2.style.display="block"
-   				var myChart2 = echarts.init(document.getElementById('chart2'));
-
-				// 指定图表的配置项和数据
-
-				var option2 = {
-						textStyle: {
-						fontFamily:'微软雅黑',
-						fontSize:15
-					},
-                    title: {text:dataJson[1].pname,
-							backgroundColor:'#e8e8e8',
-							link:'login.html',
-							textStyle:{
-								fontWeight:'lighter',
-								fontSize: 15,
-								align:'center'
-							},
-							padding:[10,10,10,10],
-							borderRadius:[15,15,15,15],
-						   },
-					tooltip : {
-					},
-					toolbox: {
-						feature: {
-							magicType: {
-								type: ['stack', 'tiled']
-							},
-							dataView: {
-								show:true,
-								readOnly:true,
-								buttonColor:'#52658f',
-								backgroundColor:'#dddddd',
-								textareaBorderColor:'#c8c8c8'
-							}
-						},
-	                    top:'3%',
-						right:'10%'
-					},
-					legend: {
-						data:['已报账','剩余预算','超标金额'],
-						top:'10%',
-						left:'2%',
-						orient:'vertical',
-						itemGap:15
-					},
-
-
-					grid: {
-						left: '25%',
-						right: '15%',
-						containLabel: true
-					},
-					xAxis : [
-						{
-							type : 'category',
-							data : dataJson[1].stages
-						}
-					],
-					yAxis : [
-						{
-							type : 'value'
-						}
-					],
-					color:['#52658f','#c8c8c8','#e34953'],
-					dataZoom:[
-						{
-							id:'dataZoomX',
-							type:'slider',
-							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-                            handleSize: 20,
-							handleStyle: {
-								shadowBlur: 6,
-								shadowOffsetX: 1,
-								shadowOffsetY: 2,
-								shadowColor: '#aaa'
-							},
-							xAxisIndex:[0],
-							filterMode:'filter',
-							start:0,
-							end:60
-						}
-					],
-
-					series: [
-						{
-							name:'已报账',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[1].hasaudit,
-							barMaxWidth:40,
-
-						},
-						{
-							name:'剩余预算',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[1].surplus,
-							itemStyle: {
-								normal:'#e8e8e8',
-								emphasis:'#a8a8a8'
-							}
-						},
-						{
-							name:'超标金额',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[1].over,
-							
-
-						}
-						]
-
-				};
-
-				// 使用刚指定的配置项和数据显示图表。
-				 myChart2.setOption(option2);
-   			}
-   			if(projectNum>=3){
-   				chart3.style.display="block";
-   				var myChart3 = echarts.init(document.getElementById('chart3'));
-
-				// 指定图表的配置项和数据
-
-				var option3 = {
-						textStyle: {
-						fontFamily:'微软雅黑',
-						fontSize:15
-					},
-                    title: {text:dataJson[2].pname,
-							backgroundColor:'#e8e8e8',
-							link:'login.html',
-							textStyle:{
-								fontWeight:'lighter',
-								fontSize: 15,
-								align:'center'
-							},
-							padding:[10,10,10,10],
-							borderRadius:[15,15,15,15],
-						   },
-					tooltip : {
-					},
-					toolbox: {
-						feature: {
-							magicType: {
-								type: ['stack', 'tiled']
-							},
-							dataView: {
-								show:true,
-								readOnly:true,
-								buttonColor:'#52658f',
-								backgroundColor:'#dddddd',
-								textareaBorderColor:'#c8c8c8'
-							}
-						},
-	                    top:'3%',
-						right:'10%'
-					},
-					legend: {
-						data:['已报账','剩余预算','超标金额'],
-						top:'10%',
-						left:'2%',
-						orient:'vertical',
-						itemGap:15
-					},
-
-
-					grid: {
-						left: '25%',
-						right: '15%',
-						containLabel: true
-					},
-					xAxis : [
-						{
-							type : 'category',
-							data : dataJson[2].stages
-						}
-					],
-					yAxis : [
-						{
-							type : 'value'
-						}
-					],
-					color:['#52658f','#c8c8c8','#e34953'],
-					dataZoom:[
-						{
-							id:'dataZoomX',
-							type:'slider',
-							handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-                            handleSize: 20,
-							handleStyle: {
-								shadowBlur: 6,
-								shadowOffsetX: 1,
-								shadowOffsetY: 2,
-								shadowColor: '#aaa'
-							},
-							xAxisIndex:[0],
-							filterMode:'filter',
-							start:0,
-							end:60
-						}
-					],
-
-					series: [
-						{
-							name:'已报账',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[2].hasaudit,
-							barMaxWidth:40,
-
-						},
-						{
-							name:'剩余预算',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[2].surplus,
-							itemStyle: {
-								normal:'#e8e8e8',
-								emphasis:'#a8a8a8'
-							}
-						},
-						{
-							name:'超标金额',
-							type:'bar',
-							stack: '金额',
-							data:dataJson[2].over,
-							
-
-						}
-						]
-				};
-
-				// 使用刚指定的配置项和数据显示图表。
-				 myChart3.setOption(option3);
-   			}		
    		}
+		//ajax请求  审核
+		function submitAuditInfo(){
+			var req=new XMLHttpRequest();
+			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						//接受信息
+						var res=req.responseText;
+						if(res=="ok"){
+							alert("审核成功");
+								location.reload(true);
+						}else{
+							alert("审核失败");
+						}
+					}
+				}
+				
+			};
+			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state=1&cause=输入界面没有，我能怎么办!");
+			req.send(null);
+			
+		}
+   		function showAuditData(){
+   			var nodes=audittable.getElementsByTagName("tr");
+			for(var i=0;i<auditData.length;i++){
+				
+				var tds=nodes[i+1].getElementsByTagName("td");
+				var name1=auditData[i].pname;
+				if(name1.length>8)
+					name1=name1.substr(0,8)+"...";
+				
+				var name2=auditData[i].sname;
+				
+				if(name2.length>4)
+					name2=name2.substr(0,4)+"...";
+				tds[0].innerHTML=name1;
+				tds[1].innerHTML=name2;
+				tds[2].innerHTML=auditData[i].stime;
+				var state=auditData[i].auditstate;
+				
+				if(state=="0"){
+					tds[3].innerHTML="未审批";
+					tds[3].className="text-danger";
+				}
+				else if(state=="2"){
+					tds[3].innerHTML="审批通过";
+					tds[3].className="text-success";
+				}else{
+					tds[3].innerHTML="不通过";
+					tds[3].className="text-danger";
+					
+				}
+				tds[4].innerHTML='<span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer" onclick="updateAuditDialog('+i+')"></span>';
+			} 
+			for(var i=auditData.length;i<4;i++){
+				var tds=nodes[i+1].getElementsByTagName("td");
+				tds[0].innerHTML="-";
+				tds[1].innerHTML="-";
+				tds[2].innerHTML="-";
+				tds[3].innerHTML="-";
+				tds[4].innerHTML="-";
+			} 
+		
+   		}
+   		function getAuditInfo(){
+   			var req=new XMLHttpRequest();
+   			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						var res=req.responseText;
+						var hehe=eval('('+res+')');
+						auditData=hehe.audits;
+						showAuditData();
+					}
+					
+				}
+			};
+			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=4");
+			req.send(null);
+  		}
    	</script>
 
   </head>
@@ -411,6 +134,34 @@
 		menus[3].className="active nav-current";
 		menus[3].role="presentation";	
 	</script>
+	
+ <!--      默认隐藏的内容:报账详细信息-->
+  <div class="modal fade bs-example-modal-sm" id="acInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document" style="width: 500px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">详细信息</h4>
+      </div>
+      <div>
+        <table class="table table-striped table-condensed">
+        	<tr><td>报账项目</td><td id="fee_pname">项目A</td></tr>       	
+        	<tr><td>项目阶段</td><td id="fee_sname">阶段一</td></tr>
+        	<tr><td>项目任务</td><td id="fee_taskname">任务一</td></tr>
+			<tr><td>报账人</td><td id="fee_appname">甲</td></tr>
+        	<tr><td>报账时间</td><td id="fee_stime">2017-10-11</td></tr>        	
+        	<tr><td>报账金额</td><td id="fee_fee">￥50.00元</td></tr>
+            <tr><td>当前状态</td>
+            <td class="text_danger"  id="fee_auditstate">未审批</td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--  主要内容-->
   <section>
     <div class=container-fluid>
@@ -437,13 +188,20 @@
 					<!-- 获取json对象 -->
 						 <script type="text/javascript">
 						 	var dataJson=eval('('+'${projects["budgets"]}'+')');
-						 
 						 	var currentPage=${projects['currentPage']};
 						 	var pageSize=${projects['pageSize']};
-						   	var pageNum=${projects['pageNum']};  
+						 	
+						  	var pageNum=${projects['pageNum']};  
+						 	var totalNum=${projects['totalNum']}; 
 						 	var totalNum=${projects['totalNum']};
 						 	var projectNum=${projects['projectNum']};
+						 	var currentGroup=1;
+						 	var groupSize=5;
+						 	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1;
 						 	refreshData(); 
+						 	
+						 	//获取审核信息
+					   		getAuditInfo();
 						 </script>
 						 
 					</div> 
@@ -458,7 +216,7 @@
 				  		var showpage=document.getElementById("showpage");
 				  	</script>
 					<li>
-					  <a href="javascript:getPreviousOnBudget(showpage);" aria-label="Previous">
+					  <a href="javascript:getPrevious(showpage);" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
@@ -479,7 +237,7 @@
 						}
 					</script>
 					<li>
-					  <a href="javascript:getNextOnBudget(showpage);" aria-label="Next">
+					  <a href="javascript:getNext(showpage);" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					  </a>
 					</li>
@@ -490,9 +248,9 @@
     	<!--	报账-->
     		<div id="account" class="col-lg-4" style="padding-left: 30px">
 	        <div class="panel panel-primary">
-		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/jsp/moneyManage/moneyAccount.jsp')">more..</span></div>
+		        <div class="panel-heading"><span>相关项目报账信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage=1&pageSize=5')">more..</span></div>
 		        <div class="panel-body">
-		        <table class="table table-striped table-condensed" style="font-size: 15px" id="feetable">
+		        <table class="table table-striped " style="font-size: 15px" id="feetable">
  		    <tr>
 			    <th>项目名称</th>
 			    <th>报销人</th>
@@ -500,70 +258,85 @@
 			    <th>状态</th>
 			    <th> </th>
 		    </tr>
-		    
-		    <script type="text/javascript">
-    			var feeData=eval('('+'${fee["feeaudits"]}'+')');
-    			var feetable=document.getElementById("feetable");
-    			for(var i=0;i<feeData.length;i++){
-    				var trNode=document.createElement("tr");
-    				
-    				var tdNode1=document.createElement("td");
-    				var pname=feeData[i].pname.substring(0,8)+"...";
-    				tdNode1.innerHTML=pname;
-    				
-    				var tdNode2=document.createElement("td");
-    				tdNode2.innerHTML=feeData[i].appname;
-    				
-    				var tdNode3=document.createElement("td");
-    				tdNode3.innerHTML=feeData[i].stime;
-    				
-    				var tdNode4=document.createElement("td");
-    				if(feeData[i].auditstate=="0"){
-    					tdNode4.className="text-danger";
-    					tdNode4.innerHTML="未审批";
-    				}else if(feeData[i].auditstate=="1"){
-    					tdNode4.className="text-danger";
-    					tdNode4.innerHTML="未通过";
-    				}else{
-    					tdNode4.className="text-success";
-    					tdNode4.innerHTML="通过审批";
-    				}
-    				
-    				var tdNode5=document.createElement("td");
-    				tdNode5.innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>';
-    			
-    				//压入数据
-    				trNode.appendChild(tdNode1);
-    				trNode.appendChild(tdNode2);
-    				trNode.appendChild(tdNode3);
-    				trNode.appendChild(tdNode4);
-    				trNode.appendChild(tdNode5);
-    				
-    				feetable.appendChild(trNode);
-    			}
-    		</script>
-		    
-		    
-		   <!--  <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text-danger">未审批</td>
-			    <td >			    
+		    <tr>
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">
 			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+			    </td>
 		    </tr>
 		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text-success">审批通过</td>
-			    <td >			    
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">			    
+			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+		   		</td>
+		    </tr>
+		    <tr>
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">			    
 			   <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
-		    </tr> -->
+		    	</td>
+		    </tr>
+		    <tr>
+			    <td align="center">项目A</td>
+			    <td align="center">甲</td>
+			    <td align="center">2017-10-11</td>
+			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">			    
+			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+		    	</td>
+		    </tr>
+			<script type="text/javascript">
+			    var nodes=document.getElementById("feetable").getElementsByTagName("tr");
+				for(var i=0;i<feeData.length;i++){
+					
+					var tds=nodes[i+1].getElementsByTagName("td");
+					var name1=feeData[i].pname;
+					if(name1.length>8)
+						name1=name1.substr(0,8)+"...";
+					
+					var name2=feeData[i].sname;
+					
+					if(name2.length>4)
+						name2=name2.substr(0,4)+"...";
+					tds[0].innerHTML=name1;
+					tds[1].innerHTML=name2;
+					tds[2].innerHTML=feeData[i].stime;
+					var state=feeData[i].auditstate;
+					
+					if(state==0){
+						tds[3].innerHTML="未审批";
+						tds[3].className="text-danger";
+					}
+					else{
+						tds[3].innerHTML="审批通过";
+						tds[3].className="text-success";
+					}
+					tds[4].innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer" onclick="updateFeeAuditDialog('+i+')"></span>';
+				} 
+				for(var i=feeData.length;i<4;i++){	
+					var tds=nodes[i+1].getElementsByTagName("td");
+					tds[0].innerHTML="-";
+					tds[1].innerHTML="-";
+					tds[2].innerHTML="-";
+					tds[3].innerHTML="-";
+					tds[4].innerHTML="-";
+				} 
+			</script>
+		    
+    		</script> 
 	        </table>
 				
                 <div>
-                <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupAc">报账</button>
+                <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupAc" onclick="getTaskInfo(${staff.staffno})">报账</button>
             </div>
                 </div>
             </div>
@@ -574,7 +347,7 @@
 	        <div class="panel panel-primary">
 		        <div class="panel-heading"><span>相关项目审批信息</span><span class="more" onClick="window.open('${pageContext.request.contextPath}/jsp/moneyManage/moneyPass.jsp')">more..</span></div>
 		        <div class="panel-body">
-		        <table class="table table-striped table-condensed" style="font-size: 15px">
+		        <table class="table table-striped table-condensed" style="font-size: 15px" id="audittable">
  		    <tr>
 			    <th>项目名称</th>
 			    <th>报销人</th>
@@ -598,6 +371,7 @@
 			    <td  class="text_danger">未审批</td>
 			    <td >			    
 			    <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+			    </td>
 		    </tr>
 		    <tr>
 			    <td >项目A</td>
@@ -606,6 +380,7 @@
 			    <td  class="text_danger">未审批</td>
 			    <td >			    
 			   <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+		     </td>
 		    </tr>
 		    <tr>
 			    <td >项目A</td>
@@ -614,8 +389,12 @@
 			    <td  class="text_danger">未审批</td>
 			    <td >			    
 			    <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+		     </td>
 		    </tr>
-
+			<script type="text/javascript">
+				var audittable=document.getElementById("audittable");
+				
+			</script>
 	        </table>
                 </div>
             </div>
@@ -637,94 +416,167 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">报账项目</label>
 				<div class="col-sm-8">
-			    <select class="form-control">
-				  <option>项目A</option>
-				  <option>项目B</option>
-				  <option>项目C</option>
+			    <select class="form-control" id="project_select">
+				  <option>请选择</option>
 				</select>
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="col-sm-2 control-label">项目阶段</label>
+				<label class="col-sm-2 control-label" >项目阶段</label>
                 <div class="col-sm-8">
-			    <select class="form-control">
-				  <option>阶段一</option>
-				  <option>阶段二</option>
-				  <option>阶段三</option>
-				  <option>阶段四</option>
-				  <option>阶段五</option>
-				  <option>阶段六</option>
-				  <option>阶段七</option>
-				  <option>阶段八</option>
+			    <select class="form-control" disabled="disabled" id="stage_select">
+			      <option>请选择</option>
 				</select>
 				</div>
 			  </div>
 		      <div class="form-group">
-			    <label class="col-sm-2 control-label">报账任务</label>
+			    <label class="col-sm-2 control-label" >报账任务</label>
 			    <div class="col-sm-8">
-			    <select class="form-control">
-			      <option>任务一</option>
-				  <option>任务二</option>
-				  <option>任务三</option>
-				  <option>任务四</option>
-				  <option>任务五</option>
-				  <option>任务六</option>
-				  <option>任务七</option>
-				  <option>任务八</option>
+			    <select class="form-control" disabled="disabled" id="task_select">
+			      <option>请选择</option>
 			    </select>
 			    </div>
 			  </div>			  
 			  <div class="form-group">
-				<label class="col-sm-2 control-label">报账金额</label>
+				<label class="col-sm-2 control-label" >报账金额</label>
 				<div class="col-sm-8">
 		          <div class="input-group">
 			      <div class="input-group-addon">￥</div>
-				  <input type="password" class="form-control" id="inputPassword3">
+				  <input type="text" class="form-control" id="inputPassword3" disabled="disabled">
 				  <div class="input-group-addon">（元）</div>
 				  </div>
 				</div>
 			  </div>
-             <div class="form-group">
-				<label  class="col-sm-2 control-label">超标原因</label>
+			  <div class="form-group" id="warnning_div" style="display: none;">
+				<label  class="col-sm-2 control-label" >提示</label>
+				<span style="color: red;font-size: 15px;font-weight: bold;" id="warnning">报账金额超出任务预算,请填写超标原因,等待审核</span>
+			  </div>
+             <div class="form-group" id="over_cause" style="display: none;">
+				<label  class="col-sm-2 control-label" >超标原因</label>
 				<div class="col-lg-8">
-				  <textarea class="form-control" rows="4"></textarea>
+				  <textarea class="form-control" rows="4" id="fee_cause"></textarea>
 				</div>
 			  </div>
           </form>
+          <script type="text/javascript">
+          		var project_pos=-1;  //项目位置
+          		var stage_pos=-1;   //阶段位置
+          		var task_pos=-1;   //任务位置
+          		var task_budget=0;
+          		var task_feeaudit=0;
+          		var project_select=document.getElementById("project_select");
+          		var stage_select=document.getElementById("stage_select");
+          		var task_select=document.getElementById("task_select");
+          		var task_fee=document.getElementById("inputPassword3");
+          		var over_cause=document.getElementById("over_cause");
+          		var warnning=document.getElementById("warnning");
+          		
+          		project_select.onchange=function(){
+          			if(this.value=="请选择"){
+          				//取消禁用
+          				stage_select.disabled="disabled";
+          				task_select.disabled="disabled";
+          				task_fee.disabled="disabled";
+          				over_cause.disabled="disabled";
+          			}else{
+          				for(var i=0;i<taskinfo.length;i++)
+          					if(taskinfo[i].pname==project_select.value){
+          						project_pos=i;
+          						break;
+          					}
+          				//取消禁止
+          				stage_select.removeAttribute("disabled");
+          				//刷新阶段
+          				showStage();
+          				task_select.disabled="disabled";
+          				task_fee.disabled="disabled";
+          			}
+          			
+          		};
+          	stage_select.onchange=function(){
+          		if(this.value=="请选择"){
+      				//取消禁用
+      				task_select.disabled="disabled";
+      				task_fee.disabled="disabled";
+      				over_cause.disabled="disabled";
+      			}else{
+      				for(var i=0;i<taskinfo[project_pos].stagelist.length;i++)
+      					if(taskinfo[project_pos].stagelist[i].sname==stage_select.value){
+      						stage_pos=i;
+      						break;
+      					}
+      				//取消禁止
+      				task_select.removeAttribute("disabled");
+      				//刷新阶段
+      				showTask();
+      				task_fee.disabled="disabled";
+      			
+      			}
+          		
+          	};
+          	task_select.onchange=function(){
+          		if(this.value=="请选择"){
+      				//禁用
+      				task_fee.disabled="disabled";
+      				over_cause.disabled="disabled";
+      			}else{
+      				
+      				for(var i=0;i<taskinfo[project_pos].stagelist[stage_pos].tasklist.length;i++){
+      					if(taskinfo[project_pos].stagelist[stage_pos].tasklist[i].taskname==task_select.value){
+      						task_pos=i;
+      						break;
+      					}
+      				}
+      				//取消禁止
+      				task_fee.removeAttribute("disabled");
+      			}
+          		
+          	};
+          	task_fee.oninput=function(){
+          		var tmp=task_fee.value;
+          		var rep=/^\d+((\.)?\d+)?$/;
+          		if(!rep.test(tmp)){
+          			if(tmp.indexOf(".")!=-1){
+          				if(tmp.indexOf(".")!=tmp.length-1){
+		          			task_fee.value="";
+		          			submit.disabled="disabled";
+		          			alert("请输入正确的金额");
+          				}
+          			}else{
+          				task_fee.value="";
+          				submit.disabled="disabled";
+	          			alert("请输入正确的金额");
+          			}
+          		}else{
+          			task_feeaudit=window.parseFloat(tmp);
+          			submit.removeAttribute("disabled");
+	          		task_budget=taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].budget;
+	          		if(task_budget<task_feeaudit){
+	          			warnning.innerHTML="当前任务剩余预算为￥"+task_budget+"元,请填写超标原因";
+	          			warnning_div.style.display="block";
+	          			over_cause.style.display="block";
+	          		}else{
+	          			submit.removeAttribute("disabled");
+	          			warnning_div.style.display="none";
+	          			over_cause.style.display="none";
+	          		}
+          		}
+          	};
+          	
+          </script>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary">报账</button>
+        <button type="button" class="btn btn-primary" onclick="submitFeeInfo();" id="submit">报账</button>
+        <script type="text/javascript">
+        	var submit=document.getElementById("submit");
+        </script>
       </div>
     </div>
   </div>
 </div>
- <!--      默认隐藏的内容:报账详细信息-->
-  <div class="modal fade bs-example-modal-sm" id="acInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">详细信息</h4>
-      </div>
-      <div>
-        <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td>项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td>阶段一</td></tr>
-        	<tr><td>项目任务</td><td>任务一</td></tr>
-			<tr><td>报账人</td><td>甲</td></tr>
-        	<tr><td>报账时间</td><td>2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td>￥50.00元</td></tr>
-            <tr><td>当前状态</td>
-            <td class="text_danger">未审批</td></tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
   <!--      默认隐藏的内容:报账详细信息（审批）-->
   <div class="modal fade bs-example-modal-sm" id="acInfoPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm" role="document">
@@ -735,19 +587,48 @@
       </div>
       <div>
         <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td>项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td>阶段一</td></tr>
-        	<tr><td>项目任务</td><td>任务一</td></tr>
-			<tr><td>报账人</td><td>甲</td></tr>
-        	<tr><td>报账时间</td><td>2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td>￥50.00元</td></tr>
+        	<tr><td>报账项目</td><td id="audit_pname">项目A</td></tr>       	
+        	<tr><td>项目阶段</td><td id="audit_sname">阶段一</td></tr>
+        	<tr><td>项目任务</td><td id="audit_taskname">任务一</td></tr>
+			<tr><td>报账人</td><td id="audit_appname">甲</td></tr>
+        	<tr><td>报账时间</td><td id="audit_stime">2017-10-11</td></tr>        	
+        	<tr><td>报账金额</td><td id="audit_fee">￥50.00元</td></tr>
             <tr><td>当前状态</td>
-            <td class="text_danger">未审批</td></tr>
+            <td id="audit_auditstate">未审批</td></tr>
         </table>
+        <script type="text/javascript">
+	   		//刷新审核框内容
+	   		function updateAuditDialog(e){
+	   			//设置审核id
+	   			fauditno=auditData[e].fauditno;
+	   			var submit_audit=document.getElementById("submit_audit");
+	   			document.getElementById("audit_pname").innerHTML=auditData[e].pname;
+	   			document.getElementById("audit_sname").innerHTML=auditData[e].sname;
+	   			document.getElementById("audit_taskname").innerHTML=auditData[e].taskname;
+	   			document.getElementById("audit_appname").innerHTML=auditData[e].appname;
+	   			document.getElementById("audit_stime").innerHTML=auditData[e].stime;
+	   			document.getElementById("audit_fee").innerHTML=auditData[e].fee;
+	   			var state=document.getElementById("audit_auditstate");
+	   			var tmp=auditData[e].auditstate;
+	   			if(tmp=="0"){
+	   				state.className="text-danger";
+	   				state.innerHTML="未审批";
+	   				submit_audit.removeAttribute("disabled");
+	   			}else if(tmp="1"){
+	   				state.className="text-danger";
+	   				state.innerHTML="不通过";
+	   				submit_audit.disabled="disabled";
+	   			}else{
+	   				state.className="text-success";
+	   				state.innerHTML="审批通过";
+	   				submit_audit.disabled="disabled";
+	   			}
+	   		}
+        </script>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary">审批</button>
+        <button type="button" class="btn btn-primary" onclick="submitAuditInfo();" id="submit_audit">审批</button>
       </div>
     </div>
   </div>

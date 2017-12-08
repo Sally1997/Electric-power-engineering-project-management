@@ -1,5 +1,6 @@
 package com.holyshit.service.impl;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
+import com.holyshit.domain.TaskInfo;
 import com.holyshit.service.StageTasksService;
 import com.holyshit.utils.ConnectionManager;
 
@@ -24,16 +26,9 @@ public class StageTasksServiceImpl implements StageTasksService{
 		ProjectDao pd=new ProjectDaoImpl();
 		String pname=null;
 		StageTaskDao std=new StageTaskDaoImpl();
-		try {
-			tasks=std.selectAllTasksById(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			ConnectionManager.closeConnection();
-		}
 		List<String> projectNames=new ArrayList<String>();
 		try {
+			tasks=std.selectAllTasksById(id);
 			for(StageTask st : tasks){
 				String pno=st.getTaskno().substring(0, 5);
 				System.out.println("取到了"+pno);
@@ -43,6 +38,8 @@ public class StageTasksServiceImpl implements StageTasksService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		Map<String, Object> res=new HashMap<String, Object>();
 		res.put("tasks", tasks);
@@ -66,6 +63,42 @@ public class StageTasksServiceImpl implements StageTasksService{
 	public List<Object> getNewTaskNo9(String ntn) throws SQLException {
 		StageTaskDao st = new StageTaskDaoImpl();
 		return st.selectTaskNoby9TN(ntn);
+	}
+
+	@Override
+	public TaskInfo findTaskInfoById(String taskno) {
+		// TODO Auto-generated method stub
+		StageTaskDao std=new StageTaskDaoImpl();
+		try {
+			return std.selectTaskInfoByTaskNo(taskno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return null;
+	}
+
+	@Override
+	public double findUsedFeeByTaskno(String taskno) {
+		// TODO Auto-generated method stub
+		StageTaskDao std=new StageTaskDaoImpl();
+		double res=0;
+		try {
+			BigDecimal fees = std.selectFeeUsedByTaskno(taskno);
+			if(fees==null){
+				return res;
+			}
+			String str=fees.toString();
+			res=Double.parseDouble(str);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return res;
 	}
 
 }

@@ -29,7 +29,9 @@ public class ConnectionManager {
 	
 	public static void closeConnection(){
 		try {
-			getConnection().close();
+			Connection conn=tl.get();
+			if(conn!=null)
+				conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

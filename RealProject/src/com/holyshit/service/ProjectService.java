@@ -2,8 +2,10 @@ package com.holyshit.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.holyshit.domain.Project;
+import com.holyshit.domain.ProjectInfo;
 
 public interface ProjectService {
 	/**
@@ -34,4 +36,10 @@ public interface ProjectService {
 	 * @throws SQLException 
 	 */
 	List<Object> getNewProjectNo(String pn_1);
+
+	/**
+	 * 获得项目展示信息
+	 * @return
+	 */
+	Map<String,Object> getProjectManageInfo(int current_page,int page_size);
 }

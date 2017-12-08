@@ -12,12 +12,6 @@
     <title>02-hradd</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/echarts.min.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ublic.css">
     
     
 	<script type="text/javascript">
@@ -79,8 +73,16 @@
 
  </head>
  <body> 
+<<<<<<< HEAD
    <!-- 页眉-->   
     <%@include file="/head.jsp" %>
+=======
+   <%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";	
+	</script>
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 <!--  主要内容-->
 <section>
     <div class=container-fluid>

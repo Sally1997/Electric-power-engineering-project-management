@@ -15,6 +15,73 @@
 		menus[3].className="active nav-current";
 		menus[3].role="presentation";	
 	</script>
+	
+	<script type="text/javascript">
+		function getFunction(cur){
+			var req = new XMLHttpRequest();
+   			req.onreadystatechange=function(){
+   				if(req.readyState==4){
+   					if(req.status==200){
+   						var res=req.responseText;
+   						//数据刷新
+   						var data=eval('('+res+')');
+   					
+   						dataJson=eval(data.feeaudits);
+   					
+   						currentPage=data.currentPage;
+					 	pageSize=data.pageSize;
+					    pageNum=data.pageNum;  
+					 	totalNum=data.totalNum; 
+   						feeauditNum=data.feeauditNum;	
+   						refreshData();	
+   					}
+   				}
+   			};
+   			
+   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=5");
+   			req.send(null);
+		}
+		function refreshData(){
+			
+			var nodes=document.getElementById("maintable").getElementsByTagName("tr");
+			for(var i=0;i<dataJson.length;i++){
+				
+				var tds=nodes[i+1].getElementsByTagName("td");
+				tds[0].innerHTML=dataJson[i].pname;
+				tds[1].innerHTML=dataJson[i].sname;
+				tds[2].innerHTML=dataJson[i].taskname;
+				tds[3].innerHTML=dataJson[i].appname;
+				tds[4].innerHTML=dataJson[i].stime;
+				tds[5].innerHTML=dataJson[i].fee;
+				var state=dataJson[i].auditstate;
+				
+				if(state=="0"){
+					tds[6].innerHTML="未审批";
+					tds[6].className="text-danger";
+				}
+				else if(state=="2"){
+					tds[6].innerHTML="审批通过";
+					tds[6].className="text-success";
+				}else{
+					tds[6].innerHTML="不通过";
+					tds[6].className="text-danger";
+				}
+			} 
+			for(var i=dataJson.length;i<5;i++){	
+				var tds=nodes[i+1].getElementsByTagName("td");
+				tds[0].innerHTML="-";
+				tds[1].innerHTML="-";
+				tds[2].innerHTML="-";
+				tds[3].innerHTML="-";
+				tds[4].innerHTML="-";
+				tds[5].innerHTML="-";
+				tds[6].innerHTML="-";
+			} 
+			
+			
+		}
+	</script>
+	
     <section>
         <div class="container-fluid">
             <div class="row">
@@ -22,7 +89,7 @@
               <div class="panel panel-primary">
 		        <div class="panel-heading"><span>相关项目报账信息</span><span class="noRight"  data-toggle="modal" data-target="#handupAc">报账</span></div>
 		        <div class="panel-body">
-		        <table class="table table-striped table-condensed" style="font-size: 15px">
+		        <table class="table table-striped table-condensed" style="font-size: 15px" id="maintable">
 					<tr>
 						<th>项目名称</th>
 						<th>项目阶段</th>
@@ -40,7 +107,7 @@
 						<td >甲</td>
 						<td >2017-10-11</td>
 						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
+						<td >未审批</td>
 						<td ></td>
 					</tr>
 					<tr>
@@ -50,7 +117,7 @@
 						<td >甲</td>
 						<td >2017-10-11</td>
 						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
+						<td >未审批</td>
 						<td ></td>
 					</tr>
 					<tr>
@@ -60,7 +127,7 @@
 						<td >甲</td>
 						<td >2017-10-11</td>
 						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
+						<td >未审批</td>
 						<td ></td>
 					</tr>
 					<tr>
@@ -70,7 +137,7 @@
 						<td >甲</td>
 						<td >2017-10-11</td>
 						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
+						<td >未审批</td>
 						<td ></td>
 					</tr>
 					<tr>
@@ -80,87 +147,64 @@
 						<td >甲</td>
 						<td >2017-10-11</td>
 						<td >￥50.00元</td>
-						<td  class="text_danger">未审批</td>
+						<td >未审批</td>
 						<td ></td>
 					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-					<tr>
-						<td >项目B</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥50.00元</td>
-						<td  class="text_success">已审批</td>
-						<td ></td>
-					</tr>
-	                <tr>
-						<td >项目C</td>
-						<td >阶段一</td>
-						<td >任务一</td>
-						<td >乙</td>
-						<td >2017-10-03</td>
-						<td >￥200.00元</td>
-						<td  class="text_warning">未通过</td>
-						<td class="text-danger">超标</td>
-					</tr>
+					
+				</table>
+					<!-- 复用前面的代码 -->
+					<script type="text/javascript">
+							var maintable=document.getElementById("maintable");
+						 	var dataJson=eval('('+'${fee["feeaudits"]}'+')');
+						 	var currentPage=${fee['currentPage']};
+						 	var pageSize=${fee['pageSize']};
+						   	var pageNum=${fee['pageNum']};  
+						 	var totalNum=${fee['totalNum']};
+						 	var feeauditNum=${fee['feeauditNum']};
+						 	var currentGroup=1;
+						 	var groupSize=5;
+						 	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1;
+						 	refreshData(); 
+					</script>
 	
 
-	        </table>
-                                <!--  分页栏-->
-				<nav aria-label="Page navigation" style="text-align: right">
-				  <ul class="pagination">
+	        
+        	<!--  分页栏-->
+				<nav aria-label="Page navigation" style="text-align: center">
+				  <ul class="pagination" id="showpage">
+				  	<script type="text/javascript">
+				  		var showpage=document.getElementById("showpage");
+				  	</script>
 					<li>
-					  <a href="#" aria-label="Previous">
+					  <a href="javascript:getPrevious(showpage);" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
+					<li class="active"><a href="javascript:jmpPage(1)">1</a></li>
+					<script type="text/javascript">
+						if(pageNum<5){
+							for(var i=2;i<=pageNum;i++){
+								var node=document.createElement("li");
+								node.innerHTML='<a href="javascript:jmpPage('+i+')">'+i+'</a>';
+								showpage.appendChild(node);
+							}
+						}else{
+							for(var i=2;i<6;i++){
+								var node=document.createElement("li");
+								node.innerHTML='<a href="javascript:jmpPage('+i+')">'+i+'</a>';
+								showpage.appendChild(node);
+							}
+						}
+					</script>
 					<li>
-					  <a href="#" aria-label="Next">
+					  <a href="javascript:getNext(showpage);" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					  </a>
 					</li>
 				  </ul>
 				</nav>	
-                </div>
-              </div>
-              </div>
-            </div>
-        </div>
+            </div> 		
+    		</div>
                 <!--      默认隐藏的内容:报账-->
 	    <div class="modal fade" id="handupAc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">

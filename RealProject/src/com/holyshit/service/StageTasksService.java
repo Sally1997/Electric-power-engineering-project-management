@@ -1,11 +1,13 @@
 package com.holyshit.service;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
+import com.holyshit.domain.TaskInfo;
 
 public interface StageTasksService {
 	/**
@@ -32,4 +34,18 @@ public interface StageTasksService {
 	 * @throws SQLException 
 	 */
 	List<Object> getNewTaskNo9(String ntn) throws SQLException;
+	
+	/**
+	 * 查询某个任务的具体信息
+	 * @param taskno
+	 * @return
+	 */
+	TaskInfo findTaskInfoById(String taskno);
+	
+	/**
+	 * 查询某个任务已报账金额
+	 * @param taskno
+	 * @return
+	 */
+	double findUsedFeeByTaskno(String taskno);
 }

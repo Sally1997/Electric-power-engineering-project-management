@@ -2,34 +2,34 @@ package com.holyshit.utils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.junit.Test;
 
-import com.holyshit.domain.TaskIndexs;
+import com.holyshit.domain.ProjectInfo;
 import com.holyshit.service.ProjectService;
 import com.holyshit.service.impl.ProjectServiceImpl;
+
+import net.sf.json.JSONArray;
 
 public class TestFozza {
 	@Test
 	public void forTest() throws SQLException{
-		String Pno = "";
-		String x = "1";
+		int current_page = 1;
+		int page_size = 5;
+		
 		ProjectService ps = new ProjectServiceImpl();
-		List<Object> list = new ArrayList<Object>();
-		list = ps.getNewProjectNo(x);
-		String str = list.get(0).toString();
-		Pno = str.substring(0, str.length()-1);
-		char c = str.charAt(str.length()-1);
-		if(c=='9'){
-			c='a';
+		Map<String,Object> info_map = new HashMap<String, Object>();
+		info_map = ps.getProjectManageInfo(current_page, page_size);
+		
+		List<ProjectInfo> plist = (List<ProjectInfo>) info_map.get("pi_list");
+		for(int i=0;i<plist.size();i++){
+			System.out.println(plist.get(i));
 		}
-		else{
-			c++;
-		}
-		Pno += c;
-		System.out.println(Pno);
+		
+		String s = JSONArray.fromObject(info_map).toString();
+		System.out.println(s);
 	}
 }

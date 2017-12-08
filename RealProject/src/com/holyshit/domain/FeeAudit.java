@@ -3,6 +3,7 @@ package com.holyshit.domain;
 import java.sql.Date;
 
 public class FeeAudit {
+	private String fauditno;
 	private String applicantno;
 	private String auditorno;
 	private String pno;
@@ -13,6 +14,13 @@ public class FeeAudit {
 	private String ofeereason;
 	private String taskno;
 	private Date stime;
+	
+	public String getFauditno() {
+		return fauditno;
+	}
+	public void setFauditno(String fauditno) {
+		this.fauditno = fauditno;
+	}
 	public String getApplicantno() {
 		return applicantno;
 	}

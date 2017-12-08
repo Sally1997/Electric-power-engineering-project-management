@@ -9,6 +9,7 @@ import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.domain.Document;
 import com.holyshit.service.DocumentService;
+import com.holyshit.utils.ConnectionManager;
 
 public class DocumentServiceImpl implements DocumentService {
 
@@ -25,6 +26,8 @@ public class DocumentServiceImpl implements DocumentService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		
 		//将分页结果封装成hashmap

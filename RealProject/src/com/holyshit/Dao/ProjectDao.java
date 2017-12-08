@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.Project;
+import com.holyshit.domain.ProjectInfo;
 /**
  * 
  * @author yuan
@@ -70,7 +71,21 @@ public interface ProjectDao {
 	 * @throws SQLException 
 	 */
 	List<Object> getMaxProNo(String pro_first_no) throws SQLException;
-} 
+	
+	/**
+	 * 搜索
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<ProjectInfo> selectProjectManageInfo(int current_page,int page_size) throws SQLException;
+	
+	/**
+	 * 查询项目管理首页的页数
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int PMPageCount() throws SQLException;
+}  
 
 
 
