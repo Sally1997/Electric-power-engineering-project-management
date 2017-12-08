@@ -215,6 +215,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		
 		String res=projects.toString();
@@ -233,6 +235,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
 			}
 			return 0;
 		}else{
@@ -242,6 +246,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
 			}
 			return 0;
 		}

@@ -26,16 +26,9 @@ public class StageTasksServiceImpl implements StageTasksService{
 		ProjectDao pd=new ProjectDaoImpl();
 		String pname=null;
 		StageTaskDao std=new StageTaskDaoImpl();
-		try {
-			tasks=std.selectAllTasksById(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			ConnectionManager.closeConnection();
-		}
 		List<String> projectNames=new ArrayList<String>();
 		try {
+			tasks=std.selectAllTasksById(id);
 			for(StageTask st : tasks){
 				String pno=st.getTaskno().substring(0, 5);
 				System.out.println("取到了"+pno);
@@ -45,6 +38,8 @@ public class StageTasksServiceImpl implements StageTasksService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		Map<String, Object> res=new HashMap<String, Object>();
 		res.put("tasks", tasks);
@@ -79,6 +74,8 @@ public class StageTasksServiceImpl implements StageTasksService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		return null;
 	}
@@ -98,6 +95,8 @@ public class StageTasksServiceImpl implements StageTasksService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		return res;
 	}
