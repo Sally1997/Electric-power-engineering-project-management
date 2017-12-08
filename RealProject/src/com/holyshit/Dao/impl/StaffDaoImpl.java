@@ -9,6 +9,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
 
 import com.holyshit.Dao.StaffDao;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 import com.holyshit.utils.C3P0Util;
@@ -46,6 +47,11 @@ public class StaffDaoImpl implements StaffDao {
 			 params[i] = new Object[]{staffnos[i],pno};
 		}
 		qr.batch("delete from psrelation where staffno = ? and pno=?", params);
+	}
+	
+	public void addAStaff(PSRelation psr) throws SQLException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		qr.update("insert into psrelation values(?,?,?); ",psr.getStaffno(),psr.getPno(),psr.getDuty());
 	}
 
 }
