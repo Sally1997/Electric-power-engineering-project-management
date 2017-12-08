@@ -73,16 +73,13 @@
 
  </head>
  <body> 
-<<<<<<< HEAD
-   <!-- 页眉-->   
-    <%@include file="/head.jsp" %>
-=======
+
    <%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
 	</script>
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
+
 <!--  主要内容-->
 <section>
     <div class=container-fluid>
@@ -191,7 +188,7 @@
 						<div id="responsible_per" class="block">
 						<form>
 						<div style="text-align: right">
-						    <a href="${pageContext.request.contextPath}/web/servlet/addAStaff?pno=${pno}" ><button type="submit" class="btn btn-primary" onclick="showPno()" >添加</button></a>
+						    <a ><button type="submit" class="btn btn-primary" onclick="window.open('${pageContext.request.contextPath}/web/servlet/addAStaff?pno=${pno}')">添加</button></a>
 							<a href="${pageContext.request.contextPath}/web/servlet/staffListServlet?pno=${pno}" style="color:white;" ><button type="submit"class="btn btn-primary" onclick="showPno()" >返回aaa</button></a>
 						</div>
 						</form>
