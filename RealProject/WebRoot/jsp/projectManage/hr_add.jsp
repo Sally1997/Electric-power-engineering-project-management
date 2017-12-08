@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>02-hradda</title>
+    <title>02-hradd</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -21,43 +21,7 @@
     
     
 	<script type="text/javascript">
-	function show()
-{
-	if (document.getElementById('sorry1').style.display == 'block')
-       {
-           	document.getElementById('sorry1').style.display = 'none';
-			document.getElementById('sorry2').style.display = 'none';
-			document.getElementById('sorry3').style.display = 'none';
-			document.getElementById('sorry4').style.display = 'none';
-			document.getElementById('sorry5').style.display = 'none';
-			document.getElementById('sorry6').style.display = 'none';
-			document.getElementById('sorry7').style.display = 'none';
-        }
-    else
-       {
-            
-            document.getElementById('sorry1').style.display = 'block';
-			document.getElementById('sorry2').style.display = 'block';
-			document.getElementById('sorry3').style.display = 'block';
-			document.getElementById('sorry4').style.display = 'block';
-			document.getElementById('sorry5').style.display = 'block';
-			document.getElementById('sorry6').style.display = 'block';
-			document.getElementById('sorry7').style.display = 'block';
-        }
-};
-	function add()
-{
-	if (document.getElementById('sorry1').style.display == 'block')
-       {
-           	document.getElementById('sorry1').style.display = 'none';
-			document.getElementById('sorry2').style.display = 'none';
-			document.getElementById('sorry3').style.display = 'none';
-			document.getElementById('sorry4').style.display = 'none';
-			document.getElementById('sorry5').style.display = 'none';
-			document.getElementById('sorry6').style.display = 'none';
-			document.getElementById('sorry7').style.display = 'none';
-        }
-};
+
 
 	window.onload=function(){
 		var searchElement = document.getElementById("SearchStaffNo");
@@ -108,6 +72,9 @@
 		searchElement.value = div.innerHTML;
 		div.parentNode.style.display = "none";
 	}
+	function showPno(){
+		alert("axibabababbab");
+	}
 </script>
 
  </head>
@@ -119,26 +86,27 @@
     <div class=container-fluid>
     	<div class="row">
     		<main class="col-lg-12 main-content">
-    		
     		<div class="col-lg-8 xumode">
    	        <div class="panel panel-primary">
     	        <div class="panel-heading">人员添加</div>
       	        <div class="panel-body">
                 <div class="col-lg-12" >
                  <!-- style="margin-top: 20px;margin-left: 5%" -->
- <!-- 为了方便在编辑器里看我下面就不把缩进改到后面了。。。你知道下面都是一块的就够了 -->
+                   <!--
+				   为了方便在编辑器里看我下面就不把缩进改到后面了。。。
+				   你知道下面都是一块的就够了 -->
+						<form action="${pageContext.request.contextPath}/web/servlet/addAStaff" method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 						<div align = "center">
-						<form action="" method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 							<div class="form-group">
 							    <input class="form-control" id="SearchStaffNo" type="text" size = "70%"/>
 							</div><!--搜索框-->
 							<div class="form-group">
 							    <input  name="" type="button" class="btn btn-primary" value="查看信息" onclick = "show();return false;" herf="${pageContext.request.contextPath}/servlet/FindAStaffServlet"/>
 							</div><!--搜索按钮-->
-						</form>
 						</div>
 						<div id="context1" style = "display:block;border:1px solid red;background-color:white;width:510px;position:absolute;left:245px;top:35px;">
 						</div><!-- 搜索提示框 -->
+						</form>
 						<div id="responsible_per" class="block">
 						<div id="first_left">
 						<font class="text">员工编号:</font>
@@ -194,40 +162,41 @@
 						<font class="text">职业资格:</font>
 						</div>
 						<div id="first_right">
-						<font class="text"><span id="sorry6" style="display:none">
-							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc">查看</button></font></span></font>
+						<font class="text"><span id="sorry6">
+							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" onclick="showPno()" >查看</button>
+							</span>
+						</font>
 						</div>
 						<div class="clear"></div>
 						</div>
-  	
-  	
-						<span id="sorry7" style="display:none">
+						
+						<span id="sorry7" >
 						<div id="responsible_per" class="block">
 						<div id="first_left">
 						<font class="text">职责:</font>
 						</div>
 						<div id="first_right">
-						<form action="" method="get" name = "search">
-						  <span><select name="duty" length = "40">
+						<span><select name="duty" length = "40">
 								<option value="duty1">职责1</option>
 								<option value="duty2">职责2</option>
 								<option value="duty3">职责3</option>
 						</select></span>
-						</form>
 						</div>
 						<div class="clear"></div>
 						</div>
 						</span>
+						
 						<div id="responsible_per" class="block">
+						<form>
 						<div style="text-align: right">
-						    <button type="submit" class="btn btn-primary" >添加</button>	
-							<button type="submit"class="btn btn-primary" >
-							<a href="${pageContext.request.contextPath}/servlet/staffListServlet" style="color:white;">返回</a></button>
+						    <a href="${pageContext.request.contextPath}/web/servlet/addAStaff?pno=${pno}" ><button type="submit" class="btn btn-primary" onclick="showPno()" >添加</button></a>
+							<a href="${pageContext.request.contextPath}/web/servlet/staffListServlet?pno=${pno}" style="color:white;" ><button type="submit"class="btn btn-primary" onclick="showPno()" >返回aaa</button></a>
 						</div>
+						</form>
 						<div class="clear"></div>
 						</div>
-            		
-		    	</div>
+            	</div>	
+		    	
 		    	</div>
 		    </div>
 		    </div>
@@ -235,6 +204,7 @@
     	</div>
     </div>
 </section>
+
 <!--资格证-->
 
 <div class="modal fade" id="handupBc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -267,9 +237,9 @@
 		<tr>
 			<td><abbr title="大学时获得">计算机四级证书</abbr></td>
 		</tr>
-	 </table>
+	      </table>
         
-      </div>
+    </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
     </div>
@@ -281,6 +251,6 @@
       	<p>©版权归谭莹小组所有</p>
    
   </div>
-  </footer>
+</footer>
   </body>
 </html>

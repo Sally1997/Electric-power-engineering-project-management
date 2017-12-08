@@ -3,6 +3,7 @@ package com.holyshit.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
@@ -39,5 +40,6 @@ public interface StaffDao {
 	 * @throws SQLException
 	 */
 	void delAllStaffs(String[] staffnos,String pno) throws SQLException;
+	void addAStaff(PSRelation psr) throws SQLException;
 }   
  

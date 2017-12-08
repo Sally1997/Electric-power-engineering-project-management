@@ -47,6 +47,9 @@
 				location.herf="${pageContext.request.contextPath}/servlet/delAllStaffsServlet?"+str;
 			
 		}
+		function showPno(){
+			alert(${pno});
+		}
 	</script>
   </head>
   <body> 
@@ -113,7 +116,7 @@
                 <div class="col-lg-12" >
  
 					<div>
-						<a href="${pageContext.request.contextPath}/hr_add.jsp" style="color:white;"><button type="button" class="btn btn-primary" style="float: right;">增加</button></a>
+						<a href="${pageContext.request.contextPath}/servlet/hrMainJumpaddServlet?pno=${pno }" style="color:white;"><button type="button" class="btn btn-primary" style="float: right;" onclick="showPno()" >增加</button></a>
 						<br/><br/>
 					</div>
 					

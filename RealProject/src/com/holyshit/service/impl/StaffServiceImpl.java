@@ -3,9 +3,11 @@ import com.holyshit.Dao.*;
 
 import java.sql.SQLException;
 import java.util.List;
-
+import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
+import com.holyshit.utils.ConnectionManager;
 import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
@@ -18,6 +20,8 @@ public class StaffServiceImpl implements StaffService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		return null;
 	}
@@ -29,6 +33,8 @@ public class StaffServiceImpl implements StaffService{
 			StaffDao.delAllStaffs(staffnos, pno);
 		}catch(SQLException e){
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 	}
 	@Override
@@ -39,9 +45,20 @@ public class StaffServiceImpl implements StaffService{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
 		return null;
 		
+	}
+	
+	public void addAStaff(PSRelation psr){
+		try {
+			StaffDao.addAStaff(psr);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

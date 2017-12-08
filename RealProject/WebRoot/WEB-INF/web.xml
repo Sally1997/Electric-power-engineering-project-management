@@ -64,6 +64,16 @@
     <servlet-name>StaffListServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.StaffListServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AddAStaff</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.AddAStaff</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HrMainJumpaddServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.HrMainJumpaddServlet</servlet-class>
+  </servlet>
+
+
 
 
   <servlet-mapping>
@@ -109,6 +119,14 @@
     <servlet-mapping>
     <servlet-name>StaffListServlet</servlet-name>
     <url-pattern>/web/servlet/staffListServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddAStaff</servlet-name>
+    <url-pattern>/web/servlet/addAStaff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HrMainJumpaddServlet</servlet-name>
+    <url-pattern>/servlet/hrMainJumpaddServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
