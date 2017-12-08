@@ -58,7 +58,6 @@
     <servlet-class>com.holyshit.web.servlet.showPageFee</servlet-class>
   </servlet>
   <servlet>
-<<<<<<< HEAD
     <servlet-name>InfoMoreServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.InfoMoreServlet</servlet-class>
   </servlet>
@@ -75,10 +74,7 @@
     <servlet-name>HrMainJumpaddServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.HrMainJumpaddServlet</servlet-class>
   </servlet>
-=======
-    <servlet-name>StaffListServlet</servlet-name>
-    <servlet-class>com.holyshit.web.servlet.StaffListServlet</servlet-class>
-  </servlet>
+
   <servlet>
     <servlet-name>showWorkingTask</servlet-name>
     <servlet-class>com.holyshit.web.servlet.showWorkingTask</servlet-class>
@@ -96,8 +92,6 @@
     <servlet-class>com.holyshit.web.servlet.SubmitAudit</servlet-class>
   </servlet>
 
-
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 
 
 
@@ -139,13 +133,8 @@
     <url-pattern>/web/servlet/showPageFee</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-<<<<<<< HEAD
     <servlet-name>InfoMoreServlet</servlet-name>
     <url-pattern>/servlet/infoMoreServlet</url-pattern>
-  </servlet-mapping>
-    <servlet-mapping>
-    <servlet-name>StaffListServlet</servlet-name>
-    <url-pattern>/web/servlet/staffListServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AddAStaff</servlet-name>
@@ -154,7 +143,8 @@
   <servlet-mapping>
     <servlet-name>HrMainJumpaddServlet</servlet-name>
     <url-pattern>/servlet/hrMainJumpaddServlet</url-pattern>
-=======
+   </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>StaffListServlet</servlet-name>
     <url-pattern>/web/servlet/staffListServlet</url-pattern>
   </servlet-mapping>
@@ -173,7 +163,7 @@
   <servlet-mapping>
     <servlet-name>SubmitAudit</servlet-name>
     <url-pattern>/web/servlet/submitAudit</url-pattern>
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
+
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
