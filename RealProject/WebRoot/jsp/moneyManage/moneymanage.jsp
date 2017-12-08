@@ -17,7 +17,7 @@
    		var taskinfo="";
    		var feeData=eval('('+'${fee["feeaudits"]}'+')');
    		var auditData;
-   		
+   		var fauditno;  //报账表编号 --审核
    		//ajax请求
    		function submitFeeInfo(){
    			if(task_fee.value==""){
@@ -44,7 +44,28 @@
    				req.send(null);
    			}
    		}
-
+		//ajax请求  审核
+		function submitAuditInfo(){
+			var req=new XMLHttpRequest();
+			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						//接受信息
+						var res=req.responseText;
+						if(res=="ok"){
+							alert("审核成功");
+								location.reload(true);
+						}else{
+							alert("审核失败");
+						}
+					}
+				}
+				
+			};
+			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state=1&cause=输入界面没有，我能怎么办!");
+			req.send(null);
+			
+		}
    		function showAuditData(){
    			var nodes=audittable.getElementsByTagName("tr");
 			for(var i=0;i<auditData.length;i++){
@@ -578,6 +599,9 @@
         <script type="text/javascript">
 	   		//刷新审核框内容
 	   		function updateAuditDialog(e){
+	   			//设置审核id
+	   			fauditno=auditData[e].fauditno;
+	   			var submit_audit=document.getElementById("submit_audit");
 	   			document.getElementById("audit_pname").innerHTML=auditData[e].pname;
 	   			document.getElementById("audit_sname").innerHTML=auditData[e].sname;
 	   			document.getElementById("audit_taskname").innerHTML=auditData[e].taskname;
@@ -589,19 +613,22 @@
 	   			if(tmp=="0"){
 	   				state.className="text-danger";
 	   				state.innerHTML="未审批";
+	   				submit_audit.removeAttribute("disabled");
 	   			}else if(tmp="1"){
 	   				state.className="text-danger";
 	   				state.innerHTML="不通过";
+	   				submit_audit.disabled="disabled";
 	   			}else{
 	   				state.className="text-success";
 	   				state.innerHTML="审批通过";
+	   				submit_audit.disabled="disabled";
 	   			}
 	   		}
         </script>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary">审批</button>
+        <button type="button" class="btn btn-primary" onclick="submitAuditInfo();" id="submit_audit">审批</button>
       </div>
     </div>
   </div>

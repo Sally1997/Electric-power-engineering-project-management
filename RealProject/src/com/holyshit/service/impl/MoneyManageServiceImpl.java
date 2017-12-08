@@ -287,6 +287,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				t.put("stime", f.getStime().toString());
 				t.put("fee", f.getFee());
 				t.put("auditstate", f.getAuditstate());
+				t.put("fauditno", f.getFauditno());
 				//查询是否超标
 				double hasused=0;
 				BigDecimal ss = std.selectFeeUsedByTaskno(f.getTaskno());
@@ -311,5 +312,22 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		res.put("audits", audits);
 		System.out.println("哈哈"+res.toString());
 		return res.toString();
+	}
+
+
+	@Override
+	public int doFeeAudit(String cause, String state,
+			String fauditno) {
+		// TODO Auto-generated method stub
+		FeeAuditDao fd=new FeeAuditDaoImpl();
+		try {
+			return fd.updateAudit(fauditno, state, cause);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return 0;
 	}
 }

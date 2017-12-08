@@ -66,4 +66,14 @@ public interface FeeAuditDao {
 	 * @throws SQLException
 	 */
 	int addFeeAuditOver(String taskno,double fee,String cause,String applicantno,String auditor,String pno)throws SQLException;
+	
+	/**
+	 * 任务发布人审核报账信息
+	 * @param taskno
+	 * @param state
+	 * @param cause
+	 * @return
+	 * @throws SQLException
+	 */
+	int updateAudit(String fauditno,String state,String cause)throws SQLException;
 }

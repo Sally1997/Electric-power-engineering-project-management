@@ -48,4 +48,13 @@ public interface MoneyManageService {
 	 * @return
 	 */
 	int handleFee(TaskInfo task,double fee,String cause,boolean over);
+	/**
+	 * 任务发布人进行报账审核
+	 * @param taskno
+	 * @param cause
+	 * @param state
+	 * @param fauditno
+	 * @return
+	 */
+	int doFeeAudit(String cause,String state,String fauditno);
 }

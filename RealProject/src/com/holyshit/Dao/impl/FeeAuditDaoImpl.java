@@ -70,4 +70,12 @@ public class FeeAuditDaoImpl implements FeeAuditDao{
 		return (long) qr.query(ConnectionManager.getConnection(),"select count(*) from feeaudit where auditorno=?",new ScalarHandler(),id);
 	}
 
+	@Override
+	public int updateAudit(String fauditno, String state, String cause)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(),"UPDATE feeaudit SET auditadv=?,audittime=?,auditstate=? WHERE fauditno=?",cause,new Date(new java.util.Date().getTime()),state,fauditno);
+	}
+
 }

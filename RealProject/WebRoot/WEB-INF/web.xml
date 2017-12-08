@@ -73,6 +73,11 @@
     <servlet-name>ShowAuditPage</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowAuditPage</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>SubmitAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SubmitAudit</servlet-class>
+  </servlet>
+
 
 
 
@@ -129,6 +134,10 @@
   <servlet-mapping>
     <servlet-name>ShowAuditPage</servlet-name>
     <url-pattern>/web/servlet/showAuditPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubmitAudit</servlet-name>
+    <url-pattern>/web/servlet/submitAudit</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
