@@ -303,7 +303,7 @@
 					if(name1.length>8)
 						name1=name1.substr(0,8)+"...";
 					
-					var name2=feeData[i].sname;
+					var name2=feeData[i].appname;
 					
 					if(name2.length>4)
 						name2=name2.substr(0,4)+"...";
@@ -312,13 +312,16 @@
 					tds[2].innerHTML=feeData[i].stime;
 					var state=feeData[i].auditstate;
 					
-					if(state==0){
+					if(state=="0"){
 						tds[3].innerHTML="未审批";
 						tds[3].className="text-danger";
 					}
-					else{
+					else if(state=="2"){
 						tds[3].innerHTML="审批通过";
 						tds[3].className="text-success";
+					}else{
+						tds[3].innerHTML="不通过";
+						tds[3].className="text-danger";
 					}
 					tds[4].innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer" onclick="updateFeeAuditDialog('+i+')"></span>';
 				} 

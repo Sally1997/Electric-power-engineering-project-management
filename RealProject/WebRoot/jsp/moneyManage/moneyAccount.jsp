@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>相关项目报账信息</title>
-    
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/money.js"></script>
 </head>
 
 <body>
@@ -17,6 +17,32 @@
 	</script>
 	
 	<script type="text/javascript">
+		var taskinfo="";
+		function submitFeeInfo(){
+   			if(task_fee.value==""){
+   				alert("金额不得为空");
+   			}else if(task_feeaudit>task_budget && document.getElementById("fee_cause").value==""){
+   				alert("超标原因不得为空");
+   			}else{
+   				//发送请求
+   				var req=new XMLHttpRequest();
+   				req.onreadystatechange=function(){
+   					if(req.readyState==4){
+   						if(req.status==200){
+   							if(req.responseText=="ok"){
+   								alert("报账成功");
+   								location.reload(true);
+   							}else{
+   								alert("报账失败");
+   							}
+   						}
+   						
+   					}
+   				};
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
+   				req.send(null);
+   			}
+   		}
 		function getFunction(cur){
 			var req = new XMLHttpRequest();
    			req.onreadystatechange=function(){
@@ -87,7 +113,7 @@
             <div class="row">
               <div class="col-lg-10 xumode">
               <div class="panel panel-primary">
-		        <div class="panel-heading"><span>相关项目报账信息</span><span class="noRight"  data-toggle="modal" data-target="#handupAc">报账</span></div>
+		        <div class="panel-heading"><span>相关项目报账信息</span><span class="noRight"  data-toggle="modal" data-target="#handupAc" onclick="getTaskInfo(${staff.staffno})">报账</span></div>
 		        <div class="panel-body">
 		        <table class="table table-striped table-condensed" style="font-size: 15px" id="maintable">
 					<tr>
@@ -205,81 +231,181 @@
 				</nav>	
             </div> 		
     		</div>
-                <!--      默认隐藏的内容:报账-->
-	    <div class="modal fade" id="handupAc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<h4 class="modal-title" id="myModalLabel">报账</h4>
-		  </div>
-		  <div class="modal-body">
-			  <form class="form-horizontal">
-				  <div class="form-group">
-					<label class="col-sm-2 control-label">报账项目</label>
-					<div class="col-sm-8">
-					<select class="form-control">
-					  <option>项目A</option>
-					  <option>项目B</option>
-					  <option>项目C</option>
-					</select>
-					</div>
+
+
+ <!--      默认隐藏的内容:报账-->
+  <div class="modal fade" id="handupAc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">报账</h4>
+      </div>
+      <div class="modal-body">
+		  <form class="form-horizontal">
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">报账项目</label>
+				<div class="col-sm-8">
+			    <select class="form-control" id="project_select">
+				  <option>请选择</option>
+				</select>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" >项目阶段</label>
+                <div class="col-sm-8">
+			    <select class="form-control" disabled="disabled" id="stage_select">
+			      <option>请选择</option>
+				</select>
+				</div>
+			  </div>
+		      <div class="form-group">
+			    <label class="col-sm-2 control-label" >报账任务</label>
+			    <div class="col-sm-8">
+			    <select class="form-control" disabled="disabled" id="task_select">
+			      <option>请选择</option>
+			    </select>
+			    </div>
+			  </div>			  
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" >报账金额</label>
+				<div class="col-sm-8">
+		          <div class="input-group">
+			      <div class="input-group-addon">￥</div>
+				  <input type="text" class="form-control" id="inputPassword3" disabled="disabled">
+				  <div class="input-group-addon">（元）</div>
 				  </div>
-				  <div class="form-group">
-					<label class="col-sm-2 control-label">项目阶段</label>
-					<div class="col-sm-8">
-					<select class="form-control">
-					  <option>阶段一</option>
-					  <option>阶段二</option>
-					  <option>阶段三</option>
-					  <option>阶段四</option>
-					  <option>阶段五</option>
-					  <option>阶段六</option>
-					  <option>阶段七</option>
-					  <option>阶段八</option>
-					</select>
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label class="col-sm-2 control-label">报账任务</label>
-					<div class="col-sm-8">
-					<select class="form-control">
-					  <option>任务一</option>
-					  <option>任务二</option>
-					  <option>任务三</option>
-					  <option>任务四</option>
-					  <option>任务五</option>
-					  <option>任务六</option>
-					  <option>任务七</option>
-					  <option>任务八</option>
-					</select>
-					</div>
-				  </div>			  
-				  <div class="form-group">
-					<label class="col-sm-2 control-label">报账金额</label>
-					<div class="col-sm-8">
-					  <div class="input-group">
-					  <div class="input-group-addon">￥</div>
-					  <input type="password" class="form-control" id="inputPassword3">
-					  <div class="input-group-addon">（元）</div>
-					  </div>
-					</div>
-				  </div>
-				 <div class="form-group">
-					<label  class="col-sm-2 control-label">超标原因</label>
-					<div class="col-lg-8">
-					  <textarea class="form-control" rows="4"></textarea>
-					</div>
-				  </div>
-			  </form>
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-			<button type="button" class="btn btn-primary">报账</button>
-		  </div>
-		</div>
-	  </div>
-	</div>
+				</div>
+			  </div>
+			  <div class="form-group" id="warnning_div" style="display: none;">
+				<label  class="col-sm-2 control-label" >提示</label>
+				<span style="color: red;font-size: 15px;font-weight: bold;" id="warnning">报账金额超出任务预算,请填写超标原因,等待审核</span>
+			  </div>
+             <div class="form-group" id="over_cause" style="display: none;">
+				<label  class="col-sm-2 control-label" >超标原因</label>
+				<div class="col-lg-8">
+				  <textarea class="form-control" rows="4" id="fee_cause"></textarea>
+				</div>
+			  </div>
+          </form>
+          <script type="text/javascript">
+          		var project_pos=-1;  //项目位置
+          		var stage_pos=-1;   //阶段位置
+          		var task_pos=-1;   //任务位置
+          		var task_budget=0;
+          		var task_feeaudit=0;
+          		var project_select=document.getElementById("project_select");
+          		var stage_select=document.getElementById("stage_select");
+          		var task_select=document.getElementById("task_select");
+          		var task_fee=document.getElementById("inputPassword3");
+          		var over_cause=document.getElementById("over_cause");
+          		var warnning=document.getElementById("warnning");
+          		
+          		project_select.onchange=function(){
+          			if(this.value=="请选择"){
+          				//取消禁用
+          				stage_select.disabled="disabled";
+          				task_select.disabled="disabled";
+          				task_fee.disabled="disabled";
+          				over_cause.disabled="disabled";
+          			}else{
+          				for(var i=0;i<taskinfo.length;i++)
+          					if(taskinfo[i].pname==project_select.value){
+          						project_pos=i;
+          						break;
+          					}
+          				//取消禁止
+          				stage_select.removeAttribute("disabled");
+          				//刷新阶段
+          				showStage();
+          				task_select.disabled="disabled";
+          				task_fee.disabled="disabled";
+          			}
+          			
+          		};
+          	stage_select.onchange=function(){
+          		if(this.value=="请选择"){
+      				//取消禁用
+      				task_select.disabled="disabled";
+      				task_fee.disabled="disabled";
+      				over_cause.disabled="disabled";
+      			}else{
+      				for(var i=0;i<taskinfo[project_pos].stagelist.length;i++)
+      					if(taskinfo[project_pos].stagelist[i].sname==stage_select.value){
+      						stage_pos=i;
+      						break;
+      					}
+      				//取消禁止
+      				task_select.removeAttribute("disabled");
+      				//刷新阶段
+      				showTask();
+      				task_fee.disabled="disabled";
+      			
+      			}
+          		
+          	};
+          	task_select.onchange=function(){
+          		if(this.value=="请选择"){
+      				//禁用
+      				task_fee.disabled="disabled";
+      				over_cause.disabled="disabled";
+      			}else{
+      				
+      				for(var i=0;i<taskinfo[project_pos].stagelist[stage_pos].tasklist.length;i++){
+      					if(taskinfo[project_pos].stagelist[stage_pos].tasklist[i].taskname==task_select.value){
+      						task_pos=i;
+      						break;
+      					}
+      				}
+      				//取消禁止
+      				task_fee.removeAttribute("disabled");
+      			}
+          		
+          	};
+          	task_fee.oninput=function(){
+          		var tmp=task_fee.value;
+          		var rep=/^\d+((\.)?\d+)?$/;
+          		if(!rep.test(tmp)){
+          			if(tmp.indexOf(".")!=-1){
+          				if(tmp.indexOf(".")!=tmp.length-1){
+		          			task_fee.value="";
+		          			submit.disabled="disabled";
+		          			alert("请输入正确的金额");
+          				}
+          			}else{
+          				task_fee.value="";
+          				submit.disabled="disabled";
+	          			alert("请输入正确的金额");
+          			}
+          		}else{
+          			task_feeaudit=window.parseFloat(tmp);
+          			submit.removeAttribute("disabled");
+	          		task_budget=taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].budget;
+	          		if(task_budget<task_feeaudit){
+	          			warnning.innerHTML="当前任务剩余预算为￥"+task_budget+"元,请填写超标原因";
+	          			warnning_div.style.display="block";
+	          			over_cause.style.display="block";
+	          		}else{
+	          			submit.removeAttribute("disabled");
+	          			warnning_div.style.display="none";
+	          			over_cause.style.display="none";
+	          		}
+          		}
+          	};
+          	
+          </script>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-primary" onclick="submitFeeInfo();" id="submit">报账</button>
+        <script type="text/javascript">
+        	var submit=document.getElementById("submit");
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
     </section>
     <footer class="copyright">
   <div class="container-fluid">

@@ -146,12 +146,15 @@
    			if(tmp=="0"){
    				state.className="text-danger";
    				state.innerHTML="未审批";
+   				submit_audit.removeAttribute("disabled");
    			}else if(tmp=="1"){
    				state.className="text-danger";
    				state.innerHTML="不通过";
+   				submit_audit.disabled="disabled";
    			}else{
    				state.className="text-success";
    				state.innerHTML="审批通过";
+   				submit_audit.disabled="disabled";
    			}
    		}
 	</script>
@@ -291,7 +294,10 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary">审批</button>
+        <button type="button" class="btn btn-primary" id="submit_audit">审批</button>
+        <script type="text/javascript">
+        	var submit_audit=document.getElementById("submit_audit");
+        </script>
       </div>
     </div>
   </div>
