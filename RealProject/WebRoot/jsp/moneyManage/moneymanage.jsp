@@ -19,111 +19,29 @@
    		var auditData;
    		var fauditno;  //报账表编号 --审核
    		//ajax请求
-   		function submitFeeInfo(){
-   			if(task_fee.value==""){
-   				alert("金额不得为空");
-   			}else if(task_feeaudit>task_budget && document.getElementById("fee_cause").value==""){
-   				alert("超标原因不得为空");
-   			}else{
-   				//发送请求
-   				var req=new XMLHttpRequest();
-   				req.onreadystatechange=function(){
-   					if(req.readyState==4){
-   						if(req.status==200){
-   							if(req.responseText=="ok"){
-   								alert("报账成功");
-   								location.reload(true);
-   							}else{
-   								alert("报账失败");
-   							}
-   						}
-   						
-   					}
-   				};
-   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
-   				req.send(null);
-   			}
-   		}
-		//ajax请求  审核
-		function submitAuditInfo(){
-			var req=new XMLHttpRequest();
-			req.onreadystatechange=function(){
-				if(req.readyState==4){
-					if(req.status==200){
-						//接受信息
-						var res=req.responseText;
-						if(res=="ok"){
-							alert("审核成功");
-								location.reload(true);
-						}else{
-							alert("审核失败");
-						}
-					}
-				}
-				
-			};
-			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state=1&cause=输入界面没有，我能怎么办!");
-			req.send(null);
-			
-		}
-   		function showAuditData(){
-   			var nodes=audittable.getElementsByTagName("tr");
-			for(var i=0;i<auditData.length;i++){
-				
-				var tds=nodes[i+1].getElementsByTagName("td");
-				var name1=auditData[i].pname;
-				if(name1.length>8)
-					name1=name1.substr(0,8)+"...";
-				
-				var name2=auditData[i].sname;
-				
-				if(name2.length>4)
-					name2=name2.substr(0,4)+"...";
-				tds[0].innerHTML=name1;
-				tds[1].innerHTML=name2;
-				tds[2].innerHTML=auditData[i].stime;
-				var state=auditData[i].auditstate;
-				
-				if(state=="0"){
-					tds[3].innerHTML="未审批";
-					tds[3].className="text-danger";
-				}
-				else if(state=="2"){
-					tds[3].innerHTML="审批通过";
-					tds[3].className="text-success";
-				}else{
-					tds[3].innerHTML="不通过";
-					tds[3].className="text-danger";
-					
-				}
-				tds[4].innerHTML='<span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer" onclick="updateAuditDialog('+i+')"></span>';
-			} 
-			for(var i=auditData.length;i<4;i++){
-				var tds=nodes[i+1].getElementsByTagName("td");
-				tds[0].innerHTML="-";
-				tds[1].innerHTML="-";
-				tds[2].innerHTML="-";
-				tds[3].innerHTML="-";
-				tds[4].innerHTML="-";
-			} 
-		
-   		}
-   		function getAuditInfo(){
-   			var req=new XMLHttpRequest();
+
+   		function getFunction(cur){
+   			var req = new XMLHttpRequest();
    			req.onreadystatechange=function(){
-				if(req.readyState==4){
-					if(req.status==200){
-						var res=req.responseText;
-						var hehe=eval('('+res+')');
-						auditData=hehe.audits;
-						showAuditData();
-					}
-					
-				}
-			};
-			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=4");
-			req.send(null);
-  		}
+   				if(req.readyState==4){
+   					if(req.status==200){
+   						var res=req.responseText;
+   						//数据刷新
+   						var data=eval('('+res+')');
+   						dataJson=data.budgets;
+   						currentPage=data.currentPage;
+					 	pageSize=data.pageSize;
+					    pageNum=data.pageNum;  
+					 	totalNum=data.totalNum; 
+   						projectNum=data.projectNum;	
+   						refreshData();	
+   					}
+   				}
+   			};
+   			
+   			req.open("post", "/RealProject/web/servlet/showbudgetpage?currentPage="+cur+"&pageSize=3");
+   			req.send(null);
+   		}
    	</script>
 
   </head>
@@ -582,51 +500,128 @@
 
   <!--      默认隐藏的内容:报账详细信息（审批）-->
   <div class="modal fade bs-example-modal-sm" id="acInfoPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">详细信息</h4>
       </div>
-      <div>
-        <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td id="audit_pname">项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td id="audit_sname">阶段一</td></tr>
-        	<tr><td>项目任务</td><td id="audit_taskname">任务一</td></tr>
-			<tr><td>报账人</td><td id="audit_appname">甲</td></tr>
-        	<tr><td>报账时间</td><td id="audit_stime">2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td id="audit_fee">￥50.00元</td></tr>
-            <tr><td>当前状态</td>
-            <td id="audit_auditstate">未审批</td></tr>
-        </table>
+      <div class="modal-body">
+		  <div>
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账项目:</font>
+							</div>
+							<div class="hehe_right">
+							<font id="audit_pname">这个项目的名字实在是特别特别特别的长</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+				<div class="hehe_left">
+				<font >项目阶段:</font>
+				</div>
+				<div class="hehe_right">
+				<font  id="audit_sname">阶段一</font>
+				</div>
+				<div class="clear"></div>
+				</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font >项目任务:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_taskname">任务一一一一一一</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font >报账人:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_appname">卢仁佳</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账时间:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_stime">2017-12-8</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账金额:</font>
+							</div>
+							<div class="hehe_right">
+							<font id="audit_fee" >￥50.00元</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>当前状态:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_auditstate">未审批</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+		  </div >
+		  <div class="panel-middle" id="top_audit">
+			 <div class="modal-header"><h4 class="modal-title">审批</h4></div>
+		  </div>
+
+		  <form id="middle_audit">
+							<div id="responsible_per" class="block">
+							<div>
+							<div class="hehe_left">
+							<input type="radio" name="pass" value="2" checked id="audit_pass">通过
+							</div>
+							<div class="hehe_right">
+							<input type="radio" name="pass" value="1">不通过
+							</div>
+							</div> 
+							<div class="clear"></div>
+							</div>
+
+							<!-- 审批人 -->
+							<div id="end_date" class="block">
+							<div class="hehe_left">
+							<font class="text">审批人:</font>
+							</div>
+							<div class="hehe_right">
+							<input type="text" name="" size="40px;" disabled value="${staff.name }">
+							</div>
+							<div class="clear"></div>
+							</div>
+							
+							<!-- 审批意见 -->
+							<div id="start_date" class="block">
+							<div class="hehe_left">
+							<font class="text">审批意见：</font>
+							</div>
+							<div class="hehe_right">
+							<textarea rows="5" cols="30" id="audit_cause"></textarea>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+
+						</form>
         <script type="text/javascript">
 	   		//刷新审核框内容
-	   		function updateAuditDialog(e){
-	   			//设置审核id
-	   			fauditno=auditData[e].fauditno;
-	   			var submit_audit=document.getElementById("submit_audit");
-	   			document.getElementById("audit_pname").innerHTML=auditData[e].pname;
-	   			document.getElementById("audit_sname").innerHTML=auditData[e].sname;
-	   			document.getElementById("audit_taskname").innerHTML=auditData[e].taskname;
-	   			document.getElementById("audit_appname").innerHTML=auditData[e].appname;
-	   			document.getElementById("audit_stime").innerHTML=auditData[e].stime;
-	   			document.getElementById("audit_fee").innerHTML=auditData[e].fee;
-	   			var state=document.getElementById("audit_auditstate");
-	   			var tmp=auditData[e].auditstate;
-	   			if(tmp=="0"){
-	   				state.className="text-danger";
-	   				state.innerHTML="未审批";
-	   				submit_audit.removeAttribute("disabled");
-	   			}else if(tmp="1"){
-	   				state.className="text-danger";
-	   				state.innerHTML="不通过";
-	   				submit_audit.disabled="disabled";
-	   			}else{
-	   				state.className="text-success";
-	   				state.innerHTML="审批通过";
-	   				submit_audit.disabled="disabled";
-	   			}
-	   		}
+	   		
         </script>
       </div>
       <div class="modal-footer">

@@ -53,6 +53,15 @@
 			width: 200px;
 			height: 25px;
 		}
+		.hehe_left{
+			padding-left: 50px;
+			float: left;
+			width: 200px;
+			height: 25px;
+		}
+		.hehe_right{
+			float: left;
+		}
 		#first_right{
 			float: left;
 		}
@@ -73,3 +82,20 @@
 			color: #e8e8e8;
 			text-decoration: underline;
 		}
+        .fanGtd {
+		  padding: 8px;
+		  line-height: 1.42857143;
+		  vertical-align: top;
+		  border-top: 1px solid #ddd;
+		}
+		.fanGth {
+		  vertical-align: bottom;
+		  border-bottom: 2px solid #ddd;
+		}
+
+		.fanGtable:first-child tr:first-child td {
+		  border-top: 0;
+		}
+        .panel-middle{
+		  border-top: 1px solid #e5e5e5;
+        }

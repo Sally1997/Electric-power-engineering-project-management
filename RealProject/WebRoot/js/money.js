@@ -1,30 +1,156 @@
-//ajax
+function updateAuditDialog(e){
+	   			//设置审核id
+	   			fauditno=auditData[e].fauditno;
+	   			var submit_audit=document.getElementById("submit_audit");
+	   			document.getElementById("audit_pname").innerHTML=auditData[e].pname;
+	   			document.getElementById("audit_sname").innerHTML=auditData[e].sname;
+	   			document.getElementById("audit_taskname").innerHTML=auditData[e].taskname;
+	   			document.getElementById("audit_appname").innerHTML=auditData[e].appname;
+	   			document.getElementById("audit_stime").innerHTML=auditData[e].stime;
+	   			document.getElementById("audit_fee").innerHTML=auditData[e].fee;
+	   			var state=document.getElementById("audit_auditstate");
+	   			var tmp=auditData[e].auditstate;
+	   			if(tmp=="0"){
+	   				state.className="text-danger";
+	   				state.innerHTML="未审批";
+	   				submit_audit.removeAttribute("disabled");
+	   				document.getElementById("top_audit").style.display="block";
+	   				document.getElementById("middle_audit").style.display="block";
+	   			}else if(tmp="1"){
+	   				state.className="text-danger";
+	   				state.innerHTML="不通过";
+	   				submit_audit.disabled="disabled";
+	   				document.getElementById("top_audit").style.display="none";
+	   				document.getElementById("middle_audit").style.display="none";
+	   			}else{
+	   				state.className="text-success";
+	   				state.innerHTML="审批通过";
+	   				submit_audit.disabled="disabled";
+	   				document.getElementById("top_audit").style.display="none";
+	   				document.getElementById("middle_audit").style.display="none";
+	   			}
+	   		}
 
-/**
-   		* 分页请求ajax
-   		*/
-   		function getFunction(cur){
-   			var req = new XMLHttpRequest();
-   			req.onreadystatechange=function(){
-   				if(req.readyState==4){
-   					if(req.status==200){
-   						var res=req.responseText;
-   						//数据刷新
-   						var data=eval('('+res+')');
-   						dataJson=data.budgets;
-   						currentPage=data.currentPage;
-					 	pageSize=data.pageSize;
-					    pageNum=data.pageNum;  
-					 	totalNum=data.totalNum; 
-   						projectNum=data.projectNum;	
-   						refreshData();	
+
+//ajax
+function submitFeeInfo(){
+   			if(task_fee.value==""){
+   				alert("金额不得为空");
+   			}else if(task_feeaudit>task_budget && document.getElementById("fee_cause").value==""){
+   				alert("超标原因不得为空");
+   			}else{
+   				//发送请求
+   				var req=new XMLHttpRequest();
+   				req.onreadystatechange=function(){
+   					if(req.readyState==4){
+   						if(req.status==200){
+   							if(req.responseText=="ok"){
+   								alert("报账成功");
+   								location.reload(true);
+   							}else{
+   								alert("报账失败");
+   							}
+   						}
+   						
    					}
-   				}
-   			};
-   			
-   			req.open("post", "/RealProject/web/servlet/showbudgetpage?currentPage="+cur+"&pageSize=3");
-   			req.send(null);
+   				};
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
+   				req.send(null);
+   			}
    		}
+		//ajax请求  审核
+		function submitAuditInfo(){
+			//处理
+			var hehe=document.getElementById("audit_pass");
+			var cause=document.getElementById("audit_cause").innerHTML;
+			var audit_auditstate;
+			if(hehe.checked){
+				audit_auditstate="2";
+			}else
+				audit_auditstate="1";
+			if(cause==""){
+				return;
+			}
+			var req=new XMLHttpRequest();
+			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						//接受信息
+						var res=req.responseText;
+						if(res=="ok"){
+							alert("审核成功");
+								location.reload(true);
+						}else{
+							alert("审核失败");
+						}
+					}
+				}
+				
+			};
+			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+cause);
+			req.send(null); 
+			
+		}
+   		function showAuditData(){
+   			var nodes=audittable.getElementsByTagName("tr");
+			for(var i=0;i<auditData.length;i++){
+				
+				var tds=nodes[i+1].getElementsByTagName("td");
+				var name1=auditData[i].pname;
+				if(name1.length>8)
+					name1=name1.substr(0,8)+"...";
+				
+				var name2=auditData[i].sname;
+				
+				if(name2.length>4)
+					name2=name2.substr(0,4)+"...";
+				tds[0].innerHTML=name1;
+				tds[1].innerHTML=name2;
+				tds[2].innerHTML=auditData[i].stime;
+				var state=auditData[i].auditstate;
+				
+				if(state=="0"){
+					tds[3].innerHTML="未审批";
+					tds[3].className="text-danger";
+				}
+				else if(state=="2"){
+					tds[3].innerHTML="审批通过";
+					tds[3].className="text-success";
+				}else{
+					tds[3].innerHTML="不通过";
+					tds[3].className="text-danger";
+					
+				}
+				tds[4].innerHTML='<span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer" onclick="updateAuditDialog('+i+')"></span>';
+			} 
+			for(var i=auditData.length;i<4;i++){
+				var tds=nodes[i+1].getElementsByTagName("td");
+				tds[0].innerHTML="-";
+				tds[1].innerHTML="-";
+				tds[2].innerHTML="-";
+				tds[3].innerHTML="-";
+				tds[4].innerHTML="-";
+			} 
+		
+   		}
+   		function getAuditInfo(){
+   			var req=new XMLHttpRequest();
+   			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						var res=req.responseText;
+						var hehe=eval('('+res+')');
+						auditData=hehe.audits;
+						showAuditData();
+					}
+					
+				}
+			};
+			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=4");
+			req.send(null);
+  		}
+/**
+   		
    		
    		/**
    		* ajax获取任务信息

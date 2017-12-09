@@ -1,6 +1,9 @@
 package com.holyshit.Dao.impl;
 
+import java.sql.SQLException;
+
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.domain.PSPlan;
@@ -8,22 +11,12 @@ import com.holyshit.domain.TaskIndexs;
 import com.holyshit.utils.ConnectionManager;
 
 public class PSPlanDaoImpl implements PSPlanDao {
-	public void addStage(PSPlan pro_stage, TaskIndexs task_index) throws Exception {
+
+	@Override
+	public PSPlan selectPsPlanInfo(String stageno) throws SQLException {
 		// TODO Auto-generated method stub
-		QueryRunner qr = new QueryRunner();
-		
-		qr.update(ConnectionManager.getConnection(), "insert into PSPlan(stageno,PNo,SName,PubPNo,CharPNo,STime,ETime,SState,budget) "
-				+ "values (?,?,?,?,?,?,?,?,?)",
-				pro_stage.getStageNo(),pro_stage.getPNo(),
-				pro_stage.getSName(),pro_stage.getPubNo(),
-				pro_stage.getCharPNo(),pro_stage.getSTime(),
-				pro_stage.getETime(),pro_stage.getBudget(),
-				pro_stage.getSState());
-		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath,IndexState) "
-				+ "values (?,?,?,?,?)",
-				task_index.getIndexNo(),task_index.getTaskNo(),
-				task_index.getIndexInfo(),task_index.getAttachPath(),
-				task_index.getIndexState());
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(),"select * from psplan where stageno=?",new BeanHandler<PSPlan>(PSPlan.class),stageno);
 	}
 
 }
