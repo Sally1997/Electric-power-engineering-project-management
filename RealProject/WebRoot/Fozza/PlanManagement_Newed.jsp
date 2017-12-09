@@ -305,17 +305,6 @@ div.tableRow p:first-child{
 			ele.style.fontWeight="normal";
   		
   		}
-	//此处是一个没法用的当前页面高亮，因为没有引入jq文件
-	    function(){
-			var navLi=$('menu_1') //此处填写你的导航html对象
-            var windowUrl=window.location.href; //获取当前url链接
-            navLi.each(function(){
-                var t=$(this).find('a').attr('href');
-                if(t==windowUrl){
-                    $(this).addClass('menu_on');  //添加当前位置样式 
-                } 
-		    })
-	    }
 </script>
 <body>
     <div id="top_fixed">
