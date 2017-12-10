@@ -37,7 +37,10 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.query("select * from psrelation join  staff on psrelation.staffno=staff.staffno where pno=?", new BeanListHandler<StaffDuty>(StaffDuty.class),pno);
 		
 	}
-
+    public Staff findAStaff(String staffno) throws SQLException{
+    	QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+    	return qr.query(ConnectionManager.getConnection(),"select * from staff where staffno=?",new BeanHandler<Staff>(Staff.class),staffno);
+    }
 	@Override
 	public void delAllStaffs(String[] staffnos, String pno) throws SQLException {
 		// TODO Auto-generated method stub
@@ -51,7 +54,7 @@ public class StaffDaoImpl implements StaffDao {
 	
 	public void addAStaff(PSRelation psr) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		qr.update("insert into psrelation values(?,?,?); ",psr.getStaffno(),psr.getPno(),psr.getDuty());
+		qr.update("insert into psrelation(Pno,Staffno,duty) values(?,?,?); ",psr.getPno(),psr.getStaffno(),psr.getDuty());
 	}
 
 }

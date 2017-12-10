@@ -15,11 +15,12 @@ public class HrMainJumpaddServlet extends HttpServlet {
 		System.out.println("取到了并跳转到了servlet，pno"+pno);
 		System.out.println("aaaa"+request.getParameter("pno"));
 		request.setAttribute("pno", pno);
+		System.out.println("取到了并跳转到了servlet，你他妈再逗我？？");
 		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		doGet(request, response);
 	}
 
 }
