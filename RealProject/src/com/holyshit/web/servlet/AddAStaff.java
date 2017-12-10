@@ -22,34 +22,24 @@ import com.mchange.v2.codegen.bean.BeangenUtils;
 public class AddAStaff extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("geegeegeegeebabybayby");
+		System.out.println("跳到了AddAStaff SERVLET");
 		String pno = request.getParameter("pno");
-		System.out.println("shenmewanyiaaaaaaaaaaa ");
 		PSRelation psr = new PSRelation();
 		String duty = request.getParameter("duty");
-		String SearchStaffNo = request.getParameter("SearchStaffNo");
+		/*String SearchStaffNo = request.getParameter("SearchStaffNo");*/
+		String SearchStaffNo = request.getParameter("searchofstaffno");
+		System.out.println("Staffno:"+SearchStaffNo);
 		psr.setPno(pno);
 		psr.setDuty(duty);
-		psr.setStaffno(SearchStaffNo);
-		System.out.println("i am here 1PNO="+pno);
-		/*
-		try {
-			BeanUtils.populate(psr, request.getParameterMap());
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
+		psr.setStaffno(SearchStaffNo);	
 		StaffService ssi = new StaffServiceImpl();
 		ssi.addAStaff(psr);
 		request.setAttribute("pno", pno);
-		request.getRequestDispatcher("${pageContext.request.contextPath}/web/servlet/hrMainJumpaddServlet?pno="+pno).forward(request,response);
+		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

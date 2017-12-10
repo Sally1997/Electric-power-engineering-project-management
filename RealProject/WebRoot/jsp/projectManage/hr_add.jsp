@@ -94,24 +94,21 @@
                    <!--
 				   为了方便在编辑器里看我下面就不把缩进改到后面了。。。
 				   你知道下面都是一块的就够了 -->
-						<form action="${pageContext.request.contextPath}/web/servlet/addAStaff" method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
+						<form method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 						<div align = "center">
 							<div class="form-group">
-							    <input class="form-control" id="SearchStaffNo" type="text" size = "70%"/>
+							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%"/>
 							</div><!--搜索框-->
 							<div class="form-group">
-							    <input  name="" type="button" class="btn btn-primary" value="查看信息" onclick = "show();return false;" herf="${pageContext.request.contextPath}/servlet/FindAStaffServlet"/>
+							    <a ><button type="submit" id="b2" class="btn btn-primary" onclick="gosearchstaff()" >查看信息</button></a>
 							</div><!--搜索按钮-->
 						</div>
-						<div id="context1" style = "display:block;border:1px solid red;background-color:white;width:510px;position:absolute;left:245px;top:35px;">
-						</div><!-- 搜索提示框 -->
-						</form>
 						<div id="responsible_per" class="block">
 						<div id="first_left">
 						<font class="text">员工编号:</font>
 						</div>
 						<div id="first_right">
-						<span id="sorry1" style="display:none"><font class="text">${Staff.staffno }</font></span>
+						<span id="sorry1" ><font class="text" name="searchofstaffno" >${Staff.staffno }</font></span>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -121,7 +118,7 @@
 						<font class="text">员工姓名:</font>
 						</div>
 						<div id="first_right">
-						<span id="sorry2" style="display:none"><font class="text">${Staff.name }</font></span>
+						<span id="sorry2" ><font class="text">${Staff.name }</font></span>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -131,7 +128,7 @@
 						<font class="text">邮箱地址:</font>
 						</div>
 						<div id="first_right">
-						<font class="text"><span id="sorry3" style="display:none">${Staff.email }</span></font>
+						<font class="text"><span id="sorry3" >${Staff.email }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -141,7 +138,7 @@
 						<font class="text">联系方式:</font>
 						</div>
 						<div id="first_right">
-						<font class="text"><span id="sorry4" style="display:none">${Staff.te }</span></font>
+						<font class="text"><span id="sorry4" >${Staff.te }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -151,7 +148,7 @@
 						<font class="text">工龄:</font>
 						</div>
 						<div id="first_right">
-						<font class="text"><span id="sorry5" style="display:none">${Staff.birthday }</span></font>
+						<font class="text"><span id="sorry5" >${Staff.birthday }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -186,14 +183,15 @@
 						</span>
 						
 						<div id="responsible_per" class="block">
-						<form>
+						
 						<div style="text-align: right">
-						    <a ><button type="submit" class="btn btn-primary" onclick="window.open('${pageContext.request.contextPath}/web/servlet/addAStaff?pno=${pno}')">添加</button></a>
-							<a href="${pageContext.request.contextPath}/web/servlet/staffListServlet?pno=${pno}" style="color:white;" ><button type="submit"class="btn btn-primary" onclick="showPno()" >返回aaa</button></a>
+						    <a ><button type="submit" id="b1" class="btn btn-primary" onclick="goaddstaff()" >添加</button></a>
+							<a ><button type="submit" class="btn btn-primary" onclick="window.open('${pageContext.request.contextPath}/web/servlet/staffListServlet?pno=${pno}')">返回</button></a>
 						</div>
-						</form>
+						
 						<div class="clear"></div>
 						</div>
+						</form>
             	</div>	
 		    	
 		    	</div>
@@ -252,4 +250,16 @@
   </div>
 </footer>
   </body>
+  <script type="text/javascript">
+  	function goaddstaff(){
+  		var p = document.getElementsByName("search")[0];
+  		p.action = action="${pageContext.request.contextPath}/web/servlet/addAStaff?pno=${pno}";
+  		
+  	}
+  	function gosearchstaff(){
+  		var p = document.getElementsByName("search")[0];
+  		p.action = action="${pageContext.request.contextPath}/web/servlet/findAStaffServlet";
+  		
+  	}
+  </script>
 </html>
