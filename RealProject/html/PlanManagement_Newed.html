@@ -12,6 +12,32 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="echarts.min.js"></script>
     <link rel="stylesheet" href="public.css">
+    <style type="text/css">
+    * {
+    padding: 0;
+    margin: 0;
+    font-family: "microsoft yahei";
+  }
+  ul li {
+    list-style-type: none;
+  }
+  .box {
+    width: 200px;
+    /*border: 1px solid red;*/
+  }
+  ul {
+    margin-left: 20px;
+    /*border: 1px solid blue;*/
+  }
+  .menuUl li {
+    margin: 10px 0;
+  }
+  .menuUl li span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .menuUl li i { margin-right: 10px; top: 0px; cursor: pointer; color: #161616;       }
+</style>
     
 
  </head>
@@ -79,7 +105,73 @@
     	        <div class="panel-heading">test01</div><!-- 这里是这个项目的名字 -->
       	        <div class="panel-body">
                 <div class="col-lg-12" >
-                 <!-- ...你这里源代码是一张图...我也不知道你该怎么实现...给你空出来好吧 -->
+                 
+                 <div class="innerUl"></div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/proTree.js" ></script>
+<script type="text/javascript">
+//后台传入的 标题列表
+var arr = [{
+    id: 1,
+    name: "一级标题",
+    pid: 0
+  }, {
+    id: 2,
+    name: "二级标题",
+    pid: 0
+  }, {
+    id: 3,
+    name: "2.1级标题",
+    pid: 2
+  }, {
+    id: 4,
+    name: "2.2级标题",
+    pid: 2
+  }, {
+    id: 5,
+    name: "1.1级标题",
+    pid: 1
+  }, {
+    id: 6,
+    name: "1.2级标题",
+    pid: 1
+  }, {
+    id: 7,
+    name: "1.21级标题",
+    pid: 6
+  }, {
+    id: 8,
+    name: "三级标题",
+    pid: 0
+  }, {
+    id: 9,
+    name: "1.22级标题",
+    pid: 6
+  }, {
+    id: 10,
+    name: "1.221级标题",
+    pid: 9
+  }, {
+    id: 11,
+    name: "1.2211级标题",
+    pid: 10
+  }, {
+    id: 12,
+    name: "1.2212级标题",
+    pid: 10
+  }
+];
+
+$(".innerUl").ProTree({
+  arr: arr,
+  simIcon: "glyphicon glyphicon-file",//单个标题字体图标
+  mouIconOpen: "glyphicon glyphicon-folder-open",//含多个标题的打开字体图标 
+  mouIconClose:"glyphicon glyphicon-folder-close",//含多个标题的关闭的字体图标
+  callback: function(id,name) {
+    alert("你选择的id是" + id + "，名字是" + name);
+  }
+})
+</script>
                  </div><!-- 剩下的你依次对齐吧。。。 -->
                 </div>
             </div> 
@@ -90,7 +182,7 @@
     	        <div class="panel-heading">结点Child2.2.2详细信息</div>
       	        <div class="panel-body">
                 <div class="col-lg-12" >
-						<!-- 同意 -->
+					
 					<div id="responsible_per" class="block">
 						<div id="first_left">
 						<font>任务名称:</font>
@@ -101,15 +193,23 @@
 						<div class="clear"></div>
 						</div>
 
+            <form action="" method="post" name="changename">
 						<div id="responsible_per" class="block">
 						<div id="first_left">
 						<font >负责人:</font>
 						</div>
 						<div id="first_right">
-						<font >李维</font>
+						<div class="dropdown"><span id="managername">李维</span>
+            <span class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><input type="text" name="change" size="15px;"/></li>
+                <li><input type = "submit" style="float:right;" name = "submit" class="btn btn-primary" value = "修改" onClick="return change;"/></li>
+              </ul><!-- 纪丽！这里样式要改一下！ -->
+          </div>
 						</div>
 						<div class="clear"></div>
 						</div>
+          </form><!-- 我虽然写了修改的js，但它蜜汁不成功，我也没时间调试了。。。谁帮忙改一下。。。 -->
 
 						<div id="responsible_per" class="block">
 						<div id="first_left">
@@ -156,11 +256,14 @@
 						</div>
 						</div>
                         
-                        <div class="clear"></div>
-						<div>
-						<button type="button" class="btn btn-primary" style="float: right;"><a href="PlanManagement_NewMilestone.html" style="color:white">新建子任务</a></button>
-						<br/><br/>
-						</div>
+            <div class="clear"></div>
+            <div id="responsible_per" class="block">
+            <div style="text-align: right">
+              <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#handupDc">提交</button>
+              <button type="submit"class="btn btn-primary" ><a href="PlanManagement_NewMilestone.html" style="color:white">新建子任务</a></button>
+            </div>
+            <div class="clear"></div>
+            </div>
 
                 </div>
                 </div>
@@ -170,7 +273,65 @@
 	    </div>
 	</div>
  </section>
- 
+
+
+  <div class="modal fade" id="handupDc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">提交</h4>
+      </div>
+      <div class="modal-body">
+      <form class="form-upload">
+
+          <div class="form-group">
+        <label for="projectname" class="col-sm-2 control-label">任务编号:</label>
+        <div class="col-sm-8">
+          2345678901
+        </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="form-group">
+        <label for="projecttype" class="col-sm-2 control-label">任务名称:</label>
+        <div class="col-sm-8">
+          Child2.2.2
+        </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="form-group">
+        <label for="projecttype" class="col-sm-2 control-label">负责人:</label>
+        <div class="col-sm-8">
+          李维
+        </div>
+        </div>
+        <div class="clear"></div>
+
+          <div class="form-group">
+        <label for="addfile" class="col-sm-2 control-label">任务指标:</label>
+        <div class="col-sm-8">
+          <font >
+              <ul>
+                <li>上传施工现场勘查报告</li><input type = "file" id="checkman">
+                <li>上传施工图纸</li><input type = "file" id="checkman"><!-- 当然这里没有没这个上传的按钮是根据你们后台那里显示的需不需要上传而定的 -->
+                <li>购买施工材料</li><input type = "file" id="checkman"><!-- 如果有需要上传的话，就会出现这个上传附件的按钮 -->
+              </ul>
+            </font>
+        </div>
+        </div>
+        <div class="clear"></div>
+        
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-primary">提交</button>
+      </div>
+    </div>
+  </div>
+</div> 
   
 <footer class="copyright">
   <div class="container-fluid">
@@ -179,4 +340,17 @@
   </div>
   </footer>
 </body>
+<script type="text/javascript">
+function chanage()
+{
+  
+  var name = document.getElementById("managername");
+  
+  name.innerHTML= changename.change.value;
+  
+  changename.change.value="";
+  return false;
+
+}
+</script>
 </html>
