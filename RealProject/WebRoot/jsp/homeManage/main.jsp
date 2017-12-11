@@ -141,6 +141,7 @@
 						  <a href="#" class="list-group-item">第二次会议通知<br><span class="uptime small">2017/10/24</span></a>
 						  <a href="#" class="list-group-item">第一次会议通知<br><span class="uptime small">2017/10/24</span></a>
 						  <a class="list-group-item">&nbsp;
+						  <!-- 指定管理员 -->
 						  <c:if test="${staff.staffno=='201526010001' }">
 						  	<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupNews">发布</button>
 						 	<br><br>
