@@ -45,24 +45,24 @@
     	                <th>截止时间</th>
     	                <th>状态</th>
     	                </tr>
-						<c:forEach items="${tasks }" var="task" varStatus="hehe">
+						<c:forEach items="${tasks }" var="task" varStatus="hehe" begin="0" end="4" step="1">
 						  <c:choose>
-  							<c:when test="${task.tstate=='0' }">
+  							<c:when test="${task.tstate=='1' }">
     	                      <tr>
 							  <td onClick="window.open(${pageContext.request.contextPath})" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
 							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
-							  <td class="text-danger">未开始</td>	
+							  <td class="text-success">正常进行中</td>	
 							  </tr>
 							</c:when>
-							<c:when test="${task.tstate=='1' }">
+							<c:when test="${task.tstate=='2' }">
 							  <tr>
 						      <td onClick="window.open()" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
 							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
-							  <td class="text-danger">正在进行</td>	
+							  <td class="text-danger">逾期进行中</td>	
 							  </tr>
 							  </c:when>
   						  </c:choose>
@@ -95,7 +95,7 @@
 							<c:forEach items="${projects }" var="project" begin="0" end="4">
 							
 							<c:choose>
-	  							<c:when test="${project.pstate=='0' }">
+	  							<c:when test="${project.pstate=='1' }">
 								<tr>
 							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
@@ -105,11 +105,11 @@
 							    </div></td>
 							    <td>${project.stime }</td>
 							    <td>${project.etime }</td>
-								<td>立项中</td>
+								<td class="text-success">正在进行中</td>
 								</c:when>
 	  						</c:choose>
 	  						<c:choose>
-	  							<c:when test="${project.pstate=='1' }">
+	  							<c:when test="${project.pstate=='2' }">
 								<tr>
 							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
@@ -119,51 +119,10 @@
 							    </div></td>
 							    <td>${project.stime }</td>
 							    <td>${project.etime }</td>
-								<td>正常进行中</td>
+								<td class="text-danger">逾期进行中</td>
 								</c:when>
 	  						</c:choose>
-	  						<c:choose>
-	  							<c:when test="${project.pstate=='2' }">
-								<tr>
-							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
-							    <td><div class="progress">
-							    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
-							    ${project.pstage*100}%
-							    </div>
-							    </div></td>
-							    <td>${project.stime }</td>
-							    <td>${project.etime }</td>
-								<td>延期进行中</td>
-								</c:when>
-	  						</c:choose>
-	  						<c:choose>
-	  							<c:when test="${project.pstate=='3' }">
-								<tr>
-							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
-							    <td><div class="progress">
-							    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
-							    ${project.pstage*100}%
-							    </div>
-							    </div></td>
-							    <td>${project.stime }</td>
-							    <td>${project.etime }</td>
-								<td>正常完工</td>
-								</c:when>
-	  						</c:choose>
-	  						<c:choose>
-	  							<c:when test="${project.pstate=='4' }">
-								<tr>
-							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
-							    <td><div class="progress">
-							    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
-							    ${project.pstage*100}%
-							    </div>
-							    </div></td>
-							    <td>${project.stime }</td>
-							    <td>${project.etime }</td>
-								<td>延期竣工</td>
-								</c:when>
-	  						</c:choose>
+	  						
 						  </c:forEach>   	          
 						  </table>
 						  </div>
@@ -186,16 +145,9 @@
     	        <div class="panel panel-primary">
     	        	<div class="panel panel-heading">最新消息<span class="more">more..</span></div>
 						<div class="list-group">
-						  <c:if test="${fn:length(staffDoc['docs'])>8 }">
   						    <c:forEach items="${staffDoc['docs'] }" begin="0" end="7" step="1" var="doc">
-						      <a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}" class="list-group-item"><span class="glyphicon glyphicon-file"></span>${doc.dtitle }<br><div class="small"><span class="uptime">><fmt:formatDate value="${doc.uploadtime }" type="both"/></</span>&nbsp;&nbsp;&nbsp;<span>上传者：${doc.uloadpno }</span></div></a>
+						      <a href="${pageContext.request.contextPath}/web/servlet/downLoadMessage?dno=${doc.dno}" class="list-group-item"><span class="glyphicon glyphicon-file"></span>${doc.dtitle }<br><div class="small"><span class="uptime">><fmt:formatDate value="${doc.uploadtime }" type="both"/></</span>&nbsp;&nbsp;&nbsp;<span>上传者：${doc.uloadpno }</span>&nbsp;&nbsp;&nbsp;<span>文件类型：${doc.ftype }</span></div></a>
 						    </c:forEach>
-  					      </c:if>
-						  <c:if test="${fn:length(staffDoc['docs'])<=8 }">
-  						    <c:forEach items="${staffDoc['docs'] }" var="doc">
-						      <a href="${pageContext.request.contextPath}/web/servlet/docDetailMessage?id=${doc.dno}" class="list-group-item"><span class="glyphicon glyphicon-file"></span>${doc.dtitle }<br><div class="small"><span class="uptime">><fmt:formatDate value="${doc.uploadtime }" type="both"/></</span>&nbsp;&nbsp;&nbsp;<span>上传者：${doc.uloadpno }</span></div></a>
-						    </c:forEach>
-  					      </c:if>
 						</div>
     	        </div>
     	        </div>
@@ -218,8 +170,4 @@
 	}
 	</script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git

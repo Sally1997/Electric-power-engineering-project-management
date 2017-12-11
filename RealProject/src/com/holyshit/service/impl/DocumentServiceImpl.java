@@ -39,4 +39,17 @@ public class DocumentServiceImpl implements DocumentService {
 		return documents;
 	}
 
+	@Override
+	public Document findDocumentById(String id) {
+		// TODO Auto-generated method stub
+		DocumentDao dd=new DocumentDaoImpl();
+		try {
+			return dd.getDocumentById(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

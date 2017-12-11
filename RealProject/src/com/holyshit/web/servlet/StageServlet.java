@@ -39,19 +39,19 @@ public class StageServlet extends HttpServlet {
 			System.out.println(task_index);
 			
 			//getParameterMap用不了
-			pro_stage.setSName(request.getParameter("StageName"));
+			pro_stage.setSname(request.getParameter("StageName"));
 			//日期转换
 			SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-			pro_stage.setSTime((Date) sdf.parse(request.getParameter("StartDate")));
-			pro_stage.setETime((Date) sdf.parse(request.getParameter("EndDate")));
+			pro_stage.setStime((Date) sdf.parse(request.getParameter("StartDate")));
+			pro_stage.setEtime((Date) sdf.parse(request.getParameter("EndDate")));
 			
 			//pro_stage.setPublisherNo("201526010429");//测试用
 			HttpSession session = request.getSession();//ss.getAttribute
 			Staff staff = (Staff)session.getAttribute("staff");
-			pro_stage.setPubNo(staff.getStaffno());//发布人是当前用户
+			pro_stage.setPubpno(staff.getStaffno());//发布人是当前用户
 			
 			//最开始状态都是0
-			pro_stage.setSState("0");
+			pro_stage.setSstate("0");
 			
 			
 			//预算

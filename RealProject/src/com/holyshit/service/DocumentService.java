@@ -22,5 +22,12 @@ public interface DocumentService {
 	 * @param pageSize   页面大小
 	 * @return
 	 */
-	Map<String, Object> findDocumentWithUserById(String id,int cur,int pageSize);	
+	Map<String, Object> findDocumentWithUserById(String id,int cur,int pageSize);
+	
+	/**
+	 * 查询文件信息
+	 * @param id
+	 * @return
+	 */
+	Document findDocumentById(String id);
 }
