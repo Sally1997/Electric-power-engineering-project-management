@@ -130,6 +130,7 @@
 					</div>
 				  </div>
     	      </div>
+    	     <!-- 公告栏部分 -->
     	      <div class="col-lg-4">
     	        <div class="panel panel-primary">
     	        	<div class="panel panel-heading">公告中心<span class="more">more..</span></div>
@@ -139,6 +140,13 @@
 						  <a href="#" class="list-group-item">第三次会议通知<br><span class="uptime small">2017/10/24</span></a>
 						  <a href="#" class="list-group-item">第二次会议通知<br><span class="uptime small">2017/10/24</span></a>
 						  <a href="#" class="list-group-item">第一次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						  <a class="list-group-item">&nbsp;
+						  <c:if test="${staff.staffno=='201526010001' }">
+						  	<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupNews">发布</button>
+						 	<br><br>
+						  </c:if>
+	
+						  </a>
 						</div>
     	        </div>
     	    <!--    你们先做成这个地方点击就能直接下载文件吧……-->
@@ -156,6 +164,40 @@
     	  </div>
     	</div>
     </section>
+    
+    <!--  默认隐藏的内容:发布公告-->
+  <div class="modal fade" id="handupNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">发布公告</h4>
+      </div>
+      <div class="modal-body">
+		  <form class="form-horizontal">
+		  		<div class="form-group">
+				<label for="newsname" class="col-sm-2 control-label">公告主题</label>
+				<div class="col-sm-8">
+		            <input type = "text" id="newstitle">
+				</div>
+			  </div>
+		  
+			  	<div class="form-group">
+				<label for="addfile" class="col-sm-2 control-label">公告文件</label>
+				<div class="col-sm-8">
+		            <input type = "file" id="checkman">
+				</div>
+			  </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-primary">发布</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
     <footer class="copyright">
     <div class="container-fluid">
       	<p>©版权归谭莹小组所有</p>
