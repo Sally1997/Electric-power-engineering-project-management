@@ -68,14 +68,14 @@ public class StageTaskDaoImpl implements StageTaskDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget,stagetasks.charpno,stagetasks.pubpno FROM stagetasks JOIN psplan ON stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE taskno=?",new BeanHandler<TaskInfo>(TaskInfo.class),taskno);
+		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget,stagetasks.charpno,stagetasks.ptaskno,stagetasks.ptasktype FROM stagetasks JOIN psplan ON stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE taskno=?",new BeanHandler<TaskInfo>(TaskInfo.class),taskno);
 	}
 
 	@Override
 	public List<TaskInfo> selectTaskInfoById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget,stagetasks.charpno,stagetasks.pubpno FROM stagetasks JOIN psplan ON  stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE stagetasks.CharPNo=? AND (stagetasks.TState='1' OR stagetasks.TState='2')",new BeanListHandler<TaskInfo>(TaskInfo.class),id);
+		return qr.query(ConnectionManager.getConnection(),"SELECT project.PName,psplan.SName,stagetasks.TaskName,project.PNo,psplan.StageNo,stagetasks.TaskNo,stagetasks.budget,stagetasks.charpno,stagetasks.ptaskno,stagetasks.ptasktype FROM stagetasks JOIN psplan ON  stagetasks.stageno=psplan.StageNo JOIN project ON psplan.PNo=project.PNo WHERE stagetasks.CharPNo=? AND (stagetasks.TState='1' OR stagetasks.TState='2')",new BeanListHandler<TaskInfo>(TaskInfo.class),id);
 	}
 
 	@Override

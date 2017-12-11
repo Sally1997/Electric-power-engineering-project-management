@@ -12,6 +12,13 @@ import com.holyshit.domain.Document;
  *
  */
 public interface DocumentDao {
+	/**
+	 * 查询上传文件的信息
+	 * @param dno
+	 * @return
+	 * @throws SQLException
+	 */
+	Document getDocumentById(String dno)throws SQLException;
 	
 	/**
 	 * 根据用户id获取相关项目的所有文档

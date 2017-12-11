@@ -4,5 +4,10 @@ import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.TaskIndexs;
 
 public interface PlanManageService {
-	public void NewStage(PSPlan pro_stage,TaskIndexs task_index) throws Exception;
+	/**
+	 * 查询阶段信息
+	 * @param stageno
+	 * @return
+	 */
+	PSPlan findPsPlanInfo(String stageno);
 }

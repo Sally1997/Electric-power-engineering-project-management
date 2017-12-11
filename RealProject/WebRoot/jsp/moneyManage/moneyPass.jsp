@@ -133,30 +133,6 @@
 			
 			
 		}
-		
-		function updateAuditDialog(e){
-   			document.getElementById("audit_pname").innerHTML=auditData[e].pname;
-   			document.getElementById("audit_sname").innerHTML=auditData[e].sname;
-   			document.getElementById("audit_taskname").innerHTML=auditData[e].taskname;
-   			document.getElementById("audit_appname").innerHTML=auditData[e].appname;
-   			document.getElementById("audit_stime").innerHTML=auditData[e].stime;
-   			document.getElementById("audit_fee").innerHTML=auditData[e].fee;
-   			var state=document.getElementById("audit_auditstate");
-   			var tmp=auditData[e].auditstate;
-   			if(tmp=="0"){
-   				state.className="text-danger";
-   				state.innerHTML="未审批";
-   				submit_audit.removeAttribute("disabled");
-   			}else if(tmp=="1"){
-   				state.className="text-danger";
-   				state.innerHTML="不通过";
-   				submit_audit.disabled="disabled";
-   			}else{
-   				state.className="text-success";
-   				state.innerHTML="审批通过";
-   				submit_audit.disabled="disabled";
-   			}
-   		}
 	</script>
     <section>
         <div class="container-fluid">
@@ -274,27 +250,130 @@
 
   <!--      默认隐藏的内容:报账详细信息（审批）-->
   <div class="modal fade bs-example-modal-sm" id="acInfoPass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">详细信息</h4>
       </div>
-      <div>
-        <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td id="audit_pname">项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td id="audit_sname">阶段一</td></tr>
-        	<tr><td>项目任务</td><td id="audit_taskname">任务一</td></tr>
-			<tr><td>报账人</td><td id="audit_appname">甲</td></tr>
-        	<tr><td>报账时间</td><td id="audit_stime">2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td id="audit_fee">￥50.00元</td></tr>
-            <tr><td>当前状态</td>
-            <td id="audit_auditstate">未审批</td></tr>
-        </table>
+      <div class="modal-body">
+		  <div>
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账项目:</font>
+							</div>
+							<div class="hehe_right">
+							<font id="audit_pname">这个项目的名字实在是特别特别特别的长</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+				<div class="hehe_left">
+				<font >项目阶段:</font>
+				</div>
+				<div class="hehe_right">
+				<font  id="audit_sname">阶段一</font>
+				</div>
+				<div class="clear"></div>
+				</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font >项目任务:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_taskname">任务一一一一一一</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font >报账人:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_appname">卢仁佳</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账时间:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_stime">2017-12-8</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账金额:</font>
+							</div>
+							<div class="hehe_right">
+							<font id="audit_fee" >￥50.00元</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>当前状态:</font>
+							</div>
+							<div class="hehe_right">
+							<font  id="audit_auditstate">未审批</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+		  </div >
+		  <div class="panel-middle" id="top_audit">
+			 <div class="modal-header"><h4 class="modal-title">审批</h4></div>
+		  </div>
+
+		  <form id="middle_audit">
+							<div id="responsible_per" class="block">
+							<div>
+							<div class="hehe_left">
+							<input type="radio" name="pass" value="2" checked id="audit_pass">通过
+							</div>
+							<div class="hehe_right">
+							<input type="radio" name="pass" value="1">不通过
+							</div>
+							</div> 
+							<div class="clear"></div>
+							</div>
+
+							<!-- 审批人 -->
+							<div id="end_date" class="block">
+							<div class="hehe_left">
+							<font class="text">审批人:</font>
+							</div>
+							<div class="hehe_right">
+							<input type="text" name="" size="40px;" disabled value="${staff.name }">
+							</div>
+							<div class="clear"></div>
+							</div>
+							
+							<!-- 审批意见 -->
+							<div id="start_date" class="block">
+							<div class="hehe_left">
+							<font class="text">审批意见：</font>
+							</div>
+							<div class="hehe_right">
+							<textarea rows="5" cols="30" id="audit_cause"></textarea>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+
+						</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary" id="submit_audit">审批</button>
+        <button type="button" class="btn btn-primary" onclick="submitAuditInfo();" id="submit_audit">审批</button>
+      </div>
         <script type="text/javascript">
         	var submit_audit=document.getElementById("submit_audit");
         </script>

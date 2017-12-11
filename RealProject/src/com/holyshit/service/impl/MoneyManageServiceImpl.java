@@ -17,10 +17,12 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.holyshit.Dao.FeeAuditDao;
+import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StaffDao;
 import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.impl.FeeAuditDaoImpl;
+import com.holyshit.Dao.impl.PSPlanDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
@@ -30,6 +32,7 @@ import com.holyshit.domain.ProjectStageBudget;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskInfo;
 import com.holyshit.service.MoneyManageService;
+import com.holyshit.service.StageTasksService;
 import com.holyshit.utils.ConnectionManager;
 
 public class MoneyManageServiceImpl implements MoneyManageService {
@@ -60,25 +63,43 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				JSONArray over=new JSONArray();
 				
 				List<ProjectStageBudget> res=fd.selectProjectStageBudget(p.getPno());
+				double totalHasAudit=0;
+				double totalSurplus=0;
+				double totalOver=0;
+				stages.add("总金额");
 				for(ProjectStageBudget psb:res){
 					stages.add(psb.getSname());
-					hasaudit.add(psb.getHasaudit());
+					double tmp_hasaudit=psb.getHasaudit();
+					hasaudit.add(tmp_hasaudit);
+					totalHasAudit+=tmp_hasaudit;
 					//报账剩余
 					double tmp=0;
 					if((tmp=psb.getBudget()-psb.getHasaudit())>0)
 					{
 						surplus.add(tmp);
 						over.add(0);
+						//计算总计
+						totalOver+=0;
+						totalSurplus+=tmp;
 					}else {
 						surplus.add(0);
 						over.add(-tmp);
+						//计算总计
+						totalOver=totalOver-tmp;
+						totalSurplus+=0;
 					}
-					//添加到数组
-					project.put("stages", stages);
-					project.put("hasaudit", hasaudit);
-					project.put("surplus", surplus);
-					project.put("over", over);
+					
 				}
+				//添加到总计
+				hasaudit.add(0, totalHasAudit);
+				surplus.add(0, totalSurplus);
+				over.add(0, totalOver);
+				//添加到数组
+				project.put("stages", stages);
+				project.put("hasaudit", hasaudit);
+				project.put("surplus", surplus);
+				project.put("over", over);
+				
 				//添加到budget
 				projectbudget.add(project);	
 			}
@@ -229,28 +250,29 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		// TODO Auto-generated method stub
 		//String taskno,double fee,String cause,String applicantno,String auditor,String pno
 		FeeAuditDao fd=new FeeAuditDaoImpl();
-		if(over){
-			try {
-				return fd.addFeeAuditOver(task.getTaskno(), fee, cause, task.getCharpno(), task.getPubpno(), task.getPno());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally{
-				ConnectionManager.closeConnection();
+		StageTaskDao std=new StageTaskDaoImpl();
+		PSPlanDao pd=new PSPlanDaoImpl();
+		String pubpno=null;
+		
+		try {
+			if(task.getPtasktype().equals("1")){
+				pubpno=std.selectTaskInfoByTaskNo(task.getPtaskno()).getCharpno();
+			}else{
+				pubpno=pd.selectPsPlanInfo(task.getPtaskno()).getCharpno();
 			}
-			return 0;
-		}else{
-			fd=new FeeAuditDaoImpl();
-			try {
-				return fd.addFeeAudit(task.getTaskno(), fee, task.getCharpno(), task.getPubpno(), task.getPno());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally{
-				ConnectionManager.closeConnection();
+			if(over){
+				return fd.addFeeAuditOver(task.getTaskno(), fee, cause, task.getCharpno(), pubpno, task.getPno());	
+			}else{
+				fd=new FeeAuditDaoImpl();
+				return fd.addFeeAudit(task.getTaskno(), fee, task.getCharpno(), pubpno, task.getPno());
 			}
-			return 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
+		return 0;
 	}
 
 
@@ -310,7 +332,6 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		res.put("pageSize", pagesize);
 		res.put("pageNum", totalNum%pagesize==0?totalNum/pagesize:totalNum/pagesize+1);
 		res.put("audits", audits);
-		System.out.println("哈哈"+res.toString());
 		return res.toString();
 	}
 

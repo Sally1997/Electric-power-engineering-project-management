@@ -12,6 +12,7 @@ public class Document {
 	private String ftype;
 	private String dtype;
 	private int fsize;
+	private String auditres;
 	private String uloadpno;
 	public String getDno() {
 		return dno;
@@ -24,6 +25,12 @@ public class Document {
 	}
 	public void setPno(String pno) {
 		this.pno = pno;
+	}
+	public String getAuditres() {
+		return auditres;
+	}
+	public void setAuditres(String auditres) {
+		this.auditres = auditres;
 	}
 	public String getDtitle() {
 		return dtitle;

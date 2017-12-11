@@ -9,19 +9,28 @@ public class TaskInfo {
 	private String taskno;
 	private double budget;
 	private String charpno;
-	private String pubpno;
+	private String ptaskno;
+	private String ptasktype;
+	
+	public String getPtasktype() {
+		return ptasktype;
+	}
+	public void setPtasktype(String ptasktype) {
+		this.ptasktype = ptasktype;
+	}
+	public String getPtaskno() {
+		return ptaskno;
+	}
+	public void setPtaskno(String ptaskno) {
+		this.ptaskno = ptaskno;
+	}
 	public String getCharpno() {
 		return charpno;
 	}
 	public void setCharpno(String charpno) {
 		this.charpno = charpno;
 	}
-	public String getPubpno() {
-		return pubpno;
-	}
-	public void setPubpno(String pubpno) {
-		this.pubpno = pubpno;
-	}
+	
 	public double getBudget() {
 		return budget;
 	}

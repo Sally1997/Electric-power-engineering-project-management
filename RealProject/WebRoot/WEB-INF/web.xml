@@ -97,6 +97,11 @@
     <servlet-name>SubmitTaskServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.SubmitTaskServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>DownLoadMessage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DownLoadMessage</servlet-class>
+  </servlet>
+
 
 
 
@@ -175,6 +180,10 @@
   <servlet-mapping>
     <servlet-name>SubmitTaskServlet</servlet-name>
     <url-pattern>/web/servlet/submitTaskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DownLoadMessage</servlet-name>
+    <url-pattern>/web/servlet/downLoadMessage</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

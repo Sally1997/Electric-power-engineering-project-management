@@ -1,118 +1,70 @@
 package com.holyshit.domain;
+
+import java.sql.Date;
+
 //electric power engineering project management 
 
 import java.sql.Date;
 
 public class PSPlan {
-	private String stageno;//阶段编号
+	//stageno  charpno   pno  sname   stime etime sstate budget
+	private String stageno;
+	private String charpno;
 	private String pno;
 	private String sname;
-	private String charpno;
 	private Date stime;
 	private Date etime;
-	private String budget;
 	private String sstate;
-
-	
-
+	private String budget;
 	public String getStageno() {
 		return stageno;
 	}
-
-
-
 	public void setStageno(String stageno) {
 		this.stageno = stageno;
 	}
-
-
-
-	public String getPno() {
-		return pno;
-	}
-
-
-
-	public void setPno(String pno) {
-		this.pno = pno;
-	}
-
-
-
-	public String getSname() {
-		return sname;
-	}
-
-
-
-	public void setSname(String sname) {
-		this.sname = sname;
-	}
-
-
 	public String getCharpno() {
 		return charpno;
 	}
-
-
-
 	public void setCharpno(String charpno) {
 		this.charpno = charpno;
 	}
-
-
-
+	public String getPno() {
+		return pno;
+	}
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
 	public Date getStime() {
 		return stime;
 	}
-
-
-
 	public void setStime(Date stime) {
 		this.stime = stime;
 	}
-
-
-
 	public Date getEtime() {
 		return etime;
 	}
-
-
-
 	public void setEtime(Date etime) {
 		this.etime = etime;
 	}
-
-
-
-	public String getBudget() {
-		return budget;
-	}
-
-
-
-	public void setBudget(String budget) {
-		this.budget = budget;
-	}
-
-
-
 	public String getSstate() {
 		return sstate;
 	}
-
-
-
 	public void setSstate(String sstate) {
 		this.sstate = sstate;
 	}
 
 
-
-	public String toString() {
-		return "projectstage [stageno=" + stageno + ", projectno=" + pno + ", stagename=" + sname
-				+ ", chargeperno=" + charpno +", startdate=" + stime
-						+ ", enddate=" + etime + " ]";
+	public String getBudget() {
+		return budget;
 	}
+	public void setBudget(String budget) {
+		this.budget = budget;
+	}
+
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.enterprise.inject.New;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -39,6 +40,13 @@ public class DocumentDaoImpl implements DocumentDao{
 				"SELECT COUNT(*) FROM psrelation JOIN document ON psrelation.pno=document.pno WHERE staffno=?",
 				new ScalarHandler(),
 				id);
+	}
+
+	@Override
+	public Document getDocumentById(String dno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(), "select * from document where dno=?", new BeanHandler<Document>(Document.class),dno);
 	}
 
 }

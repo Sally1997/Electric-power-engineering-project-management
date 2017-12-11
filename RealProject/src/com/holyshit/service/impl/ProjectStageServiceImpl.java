@@ -12,7 +12,7 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 	public void AddStageandTask(PSPlan pro_stage, TaskIndexs task_index) throws Exception {
 		// TODO Auto-generated method stub
 		PSPlanDao sd = new PSPlanDaoImpl();
-		sd.addStage(pro_stage, task_index);
+//		sd.addStage(pro_stage, task_index);
 	}
 
 }
