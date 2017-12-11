@@ -1,6 +1,6 @@
 package com.holyshit.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class StageTask {
 	private String taskno;
@@ -34,14 +34,14 @@ public class StageTask {
 	public Date getStime() {
 		return stime;
 	}
-	public void setStime(Date stime) {
-		this.stime = stime;
+	public void setStime(Date date) {
+		this.stime = (Date) date;
 	}
 	public Date getEtime() {
 		return etime;
 	}
-	public void setEtime(Date etime) {
-		this.etime = etime;
+	public void setEtime(Date date) {
+		this.etime = (Date) date;
 	}
 	public String getPubno() {
 		return pubno;

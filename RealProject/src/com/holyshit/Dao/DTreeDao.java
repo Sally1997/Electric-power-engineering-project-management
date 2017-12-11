@@ -2,6 +2,7 @@ package com.holyshit.Dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.holyshit.domain.Project;
 
@@ -47,4 +48,25 @@ public interface DTreeDao {
 	 * @throws SQLException 
 	 */
 	StageTask selectTaskInfo(String tn) throws SQLException;
+	/**
+	 * 根据项目编号，获取tree说需要的id，name，pid
+	 * @param pn
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Map<String,Object>> selectTreeAttribute(String pn) throws SQLException;
+	
+	/**
+	 * 获取节点信息
+	 * @throws SQLException 
+	 */
+	Map<String,Object> selectNodeInfo(String no) throws SQLException;
+	
+	/**
+	 * 获取指标信息
+	 * @param no
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> selectIndexInfo(String no) throws SQLException;
 }

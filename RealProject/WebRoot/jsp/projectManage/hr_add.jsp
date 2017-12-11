@@ -97,7 +97,7 @@
 						<form method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 						<div align = "center">
 							<div class="form-group">
-							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%"/>
+							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%" value="${lastSearchStaffNo}"/>
 							</div><!--搜索框-->
 							<div class="form-group">
 							    <a ><button type="submit" id="b2" class="btn btn-primary" onclick="gosearchstaff()" >查看信息</button></a>
@@ -186,7 +186,7 @@
 						
 						<div style="text-align: right">
 						    <a ><button type="submit" id="b1" class="btn btn-primary" onclick="goaddstaff()" >添加</button></a>
-							<a ><button type="submit" class="btn btn-primary" onclick="window.open('${pageContext.request.contextPath}/web/servlet/staffListServlet?pno=${pno}')">返回</button></a>
+							<a ><button type="submit" class="btn btn-primary" onclick="goback()" >返回</button></a>
 						</div>
 						
 						<div class="clear"></div>
@@ -216,25 +216,12 @@
 		<tr>
 			<th>职业资格证</th>
 		</tr>
+		<c:forEach items="${Qualifications}" var="Q" >
 		<tr>
-			<td><abbr title="大学时获得">四级证书</abbr></td>
+			<td><abbr title="大学时获得">${Q.qualifdesc }</abbr></td>
 		</tr>
-		<tr>
-			<td><abbr title="大学时获得">六级证书</abbr></td>
-		</tr>
-		<tr>
-			<td><abbr title="大学时获得，但没车">驾照</abbr></td>
-		</tr>
-		<tr>
-			<td><abbr title="初中时获得，现在已基本忘掉了">钢琴十级</abbr></td>
-		</tr>
-		<tr>
-			<td><abbr title="大学时获得">计算机二级证书</abbr></td>
-		</tr>
-		<tr>
-			<td><abbr title="大学时获得">计算机四级证书</abbr></td>
-		</tr>
-	      </table>
+		</c:forEach>
+		  </table>
         
     </div>
     <div class="modal-footer">
@@ -253,12 +240,17 @@
   <script type="text/javascript">
   	function goaddstaff(){
   		var p = document.getElementsByName("search")[0];
-  		p.action = action="${pageContext.request.contextPath}/web/servlet/addAStaff?pno=${pno}";
+  		p.action = "${pageContext.request.contextPath}/web/servlet/addAStaff?pno=${pno}";
+  		
+  	}
+  	function goback(){
+  		var p = document.getElementsByName("search")[0];
+  		p.action = "${pageContext.request.contextPath}/web/servlet/staffListServlet?pno=${pno}";
   		
   	}
   	function gosearchstaff(){
   		var p = document.getElementsByName("search")[0];
-  		p.action = action="${pageContext.request.contextPath}/web/servlet/findAStaffServlet";
+  		p.action = "${pageContext.request.contextPath}/web/servlet/findAStaffServlet?pno=${pno}";
   		
   	}
   </script>

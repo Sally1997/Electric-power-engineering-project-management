@@ -19,8 +19,7 @@
 			}
 		}
 		function delAllStaffs(){
-		    alert("shaziaaaa");
-			var ids = document.getElementsByName(ids);
+			var ids = document.getElementsByName("ids");
 			var str="";
 			for(var i=0;i<ids.length;i++)
 			{
@@ -29,12 +28,10 @@
 					str+="ids="+ids[i].value+"&";
 				}
 			}
-			alert("shaziaaaa");
 			str=str.substring(0,str.length-1);
 			alert(str);
 			if(str!="")
-				alert("shazi123");
-				location.herf="${pageContext.request.contextPath}/servlet/delAllStaffsServlet?"+str;
+				location.herf="${pageContext.request.contextPath}/web/servlet/delAllStaffsServlet?"+str;
 			
 		}
 		function showPno(){
@@ -64,7 +61,7 @@
 						<a href="${pageContext.request.contextPath}/servlet/hrMainJumpaddServlet?pno=${pno }" style="color:white;"><button type="button" class="btn btn-primary" style="float: right;" onclick="showPno()" >增加</button></a>
 						<br/><br/>
 					</div>
-					
+				<form method="post" action="${pageContext.request.contextPath}/web/servlet/delAllStaffsServlet?pno=${pno }">
 					<table class="table table-striped table-condensed" style="font-size: 15px">
 						<tr>
 							<th><input type="checkbox" id="ckAll" onclick="checkAll()" /></th>
@@ -78,12 +75,20 @@
 						</tr>
 					<c:forEach items="${Staff}" var="s" >
 						<tr>
-							<td align="center"><input type="checkbox" name="ids" /></td>
+							<td align="center"><input type="checkbox" name="ids" value="${s.staffno }" /></td>
 							<td align="center">${s.staffno }</td>
 							<td align="center">${s.name }</td>
 							<td align="center">${s.te }</td>
 							<td align="center">${s.duty }</td>
-							<td align="center">老大<span class="glyphicon glyphicon-pencil" style="cursor: pointer"></span></td>
+							<td align="center">
+								<div class="dropdown"><span id="managername">老大</span>
+            					<span class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+              						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                						<li><input type="text" name="change" size="15px;"/></li>
+                						<li><input type = "submit" style="float:right;" name = "submit" class="btn btn-primary" value = "修改" onClick="return change;"/></li>
+             						</ul><!-- 纪丽！这里样式要改一下！ -->
+          						</div>	
+							</td>
 							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupAc">发送</button></td>
 							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" herf="${pageContext.request.contextPath}/servlet/qualificationListServlet?staffno=${s.staffno}" >查看</button></td>
 						</tr>
@@ -91,7 +96,7 @@
 					</table>
 					
 					
-						<!--  分页栏-->
+					<!--  分页栏-->
 					<nav aria-label="Page navigation" style="text-align: center">
 				  <ul class="pagination">
 					<li>
@@ -111,10 +116,11 @@
 					</li>
 				  </ul>
 				</nav>
-					<div>
-                <button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" onclick="delAllStaffs()" >删除</button>
+				<div>
+                <button type="submit" class="btn btn-primary" style="float: right;" data-toggle="modal" >删除</button>
                 <br/><br/>
-            </div>		
+                </div>
+            </form>		
                 </div>
                 </div>
 				

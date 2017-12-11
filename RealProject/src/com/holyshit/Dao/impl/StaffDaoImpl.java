@@ -48,7 +48,10 @@ public class StaffDaoImpl implements StaffDao {
 		Object[][] params = new Object[staffnos.length][];
 		for (int i = 0; i < params.length; i++) {
 			 params[i] = new Object[]{staffnos[i],pno};
+			 System.out.println(staffnos[i]);
+			 System.out.println(pno);
 		}
+		System.out.println("到删除的Dao层了");
 		qr.batch("delete from psrelation where staffno = ? and pno=?", params);
 	}
 	

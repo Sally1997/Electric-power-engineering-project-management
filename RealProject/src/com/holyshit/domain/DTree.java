@@ -1,35 +1,63 @@
 package com.holyshit.domain;
 
 public class DTree {
-	private String CurrentNode;
-	private String ParentNode;
-	private String NodeName;
-	private String Mapping="javascript:getTask()";
-	public String getCurrentNode() {
-		return CurrentNode;
-	}
-	public void setCurrentNode(String currentNode) {
-		CurrentNode = currentNode;
-	}
-	public String getParentNode() {
-		return ParentNode;
-	}
-	public void setParentNode(String parentNode) {
-		ParentNode = parentNode;
-	}
-	public String getNodeName() {
-		return NodeName;
-	}
-	public String getMapping() {
-		return Mapping;
-	}
-	public void setNodeName(String nodeName) {
-		NodeName = nodeName;
-	}
+	private String currentnode;
+	private String parentnode;
+	private String nodename;
+	private String mapping="javascript:getTask()";
 	
+	
+	
+	public String getCurrentnode() {
+		return currentnode;
+	}
+
+
+
+	public void setCurrentnode(String currentnode) {
+		this.currentnode = currentnode;
+	}
+
+
+
+	public String getParentnode() {
+		return parentnode;
+	}
+
+
+
+	public void setParentnode(String parentnode) {
+		this.parentnode = parentnode;
+	}
+
+
+
+	public String getNodename() {
+		return nodename;
+	}
+
+
+
+	public void setNodename(String nodename) {
+		this.nodename = nodename;
+	}
+
+
+
+	public String getMapping() {
+		return mapping;
+	}
+
+
+
+	public void setMapping(String mapping) {
+		this.mapping = mapping;
+	}
+
+
 	public String toString(){
-		return "DTree [CurrentNode="+CurrentNode+", ParentNode="+ParentNode+
-				", NodeName="+NodeName+", Mapping="+Mapping+"]";
+		return "dtree [currentnode="+currentnode+", parentnode="+parentnode+
+				", nodename="+nodename+", mapping="+mapping+"]";
 	}
 	
 }
