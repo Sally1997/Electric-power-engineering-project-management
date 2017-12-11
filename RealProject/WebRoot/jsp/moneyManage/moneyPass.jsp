@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>相关项目报账审批</title>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/money.js"></script>
 </head>
 
 <body>
