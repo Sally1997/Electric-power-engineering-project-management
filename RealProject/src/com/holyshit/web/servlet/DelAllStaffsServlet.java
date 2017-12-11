@@ -1,6 +1,7 @@
 package com.holyshit.web.servlet;
 import com.holyshit.service.*;
 
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -11,14 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.holyshit.service.*;
 import com.holyshit.service.impl.StaffServiceImpl;
+@WebServlet("/web/servlet/delAllStaffsServlet")
 public class DelAllStaffsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String[] staffnos = request.getParameterValues("staffnos");
+		System.out.println("跳到了批量删除的SERVLET");
+		String[] staffnos = request.getParameterValues("ids");
 		String pno=request.getParameter("pno");
+		System.out.println("pno="+pno);
 		StaffService ss = new StaffServiceImpl();
 		ss.delAllStaffs(staffnos,pno);
-		
+		request.setAttribute("pno", pno);
 		request.getRequestDispatcher("/web/servlet/staffListServlet?pno="+pno).forward(request,response);
 	}
 

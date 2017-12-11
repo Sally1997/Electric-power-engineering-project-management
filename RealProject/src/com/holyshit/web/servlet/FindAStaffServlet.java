@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.holyshit.domain.Qualification;
 import com.holyshit.domain.Staff;
+import com.holyshit.domain.StaffDuty;
+import com.holyshit.service.QualificationService;
 import com.holyshit.service.StaffService;
+import com.holyshit.service.impl.QualificationServiceImpl;
 import com.holyshit.service.impl.StaffServiceImpl;
 
 /**
@@ -31,6 +35,13 @@ public class FindAStaffServlet extends HttpServlet {
 		System.out.println("姓名："+Staff.getName());
 		System.out.println("邮箱："+Staff.getEmail());
 		System.out.println("联系方式："+Staff.getTe());
+		QualificationService qs = new QualificationServiceImpl();
+		List<Qualification> Qualifications = qs.findAllQualifications(SearchStaffNo);
+		for(int i=0;i<Qualifications.size();i++)
+		{
+			System.out.println(Qualifications.get(i).getQualifdesc());
+		}
+		request.setAttribute("Qualifications", Qualifications);
 		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}
 
