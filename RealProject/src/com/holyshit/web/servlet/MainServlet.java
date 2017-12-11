@@ -14,9 +14,11 @@ import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.DocumentService;
+import com.holyshit.service.NoticeService;
 import com.holyshit.service.ProjectService;
 import com.holyshit.service.StageTasksService;
 import com.holyshit.service.impl.DocumentServiceImpl;
+import com.holyshit.service.impl.NoticeServiceImpl;
 import com.holyshit.service.impl.ProjectServiceImpl;
 import com.holyshit.service.impl.StageTasksServiceImpl;
 
@@ -60,6 +62,10 @@ public class MainServlet extends HttpServlet {
 					
 					
 				}
+				//公告模块
+				NoticeService ns=new NoticeServiceImpl();
+				Map<String, Object> notices = ns.showAllNoticeByPage(1, 5);
+				request.setAttribute("notices",notices );
 				
 				//转向到主页
 				request.getRequestDispatcher("/jsp/homeManage/main.jsp").forward(request, response);
