@@ -55,7 +55,7 @@ public class NewProjectServlet extends HttpServlet {
 		pro.setPstage("0");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		pro.setStime(new Date());
+		pro.setStime((java.sql.Date) new Date());
 		
 		//预算和结束时间未设置
 		System.out.println(pro.getPname());

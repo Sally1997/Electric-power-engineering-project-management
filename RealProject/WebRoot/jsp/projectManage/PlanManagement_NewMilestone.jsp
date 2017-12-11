@@ -8,9 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlanManagement_NewMilestone</title>
 
-    
-
-
  </head>
  <body> 
    <%@include file="/head.jsp" %>
@@ -51,7 +48,7 @@
                 <div class="col-lg-12" >
 						<!-- 同意 -->
 						
-					<form method="post" name="addMileStone" action="${pageContext.request.contextPath}/servlet/StageServlet">
+					<form method="post" name="addMileStone">
 						<!-- 阶段名称 -->
 						<div id="milestone_name" class="block">
 						<div id="first_left">
@@ -116,6 +113,8 @@
 						</div>
 						<div id="first_right">
 						<input type="text" name="IndexInfo" size="40px;">
+						<!-- <div style="height:2px"></div>
+						<input type="file" name="IndexFile"> -->
 						</div>
 						</div>
 						<div class="clear"></div>
@@ -126,8 +125,8 @@
 
                     <div id="responsible_per" class="block">
 						<div style="text-align: right">
-						    <input type = "submit" class="btn btn-primary" value = "新建阶段" onClick="addElement()">	
-							<button type="" class="btn btn-primary" ><a href="${pageContext.request.contextPath }/servlet/DTreeNodeServlet" style="color:white;">结束新建</a></button>
+						    <input type = "submit" name = "submit" class="btn btn-primary" value = "新建阶段" onClick="return addElement();">		
+							<button type="submit" class="btn btn-primary" ><a href="${pageContext.request.contextPath }/servlet/DTreeNodeServlet" style="color:white;">结束新建</a></button>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -145,7 +144,7 @@
 	<%-- div下拉菜单 --%>
 	<div id="fozza1" class="fozza2"></div>
 
-	<footer class="copyright">
+<footer class="copyright">
   <div class="container-fluid">
       	<p>©版权归谭莹小组所有</p>
    
@@ -203,8 +202,8 @@ function addElement()
 	form1.StartDate.value="";
 	form1.EndDate.value="";
 	form1.budget.value="";
-	
-	//
+	return false;
+
 }
 </script>
 </html>

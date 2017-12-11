@@ -1,6 +1,6 @@
 package com.holyshit.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Project {
 	private String pno;
@@ -33,8 +33,8 @@ public class Project {
 	public Date getStime() {
 		return stime;
 	}
-	public void setStime(Date stime) {
-		this.stime = stime;
+	public void setStime(Date date) {
+		this.stime = date;
 	}
 	public Date getEtime() {
 		return etime;

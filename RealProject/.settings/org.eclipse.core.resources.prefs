@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebRoot/jsp/projectManage/newstage.jsp=UTF-8
 encoding//src/com/holyshit/Dao/impl/ProjectDaoImpl.java=UTF-8
 encoding//src/com/holyshit/web/servlet/MainServlet.java=UTF-8
 encoding/<project>=UTF-8

@@ -1,16 +1,14 @@
 package com.holyshit.web.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.holyshit.domain.Project;
-import com.holyshit.domain.PSPlan;
-import com.holyshit.domain.StageTask;
 import com.holyshit.service.DTreeNodeService;
 import com.holyshit.service.impl.DTreeNodeServiceImpl;
 
@@ -24,35 +22,14 @@ public class ShowNodeServlet extends HttpServlet {
 		//获取
 		String no = request.getParameter("NodeNo");
 		
-		//新建四个对象
-		Project p = new Project();
-		PSPlan ps = new PSPlan();
-		StageTask st = new StageTask();
-		DTreeNodeService dtns = new DTreeNodeServiceImpl();
+		DTreeNodeService dtn = new DTreeNodeServiceImpl();
+		Map<String,Object> map = new HashMap<String, Object>();
+		map = dtn.GetNodeInfo(no);
 		
-		//返回
-		String s = "";
-		int len = no.length();
-
-		try {
-			if (len == 5) {
-				p = dtns.GetProjectInfo(no);
-				s = "项目,"+p.getPno()+","+p.getPname()+","+p.getPmno()+","+p.getStime()+","+p.getEtime()+","+p.getPbudget();
-			}
-			else if(len==6){
-				ps = dtns.GetStageInfo(no);
-				s = "项目阶段,"+ps.getStageNo()+","+ps.getSName()+","+ps.getCharPNo()+","+ps.getSTime()+","+ps.getETime()+","+ps.getBudget()+",我不知道";
-			}
-			else{
-				st = dtns.GetTaskInfo(no);
-				s = "任务节点,"+st.getTaskno()+","+st.getTaskname()+","+st.getCharpno()+","+st.getStime()+","+st.getEtime()+","+st.getBudget()+",谁知道呢";
-			}
-			response.getWriter().write(s);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		String s = JSONObject.fromObject(map).toString();
+		//转换成json对象
+		
+		response.getWriter().write(s);
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,6 +1,7 @@
 package com.holyshit.web.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
@@ -41,8 +42,8 @@ public class StageServlet extends HttpServlet {
 			pro_stage.setSName(request.getParameter("StageName"));
 			//日期转换
 			SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
-			pro_stage.setSTime(sdf.parse(request.getParameter("StartDate")));
-			pro_stage.setETime(sdf.parse(request.getParameter("EndDate")));
+			pro_stage.setSTime((Date) sdf.parse(request.getParameter("StartDate")));
+			pro_stage.setETime((Date) sdf.parse(request.getParameter("EndDate")));
 			
 			//pro_stage.setPublisherNo("201526010429");//测试用
 			HttpSession session = request.getSession();//ss.getAttribute

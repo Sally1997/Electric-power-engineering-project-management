@@ -1,7 +1,7 @@
 package com.holyshit.domain;
 //electric power engineering project management 
 
-import java.util.Date;
+import java.sql.Date;
 
 public class PSPlan {
 	private String StageNo;//阶段编号
