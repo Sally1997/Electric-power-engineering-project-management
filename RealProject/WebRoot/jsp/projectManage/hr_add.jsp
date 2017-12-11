@@ -97,7 +97,7 @@
 						<form method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 						<div align = "center">
 							<div class="form-group">
-							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%"/>
+							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%" value="${lastSearchStaffNo}"/>
 							</div><!--搜索框-->
 							<div class="form-group">
 							    <a ><button type="submit" id="b2" class="btn btn-primary" onclick="gosearchstaff()" >查看信息</button></a>
@@ -250,7 +250,7 @@
   	}
   	function gosearchstaff(){
   		var p = document.getElementsByName("search")[0];
-  		p.action = "${pageContext.request.contextPath}/web/servlet/findAStaffServlet";
+  		p.action = "${pageContext.request.contextPath}/web/servlet/findAStaffServlet?pno=${pno}";
   		
   	}
   </script>

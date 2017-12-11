@@ -26,6 +26,7 @@ public class FindAStaffServlet extends HttpServlet {
 		System.out.println("跳到了查找的Servlet");
 		String SearchStaffNo=request.getParameter("SearchStaffNo");
 		System.out.println("搜索staffno"+SearchStaffNo);
+		String pno = request.getParameter("pno");
 		StaffService ssi = new StaffServiceImpl();
 		Staff Staff = ssi.findAStaff(SearchStaffNo);
 		request.setAttribute("Staff", Staff);
@@ -42,6 +43,8 @@ public class FindAStaffServlet extends HttpServlet {
 			System.out.println(Qualifications.get(i).getQualifdesc());
 		}
 		request.setAttribute("Qualifications", Qualifications);
+		request.setAttribute("lastSearchStaffNo", Staff.getStaffno());
+		request.setAttribute("pno", pno);
 		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}
 
