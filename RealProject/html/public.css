@@ -47,13 +47,13 @@
         header{
 			background-image: url(src/topbk.png);
 		}
-		#first_left{
+		.hehe_left{
 			padding-left: 50px;
 			float: left;
 			width: 200px;
 			height: 25px;
 		}
-		#first_right{
+		.hehe_right{
 			float: left;
 		}
 		.clear{
@@ -87,3 +87,6 @@
 		.fanGtable:first-child tr:first-child td {
 		  border-top: 0;
 		}
+        .panel-middle{
+		  border-top: 1px solid #e5e5e5;
+        }

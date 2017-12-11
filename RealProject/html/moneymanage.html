@@ -700,22 +700,123 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">详细信息</h4>
       </div>
-      <div>
-        <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td>项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td>阶段一</td></tr>
-        	<tr><td>项目任务</td><td>任务一</td></tr>
-			<tr><td>报账人</td><td>甲</td></tr>
-        	<tr><td>报账时间</td><td>2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td>￥50.00元</td></tr>
-            <tr><td>当前状态</td>
-            <td class="text-danger">未审批</td></tr>
-            <tr><td>审批意见</td><td>暂无</td><tr>
-        </table>
+      <div class="modal-body">
+		  <div>
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账项目:</font>
+							</div>
+							<div class="hehe_right">
+							<font>这个项目的名字实在是特别特别特别的长</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+				<div class="hehe_left">
+				<font >项目阶段:</font>
+				</div>
+				<div class="hehe_right">
+				<font >阶段一</font>
+				</div>
+				<div class="clear"></div>
+				</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font >项目任务:</font>
+							</div>
+							<div class="hehe_right">
+							<font >任务一一一一一一</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font >报账人:</font>
+							</div>
+							<div class="hehe_right">
+							<font >卢仁佳</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账时间:</font>
+							</div>
+							<div class="hehe_right">
+							<font >2017-12-8</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>报账金额:</font>
+							</div>
+							<div class="hehe_right">
+							<font >￥50.00元</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+				<div id="responsible_per" class="block">
+							<div class="hehe_left">
+							<font>当前状态:</font>
+							</div>
+							<div class="hehe_right">
+							<font >未审批</font>
+							</div>
+							<div class="clear"></div>
+							</div>
+		  </div>
+		  <div class="panel-middle">
+			 <div class="modal-header"><h4 class="modal-title">审批</h4></div>
+		  </div>
+
+		  <form>
+							<div id="responsible_per" class="block">
+							<div>
+							<div class="hehe_left">
+							<input type="radio" name="是否同意" value="同意" checked >通过
+							</div>
+							<div class="hehe_right">
+							<input type="radio" name="是否同意" value="不同意">不通过
+							</div>
+							</div> 
+							<div class="clear"></div>
+							</div>
+
+							<!-- 审批人 -->
+							<div id="end_date" class="block">
+							<div class="hehe_left">
+							<font class="text">审批人:</font>
+							</div>
+							<div class="hehe_right">
+							<input type="text" name="" size="40px;" disabled>
+							</div>
+							<div class="clear"></div>
+							</div>
+							
+							<!-- 审批意见 -->
+							<div id="start_date" class="block">
+							<div class="hehe_left">
+							<font class="text">审批意见：</font>
+							</div>
+							<div class="hehe_right">
+							<textarea rows="5" cols="30"></textarea>
+							</div>
+							<div class="clear"></div>
+							</div>
+
+
+						</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary" onClick="window.open('moneycheck.html')">审批</button>
+        <button type="button" class="btn btn-primary">审批</button>
       </div>
     </div>
   </div>
