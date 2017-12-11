@@ -69,4 +69,24 @@ public interface DTreeDao {
 	 * @throws SQLException 
 	 */
 	List<Object> selectIndexInfo(String no) throws SQLException;
+	
+	/**
+	 * 根据任务的编号和指标信息添加插入指标附件的路径
+	 * @throws SQLException 
+	 */
+	public void insertIndexPath(String no,String indexinfo, String path) throws SQLException;
+	
+	/**
+	 * 根据阶段编号改变阶段状态
+	 * @param sno 阶段编号
+	 * @throws SQLException 
+	 */
+	public void updateSState(String sno) throws SQLException;
+	
+	/**
+	 * 根据任务编号改变阶段状态
+	 * @param sno 任务编号
+	 * @throws SQLException 
+	 */
+	public void updateTState(String tno) throws SQLException;
 }

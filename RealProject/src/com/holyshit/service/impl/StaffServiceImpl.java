@@ -12,9 +12,9 @@ import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
 public class StaffServiceImpl implements StaffService{
-	private StaffDao StaffDao = new StaffDaoImpl();
 	//list staffs service
 	public List<StaffDuty> findAllStaffs(String pno){
+		StaffDao StaffDao = new StaffDaoImpl();
 		try {
 			return StaffDao.findAllStaffs(pno);
 		} catch (SQLException e) {
@@ -28,6 +28,7 @@ public class StaffServiceImpl implements StaffService{
 	//delete staffs service
 	public void delAllStaffs(String[] staffnos,String pno) {
 		// TODO Auto-generated method stub
+		StaffDao StaffDao = new StaffDaoImpl();
 		try{
 
 			StaffDao.delAllStaffs(staffnos, pno);
@@ -40,6 +41,7 @@ public class StaffServiceImpl implements StaffService{
 	@Override
 	public Staff findAStaff(String staffno) {
 		// TODO Auto-generated method stub
+		StaffDao StaffDao = new StaffDaoImpl();
 		try {
 			return StaffDao.selectStaffById(staffno);
 		} catch (SQLException e) {
@@ -53,12 +55,30 @@ public class StaffServiceImpl implements StaffService{
 	}
 	
 	public void addAStaff(PSRelation psr){
+		StaffDao StaffDao = new StaffDaoImpl();
 		try {
 			StaffDao.addAStaff(psr);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
 		}
+	}
+	@Override
+	public boolean ifInProject(String staffno) {
+		StaffDao StaffDao = new StaffDaoImpl();
+		boolean b = true;
+		try {
+			int x = StaffDao.selectStaffByNo(staffno);
+			if(x==0){
+				b = false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return b;
 	}
 
 }

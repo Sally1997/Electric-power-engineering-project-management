@@ -48,7 +48,6 @@ public class StageServlet extends HttpServlet {
 			//pro_stage.setPublisherNo("201526010429");//测试用
 			HttpSession session = request.getSession();//ss.getAttribute
 			Staff staff = (Staff)session.getAttribute("staff");
-			pro_stage.setPubno(staff.getStaffno());//发布人是当前用户
 			
 			//最开始状态都是0
 			pro_stage.setSstate("0");

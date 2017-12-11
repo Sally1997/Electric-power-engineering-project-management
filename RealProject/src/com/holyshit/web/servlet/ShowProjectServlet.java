@@ -30,13 +30,6 @@ public class ShowProjectServlet extends HttpServlet {
 		Map<String,Object> info_map = new HashMap<String, Object>();
 		info_map = ps.getProjectManageInfo(current_page, page_size);
 		
-		/*//转换成JSON数组
-		String s = JSONObject.fromObject(info_map).toString();
-		System.out.println(s);
-		
-		response.getWriter().write(s);*/
-		
-		
 		request.setAttribute("info_map", info_map);
 		request.getRequestDispatcher("/jsp/projectManage/projectmanagerfirst.jsp").forward(request, response);;
 		

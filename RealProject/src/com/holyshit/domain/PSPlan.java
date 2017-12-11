@@ -7,7 +7,6 @@ public class PSPlan {
 	private String stageno;//阶段编号
 	private String pno;
 	private String sname;
-	private String pubno;
 	private String charpno;
 	private Date stime;
 	private Date etime;
@@ -49,19 +48,6 @@ public class PSPlan {
 	public void setSname(String sname) {
 		this.sname = sname;
 	}
-
-
-
-	public String getPubno() {
-		return pubno;
-	}
-
-
-
-	public void setPubno(String pubno) {
-		this.pubno = pubno;
-	}
-
 
 
 	public String getCharpno() {
@@ -126,7 +112,7 @@ public class PSPlan {
 
 	public String toString() {
 		return "projectstage [stageno=" + stageno + ", projectno=" + pno + ", stagename=" + sname
-				+ ", publisherno=" + pubno + ", chargeperno=" + charpno +", startdate=" + stime
+				+ ", chargeperno=" + charpno +", startdate=" + stime
 						+ ", enddate=" + etime + " ]";
 	}
 }

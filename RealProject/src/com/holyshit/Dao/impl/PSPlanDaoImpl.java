@@ -13,9 +13,9 @@ public class PSPlanDaoImpl implements PSPlanDao {
 		QueryRunner qr = new QueryRunner();
 		
 		qr.update(ConnectionManager.getConnection(), "insert into PSPlan(stageno,PNo,SName,PubPNo,CharPNo,STime,ETime,SState,budget) "
-				+ "values (?,?,?,?,?,?,?,?,?)",
+				+ "values (?,?,?,?,?,?,?,?)",
 				pro_stage.getStageno(),pro_stage.getPno(),
-				pro_stage.getSname(),pro_stage.getPubno(),
+				pro_stage.getSname(),
 				pro_stage.getCharpno(),pro_stage.getStime(),
 				pro_stage.getEtime(),pro_stage.getBudget(),
 				pro_stage.getSstate());
