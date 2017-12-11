@@ -26,15 +26,15 @@ public class AddAStaff extends HttpServlet {
 		String pno = request.getParameter("pno");
 		PSRelation psr = new PSRelation();
 		String duty = request.getParameter("duty");
-		/*String SearchStaffNo = request.getParameter("SearchStaffNo");*/
-		String SearchStaffNo = request.getParameter("searchofstaffno");
-		System.out.println("Staffno:"+SearchStaffNo);
+		String SearchStaffNo = request.getParameter("SearchStaffNo");
+		System.out.println("Staffno:"+SearchStaffNo+" pno="+pno+" duty="+duty);
 		psr.setPno(pno);
 		psr.setDuty(duty);
 		psr.setStaffno(SearchStaffNo);	
 		StaffService ssi = new StaffServiceImpl();
 		ssi.addAStaff(psr);
 		request.setAttribute("pno", pno);
+		
 		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}
 
