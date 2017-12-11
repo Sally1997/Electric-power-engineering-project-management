@@ -4,91 +4,129 @@ package com.holyshit.domain;
 import java.sql.Date;
 
 public class PSPlan {
-	private String StageNo;//阶段编号
-	private String PNo;
-	private String SName;
-	private String PubNo;
-	private String CharPNo;
-	private Date STime;
-	private Date ETime;
+	private String stageno;//阶段编号
+	private String pno;
+	private String sname;
+	private String pubno;
+	private String charpno;
+	private Date stime;
+	private Date etime;
 	private String budget;
-	private String SState;
+	private String sstate;
+
+	
+
+	public String getStageno() {
+		return stageno;
+	}
+
+
+
+	public void setStageno(String stageno) {
+		this.stageno = stageno;
+	}
+
+
+
+	public String getPno() {
+		return pno;
+	}
+
+
+
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
+
+
+
+	public String getSname() {
+		return sname;
+	}
+
+
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+
+
+	public String getPubno() {
+		return pubno;
+	}
+
+
+
+	public void setPubno(String pubno) {
+		this.pubno = pubno;
+	}
+
+
+
+	public String getCharpno() {
+		return charpno;
+	}
+
+
+
+	public void setCharpno(String charpno) {
+		this.charpno = charpno;
+	}
+
+
+
+	public Date getStime() {
+		return stime;
+	}
+
+
+
+	public void setStime(Date stime) {
+		this.stime = stime;
+	}
+
+
+
+	public Date getEtime() {
+		return etime;
+	}
+
+
+
+	public void setEtime(Date etime) {
+		this.etime = etime;
+	}
+
+
 
 	public String getBudget() {
 		return budget;
 	}
 
+
+
 	public void setBudget(String budget) {
 		this.budget = budget;
 	}
 
-	public String getSState() {
-		return SState;
+
+
+	public String getSstate() {
+		return sstate;
 	}
 
-	public void setSState(String sState) {
-		SState = sState;
+
+
+	public void setSstate(String sstate) {
+		this.sstate = sstate;
 	}
 
-	public String getStageNo() {
-		return StageNo;
-	}
 
-	public void setStageNo(String stageNo) {
-		StageNo = stageNo;
-	}
-
-	public String getPNo() {
-		return PNo;
-	}
-
-	public void setPNo(String pNo) {
-		PNo = pNo;
-	}
-
-	public String getSName() {
-		return SName;
-	}
-
-	public void setSName(String sName) {
-		SName = sName;
-	}
-
-	public String getPubNo() {
-		return PubNo;
-	}
-
-	public void setPubNo(String pubNo) {
-		PubNo = pubNo;
-	}
-
-	public String getCharPNo() {
-		return CharPNo;
-	}
-
-	public void setCharPNo(String charPNo) {
-		CharPNo = charPNo;
-	}
-
-	public Date getSTime() {
-		return STime;
-	}
-
-	public void setSTime(Date sTime) {
-		STime = sTime;
-	}
-
-	public Date getETime() {
-		return ETime;
-	}
-
-	public void setETime(Date eTime) {
-		ETime = eTime;
-	}
 
 	public String toString() {
-		return "ProjectStage [StageNo=" + StageNo + ", ProjectNo=" + PNo + ", StageName=" + SName
-				+ ", PublisherNo=" + PubNo + ", ChargePerNo=" + CharPNo +", StartDate=" + STime
-						+ ", EndDate=" + ETime + " ]";
+		return "projectstage [stageno=" + stageno + ", projectno=" + pno + ", stagename=" + sname
+				+ ", publisherno=" + pubno + ", chargeperno=" + charpno +", startdate=" + stime
+						+ ", enddate=" + etime + " ]";
 	}
 }
