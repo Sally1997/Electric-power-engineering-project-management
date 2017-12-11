@@ -3,7 +3,6 @@ package com.holyshit.Dao;
 import java.sql.SQLException;
 
 import com.holyshit.domain.PSPlan;
-import com.holyshit.domain.TaskIndexs;
 
 public interface PSPlanDao {
 	

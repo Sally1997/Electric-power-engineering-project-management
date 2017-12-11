@@ -40,6 +40,17 @@ public interface StaffDao {
 	 * @throws SQLException
 	 */
 	void delAllStaffs(String[] staffnos,String pno) throws SQLException;
+	
 	void addAStaff(PSRelation psr) throws SQLException;
+	
+	/**
+	 * 
+	 * @param no 编号
+	 * @return
+	 * @throws SQLException 
+	 */
+	int selectStaffByNo(String no) throws SQLException;
+	
+	
 }   
  

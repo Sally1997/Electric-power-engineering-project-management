@@ -15,6 +15,7 @@ import com.holyshit.domain.Project;
 import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.DTreeNodeService;
+import com.holyshit.utils.ConnectionManager;
 
 public class DTreeNodeServiceImpl implements DTreeNodeService {
 	
@@ -109,6 +110,7 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 			map.put("charpname", map1.get("charpname"));
 			map.put("name", map1.get("name"));
 			map.put("budget", map1.get("budget"));
+			map.put("staffno", map1.get("staffno"));
 			
 			//时间转换 sql.date转换成util.date
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -132,6 +134,42 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 		return map;
 	}
 	
-	
+	public void addIndexPath(String path,String no,String indexinfo) {
+		DTreeDao dtd = new DTreeDaoImpl();
+		try {
+			dtd.insertIndexPath(no, indexinfo, path);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
 
+	@Override
+	public void changeSState(String sno) {
+		DTreeDao dtd = new DTreeDaoImpl();
+		try {
+			dtd.updateSState(sno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+
+	@Override
+	public void changeTState(String tno) {
+		DTreeDao dtd = new DTreeDaoImpl();
+		try {
+			dtd.updateTState(tno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+	
 }

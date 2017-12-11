@@ -16,6 +16,7 @@ import com.holyshit.domain.Project;
 import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.StageTask;
 import com.holyshit.utils.C3P0Util;
+import com.holyshit.utils.ConnectionManager;
 
 public class DTreeDaoImpl implements DTreeDao {
 
@@ -77,11 +78,11 @@ public class DTreeDaoImpl implements DTreeDao {
 	public Map<String, Object> selectNodeInfo(String no) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT * FROM("+
-					"SELECT stagetasks.taskno AS no,taskname AS name,staff.Name AS charpname,stime,etime,budget "+
+					"SELECT stagetasks.taskno AS no,taskname AS name,staff.Name AS charpname,stime,etime,budget,staffno "+
 					"FROM staff,stagetasks WHERE staffno=charpno UNION "+
-					"SELECT stageno AS NO,sname AS NAME,staff.Name AS charpname,stime,etime,budget "+
+					"SELECT stageno AS NO,sname AS NAME,staff.Name AS charpname,stime,etime,budget,staffno "+
 					"FROM staff,psplan WHERE staffno=charpno UNION "+
-					"SELECT pno AS NO,pname AS NAME,staff.Name AS charpname,stime,etime,pbudget AS budget "+
+					"SELECT pno AS NO,pname AS NAME,staff.Name AS charpname,stime,etime,pbudget AS budget,staffno "+
 					"FROM staff,project WHERE staffno=pmno)a "+
 					"WHERE a.no=?",
 				new MapHandler(), no);
@@ -92,6 +93,29 @@ public class DTreeDaoImpl implements DTreeDao {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT indexinfo FROM taskindexes "+
 					"WHERE taskno=?", new ColumnListHandler(),no);
+	}
+
+	@Override
+	public void insertIndexPath(String no, String indexinfo, String path) throws SQLException {
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE taskindexes "+
+			"SET AttachPath=? WHERE taskno=? AND indexinfo=?",
+			path,no,indexinfo);
+	}
+
+	@Override
+	public void updateSState(String sno) throws SQLException {
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE psplan SET sstate='1' "+
+			"WHERE stageno=?",sno);
+		
+	}
+
+	@Override
+	public void updateTState(String tno) throws SQLException {
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE stagetasks SET tstate='1' "+
+			"WHERE taskno=?",tno);
 	}
 
 }

@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.holyshit.Dao.StaffDao;
 import com.holyshit.domain.PSRelation;
@@ -56,8 +57,20 @@ public class StaffDaoImpl implements StaffDao {
 	}
 	
 	public void addAStaff(PSRelation psr) throws SQLException{
-		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		qr.update("insert into psrelation(Pno,Staffno,duty) values(?,?,?); ",psr.getPno(),psr.getStaffno(),psr.getDuty());
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),
+				"insert into psrelation(Pno,Staffno,duty) values(?,?,?); ",
+				psr.getPno(),psr.getStaffno(),psr.getDuty());
 	}
+
+	@Override
+	public int selectStaffByNo(String no) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		long l =  (long) qr.query("select count(*) from psrelation "+
+				"where staffno=?", new ScalarHandler(),no);
+		return (int)l;
+	}
+	
+	
 
 }

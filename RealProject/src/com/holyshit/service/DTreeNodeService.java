@@ -65,4 +65,24 @@ public interface DTreeNodeService {
 	 * @throws ParseException 
 	 */
 	public Map<String,Object> GetNodeInfo(String no);
+	
+	/**
+	 * 添加指标附件路径
+	 * @param path 路径
+	 * @param no 阶段或者任务编号
+	 * @param indexinfo 指标内容
+	 */
+	public void addIndexPath(String path,String no,String indexinfo);
+	
+	/**
+	 * 根据阶段编号改变状态
+	 * @param sno
+	 */
+	public void changeSState(String sno);
+	
+	/**
+	 * 根据任务编号改变状态
+	 * @param tno
+	 */
+	public void changeTState(String tno);
 }

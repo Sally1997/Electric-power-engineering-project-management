@@ -179,7 +179,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>SubmitTaskServlet</servlet-name>
-    <url-pattern>/servlet/SubmitTaskServlet</url-pattern>
+    <url-pattern>/web/servlet/submitTaskServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DownLoadMessage</servlet-name>
