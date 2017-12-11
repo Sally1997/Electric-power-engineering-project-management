@@ -48,7 +48,7 @@ public class StageServlet extends HttpServlet {
 			//pro_stage.setPublisherNo("201526010429");//测试用
 			HttpSession session = request.getSession();//ss.getAttribute
 			Staff staff = (Staff)session.getAttribute("staff");
-			pro_stage.setPubpno(staff.getStaffno());//发布人是当前用户
+			pro_stage.setPubno(staff.getStaffno());//发布人是当前用户
 			
 			//最开始状态都是0
 			pro_stage.setSstate("0");
@@ -69,10 +69,10 @@ public class StageServlet extends HttpServlet {
 			//暂时还未商榷项目编号的获取方式先用10001暂时代替使用
 			String pn="10001";
 			
-			pro_stage.setPNo(pn);
+			pro_stage.setPno(pn);
 			AutoNumber an = new AutoNumber();
 			String sn = an.PNtoSN(pn);
-			pro_stage.setStageNo(sn);
+			pro_stage.setStageno(sn);
 			
 			//审批人
 			String rcpn = request.getParameter("PersonInCharge");
@@ -80,7 +80,7 @@ public class StageServlet extends HttpServlet {
 			for(int i=0;i<12;i++){
 				cpn+=rcpn.charAt(rcpn.length()-13+i);
 			}
-			pro_stage.setCharPNo(cpn);
+			pro_stage.setCharpno(cpn);
 			
 			String tn = an.CreateNewTaskNo(sn);
 			task_index.setTaskNo(tn);

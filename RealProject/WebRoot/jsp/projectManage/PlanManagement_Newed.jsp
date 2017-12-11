@@ -233,7 +233,7 @@ $(".innerUl").ProTree({
           <div class="form-group">
         <label for="projectname" class="col-sm-2 control-label">任务编号:</label>
         <div class="col-sm-8">
-          2345678901
+          <span id="pop_taskno"></span>
         </div>
         </div>
         <div class="clear"></div>
@@ -241,7 +241,7 @@ $(".innerUl").ProTree({
         <div class="form-group">
         <label for="projecttype" class="col-sm-2 control-label">任务名称:</label>
         <div class="col-sm-8">
-          Child2.2.2
+          <span id="pop_taskname"></span>
         </div>
         </div>
         <div class="clear"></div>
@@ -249,7 +249,7 @@ $(".innerUl").ProTree({
         <div class="form-group">
         <label for="projecttype" class="col-sm-2 control-label">负责人:</label>
         <div class="col-sm-8">
-          李维
+         	<span id="pop_charpname"></span>
         </div>
         </div>
         <div class="clear"></div>
@@ -258,11 +258,7 @@ $(".innerUl").ProTree({
         <label for="addfile" class="col-sm-2 control-label">任务指标:</label>
         <div class="col-sm-8">
           <font >
-              <ul>
-                <li>上传施工现场勘查报告</li><input type = "file" id="checkman">
-                <li>上传施工图纸</li><input type = "file" id="checkman"><!-- 当然这里没有没这个上传的按钮是根据你们后台那里显示的需不需要上传而定的 -->
-                <li>购买施工材料</li><input type = "file" id="checkman"><!-- 如果有需要上传的话，就会出现这个上传附件的按钮 -->
-              </ul>
+              <ul></ul>
             </font>
         </div>
         </div>
@@ -305,7 +301,7 @@ function resetecho(){
 }
 
 function popup(){
-	
+	var p = document.getElementById("pop_taskno");
 }
 
 var aja = new XMLHttpRequest();

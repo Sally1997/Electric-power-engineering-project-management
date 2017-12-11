@@ -58,13 +58,13 @@ public class PSPlan {
 	public void setSstate(String sstate) {
 		this.sstate = sstate;
 	}
+
+
 	public String getBudget() {
 		return budget;
 	}
 	public void setBudget(String budget) {
 		this.budget = budget;
 	}
-	
 
-	
 }

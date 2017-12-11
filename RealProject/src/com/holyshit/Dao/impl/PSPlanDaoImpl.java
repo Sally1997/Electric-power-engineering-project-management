@@ -15,8 +15,20 @@ public class PSPlanDaoImpl implements PSPlanDao {
 	@Override
 	public PSPlan selectPsPlanInfo(String stageno) throws SQLException {
 		// TODO Auto-generated method stub
-		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"select * from psplan where stageno=?",new BeanHandler<PSPlan>(PSPlan.class),stageno);
+		QueryRunner qr = new QueryRunner();
+		
+		qr.update(ConnectionManager.getConnection(), "insert into PSPlan(stageno,PNo,SName,PubPNo,CharPNo,STime,ETime,SState,budget) "
+				+ "values (?,?,?,?,?,?,?,?,?)",
+				pro_stage.getStageno(),pro_stage.getPno(),
+				pro_stage.getSname(),pro_stage.getPubno(),
+				pro_stage.getCharpno(),pro_stage.getStime(),
+				pro_stage.getEtime(),pro_stage.getBudget(),
+				pro_stage.getSstate());
+		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath,IndexState) "
+				+ "values (?,?,?,?,?)",
+				task_index.getIndexNo(),task_index.getTaskNo(),
+				task_index.getIndexInfo(),task_index.getAttachPath(),
+				task_index.getIndexState());
 	}
 
 }
