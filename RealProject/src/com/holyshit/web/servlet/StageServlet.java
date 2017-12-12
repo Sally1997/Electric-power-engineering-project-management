@@ -21,20 +21,16 @@ import com.holyshit.utils.AutoNumber;
 /**
  * Servlet implementation class StageServlet
  */
-@WebServlet({ "/StageServlet", "/servlet/StageServlet" })
+@WebServlet({ "/StageServlet", "web/servlet/stageServlet" })
 public class StageServlet extends HttpServlet {
-       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("text/html", "charset=UTF-8");
-		
+		/*
 		PSPlan pro_stage = new PSPlan();
 		TaskIndexs task_index = new TaskIndexs();
 		
 		try {
-			/**
-			 * 获取表单数据
-			 */
 			System.out.println(pro_stage);
 			System.out.println(task_index);
 			
@@ -63,8 +59,8 @@ public class StageServlet extends HttpServlet {
 			//阶段编号（7），发布（12），负责人（12）null
 			//指标编号（11），任务编号（10）null
 			
-			/*Project project = (Project) request.getAttribute("project");
-			String pn1 = project.getPno();*/
+			Project project = (Project) request.getAttribute("project");
+			String pn1 = project.getPno();
 			//暂时还未商榷项目编号的获取方式先用10001暂时代替使用
 			String pn="10001";
 			
@@ -99,7 +95,7 @@ public class StageServlet extends HttpServlet {
 		}
 		//分发转向新建成功！
 		response.getWriter().print("<script></script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/jsp/projectManage/PlanManagement_NewMilestone.jsp");	
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/jsp/projectManage/PlanManagement_NewMilestone.jsp");*/	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
