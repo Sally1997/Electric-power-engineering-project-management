@@ -175,7 +175,7 @@
     	     <!-- 公告栏部分 -->
     	      <div class="col-lg-4">
     	        <div class="panel panel-primary">
-    	        	<div class="panel panel-heading">公告中心<span class="more">more..</span></div>
+    	        	<div class="panel panel-heading">公告中心<span class="more" onclick="window.open('${pageContext.request.contextPath}/jsp/homeManage/news.jsp')">more..</span></div>
 						<div class="list-group">
 						<c:forEach items="${notices['noticelist'] }" var="notice" begin="0" end="4" step="1" varStatus="status">
 							<a href="${pageContext.request.contextPath}/web/servlet/lookNotice?noticeno=${notice.noticeno}" class="list-group-item">${notice.noticetitle }<br><span class="uptime small"><fmt:formatDate value="${notice.pubtime }" type="both"/></span></a>
@@ -196,7 +196,7 @@
     	        </div>
     	    <!--    你们先做成这个地方点击就能直接下载文件吧……-->
     	        <div class="panel panel-primary">
-    	        	<div class="panel panel-heading">最新消息<span class="more">more..</span></div>
+    	        	<div class="panel panel-heading">最新消息<span class="more" onclick="window.open('${pageContext.request.contextPath}/jsp/homeManage/info.jsp')">more..</span></div>
 						<div class="list-group">
   						    <c:forEach items="${staffDoc['docs'] }" begin="0" end="7" step="1" var="doc">
 						      <a href="${pageContext.request.contextPath}/web/servlet/downLoadMessage?dno=${doc.dno}" class="list-group-item"><span class="glyphicon glyphicon-file"></span>${doc.dtitle }<br><div class="small"><span class="uptime">><fmt:formatDate value="${doc.uploadtime }" type="both"/></</span>&nbsp;&nbsp;&nbsp;<span>上传者：${doc.uloadpno }</span>&nbsp;&nbsp;&nbsp;<span>文件类型：${doc.ftype }</span></div></a>

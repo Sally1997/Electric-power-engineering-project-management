@@ -33,9 +33,10 @@ public class DocumentServiceImpl implements DocumentService {
 		//将分页结果封装成hashmap
 		Map<String, Object> documents=new HashMap<String, Object>();
 		documents.put("docs", list);
-		documents.put("total", total);
+		documents.put("totalNum", total);
 		documents.put("currentPage", cur);
 		documents.put("pageSize", pageSize);
+		documents.put("pageNum", total%pageSize==0?total/pageSize:total/pageSize+1);
 		return documents;
 	}
 

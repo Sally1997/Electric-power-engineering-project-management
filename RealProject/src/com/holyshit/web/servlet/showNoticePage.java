@@ -2,6 +2,9 @@ package com.holyshit.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,17 +34,26 @@ public class showNoticePage extends HttpServlet {
 		//调用服务
 		NoticeService ns=new NoticeServiceImpl();
 		Map<String, Object> res = ns.showAllNoticeByPage(cur, pageSize);
-		
+		//生成json数组
+		List<Notice> noticelist=(List<Notice>) res.get("noticelist");
+		JSONArray notices=new JSONArray();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		for(Notice n:noticelist){
+			JSONObject object=new JSONObject();
+			object.put("noticetitle", n.getNoticetitle());
+			object.put("pubtime", sdf.format(new Date(n.getPubtime().getTime())));
+			object.put("noticeno", n.getNoticeno());
+			notices.add(object);
+		}
 		//封装json
 		JSONObject jsondata=new JSONObject();
 		jsondata.put("totalNum", res.get("totalNum"));
 		jsondata.put("pageNum", res.get("pageNum"));
 		jsondata.put("currentPage", res.get("currentPage"));
 		jsondata.put("pageSize", res.get("pageSize"));
-		List<Notice> noticelist= (List<Notice>) res.get("noticelist");
-		JSONArray list=JSONArray.fromObject(noticelist);
-		System.out.println(list.toString());
-		jsondata.put("noticelist", list.toString());
+		jsondata.put("noticelist", notices);
+		
+		
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(jsondata.toString());
 		
