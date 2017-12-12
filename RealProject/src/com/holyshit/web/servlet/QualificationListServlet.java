@@ -17,16 +17,22 @@ import com.holyshit.service.impl.QualificationServiceImpl;
 /**
  * Servlet implementation class QualificationListServlet
  */
-@WebServlet("/qualificationListServlet")
+@WebServlet("/web/servlet/qualificationListServlet")
 public class QualificationListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String staffno=request.getParameter("staffno");//我要获取当前行staffno的值
+		System.out.println("璺冲埌浜嗚祫鏍糞ERVLET");
+		String staffno = request.getParameter("staffno");
 		QualificationService qfsi = new QualificationServiceImpl();
 		List<Qualification> Qualifications = qfsi.findAllQualifications(staffno);
+		System.out.println("00000000");
+		for(int i=0;i<Qualifications.size();i++)
+		{
+			System.out.println(Qualifications.get(i).getQualifdesc());
+		}
 		request.setAttribute("Qualification", Qualifications);
 		request.setAttribute("staffno", staffno);
-		request.getRequestDispatcher("/hr_main.jsp").forward(request,response);
+		request.getRequestDispatcher("/jsp/projectManage/hr_main.jsp").forward(request,response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

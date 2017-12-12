@@ -37,6 +37,9 @@
 		function showPno(){
 			alert(${pno});
 		}
+		function lookQuali(){
+			var ids = document.getElementsByName("ids");
+		}
 	</script>
   </head>
   <body> 
@@ -90,7 +93,7 @@
           						</div>	
 							</td>
 							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupAc">发送</button></td>
-							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" herf="${pageContext.request.contextPath}/servlet/qualificationListServlet?staffno=${s.staffno}" >查看</button></td>
+							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" value="${s.staffno }"  href="${pageContext.request.contextPath}/web/servlet/qualificationListServlet?staffno=${s.staffno}" >查看</button></td>
 						</tr>
 					</c:forEach>
 					</table>
@@ -197,9 +200,9 @@
 		<tr>
 			<th>职业资格证</th>
 		</tr>
-	<c:forEach items="${Qualification}" var="q" >
+	<c:forEach items="${Qualification}" >
 		<tr>
-			<td><abbr title="大学时获得">${q.qualifdesc }</abbr></td>
+			<td><abbr title="大学时获得">${Qualification.qualifdesc }</abbr></td>
 		</tr>
 	</c:forEach>
 	 </table>

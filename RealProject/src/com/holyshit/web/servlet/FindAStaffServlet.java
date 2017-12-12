@@ -1,7 +1,9 @@
 package com.holyshit.web.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,21 +31,31 @@ public class FindAStaffServlet extends HttpServlet {
 		String pno = request.getParameter("pno");
 		StaffService ssi = new StaffServiceImpl();
 		Staff Staff = ssi.findAStaff(SearchStaffNo);
-		request.setAttribute("Staff", Staff);
-		request.setAttribute("SearchStaffNo", SearchStaffNo);
-		System.out.println("信息：");
-		System.out.println("编号："+Staff.getStaffno());
-		System.out.println("姓名："+Staff.getName());
-		System.out.println("邮箱："+Staff.getEmail());
-		System.out.println("联系方式："+Staff.getTe());
-		QualificationService qs = new QualificationServiceImpl();
-		List<Qualification> Qualifications = qs.findAllQualifications(SearchStaffNo);
-		for(int i=0;i<Qualifications.size();i++)
+		if(Staff==null)
 		{
-			System.out.println(Qualifications.get(i).getQualifdesc());
+			System.out.println("用户不存在");
+			String error = "用户不存在";
+			request.setAttribute("error", error);
 		}
-		request.setAttribute("Qualifications", Qualifications);
-		request.setAttribute("lastSearchStaffNo", Staff.getStaffno());
+		else
+		{
+			request.setAttribute("Staff", Staff);
+			request.setAttribute("SearchStaffNo", SearchStaffNo);
+			System.out.println("信息：");
+			System.out.println("编号："+Staff.getStaffno());
+			System.out.println("姓名："+Staff.getName());
+			System.out.println("邮箱："+Staff.getEmail());
+			System.out.println("联系方式："+Staff.getTe());
+			QualificationService qs = new QualificationServiceImpl();
+			List<Qualification> Qualifications = qs.findAllQualifications(SearchStaffNo);
+			for(int i=0;i<Qualifications.size();i++)
+			{
+				System.out.println(Qualifications.get(i).getQualifdesc());
+			}
+			request.setAttribute("Qualifications", Qualifications);
+			request.setAttribute("lastSearchStaffNo", Staff.getStaffno());
+		}
+		
 		request.setAttribute("pno", pno);
 		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}

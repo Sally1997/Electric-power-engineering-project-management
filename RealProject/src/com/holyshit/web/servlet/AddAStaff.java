@@ -34,7 +34,8 @@ public class AddAStaff extends HttpServlet {
 		StaffService ssi = new StaffServiceImpl();
 		ssi.addAStaff(psr);
 		request.setAttribute("pno", pno);
-		
+		String error = "添加成功";
+		request.setAttribute("error", error);
 		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}
 

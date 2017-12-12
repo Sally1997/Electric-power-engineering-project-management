@@ -102,6 +102,9 @@
 							<div class="form-group">
 							    <a ><button type="submit" id="b2" class="btn btn-primary" onclick="gosearchstaff()" >查看信息</button></a>
 							</div><!--搜索按钮-->
+							<div>
+                         		 <p style="color:red">${error}</p>
+                            </div>
 						</div>
 						<div id="responsible_per" class="block">
 						<div id="first_left">
