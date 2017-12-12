@@ -16,6 +16,12 @@ public class PSPlan {
 	private Date etime;
 	private String sstate;
 	private String budget;
+	
+	public String toString(){
+		return "stageno="+stageno+",charpno="+charpno+",pno="+pno+",sname="+sname
+				+ ",stime="+stime+",etime="+etime+",sstate="+sstate+",budget="+budget;
+	}
+	
 	public String getStageno() {
 		return stageno;
 	}
@@ -66,5 +72,6 @@ public class PSPlan {
 	public void setBudget(String budget) {
 		this.budget = budget;
 	}
-
+	
+	
 }

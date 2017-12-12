@@ -91,7 +91,10 @@ public class ProjectDaoImpl implements ProjectDao {
 	@Override
 	public int PMPageCount() throws SQLException {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
-		long l = (long) qr.query("SELECT COUNT(*) FROM project", new ScalarHandler(1));
+		long l = (long) qr.query("select count(*) from ("+
+				"SELECT Project.Pno,PName,NAME,duty,PType,PState "+
+				"FROM project,psrelation,staff WHERE project.PNo=psrelation.PNo "+
+				"AND PMno=staff.staffno AND psrelation.staffno=?)a", new ScalarHandler(1));
 		return (int)l;
 	}
 
