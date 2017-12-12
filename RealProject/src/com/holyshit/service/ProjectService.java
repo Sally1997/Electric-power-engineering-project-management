@@ -41,5 +41,12 @@ public interface ProjectService {
 	 * 获得项目展示信息
 	 * @return
 	 */
-	Map<String,Object> getProjectManageInfo(int current_page,int page_size);
+	Map<String,Object> getProjectManageInfo(String staffno,int current_page,int page_size);
+	
+	/**
+	 * 判断项目是否为空
+	 * @param pno
+	 * @return
+	 */
+	boolean ifIsEmptyProject(String pno);
 }

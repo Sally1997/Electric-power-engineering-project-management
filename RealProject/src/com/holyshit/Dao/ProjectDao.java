@@ -77,7 +77,7 @@ public interface ProjectDao {
 	 * @return
 	 * @throws SQLException 
 	 */
-	List<ProjectInfo> selectProjectManageInfo(int current_page,int page_size) throws SQLException;
+	List<ProjectInfo> selectProjectManageInfo(String staffno,int current_page,int page_size) throws SQLException;
 	
 	/**
 	 * 查询项目管理首页的页数
@@ -85,6 +85,14 @@ public interface ProjectDao {
 	 * @throws SQLException 
 	 */
 	public int PMPageCount() throws SQLException;
+	
+	/**
+	 * 根据项目编号查找到这个项目下是否有任务
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	public int selectCountStage(String pno) throws SQLException;
 }  
 
 
