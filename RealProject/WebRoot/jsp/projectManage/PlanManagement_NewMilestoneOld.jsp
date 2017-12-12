@@ -16,12 +16,9 @@
 		menus[1].role="presentation";	
 	</script>
 	
-	<%-- div下拉菜单 --%>
+		<%-- div下拉菜单 --%>
 	<div id="fozza1" class="fozza2"></div>
-	<%-- 我是一个隐藏表单域 --%>
-	<div id="hiddenarea"></div>
-	
-	
+	<%-- 这是我写的啦 --%>
 <!--  主要内容-->
 <section>
     <div class=container-fluid>
@@ -55,7 +52,7 @@
     	        <div class="panel-heading">阶段新建</div>
       	        <div class="panel-body">
                 <div class="col-lg-12" >
-					<form action="" method="" name="form1">
+					<form action="" method="post" name="form1">
 						<!--阶段名称 -->
 						<div id="milestone_name" class="block">
 						<div id="first_left">
@@ -128,11 +125,6 @@
 	    </div>
 	</div>
  </section>
- 
- 	<%-- 隐藏表单域 --%>
- 	<form>
- 		
- 	</form>
 
  <!--      默认隐藏的内容:审批意见-->
  <div class="modal fade" id="handupCc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -185,8 +177,6 @@
   </footer>
 </body>
 <script type="text/javascript">
-var i = 0;
-
 /*function Dlt()
 {
 	var table = document.getElementById("form3");
@@ -237,7 +227,6 @@ var i = 0;
 function addGoal()
 {
 	var goal = document.createTextNode(form2.goal.value);
-	
 	
     var dlt = document.createElement("input");
 	dlt.setAttribute("id","delete");
@@ -347,24 +336,10 @@ function addElement()
 	tr.appendChild(td_budget);	
 	tr.appendChild(td_goal);	
 	tbody.appendChild(tr); //将tr节点加入tbody中
-	
+
 	var tComment = document.getElementById("newms"); //获取table对象
 
 	tComment.appendChild(tbody); //将节点tbody加入节点尾部
-	
-	//将提交的表单值保存到隐藏域 隐藏表单传值
-	var ha = document.getElementById("hiddenarea")
-	var cf = document.createElement("form");
-	var ci = document.createElement("input");
-	
-	
-	//阶段名称
-	ci.setAttribute("name", "stagename");
-	//ci.setAttribute("type", button);
-	ci.setAttribute("value", form1.msname.value);
-	
-	cf.appendChild(ci);
-	ha.appendChild(cf);
 	
 	form1.msname.value="";
 	form1.mngname.value="";
