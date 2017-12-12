@@ -84,7 +84,7 @@ public interface ProjectDao {
 	 * @return
 	 * @throws SQLException 
 	 */
-	public int PMPageCount() throws SQLException;
+	public int PMPageCount(String staffno) throws SQLException;
 	
 	/**
 	 * 根据项目编号查找到这个项目下是否有任务

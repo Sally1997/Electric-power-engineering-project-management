@@ -75,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
 		ProjectDao pd = new ProjectDaoImpl();
 		Map<String,Object> pm_info = new HashMap<String,Object>();
 		try {
-			int count = pd.PMPageCount();
+			int count = pd.PMPageCount(staffno);
 			int total_page = (int) Math.ceil(count*1.0/page_size);
 			
 			List<ProjectInfo> list = new ArrayList<ProjectInfo>();

@@ -119,10 +119,11 @@ public class StageServlet extends HttpServlet {
 			String name = (String) e.nextElement();
 			String value=request.getParameter(name);
 			out.write(name+"="+value);
-		    if(name=="fozza_sn"){
+			System.out.println(name);
+		    if(name.equals("fozza_sn")){
 		    	pro_stage.setSname(value);
 		    }
-		    if(name=="fozza_cp"){
+		    if(name.equals("fozza_cp")){
 		    	//审批人
 				String rcpn = value;
 				String cpn = "";
@@ -131,7 +132,7 @@ public class StageServlet extends HttpServlet {
 				}
 				pro_stage.setCharpno(cpn);
 		    }
-		    if(name=="fozza_st"){
+		    if(name.equals("fozza_st")){
 		    	try {
 					pro_stage.setStime((Date) sdf.parse(value));
 				} catch (ParseException e1) {
@@ -139,7 +140,7 @@ public class StageServlet extends HttpServlet {
 					e1.printStackTrace();
 				}
 		    }
-		    if(name=="fozza_et"){
+		    if(name.equals("fozza_et")){
 		    	try {
 					pro_stage.setEtime((Date) sdf.parse(value));
 				} catch (ParseException e1) {
@@ -147,13 +148,13 @@ public class StageServlet extends HttpServlet {
 					e1.printStackTrace();
 				}
 		    }
-		    if(name=="fozza_bg"){
+		    if(name.equals("fozza_bg")){
 		    	pro_stage.setBudget(value);
 		    }
-		    if(name=="indexcontent"){
+		    if(name.equals("indexcontent")){
 		    	icArray = value.split(",");
 		    }
-		    if(name=="attachmentneed"){
+		    if(name.equals("attachmentneed")){
 		    	anArray = value.split(",");
 		    }
 		    
