@@ -21,7 +21,7 @@ public interface ProjectService {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<Object> getNewStageNo(String pn) throws SQLException;
+	List<Object> getNewStageNo(String pn);
 	
 	/**
 	 * 根据servlet新建一个项目

@@ -34,9 +34,16 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Object> getNewStageNo(String pn) throws SQLException {
+	public List<Object> getNewStageNo(String pn){
 		ProjectDao pjd = new ProjectDaoImpl();
-		return pjd.selectProjectStageNoByPN(pn);
+		List<Object> list = new ArrayList<Object>();
+		try {
+			list = pjd.selectProjectStageNoByPN(pn);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
