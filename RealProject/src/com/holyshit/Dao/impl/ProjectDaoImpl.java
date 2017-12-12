@@ -79,19 +79,27 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public List<ProjectInfo> selectProjectManageInfo(int current_page,int page_size) throws SQLException {
+	public List<ProjectInfo> selectProjectManageInfo(String staffno,int current_page,int page_size) throws SQLException {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT Project.Pno,PName,NAME,duty,PType,PState "+
-				"FROM (Project JOIN psrelation ON Project.PNo=psrelation.PNo) "+
-				"JOIN staff ON psrelation.StaffNo=staff.StaffNo limit ?,?", 
-				new BeanListHandler<ProjectInfo>(ProjectInfo.class),
-				(current_page-1)*page_size,page_size);
+				"FROM project,psrelation,staff WHERE project.PNo=psrelation.PNo "+
+				"AND PMno=staff.staffno AND psrelation.staffno=? "+
+				"LIMIT ?,?",new BeanListHandler<ProjectInfo>(ProjectInfo.class),
+				staffno,(current_page-1)*page_size,page_size);
 	}
 
 	@Override
 	public int PMPageCount() throws SQLException {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		long l = (long) qr.query("SELECT COUNT(*) FROM project", new ScalarHandler(1));
+		return (int)l;
+	}
+
+	@Override
+	public int selectCountStage(String pno) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		long l = (long) qr.query("SELECT stageno FROM psplan WHERE pno=?", 
+				new ScalarHandler(1),pno);
 		return (int)l;
 	}
 

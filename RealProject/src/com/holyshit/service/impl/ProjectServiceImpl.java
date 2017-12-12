@@ -64,7 +64,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public Map<String,Object> getProjectManageInfo(int current_page,int page_size) {
+	public Map<String,Object> getProjectManageInfo(String staffno,int current_page,int page_size) {
 		ProjectDao pd = new ProjectDaoImpl();
 		Map<String,Object> pm_info = new HashMap<String,Object>();
 		try {
@@ -72,7 +72,7 @@ public class ProjectServiceImpl implements ProjectService {
 			int total_page = (int) Math.ceil(count*1.0/page_size);
 			
 			List<ProjectInfo> list = new ArrayList<ProjectInfo>();
-			list = pd.selectProjectManageInfo(current_page,page_size);
+			list = pd.selectProjectManageInfo(staffno,current_page,page_size);
 			
 			//state转换
 			StateConversion sc = new StateConversion();
@@ -89,6 +89,21 @@ public class ProjectServiceImpl implements ProjectService {
 			e.printStackTrace();
 		}
 		return pm_info;
+	}
+
+	@Override
+	public boolean ifIsEmptyProject(String pno) {
+		ProjectDao pd = new ProjectDaoImpl();
+		boolean iep = true;
+		try {
+			if(pd.selectCountStage(pno)>0){
+				iep = false;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return iep;
 	}
 
 }
