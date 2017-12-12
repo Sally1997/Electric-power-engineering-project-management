@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <title>首页</title>
     <!-- Bootstrap -->
-  
+
 </head>
 
 <body>
@@ -20,6 +20,48 @@
 	<script type="text/javascript">
 		menus[0].className="active nav-current";
 		menus[0].role="presentation";	
+	</script>
+	
+	<script type="text/javascript">
+		//ajax请求上传文件
+		function submitNotice(){
+			
+			var formdata=new FormData();
+			var file=document.getElementById("newsfile").files;
+			var filename=document.getElementById("newsfile").value;
+			//数据校验
+			if(document.getElementById("newstitle").value==""){
+				alert("请输入公告标题");
+				return;
+			}
+			if(filename==""){
+				alert("请选择上传公告文件");
+				return;
+			}
+			var houzhui=filename.substring(filename.indexOf(".")+1,filename.length);
+			if(houzhui!="html"){
+				alert("请上传html文件");
+				return;
+			}
+			formdata.append("file_1",file[0]);
+			formdata.append("noticetitle",document.getElementById("newstitle").value);
+			var req=new XMLHttpRequest();
+			req.onreadystatechange=function(){
+				if(req.readyState==4){
+					if(req.status==200){
+						if(req.responseText=="ok"){
+							alert("公告发布成功");
+							location.reload(true);
+						}else{  //显示报错信息
+							alert(req.responseText);	
+						}
+					}
+				}
+			};
+			
+			req.open("post", "${pageContext.request.contextPath}/web/servlet/uploadNotice");
+			req.send(formdata);
+		}
 	</script>
     <section>
     	<div class="container-fluid">
@@ -135,12 +177,15 @@
     	        <div class="panel panel-primary">
     	        	<div class="panel panel-heading">公告中心<span class="more">more..</span></div>
 						<div class="list-group">
-						  <a href="#" class="list-group-item">第五次会议通知<br><span class="uptime small">2017/10/24</span></a>
-						  <a href="#" class="list-group-item">第四次会议通知<br><span class="uptime small">2017/10/24</span></a>
-						  <a href="#" class="list-group-item">第三次会议通知<br><span class="uptime small">2017/10/24</span></a>
-						  <a href="#" class="list-group-item">第二次会议通知<br><span class="uptime small">2017/10/24</span></a>
-						  <a href="#" class="list-group-item">第一次会议通知<br><span class="uptime small">2017/10/24</span></a>
+						<c:forEach items="${notices['noticelist'] }" var="notice" begin="0" end="4" step="1" varStatus="status">
+							<a href="${pageContext.request.contextPath}/web/servlet/lookNotice?noticeno=${notice.noticeno}" class="list-group-item">${notice.noticetitle }<br><span class="uptime small"><fmt:formatDate value="${notice.pubtime }" type="both"/></span></a>
+						</c:forEach>
+						  
+						<c:forEach begin="${fn:length(notices['noticelist']) }" end="4" step="1">
+							<a href="#" class="list-group-item">-<br><span class="uptime small">-</span></a>
+						</c:forEach>
 						  <a class="list-group-item">&nbsp;
+						  <!-- 指定管理员 -->
 						  <c:if test="${staff.staffno=='201526010001' }">
 						  	<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupNews">发布</button>
 						 	<br><br>
@@ -175,6 +220,9 @@
       </div>
       <div class="modal-body">
 		  <form class="form-horizontal">
+			  <div class="form-group">
+					<span style="color: red;position: relative;left: 10%;">提示：请上传正确的html文件</span>
+			  </div>
 		  		<div class="form-group">
 				<label for="newsname" class="col-sm-2 control-label">公告主题</label>
 				<div class="col-sm-8">
@@ -185,14 +233,14 @@
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">公告文件</label>
 				<div class="col-sm-8">
-		            <input type = "file" id="checkman">
+		            <input type = "file" id="newsfile" multiple="multiple">
 				</div>
 			  </div>
           </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary">发布</button>
+        <button type="button" class="btn btn-primary" onclick="submitNotice();">发布</button>
       </div>
     </div>
   </div>

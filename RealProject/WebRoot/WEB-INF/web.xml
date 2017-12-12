@@ -101,6 +101,21 @@
     <servlet-name>DownLoadMessage</servlet-name>
     <servlet-class>com.holyshit.web.servlet.DownLoadMessage</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UploadNotice</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.UploadNotice</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>showNoticePage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.showNoticePage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LookNotice</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.LookNotice</servlet-class>
+  </servlet>
+
+
+
 
 
 
@@ -184,6 +199,18 @@
   <servlet-mapping>
     <servlet-name>DownLoadMessage</servlet-name>
     <url-pattern>/web/servlet/downLoadMessage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadNotice</servlet-name>
+    <url-pattern>/web/servlet/uploadNotice</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>showNoticePage</servlet-name>
+    <url-pattern>/web/servlet/showNoticePage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LookNotice</servlet-name>
+    <url-pattern>/web/servlet/lookNotice</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
