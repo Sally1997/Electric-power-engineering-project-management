@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.junit.Test;
 
 import com.holyshit.Dao.DTreeDao;
@@ -29,33 +31,15 @@ import net.sf.json.JSONObject;
 public class TestFozza {
 	@Test
 	public void forTest() throws SQLException{
-		
-		String no = "10001";
-		DTreeDao dtd = new DTreeDaoImpl();
-		Map<String, Object> map1 = new HashMap<String, Object>();
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<Object> list = new ArrayList<Object>();
-		
-			//获取节点信息
-			map1 = dtd.selectNodeInfo(no);
-			map.put("no", map1.get("no"));
-			map.put("charpname", map1.get("charpname"));
-			map.put("name", map1.get("name"));
-			map.put("budget", map1.get("budget"));
-			
-			//时间转换 sql.date转换成util.date
-			
-			java.sql.Date d1 = (java.sql.Date) map.get("stime");
-			System.out.println(d1);
-			map.put("stime", d1);
-			
-			//获取指标信息
-			list = dtd.selectIndexInfo(no);
-			
-			map.put("indexinfo", list);
-			
-		String s = map1.toString();
-		System.out.println(s);
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		String staffno = "201526010001";
+		long l = (long) qr.query("select count(*) from ("+
+				"SELECT Project.Pno,PName,NAME,duty,PType,PState "+
+				"FROM project,psrelation,staff WHERE project.PNo=psrelation.PNo "+
+				"AND PMno=staff.staffno AND psrelation.staffno=?)a"
+				,new ScalarHandler(),staffno);
+		int x = (int) l;
+		System.out.println(x);
 	}
 	
 	

@@ -118,6 +118,7 @@ public class StageServlet extends HttpServlet {
 		while(e.hasMoreElements()){
 			String name = (String) e.nextElement();
 			String value=request.getParameter(name);
+			out.write(name+"="+value);
 		    if(name=="fozza_sn"){
 		    	pro_stage.setSname(value);
 		    }
@@ -166,13 +167,15 @@ public class StageServlet extends HttpServlet {
 		    	pro_stage.setSstate("0");
 		    	//生成阶段编号
 		    	AutoNumber an = new AutoNumber();
+		    	String sn = "";
 				try {
-					String sn = an.PNtoSN(pn);
+					sn = an.PNtoSN(pn);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-		    	
+				pro_stage.setStageno(sn);
+		    	System.out.println(pro_stage);
 		    }
 		}
 		
