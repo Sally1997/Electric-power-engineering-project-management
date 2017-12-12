@@ -40,14 +40,17 @@
  	<script type="text/javascript">
  		//更新数据
  		function refreshData(){
+ 			var pnamenodes=document.getElementsByName("pro_pname");
  			
 			//新版本
 			var trs=showtable.getElementsByTagName("tr");
- 			for(var i=1;i<dataJson.length;i++){
- 				var nodes=trs[i].getElementsByTagName("td");
+ 			for(var i=0;i<dataJson.length;i++){
+ 				var nodes=trs[i+1].getElementsByTagName("td");
  				nodes[0].innerHTML='<a href="javascript:goPlanManage('+dataJson[i].pno+')" name="pro_no">'+dataJson[i].pno+'</a>';
  				//刷新值
- 				document.getElementById("project_name").innerHTML=dataJson[i].pname;
+ 				
+ 			
+ 				pnamenodes[i].innerHTML=dataJson[i].pname;
  				nodes[2].innerHTML=dataJson[i].name;
  				nodes[3].innerHTML=dataJson[i].duty;
  				nodes[4].innerHTML=dataJson[i].ptype;
@@ -56,7 +59,7 @@
  			}
  			//刷新横线
  			for(var i=dataJson.length;i<5;i++){
- 				var nodes=trs[i].getElementsByTagName("td");
+ 				var nodes=trs[i+1].getElementsByTagName("td");
  				nodes[0].innerHTML='-';
  				nodes[1].innerHTML='-';
  				nodes[2].innerHTML='-';
@@ -98,7 +101,7 @@
 		    <tr name="fozza_tr" style="display:''">
 			    <td align="left"><a href="javascript:goPlanManage('${pl.pno }')" name="pro_no">${pl.pno }</a></td>
 			    <td align="left">
-			    	<div class="dropdown"><span name="pro_pname" id="project_name">${pl.pname }</span>
+			    	<div class="dropdown"><span name="pro_pname">${pl.pname }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="/RealProject/web/servlet/staffListServlet?pno=${pl.pno }">人员管理</a></li>
