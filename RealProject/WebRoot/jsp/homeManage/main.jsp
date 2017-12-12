@@ -175,7 +175,7 @@
     	     <!-- 公告栏部分 -->
     	      <div class="col-lg-4">
     	        <div class="panel panel-primary">
-    	        	<div class="panel panel-heading">公告中心<span class="more">more..</span></div>
+    	        	<div class="panel panel-heading">公告中心<span class="more" onclick="window.open('${pageContext.request.contextPath}/jsp/homeManage/news.jsp')">more..</span></div>
 						<div class="list-group">
 						<c:forEach items="${notices['noticelist'] }" var="notice" begin="0" end="4" step="1" varStatus="status">
 							<a href="${pageContext.request.contextPath}/web/servlet/lookNotice?noticeno=${notice.noticeno}" class="list-group-item">${notice.noticetitle }<br><span class="uptime small"><fmt:formatDate value="${notice.pubtime }" type="both"/></span></a>

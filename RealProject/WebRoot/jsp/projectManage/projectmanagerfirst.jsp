@@ -40,7 +40,8 @@
  	<script type="text/javascript">
  		//更新数据
  		function refreshData(){
- 			showtable.innerHTML="";
+ 			//旧版本刷新数据
+ 			/* showtable.innerHTML="";
  			var first=document.createElement("tr");
  			first.innerHTML='<th align="center">项目编号</th><th align="center">项目名称</th><th align="center">项目经理</th><th align="center">职责</th><th align="center">项目类型</th><th align="center">状态</th>';
  			for(var i=0;i<dataJson.length;i++){
@@ -76,9 +77,25 @@
  				tr.appendChild(td5);
  				tr.appendChild(td6);
  				showtable.appendChild(tr);
- 			}
+ 			} */
  			
-
+			//新版本
+			var trs=showtable.getElementsByTagName("tr");
+ 			for(var i=1;i<dataJson.length;i++){
+ 				var nodes=trs[i].getElementsByTagName("td");
+ 				nodes[0].innerHTML='<a href="javascript:goPlanManage('+dataJson[i].pno+')" name="pro_no">'+dataJson[i].pno+'</a>';
+ 				//刷新值
+ 				document.getElementById("project_name").innerHTML=dataJson[i].pname;
+ 				nodes[2].innerHTML=dataJson[i].name;
+ 				nodes[3].innerHTML=dataJson[i].duty;
+ 				nodes[4].innerHTML=dataJson[i].ptype;
+ 				nodes[4].innerHTML=dataJson[i].pstate;
+ 			
+ 			}
+ 			//刷新横线
+ 			for(var i=dataJson.length;i<5;i++){
+ 				
+ 			}
  			
  		}
  	</script>
@@ -111,12 +128,12 @@
 		    <!-- display:""的原因是block会引起错位 -->
 		    <c:forEach items="${info_map['pi_list'] }" var="pl">
 		    <tr name="fozza_tr" style="display:''">
-			    <td align="left"><a href="javascript:goPlanManage(pno)" name="pro_no">${pl.pno }</a></td>
+			    <td align="left"><a href="javascript:goPlanManage('${pl.pno }')" name="pro_no">${pl.pno }</a></td>
 			    <td align="left">
-			    	<div class="dropdown"><span name="pro_pname">${pl.pname }</span>
+			    	<div class="dropdown"><span name="pro_pname" id="project_name">${pl.pname }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a href="/RealProject/web/servlet/staffListServlet?pno=10001">人员管理</a></li>
+    						<li><a href="/RealProject/web/servlet/staffListServlet?pno=${pl.pno }">人员管理</a></li>
     						<li><a href="/RealProject/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
   						</ul>
 					</div>
@@ -129,7 +146,26 @@
 		    </tr>
 
 			</c:forEach>
-		
+			<c:forEach begin="${fn:length(info_map['pi_list']) }" end="4" step="1">
+		    <tr name="fozza_tr" style="display:''">
+			    <td align="left"><a href="#" name="pro_no">-</a></td>
+			    <td align="left">
+			    	<div class="dropdown"><span name="pro_pname">-</span>
+  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    						<li><a href="#">人员管理</a></li>
+    						<li><a href="#">计划管理</a></li>
+  						</ul>
+					</div>
+				</td>
+
+			    <td align="left">-</td>
+			    <td align="left">-</td>
+			    <td align="left" >-</td>
+			    <td align="left">-</td>
+		    </tr>
+
+			</c:forEach>
 	        </table> 
 					</div> 
                     </div>
