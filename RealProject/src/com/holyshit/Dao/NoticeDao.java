@@ -16,7 +16,7 @@ public interface NoticeDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	int addNotice(String title,String path,String pubpno,Date time)throws SQLException;
+	int addNotice(String noticeno,String title,String path,String pubpno,Date time)throws SQLException;
 	
 	/**
 	 * 分页查询所有的公告

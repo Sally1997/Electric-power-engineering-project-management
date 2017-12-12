@@ -19,11 +19,11 @@ import com.holyshit.utils.ConnectionManager;
 public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
-	public int addNotice(String title, String path, String pubpno, Date time)
+	public int addNotice(String noticeno,String title, String path, String pubpno, Date time)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.update(ConnectionManager.getConnection(), "INSERT INTO notice(noticetitle,filepath,pubpno,pubTime) VALUES(?,?,?,?)",title,path,pubpno,new Timestamp(time.getTime()));
+		return qr.update(ConnectionManager.getConnection(), "INSERT INTO  notice VALUES(?,?,?,?,?)",noticeno,title,path,pubpno,new Timestamp(time.getTime()));
 	}
 
 	@Override

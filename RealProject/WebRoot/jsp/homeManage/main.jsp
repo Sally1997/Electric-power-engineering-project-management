@@ -220,6 +220,9 @@
       </div>
       <div class="modal-body">
 		  <form class="form-horizontal">
+			  <div class="form-group">
+					<span style="color: red;position: relative;left: 10%;">提示：请上传正确的html文件</span>
+			  </div>
 		  		<div class="form-group">
 				<label for="newsname" class="col-sm-2 control-label">公告主题</label>
 				<div class="col-sm-8">

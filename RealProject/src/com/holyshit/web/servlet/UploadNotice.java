@@ -1,11 +1,15 @@
 package com.holyshit.web.servlet;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,11 +32,19 @@ public class UploadNotice extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("UTF-8");
+		
+		/**
+		 * cesium
+		 */
+		
 		//处理上传的文件
 		DiskFileItemFactory dff=new DiskFileItemFactory();
-		File path=new File(request.getServletContext().getRealPath("/upload"));
-		//设置临时文件存储路径
 		dff.setRepository(new File(getServletContext().getRealPath("/tmp")));
+		String realPath = "/var/ProjectData/ProjectNotice/"+new Date(new java.util.Date().getTime()).toString();
+		System.out.println(realPath);
+		File path=new File(realPath);
+		path.setWritable(true, false);
+		
 		//设置上传单个文件的大小
 		ServletFileUpload fileUpload=new ServletFileUpload(dff);
 		//设置最大为1M
@@ -43,6 +55,7 @@ public class UploadNotice extends HttpServlet {
 			String title=null;
 			String filename=null;
 			String filepath=null;
+			String uuid=UUID.randomUUID().toString();
 			try {
 				try {
 					filelist = fileUpload.parseRequest(request);
@@ -68,11 +81,17 @@ public class UploadNotice extends HttpServlet {
 					//处理文件
 					if(!path.exists())
 						path.mkdirs();
-					filename=item.getName();
-					filepath=path.toString()+File.separator+filename;
-					System.out.println("文件名:"+filename);
+					
+					//文件名不重要
+//					filename=item.getName();
+//					filename=filename.substring(filename.lastIndexOf(File.separator)+1);
+					filepath=path+File.separator+uuid+".html";
 					try {
-						item.write(new File(path+File.separator+filename));
+						
+						File last = new File(path,uuid+".html");
+						System.out.println("最终路径为"+last.toString());
+						last.setWritable(true,false);
+						item.write(last);
 						item.delete();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -84,7 +103,7 @@ public class UploadNotice extends HttpServlet {
 			
 			//调用服务
 			NoticeService ns=new NoticeServiceImpl();
-			int res = ns.publishNotice(title, filepath, ((Staff)request.getSession().getAttribute("staff")).getStaffno(), new Date(new java.util.Date().getTime()));
+			int res = ns.publishNotice(uuid,title, filepath, ((Staff)request.getSession().getAttribute("staff")).getStaffno(), new Date(new java.util.Date().getTime()));
 			if(res==1)
 				response.getWriter().write("ok");
 			else {

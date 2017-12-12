@@ -14,7 +14,7 @@ public interface NoticeService {
 	 * @param time
 	 * @return
 	 */
-	int publishNotice(String title,String path,String pubpno,Date time);
+	int publishNotice(String noticeno,String title,String path,String pubpno,Date time);
 	
 	/**
 	 * 分页显示公告

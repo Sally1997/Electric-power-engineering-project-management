@@ -34,8 +34,10 @@ public class LookNotice extends HttpServlet {
 		Date pubtime = notice.getPubtime();
 		String filepath=notice.getFilepath();
 		String noticecontent="";
+		System.out.println(filepath);
 		//读取文件内容 字符流
 		InputStreamReader input=new FileReader(filepath);
+		
 		char buffer[]=new char[512];
 		int len=0;
 		while((len=input.read(buffer))!=-1){

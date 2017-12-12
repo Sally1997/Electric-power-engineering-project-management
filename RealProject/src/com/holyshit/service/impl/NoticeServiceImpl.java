@@ -17,11 +17,11 @@ import com.holyshit.utils.ConnectionManager;
 public class NoticeServiceImpl implements NoticeService {
 
 	@Override
-	public int publishNotice(String title, String path, String pubpno, Date time) {
+	public int publishNotice(String noticeno,String title, String path, String pubpno, Date time) {
 		// TODO Auto-generated method stub
 		NoticeDao nd=new NoticeDaoImpl();
 		try {
-			return nd.addNotice(title, path, pubpno, time);
+			return nd.addNotice(noticeno,title, path, pubpno, time);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
