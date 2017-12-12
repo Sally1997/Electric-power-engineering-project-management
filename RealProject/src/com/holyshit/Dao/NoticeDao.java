@@ -31,4 +31,12 @@ public interface NoticeDao {
 	 * @throws SQLException
 	 */
 	long totalNumNotice() throws SQLException;
+	
+	/**
+	 * 根据公告id查询公告信息
+	 * @param noticeno
+	 * @return
+	 * @throws SQLException
+	 */
+	Notice selectNoticeById(String noticeno)throws SQLException;
 }

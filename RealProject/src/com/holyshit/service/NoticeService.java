@@ -3,6 +3,8 @@ package com.holyshit.service;
 import java.sql.Date;
 import java.util.Map;
 
+import com.holyshit.domain.Notice;
+
 public interface NoticeService {
 	/**
 	 * 发布一条公告
@@ -21,4 +23,11 @@ public interface NoticeService {
 	 * @return
 	 */
 	Map<String, Object> showAllNoticeByPage(int cur,int pagesize);
+	
+	/**
+	 * 查询公告信息
+	 * @param noticeno
+	 * @return
+	 */
+	Notice findNoticeById(String noticeno);
 }

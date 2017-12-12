@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Id;
+
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
@@ -35,6 +38,13 @@ public class NoticeDaoImpl implements NoticeDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return (long) qr.query(ConnectionManager.getConnection(), "select count(*) from notice", new ScalarHandler());
+	}
+
+	@Override
+	public Notice selectNoticeById(String noticeno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(),"select * from notice where noticeno=?",new BeanHandler<Notice>(Notice.class),noticeno);
 	}
 
 }

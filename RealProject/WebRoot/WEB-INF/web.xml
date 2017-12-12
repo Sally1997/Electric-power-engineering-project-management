@@ -109,6 +109,11 @@
     <servlet-name>showNoticePage</servlet-name>
     <servlet-class>com.holyshit.web.servlet.showNoticePage</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>LookNotice</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.LookNotice</servlet-class>
+  </servlet>
+
 
 
 
@@ -202,6 +207,10 @@
   <servlet-mapping>
     <servlet-name>showNoticePage</servlet-name>
     <url-pattern>/web/servlet/showNoticePage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LookNotice</servlet-name>
+    <url-pattern>/web/servlet/lookNotice</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

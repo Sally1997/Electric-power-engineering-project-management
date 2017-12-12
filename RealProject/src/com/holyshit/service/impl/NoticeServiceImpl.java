@@ -61,4 +61,17 @@ public class NoticeServiceImpl implements NoticeService {
 		return res;
 	}
 
+	@Override
+	public Notice findNoticeById(String noticeno) {
+		// TODO Auto-generated method stub
+		NoticeDao nd=new NoticeDaoImpl();
+		try {
+			return nd.selectNoticeById(noticeno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
