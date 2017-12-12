@@ -25,9 +25,11 @@ public class JudgeStageExist extends HttpServlet {
 		ProjectService ps=new ProjectServiceImpl();
 		boolean res = ps.ifIsEmptyProject(pno);
 		if(res){
+			System.out.println("新建阶段啦");
 			request.setAttribute("pno", pno);
 			request.getRequestDispatcher("/jsp/projectManage/PlanManagement_NewMilestone.jsp").forward(request, response);
 		}else{
+			System.out.println("跳转树状图啦");
 			response.sendRedirect("/RealProject/servlet/DTreeNodeServlet?pno="+pno);
 		}
 		
