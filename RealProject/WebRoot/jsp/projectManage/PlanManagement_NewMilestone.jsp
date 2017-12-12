@@ -20,7 +20,7 @@
 	<%-- div下拉菜单 --%>
 	<div id="fozza1" class="fozza2"></div>
 	<%-- 我是一个隐藏表单域 --%>
-	<form method="post" name="postform">
+	<form method="post" name="postform" action = "${pageContext.request.contextPath}/web/servlet/stageServlet">
 	<div id="hiddenarea"></div>
 	</form>
 	
@@ -116,7 +116,7 @@
 
                     <div id="responsible_per" class="block">
 						<div style="text-align: right">
-						    <input type = "submit" name = "submit" class="btn btn-primary" value = "新建任务" onClick="return addElement();">	
+						    <input type = "button" name = "submit" class="btn btn-primary" value = "新建任务" onClick="return addElement();">	
 							<button type="button" class="btn btn-primary" ><a href="javascript:dsubmit()" style="color:white;">结束新建</a></button>
 						</div>
 						<div class="clear"></div>
@@ -483,7 +483,7 @@ function addElement()
 	
 	//开始日期
 	ci = document.createElement("input");
-	ci.setAttribute("type", button);
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("name","fozza_st");
 	ci.setAttribute("value",form1.StartDate.value);
 	cf.appendChild(ci);
@@ -519,12 +519,11 @@ function dsubmit(){
 	var indexcontent = "";
 	var attachmentneed = "";
 	var ha = document.getElementById("hiddenarea");
-	var ic,an;
 	for(i=0;i<bigar.length;i++)
 	{
 		//将提交的表单值保存到隐藏域 隐藏表单传值
-		ic = document.createElement("input");
-		an = document.createElement("input");
+		var ic = document.createElement("input");
+		var an = document.createElement("input");
 		for(j=0;j<bigar[i].dj_ii.length;j++){
 			if(j>0){
 				indexcontent += "," + bigar[i].dj_ii[j];
@@ -539,15 +538,14 @@ function dsubmit(){
 		ic.setAttribute("value", indexcontent);
 		ic.setAttribute("type", "hidden");
 		
-		an.setAtribute("name", "attachmentneed");
+		an.setAttribute("name", "attachmentneed");
 		an.setAttribute("value", attachmentneed);
 		an.setAttribute("type", "hidden");
 		//添加到表单
 		ha.appendChild(ic);
 		ha.appendChild(an);
 	}
-	var pf = document.getElementsByName("postname")[0];
-	pf.action = "${pageContext.request.contextPath}/web/servlet/stageServlet";
+	var pf = document.getElementsByName("postform")[0];
 	pf.submit();
 }
 
