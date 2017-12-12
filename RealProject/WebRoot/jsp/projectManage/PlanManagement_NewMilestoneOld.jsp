@@ -18,6 +18,7 @@
 	
 		<%-- div下拉菜单 --%>
 	<div id="fozza1" class="fozza2"></div>
+	
 	<%-- 这是我写的啦 --%>
 <!--  主要内容-->
 <section>
