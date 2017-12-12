@@ -102,7 +102,7 @@
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="/RealProject/web/servlet/staffListServlet?pno=${pl.pno }">人员管理</a></li>
-    						<li><a href="/RealProject/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
+    						<li><a href="/RealProject/web/servlet/judgeStageExist?pno=${pl.pno }">计划管理</a></li>
   						</ul>
 					</div>
 				</td>

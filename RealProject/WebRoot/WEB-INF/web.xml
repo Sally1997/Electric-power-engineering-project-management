@@ -118,9 +118,14 @@
     <servlet-class>com.holyshit.web.servlet.ShowDocumentPage</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>JudgeStageExist</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.JudgeStageExist</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>StageServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.StageServlet</servlet-class>
   </servlet>
+
 
 
 
@@ -226,8 +231,13 @@
     <url-pattern>/web/servlet/showDocumentPage</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>JudgeStageExist</servlet-name>
+    <url-pattern>/web/servlet/judgeStageExist</url-pattern>
+   </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>StageServlet</servlet-name>
     <url-pattern>/web/servlet/stageServlet</url-pattern>
+
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
