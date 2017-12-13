@@ -2,13 +2,10 @@ package com.holyshit.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.TaskIndexs;
+import com.holyshit.service.ProjectStageSercvice;
+import com.holyshit.service.StageTasksService;
+import com.holyshit.service.impl.ProjectStageServiceImpl;
+import com.holyshit.service.impl.StageTasksServiceImpl;
 import com.holyshit.utils.AutoNumber;
 
 /**
@@ -103,8 +104,8 @@ public class StageServlet extends HttpServlet {
 		PSPlan pro_stage = new PSPlan();
 		TaskIndexs task_index = new TaskIndexs();
 		
-		List<PSPlan> plist = new ArrayList<PSPlan>();
-		List<TaskIndexs> tlist = new ArrayList<TaskIndexs>();
+		//List<PSPlan> plist = new ArrayList<PSPlan>();
+		//List<TaskIndexs> tlist = new ArrayList<TaskIndexs>();
 		
 		PrintWriter out = response.getWriter();
 		Enumeration e = request.getParameterNames();
@@ -119,7 +120,6 @@ public class StageServlet extends HttpServlet {
 			String name = (String) e.nextElement();
 			String value=request.getParameter(name);
 			out.write(name+"="+value);
-			System.out.println(name);
 		    if(name.equals("fozza_sn")){
 		    	pro_stage.setSname(value);
 		    }
@@ -134,7 +134,9 @@ public class StageServlet extends HttpServlet {
 		    }
 		    if(name.equals("fozza_st")){
 		    	try {
-					pro_stage.setStime((Date) sdf.parse(value));
+		    		java.util.Date d = sdf.parse(value);
+		    		java.sql.Date date = new java.sql.Date(d.getTime());
+					pro_stage.setStime(date);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -142,7 +144,9 @@ public class StageServlet extends HttpServlet {
 		    }
 		    if(name.equals("fozza_et")){
 		    	try {
-					pro_stage.setEtime((Date) sdf.parse(value));
+		    		java.util.Date d = sdf.parse(value);
+		    		java.sql.Date date = new java.sql.Date(d.getTime());
+					pro_stage.setEtime(date);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -161,6 +165,7 @@ public class StageServlet extends HttpServlet {
 		  //x自减为0时
 		    x7--;
 		    if(x7==0){
+		    	x7=7;
 		    	//从表单里面获取到的阶段信息有阶段名称，审批人编号，开始结束日期，预算
 		    	//获取到项目编号，状态置为0，生成阶段编号
 		    	//获取到指标内容数组，是否需要上传文件数组
@@ -177,6 +182,24 @@ public class StageServlet extends HttpServlet {
 				}
 				pro_stage.setStageno(sn);
 		    	System.out.println(pro_stage);
+		    	ProjectStageSercvice pss = new ProjectStageServiceImpl();
+		    	pss.AddStage(pro_stage);
+		    	
+		    	StageTasksService sts = new StageTasksServiceImpl();
+		    	
+		    	//指标的新建
+		    	int len = icArray.length;
+		    	for(int i=0;i<len;i++){
+		    		System.out.println(icArray[i]);
+		    		task_index = new TaskIndexs();
+		    		task_index.setTaskno(pro_stage.getStageno());
+		    		task_index.setIndexinfo(icArray[i]);
+		    		task_index.setAchreq(anArray[i]);
+		    		task_index.setIndexstate("0");
+		    		sts.addIndexInfo(task_index);
+		    	}
+		    	
+		    	pro_stage = new PSPlan();
 		    }
 		}
 		

@@ -48,4 +48,10 @@ public interface StageTasksService {
 	 * @return
 	 */
 	double findUsedFeeByTaskno(String taskno);
+	
+	/**
+	 * 插入指标信息
+	 * @param task_index
+	 */
+	public void addIndexInfo(TaskIndexs task_index);
 }

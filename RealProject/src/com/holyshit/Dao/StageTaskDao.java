@@ -66,4 +66,11 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	void addTask(StageTask stage_task,TaskIndexs task_index) throws SQLException;
+	
+	/**
+	 * 新建指标
+	 * @param task_index
+	 * @throws SQLException 
+	 */
+	void insertIndexInfo(TaskIndexs task_index) throws SQLException;
 }

@@ -73,11 +73,11 @@ public class TaskServlet extends HttpServlet {
 			stage_task.setTstate("0");
 			
 			//任务指标表
-			task_index.setTaskNo(ntn);
-			task_index.setIndexNo(an.TNtoIN(ntn));
+			task_index.setTaskno(ntn);
+			task_index.setIndexno(an.TNtoIN(ntn));
 			
 			//指标内容
-			task_index.setIndexInfo(request.getParameter("IndexInfo"));
+			task_index.setIndexinfo(request.getParameter("IndexInfo"));
 			System.out.println(task_index);
 			
 			//插入

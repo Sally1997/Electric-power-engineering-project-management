@@ -101,4 +101,17 @@ public class StageTasksServiceImpl implements StageTasksService{
 		return res;
 	}
 
+	@Override
+	public void addIndexInfo(TaskIndexs task_index) {
+		StageTaskDao std=new StageTaskDaoImpl();
+		try {
+			std.insertIndexInfo(task_index);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+
 }

@@ -52,9 +52,9 @@ public class StageTaskDaoImpl implements StageTaskDao {
 				stage_task.getTstate(),stage_task.getBudget());
 		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath,IndexState) "
 				+ "values (?,?,?,?,?)",
-				task_index.getIndexNo(),task_index.getTaskNo(),
-				task_index.getIndexInfo(),task_index.getAttachPath(),
-				task_index.getIndexState());
+				task_index.getIndexno(),task_index.getTaskno(),
+				task_index.getIndexinfo(),task_index.getAttachpath(),
+				task_index.getIndexstate());
 	}
 
 	@Override
@@ -83,6 +83,18 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return (BigDecimal) qr.query(ConnectionManager.getConnection(), "SELECT SUM(fee) FROM feeaudit WHERE taskno=? AND auditstate='2'",new ScalarHandler(),taskno);
+		
+	}
+
+	@Override
+	public void insertIndexInfo(TaskIndexs task_index) throws SQLException {
+		QueryRunner qr=new QueryRunner();
+		qr.update(ConnectionManager.getConnection(), 
+			"INSERT INTO taskindexes(taskno,indexinfo,indexstate,achreq)"+
+					"VALUES(?,?,?,?)",task_index.getTaskno(),
+					task_index.getIndexinfo(),task_index.getIndexstate(),
+					task_index.getAchreq());
+		
 	}
 
 }
