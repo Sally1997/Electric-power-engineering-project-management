@@ -102,7 +102,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	@Override
 	public int selectCountStage(String pno) throws SQLException {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
-		long l = (long) qr.query("SELECT stageno FROM psplan WHERE pno=?", 
+		long l = (long) qr.query("SELECT count(*) FROM psplan WHERE pno=?", 
 				new ScalarHandler(1),pno);
 		return (int)l;
 	}

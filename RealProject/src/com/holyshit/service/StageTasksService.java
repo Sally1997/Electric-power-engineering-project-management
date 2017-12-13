@@ -54,4 +54,10 @@ public interface StageTasksService {
 	 * @param task_index
 	 */
 	public void addIndexInfo(TaskIndexs task_index);
+	
+	/**
+	 * 添加一个心得阶段
+	 * @param stage_task
+	 */
+	public void addTask(StageTask stage_task);
 }

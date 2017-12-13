@@ -114,4 +114,17 @@ public class StageTasksServiceImpl implements StageTasksService{
 		}
 	}
 
+	@Override
+	public void addTask(StageTask stage_task) {
+		StageTaskDao std=new StageTaskDaoImpl();
+		try {
+			std.insertTask(stage_task);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+
 }

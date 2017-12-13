@@ -204,7 +204,9 @@ $(".innerUl").ProTree({
             <div id="responsible_per" class="block">
             <div style="text-align: right">
               <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#handupDc" onclick="popup()">提交</button>
-              <button type="submit"class="btn btn-primary" ><a href="PlanManagement_NewMilestone.html" style="color:white">新建子任务</a></button>
+              <button type="submit"class="btn btn-primary" >
+              <a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp" style="color:white">新建子任务</a>
+              </button>
             </div>
             <div class="clear"></div>
             </div>

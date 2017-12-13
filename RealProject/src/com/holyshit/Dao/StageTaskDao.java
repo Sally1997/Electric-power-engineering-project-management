@@ -68,6 +68,13 @@ public interface StageTaskDao {
 	void addTask(StageTask stage_task,TaskIndexs task_index) throws SQLException;
 	
 	/**
+	 * 新建任务
+	 * @param stage_task
+	 * @throws SQLException 
+	 */
+	void insertTask(StageTask stage_task) throws SQLException;
+	
+	/**
 	 * 新建指标
 	 * @param task_index
 	 * @throws SQLException 
