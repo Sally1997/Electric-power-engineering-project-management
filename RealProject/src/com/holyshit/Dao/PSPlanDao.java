@@ -12,4 +12,11 @@ public interface PSPlanDao {
 	 * @throws SQLException
 	 */
 	PSPlan selectPsPlanInfo(String stageno) throws SQLException;
+	
+	/**
+	 * 插入新的阶段
+	 * @param pro_stage
+	 * @throws SQLException 
+	 */
+	void insertStage(PSPlan pro_stage) throws SQLException;
 }

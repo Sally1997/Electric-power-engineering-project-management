@@ -34,9 +34,16 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Object> getNewStageNo(String pn) throws SQLException {
+	public List<Object> getNewStageNo(String pn){
 		ProjectDao pjd = new ProjectDaoImpl();
-		return pjd.selectProjectStageNoByPN(pn);
+		List<Object> list = new ArrayList<Object>();
+		try {
+			list = pjd.selectProjectStageNoByPN(pn);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
@@ -68,7 +75,7 @@ public class ProjectServiceImpl implements ProjectService {
 		ProjectDao pd = new ProjectDaoImpl();
 		Map<String,Object> pm_info = new HashMap<String,Object>();
 		try {
-			int count = pd.PMPageCount();
+			int count = pd.PMPageCount(staffno);
 			int total_page = (int) Math.ceil(count*1.0/page_size);
 			
 			List<ProjectInfo> list = new ArrayList<ProjectInfo>();

@@ -24,7 +24,8 @@ public class DTreeNodeServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		String pn = "10001";
+		String pn = request.getParameter("pno");
+		System.out.println("DTservlet取到了"+pn);
 		
 		DTreeNodeService dtns = new DTreeNodeServiceImpl();
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();

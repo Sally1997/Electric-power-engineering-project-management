@@ -29,7 +29,7 @@ public class ShowProjectServlet2 extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("staff");
 		String staffno = staff.getStaffno();
 		//定义当前页和页大小
-		int current_page = 1;
+		int current_page = Integer.parseInt(request.getParameter("current_page"));
 		int page_size = 5;
 		
 		ProjectService ps = new ProjectServiceImpl();

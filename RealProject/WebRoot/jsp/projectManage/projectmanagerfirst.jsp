@@ -40,61 +40,32 @@
  	<script type="text/javascript">
  		//更新数据
  		function refreshData(){
- 			//旧版本刷新数据
- 			/* showtable.innerHTML="";
- 			var first=document.createElement("tr");
- 			first.innerHTML='<th align="center">项目编号</th><th align="center">项目名称</th><th align="center">项目经理</th><th align="center">职责</th><th align="center">项目类型</th><th align="center">状态</th>';
- 			for(var i=0;i<dataJson.length;i++){
- 				var tr=document.createElement("tr");
- 				
- 				var td1=document.createElement("td");
- 				td1.align="left";
- 				td1.innerHTML='<a href="javascript:goPlanManage(pno)" name="pro_no">'+dataJson[i].pno+'</a>';
- 				
- 				var td2=document.createElement("td");
- 				td2.align="left";
- 				td2.innerHTML='<div class="dropdown"><span name="pro_pname">'+dataJson[i].pname+'</span><span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><li><a href="/RealProject/web/servlet/staffListServlet?pno=10001">人员管理</a></li><li><a href="/RealProject/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li></ul></div>';
- 				
- 				var td3=document.createElement("td");
- 				td3.align="left";
- 				td3.innerHTML=dataJson[i].name;
- 				
- 				var td4=document.createElement("td");
- 				td4.align="left";
- 				td4.innerHTML=dataJson[i].duty;
- 				
- 				var td5=document.createElement("td");
- 				td5.align="left";
- 				td5.innerHTML=dataJson[i].ptype;
- 				
- 				var td6=document.createElement("td");
- 				td6.align="left";
- 				td6.innerHTML=dataJson[i].pstate;
- 				tr.appendChild(td1);
- 				tr.appendChild(td2);
- 				tr.appendChild(td3);
- 				tr.appendChild(td4);
- 				tr.appendChild(td5);
- 				tr.appendChild(td6);
- 				showtable.appendChild(tr);
- 			} */
+ 			var pnamenodes=document.getElementsByName("pro_pname");
  			
 			//新版本
 			var trs=showtable.getElementsByTagName("tr");
- 			for(var i=1;i<dataJson.length;i++){
- 				var nodes=trs[i].getElementsByTagName("td");
+ 			for(var i=0;i<dataJson.length;i++){
+ 				var nodes=trs[i+1].getElementsByTagName("td");
  				nodes[0].innerHTML='<a href="javascript:goPlanManage('+dataJson[i].pno+')" name="pro_no">'+dataJson[i].pno+'</a>';
  				//刷新值
- 				document.getElementById("project_name").innerHTML=dataJson[i].pname;
+ 				
+ 			
+ 				nodes[1].innerHTML=nodes[1].innerHTML='<div class="dropdown"><span name="pro_pname">'+dataJson[i].pname+'</span><span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><li><a href="/RealProject/web/servlet/staffListServlet?pno='+dataJson[i].pno+'">人员管理</a></li><li><a href="/RealProject/web/servlet/judgeStageExist?pno='+dataJson[i].pno+'">计划管理</a></li></ul></div>';
  				nodes[2].innerHTML=dataJson[i].name;
  				nodes[3].innerHTML=dataJson[i].duty;
  				nodes[4].innerHTML=dataJson[i].ptype;
- 				nodes[4].innerHTML=dataJson[i].pstate;
+ 				nodes[5].innerHTML=dataJson[i].pstate;
  			
  			}
  			//刷新横线
  			for(var i=dataJson.length;i<5;i++){
- 				
+ 				var nodes=trs[i+1].getElementsByTagName("td");
+ 				nodes[0].innerHTML='-';
+ 				nodes[1].innerHTML='-';
+ 				nodes[2].innerHTML='-';
+ 				nodes[3].innerHTML='-';
+ 				nodes[4].innerHTML='-';
+ 				nodes[5].innerHTML='-';
  			}
  			
  		}
@@ -130,11 +101,11 @@
 		    <tr name="fozza_tr" style="display:''">
 			    <td align="left"><a href="javascript:goPlanManage('${pl.pno }')" name="pro_no">${pl.pno }</a></td>
 			    <td align="left">
-			    	<div class="dropdown"><span name="pro_pname" id="project_name">${pl.pname }</span>
+			    	<div class="dropdown"><span name="pro_pname">${pl.pname }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="/RealProject/web/servlet/staffListServlet?pno=${pl.pno }">人员管理</a></li>
-    						<li><a href="/RealProject/jsp/projectManage/PlanManagement_NewMilestone.jsp">计划管理</a></li>
+    						<li><a href="/RealProject/web/servlet/judgeStageExist?pno=${pl.pno }">计划管理</a></li>
   						</ul>
 					</div>
 				</td>
@@ -296,6 +267,7 @@
 					    pageNum=data.total_page;  
 					 	totalNum=data.count; 
 						projectNum=dataJson.length;	
+						
 						refreshData();	
 					}
 				}
