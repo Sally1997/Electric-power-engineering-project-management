@@ -31,4 +31,16 @@ public class PSPlanDaoImpl implements PSPlanDao {
 				task_index.getIndexState());*/
 	}
 
+	@Override
+	public void insertStage(PSPlan pro_stage) throws SQLException {
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(), "insert into PSPlan(stageno,PNo,SName,CharPNo,STime,ETime,budget,SState) "
+				+ "values (?,?,?,?,?,?,?,?)",
+				pro_stage.getStageno(),pro_stage.getPno(),
+				pro_stage.getSname(),
+				pro_stage.getCharpno(),pro_stage.getStime(),
+				pro_stage.getEtime(),pro_stage.getBudget(),
+				pro_stage.getSstate());
+	}
+
 }

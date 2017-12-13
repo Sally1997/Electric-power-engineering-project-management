@@ -7,18 +7,24 @@ public class StageTask {
 	private String taskname;
 	private Date stime;
 	private Date etime;
-	private String pubno;
+	private String ptasktype;
 	private String charpno;
 	private String ptaskno;
 	private String tstate;
 	private String budget;
-	private String taskcontent;
+	private String stageno;
+	private String pno;
+	public String getPno() {
+		return pno;
+	}
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
 	public String toString() {
 		return "StageTask [taskno=" + taskno + ", taskname=" + taskname + ", stime=" + stime
-				+ ", etime=" + etime + ", pubno=" + pubno +", charpno=" + charpno
+				+ ", etime=" + etime + ", stageno=" + stageno +", charpno=" + charpno
 						+ ", ptaskno=" + ptaskno + ", tstate=" + tstate +"]";
 	}
-	
 	public String getTaskno() {
 		return taskno;
 	}
@@ -34,20 +40,20 @@ public class StageTask {
 	public Date getStime() {
 		return stime;
 	}
-	public void setStime(Date date) {
-		this.stime = (Date) date;
+	public void setStime(Date stime) {
+		this.stime = stime;
 	}
 	public Date getEtime() {
 		return etime;
 	}
-	public void setEtime(Date date) {
-		this.etime = (Date) date;
+	public void setEtime(Date etime) {
+		this.etime = etime;
 	}
-	public String getPubno() {
-		return pubno;
+	public String getPtasktype() {
+		return ptasktype;
 	}
-	public void setPubno(String pubno) {
-		this.pubno = pubno;
+	public void setPtasktype(String ptasktype) {
+		this.ptasktype = ptasktype;
 	}
 	public String getCharpno() {
 		return charpno;
@@ -70,17 +76,15 @@ public class StageTask {
 	public String getBudget() {
 		return budget;
 	}
-
 	public void setBudget(String budget) {
 		this.budget = budget;
 	}
-
-	public String getTaskcontent() {
-		return taskcontent;
+	public String getStageno() {
+		return stageno;
 	}
-
-	public void setTaskcontent(String taskcontent) {
-		this.taskcontent = taskcontent;
+	public void setStageno(String stageno) {
+		this.stageno = stageno;
 	}
+	
 	
 }

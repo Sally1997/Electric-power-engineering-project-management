@@ -44,17 +44,17 @@ public class StageTaskDaoImpl implements StageTaskDao {
 	public void addTask(StageTask stage_task, TaskIndexs task_index) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		qr.update("INSERT INTO stagetasks(taskno,taskname,stime,etime,pubpno,charpno,ptaskno,tstate,budget) "
+		qr.update("INSERT INTO stagetasks(taskno,taskname,stime,etime,ptasktype,charpno,ptaskno,tstate,budget) "
 				+"values(?,?,?,?,?,?,?,?,?)", stage_task.getTaskno(),
 				stage_task.getTaskname(),stage_task.getStime(),
-				stage_task.getEtime(),stage_task.getPubno(),
+				stage_task.getEtime(),stage_task.getPtasktype(),
 				stage_task.getCharpno(),stage_task.getPtaskno(),
 				stage_task.getTstate(),stage_task.getBudget());
 		qr.update(ConnectionManager.getConnection(), "insert into taskindexes(IndexNo,TaskNo,IndexInfo,AttachPath,IndexState) "
 				+ "values (?,?,?,?,?)",
-				task_index.getIndexNo(),task_index.getTaskNo(),
-				task_index.getIndexInfo(),task_index.getAttachPath(),
-				task_index.getIndexState());
+				task_index.getIndexno(),task_index.getTaskno(),
+				task_index.getIndexinfo(),task_index.getAttachpath(),
+				task_index.getIndexstate());
 	}
 
 	@Override
@@ -83,6 +83,30 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return (BigDecimal) qr.query(ConnectionManager.getConnection(), "SELECT SUM(fee) FROM feeaudit WHERE taskno=? AND auditstate='2'",new ScalarHandler(),taskno);
+		
+	}
+
+	@Override
+	public void insertIndexInfo(TaskIndexs task_index) throws SQLException {
+		QueryRunner qr=new QueryRunner();
+		qr.update(ConnectionManager.getConnection(), 
+			"INSERT INTO taskindexes(taskno,indexinfo,indexstate,achreq)"+
+					"VALUES(?,?,?,?)",task_index.getTaskno(),
+					task_index.getIndexinfo(),task_index.getIndexstate(),
+					task_index.getAchreq());
+		
+	}
+
+	@Override
+	public void insertTask(StageTask stage_task) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		qr.update("INSERT INTO stagetasks(taskno,taskname,stime,etime,ptasktype,charpno,ptaskno,tstate,budget,pno,stageno) "
+				+"values(?,?,?,?,?,?,?,?,?,?,?)", stage_task.getTaskno(),
+				stage_task.getTaskname(),stage_task.getStime(),
+				stage_task.getEtime(),stage_task.getPtasktype(),
+				stage_task.getCharpno(),stage_task.getPtaskno(),
+				stage_task.getTstate(),stage_task.getBudget(),
+				stage_task.getPno(),stage_task.getStageno());
 	}
 
 }
