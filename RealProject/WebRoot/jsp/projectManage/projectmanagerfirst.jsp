@@ -50,7 +50,7 @@
  				//刷新值
  				
  			
- 				pnamenodes[i].innerHTML=dataJson[i].pname;
+ 				nodes[1].innerHTML=nodes[1].innerHTML='<div class="dropdown"><span name="pro_pname">'+dataJson[i].pname+'</span><span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><li><a href="/RealProject/web/servlet/staffListServlet?pno='+dataJson[i].pno+'">人员管理</a></li><li><a href="/RealProject/web/servlet/judgeStageExist?pno='+dataJson[i].pno+'">计划管理</a></li></ul></div>';
  				nodes[2].innerHTML=dataJson[i].name;
  				nodes[3].innerHTML=dataJson[i].duty;
  				nodes[4].innerHTML=dataJson[i].ptype;
