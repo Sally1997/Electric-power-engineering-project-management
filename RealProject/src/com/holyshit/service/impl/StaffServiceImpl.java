@@ -8,15 +8,25 @@ import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.domain.PSRelation;
+import com.holyshit.domain.PageBean;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
 public class StaffServiceImpl implements StaffService{
 	//list staffs service
-	public List<StaffDuty> findAllStaffs(String pno){
+	public PageBean findAllStaffs(String pno,int CurrentPage,int PageSize){
 		StaffDao StaffDao = new StaffDaoImpl();
 		try {
-			return StaffDao.findAllStaffs(pno);
+			int count = StaffDao.countAllStaffs(pno);
+			int totalPage = (int)Math.ceil(count*1.0/PageSize);
+			
+			PageBean pb = new PageBean();
+			pb.setCount(count);
+			pb.setStaffs(StaffDao.findAllStaffs(pno,CurrentPage,PageSize));
+			pb.setCurrentPage(CurrentPage);
+			pb.setPageSize(PageSize);
+			pb.setTotalPage(totalPage);
+			return pb;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,5 +90,6 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return b;
 	}
+	
 
 }

@@ -3,15 +3,15 @@ package com.holyshit.service;
 import java.util.List;
 
 import com.holyshit.domain.PSRelation;
+import com.holyshit.domain.PageBean;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
 public interface StaffService {
-	List<StaffDuty> findAllStaffs(String pno);
 	
 	void delAllStaffs(String[] staffnos,String pno);
 	
-	Staff findAStaff(String staffno);
+	PageBean findAllStaffs(String pno,int CurrentPage,int PageSize);
 	
 	void addAStaff(PSRelation psr);
 	
@@ -21,4 +21,6 @@ public interface StaffService {
 	 * @return
 	 */
 	boolean ifInProject(String staffno);
+
+	Staff findAStaff(String staffno);
 }

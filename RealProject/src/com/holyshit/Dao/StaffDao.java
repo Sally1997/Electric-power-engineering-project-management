@@ -32,7 +32,7 @@ public interface StaffDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<StaffDuty> findAllStaffs(String pno) throws SQLException;
+	List<StaffDuty> findAllStaffs(String pno,int CurrentPage,int PageSize) throws SQLException;
 	/**
 	 * 删除某个项目的所有成员
 	 * @param staffnos  成员id数组
@@ -50,6 +50,7 @@ public interface StaffDao {
 	 * @throws SQLException 
 	 */
 	int selectStaffByNo(String no) throws SQLException;
+	int countAllStaffs(String pno) throws SQLException;
 	
 	
 }   

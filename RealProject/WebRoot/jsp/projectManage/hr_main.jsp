@@ -76,7 +76,7 @@
 							<th>发送信息</th>
 							<th>资格证</th>
 						</tr>
-					<c:forEach items="${Staff}" var="s" >
+					<c:forEach items="${pb.staffs}" var="s" >
 						<tr>
 							<td align="center"><input type="checkbox" name="ids" value="${s.staffno }" /></td>
 							<td align="center">${s.staffno }</td>
@@ -103,17 +103,13 @@
 					<nav aria-label="Page navigation" style="text-align: center">
 				  <ul class="pagination">
 					<li>
-					  <a href="#" aria-label="Previous">
+					  <a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?currPage=${pb.currentPage==1?1:pb.currentPage-1}&pno=${pno}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
+					<li class="active">第${pb.currentPage}页/共${pb.totalPage}页</li>
 					<li>
-					  <a href="#" aria-label="Next">
+					  <a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?currPage=${pb.currentPage==pb.totalPage?pb.currentPage:pb.currentPage+1}&pno=${pno}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					  </a>
 					</li>

@@ -33,10 +33,15 @@ public class StaffDaoImpl implements StaffDao {
 				);
 	}
 	
-	public List<StaffDuty> findAllStaffs(String pno) throws SQLException{
+	public List<StaffDuty> findAllStaffs(String pno,int CurrentPage,int PageSize) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select * from psrelation join  staff on psrelation.staffno=staff.staffno where pno=?", new BeanListHandler<StaffDuty>(StaffDuty.class),pno);
+		return qr.query("select * from psrelation join  staff on psrelation.staffno=staff.staffno where pno=? limit ?,?", new BeanListHandler<StaffDuty>(StaffDuty.class),pno,(CurrentPage-1)*PageSize,PageSize);
 		
+	}
+	public int countAllStaffs(String pno) throws SQLException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		long count = (Long)qr.query("select count(*) from psrelation where pno=?",new ScalarHandler(),pno);
+		return (int)count;
 	}
     public Staff findAStaff(String staffno) throws SQLException{
     	QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
