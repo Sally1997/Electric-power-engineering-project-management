@@ -258,6 +258,9 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			if(task.getPtasktype().equals("1")){
 				pubpno=std.selectTaskInfoByTaskNo(task.getPtaskno()).getCharpno();
 			}else{
+				if(pd.selectPsPlanInfo(task.getPtaskno())==null){
+					System.out.println("11111");
+				}
 				pubpno=pd.selectPsPlanInfo(task.getPtaskno()).getCharpno();
 			}
 			if(over){

@@ -46,8 +46,8 @@
 			var trs=showtable.getElementsByTagName("tr");
  			for(var i=0;i<dataJson.length;i++){
  				var nodes=trs[i+1].getElementsByTagName("td");
- 				nodes[0].innerHTML='<a href="javascript:goPlanManage('+dataJson[i].pno+')" name="pro_no">'+dataJson[i].pno+'</a>';
- 				//刷新值
+ 				nodes[0].innerHTML='<a href="javascript:window.location.href=&apos;/RealProject/web/servlet/judgeStageExist?pno='+dataJson[i].pno+'&apos;" name="pro_no">'+dataJson[i].pno+'</a>';
+ 				//刷新值0
  				
  			
  				nodes[1].innerHTML=nodes[1].innerHTML='<div class="dropdown"><span name="pro_pname">'+dataJson[i].pname+'</span><span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><li><a href="/RealProject/web/servlet/staffListServlet?pno='+dataJson[i].pno+'">人员管理</a></li><li><a href="/RealProject/web/servlet/judgeStageExist?pno='+dataJson[i].pno+'">计划管理</a></li></ul></div>';
@@ -99,7 +99,7 @@
 		    <!-- display:""的原因是block会引起错位 -->
 		    <c:forEach items="${info_map['pi_list'] }" var="pl">
 		    <tr name="fozza_tr" style="display:''">
-			    <td align="left"><a href="javascript:goPlanManage('${pl.pno }')" name="pro_no">${pl.pno }</a></td>
+			    <td align="left"><a href="javascript:window.location.href='/RealProject/web/servlet/judgeStageExist?pno=${pl.pno }'" name="pro_no">${pl.pno }</a></td>
 			    <td align="left">
 			    	<div class="dropdown"><span name="pro_pname">${pl.pname }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
@@ -207,7 +207,7 @@
 				<div class="form-group">
 				<label for="projecttype" class="col-sm-2 control-label">项目类型</label>
 				<div class="col-sm-8">
-			    <select class="form-control" name="ProjectType">
+			    <select class="form-control" name="ProjectType" id="projecttype">
 				  <option>工程类</option>
 				  <option>设计类</option>
 				 </select>
@@ -222,22 +222,39 @@
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">相关附件</label>
 				<div class="col-sm-8">
-		            <input type = "file" id="checkman">
+		            <input type = "file" multiple="multiple" id="file">
 				</div>
 			  </div>
              <div class="form-group">
 				<label for="others" class="col-sm-2 control-label">其他备注</label>
 				<div class="col-lg-8">
-				  <textarea class="form-control" rows="4" name="OtherRemark"></textarea>
+				  <textarea class="form-control" rows="4" name="OtherRemark" id="others"></textarea>
 				</div>
 			  </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <!-- <button type="submit" class="btn btn-primary">提交</button> -->
-        <input type="submit" class="btn btn-primary" value="提交">
+        <input type="button" class="btn btn-primary" value="提交" onclick="submitProject();">
       </div>
       </form>
+      <script type="text/javascript">
+      		//发送ajax请求
+      		function submitProject(){
+      			var projectname=document.getElementById("projectname");
+      			var projecttype=document.getElementById("projecttype");
+      			var checkman=document.getElementById("checkman");
+      			var file=document.getElementById("file").files[0];
+      			var others=document.getElementById("others");
+      			
+      			//进行验证
+      			if(projectname.value==""){
+      				alert("请输入项目名称");
+      				return;
+      			}
+      			
+      		}
+      	
+      </script>
     </div>
   </div>
   <div id="fozza1" class="fozza3"></div> 

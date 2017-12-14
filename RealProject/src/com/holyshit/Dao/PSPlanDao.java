@@ -7,6 +7,7 @@ import com.holyshit.domain.PSPlan;
 public interface PSPlanDao {
 	
 	/**
+	 * author 袁奇中
 	 * 查询阶段的详细信息
 	 * @param stageno
 	 * @throws SQLException
