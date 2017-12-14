@@ -11,13 +11,13 @@ import com.holyshit.domain.ProjectInfo;
  *
  */
 public interface ProjectDao {
-	//根据项目ID获取整个项目的DAO和SERVICE写在DTREEDAO和DTREENODE里面
-	//get all paoject info by id impl in Dtree(in case wrong encording)
-	//	^	Look at there
-	//	|	My son
-	//	|	Dog Yuan
-	//get task info and stage info --> DTreeDao
-	
+	/**
+	 * 获取项目的已经报账金额
+	 * @param pno
+	 * @return
+	 * @throws SQLException
+	 */
+	double selectProjectHasFee(String pno)throws SQLException;
 	/**
 	 * 获取用户正在参与的所有项目的列表
 	 * @param id 用户id

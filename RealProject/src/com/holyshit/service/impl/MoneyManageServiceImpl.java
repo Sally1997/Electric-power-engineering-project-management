@@ -63,30 +63,32 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				JSONArray over=new JSONArray();
 				
 				List<ProjectStageBudget> res=fd.selectProjectStageBudget(p.getPno());
-				double totalHasAudit=0;
 				double totalSurplus=0;
 				double totalOver=0;
+				double totalHasAudit=pd.selectProjectHasFee(p.getPno());
+				double tmp_total=totalHasAudit- p.getPbudget();
+				if(tmp_total>0){
+					totalSurplus=0;
+					totalOver=tmp_total;
+				}else{
+					totalSurplus=-tmp_total;
+					totalOver=0;
+				}
+				
 				stages.add("总金额");
 				for(ProjectStageBudget psb:res){
 					stages.add(psb.getSname());
 					double tmp_hasaudit=psb.getHasaudit();
 					hasaudit.add(tmp_hasaudit);
-					totalHasAudit+=tmp_hasaudit;
 					//报账剩余
 					double tmp=0;
 					if((tmp=psb.getBudget()-psb.getHasaudit())>0)
 					{
 						surplus.add(tmp);
 						over.add(0);
-						//计算总计
-						totalOver+=0;
-						totalSurplus+=tmp;
 					}else {
 						surplus.add(0);
 						over.add(-tmp);
-						//计算总计
-						totalOver=totalOver-tmp;
-						totalSurplus+=0;
 					}
 					
 				}
