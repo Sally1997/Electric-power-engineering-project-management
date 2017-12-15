@@ -40,7 +40,7 @@ public class UploadNotice extends HttpServlet {
 		//处理上传的文件
 		DiskFileItemFactory dff=new DiskFileItemFactory();
 		dff.setRepository(new File(getServletContext().getRealPath("/tmp")));
-		String realPath = "/var/ProjectData/ProjectNotice/"+new Date(new java.util.Date().getTime()).toString();
+		String realPath = "d:/var/ProjectData/ProjectNotice/"+new Date(new java.util.Date().getTime()).toString();
 		System.out.println(realPath);
 		File path=new File(realPath);
 		path.setWritable(true, false);
