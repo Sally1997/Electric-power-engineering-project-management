@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>项目资料</title>
+   <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <link href="public.css" rel="stylesheet" type="text/css">
+    <!--下拉菜单插件bootstrap-select-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css"> 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="bootstrap-select/bootstrap-select/js/i18n/defaults-*.js"></script>
+    
+      <!-- bootstrap-datetimepicker -->
+  <script type="text/javascript" src="bootstrap-datetimepicker/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="bootstrap-datetimepicker/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="bootstrap-datetimepicker/moment/min/locales.min.js"></script>
+  <script type="text/javascript" src="bootstrap-datetimepicker/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="bootstrap-datetimepicker/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+</head>
+
+<body>
+
+<!-- 页眉-->   
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- start logo -->
+                    <span class="blanding"><img src="src/logo.png" width="100px">面向电力工程项目管理</span>
+                    
+                    <!-- end logo -->
+                    
+                </div>
+            </div>
+        </div>
+      </header>
+ <!--   导航栏-->
+  	<div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+    <!-- 导航栏-->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="main.html">首页</a><span class="sr-only">(current)</span></li>
+              <li><a href="01-projectmanagerfirst 01.html">项目管理</a></li>
+              <li  class="active nav-current" role="presentation"><a href="document.html">文档管理</a></li>
+              <li><a href="moneymanage.html">资金管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer"></a></li>
+              <li><a href="#">用户XXX</a></li>
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="#">任务消息<span class="badge" style="float: right">4</span></a></li>
+					<li><a href="#">系统信息<span class="badge" style="float: right">4</span></a></li>
+		            <li><a href="#">审批消息<span class="badge" style="float: right">2</span></a></li>
+			      </ul>
+              </li>
+            </ul>
+         </div><!-- /.navbar-collapse -->
+       </div><!-- /.container-fluid -->
+     </nav>
+  </div>
+    
+   
+    <section>
+       <div class="container-fluid">
+       <div class="row">
+           <div class="col-lg-9 col-sm-9 xumode">
+           <form>
+           <div class="container-fluid" id="search">
+           <div class="row">
+              <div class="col-lg-2 col-sm-2">
+			  <div class="form-group">
+				<select class="selectpicker" data-width="100%">
+				  <option>工程类</option>
+				  <option>设计类</option>
+				</select>
+			  </div>
+			  </div> 
+			  <div class='col-lg-3 col-lg-offset-4 col-sm-3 col-sm-offset-4'>
+				<div class="form-group">
+					<input type='text' class="form-control" placeholder="选择时间范围" id='datetimepicker1'/>
+				</div>
+			  </div>
+			  <div class='col-lg-3 col-sm-3'>
+					<div class="form-group">
+						<input type='text' class="form-control" placeholder="选择时间范围" id='datetimepicker2'/>
+						</div>
+			  </div>
+              <div class="col-lg-12">
+                   <div class="form-group">
+                   <div class="input-group">
+                       <input type="text" class="form-control" placeholder="请输入关键字">
+                       <span class="input-group-btn">
+                       <button class="btn btn-primary" type="button">搜索</button>
+                       </span>
+                       <span class="input-group-btn">
+                       <button class="btn btn-default" type="button">上传文件</button>
+                       </span>
+                   </div>
+                   </div>
+              </div>
+              <div class="col-lg-12" id="checkboxrow" style="margin-top:-2%">
+                  <div class="checkbox">
+                  <label class="checkbox-inline"><input type="checkbox">全部</label>
+                  <label class="checkbox-inline"><input type="checkbox">DOC</label>
+                  <label class="checkbox-inline"><input type="checkbox">PPT</label>
+                  <label class="checkbox-inline"><input type="checkbox">PDF</label>
+                  <label class="checkbox-inline"><input type="checkbox">XLS</label>
+                  <label class="checkbox-inline"><input type="checkbox">视频（*.FLV，*.MP4）</label>
+                  <label class="checkbox-inline"><input type="checkbox">其他</label>
+                  </div>
+              </div>
+           </div>
+           </div>
+           </form>
+                      <!--折叠框，超大份注意-->
+			   <div class="container-fluid">
+			   <div class="row">
+					<div class="list-group">
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
+						<p class="list-group-item-text">
+						    <span>项目A的名字其实特别特别特别的长&nbsp;&nbsp;&nbsp;</span>
+							<span>上传时间：</span><span>>2015-11-1 23:58&nbsp;&nbsp;&nbsp;</span>
+							<span>上传者：</span><span>201526010001&nbsp;&nbsp;&nbsp;</span>
+							<span>文件类型：</span><span>docx&nbsp;&nbsp;&nbsp;</span>
+						</p>
+					  </a>
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-film"></span>文件二的名字其实很长很长很长很长</h4>
+						<p class="list-group-item-text">
+						    <span>项目A的名字其实特别特别特别的长&nbsp;&nbsp;&nbsp;</span>
+							<span>上传时间：</span><span>>2015-11-1 23:58&nbsp;&nbsp;&nbsp;</span>
+							<span>上传者：</span><span>201526010001&nbsp;&nbsp;&nbsp;</span>
+							<span>文件类型：</span><span>flv&nbsp;&nbsp;&nbsp;</span>
+						</p>
+					  </a>
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
+						<p class="list-group-item-text">
+						    <span>项目A的名字其实特别特别特别的长&nbsp;&nbsp;&nbsp;</span>
+							<span>上传时间：</span><span>>2015-11-1 23:58&nbsp;&nbsp;&nbsp;</span>
+							<span>上传者：</span><span>201526010001&nbsp;&nbsp;&nbsp;</span>
+							<span>文件类型：</span><span>docx&nbsp;&nbsp;&nbsp;</span>
+						</p>
+					  </a>
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件四的名字其实很长很长很长很长</h4>
+						<p class="list-group-item-text">
+						    <span>项目B的名字其实特别特别特别的长&nbsp;&nbsp;&nbsp;</span>
+							<span>上传时间：</span><span>>2015-11-1 23:58&nbsp;&nbsp;&nbsp;</span>
+							<span>上传者：</span><span>201526010001&nbsp;&nbsp;&nbsp;</span>
+							<span>文件类型：</span><span>docx&nbsp;&nbsp;&nbsp;</span>
+						</p>
+					  </a>
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件五的名字其实很长很长很长很长</h4>
+						<p class="list-group-item-text">
+						    <span>项目B的名字其实特别特别特别的长&nbsp;&nbsp;&nbsp;</span>
+							<span>上传时间：</span><span>>2015-11-1 23:58&nbsp;&nbsp;&nbsp;</span>
+							<span>上传者：</span><span>201526010001&nbsp;&nbsp;&nbsp;</span>
+							<span>文件类型：</span><span>docx&nbsp;&nbsp;&nbsp;</span>
+						</p>
+					  </a>
+					</div>	                	 
+			   </div>
+			   </div>
+	       </div>
+       </div>
+       </div>
+    </section>
+    <script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+			locale:'zh-cn',
+			viewMode:'days',
+			format:'YYYY/MM/DD'
+		});
+        $('#datetimepicker2').datetimepicker({
+            useCurrent: false,
+			locale:'zh-cn',
+			viewMode:'days',
+			format:'YYYY/MM/DD'
+        });
+        $("#datetimepicker1").on("dp.change", function (e) {
+            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker2").on("dp.change", function (e) {
+            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
+
+    <footer class="copyright">
+    <div class="container-fluid">
+      	<p>©版权归谭莹小组所有</p>
+   
+	</div>
+	</footer>
+</body>
+</html>
+
+					

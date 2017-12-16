@@ -90,3 +90,16 @@
         .panel-middle{
 		  border-top: 1px solid #e5e5e5;
         }
+        .docType{
+			background-color: rgba(123,130,146,1.00);
+			color: white; 
+			margin-top: 10%;
+			border-radius: 5%;
+			padding: 5%
+		}
+        .docTypeIcon{
+	        margin-right: 5%;
+        }
+		.docMargin{
+			margin-top: 2%;
+		}
