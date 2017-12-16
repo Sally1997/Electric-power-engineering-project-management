@@ -1,5 +1,6 @@
 package com.holyshit.Dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -105,6 +106,17 @@ public class ProjectDaoImpl implements ProjectDao {
 		long l = (long) qr.query("SELECT count(*) FROM psplan WHERE pno=?", 
 				new ScalarHandler(1),pno);
 		return (int)l;
+	}
+
+	@Override
+	public double selectProjectHasFee(String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		BigDecimal res = (BigDecimal) qr.query(ConnectionManager.getConnection(),"SELECT SUM(fee) FROM feeaudit WHERE pno=? AND AuditState='2'",new ScalarHandler(),pno);
+		if(res==null)
+			return 0;
+		return Double.parseDouble(res.toString());
+	
 	}
 
 }

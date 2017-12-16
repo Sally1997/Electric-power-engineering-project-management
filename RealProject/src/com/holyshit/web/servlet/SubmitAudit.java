@@ -21,11 +21,9 @@ public class SubmitAudit extends HttpServlet {
 		if(fauditno==null || cause==null || state==null){
 			response.getWriter().write("error");
 		}
-		
 		//递交审核
 		MoneyManageService ms=new MoneyManageServiceImpl();
 		int res = ms.doFeeAudit(cause, state, fauditno);
-		
 		if(res==0){
 			response.getWriter().write("error");
 		}else {

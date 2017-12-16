@@ -91,7 +91,7 @@
 						  <c:choose>
   							<c:when test="${task.tstate=='1' }">
     	                      <tr>
-							  <td onClick="window.open(${pageContext.request.contextPath})" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
+							  <td onclick="window.open(${pageContext.request.contextPath})" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
 							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
@@ -100,7 +100,7 @@
 							</c:when>
 							<c:when test="${task.tstate=='2' }">
 							  <tr>
-						      <td onClick="window.open()" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
+						      <td onclick="window.open()" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
 							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
@@ -139,7 +139,7 @@
 							<c:choose>
 	  							<c:when test="${project.pstate=='1' }">
 								<tr>
-							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
+							    <td onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${project.pno }')" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
 							    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
 							    ${project.pstage*100}%
@@ -153,7 +153,7 @@
 	  						<c:choose>
 	  							<c:when test="${project.pstate=='2' }">
 								<tr>
-							    <td onClick="window.open()" title="${project.pname }" name="myabbr" >${project.pname }</td>
+							    <td onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${project.pno }')" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
 							    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
 							    ${project.pstage*100}%

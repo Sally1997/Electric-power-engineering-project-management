@@ -62,13 +62,15 @@ function submitFeeInfo(){
 		function submitAuditInfo(){
 			//处理
 			var hehe=document.getElementById("audit_pass");
-			var cause=document.getElementById("audit_cause").innerHTML;
+			var cause=document.getElementById("audit_cause").value;
 			var audit_auditstate;
 			if(hehe.checked){
 				audit_auditstate="2";
 			}else
 				audit_auditstate="1";
+			
 			if(cause==""){
+				
 				return;
 			}
 			var req=new XMLHttpRequest();
@@ -78,7 +80,7 @@ function submitFeeInfo(){
 						//接受信息
 						var res=req.responseText;
 						if(res=="ok"){
-							alert("审核成功");
+							alert("审核完成");
 								location.reload(true);
 						}else{
 							alert("审核失败");
@@ -89,7 +91,6 @@ function submitFeeInfo(){
 			};
 			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+cause);
 			req.send(null); 
-			
 		}
    		function showAuditData(){
    			var nodes=audittable.getElementsByTagName("tr");
