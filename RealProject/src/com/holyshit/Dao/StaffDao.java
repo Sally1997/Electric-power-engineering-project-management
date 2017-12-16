@@ -2,6 +2,7 @@ package com.holyshit.Dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Staff;
@@ -52,6 +53,22 @@ public interface StaffDao {
 	int selectStaffByNo(String no) throws SQLException;
 	int countAllStaffs(String pno) throws SQLException;
 	
+	/**
+	 * 从项目组里面拉人
+	 * @param pno 项目编号
+	 * @param userno 用户编号
+	 * @return 返回项目组人员名单，暂且不排除发布人自己当审核人的情况
+	 * @throws SQLException 
+	 */
+	List<Map<String,Object>> selectStaffInProject(String pno,String userno) throws SQLException;
 	
+	/**
+	 * 从公司里面拉人
+	 * @param pno 项目编号
+	 * @param userno 用户编号
+	 * @return 
+	 * @throws SQLException 
+	 */
+	List<Map<String,Object>> selectStaffInCompany(String pno,String userno) throws SQLException;
 }   
  

@@ -18,12 +18,16 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.junit.Test;
 
 import com.holyshit.Dao.DTreeDao;
+import com.holyshit.Dao.StaffDao;
 import com.holyshit.Dao.impl.DTreeDaoImpl;
+import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.domain.ProjectInfo;
 import com.holyshit.service.DTreeNodeService;
 import com.holyshit.service.ProjectService;
+import com.holyshit.service.StaffService;
 import com.holyshit.service.impl.DTreeNodeServiceImpl;
 import com.holyshit.service.impl.ProjectServiceImpl;
+import com.holyshit.service.impl.StaffServiceImpl;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -31,15 +35,11 @@ import net.sf.json.JSONObject;
 public class TestFozza {
 	@Test
 	public void forTest() throws SQLException{
-		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		String staffno = "201526010001";
-		long l = (long) qr.query("select count(*) from ("+
-				"SELECT Project.Pno,PName,NAME,duty,PType,PState "+
-				"FROM project,psrelation,staff WHERE project.PNo=psrelation.PNo "+
-				"AND PMno=staff.staffno AND psrelation.staffno=?)a"
-				,new ScalarHandler(),staffno);
-		int x = (int) l;
-		System.out.println(x);
+		StaffService ss = new StaffServiceImpl();
+		List<Map<String, Object>> list = ss.showStaffInProject("10001","201526010001");
+		
+		String str = JSONArray.fromObject(list).toString();
+		System.out.println(str);
 	}
 	
 	

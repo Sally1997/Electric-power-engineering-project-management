@@ -2,11 +2,13 @@ package com.holyshit.Dao.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.holyshit.Dao.StaffDao;
@@ -74,6 +76,28 @@ public class StaffDaoImpl implements StaffDao {
 		long l =  (long) qr.query("select count(*) from psrelation "+
 				"where staffno=?", new ScalarHandler(),no);
 		return (int)l;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectStaffInProject(String pno, String userno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT staffno,name,te,duty,notes FROM "+
+			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
+			"WHERE psrelation.pno=? AND staff.staffno=psrelation.StaffNo)a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno", 
+			new MapListHandler(),pno,userno);
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> selectStaffInCompany(String pno, String userno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT staffno,name,te,duty,notes FROM "+
+			"(SELECT staff.StaffNo,NAME,te,duty "+
+			"FROM staff LEFT JOIN psrelation ON "+
+			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo)a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno",
+			new MapListHandler(),pno,userno);
 	}
 	
 	
