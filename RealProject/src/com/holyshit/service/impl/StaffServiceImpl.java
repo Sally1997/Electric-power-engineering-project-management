@@ -2,7 +2,10 @@ package com.holyshit.service.impl;
 import com.holyshit.Dao.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
@@ -89,6 +92,46 @@ public class StaffServiceImpl implements StaffService{
 			e.printStackTrace();
 		}
 		return b;
+	}
+	@Override
+	public List<Map<String, Object>> showStaffInProject(String pno, String userno) {
+		StaffDao StaffDao = new StaffDaoImpl();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			list =  StaffDao.selectStaffInProject(pno, userno);
+			for(Map<String, Object> map:list){
+				if(map.get("duty")==null){
+					map.put("duty", "null");
+				}
+				if(map.get("notes")==null){
+					map.put("notes", "null");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	@Override
+	public List<Map<String, Object>> showStaffInCompany(String pno, String userno) {
+		StaffDao StaffDao = new StaffDaoImpl();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			list =  StaffDao.selectStaffInCompany(pno, userno);
+			for(Map<String, Object> map:list){
+				if(map.get("duty")==null){
+					map.put("duty", "null");
+				}
+				if(map.get("notes")==null){
+					map.put("notes", "null");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 

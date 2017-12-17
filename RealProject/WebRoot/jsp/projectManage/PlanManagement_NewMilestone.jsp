@@ -75,7 +75,8 @@
 						<font class="text">负责人：</font>
 						</div>
 						<div id="first_right">
-						<input type="text" name="mngname" size="40px;">
+						<input type="text" name="mngname" size="40px" disabled="disabled" style="display:none">
+						<button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target= "#search" onclick="search_member()">查找</button>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -168,6 +169,64 @@
     <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="confirmIndex()">确认</button>
     <submit type="submit" class="btn btn-primary" onclick="removeIndex()">删除</button><!-- 我写了三个函数来做这个delete都失败了（在下面注释掉了）不过丁杰也说了可以不用js实现这个删除我就不继续试了。。。 -->
+    </div>
+	</div>
+</div>
+</div>
+
+
+<!--      默认隐藏的内容:查找人員-->
+ <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">人员查找</h4>
+    </div>
+    <div class="modal-body">
+    	<form action="" method="post" name="form2">
+    	<div id="others" class="block">
+			<div id="first_left">
+			<font class="text">输入:</font>
+			</div>
+			<div id="first_right">
+			<input type="text" name="goal" size="20px;">&nbsp;&nbsp;<input type = "submit" name = "ok" class="btn btn-primary" value = "查找" onClick="return addGoal();">
+			<input name = "where" type = "radio" value = "in"><span>项目内</span>
+			<input name = "where" type = "radio" value = "out"><span>公司内</span>
+			</div>
+			</div>
+			<div class="clear"></div>
+			<br/>
+		</form>
+		<form action="" method="post" name="form3">
+			<table id = "member_table" class="table table-striped table-condensed" style="font-size: 15px">
+ 		    <tr>
+			    <th>选择</th>
+			    <th>标号</th>
+			    <th>姓名</th>
+			    <th>联系方式</th>
+			    <th>职责</th>
+			    <th>备注</th>
+			    <!-- 编号，名字，电话号，职责，备注 -->
+		    </tr>
+		    <!-- <tr>
+		    	<td>
+		    		<input name = "choose_char_per" type= "radio" value = "'开发人员'+'('+'201526010001'+')'" />
+		    	</td>
+			    <td>201526010001</td>
+			    <td>OO</td>
+			    <td>12222222221</td>
+			    <td>开发人员</td>
+			    <td>老大</td>
+		    </tr> -->
+		    
+	        </table>
+		</form>
+		   
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+    <button type="button" class="btn btn-primary" onclick="give_option()">选择</button>
     </div>
 	</div>
 </div>
@@ -598,5 +657,75 @@ window.onload = function() {
 		aja.send(null);
 	}
 }
+
+function give_option(){
+	var ccp = document.getElementsByName("choose_char_per");
+	var ser = document.getElementsByName("search")[0];
+	for(var i=0;i<ccp.length;i++){
+		if(ccp[i].checked==true){
+			
+		}
+	}
+}
+
+function search_member(){
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			alert(aja.responseText);
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				var dutytxt = document.createTextNode(str[i].duty);
+				var notestxt = document.createTextNode(str[i].notes);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				var td_duty = document.createElement("td");
+				var td_notes = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				td_duty.appendChild(dutytxt);
+				td_notes.appendChild(notestxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				tr_t.appendChild(td_duty);
+				tr_t.appendChild(td_notes);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tr_t);
+			}
+		}
+	}
+	
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
+	aja.send(null);
+}
+
 </script>
 </html>

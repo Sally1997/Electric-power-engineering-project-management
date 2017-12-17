@@ -105,6 +105,9 @@ public class SubmitTaskServlet extends HttpServlet {
 			psr.setDuty("审核人");
 			ss.addAStaff(psr);
 		}
+		
+		//提交完成啦~跳回树状图把
+		response.sendRedirect("/RealProject/servlet/DTreeNodeServlet?pno="+pno);
 	}
 	
 	//上传文件处理
@@ -121,7 +124,7 @@ public class SubmitTaskServlet extends HttpServlet {
 			filename = UUID.randomUUID()+"_"+filename;
 			
 			//创建一个本地目录
-			String directorypath = "D:/RealProject/Upload";
+			String directorypath = "D:\\RealProject\\Upload";
 			//新建文件夹
 			File store_directory = new File(directorypath);
 			if(!store_directory.exists()){
