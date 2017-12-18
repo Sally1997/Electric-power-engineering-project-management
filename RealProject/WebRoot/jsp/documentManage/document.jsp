@@ -1,34 +1,32 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <title>文档管理</title>
- <!--下拉菜单插件bootstrap-select-->
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css"> 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="${pageContext.request.contextPath }/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-  <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-  <script src="${pageContext.request.contextPath }/bootstrap-select/bootstrap-select/js/i18n/defaults-*.js"></script>
-  
-    <!-- bootstrap-datetimepicker -->
-  <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/jquery/jquery.min.js"></script>
+	<%@include file="/head.jsp" %>
+    <script type="text/javascript">
+	    menus[2].className="active nav-current";
+		menus[2].role="presentation";	
+    </script>
+    <!--下拉菜单插件bootstrap-select-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css"> 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="${pageContext.request.contextPath }/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+      <!-- bootstrap-datetimepicker -->
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/moment.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
-  <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-  <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
 </head>
+
 <body>
- <%@include file="/head.jsp" %>
-	<script type="text/javascript">
-		menus[2].className="active nav-current";
-		menus[2].role="presentation";	
-	</script>
-<section>
+	
+   
+    <section>
        <div class="container-fluid">
        <div class="row">
            <div class="col-lg-9 col-sm-9 xumode">
@@ -37,7 +35,7 @@
            <div class="row">
               <div class="col-lg-2 col-sm-2">
 			  <div class="form-group">
-				<select class="selectpicker" data-width="100%">
+				<select class="selectpicker" data-width="100%" id="documentType">
 				  <option>工程类</option>
 				  <option>设计类</option>
 				</select>
@@ -56,25 +54,25 @@
               <div class="col-lg-12">
                    <div class="form-group">
                    <div class="input-group">
-                       <input type="text" class="form-control" placeholder="请输入关键字">
+                       <input type="text" class="form-control" placeholder="请输入关键字" id="keywords">
                        <span class="input-group-btn">
-                       <button class="btn btn-primary" type="button">搜索</button>
+                       <button class="btn btn-primary" type="button" onclick="findDocument();">搜索</button>
                        </span>
                        <span class="input-group-btn">
-                       <button class="btn btn-default" type="button">上传文件</button>
+                       <button type="button" class="btn btn-default" style="float: right;" data-toggle="modal" data-target="#handupFile">上传文件</button>
                        </span>
                    </div>
                    </div>
               </div>
               <div class="col-lg-12" id="checkboxrow" style="margin-top:-2%">
                   <div class="checkbox">
-                  <label class="checkbox-inline"><input type="checkbox">全部</label>
-                  <label class="checkbox-inline"><input type="checkbox">DOC</label>
-                  <label class="checkbox-inline"><input type="checkbox">PPT</label>
-                  <label class="checkbox-inline"><input type="checkbox">PDF</label>
-                  <label class="checkbox-inline"><input type="checkbox">XLS</label>
-                  <label class="checkbox-inline"><input type="checkbox">视频（*.FLV，*.MP4）</label>
-                  <label class="checkbox-inline"><input type="checkbox">其他</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="selectAll">全部</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="docx">DOCX</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="ppt">PPT</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="pdf">PDF</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="xls">XLS</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="video">视频（*.FLV，*.MP4）</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="other">其他</label>
                   </div>
               </div>
            </div>
@@ -109,18 +107,84 @@
        </div>
        </div>
     </section>
+    
+    <!--  默认隐藏的内容:上传文件-->
+  <div class="modal fade" id="handupFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">上传文件</h4>
+      </div>
+      <div class="modal-body">
+		  <form class="form-horizontal">
+		  		<div class="form-group">
+				<label for="newsname" class="col-sm-2 control-label">文件主题</label>
+				<div class="col-sm-8">
+		            <input type = "text" id="newstitle">
+				</div>
+			  </div>
+		  
+			  	<div class="form-group">
+				<label for="addfile" class="col-sm-2 control-label">上传文件</label>
+				<div class="col-sm-8">
+		            <input type = "file" id="newfile" multiple="multiple">
+				</div>
+			  </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-primary" onclick="submitFile();">上传</button>
+      </div>
+    </div>
+  </div>
+</div>
     <script type="text/javascript">
+    var documentData;
+    function findDocument(){
+    	//数据获取校验
+    	var dType=document.getElementById("documentType").value;
+    	if(dType=="工程类")
+    		dType="0";
+    	else
+    		dType="1";
+    	var dateFrom=document.getElementById("datetimepicker1").value;
+    	
+    	var dateTo=document.getElementById("datetimepicker2").value;
+    	var keywords=document.getElementById("keywords").value;
+    	var fType="";
+    	var nodes=document.getElementsByName("fileType");
+    	for(var i=0;i<nodes.length;i++)
+    		if(nodes[i].checked)
+    			fType+=nodes[i].value+":";
+    	//发送查询
+    	var req=new XMLHttpRequest();
+    	req.onreadystatechange=function(){
+    		if(req.readyState==4)
+    			if(req.status==200){
+    				//处理数据
+    				var res=req.responseText;
+    				alert(res);
+    				var data=eval('('+res+')');
+					documentData=data.docs;
+					
+    			}
+    	};
+    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage=0&pageSize=5");
+    	req.send(null);
+    }
     $(function () {
         $('#datetimepicker1').datetimepicker({
 			locale:'zh-cn',
 			viewMode:'days',
-			format:'YYYY/MM/DD'
+			format:'YYYY-MM-DD'
 		});
         $('#datetimepicker2').datetimepicker({
             useCurrent: false,
 			locale:'zh-cn',
 			viewMode:'days',
-			format:'YYYY/MM/DD'
+			format:'YYYY-MM-DD'
         });
         $("#datetimepicker1").on("dp.change", function (e) {
             $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
@@ -129,6 +193,23 @@
             $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
         });
     });
+    //页面加载完毕执行
+    window.onload=function(){
+    	//全选框
+    	var selectAll=document.getElementsByName("selectAll")[0];
+    	selectAll.onclick=function(){
+    		var nodes=document.getElementsByName("fileType");
+    		if(this.checked){
+    			for(var i=0;i<nodes.length;i++){
+    				nodes[i].checked="checked";
+    			}
+    		}else{
+    			for(var i=0;i<nodes.length;i++){
+    				nodes[i].checked="";
+    			}
+    		}
+    	};
+    };
 </script>
     <footer class="copyright">
     <div class="container-fluid">
@@ -138,4 +219,3 @@
 	</footer>
 </body>
 </html>
-	

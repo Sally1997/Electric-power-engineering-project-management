@@ -1,10 +1,12 @@
 package com.holyshit.Dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import com.holyshit.domain.Document;
+import com.holyshit.domain.DocumentInfo;
 
 /**
  * 
@@ -12,6 +14,28 @@ import com.holyshit.domain.Document;
  *
  */
 public interface DocumentDao {
+	/**
+	 * 查询符合相应条件的文件数量
+	 * @param dtype
+	 * @param dateFrom
+	 * @param dateTo
+	 * @param keywords
+	 * @param ftype
+	 * @return
+	 * @throws SQLException
+	 */
+	long totalNumWithCondition(String dtype,String dateFrom,String dateTo,String keywords,String ftype)throws SQLException;
+	/**
+	 * 根据条件查询文档
+	 * @param dtype
+	 * @param dateFrom
+	 * @param dateTo
+	 * @param keywords
+	 * @param ftype
+	 * @return
+	 * @throws SQLException
+	 */
+	List<DocumentInfo> selectDocumentByCondition(String dtype,String dateFrom,String dateTo,String keywords,String ftype,int cur,int pageSize)throws SQLException;
 	/**
 	 * 查询上传文件的信息
 	 * @param dno

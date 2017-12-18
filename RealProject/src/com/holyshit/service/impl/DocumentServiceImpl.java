@@ -1,15 +1,21 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.domain.Document;
+import com.holyshit.domain.DocumentInfo;
 import com.holyshit.service.DocumentService;
 import com.holyshit.utils.ConnectionManager;
+import com.holyshit.web.servlet.NewProjectServlet;
 
 public class DocumentServiceImpl implements DocumentService {
 
@@ -49,8 +55,50 @@ public class DocumentServiceImpl implements DocumentService {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.getConnection();
 		}
 		return null;
+	}
+
+	@Override
+	public Map<String, Object> findDocumentByContidtion(String dtype,
+			String datefrom, String dateto, String keywords, String ftype,int cur,int pageSize) {
+		// TODO Auto-generated method stub
+		DocumentDao dd=new DocumentDaoImpl();
+		long totalSize=0;
+		List<DocumentInfo> docs=null;
+		try {
+			docs = dd.selectDocumentByCondition(dtype, datefrom, dateto, keywords, ftype, cur, pageSize);
+			totalSize=dd.totalNumWithCondition(dtype, datefrom, dateto, keywords, ftype);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		JSONArray documents=new JSONArray();
+		//封装jsonarray
+		for(DocumentInfo di:docs){
+			JSONObject jsonObject=new JSONObject();
+			jsonObject.put("dno", di.getDno());
+			jsonObject.put("dtitle", di.getDtitle());
+			jsonObject.put("uploadtime",di.getUploadtime().toLocaleString());
+			jsonObject.put("dloadtimes",di.getDloadtimes());
+			jsonObject.put("ftype",di.getFtype());
+			jsonObject.put("dtype",di.getDtype());
+			jsonObject.put("uloadpno",di.getUloadpno());
+			jsonObject.put("pname",di.getPname());
+			documents.add(jsonObject);
+		}
+		Map<String, Object> resMap=new HashMap<String, Object>();
+		
+		resMap.put("docs", documents.toString());
+		resMap.put("totalNum", totalSize);
+		resMap.put("currentPage", cur);
+		resMap.put("pageSize", pageSize);
+		resMap.put("pageNum", totalSize%pageSize==0?totalSize/pageSize:totalSize/pageSize+1);
+		return resMap;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.holyshit.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,19 @@ import com.holyshit.domain.Document;
  *
  */
 public interface DocumentService {
+	/**
+	 * 根据条件查询文档
+	 * @param ftype
+	 * @param datefrom
+	 * @param dateto
+	 * @param keywords
+	 * @param ftype
+	 * @return
+	 */
+	Map<String, Object> findDocumentByContidtion(String dtype,String datefrom,String dateto,String keywords,String ftype,int cur,int pageSize);
+	
+	
+	
 	/**
 	 * 列出用户相关项目的所有文档，时间排序
 	 * @param id   用户id

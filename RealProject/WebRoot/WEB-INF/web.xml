@@ -135,6 +135,11 @@
     <servlet-name>ShowStaffInfoServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowStaffInfoServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FindDocument</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.FindDocument</servlet-class>
+  </servlet>
+
 
 
 
@@ -256,6 +261,10 @@
   <servlet-mapping>
     <servlet-name>ShowStaffInfoServlet</servlet-name>
     <url-pattern>/web/servlet/showStaffInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FindDocument</servlet-name>
+    <url-pattern>/web/servlet/findDocument</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
