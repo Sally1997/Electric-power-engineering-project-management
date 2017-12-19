@@ -1,10 +1,13 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.enterprise.inject.New;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -83,7 +86,7 @@ public class DocumentServiceImpl implements DocumentService {
 			JSONObject jsonObject=new JSONObject();
 			jsonObject.put("dno", di.getDno());
 			jsonObject.put("dtitle", di.getDtitle());
-			jsonObject.put("uploadtime",di.getUploadtime().toLocaleString());
+			jsonObject.put("uploadtime",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(di.getUploadtime()));
 			jsonObject.put("dloadtimes",di.getDloadtimes());
 			jsonObject.put("ftype",di.getFtype());
 			jsonObject.put("dtype",di.getDtype());
