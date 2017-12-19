@@ -36,7 +36,27 @@ public class DeleteSessionListener implements ServletContextListener{
 		//定时清理失效session  
 		//60s清理一次
 		Timer timer=new Timer();
-		
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//遍历链表中所有session，如果失效，则删除
+				for(Iterator<HttpSession> iterator=list.iterator();iterator.hasNext();){
+					HttpSession session = iterator.next();
+					long last=session.getLastAccessedTime();
+					//超过20分钟没有操作  失效
+					if(new Date().getTime()-last>1200000)
+					{
+						int num=(Integer) application.getAttribute("livingcount");
+						application.setAttribute("livingcount", num-1);
+						session.invalidate();
+						iterator.remove();
+						System.out.println("1人被系统强制踢出，当前在线人数："+(Integer)application.getAttribute("livingcount"));
+					}
+				}
+			}
+		}, 0, 60000);
 		
 		
 	}
