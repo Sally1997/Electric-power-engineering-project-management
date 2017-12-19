@@ -246,7 +246,7 @@
   </div>
 </div>
     
-    <footer class="copyright">
+    <footer class="copyright atLow">
     <div class="container-fluid">
       	<p>©版权归谭莹小组所有</p>
    

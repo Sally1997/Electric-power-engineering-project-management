@@ -103,3 +103,8 @@
 		.docMargin{
 			margin-top: 2%;
 		}
+		.atLow{
+			position:fixed;
+			bottom:0;
+			width:100%;
+		}

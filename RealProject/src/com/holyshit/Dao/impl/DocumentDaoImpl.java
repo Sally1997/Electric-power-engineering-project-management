@@ -83,8 +83,7 @@ public class DocumentDaoImpl implements DocumentDao{
 				}
 			sql+=" )";		
 		}
-		sql+=" limit "+cur+","+pageSize;
-		System.out.println(sql);
+		sql+=" order by dloadtimes desc limit "+(cur-1)*pageSize+","+pageSize;
 		return qr.query(ConnectionManager.getConnection(), sql,new BeanListHandler<DocumentInfo>(DocumentInfo.class));
 	}
 
