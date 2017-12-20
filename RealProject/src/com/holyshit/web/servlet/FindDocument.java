@@ -19,6 +19,7 @@ public class FindDocument extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 //	参数	dtype="+dType+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize="+pagesize);
+		String ptype=request.getParameter("ptype");
 		String dtype=request.getParameter("dtype");
 		String dateFrom=request.getParameter("dateFrom");
 		String dateTo=request.getParameter("dateTo");
@@ -26,14 +27,14 @@ public class FindDocument extends HttpServlet {
 		String ftype=request.getParameter("ftype");
 		int cur=Integer.parseInt(request.getParameter("currentPage"));
 		int pageSize=Integer.parseInt(request.getParameter("pageSize"));
-		if(dtype==null||dateFrom==null||dateTo==null||keywords==null||ftype==null){
+		if(ptype==null||dtype==null||dateFrom==null||dateTo==null||keywords==null||ftype==null){
 			//返回
 			request.getRequestDispatcher("/jsp/error/error_500.jsp").forward(request, response);
 			return;
 		}
 		//调用服务
 		DocumentService ds=new DocumentServiceImpl();
-		Map<String, Object> res = ds.findDocumentByContidtion(dtype, dateFrom, dateTo, keywords, ftype, cur, pageSize);
+		Map<String, Object> res = ds.findDocumentByContidtion(ptype,dtype, dateFrom, dateTo, keywords, ftype, cur, pageSize);
 	
 		JSONObject json=new JSONObject();
 		json.put("totalNum", res.get("totalNum"));

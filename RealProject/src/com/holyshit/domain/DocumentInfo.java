@@ -9,8 +9,16 @@ public class DocumentInfo {
 	private int dloadtimes;
 	private String ftype;
 	private String dtype;
+	private String ptype;
 	private String uloadpno;
 	private String pname;
+	
+	public String getPtype() {
+		return ptype;
+	}
+	public void setPtype(String ptype) {
+		this.ptype = ptype;
+	}
 	public String getDno() {
 		return dno;
 	}

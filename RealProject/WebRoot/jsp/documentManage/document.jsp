@@ -96,6 +96,19 @@
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
 							<span>下载次数：</span><span>1</span>
+							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick="" value="111"></button>
+						</p>
+						
+					  </a>
+					  <a href="#" class="list-group-item">
+						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
+						<p class="list-group-item-text">
+						    <span>项目A的名字其实特别特别特别的长</span>&nbsp;&nbsp;&nbsp;
+							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
+							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
+							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
+							<span>下载次数：</span><span>1</span>
+							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
 					  <a href="#" class="list-group-item">
@@ -106,6 +119,7 @@
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
 							<span>下载次数：</span><span>1</span>
+							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
 					  <a href="#" class="list-group-item">
@@ -116,6 +130,7 @@
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
 							<span>下载次数：</span><span>1</span>
+							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
 					  <a href="#" class="list-group-item">
@@ -126,16 +141,7 @@
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
 							<span>下载次数：</span><span>1</span>
-						</p>
-					  </a>
-					  <a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
-						<p class="list-group-item-text">
-						    <span>项目A的名字其实特别特别特别的长</span>&nbsp;&nbsp;&nbsp;
-							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
-							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
-							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
 					</div>	  
@@ -185,6 +191,8 @@
            </div>
        </div>
        </div>
+       
+       
     </section>
     
     <!--  默认隐藏的内容:上传文件-->
@@ -233,12 +241,20 @@
  	var groupSize=5;
  	var groupNum=pageNum%groupSize==0?parseInt(pageNum/groupSize):parseInt(pageNum/groupSize)+1;
  	//条件
- 	var dType;
+ 	var ptype
+ 	var dType="";
  	var dateFrom;
  	var dateTo;
  	var keywords;
  	var fType;
- 	//刷新数据
+ 	//下载
+ 	function download(dno){
+ 		var res=confirm("当前文件暂不支持预览，是否进行下载?");
+ 		if(res)
+ 			window.location.href="${pageContext.request.contextPath}/web/servlet/downLoadMessage?dno="+dno;
+ 	}
+ 	
+ 	//刷新数据0
  	function refreshData(){
  		var nodes=showtable.getElementsByTagName("a");
  		//刷新数据并且显示
@@ -258,6 +274,26 @@
  			spans[4].innerHTML=documentData[i].uloadpno;
  			spans[6].innerHTML=documentData[i].ftype;
  			spans[8].innerHTML=documentData[i].dloadtimes;
+ 			//download
+ 			var btn=nodes[i].getElementsByTagName("p")[0].getElementsByTagName("button")[0];
+ 			btn.value=documentData[i].dno;
+ 			btn.onclick=function(){
+ 				window.location.href="${pageContext.request.contextPath}/web/servlet/downLoadMessage?dno="+this.value;
+ 				return false;
+ 			};
+ 			//file preview
+ 			var base="https://view.officeapps.live.com/op/view.aspx?src=";
+ 			var src=encodeURIComponent("http://www.blackstar0412.cn/RealProject/web/servlet/downLoadMessage?dno="+documentData[i].dno);
+ 			//判断是否可以进行预览
+ 			var t=documentData[i].ftype;
+ 			if(t=="docx"||t=="doc"||t=="ppt"||t=="pdf"||t=="xls"){
+ 				//使用office预览
+ 				nodes[i].href="javascript:window.open('"+base+src+"')";
+ 				
+ 			}else{
+ 				//直接下载 询问
+ 				nodes[i].href="javascript:download('"+documentData[i].dno+"')";
+ 			}
  		}
  		//隐藏
  		for(var i=documentData.length;i<5;i++){
@@ -266,11 +302,11 @@
  	}
  	function findDocument(){
  		//数据获取校验
-    	dType=document.getElementById("documentType").value;
-    	if(dType=="工程类")
-    		dType="0";
+    	ptype=document.getElementById("documentType").value;
+    	if(ptype=="工程类")
+    		ptype="0";
     	else
-    		dType="1";
+    		ptype="1";
     	dateFrom=document.getElementById("datetimepicker1").value;
     	
     	dateTo=document.getElementById("datetimepicker2").value;
@@ -287,7 +323,7 @@
     			if(req.status==200){
     				//处理数据
     				var res=req.responseText;
-    				//alert(res);
+
     				var data=eval('('+res+')');
 					documentData=data.docs;
 					//数据显示
@@ -334,7 +370,7 @@
 					}
     			}
     	};
-    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
+    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
     	req.send(null);
  	}
     function getFunction(cur){
@@ -371,7 +407,7 @@
 					}
     			}
     	};
-    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
+    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
     	req.send(null);
     }
     $(function () {

@@ -32,21 +32,24 @@ public class DownLoadMessage extends HttpServlet {
 		String dno=request.getParameter("dno");
 		if(dno==null){
 			request.getRequestDispatcher("/jsp/error/error_500.jsp").forward(request, response);
+			return;
 		}
 		
 		DocumentService ds=new DocumentServiceImpl();
 		Document doc = ds.findDocumentById(dno);
 		if(doc==null){
 			System.out.println("不存在啊");
-			request.getRequestDispatcher("/jsp/error/error_404.jsp").forward(request, response);
+			response.setStatus(404);
+			return;
 		}
 		String filepath=doc.getDpath();
-		String filename=filepath.substring(filepath.lastIndexOf(File.separator)+1);
-		filename=filename.substring(filename.lastIndexOf("_")+1);
-		response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
+		String filename=doc.getDtitle()+filepath.substring(filepath.lastIndexOf("."));
+		filename = new String(filename.getBytes(), "ISO-8859-1");
+		response.setHeader("content-disposition", "attachment;filename=" + filename);
 		InputStream input=new FileInputStream(filepath);
 		OutputStream out=response.getOutputStream();
 		int len=0;
+	
 		//缓冲区
 		byte b[]=new byte[1024];
 		while((len=input.read(b))!=-1){

@@ -60,12 +60,14 @@ public class DocumentDaoImpl implements DocumentDao{
 	}
 
 	@Override
-	public List<DocumentInfo> selectDocumentByCondition(String dtype,
+	public List<DocumentInfo> selectDocumentByCondition(String ptype,String dtype,
 			String dateFrom, String dateTo, String keywords, String ftype,int cur,int pageSize)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes from document join project on document.pno=project.pno where dtype="+dtype;
+		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype from document join project on document.pno=project.pno where ptype='"+ptype+"'";
+		if(!dtype.equals(""))
+			sql+=" and dtype='"+dtype+"'";
 		if(!dateTo.equals(""))
 			sql+=" and uploadtime<='"+dateTo+"'";
 		if(!dateFrom.equals(""))
@@ -84,16 +86,19 @@ public class DocumentDaoImpl implements DocumentDao{
 			sql+=" )";		
 		}
 		sql+=" order by dloadtimes desc limit "+(cur-1)*pageSize+","+pageSize;
+		System.out.println(sql);
 		return qr.query(ConnectionManager.getConnection(), sql,new BeanListHandler<DocumentInfo>(DocumentInfo.class));
 	}
 
 	@Override
-	public long totalNumWithCondition(String dtype, String dateFrom,
+	public long totalNumWithCondition(String ptype,String dtype, String dateFrom,
 			String dateTo, String keywords, String ftype) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		
-		String sql="select count(*) from document where dtype="+dtype;
+		String sql="select count(*) from document join project on document.pno=project.pno where ptype='"+ptype+"'";
+		if(!dtype.equals(""))
+			sql+=" and dtype='"+dtype+"'";
 		if(!dateTo.equals(""))
 			sql+=" and uploadtime<='"+dateTo+"'";
 		if(!dateFrom.equals(""))
@@ -111,6 +116,7 @@ public class DocumentDaoImpl implements DocumentDao{
 				}
 			sql+=" )";		
 		}
+		System.out.println(sql);
 		return (long) qr.query(ConnectionManager.getConnection(), sql,new ScalarHandler());
 	}
 
