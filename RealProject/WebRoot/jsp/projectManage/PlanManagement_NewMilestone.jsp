@@ -209,6 +209,7 @@
 			    <th>备注</th>
 			    <!-- 编号，名字，电话号，职责，备注 -->
 		    </tr>
+		    <tbody id="iamtbody"></tbody>
 		    <!-- <tr>
 		    	<td>
 		    		<input name = "choose_char_per" type= "radio" value = "'开发人员'+'('+'201526010001'+')'" />
@@ -608,79 +609,40 @@ function dsubmit(){
 	pf.submit();
 }
 
-function ifclick(div) {
-	var InputWord = document.getElementsByName("mngname")[0];
-	InputWord.value = div.innerHTML;
-	div.parentNode.style.display = "none";
-}
-function change_1(ele) {
-	ele.style.backgroundColor = "#3388FF";
-}
-function change_2(ele) {
-	ele.style.backgroundColor = "";
-}
-window.onload = function() {
-	//输入文本框
-	var InputWord = document.getElementsByName("mngname")[0];
-	//获得下拉框
-	var fozza_handsome = document.getElementById("fozza1");
-	//
-	var aja = new XMLHttpRequest();
-	aja.onreadystatechange = function() {
-		if (aja.readyState == 4) {
-			if (aja.status == 200) {
-				var str = aja.responseText; //得到服务器返回数据
-				var ss = str.split(","); //分割得到的整串text
-				var childDivs = "";
-				for (var i = 0; i < ss.length; i++) {
-					childDivs += "<div id='fozza2' onclick='ifclick(this)' onmouseover='change_1(this)' onmouseout='change_2(this)'>" + ss[i] + "</div>";
-				//将每个元素放进div里面
-				}
-				fozza_handsome.innerHTML = childDivs;
-			}
-		}
-	}
 
-	InputWord.onkeyup = function() {
-		var msg = InputWord.value;
-		var fozza_handsome = document.getElementById("fozza1");
-		if (msg == "") {
-			fozza1.style.display = "none";
-			fozza1.style.border = "1px";
-		} else {
-			fozza1.style.display = "block";
-			fozza1.style.border = "1px solid grey";
-		}
-		//创建链接
-		aja.open("get", "${pageContext.request.contextPath }/servlet/ListNameNoServlet?msg=" + msg);
-		//发送请求
-		aja.send(null);
-	}
-}
 
 function give_option(){
 	var ccp = document.getElementsByName("choose_char_per");
+	//这个是弹窗的id
 	var ser = document.getElementsByName("search")[0];
+	var mng = document.getElementsByName("mngname")[0];  
 	for(var i=0;i<ccp.length;i++){
 		if(ccp[i].checked==true){
-			
+			mng.value = ccp[i].value;
+			mng.style.display = "";
+			break;
 		}
 	}
 }
 
 function search_member(){
+	var tbody_t = document.getElementById("iamtbody");
+	var childs = tbody_t.childNodes;
+	for(var i=childs.length-1;i>=0;i--){
+		tbody_t.removeChild(childs[i]);
+	}
+	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
-			alert(aja.responseText);
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
 				//每个radio的value值
-				var v = str[i].name+"("+str[i].staffno+")";
+				var v = str[i].NAME+"("+str[i].staffno+")";
 				
 				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
-				var nametxt = document.createTextNode(str[i].name);
+				var nametxt = document.createTextNode(str[i].NAME);
 				var staffnotxt = document.createTextNode(str[i].staffno);
 				var tetxt = document.createTextNode(str[i].te);
 				var dutytxt = document.createTextNode(str[i].duty);
@@ -716,9 +678,13 @@ function search_member(){
 				tr_t.appendChild(td_duty);
 				tr_t.appendChild(td_notes);
 				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
 				//获取tableID
 				var table_t = document.getElementById("member_table");
-				table_t.appendChild(tr_t);
+				table_t.appendChild(tbody_t);
 			}
 		}
 	}
