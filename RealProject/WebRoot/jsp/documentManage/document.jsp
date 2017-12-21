@@ -95,7 +95,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick="" value="111"></button>
 						</p>
 						
@@ -107,7 +107,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -118,7 +118,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -129,7 +129,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -140,7 +140,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -370,7 +370,7 @@
 					}
     			}
     	};
-    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
     	req.send(null);
  	}
     function getFunction(cur){
@@ -407,7 +407,7 @@
 					}
     			}
     	};
-    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
     	req.send(null);
     }
     $(function () {
