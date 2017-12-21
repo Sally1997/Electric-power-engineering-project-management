@@ -281,14 +281,12 @@
  				window.location.href="${pageContext.request.contextPath}/web/servlet/downLoadMessage?dno="+this.value;
  				return false;
  			};
- 			//file preview
- 			var base="https://view.officeapps.live.com/op/view.aspx?src=";
- 			var src=encodeURIComponent("http://www.blackstar0412.cn/RealProject/web/servlet/downLoadMessage?dno="+documentData[i].dno);
+ 			
  			//判断是否可以进行预览
  			var t=documentData[i].ftype;
  			if(t=="docx"||t=="doc"||t=="ppt"||t=="pdf"||t=="xls"){
  				//使用office预览
- 				nodes[i].href="javascript:window.open('"+base+src+"')";
+ 				nodes[i].href="javascript:window.open('/RealProject/jsp/documentManage/preview.jsp?dno="+documentData[i].dno+"')";
  				
  			}else{
  				//直接下载 询问
@@ -368,6 +366,7 @@
 						fenye.style.display="block";
 						showtable.style.display="block";
 					}
+					
     			}
     	};
     	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");

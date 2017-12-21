@@ -139,6 +139,11 @@
     <servlet-name>FindDocument</servlet-name>
     <servlet-class>com.holyshit.web.servlet.FindDocument</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>SaveFileInCache</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SaveFileInCache</servlet-class>
+  </servlet>
+
 
 
 
@@ -265,6 +270,10 @@
   <servlet-mapping>
     <servlet-name>FindDocument</servlet-name>
     <url-pattern>/web/servlet/findDocument</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SaveFileInCache</servlet-name>
+    <url-pattern>/web/servlet/saveFile</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

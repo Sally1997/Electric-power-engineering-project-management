@@ -2,6 +2,7 @@ package com.holyshit.web.servlet;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -50,12 +51,12 @@ public class DownLoadMessage extends HttpServlet {
 		OutputStream out=response.getOutputStream();
 		int len=0;
 	
+		
 		//缓冲区
 		byte b[]=new byte[1024];
 		while((len=input.read(b))!=-1){
 			out.write(b, 0, len);
 		}
-		
 		//关闭流
 		out.close();
 		input.close();
