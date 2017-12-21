@@ -190,7 +190,7 @@
 			<font class="text">输入:</font>
 			</div>
 			<div id="first_right">
-			<input type="text" name="goal" size="20px;">&nbsp;&nbsp;
+			<input type="text" id="getme" name="goal" size="20px;">&nbsp;&nbsp;
 			<input type = "button" name = "ok" class="btn btn-primary" value = "查找" onClick="search_staff()">
 			<input name = "where" type = "radio" value = "in" checked="checked" onclick="choosepoc(this)"><span>项目内</span>
 			<input name = "where" type = "radio" value = "out" onclick="choosepoc(this)"><span>公司内</span>
@@ -271,7 +271,7 @@ function ifclick(v){
 		if(bigar[i].dj_sn==bigsn){
 			//如果在bigar数组里面找到对象的名字和当前阶段的名字相同的话就循环创建节点
 			for(j=0;j<bigar[i].dj_ii.length;j++){
-				<!-- 我这么重要当然要输出啦-->
+				//-- 我这么重要当然要输出啦-->
 				//alert(bigar[i].dj_ii[j]);
 				
 				//创建一个文本节点
@@ -353,7 +353,7 @@ function addGoal()
 	cursor_ii = form2.goal.value;//获取指标内容
 	//alert(cursor_ii);
 	
-	<!-- 我是分割线啊，你是谁啊-->
+	// 我是分割线啊，你是谁啊
 	
     var dlt = document.createElement("input");
 	dlt.setAttribute("name","deletenode");//复选框name为deletenode
@@ -410,7 +410,7 @@ function addGoal()
 	tComment.appendChild(tbody); //将节点tbody加入节点尾部
 	
 	form2.goal.value="";
-	<!-- 将index content 和 if need upload 加入数组中 -->
+	//将index content 和 if need upload 加入数组中 -->
 	dxi.dj_ii.push(cursor_ii);
 	return false;
 
@@ -775,9 +775,8 @@ function search_staff(){
 		tbody_t.removeChild(childs[i]);
 	}
 	
-	var g = document.getElementsByName("goal")[0];
+	var g = document.getElementById("getme");
 	var keyword = g.value;
-	alert(keyword);
 	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){

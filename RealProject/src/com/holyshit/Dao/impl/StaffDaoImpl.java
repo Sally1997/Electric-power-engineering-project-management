@@ -81,25 +81,36 @@ public class StaffDaoImpl implements StaffDao {
 	@Override
 	public List<Map<String, Object>> selectStaffInProject(String pno, String userno) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT staffno,name,te,duty,notes FROM "+
+		return qr.query("SELECT StaffNo,name,te,duty,notes FROM "+
 			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
-			"WHERE psrelation.pno=? AND staff.staffno=psrelation.StaffNo)a "+
-			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno", 
+			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno)a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno limit 0,10", 
 			new MapListHandler(),pno,userno);
-		
 	}
 
 	@Override
 	public List<Map<String, Object>> selectStaffInCompany(String pno, String userno) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT staffno,name,te,duty,notes FROM "+
+		return qr.query("SELECT StaffNo,name,te,duty,notes FROM "+
 			"(SELECT staff.StaffNo,NAME,te,duty "+
 			"FROM staff LEFT JOIN psrelation ON "+
-			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo)a "+
-			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno",
+			"psrelation.pno=? AND staff.staffno=psrelation.staffno)a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno limit 0,10",
 			new MapListHandler(),pno,userno);
 	}
 	
-	
+	@Override
+	public List<Map<String, Object>> selectStaffInCompany(String pno, String userno,String keyword) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT staffno,name,te,duty,notes FROM "+
+			"(SELECT staff.staffno,name,te,duty "+
+			"FROM staff LEFT JOIN psrelation ON "+
+			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo)a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) "+
+			"WHERE staffno LIKE ? OR NAME LIKE ? OR te LIKE ? "+
+			"OR duty LIKE ? OR notes LIKE ? ORDER BY staffno limit 0,10",
+			new MapListHandler(),pno,userno,"%"+keyword+"%","%"+keyword+"%",
+			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
+	}
 
 }

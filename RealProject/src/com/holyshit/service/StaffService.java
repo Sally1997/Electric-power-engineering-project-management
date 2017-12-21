@@ -40,4 +40,12 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> showStaffInCompany(String pno,String userno);
+	
+	/**\
+	 * 搜索公司成员列表
+	 * @param pno
+	 * @param userno
+	 * @return
+	 */
+	List<Map<String,Object>> queryStaffInCompany(String pno,String userno,String keyword);
 }

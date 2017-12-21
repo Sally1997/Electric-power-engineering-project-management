@@ -70,5 +70,15 @@ public interface StaffDao {
 	 * @throws SQLException 
 	 */
 	List<Map<String,Object>> selectStaffInCompany(String pno,String userno) throws SQLException;
+	
+	/**
+	 * 从公司里面搜索人员
+	 * @param pno 项目编号
+	 * @param userno 用户编号
+	 * @return 
+	 * @throws SQLException 
+	 */
+	List<Map<String,Object>> selectStaffInCompany(String pno,String userno,String keyword) throws SQLException;
+	
 }   
  
