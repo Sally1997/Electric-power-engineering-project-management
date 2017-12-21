@@ -2,7 +2,11 @@ package com.holyshit.utils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.holyshit.domain.PSPlan;
 import com.holyshit.service.ProjectService;
@@ -157,5 +161,49 @@ public class AutoNumber {
 	}
 	
 	//state从数字映射到字符串
+	
+	/**
+     * json大写转小写
+     * 
+     * @param jSONArray1 jSONArray1
+     * @return JSONObject
+     */
+    public static JSONObject transToLowerObject(String json) {
+        JSONObject jSONArray2 = new JSONObject();
+        JSONObject jSONArray1 = JSONObject.fromObject(json);
+        Iterator it = jSONArray1.keys();
+        while (it.hasNext()) {
+            String key = (String) it.next();
+            Object object = jSONArray1.get(key);
+            if (object.getClass().toString().endsWith("JSONObject")) {
+                jSONArray2.accumulate(key.toLowerCase(), transToLowerObject(object.toString()));
+            } else if (object.getClass().toString().endsWith("JSONArray")) {
+                jSONArray2.accumulate(key.toLowerCase(), transToArray(jSONArray1.getJSONArray(key).toString()));
+            }else{
+                 jSONArray2.accumulate(key.toLowerCase(), object);
+            }
+        }
+        return jSONArray2;
+    }
+
+    /**
+     * jsonArray转jsonArray
+     * 
+     * @param jSONArray1 jSONArray1
+     * @return JSONArray
+     */
+    public static JSONArray transToArray(String jsonArray) {
+        JSONArray jSONArray2 = new JSONArray();
+        JSONArray jSONArray1 = JSONArray.fromObject(jsonArray);
+        for (int i = 0; i < jSONArray1.size(); i++) {
+            Object jArray = jSONArray1.getJSONObject(i);
+            if (jArray.getClass().toString().endsWith("JSONObject")) {
+                jSONArray2.add(transToLowerObject( jArray.toString()));
+            } else if (jArray.getClass().toString().endsWith("JSONArray")) {
+                jSONArray2.add(transToArray(jArray.toString()));
+            }
+        }
+        return jSONArray2;
+    }
 	
 }

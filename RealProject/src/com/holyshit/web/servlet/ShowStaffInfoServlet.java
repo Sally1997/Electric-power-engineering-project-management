@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.holyshit.domain.Staff;
 import com.holyshit.service.StaffService;
 import com.holyshit.service.impl.StaffServiceImpl;
+import com.holyshit.utils.AutoNumber;
 
 import net.sf.json.JSONArray;
 
@@ -40,11 +41,16 @@ public class ShowStaffInfoServlet extends HttpServlet {
 		if(s.equals("ptype")){
 			//如果选择类型是空或者project type则
 			list = ss.showStaffInProject(pno, userno);
-			str = JSONArray.fromObject(list).toString();
+			String ja = JSONArray.fromObject(list).toString();
+			AutoNumber an = new AutoNumber();
+			str = an.transToArray(ja).toString();
 		}
 		else{
 			list = ss.showStaffInCompany(pno, userno);
-			str = JSONArray.fromObject(list).toString();
+			//str = JSONArray.fromObject(list).toString();
+			String ja = JSONArray.fromObject(list).toString();
+			AutoNumber an = new AutoNumber();
+			str = an.transToArray(ja).toString();
 		}
 		System.out.println(str);
 		//返回字符串
