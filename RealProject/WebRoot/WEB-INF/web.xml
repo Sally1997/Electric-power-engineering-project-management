@@ -147,6 +147,11 @@
     <servlet-name>SaveFileInCache</servlet-name>
     <servlet-class>com.holyshit.web.servlet.SaveFileInCache</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>UploadDocument</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.UploadDocument</servlet-class>
+  </servlet>
+
 
 
 
@@ -282,6 +287,10 @@
   <servlet-mapping>
     <servlet-name>SaveFileInCache</servlet-name>
     <url-pattern>/web/servlet/saveFile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadDocument</servlet-name>
+    <url-pattern>/web/servlet/uploadDocument</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

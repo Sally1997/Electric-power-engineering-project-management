@@ -247,6 +247,41 @@
  	var dateTo;
  	var keywords;
  	var fType;
+ 	
+ 	//上传文件
+ 	function submitFile(){
+ 		var file=document.getElementById("newfile").files[0];
+ 		var formdata=new FormData();
+ 		if(document.getElementById("newstitle").value==""){
+ 			alert("文件标题不能为空！");
+ 			return;
+ 		}
+ 		var hehe=document.getElementById("newfile").value;
+		if(hehe.lastIndexOf(".")==-1){
+			alert("请上传格式正确的文件!");
+			return ;
+		}
+ 		formdata.append("dtitle",document.getElementById("newstitle").value);
+ 		formdata.append("uploadfile",file);
+ 		
+ 		var req=new XMLHttpRequest();
+ 		req.onreadystatechange=function(){
+ 			if(req.readyState==4){
+ 				if(req.status==200){
+ 					if(req.responseText=="ok"){
+ 						alert("文件上传成功");
+ 						location.reload();
+ 					}
+ 					else{
+ 						alert("文件上传失败");
+ 					}
+ 				}
+ 			}
+ 		};
+ 		req.open("post", "${pageContext.request.contextPath}/web/servlet/uploadDocument");
+ 		req.send(formdata);
+ 	}
+ 	
  	//下载
  	function download(dno){
  		var res=confirm("当前文件暂不支持预览，是否进行下载?");

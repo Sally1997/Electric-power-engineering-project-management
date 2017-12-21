@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -118,6 +119,24 @@ public class DocumentDaoImpl implements DocumentDao{
 		}
 		System.out.println(sql);
 		return (long) qr.query(ConnectionManager.getConnection(), sql,new ScalarHandler());
+	}
+
+	@Override
+	public int addReadingNumber(String dno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(), "UPDATE document SET DloadTimes=DloadTimes+1 WHERE dno=?",dno);
+	}
+
+	@Override
+	public int addDocument(String dno, String uloadpno, String pno,
+			String dtitle, String dpath, String ftype, String dtype, int fsize)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="insert into document values(?,?,?,?,?,?,?,?,?,?,?)";
+		
+		return qr.update(ConnectionManager.getConnection(), sql,dno,uloadpno,pno,dtitle,dpath,new Timestamp(new java.util.Date().getTime()),0,ftype,dtype,fsize,"0");
 	}
 
 }

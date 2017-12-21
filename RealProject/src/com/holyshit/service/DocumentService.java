@@ -1,6 +1,7 @@
 package com.holyshit.service;
 
 import java.sql.Date;
+
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,17 @@ import com.holyshit.domain.Document;
  *
  */
 public interface DocumentService {
+	/**
+	 * 进行文件上传
+	 * @param dtitle
+	 * @param uloadpno
+	 * @param pno
+	 * @param ftype
+	 * @param dtype
+	 * @return
+	 */
+	boolean uploadDocument(String dno,String dtitle,String dpath,String uloadpno,String pno,String ftype,String dtype,int fsize);
+	
 	/**
 	 * 根据条件查询文档
 	 * @param ftype
