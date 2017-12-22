@@ -47,18 +47,20 @@ public class UploadDocument extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			String dtype=null;
 			for(FileItem f:pars){
 				if(f.isFormField()){
-					dtitle=f.getString();
-					dtitle=new String(dtitle.getBytes("ISO-8859-1"),"UTF-8");
-					System.out.println("取到的值为:"+dtitle);
+					if(f.getFieldName().equals("dtitle")){
+						dtitle=f.getString();
+						dtitle=new String(dtitle.getBytes("ISO-8859-1"),"UTF-8");
+					}else if(f.getFieldName().equals("dtype")){
+						dtype=f.getString();
+					}
 				}else{
 					//上传文件
 					if(dtitle!=null){
 						String dno=UUID.randomUUID().toString();
 						String filename=f.getName();
-						System.out.println("文件名:"+filename);
 						//获取后缀名
 						String ftype=filename.substring(filename.lastIndexOf(".")+1);
 						String uloadpno=((Staff)request.getSession().getAttribute("staff")).getStaffno();
@@ -68,7 +70,7 @@ public class UploadDocument extends HttpServlet {
 						//写入文件
 						String hash=Integer.toHexString(dtitle.hashCode());
 						
-						String base="d:/var/ProjectData/ProjectFile/"+hash.charAt(0)+"/"+hash.charAt(1);
+						String base="/var/ProjectData/ProjectFile/"+hash.charAt(0)+"/"+hash.charAt(1);
 						File filepath=new File(base);
 						//如果不存在，则创建目录
 						if(!filepath.exists())
@@ -83,7 +85,7 @@ public class UploadDocument extends HttpServlet {
 							return;
 						}
 							
-						boolean res = ds.uploadDocument(dno, dtitle, last.getPath(), uloadpno, "00000", ftype, "0",(int)f.getSize());
+						boolean res = ds.uploadDocument(dno, dtitle, last.getPath(), uloadpno, "00000", ftype, dtype,(int)f.getSize());
 						response.setCharacterEncoding("UTF-8");
 						if(res){
 							response.getWriter().write("ok");

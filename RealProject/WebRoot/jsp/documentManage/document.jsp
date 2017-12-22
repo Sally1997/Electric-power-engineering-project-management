@@ -59,7 +59,7 @@
                        <button class="btn btn-primary" type="button" onclick="findDocument();">搜索</button>
                        </span>
                        <span class="input-group-btn">
-                       <button type="button" class="btn btn-default" style="float: right;" data-toggle="modal" data-target="#handupFile">上传文件</button>
+                       <button type="button" class="btn btn-default" style="float: right;" data-toggle="modal" data-target="#handupFile" onclick="clearInfo();">上传文件</button>
                        </span>
                    </div>
                    </div>
@@ -208,10 +208,21 @@
 		  		<div class="form-group">
 				<label for="newsname" class="col-sm-2 control-label">文件主题</label>
 				<div class="col-sm-8">
-		            <input type = "text" id="newstitle">
+		            <input class="form-control" type = "text" id="newstitle">
 				</div>
 			  </div>
-		  
+		  		<!-- 文件类型 -->
+		  	<div class="form-group">
+				<label class="col-sm-2 control-label">文档类型</label>
+				<div class="col-sm-8">
+			    <select class="form-control" id="document_type">
+				  <option>请选择</option>
+				  <option>学习资料</option>
+				  <option>实用文档</option>
+				</select>
+				</div>
+			  </div>
+			  
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">上传文件</label>
 				<div class="col-sm-8">
@@ -250,6 +261,17 @@
  	
  	//上传文件
  	function submitFile(){
+ 		var document_type=document.getElementById("document_type").value;
+ 		var hehe_type="";
+ 		if(document_type=="请选择"){
+ 			alert("请选择文档类型");
+ 			return;
+ 		}else if(document_type=="学习资料"){
+ 			hehe_type="2";
+ 		}else if(document_type=="实用文档"){
+ 			hehe_type="3";
+ 		}
+ 		
  		var file=document.getElementById("newfile").files[0];
  		var formdata=new FormData();
  		if(document.getElementById("newstitle").value==""){
@@ -262,6 +284,7 @@
 			return ;
 		}
  		formdata.append("dtitle",document.getElementById("newstitle").value);
+ 		formdata.append("dtype",hehe_type);
  		formdata.append("uploadfile",file);
  		
  		var req=new XMLHttpRequest();
@@ -281,7 +304,16 @@
  		req.open("post", "${pageContext.request.contextPath}/web/servlet/uploadDocument");
  		req.send(formdata);
  	}
- 	
+ 	//点击上传文件按钮时，清除模态框信息
+ 	function clearInfo(){
+ 		var newstitle=document.getElementById("newstitle");
+ 		var newfile=document.getElementById("newfile");
+ 		var document_type=document.getElementById("document_type");
+ 		//清除
+ 		newstitle.value="";
+ 		newfile.value="";
+ 		document_type.value="请选择";
+ 	}
  	//下载
  	function download(dno){
  		var res=confirm("当前文件暂不支持预览，是否进行下载?");
