@@ -12,7 +12,14 @@ public class DocumentInfo {
 	private String ptype;
 	private String uloadpno;
 	private String pname;
+	private int fsize;
 	
+	public int getFsize() {
+		return fsize;
+	}
+	public void setFsize(int fsize) {
+		this.fsize = fsize;
+	}
 	public String getPtype() {
 		return ptype;
 	}

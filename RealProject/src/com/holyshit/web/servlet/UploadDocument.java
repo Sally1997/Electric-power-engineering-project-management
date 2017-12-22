@@ -31,23 +31,22 @@ public class UploadDocument extends HttpServlet {
 		//设置临时文件目录
 		dff.setRepository(new File(getServletContext().getRealPath("/tmp")));
 		ServletFileUpload upload=new ServletFileUpload(dff);
-		upload.setFileSizeMax(10*1024*1024); //设置文件的大小为10M
 		if(upload.isMultipartContent(request)){
 			List<FileItem> pars=null;
 			String dtitle=null;
 			DocumentService ds=new DocumentServiceImpl();
 			try {
-				try {
 					pars = upload.parseRequest(request);
-				} catch (FileUploadBase.FileSizeLimitExceededException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			} catch (FileUploadException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return;
 			}
 			String dtype=null;
+			if(pars==null){
+				response.getWriter().write("is null a ");
+				return;
+			}
 			for(FileItem f:pars){
 				if(f.isFormField()){
 					if(f.getFieldName().equals("dtitle")){
@@ -78,6 +77,7 @@ public class UploadDocument extends HttpServlet {
 						File last=new File(filepath.getPath()+"/"+realpath);
 						try {
 							f.write(last);
+							System.out.println(last.getPath());
 							f.delete();
 						} catch (Exception e) {
 							// TODO Auto-generated catch block

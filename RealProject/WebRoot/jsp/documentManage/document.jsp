@@ -20,6 +20,19 @@
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+	<style type="text/css">
+		.loadpagediv{  
+		    width:160px;  
+		    height:56px;  
+		    position: absolute;  
+		    top:50%; 
+			margin-left:-80px;
+			margin-top:-28px;
+		    left:50%;  
+		    background: url(https://m.baidu.com/static/search/ico_loading.gif) no-repeat;  
+		    z-index:9999;  
+		}  
+	</style>
 
 </head>
 
@@ -92,10 +105,11 @@
 						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
 						<p class="list-group-item-text">
 						    <span>项目A的名字其实特别特别特别的长</span>&nbsp;&nbsp;&nbsp;
-							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
-							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-time"></span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user">&nbsp;</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>查看次数：</span><span>1</span>
+							<span class="glyphicon glyphicon-download"></span><span>1</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-hdd"></span><span>1</span>KB
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick="" value="111"></button>
 						</p>
 						
@@ -104,10 +118,11 @@
 						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
 						<p class="list-group-item-text">
 						    <span>项目A的名字其实特别特别特别的长</span>&nbsp;&nbsp;&nbsp;
-							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
-							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-time"></span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user">&nbsp;</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>查看次数：</span><span>1</span>
+							<span class="glyphicon glyphicon-download"></span><span>1</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-hdd"></span><span>1</span>KB
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -115,10 +130,11 @@
 						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
 						<p class="list-group-item-text">
 						    <span>项目A的名字其实特别特别特别的长</span>&nbsp;&nbsp;&nbsp;
-							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
-							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-time"></span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user">&nbsp;</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>查看次数：</span><span>1</span>
+							<span class="glyphicon glyphicon-download"></span><span>1</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-hdd"></span><span>1</span>KB
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -126,10 +142,11 @@
 						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
 						<p class="list-group-item-text">
 						    <span>项目A的名字其实特别特别特别的长</span>&nbsp;&nbsp;&nbsp;
-							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
-							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-time"></span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user">&nbsp;</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>查看次数：</span><span>1</span>
+							<span class="glyphicon glyphicon-download"></span><span>1</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-hdd"></span><span>1</span>KB
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -137,10 +154,11 @@
 						<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-file"></span>文件一的名字其实很长很长很长很长</h4>
 						<p class="list-group-item-text">
 						    <span>项目A的名字其实特别特别特别的长</span>&nbsp;&nbsp;&nbsp;
-							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
-							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-time"></span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-user">&nbsp;</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>查看次数：</span><span>1</span>
+							<span class="glyphicon glyphicon-download"></span><span>1</span>&nbsp;&nbsp;&nbsp;
+							<span class="glyphicon glyphicon-hdd"></span><span>1</span>KB
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -233,7 +251,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary" onclick="submitFile();">上传</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="submitFile();">上传</button>
       </div>
     </div>
   </div>
@@ -258,11 +276,12 @@
  	var dateTo;
  	var keywords;
  	var fType;
- 	
+ 	//上传等待
+ 	var loadPageFlag;
  	//上传文件
  	function submitFile(){
  		var document_type=document.getElementById("document_type").value;
- 		var hehe_type="";
+ 		var hehe_type="0";
  		if(document_type=="请选择"){
  			alert("请选择文档类型");
  			return;
@@ -290,19 +309,22 @@
  		var req=new XMLHttpRequest();
  		req.onreadystatechange=function(){
  			if(req.readyState==4){
+ 				clearLoadPage();
  				if(req.status==200){
+ 					
  					if(req.responseText=="ok"){
  						alert("文件上传成功");
- 						location.reload();
+ 						location.reload(); 
  					}
- 					else{
- 						alert("文件上传失败");
+ 					else if(req.responseText=="outOfSize"){
+ 						alert("请上传");
  					}
  				}
  			}
  		};
  		req.open("post", "${pageContext.request.contextPath}/web/servlet/uploadDocument");
  		req.send(formdata);
+ 		loadPageFlag=setTimeout('loadPage()',100);
  	}
  	//点击上传文件按钮时，清除模态框信息
  	function clearInfo(){
@@ -341,6 +363,7 @@
  			spans[4].innerHTML=documentData[i].uloadpno;
  			spans[6].innerHTML=documentData[i].ftype;
  			spans[8].innerHTML=documentData[i].dloadtimes;
+ 			spans[10].innerHTML=documentData[i].fsize;
  			//download
  			var btn=nodes[i].getElementsByTagName("p")[0].getElementsByTagName("button")[0];
  			btn.value=documentData[i].dno;
@@ -517,6 +540,23 @@
     	document.getElementById("fenye").style.display="none";
     };
 </script>
+	<!-- 等待 -->
+	<div id="loadpagediv" class="loadpagediv" style="display: none;"></div>
+	<div id="shadow_hehe" style="width: 100%;height:100%;position: fixed;z-index: 888;opacity:0.8;background-color: black;left: 0;top: 0;display: none;"></div>
+	<script type="text/javascript">
+		function loadPage() {  
+			
+            document.getElementById('loadpagediv').style.display =  "block";
+            document.getElementById("shadow_hehe").style.display="block";
+            loadPageFlag= setTimeout('loadPage()',100);  
+	
+	    }
+		function clearLoadPage(){
+			document.getElementById('loadpagediv').style.display =  "none";
+            document.getElementById("shadow_hehe").style.display="none";
+            clearTimeout(loadPageFlag);
+		}
+	</script> 
 	<!-- 占位 -->
 	<div style="height: 50px"></div>
     <footer class="copyright atLow" style="z-index: 5">

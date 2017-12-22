@@ -66,7 +66,7 @@ public class DocumentDaoImpl implements DocumentDao{
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype from document join project on document.pno=project.pno where ptype='"+ptype+"'";
+		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from document join project on document.pno=project.pno where ptype='"+ptype+"'";
 		if(!dtype.equals(""))
 			sql+=" and dtype='"+dtype+"'";
 		if(!dateTo.equals(""))

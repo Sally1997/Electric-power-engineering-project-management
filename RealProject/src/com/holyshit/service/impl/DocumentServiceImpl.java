@@ -100,6 +100,7 @@ public class DocumentServiceImpl implements DocumentService {
 			jsonObject.put("dtype",di.getDtype());
 			jsonObject.put("uloadpno",di.getUloadpno());
 			jsonObject.put("pname",di.getPname());
+			jsonObject.put("fsize", di.getFsize());
 			documents.add(jsonObject);
 		}
 		Map<String, Object> resMap=new HashMap<String, Object>();
