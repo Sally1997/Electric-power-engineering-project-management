@@ -59,7 +59,7 @@
                        <button class="btn btn-primary" type="button" onclick="findDocument();">搜索</button>
                        </span>
                        <span class="input-group-btn">
-                       <button type="button" class="btn btn-default" style="float: right;" data-toggle="modal" data-target="#handupFile">上传文件</button>
+                       <button type="button" class="btn btn-default" style="float: right;" data-toggle="modal" data-target="#handupFile" onclick="clearInfo();">上传文件</button>
                        </span>
                    </div>
                    </div>
@@ -95,7 +95,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick="" value="111"></button>
 						</p>
 						
@@ -107,7 +107,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -118,7 +118,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -129,7 +129,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -140,7 +140,7 @@
 							<span>上传时间：</span><span>>2015-11-1 23:58</span>&nbsp;&nbsp;&nbsp;
 							<span>上传者：</span><span>201526010001</span>&nbsp;&nbsp;&nbsp;
 							<span>文件类型：</span><span>docx</span>&nbsp;&nbsp;&nbsp;
-							<span>下载次数：</span><span>1</span>
+							<span>查看次数：</span><span>1</span>
 							<button class="glyphicon glyphicon-save" style="font-size: 20px;float: right;" title="下载" onclick=""></button>
 						</p>
 					  </a>
@@ -208,10 +208,21 @@
 		  		<div class="form-group">
 				<label for="newsname" class="col-sm-2 control-label">文件主题</label>
 				<div class="col-sm-8">
-		            <input type = "text" id="newstitle">
+		            <input class="form-control" type = "text" id="newstitle">
 				</div>
 			  </div>
-		  
+		  		<!-- 文件类型 -->
+		  	<div class="form-group">
+				<label class="col-sm-2 control-label">文档类型</label>
+				<div class="col-sm-8">
+			    <select class="form-control" id="document_type">
+				  <option>请选择</option>
+				  <option>学习资料</option>
+				  <option>实用文档</option>
+				</select>
+				</div>
+			  </div>
+			  
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">上传文件</label>
 				<div class="col-sm-8">
@@ -247,6 +258,62 @@
  	var dateTo;
  	var keywords;
  	var fType;
+ 	
+ 	//上传文件
+ 	function submitFile(){
+ 		var document_type=document.getElementById("document_type").value;
+ 		var hehe_type="";
+ 		if(document_type=="请选择"){
+ 			alert("请选择文档类型");
+ 			return;
+ 		}else if(document_type=="学习资料"){
+ 			hehe_type="2";
+ 		}else if(document_type=="实用文档"){
+ 			hehe_type="3";
+ 		}
+ 		
+ 		var file=document.getElementById("newfile").files[0];
+ 		var formdata=new FormData();
+ 		if(document.getElementById("newstitle").value==""){
+ 			alert("文件标题不能为空！");
+ 			return;
+ 		}
+ 		var hehe=document.getElementById("newfile").value;
+		if(hehe.lastIndexOf(".")==-1){
+			alert("请上传格式正确的文件!");
+			return ;
+		}
+ 		formdata.append("dtitle",document.getElementById("newstitle").value);
+ 		formdata.append("dtype",hehe_type);
+ 		formdata.append("uploadfile",file);
+ 		
+ 		var req=new XMLHttpRequest();
+ 		req.onreadystatechange=function(){
+ 			if(req.readyState==4){
+ 				if(req.status==200){
+ 					if(req.responseText=="ok"){
+ 						alert("文件上传成功");
+ 						location.reload();
+ 					}
+ 					else{
+ 						alert("文件上传失败");
+ 					}
+ 				}
+ 			}
+ 		};
+ 		req.open("post", "${pageContext.request.contextPath}/web/servlet/uploadDocument");
+ 		req.send(formdata);
+ 	}
+ 	//点击上传文件按钮时，清除模态框信息
+ 	function clearInfo(){
+ 		var newstitle=document.getElementById("newstitle");
+ 		var newfile=document.getElementById("newfile");
+ 		var document_type=document.getElementById("document_type");
+ 		//清除
+ 		newstitle.value="";
+ 		newfile.value="";
+ 		document_type.value="请选择";
+ 	}
  	//下载
  	function download(dno){
  		var res=confirm("当前文件暂不支持预览，是否进行下载?");
@@ -281,14 +348,12 @@
  				window.location.href="${pageContext.request.contextPath}/web/servlet/downLoadMessage?dno="+this.value;
  				return false;
  			};
- 			//file preview
- 			var base="https://view.officeapps.live.com/op/view.aspx?src=";
- 			var src=encodeURIComponent("http://www.blackstar0412.cn/RealProject/web/servlet/downLoadMessage?dno="+documentData[i].dno);
+ 			
  			//判断是否可以进行预览
  			var t=documentData[i].ftype;
  			if(t=="docx"||t=="doc"||t=="ppt"||t=="pdf"||t=="xls"){
  				//使用office预览
- 				nodes[i].href="javascript:window.open('"+base+src+"')";
+ 				nodes[i].href="javascript:window.open('/RealProject/jsp/documentManage/preview.jsp?dno="+documentData[i].dno+"')";
  				
  			}else{
  				//直接下载 询问
@@ -368,9 +433,10 @@
 						fenye.style.display="block";
 						showtable.style.display="block";
 					}
+					
     			}
     	};
-    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
     	req.send(null);
  	}
     function getFunction(cur){
@@ -407,7 +473,7 @@
 					}
     			}
     	};
-    	req.open("get","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
     	req.send(null);
     }
     $(function () {

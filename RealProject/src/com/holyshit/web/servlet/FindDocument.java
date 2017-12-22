@@ -16,14 +16,18 @@ import com.holyshit.service.impl.DocumentServiceImpl;
 
 public class FindDocument extends HttpServlet {
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 //	参数	dtype="+dType+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize="+pagesize);
+		request.setCharacterEncoding("UTF-8");
 		String ptype=request.getParameter("ptype");
 		String dtype=request.getParameter("dtype");
 		String dateFrom=request.getParameter("dateFrom");
 		String dateTo=request.getParameter("dateTo");
 		String keywords=request.getParameter("keywords");
+		//linux服务器出现问题，乱码
+		keywords=new String(keywords.getBytes("ISO-8859-1"),"UTF-8"); 
+		System.out.println(keywords);
 		String ftype=request.getParameter("ftype");
 		int cur=Integer.parseInt(request.getParameter("currentPage"));
 		int pageSize=Integer.parseInt(request.getParameter("pageSize"));

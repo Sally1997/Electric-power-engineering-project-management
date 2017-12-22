@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.enterprise.inject.New;
 
@@ -52,16 +53,23 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public Document findDocumentById(String id) {
 		// TODO Auto-generated method stub
+		Document res=null;
 		DocumentDao dd=new DocumentDaoImpl();
+		ConnectionManager.startTransaction();
 		try {
-			return dd.getDocumentById(id);
+			res=dd.getDocumentById(id);
+			int num=dd.addReadingNumber(id);
+			if(num!=1)
+				throw new SQLException();
+			ConnectionManager.commit();
 		} catch (SQLException e) {
+			ConnectionManager.rollback();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			ConnectionManager.getConnection();
+			ConnectionManager.closeConnection();
 		}
-		return null;
+		return res;
 	}
 
 	@Override
@@ -102,6 +110,29 @@ public class DocumentServiceImpl implements DocumentService {
 		resMap.put("pageSize", pageSize);
 		resMap.put("pageNum", totalSize%pageSize==0?totalSize/pageSize:totalSize/pageSize+1);
 		return resMap;
+	}
+
+	@Override
+	public boolean uploadDocument(String dno,String dtitle,String dpath, String uloadpno, String pno,
+			String ftype, String dtype,int fsize) {
+		// TODO Auto-generated method stub
+		DocumentDao dd=new DocumentDaoImpl();
+		int res=0;
+		//类型转换
+		if(ftype.equals("mp4")||ftype.equals("flv")){
+			ftype="video";
+		}
+		try {
+			res=dd.addDocument(dno, uloadpno, pno, dtitle, dpath, ftype, dtype, fsize);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		if(res==1)
+			return true;
+		return false;
 	}
 
 }

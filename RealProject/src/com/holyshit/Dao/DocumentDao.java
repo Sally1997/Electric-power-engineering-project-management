@@ -15,6 +15,27 @@ import com.holyshit.domain.DocumentInfo;
  */
 public interface DocumentDao {
 	/**
+	 * 添加文件到数据库
+	 * @param dno
+	 * @param uloadpno
+	 * @param pno
+	 * @param dtitle
+	 * @param dpath
+	 * @param ftype
+	 * @param dtype
+	 * @param fsize
+	 * @return
+	 * @throws SQLException
+	 */
+	int addDocument(String dno,String uloadpno,String pno,String dtitle,String dpath,String ftype,String dtype,int fsize)throws SQLException;
+	/**
+	 * 将阅读数量加1
+	 * @param dno
+	 * @return
+	 * @throws SQLException
+	 */
+	int addReadingNumber(String dno)throws SQLException;
+	/**
 	 * 查询符合相应条件的文件数量
 	 * @param dtype
 	 * @param dateFrom
