@@ -54,7 +54,7 @@
 				  <ul class="dropdown-menu">
 					<li><a href="#">任务消息<span class="badge" style="float: right">4</span></a></li>
 					<li><a href="#">系统信息<span class="badge" style="float: right">4</span></a></li>
-		            <li><a href="#">审批消息<span class="badge" style="float: right">2</span></a></li>
+		            <li><a href="${pageContext.request.contextPath }/web/servlet/showNoticeServlet">审批消息<span class="badge" style="float: right">2</span></a></li>
 			      </ul>
               </li>
             </ul>

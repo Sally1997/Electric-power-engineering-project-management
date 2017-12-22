@@ -143,6 +143,10 @@
     <servlet-name>FindDocument</servlet-name>
     <servlet-class>com.holyshit.web.servlet.FindDocument</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ShowNoticeServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowNoticeServlet</servlet-class>
+  </servlet>
 
 
 
@@ -273,6 +277,10 @@
   <servlet-mapping>
     <servlet-name>FindDocument</servlet-name>
     <url-pattern>/web/servlet/findDocument</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowNoticeServlet</servlet-name>
+    <url-pattern>/web/servlet/showNoticeServlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

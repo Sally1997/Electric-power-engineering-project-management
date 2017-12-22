@@ -190,9 +190,10 @@
 			<font class="text">输入:</font>
 			</div>
 			<div id="first_right">
-			<input type="text" name="goal" size="20px;">&nbsp;&nbsp;<input type = "submit" name = "ok" class="btn btn-primary" value = "查找" onClick="return addGoal();">
-			<input name = "where" type = "radio" value = "in"><span>项目内</span>
-			<input name = "where" type = "radio" value = "out"><span>公司内</span>
+			<input type="text" id="getme" name="goal" size="20px;">&nbsp;&nbsp;
+			<input type = "button" name = "ok" class="btn btn-primary" value = "查找" onClick="search_staff()">
+			<input name = "where" type = "radio" value = "in" checked="checked" onclick="choosepoc(this)"><span>项目内</span>
+			<input name = "where" type = "radio" value = "out" onclick="choosepoc(this)"><span>公司内</span>
 			</div>
 			</div>
 			<div class="clear"></div>
@@ -227,11 +228,12 @@
     </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-    <button type="button" class="btn btn-primary" onclick="give_option()">选择</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="give_option()">选择</button>
     </div>
 	</div>
 </div>
 </div>
+  
 
   
  <div>
@@ -639,10 +641,10 @@ function search_member(){
 			
 			for(var i=0;i<str.length;i++){
 				//每个radio的value值
-				var v = str[i].NAME+"("+str[i].staffno+")";
+				var v = str[i].name+"("+str[i].staffno+")";
 				
 				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
-				var nametxt = document.createTextNode(str[i].NAME);
+				var nametxt = document.createTextNode(str[i].name);
 				var staffnotxt = document.createTextNode(str[i].staffno);
 				var tetxt = document.createTextNode(str[i].te);
 				var dutytxt = document.createTextNode(str[i].duty);
@@ -690,8 +692,156 @@ function search_member(){
 	}
 	
 	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
+	
 	aja.send(null);
 }
 
+function choosepoc(poc){
+	var tbody_t = document.getElementById("iamtbody");
+	var childs = tbody_t.childNodes;
+	for(var i=childs.length-1;i>=0;i--){
+		tbody_t.removeChild(childs[i]);
+	}
+	
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				var dutytxt = document.createTextNode(str[i].duty);
+				var notestxt = document.createTextNode(str[i].notes);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				var td_duty = document.createElement("td");
+				var td_notes = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				td_duty.appendChild(dutytxt);
+				td_notes.appendChild(notestxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				tr_t.appendChild(td_duty);
+				tr_t.appendChild(td_notes);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	
+	if(poc.value=="in"){
+		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
+	}
+	else{
+		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype");
+	}
+	aja.send(null);
+}
+
+function search_staff(){
+	var wh = document.getElementsByName("where")[1];
+	wh.checked = "checked";
+	
+	var tbody_t = document.getElementById("iamtbody");
+	var childs = tbody_t.childNodes;
+	for(var i=childs.length-1;i>=0;i--){
+		tbody_t.removeChild(childs[i]);
+	}
+	
+	var g = document.getElementById("getme");
+	var keyword = g.value;
+	
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				var dutytxt = document.createTextNode(str[i].duty);
+				var notestxt = document.createTextNode(str[i].notes);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				var td_duty = document.createElement("td");
+				var td_notes = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				td_duty.appendChild(dutytxt);
+				td_notes.appendChild(notestxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				tr_t.appendChild(td_duty);
+				tr_t.appendChild(td_notes);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+keyword);
+	
+	aja.send(null);
+}
 </script>
 </html>

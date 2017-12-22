@@ -38,7 +38,6 @@ public class ShowProjectServlet2 extends HttpServlet {
 		
 		//转换成JSON数组
 		String s = JSONObject.fromObject(info_map).toString();
-		System.out.println(s);
 		
 		response.getWriter().write(s);
 		
