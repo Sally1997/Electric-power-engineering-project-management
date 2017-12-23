@@ -66,9 +66,13 @@ public class DocumentDaoImpl implements DocumentDao{
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from document join project on document.pno=project.pno where ptype='"+ptype+"'";
-		if(!dtype.equals(""))
-			sql+=" and dtype='"+dtype+"'";
+		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from document join project on document.pno=project.pno where ";
+		if(!ptype.equals("")){
+			sql+=" ptype='"+ptype+"'";
+		}else{
+			sql+=" dtype='"+dtype+"'";
+			
+		}
 		if(!dateTo.equals(""))
 			sql+=" and uploadtime<='"+dateTo+"'";
 		if(!dateFrom.equals(""))
@@ -97,11 +101,13 @@ public class DocumentDaoImpl implements DocumentDao{
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		
-		String sql="select count(*) from document join project on document.pno=project.pno where ptype='"+ptype+"'";
-		if(!dtype.equals(""))
-			sql+=" and dtype='"+dtype+"'";
-		if(!dateTo.equals(""))
-			sql+=" and uploadtime<='"+dateTo+"'";
+		String sql="select count(*) from document join project on document.pno=project.pno where";
+		if(!ptype.equals("")){
+			sql+=" ptype='"+ptype+"'";
+		}else{
+			sql+=" dtype='"+dtype+"'";
+			
+		}
 		if(!dateFrom.equals(""))
 			sql+=" and uploadtime>='"+dateFrom+"'";
 		if(!keywords.equals(""))

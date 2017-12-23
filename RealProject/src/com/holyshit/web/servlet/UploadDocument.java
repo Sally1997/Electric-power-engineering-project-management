@@ -40,6 +40,7 @@ public class UploadDocument extends HttpServlet {
 			} catch (FileUploadException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				response.getWriter().write("throw a exception");
 				return;
 			}
 			String dtype=null;

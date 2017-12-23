@@ -1,3 +1,20 @@
+
+//ajax等待响应
+function loadPage() {  
+    document.getElementById('loadpagediv').style.display =  "block";
+    document.getElementById("shadow_hehe").style.display="block";
+    loadPageFlag= setTimeout('loadPage()',100);  
+
+}
+function clearLoadPage(){
+	document.getElementById('loadpagediv').style.display =  "none";
+    document.getElementById("shadow_hehe").style.display="none";
+    clearTimeout(loadPageFlag);
+}
+
+
+
+
 //显示指定页面的内容
 function jmpPage(cur){
 	//设置新标记

@@ -311,7 +311,7 @@
  			if(req.readyState==4){
  				clearLoadPage();
  				if(req.status==200){
- 					
+ 					alert(req.responseText);
  					if(req.responseText=="ok"){
  						alert("文件上传成功");
  						location.reload(); 
@@ -543,20 +543,6 @@
 	<!-- 等待 -->
 	<div id="loadpagediv" class="loadpagediv" style="display: none;"></div>
 	<div id="shadow_hehe" style="width: 100%;height:100%;position: fixed;z-index: 888;opacity:0.8;background-color: black;left: 0;top: 0;display: none;"></div>
-	<script type="text/javascript">
-		function loadPage() {  
-			
-            document.getElementById('loadpagediv').style.display =  "block";
-            document.getElementById("shadow_hehe").style.display="block";
-            loadPageFlag= setTimeout('loadPage()',100);  
-	
-	    }
-		function clearLoadPage(){
-			document.getElementById('loadpagediv').style.display =  "none";
-            document.getElementById("shadow_hehe").style.display="none";
-            clearTimeout(loadPageFlag);
-		}
-	</script> 
 	<!-- 占位 -->
 	<div style="height: 50px"></div>
     <footer class="copyright atLow" style="z-index: 5">
