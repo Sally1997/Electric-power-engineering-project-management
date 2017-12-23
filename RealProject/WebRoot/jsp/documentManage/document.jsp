@@ -49,8 +49,11 @@
               <div class="col-lg-2 col-sm-2">
 			  <div class="form-group">
 				<select class="selectpicker" data-width="100%" id="documentType">
-				  <option>设计类</option>
 				  <option>工程类</option>
+				  <option>设计类</option>
+				  <option>学习资料</option>
+				  <option>实用文档</option>
+				  
 				</select>
 			  </div>
 			  </div> 
@@ -187,21 +190,21 @@
                <div class="col-lg-4">
                    <div class="docType">
                    <h2><span class="glyphicon glyphicon-list-alt docTypeIcon"></span>项目资料</h2>
-                   <a class="noRight" href="documentPDoc.html" style="text-decoration: none;"><h4>点击进入>></h4></a>
+                   <a class="noRight" href="${pageContext.request.contextPath}/jsp/documentManage/projectDocument.jsp" style="text-decoration: none;"><h4>点击进入>></h4></a>
                    <p>这里放着的是项目资料，由项目管理页面上传</p>
                    </div>
                </div>
                <div class="col-lg-4">
                    <div class="docType">
                    <h2><span class="glyphicon glyphicon-education docTypeIcon"></span>学习资料</h2>
-                   <a class="noRight" href="studyDoc.html" style="text-decoration: none;"><h4>点击进入>></h4></a>
+                   <a class="noRight" href="${pageContext.request.contextPath}/jsp/documentManage/studyDocument.jsp" style="text-decoration: none;"><h4>点击进入>></h4></a>
                    <p>这里放着的是学习资料，由文档管理页面上传</p>
                    </div>
                </div>
                <div class="col-lg-4">
                    <div class="docType">
                    <h2><span class="glyphicon glyphicon-book docTypeIcon"></span>实用文档</h2>
-                   <a class="noRight" href="praticalDoc.html" style="text-decoration: none;"><h4>点击进入>></h4></a>
+                   <a class="noRight" href="${pageContext.request.contextPath}/jsp/documentManage/praticalDocument.jsp" style="text-decoration: none;"><h4>点击进入>></h4></a>
                    <p>这里放着的是实用文档，由文档管理页面上传</p>
                    </div>
                </div>
@@ -311,7 +314,6 @@
  			if(req.readyState==4){
  				clearLoadPage();
  				if(req.status==200){
- 					alert(req.responseText);
  					if(req.responseText=="ok"){
  						alert("文件上传成功");
  						location.reload(); 
@@ -374,7 +376,7 @@
  			
  			//判断是否可以进行预览
  			var t=documentData[i].ftype;
- 			if(t=="docx"||t=="doc"||t=="ppt"||t=="pdf"||t=="xls"){
+ 			if(t=="docx"||t=="doc"||t=="docm"||t=="dotm"||t=="dotx"||t=="xlsx"||t=="xlsb"||t=="xls"||t=="xlsm"||t=="pptx"||t=="ppsx"||t=="ppt"||t=="pps"||t=="pptm"||t=="potm"||t=="ppam"||t=="potx"||t=="posm"){
  				//使用office预览
  				nodes[i].href="javascript:window.open('/RealProject/jsp/documentManage/preview.jsp?dno="+documentData[i].dno+"')";
  				
@@ -391,10 +393,21 @@
  	function findDocument(){
  		//数据获取校验
     	ptype=document.getElementById("documentType").value;
-    	if(ptype=="工程类")
-    		ptype="0";
-    	else
+    	if(ptype=="工程类"){
     		ptype="1";
+    		dType="";
+    	}
+    	else if(ptype=="设计类"){
+    		ptype="0";
+    		dType="";
+    	}else if(ptype=="学习资料"){
+    		ptype="";
+    		dType="2";
+    	}else if(ptype=="实用文档"){
+    		ptype="";
+    		dType="3";
+    	}
+    		
     	dateFrom=document.getElementById("datetimepicker1").value;
     	
     	dateTo=document.getElementById("datetimepicker2").value;

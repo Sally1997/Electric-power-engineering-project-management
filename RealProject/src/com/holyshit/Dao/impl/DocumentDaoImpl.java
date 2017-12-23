@@ -67,10 +67,10 @@ public class DocumentDaoImpl implements DocumentDao{
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from document join project on document.pno=project.pno where ";
-		if(!ptype.equals("")){
-			sql+=" ptype='"+ptype+"'";
-		}else{
+		if(!dtype.equals("")){
 			sql+=" dtype='"+dtype+"'";
+		}else{
+			sql+=" ptype='"+ptype+"' and document.pno!='00000'";
 			
 		}
 		if(!dateTo.equals(""))
@@ -91,7 +91,6 @@ public class DocumentDaoImpl implements DocumentDao{
 			sql+=" )";		
 		}
 		sql+=" order by dloadtimes desc limit "+(cur-1)*pageSize+","+pageSize;
-		System.out.println(sql);
 		return qr.query(ConnectionManager.getConnection(), sql,new BeanListHandler<DocumentInfo>(DocumentInfo.class));
 	}
 
@@ -102,10 +101,10 @@ public class DocumentDaoImpl implements DocumentDao{
 		QueryRunner qr=new QueryRunner();
 		
 		String sql="select count(*) from document join project on document.pno=project.pno where";
-		if(!ptype.equals("")){
-			sql+=" ptype='"+ptype+"'";
-		}else{
+		if(!dtype.equals("")){
 			sql+=" dtype='"+dtype+"'";
+		}else{
+			sql+=" ptype='"+ptype+"' and document.pno!='00000'";
 			
 		}
 		if(!dateFrom.equals(""))

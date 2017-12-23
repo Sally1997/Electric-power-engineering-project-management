@@ -28,6 +28,10 @@ public class UploadDocument extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		DiskFileItemFactory dff=new DiskFileItemFactory();
+		//临时目录是否存在
+		File tmpDir=new File(getServletContext().getRealPath("/tmp"));
+		if(!tmpDir.exists())
+			tmpDir.mkdirs();
 		//设置临时文件目录
 		dff.setRepository(new File(getServletContext().getRealPath("/tmp")));
 		ServletFileUpload upload=new ServletFileUpload(dff);
