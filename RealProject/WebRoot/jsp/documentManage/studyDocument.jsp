@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>文档管理</title>
+<title>学习资料</title>
 	<%@include file="/head.jsp" %>
     <script type="text/javascript">
 	    menus[2].className="active nav-current";
@@ -17,8 +17,8 @@
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
       <!-- bootstrap-datetimepicker -->
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/moment.min.js"></script>
-  <script type="text/javascript" src="${pageContext.request.contextPath }/js/document.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/js/document.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 	<style type="text/css">
@@ -49,13 +49,8 @@
            <div class="row">
               <div class="col-lg-2 col-sm-2">
 			  <div class="form-group">
-				<select class="selectpicker" data-width="100%" id="documentType">
-				  <option>工程类</option>
-				  <option>设计类</option>
-				  <option>学习资料</option>
-				  <option>实用文档</option>
-				  
-				</select>
+				 <!-- <span class="form-control">学习资料</span> -->
+				 <input class="form-control" type="text" value="学习资料" id="documentType" readonly="readonly">
 			  </div>
 			  </div> 
 			  <div class='col-lg-3 col-lg-offset-4 col-sm-3 col-sm-offset-4'>
@@ -185,32 +180,9 @@
 				  	</script>             	 
 			   </div>
 			   </div>
-                      <!--不是搜索栏的模块部分-->
-           <div class="container-fluid" id="detail_enter">
-           <div class="row">
-               <div class="col-lg-4">
-                   <div class="docType">
-                   <h2><span class="glyphicon glyphicon-list-alt docTypeIcon"></span>项目资料</h2>
-                   <a class="noRight" href="${pageContext.request.contextPath}/jsp/documentManage/projectDocument.jsp" style="text-decoration: none;"><h4>点击进入>></h4></a>
-                   <p>这里放着的是项目资料，由项目管理页面上传</p>
-                   </div>
-               </div>
-               <div class="col-lg-4">
-                   <div class="docType">
-                   <h2><span class="glyphicon glyphicon-education docTypeIcon"></span>学习资料</h2>
-                   <a class="noRight" href="${pageContext.request.contextPath}/jsp/documentManage/studyDocument.jsp" style="text-decoration: none;"><h4>点击进入>></h4></a>
-                   <p>这里放着的是学习资料，由文档管理页面上传</p>
-                   </div>
-               </div>
-               <div class="col-lg-4">
-                   <div class="docType">
-                   <h2><span class="glyphicon glyphicon-book docTypeIcon"></span>实用文档</h2>
-                   <a class="noRight" href="${pageContext.request.contextPath}/jsp/documentManage/praticalDocument.jsp" style="text-decoration: none;"><h4>点击进入>></h4></a>
-                   <p>这里放着的是实用文档，由文档管理页面上传</p>
-                   </div>
-               </div>
-           </div>
-           </div>
+                 <!-- 占位兼容 -->     
+               <div id="detail_enter"></div>
+                      
        </div>
        </div>
        
@@ -282,10 +254,6 @@
  	var fType;
  	//上传等待
  	var loadPageFlag;
- 	
- 	
- 	
- 	
     $(function () {
         $('#datetimepicker1').datetimepicker({
 			locale:'zh-cn',
@@ -325,11 +293,12 @@
     	document.getElementById("showtable").style.display="none";
     	document.getElementById("noRes").style.display="none";
     	document.getElementById("fenye").style.display="none";
+    	findDocument();
     };
 </script>
 	<!-- 等待 -->
 	<div id="loadpagediv" class="loadpagediv" style="display: none;"></div>
-	<div id="shadow_hehe" style="width: 100%;height:100%;position: fixed;z-index: 888;opacity:0.9;background-color: black;left: 0;top: 150px;display: none;"></div>
+	<div id="shadow_hehe" style="width: 100%;height:100%;position: fixed;z-index: 888;opacity:0.8;background-color: black;left: 0;top: 0;display: none;"></div>
 	<!-- 占位 -->
 	<div style="height: 50px"></div>
     <footer class="copyright atLow" style="z-index: 5">

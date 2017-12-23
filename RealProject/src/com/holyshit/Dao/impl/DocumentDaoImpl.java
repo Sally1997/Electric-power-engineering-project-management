@@ -122,7 +122,6 @@ public class DocumentDaoImpl implements DocumentDao{
 				}
 			sql+=" )";		
 		}
-		System.out.println(sql);
 		return (long) qr.query(ConnectionManager.getConnection(), sql,new ScalarHandler());
 	}
 

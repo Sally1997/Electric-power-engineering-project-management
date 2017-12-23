@@ -26,7 +26,6 @@ public class UploadDocument extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
 		DiskFileItemFactory dff=new DiskFileItemFactory();
 		//临时目录是否存在
 		File tmpDir=new File(getServletContext().getRealPath("/tmp"));
@@ -82,7 +81,6 @@ public class UploadDocument extends HttpServlet {
 						File last=new File(filepath.getPath()+"/"+realpath);
 						try {
 							f.write(last);
-							System.out.println(last.getPath());
 							f.delete();
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
@@ -97,9 +95,6 @@ public class UploadDocument extends HttpServlet {
 						}else{
 							response.getWriter().write("error");
 						}
-					}
-					else{
-						System.out.println("error");
 					}
 					
 				}
