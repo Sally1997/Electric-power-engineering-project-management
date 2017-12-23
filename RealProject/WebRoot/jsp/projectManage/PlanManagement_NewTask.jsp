@@ -609,6 +609,8 @@ function dsubmit(){
 	pf.submit();
 }
 
+
+
 function give_option(){
 	var ccp = document.getElementsByName("choose_char_per");
 	//这个是弹窗的id
@@ -623,6 +625,7 @@ function give_option(){
 	}
 }
 
+//以下是选择用户功能
 function search_member(){
 	var tbody_t = document.getElementById("iamtbody");
 	var childs = tbody_t.childNodes;
