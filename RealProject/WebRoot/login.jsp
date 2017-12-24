@@ -5,6 +5,7 @@
   <head>
     <title>员工登陆</title>
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/image/1.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
     <meta name="keywords" content="keyword1,keyword2,keyword3">
     <meta name="description" content="this is my page">
     <meta name="content-type" content="text/html; charset=UTF-8">
@@ -14,8 +15,7 @@
 	<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
    	<script type="text/javascript" src="${pageContext.request.contextPath}/js/yqz.js"></script>
    <!--jsp-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/login.css" type="text/css">
-   
+    
     <meta charset=UTF-8>
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
     <script type="text/javascript">
@@ -27,61 +27,15 @@
   				var img=document.getElementById("img");
   				img.src="${pageContext.request.contextPath}/web/servlet/validatecode?"+new Date();
   			}
-  			window.onload=function(){
-  				if("${account.staffno}"!=""){
-  					//获取用户头像
-  					getUserLogo();
-  				}
-  			}	
+  			
     	</script>
-  
-	<style type="text/css">
-		body{
-			background-image: url(${pageContext.request.contextPath}/image/indexbk.jpg);
-			font-family: "微软雅黑";
-			background-size: cover; 
-			
-		}
-		main{
-			margin-top: 80px;
-		}
-		form{
-			margin-top: 20px;
-		}
-		form small{
-			font-weight: lighter;
-		}
-		.round-img{
-			width:60px; 
-			height:60px; 
-			border-radius:50%;
-			line-height:60px; 
-			display:block; 
-			color:#585858; 
-		}
-		.jumbotron h1{
+  		<style type="text/css">
+  		.jumbotron h1{
 			color: white;
 			font-weight: lighter;
 			letter-spacing: 5px;
 		}
-		.jumbotron p{
-			color: white;
-			font-weight: lighter;
-		}
-		#img {
-        border-radius: 2px;
-        cursor: pointer;
-        position: absolute;
-        z-index: 3;
-        left: 0;
-        top: 0;
-        }
-
-        #validateCode {
-        padding-left: 110px;
-        }
-
-  </style>
+  		</style>
   </head>
 
   <body>
@@ -89,12 +43,14 @@
       <div class="container-fluid">
           <div class="row">
               <main>
+             
               <div class="col-lg-8">
               	  <div class="jumbotron" style="background-color: transparent;text-align:right">
               	  	<h1>面向电力项目工程管理</h1>
               	  	<p>一个快捷，方便的项目管理网站，专门为电力工程设计</p>
               	  </div>
               </div>
+       
               <div class="col-lg-3">
               	  <div class="panel panel-primary" style="margin-top: 10px;background-color: rgba(255,255,255,0.80);border-radius: 5%">
                       <div class="panel-body" style="margin-top: 20px;margin-bottom: 10px">

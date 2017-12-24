@@ -2,19 +2,46 @@
 <html>
   <head>
     <title>offline.html</title>
-	
+	<link rel="shortcut icon" href="/RealProject/image/1.ico" type="image/x-icon" />
     <meta name="keywords" content="keyword1,keyword2,keyword3">
     <meta name="description" content="this is my page">
     <meta name="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/RealProject/js/yqz.js"></script>
+	<link rel="stylesheet" href="/RealProject/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="/RealProject/bootstrap/css/bootstrap.min.css">
+	
+	<script src="/RealProject/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/RealProject/css/login.css">
   </head>
   
   <body>
-    <p>您处于离线状态
-   	<br>
-   	<a href="/RealProject/login.jsp">登陆</a>
-   	<br>
+    <section>
+      <div class="container-fluid">
+          <div class="row">
+              <main>
+              <div class="col-lg-8">
+              	  <div class="jumbotron" style="background-color: transparent;text-align:right">
+              	  	<h1>面向电力项目工程管理</h1>
+              	  	<p>一个快捷，方便的项目管理网站，专门为电力工程设计</p>
+              	  </div>
+              </div>
+              <div class="col-lg-3">
+              	  <div class="panel panel-primary" style="margin-top:70px;background-color: rgba(255,255,255,0.70);border-radius: 5%">
+                      <div class="panel-body" style="margin-top: 20px;margin-bottom: 10px">
+                      <div class="col-lg-12"> 
+              	      <p style = "font-size:20px;color:black;">您处于离线状态
+                       <!--  <button type="button" class="btn btn-primary" style = "float:right"><a href="#" style="text-decoration: none;">登录</a></button></p> -->
+                      	<a href="/RealProject/login.jsp"><button type="button" class="btn btn-primary" style = "float:right">登录</button></a>
+                        
+              	      </div>
+              	      </div>
+              	  </div>
+              </div>
+              </main>
+          </div>
+      </div>
+  </section>
   </body>
 </html>

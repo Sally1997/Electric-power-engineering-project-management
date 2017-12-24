@@ -1,6 +1,7 @@
 body{
-			background-image: url(indexbk.png);
-			font-family: "Î¢ÈíÑÅºÚ";
+			background-image: url(/RealProject/image/indexbk.jpg);
+			font-family: "微软雅黑";
+			background-size: cover;
 			
 		}
 		main{
@@ -20,6 +21,14 @@ body{
 		.jumbotron p{
 			color: white;
 			font-weight: lighter;
+		}
+		.round-img{
+			width:60px; 
+			height:60px; 
+			border-radius:50%;
+			line-height:60px; 
+			display:block; 
+			color:#585858; 
 		}
 		#img {
         border-radius: 2px;
