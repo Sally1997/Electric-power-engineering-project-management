@@ -75,7 +75,6 @@ public class FeeAuditDaoImpl implements FeeAuditDao{
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		System.out.println("state="+state);
 		return qr.update(ConnectionManager.getConnection(),"UPDATE feeaudit SET auditadv=?,audittime=?,auditstate=? WHERE fauditno=?",cause,new Date(new java.util.Date().getTime()),state,fauditno);
 	}
 

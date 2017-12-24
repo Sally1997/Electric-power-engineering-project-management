@@ -31,7 +31,6 @@ public class StageTasksServiceImpl implements StageTasksService{
 			tasks=std.selectAllTasksById(id);
 			for(StageTask st : tasks){
 				String pno=st.getTaskno().substring(0, 5);
-				System.out.println("取到了"+pno);
 				pname = pd.selectProjetById(pno).getPname();
 				projectNames.add(pname);
 			}

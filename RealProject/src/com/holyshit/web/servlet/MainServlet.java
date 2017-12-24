@@ -66,7 +66,6 @@ public class MainServlet extends HttpServlet {
 				NoticeService ns=new NoticeServiceImpl();
 				Map<String, Object> notices = ns.showAllNoticeByPage(1, 5);
 				request.setAttribute("notices",notices );
-				
 				//转向到主页
 				request.getRequestDispatcher("/jsp/homeManage/main.jsp").forward(request, response);
 	}

@@ -52,7 +52,6 @@ public class DeleteSessionListener implements ServletContextListener{
 						application.setAttribute("livingcount", num-1);
 						session.invalidate();
 						iterator.remove();
-						System.out.println("1人被系统强制踢出，当前在线人数："+(Integer)application.getAttribute("livingcount"));
 					}
 				}
 			}

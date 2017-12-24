@@ -29,7 +29,6 @@ public class ProjectServiceImpl implements ProjectService {
 		}finally{
 			ConnectionManager.closeConnection();
 		}
-		System.out.println(projects);
 		return projects;
 	}
 

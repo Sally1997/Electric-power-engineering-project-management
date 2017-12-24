@@ -187,7 +187,7 @@
 						</c:forEach>
 						  <a class="list-group-item">&nbsp;
 						  <!-- 指定管理员 -->
-						  <c:if test="${staff.staffno=='201526010001' }">
+						  <c:if test="${not empty publicNotice_1 }">
 						  	<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupNews">发布</button>
 						 	<br><br>
 						  </c:if>

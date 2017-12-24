@@ -113,7 +113,6 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			ConnectionManager.closeConnection();
 		}
 
-		System.out.println(projectbudget.toString());
 		
 		//封装返回的map
 		Map<String, Object> resMap=new HashMap<String, Object>();
@@ -261,7 +260,6 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				pubpno=std.selectTaskInfoByTaskNo(task.getPtaskno()).getCharpno();
 			}else{
 				if(pd.selectPsPlanInfo(task.getPtaskno())==null){
-					System.out.println("11111");
 				}
 				pubpno=pd.selectPsPlanInfo(task.getPtaskno()).getCharpno();
 			}
