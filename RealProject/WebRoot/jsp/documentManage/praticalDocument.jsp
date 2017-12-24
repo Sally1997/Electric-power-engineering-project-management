@@ -295,16 +295,6 @@
     	findDocument();
     };
 </script>
-	<!-- 等待 -->
-	<div id="loadpagediv" class="loadpagediv" style="display: none;"></div>
-	<div id="shadow_hehe" style="width: 100%;height:100%;position: fixed;z-index: 888;opacity:0.8;background-color: black;left: 0;top: 0;display: none;"></div>
-	<!-- 占位 -->
-	<div style="height: 50px"></div>
-    <footer class="copyright atLow" style="z-index: 5">
-    <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-	</div>
-	</footer>
+	<%@include file="/footer.jsp" %>
 </body>
 </html>

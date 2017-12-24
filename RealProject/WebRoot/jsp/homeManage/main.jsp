@@ -247,12 +247,7 @@
   </div>
 </div>
     
-    <footer class="copyright atLow">
-    <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-	</div>
-	</footer>
+    <%@include file="/footer.jsp" %>
 	<!--实现文本缩略-->
 	<script type="text/javascript"> 
     var mylist = document.getElementsByName("myabbr");

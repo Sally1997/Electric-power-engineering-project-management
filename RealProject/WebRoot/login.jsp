@@ -39,6 +39,7 @@
 		body{
 			background-image: url(${pageContext.request.contextPath}/image/indexbk.jpg);
 			font-family: "微软雅黑";
+			background-size: cover; 
 			
 		}
 		main{

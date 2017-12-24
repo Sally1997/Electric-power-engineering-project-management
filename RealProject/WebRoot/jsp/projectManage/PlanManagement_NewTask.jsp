@@ -238,12 +238,7 @@
 	<input type="button" value="开发人员测试" onclick="root()" style="position:fixed;top:40%;right:5%;z-index:999">
  </div>
   
-<footer class="copyright">
-  <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-  </div>
-  </footer>
+<%@include file="/footer.jsp" %>
 </body>
 <script type="text/javascript">
 //全局的大阶段名称

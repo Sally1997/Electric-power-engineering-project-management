@@ -263,12 +263,7 @@
  
 
  
- <footer class="copyright">
-  <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-  </div>
-  </footer>
+ <%@include file="/footer.jsp" %>
   </body>
 <script type="text/javascript">
 	function getFunction(cur){
