@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>通知</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <link href="public.css" rel="stylesheet" type="text/css">
+    <!--下拉菜单插件bootstrap-select-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css"> 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="bootstrap-select/bootstrap-select/js/i18n/defaults-*.js"></script>
+    
+      <!-- bootstrap-datetimepicker -->
+  <script type="text/javascript" src="bootstrap-datetimepicker/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="bootstrap-datetimepicker/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="bootstrap-datetimepicker/moment/min/locales.min.js"></script>
+  <script type="text/javascript" src="bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+</head>
+
+<body style="min-height: 100%">
+
+<!-- 页眉-->   
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- start logo -->
+                    <span class="blanding"><img src="src/logo.png" width="100px">面向电力工程项目管理</span>
+                    
+                    <!-- end logo -->
+                    
+                </div>
+            </div>
+        </div>
+      </header>
+ <!--   导航栏-->
+  	<div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+    <!-- 导航栏-->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="main.html">首页</a></li>
+              <li><a href="01-projectmanagerfirst 01.html">项目管理</a></li>
+              <li><a href="document.html">文档管理</a></li>
+              <li><a href="moneymanage.html">资金管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer"></a></li>
+              <li><a href="#">用户XXX</a></li>
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
+				  <ul class="dropdown-menu" id="navinform">
+					<li><a href="#taskinform">任务消息<span class="badge" style="float: right">4</span></a></li>
+					<li><a href="#sysinform" >系统信息<span class="badge" style="float: right">4</span></a></li>
+		            <li><a href="#checkinform">审批消息<span class="badge" style="float: right">2</span></a></li>
+			      </ul>
+              </li>
+            </ul>
+         </div><!-- /.navbar-collapse -->
+       </div><!-- /.container-fluid -->
+     </nav>
+  </div>
+    
+   
+    <section style="min-height: 100%">
+       <div class="container-fluid">
+       <div class="row">
+       <div class="col-lg-10 xumode">
+					 <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist" id="myTab">
+			<li role="presentation"><a href="#taskinform" aria-controls="taskinform" role="tab" data-toggle="tab">任务消息&nbsp;<span class="badge">4</span></a></li>
+			<li role="presentation"><a href="#sysinform" aria-controls="sysinform" role="tab" data-toggle="tab">系统信息&nbsp;<span class="badge">4</span></a></li>
+			<li role="presentation"><a href="#checkinform" aria-controls="checkinform" role="tab" data-toggle="tab">审批消息&nbsp;<span class="badge">2</span></a></li>
+		  </ul>
+
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+			<div role="tabpanel" class="tab-pane" id="taskinform">
+				<div class="list-group">
+				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
+				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
+				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
+				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
+				  <button type="button" class="list-group-item">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="sysinform">				
+			  <div class="list-group">
+				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉入项目组<strong>进入项目A的名字特别特别特别长</strong><span class="small"><a>&nbsp;>进入项目</a></span></button>
+				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉出项目组<strong>进入项目A的名字特别特别特别长</strong></button>
+				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉入项目组<strong>进入项目A的名字特别特别特别长</strong><span class="small"><a>&nbsp;>进入项目</a></span></button>
+				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉出项目组<strong>进入项目A的名字特别特别特别长</strong></button>
+				  <button type="button" class="list-group-item">您已经被<strong>用户A</strong>拉入项目组<strong>进入项目A的名字特别特别特别长</strong><span class="small"><a>&nbsp;>进入项目</a></span></button>
+				</div>
+				</div>
+			<div role="tabpanel" class="tab-pane" id="checkinform">
+				<div class="list-group">
+				  <button type="button" class="list-group-item list-group-item-success">您的项目<strong>项目A的名字特别特别特别长</strong>已通过审批<span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small"><a>&nbsp;>查看</a></span></button>
+				  <button type="button" class="list-group-item list-group-item-danger">您的报账<strong>任务三：报账理由</strong>未通过审批</button>
+				  <button type="button" class="list-group-item">您的报账<strong>任务二：报账理由</strong>未通过审批</button>
+				  <button type="button" class="list-group-item">您的报账<strong>任务一：报账理由</strong>通过审批</button>
+				</div>
+			</div>
+		  </div>
+       </div>
+       </div>
+       </div>
+    </section>
+    <script>
+	$(function () {
+		$('#myTab li:eq(0) a').tab('show');
+	});
+		
+		
+	/*注明：导航栏那个下拉菜单被我多加了个id叫navinform*/
+	$(function () {
+		var i;
+		if(i == 0)
+		{
+		  $('#myTab li:eq(0) a').tab('show')
+		}
+		else if(i == 1)
+		{
+		  $('#myTab li:eq(1) a').tab('show')
+		}
+		else if(i == 2)
+		{
+		  $('#myTab li:eq(2) a').tab('show')
+		}
+		else{
+		/*	随便写个什么错误提示
+			*/
+		}
+	});
+	</script>
+    <footer class="copyright">
+    <div class="container-fluid">
+      	<p>©版权归谭莹小组所有</p>
+   
+	</div>
+	</footer>
+</body>
+</html>
