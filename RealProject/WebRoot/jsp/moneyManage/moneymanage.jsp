@@ -6,7 +6,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>资金管理</title>
-
+	<!-- 包含头部内容 -->
+   <%@ include file="/head.jsp"%>
+   <script type="text/javascript">
+		menus[3].className="active nav-current";
+		menus[3].role="presentation";	
+	</script>
     <!-- Bootstrap -->
     
 	
@@ -46,12 +51,7 @@
 
   </head>
   <body> 
-   <!-- 包含头部内容 -->
-   <%@ include file="/head.jsp"%>
-   <script type="text/javascript">
-		menus[3].className="active nav-current";
-		menus[3].role="presentation";	
-	</script>
+   
 	
  <!--      默认隐藏的内容:报账详细信息-->
   <div class="modal fade bs-example-modal-sm" id="acInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

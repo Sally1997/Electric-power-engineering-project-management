@@ -6,6 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>${noticetitle }</title>
+<%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[0].className="active nav-current";
+		menus[0].role="presentation";	
+	</script>
 <style type="text/css">
 	.noticeTop{
 		text-align: center;
@@ -16,11 +21,7 @@
 </style>
 </head>
 <body>
-	<%@include file="/head.jsp" %>
-	<script type="text/javascript">
-		menus[0].className="active nav-current";
-		menus[0].role="presentation";	
-	</script>
+	
 	
 	<!--  主要内容-->
 <section>

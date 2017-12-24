@@ -7,14 +7,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>新建阶段</title>
-
- </head>
- <body> 
-   <%@include file="/head.jsp" %>
+	 <%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
 	</script>
+ </head>
+ <body> 
+  
 <!--  主要内容-->
 <section>
     <div class=container-fluid>

@@ -10,7 +10,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Planfirst</title>
-
+	<%@ include file="/head.jsp"%>
+   <script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";	
+	</script>
     <!-- Bootstrap -->
     
 <style type="text/css">
@@ -36,11 +40,7 @@
   </head>
   <body> 
    <!-- 网页头部 -->
-	<%@ include file="/head.jsp"%>
-   <script type="text/javascript">
-		menus[1].className="active nav-current";
-		menus[1].role="presentation";	
-	</script>
+	
 	
 <!--  主要内容-->
   <section>

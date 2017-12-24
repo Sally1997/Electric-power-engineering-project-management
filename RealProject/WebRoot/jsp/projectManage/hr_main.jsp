@@ -10,6 +10,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>01-hrfirst</title>
+    <%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";	
+	</script>
 	<script type="text/javascript">
 		function checkAll(){
 			var flag=document.getElementById("ckAll").checked;
@@ -43,11 +48,7 @@
 	</script>
   </head>
   <body> 
-   <%@include file="/head.jsp" %>
-	<script type="text/javascript">
-		menus[1].className="active nav-current";
-		menus[1].role="presentation";	
-	</script>
+   
 <!--  主要内容-->
   <section>
     <div class=container-fluid>

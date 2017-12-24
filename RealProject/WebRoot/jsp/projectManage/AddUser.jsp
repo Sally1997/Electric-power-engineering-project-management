@@ -60,6 +60,7 @@
 }
 </script>
 <title>Insert title here</title>
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/1.ico" type="image/x-icon" />
 </head>
 <body>
 	

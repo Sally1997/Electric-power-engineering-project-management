@@ -11,16 +11,17 @@
 <head>
 <meta charset="utf-8">
 <title>首页</title>
-    <!-- Bootstrap -->
-
-</head>
-
-<body>
-	<%@include file="/head.jsp" %>
+<%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[0].className="active nav-current";
 		menus[0].role="presentation";	
 	</script>
+    <!-- Bootstrap -->
+	
+</head>
+
+<body>
+	
 	
 	<script type="text/javascript">
 		//ajax请求上传文件

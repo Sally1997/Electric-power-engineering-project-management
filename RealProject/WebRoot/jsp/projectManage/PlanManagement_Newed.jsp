@@ -12,6 +12,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlanManagement_Newed</title>
+    <%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";
+	</script>	
     <style type="text/css">
     * {
     padding: 0;
@@ -41,11 +46,7 @@
  </head>
  <body> 
  <!--   导航栏-->
-  	   <%@include file="/head.jsp" %>
-	<script type="text/javascript">
-		menus[1].className="active nav-current";
-		menus[1].role="presentation";
-	</script>	
+  	   
 	
 <% request.setAttribute("pno",request.getParameter("pno")); %>
 <!--  主要内容-->

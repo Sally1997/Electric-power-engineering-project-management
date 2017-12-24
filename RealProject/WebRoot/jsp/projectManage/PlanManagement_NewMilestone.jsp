@@ -6,16 +6,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlanManagement_NewMilestone</title>
-
- </head>
- <body> 
-   <%@include file="/head.jsp" %>
+	<%@include file="/head.jsp" %>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/fozza.css" type="text/css">
    
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
 	</script>
+ </head>
+ <body> 
+   
 	
 	<%-- div下拉菜单 --%>
 	<div id="fozza1" class="fozza2"></div>

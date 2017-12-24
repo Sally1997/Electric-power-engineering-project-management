@@ -5,13 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>更多公告</title>
-</head>
-<body>
-	<%@include file="/head.jsp" %>
+<%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[0].className="active nav-current";
 		menus[0].role="presentation";	
 	</script>
+</head>
+<body>
+	
 	<script type="text/javascript">
 		var noticeData;
 		function getFunction(cur){
