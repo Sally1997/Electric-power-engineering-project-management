@@ -76,6 +76,15 @@ public class StaffLogin extends HttpServlet {
 				response.addCookie(cname);
 				response.addCookie(cpassword);
 			
+			}else{
+				Cookie cname=new Cookie("staffno", "");
+				Cookie cpassword=new Cookie("password", "");
+				cname.setMaxAge(0);
+				cpassword.setMaxAge(0);
+				cname.setPath("/");
+				cpassword.setPath("/");
+				response.addCookie(cname);
+				response.addCookie(cpassword);
 			}
 			//����session
 			session.removeAttribute("validatecode");
