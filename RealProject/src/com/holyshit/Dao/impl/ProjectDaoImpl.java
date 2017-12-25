@@ -119,4 +119,11 @@ public class ProjectDaoImpl implements ProjectDao {
 	
 	}
 
+	@Override
+	public String selectDuty(String staffno, String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return (String)qr.query(ConnectionManager.getConnection(), "select duty from psrelation where pno=? and staffno=?",new ScalarHandler(),pno,staffno);
+		
+	}
 }

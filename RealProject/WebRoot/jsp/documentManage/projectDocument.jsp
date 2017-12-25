@@ -72,7 +72,6 @@
                   <label class="checkbox-inline"><input type="checkbox" name="fileType" value="pdf">PDF</label>
                   <label class="checkbox-inline"><input type="checkbox" name="fileType" value="xls">XLS</label>
                   <label class="checkbox-inline"><input type="checkbox" name="fileType" value="video">视频（*.FLV，*.MP4）</label>
-                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="other">其他</label>
                   </div>
               </div>
            </div>
