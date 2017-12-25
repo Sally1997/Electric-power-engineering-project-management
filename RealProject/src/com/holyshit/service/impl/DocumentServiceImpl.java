@@ -55,15 +55,9 @@ public class DocumentServiceImpl implements DocumentService {
 		// TODO Auto-generated method stub
 		Document res=null;
 		DocumentDao dd=new DocumentDaoImpl();
-		ConnectionManager.startTransaction();
 		try {
 			res=dd.getDocumentById(id);
-			int num=dd.addReadingNumber(id);
-			if(num!=1)
-				throw new SQLException();
-			ConnectionManager.commit();
 		} catch (SQLException e) {
-			ConnectionManager.rollback();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
@@ -134,6 +128,19 @@ public class DocumentServiceImpl implements DocumentService {
 		if(res==1)
 			return true;
 		return false;
+	}
+
+	@Override
+	public int addReadingNumberInDocument(String id){
+		// TODO Auto-generated method stub
+		DocumentDao dd=new DocumentDaoImpl();
+		try {
+			return dd.addReadingNumber(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

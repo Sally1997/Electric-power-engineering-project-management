@@ -1,5 +1,6 @@
 package com.holyshit.web.servlet;
 
+import java.beans.Encoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -46,7 +47,7 @@ public class DownLoadMessage extends HttpServlet {
 		String filepath=doc.getDpath();
 		String filename=doc.getDtitle()+filepath.substring(filepath.lastIndexOf("."));
 		filename = new String(filename.getBytes(), "ISO-8859-1");
-		response.setHeader("content-disposition", "attachment;filename=" + filename);
+		response.setHeader("content-disposition", "attachment;filename=" +URLEncoder.encode(filename, "ISO-8859-1"));
 		InputStream input=new FileInputStream(filepath);
 		OutputStream out=response.getOutputStream();
 		int len=0;
@@ -56,6 +57,10 @@ public class DownLoadMessage extends HttpServlet {
 		byte b[]=new byte[1024];
 		while((len=input.read(b))!=-1){
 			out.write(b, 0, len);
+		}
+		int cur = ds.addReadingNumberInDocument(dno);
+		if(cur!=1){
+			request.getRequestDispatcher("/jsp/error/error_500.jsp").forward(request, response);
 		}
 		//关闭流
 		out.close();
