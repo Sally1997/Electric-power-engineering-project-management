@@ -153,6 +153,7 @@ $(".innerUl").ProTree({
 						<input type="text" style="display:none" id="fozza_text" onblur="resetecho()">
             <!-- <span onclick="altercharp()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown"></span>
              -->
+             <!-- 权限问题 -->
             <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle = "modal" data-target= "#search"></span>
             
               <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

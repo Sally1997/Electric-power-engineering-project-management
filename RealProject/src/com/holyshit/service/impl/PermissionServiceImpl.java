@@ -46,4 +46,23 @@ public class PermissionServiceImpl implements PermissionService {
 		return res;
 	}
 
+	@Override
+	public boolean enableNewStage(String pno, String staffno) {
+		// TODO Auto-generated method stub
+		boolean res=false;
+		ProjectDao pd=new ProjectDaoImpl();
+		String duty=null;
+		try {
+			duty = pd.selectDuty(staffno, pno);
+			if(duty!=null&&duty.equals("项目经理"))
+				res=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return res;
+	}
+
 }

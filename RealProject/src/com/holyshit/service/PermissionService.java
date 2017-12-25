@@ -1,6 +1,14 @@
 package com.holyshit.service;
 
 public interface PermissionService {
+	/**
+	 * 是否具有新建阶段的权限
+	 * @param pno
+	 * @param staffno
+	 * @return
+	 */
+	boolean enableNewStage(String pno,String staffno);
+	
 	/***
 	 * 是否具有发布公告的权限
 	 * @param staffno
