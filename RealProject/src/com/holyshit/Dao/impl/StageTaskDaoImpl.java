@@ -109,4 +109,11 @@ public class StageTaskDaoImpl implements StageTaskDao {
 				stage_task.getPno(),stage_task.getStageno());
 	}
 
+	@Override
+	public String selectTaskCharge(String taskno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return (String) qr.query(ConnectionManager.getConnection(), "select charpno from stagetasks where taskno=?",new ScalarHandler(),taskno);
+	}
+
 }

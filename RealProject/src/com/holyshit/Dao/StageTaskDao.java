@@ -14,6 +14,14 @@ import com.holyshit.domain.TaskInfo;
  *
  */
 public interface StageTaskDao {
+	
+	/**
+	 * 查询任务的负责人
+	 * @param taskno
+	 * @return
+	 * @throws SQLException
+	 */
+	String selectTaskCharge(String taskno)throws SQLException;
 	/**
 	 * 查询某个任务已经报销的金额
 	 * @param taskno

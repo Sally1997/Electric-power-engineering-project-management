@@ -62,7 +62,6 @@
                 <div class="col-lg-12" >
                  
                  <div class="innerUl"></div>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/proTree.js" ></script>
 <script type="text/javascript">
 //后台传入的 标题列表
@@ -154,7 +153,7 @@ $(".innerUl").ProTree({
             <!-- <span onclick="altercharp()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown"></span>
              -->
              <!-- 权限问题 -->
-            <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle = "modal" data-target= "#search"></span>
+            <span onclick="permissionCheck()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1"></span>
             
               <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><input type="text" name="fozza_change" size="15px;"/></li>
@@ -519,6 +518,24 @@ function search_member(){
 	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
 	
 	aja.send(null);
+}
+
+//进行权限的判断
+function permissionCheck(){
+	var req=new XMLHttpRequest();
+	req.onreadystatechange=function(){
+		if(req.readyState==4){
+			if(req.status==200){
+				if(req.responseText=="ok")
+					$('#search').modal('show'); 
+				else
+					alert("您没有权限进行此操作");
+			}
+		}
+	};
+	req.open("get", "${pageContext.request.contextPath}/web/servlet/enableChangeCharge?id="+document.getElementById("task_name").innerHTML);
+	req.send(null);
+	
 }
 
 function choosepoc(poc){

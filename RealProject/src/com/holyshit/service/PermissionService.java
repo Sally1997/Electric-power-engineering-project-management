@@ -2,6 +2,14 @@ package com.holyshit.service;
 
 public interface PermissionService {
 	/**
+	 * 查看是否具有改变负责人的权限
+	 * @param staffno
+	 * @param pno
+	 * @return
+	 */
+	boolean enableChangeCharge(String staffno,String id);
+	
+	/**
 	 * 是否具有新建阶段的权限
 	 * @param pno
 	 * @param staffno
