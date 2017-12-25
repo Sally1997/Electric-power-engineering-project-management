@@ -111,3 +111,14 @@
 			bottom:0;
 			width:100%;
 		}
+		.loadpagediv{  
+		    width:160px;  
+		    height:56px;  
+		    position: absolute;  
+		    top:50%; 
+			margin-left:-80px;
+			margin-top:-28px;
+		    left:50%;  
+		    background: url(https://m.baidu.com/static/search/ico_loading.gif) no-repeat;  
+		    z-index:9999;  
+		}

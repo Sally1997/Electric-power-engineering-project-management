@@ -21,19 +21,7 @@
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-	<style type="text/css">
-		.loadpagediv{  
-		    width:160px;  
-		    height:56px;  
-		    position: absolute;  
-		    top:50%; 
-			margin-left:-80px;
-			margin-top:-28px;
-		    left:50%;  
-		    background: url(https://m.baidu.com/static/search/ico_loading.gif) no-repeat;  
-		    z-index:9999;  
-		}  
-	</style>
+	
 
 </head>
 
