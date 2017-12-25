@@ -146,7 +146,7 @@
   	username.style.color="gray";
   	function updateCode(){
   		var img=document.getElementById("img");
-  		img.src="${pageContext.request.contextPath }/web/servlet/validatecode?"+new Date();
+  		img.src="${pageContext.request.contextPath }/web/servlet/validatecode?times="+new Date().getTime();
   	}
   	function putAdmin(){
   		var ele=document.getElementById("admin_detail");
