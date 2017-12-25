@@ -72,7 +72,8 @@
  			nodes[i].style.display="block";
  			//ico以及链接以及项目
  			var hehe=nodes[i].getElementsByTagName("h4")[0];
- 			if(documentData[i].ftype=="video"){
+ 			var videoType=documentData[i].ftype;
+ 			if(videoType=="mp4"||videoType=="avi"||videoType=="3gp"||videoType=="wmv"||videoType=="rmvb"||videoType=="mov"||videoType=="flv"){
  				hehe.innerHTML='<span class="glyphicon glyphicon-film"></span>'+documentData[i].dtitle;
  			}else{
  				hehe.innerHTML='<span class="glyphicon glyphicon-file"></span>'+documentData[i].dtitle;
@@ -142,9 +143,12 @@
     	keywords=document.getElementById("keywords").value;
     	fType="";
     	var nodes=document.getElementsByName("fileType");
-    	for(var i=0;i<nodes.length;i++)
-    		if(nodes[i].checked)
-    			fType+=nodes[i].value+":";
+    	if(document.getElementsByName("selectAll")[0].checked)
+    		fType="all";
+    	else
+	    	for(var i=0;i<nodes.length;i++)
+	    		if(nodes[i].checked)
+	    			fType+=nodes[i].value+":";
     	//发送查询
     	var req=new XMLHttpRequest();
     	req.onreadystatechange=function(){

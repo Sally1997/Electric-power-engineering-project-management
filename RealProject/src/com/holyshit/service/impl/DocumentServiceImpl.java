@@ -114,9 +114,6 @@ public class DocumentServiceImpl implements DocumentService {
 		DocumentDao dd=new DocumentDaoImpl();
 		int res=0;
 		//类型转换
-		if(ftype.equals("mp4")||ftype.equals("flv")){
-			ftype="video";
-		}
 		try {
 			res=dd.addDocument(dno, uloadpno, pno, dtitle, dpath, ftype, dtype, fsize);
 		} catch (SQLException e) {
