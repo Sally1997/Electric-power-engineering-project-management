@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>项目文档审批</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <link rel="stylesheet" href="public.css">
+    
+
+ </head>
+ <body> 
+   <!-- 页眉-->   
+     <header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- start logo -->
+                    <span class="blanding"><img src="src/logo.png" width="100px">面向电力工程项目管理</span>
+                    
+                    <!-- end logo -->
+                    
+                </div>
+            </div>
+        </div>
+      </header>
+ <!--   导航栏-->
+  	<div>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+    <!-- 导航栏-->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="#">首页</a></li>
+              <li><a href="#">项目管理</a><span class="sr-only">(current)</span></li>
+              <li><a href="#">文档管理</a></li>
+              <li><a href="moneymanage.html">资金管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer"></a></li>
+              <li><a href="#">用户XXX</a></li>
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="#">任务消息<span class="badge" style="float: right">4</span></a></li>
+					<li><a href="#">系统信息<span class="badge" style="float: right">4</span></a></li>
+		            <li><a href="#">审批消息<span class="badge" style="float: right">2</span></a></li>
+			      </ul>
+              </li>
+            </ul>
+         </div><!-- /.navbar-collapse -->
+       </div><!-- /.container-fluid -->
+     </nav>
+  </div>
+<!--  主要内容-->
+<section>
+    <div class=container-fluid>
+    	<div class="row">
+    		<main class="col-lg-12 main-content">
+    		
+    		<div class="col-lg-8" style="float:none; margin: 20px auto">
+   	        <div class="panel panel-primary" style="margin: 20px auto">
+    	        <div class="panel-heading">项目文档信息</div>
+      	        <div class="panel-body">
+                <div class="col-lg-12" >
+                 <!-- style="margin-top: 20px;margin-left: 5%" -->
+ 
+						<div class="block"><!--这里我就不给你把缩进改到后面了。。。太难改了。。。你反正晓得下面都是一块的-->
+						<div class="hehe_left">
+						<font>项目类型:</font>
+						</div>
+						<div class="hehe_right">
+						<font>工程类</font>
+						</div>
+						<div class="clear"></div>
+						</div>
+
+						<div  class="block">
+						<div class="hehe_left">
+						<font >项目名称:</font>
+						</div>
+						<div class="hehe_right">
+						<font >项目A的名字特别特别特别长</font>
+						</div>
+						<div class="clear"></div>
+						</div>
+
+						<div  class="block">
+						<div class="hehe_left">
+						<font >文件名称:</font>
+						</div>
+						<div class="hehe_right">
+						<font >这个文件的名称也指不准到底有多长呢</font>
+						</div>
+						<div class="clear"></div>
+						</div>
+
+					    <div  class="block">
+						<div class="hehe_left">
+						<font >上传时间:</font>
+						</div>
+						<div class="hehe_right">
+						<font >2017-12-01</font>
+						</div>
+						<div class="clear"></div>
+						</div>
+						
+						
+						<div  class="block">
+						<div class="hehe_left">
+						<font >相关附件:</font>
+						</div>
+						<div class="hehe_right">
+						<font >Test02</font>
+						</div>
+						<div class="clear"></div>
+						</div>
+
+						<div  class="block">
+						<div class="hehe_left">
+						<font >备注:</font>
+						</div>
+						<div class="hehe_right">
+						<font >无</font>
+						</div>
+						</div>            
+
+                </div>
+                </div>
+            </div> 
+    		</div>
+
+			<div class="col-lg-8 xumode">
+   	        <div class="panel panel-primary">
+    	        <div class="panel-heading">项目文档审批</div>
+      	        <div class="panel-body">
+                <div class="col-lg-12" >
+						<!-- 同意 -->
+					<form>
+						<div  class="block">
+						<div>
+						<div class="hehe_left">
+						<input type="radio" name="是否同意" value="同意" checked >同意
+						</div>
+						<div class="hehe_right">
+						<input type="radio" name="是否同意" value="不同意">不同意
+						</div>
+						</div> 
+						<div class="clear"></div>
+						</div>
+
+						<!-- 审批意见 -->
+						<div id="start_date" class="block">
+						<div class="hehe_left">
+						<font class="text">审批意见：</font>
+						</div>
+						<div class="hehe_right">
+						<input type="text" name="" size="40px;">
+						</div>
+						<div class="clear"></div>
+						</div>
+
+						<!-- 备注 -->
+						<div id="budget" class="block">
+						<div class="hehe_left">
+						<font class="textarea">备注:</font>
+						</div>
+						<div class="hehe_right">
+						<textarea rows="3" cols="50"></textarea>
+						</div>
+						</div>
+						<div class="clear"></div>
+						<div>
+						<button type="button" class="btn btn-primary" style="float: right;">确定</button>
+						</div>
+                    </form>
+                </div>
+                </div>
+            </div> 
+    		</div>
+    		</main>
+	    </div>
+	</div>
+ </section>
+
+ 
+  
+<footer class="copyright">
+  <div class="container-fluid">
+      	<p>©版权归谭莹小组所有</p>
+   
+  </div>
+  </footer>
+</body>
+</html>
