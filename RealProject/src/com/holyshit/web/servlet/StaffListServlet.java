@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 public class StaffListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pno=request.getParameter("pno");
-		System.out.println("跳转到了staffLISTservlet");
 		int PageSize = 5;
 		String currPage = request.getParameter("currPage");
 		int CurrentPage = 1;

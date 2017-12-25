@@ -68,7 +68,9 @@
 				<form method="post" action="${pageContext.request.contextPath}/web/servlet/delAllStaffsServlet?pno=${pno }">
 					<table class="table table-striped table-condensed" style="font-size: 15px">
 						<tr>
-							<th><input type="checkbox" id="ckAll" onclick="checkAll()" /></th>
+							<c:if test="${not empty deleteAndAddStaff }">
+								<th><input type="checkbox" id="ckAll" onclick="checkAll()" /></th>
+							</c:if>
 							<th>员工编号</th>
 							<th>员工姓名</th>
 							<th>联系方式</th>
@@ -79,7 +81,9 @@
 						</tr>
 					<c:forEach items="${pb.staffs}" var="s" >
 						<tr>
-							<td align="center"><input type="checkbox" name="ids" value="${s.staffno }" /></td>
+							<c:if test="${not empty deleteAndAddStaff }">
+								<td align="center"><input type="checkbox" name="ids" value="${s.staffno }" /></td>
+							</c:if>
 							<td align="center">${s.staffno }</td>
 							<td align="center">${s.name }</td>
 							<td align="center">${s.te }</td>
@@ -117,7 +121,11 @@
 				  </ul>
 				</nav>
 				<div>
-                <button type="submit" class="btn btn-primary" style="float: right;" data-toggle="modal" >删除</button>
+				<!-- 权限认证 -->
+				<c:if test="${not empty deleteAndAddStaff }">
+					<button type="submit" class="btn btn-primary" style="float: right;" data-toggle="modal" >删除</button>
+				</c:if>
+                
                 <br/><br/>
                 </div>
             </form>		

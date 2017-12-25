@@ -35,7 +35,7 @@ public class PermissionServiceImpl implements PermissionService {
 		String duty=null;
 		try {
 			duty = pd.selectDuty(staffno, pno);
-			if(duty.equals("项目经理"))
+			if(duty!=null&&duty.equals("项目经理"))
 				res=true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

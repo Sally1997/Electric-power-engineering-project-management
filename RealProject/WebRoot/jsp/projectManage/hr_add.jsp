@@ -188,7 +188,11 @@
 						<div id="responsible_per" class="block">
 						
 						<div style="text-align: right">
-						    <a ><button type="submit" id="b1" class="btn btn-primary" onclick="goaddstaff()" >添加</button></a>
+						
+							<c:if test="${not empty deleteAndAddStaff }">
+								<a ><button type="submit" id="b1" class="btn btn-primary" onclick="goaddstaff()" >添加</button></a>
+							</c:if>
+						    
 							<a ><button type="submit" class="btn btn-primary" onclick="goback()" >返回</button></a>
 						</div>
 						

@@ -10,12 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HrMainJumpaddServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("111111111111111111");
 		String pno = request.getParameter("pno");
-		System.out.println("取到了并跳转到了servlet，pno"+pno);
-		System.out.println("aaaa"+request.getParameter("pno"));
 		request.setAttribute("pno", pno);
-		System.out.println("取到了并跳转到了servlet，你他妈再逗我？？");
 		request.getRequestDispatcher("/jsp/projectManage/hr_add.jsp").forward(request,response);
 	}
 
