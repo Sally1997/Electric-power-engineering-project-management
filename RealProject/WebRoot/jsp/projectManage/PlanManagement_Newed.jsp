@@ -113,6 +113,8 @@ $(".innerUl").ProTree({
 					}
 					nii.innerHTML = ih;
 				}
+				//权限管理
+				enableManageTask();
 			}
 		}
 		//创建连接
@@ -208,7 +210,7 @@ $(".innerUl").ProTree({
                         
             <div class="clear"></div>
             <div id="responsible_per" class="block">
-            <div style="text-align: right">
+            <div style="text-align: right" id="taskManage">
               <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#handupDc" onclick="popup()">提交</button>
               <button type="submit"class="btn btn-primary" >
               <a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=<%=request.getParameter("pno") %>" style="color:white">新建子任务</a>
@@ -441,6 +443,8 @@ var aja = new XMLHttpRequest();
 				p.style.display = "none";
 				p = document.getElementById("new_index");
 				p.style.display = "none";
+				
+				enableManageTask();
 			}
 		}
 		//创建连接
@@ -526,8 +530,11 @@ function permissionCheck(){
 	req.onreadystatechange=function(){
 		if(req.readyState==4){
 			if(req.status==200){
-				if(req.responseText=="ok")
+				if(req.responseText=="ok"){
+					//当前用户为负责人
 					$('#search').modal('show'); 
+					search_member();
+				}
 				else
 					alert("您没有权限进行此操作");
 			}
@@ -537,6 +544,26 @@ function permissionCheck(){
 	req.send(null);
 	
 }
+//新建以及提交子任务的权限
+function enableManageTask(){
+	var req=new XMLHttpRequest();
+	req.onreadystatechange=function(){
+		if(req.readyState==4){
+			if(req.status==200){
+				if(req.responseText=="ok"){
+					//当前用户为负责人
+					document.getElementById("taskManage").style.display="block";
+				}
+				else
+					document.getElementById("taskManage").style.display="none";
+			}
+		}
+	};
+	req.open("get", "${pageContext.request.contextPath}/web/servlet/enableChangeCharge?id="+document.getElementById("task_name").innerHTML);
+	req.send(null);
+}
+
+
 
 function choosepoc(poc){
 	var tbody_t = document.getElementById("iamtbody");
