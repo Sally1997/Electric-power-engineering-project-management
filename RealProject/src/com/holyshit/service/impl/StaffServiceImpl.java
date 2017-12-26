@@ -9,7 +9,9 @@ import java.util.Map;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
+import com.holyshit.Dao.impl.NoteDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.domain.Note;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.PageBean;
 import com.holyshit.domain.Staff;
@@ -17,18 +19,41 @@ import com.holyshit.domain.StaffDuty;
 
 public class StaffServiceImpl implements StaffService{
 	//list staffs service
-	public PageBean findAllStaffs(String pno,int CurrentPage,int PageSize){
+	public PageBean findAllStaffs(String pno,int CurrentPage,int PageSize,String noterno){
+		System.out.println("跳转了到了见鬼的findallstaffs函数");
 		StaffDao StaffDao = new StaffDaoImpl();
+		NoteDao NoteDao = new NoteDaoImpl();
 		try {
+			System.out.println("进来了啦啦啦啦啦啦啦啦阿拉蕾");
 			int count = StaffDao.countAllStaffs(pno);
 			int totalPage = (int)Math.ceil(count*1.0/PageSize);
-			
+			List<StaffDuty> stafflist = StaffDao.findAllStaffs(pno,CurrentPage,PageSize);
+			List<String> notelist = new ArrayList<String>();
+			System.out.println("开始了……感觉要完蛋");
+			System.out.println("size:"+stafflist.size());
+			for(int i=0;i<stafflist.size();i++)
+			{
+				
+				System.out.println("i=="+i);
+				System.out.println("开始了……感觉要完蛋啊啊啊啊"+stafflist.get(i).getStaffno()+"pno:"+ pno);
+				
+				//System.out.println("notes"+NoteDao.findNote(pno, noterno, stafflist.get(i).getStaffno()).getNotes());
+				if(NoteDao.findNote(pno, noterno, stafflist.get(i).getStaffno())==null)
+				{
+				notelist.add(null);
+				}else {
+					System.out.println("瞎几把搞啊啊啊啊啊");
+					notelist.add(NoteDao.findNote(pno, noterno, stafflist.get(i).getStaffno()).getNotes());
+				}
+			}
+			System.out.println("卧槽！！！！！");
 			PageBean pb = new PageBean();
 			pb.setCount(count);
-			pb.setStaffs(StaffDao.findAllStaffs(pno,CurrentPage,PageSize));
+			pb.setStaffs(stafflist);
 			pb.setCurrentPage(CurrentPage);
 			pb.setPageSize(PageSize);
 			pb.setTotalPage(totalPage);
+			pb.setNotes(notelist);
 			return pb;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

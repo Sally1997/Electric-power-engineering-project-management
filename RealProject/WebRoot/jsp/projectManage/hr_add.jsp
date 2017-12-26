@@ -97,7 +97,7 @@
 						<form method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 						<div align = "center">
 							<div class="form-group">
-							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%" value="${lastSearchStaffNo}"/>
+							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%" placeholder="请输入员工编号，长度为12位" value="${lastSearchStaffNo}"/>
 							</div><!--搜索框-->
 							<div class="form-group">
 							    <a ><button type="submit" id="b2" class="btn btn-primary" onclick="gosearchstaff()" >查看信息</button></a>
@@ -107,60 +107,60 @@
                             </div>
 						</div>
 						<div id="responsible_per" class="block">
-						<div id="first_left">
+						<div class = "hehe_left">
 						<font class="text">员工编号:</font>
 						</div>
-						<div id="first_right">
+						<div class = "hehe_right">
 						<span id="sorry1" ><font class="text" name="searchofstaffno" >${Staff.staffno }</font></span>
 						</div>
 						<div class="clear"></div>
 						</div>
 	
 						<div id="responsible_per" class="block">
-						<div id="first_left">
+						<div class = "hehe_left">
 						<font class="text">员工姓名:</font>
 						</div>
-						<div id="first_right">
+						<div class = "hehe_right">
 						<span id="sorry2" ><font class="text">${Staff.name }</font></span>
 						</div>
 						<div class="clear"></div>
 						</div>
 	
 						<div id="responsible_per" class="block">
-						<div id="first_left">
+						<div class = "hehe_left">
 						<font class="text">邮箱地址:</font>
 						</div>
-						<div id="first_right">
+						<div class = "hehe_right">
 						<font class="text"><span id="sorry3" >${Staff.email }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
 	
 						<div id="responsible_per" class="block">
-						<div id="first_left">
+						<div class = "hehe_left">
 						<font class="text">联系方式:</font>
 						</div>
-						<div id="first_right">
+						<div class = "hehe_right">
 						<font class="text"><span id="sorry4" >${Staff.te }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
 	
 						<div id="responsible_per" class="block">
-						<div id="first_left">
+						<div class = "hehe_left">
 						<font class="text">工龄:</font>
 						</div>
-						<div id="first_right">
+						<div class = "hehe_right">
 						<font class="text"><span id="sorry5" >${Staff.birthday }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
 
 						<div id="responsible_per" class="block">
-						<div id="first_left">
+						<div class = "hehe_left">
 						<font class="text">职业资格:</font>
 						</div>
-						<div id="first_right">
+						<div class = "hehe_right">
 						<font class="text"><span id="sorry6">
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" onclick="showPno()" >查看</button>
 							</span>
@@ -171,10 +171,10 @@
 						
 						<span id="sorry7" >
 						<div id="responsible_per" class="block">
-						<div id="first_left">
+						<div class = "hehe_left">
 						<font class="text">职责:</font>
 						</div>
-						<div id="first_right">
+						<div class = "hehe_right">
 						<span><select name="duty" length = "40">
 								<option value="duty1">职责1</option>
 								<option value="duty2">职责2</option>

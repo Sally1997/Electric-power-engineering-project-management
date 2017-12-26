@@ -9,6 +9,7 @@ public class PageBean {
 	private int count;
 	private int totalPage;
 	private List<StaffDuty> staffs;
+	private List<String> notes;
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -38,5 +39,11 @@ public class PageBean {
 	}
 	public void setStaffs(List<StaffDuty> staffs) {
 		this.staffs = staffs;
+	}
+	public List<String> getNotes() {
+		return notes;
+	}
+	public void setNotes(List<String> notes) {
+		this.notes = notes;
 	}
 }

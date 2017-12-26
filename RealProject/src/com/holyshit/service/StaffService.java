@@ -12,7 +12,7 @@ public interface StaffService {
 	
 	void delAllStaffs(String[] staffnos,String pno);
 	
-	PageBean findAllStaffs(String pno,int CurrentPage,int PageSize);
+	PageBean findAllStaffs(String pno,int CurrentPage,int PageSize,String noterno);
 	
 	void addAStaff(PSRelation psr);
 	
