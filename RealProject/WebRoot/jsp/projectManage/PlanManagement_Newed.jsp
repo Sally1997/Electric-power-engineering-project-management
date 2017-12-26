@@ -12,6 +12,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlanManagement_Newed</title>
+    <%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";
+	</script>	
     <style type="text/css">
     * {
     padding: 0;
@@ -41,11 +46,7 @@
  </head>
  <body> 
  <!--   导航栏-->
-  	   <%@include file="/head.jsp" %>
-	<script type="text/javascript">
-		menus[1].className="active nav-current";
-		menus[1].role="presentation";
-	</script>	
+  	   
 	
 <% request.setAttribute("pno",request.getParameter("pno")); %>
 <!--  主要内容-->
@@ -61,7 +62,6 @@
                 <div class="col-lg-12" >
                  
                  <div class="innerUl"></div>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/proTree.js" ></script>
 <script type="text/javascript">
 //后台传入的 标题列表
@@ -152,7 +152,8 @@ $(".innerUl").ProTree({
 						<input type="text" style="display:none" id="fozza_text" onblur="resetecho()">
             <!-- <span onclick="altercharp()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown"></span>
              -->
-            <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle = "modal" data-target= "#search"></span>
+             <!-- 权限问题 -->
+            <span onclick="permissionCheck()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1"></span>
             
               <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><input type="text" name="fozza_change" size="15px;"/></li>
@@ -358,12 +359,7 @@ $(".innerUl").ProTree({
   
   
   
-<footer class="copyright">
-  <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-  </div>
-  </footer>
+<%@include file="/footer.jsp" %>
 </body>
 <script type="text/javascript">
 //提交表单
@@ -522,6 +518,24 @@ function search_member(){
 	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
 	
 	aja.send(null);
+}
+
+//进行权限的判断
+function permissionCheck(){
+	var req=new XMLHttpRequest();
+	req.onreadystatechange=function(){
+		if(req.readyState==4){
+			if(req.status==200){
+				if(req.responseText=="ok")
+					$('#search').modal('show'); 
+				else
+					alert("您没有权限进行此操作");
+			}
+		}
+	};
+	req.open("get", "${pageContext.request.contextPath}/web/servlet/enableChangeCharge?id="+document.getElementById("task_name").innerHTML);
+	req.send(null);
+	
 }
 
 function choosepoc(poc){

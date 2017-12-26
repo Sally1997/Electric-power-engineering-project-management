@@ -6,16 +6,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>PlanManagement_NewMilestone</title>
-
- </head>
- <body> 
-   <%@include file="/head.jsp" %>
+	<%@include file="/head.jsp" %>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/fozza.css" type="text/css">
    
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
 	</script>
+ </head>
+ <body> 
+   
 	
 	<%-- div下拉菜单 --%>
 	<div id="fozza1" class="fozza2"></div>
@@ -238,12 +238,7 @@
 	<input type="button" value="开发人员测试" onclick="root()" style="position:fixed;top:40%;right:5%;z-index:999">
  </div>
   
-<footer class="copyright">
-  <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-  </div>
-  </footer>
+<%@include file="/footer.jsp" %>
 </body>
 <script type="text/javascript">
 //全局的大阶段名称

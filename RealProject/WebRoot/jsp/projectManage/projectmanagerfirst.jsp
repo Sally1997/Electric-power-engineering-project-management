@@ -15,14 +15,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>projectmanagerfirst</title>
-  </head>
-  <body> 
-   
-	<%@include file="/head.jsp" %>
+    <%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
 	</script>
+  </head>
+  <body> 
+   
+	
  <section>
  	<script type="text/javascript">
 	 	var dataJson;
@@ -262,12 +263,7 @@
  
 
  
- <footer class="copyright">
-  <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-  </div>
-  </footer>
+ <%@include file="/footer.jsp" %>
   </body>
 <script type="text/javascript">
 	function getFunction(cur){

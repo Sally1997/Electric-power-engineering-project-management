@@ -17,6 +17,13 @@ import com.holyshit.domain.Document;
  *
  */
 public interface DocumentService {
+	
+	/**
+	 * 增加阅读量
+	 * @param id
+	 * @return
+	 */
+	int addReadingNumberInDocument(String id);
 	/**
 	 * 进行文件上传
 	 * @param dtitle

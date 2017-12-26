@@ -5,6 +5,18 @@
     <filter-name>LoginFilter</filter-name>
     <filter-class>com.holyshit.filter.LoginFilter</filter-class>
   </filter>
+  <filter>
+    <filter-name>MainPageFilter</filter-name>
+    <filter-class>com.holyshit.filter.MainPageFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>StaffListServletFilter</filter-name>
+    <filter-class>com.holyshit.filter.StaffListServletFilter</filter-class>
+  </filter>
+  
+  
+  
+  
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>*.jsp</url-pattern>
@@ -13,6 +25,23 @@
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>MainPageFilter</filter-name>
+    <servlet-name>MainServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>StaffListServletFilter</filter-name>
+    <servlet-name>StaffListServlet</servlet-name>
+    <servlet-name>HrMainJumpaddServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  
+  
+  
+  
   <listener>
     <listener-class>com.holyshit.listener.CountLivingListener</listener-class>
   </listener>
@@ -149,6 +178,30 @@
     <servlet-name>UploadDocument</servlet-name>
     <servlet-class>com.holyshit.web.servlet.UploadDocument</servlet-class>
   </servlet>
+<<<<<<< HEAD
+=======
+  <servlet>
+    <servlet-name>EnableChangeCharge</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.EnableChangeCharge</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
   <servlet-mapping>
     <servlet-name>ValidateCode</servlet-name>
     <url-pattern>/web/servlet/validatecode</url-pattern>
@@ -273,6 +326,14 @@
     <servlet-name>UploadDocument</servlet-name>
     <url-pattern>/web/servlet/uploadDocument</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
+=======
+  <servlet-mapping>
+    <servlet-name>EnableChangeCharge</servlet-name>
+    <url-pattern>/web/servlet/enableChangeCharge</url-pattern>
+  </servlet-mapping>
+  
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

@@ -11,6 +11,17 @@ import com.holyshit.domain.ProjectInfo;
  *
  */
 public interface ProjectDao {
+	
+	/**
+	 * 查询某人的职责
+	 * @param staffno
+	 * @param pno
+	 * @return
+	 * @throws SQLException
+	 */
+	String selectDuty(String staffno,String pno)throws SQLException;
+	
+	
 	/**
 	 * 获取项目的已经报账金额
 	 * @param pno

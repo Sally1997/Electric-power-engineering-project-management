@@ -26,6 +26,7 @@ import com.holyshit.Dao.DocumentDao;
 import com.holyshit.domain.Document;
 import com.holyshit.domain.DocumentInfo;
 import com.holyshit.utils.ConnectionManager;
+import com.holyshit.utils.FileSuffixConvert;
 
 public class DocumentDaoImpl implements DocumentDao{
 
@@ -80,15 +81,23 @@ public class DocumentDaoImpl implements DocumentDao{
 		if(!keywords.equals(""))
 			sql+=" and dtitle like '%"+keywords+"%'";
 		if(!ftype.equals("")){
-			String[] types = ftype.split(":");
-			sql+=" and (";
-			for(int i=0;i<types.length;i++)
-				if(i==0)
-					sql+="ftype='"+types[i]+"'";
-				else{
-					sql+=" or ftype='"+types[i]+"'";
-				}
-			sql+=" )";		
+			if(!ftype.equals("all")){
+				String[] types = ftype.split(":");
+				sql+=" and (";
+				for(int i=0;i<types.length;i++)
+					if(i==0){
+						String[] cres = FileSuffixConvert.convert(types[i]);
+						sql+="ftype='"+cres[0]+"'";
+						for(int j=1;j<cres.length;j++)
+							sql+=" or ftype='"+cres[j]+"'";
+					}
+					else{
+						String[] cres = FileSuffixConvert.convert(types[i]);
+						for(int j=0;j<cres.length;j++)
+							sql+=" or ftype='"+cres[j]+"'";
+					}
+				sql+=" )";
+			}
 		}
 		sql+=" order by dloadtimes desc limit "+(cur-1)*pageSize+","+pageSize;
 		return qr.query(ConnectionManager.getConnection(), sql,new BeanListHandler<DocumentInfo>(DocumentInfo.class));
@@ -112,16 +121,25 @@ public class DocumentDaoImpl implements DocumentDao{
 		if(!keywords.equals(""))
 			sql+=" and dtitle like '%"+keywords+"%'";
 		if(!ftype.equals("")){
-			String[] types = ftype.split(":");
-			sql+=" and (";
-			for(int i=0;i<types.length;i++)
-				if(i==0)
-					sql+="ftype='"+types[i]+"'";
-				else{
-					sql+=" or ftype='"+types[i]+"'";
-				}
-			sql+=" )";		
+			if(!ftype.equals("all")){
+				String[] types = ftype.split(":");
+				sql+=" and (";
+				for(int i=0;i<types.length;i++)
+					if(i==0){
+						String[] cres = FileSuffixConvert.convert(types[i]);
+						sql+="ftype='"+cres[0]+"'";
+						for(int j=1;j<cres.length;j++)
+							sql+=" or ftype='"+cres[j]+"'";
+					}
+					else{
+						String[] cres = FileSuffixConvert.convert(types[i]);
+						for(int j=0;j<cres.length;j++)
+							sql+=" or ftype='"+cres[j]+"'";
+					}
+				sql+=" )";
+			}
 		}
+		
 		return (long) qr.query(ConnectionManager.getConnection(), sql,new ScalarHandler());
 	}
 

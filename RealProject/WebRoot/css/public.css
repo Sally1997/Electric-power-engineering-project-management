@@ -36,6 +36,9 @@
 			padding-top: 10px;
 			padding-bottom: 10px;
 			margin-top: 100px;
+			position:fixed;
+			bottom:0;
+			width:100%;
 		}
 		.xumode{
 			float:none;
@@ -107,4 +110,15 @@
 			position:fixed;
 			bottom:0;
 			width:100%;
+		}
+		.loadpagediv{  
+		    width:160px;  
+		    height:56px;  
+		    position: absolute;  
+		    top:50%; 
+			margin-left:-80px;
+			margin-top:-28px;
+		    left:50%;  
+		    background: url(https://m.baidu.com/static/search/ico_loading.gif) no-repeat;  
+		    z-index:9999;  
 		}

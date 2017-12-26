@@ -10,7 +10,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>02-hradd</title>
-
+	   <%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";	
+	</script>
     <!-- Bootstrap -->
     
     
@@ -73,6 +77,7 @@
 
  </head>
  <body> 
+<<<<<<< HEAD
 
    <%@include file="/head.jsp" %>
 	<script type="text/javascript">
@@ -80,6 +85,11 @@
 		menus[1].role="presentation";	
 	</script>
 
+=======
+
+
+
+>>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 <!--  主要内容-->
 <section>
     <div class=container-fluid>
@@ -188,7 +198,11 @@
 						<div id="responsible_per" class="block">
 						
 						<div style="text-align: right">
-						    <a ><button type="submit" id="b1" class="btn btn-primary" onclick="goaddstaff()" >添加</button></a>
+						
+							<c:if test="${not empty deleteAndAddStaff }">
+								<a ><button type="submit" id="b1" class="btn btn-primary" onclick="goaddstaff()" >添加</button></a>
+							</c:if>
+						    
 							<a ><button type="submit" class="btn btn-primary" onclick="goback()" >返回</button></a>
 						</div>
 						
@@ -233,12 +247,7 @@
     </div>
   </div>
 </div>
-<footer class="copyright">
-  <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-  </div>
-</footer>
+<%@include file="/footer.jsp" %>
   </body>
   <script type="text/javascript">
   	function goaddstaff(){

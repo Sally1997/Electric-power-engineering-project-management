@@ -11,16 +11,17 @@
 <head>
 <meta charset="utf-8">
 <title>首页</title>
-    <!-- Bootstrap -->
-
-</head>
-
-<body>
-	<%@include file="/head.jsp" %>
+<%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[0].className="active nav-current";
 		menus[0].role="presentation";	
 	</script>
+    <!-- Bootstrap -->
+	
+</head>
+
+<body>
+	
 	
 	<script type="text/javascript">
 		//ajax请求上传文件
@@ -186,7 +187,7 @@
 						</c:forEach>
 						  <a class="list-group-item">&nbsp;
 						  <!-- 指定管理员 -->
-						  <c:if test="${staff.staffno=='201526010001' }">
+						  <c:if test="${not empty publicNotice_1 }">
 						  	<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupNews">发布</button>
 						 	<br><br>
 						  </c:if>
@@ -246,12 +247,7 @@
   </div>
 </div>
     
-    <footer class="copyright atLow">
-    <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-	</div>
-	</footer>
+    <%@include file="/footer.jsp" %>
 	<!--实现文本缩略-->
 	<script type="text/javascript"> 
     var mylist = document.getElementsByName("myabbr");

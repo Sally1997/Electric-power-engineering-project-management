@@ -8,8 +8,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>网页未找到</title>
-
+    <title>项目管理</title>
+	<%@include file="/head.jsp" %>
+	<script type="text/javascript">
+		menus[1].className="active nav-current";
+		menus[1].role="presentation";
+	</script>	
     <!-- Bootstrap -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css">
@@ -20,28 +24,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
  </head>
  <body> 
-   <!-- 页眉-->   
-     <header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- start logo -->
-                    <span class="blanding"><img src="${pageContext.request.contextPath}/image/logo.png" width="100px">面向电力工程项目管理</span>
-                    
-                    <!-- end logo -->
-                    
-                </div>
-            </div>
-        </div>
-      </header>
+   
 
 <section>
           <div class="row">
               <main style="text-align:center;margin:0 auto">
               <div class="col-lg-14">
-                  <h1 style = "margin-top:28px;color:#073763;font-size:120px;letter-spacing:15px">404</h1>
-                      <h2 style = "color:#073763;font-size:29px;letter-spacing:7px">ERROR  PAGE</h2>
-                      <p style = "font-size:20px;color:#073763;font-family:微软雅黑;letter-spacing:7px">页面不见了！建议您</p>
+                      <h2 style = "color:#073763;font-size:29px;letter-spacing:7px">NOTHING</h2>
+                      <p style = "font-size:20px;color:#073763;font-family:微软雅黑;letter-spacing:7px">项目尚未创建阶段！</p>
                       <span>
                       	<a href="${pageContext.request.contextPath}/web/servlet/mainServlet"><button type="button" class="btn btn-primary">返回首页</button></a>
                       	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

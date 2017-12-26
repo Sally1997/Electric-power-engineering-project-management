@@ -5,7 +5,8 @@
 <script src="${pageContext.request.contextPath }/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/public.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/yqz.js"></script>
-
+<!-- 项目logo -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/image/1.ico" type="image/x-icon" />
 <!-- 页眉-->   
      <header>
         <div class="container-fluid">

@@ -5,13 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>更多消息</title>
-</head>
-<body>
-	<%@include file="/head.jsp" %>
+<%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[0].className="active nav-current";
 		menus[0].role="presentation";	
 	</script>
+</head>
+<body>
+	
 	<script type="text/javascript">
 		var documentData;
 		function getFunction(cur){
@@ -221,6 +222,6 @@
     	</div>
     </div>
 	</section>
-	
+	<%@include file="/footer.jsp" %>
 </body>
 </html>

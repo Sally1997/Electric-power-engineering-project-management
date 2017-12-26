@@ -21,20 +21,7 @@
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-	<style type="text/css">
-		.loadpagediv{  
-		    width:160px;  
-		    height:56px;  
-		    position: absolute;  
-		    top:50%; 
-			margin-left:-80px;
-			margin-top:-28px;
-		    left:50%;  
-		    background: url(https://m.baidu.com/static/search/ico_loading.gif) no-repeat;  
-		    z-index:9999;  
-		}  
-	</style>
-
+	
 </head>
 
 <body>
@@ -88,8 +75,7 @@
                   <label class="checkbox-inline"><input type="checkbox" name="fileType" value="ppt">PPT</label>
                   <label class="checkbox-inline"><input type="checkbox" name="fileType" value="pdf">PDF</label>
                   <label class="checkbox-inline"><input type="checkbox" name="fileType" value="xls">XLS</label>
-                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="video">视频（*.FLV，*.MP4）</label>
-                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="other">其他</label>
+                  <label class="checkbox-inline"><input type="checkbox" name="fileType" value="video">视频</label>
                   </div>
               </div>
            </div>
@@ -327,16 +313,6 @@
     	document.getElementById("fenye").style.display="none";
     };
 </script>
-	<!-- 等待 -->
-	<div id="loadpagediv" class="loadpagediv" style="display: none;"></div>
-	<div id="shadow_hehe" style="width: 100%;height:100%;position: fixed;z-index: 888;opacity:0.9;background-color: black;left: 0;top: 150px;display: none;"></div>
-	<!-- 占位 -->
-	<div style="height: 50px"></div>
-    <footer class="copyright atLow" style="z-index: 5">
-    <div class="container-fluid">
-      	<p>©版权归谭莹小组所有</p>
-   
-	</div>
-	</footer>
+	<%@include file="/footer.jsp" %>
 </body>
 </html>

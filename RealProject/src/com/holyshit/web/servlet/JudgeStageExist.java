@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.holyshit.domain.Staff;
+import com.holyshit.service.PermissionService;
 import com.holyshit.service.ProjectService;
+import com.holyshit.service.impl.PermissionServiceImpl;
 import com.holyshit.service.impl.ProjectServiceImpl;
 
 public class JudgeStageExist extends HttpServlet {
@@ -17,7 +20,8 @@ public class JudgeStageExist extends HttpServlet {
 			throws ServletException, IOException {
 
 		String pno=request.getParameter("pno");
-		if(pno==null){
+		Staff staff=(Staff) request.getSession().getAttribute("staff");
+		if(pno==null||staff==null){
 			request.getRequestDispatcher("/jsp/error/error_500.jsp").forward(request, response);
 			return;
 		}
@@ -25,11 +29,15 @@ public class JudgeStageExist extends HttpServlet {
 		ProjectService ps=new ProjectServiceImpl();
 		boolean res = ps.ifIsEmptyProject(pno);
 		if(res){
-			System.out.println("新建阶段啦");
-			request.setAttribute("pno", pno);
-			request.getRequestDispatcher("/jsp/projectManage/PlanManagement_NewMilestone.jsp").forward(request, response);
+			PermissionService permission=new PermissionServiceImpl();
+			boolean enableNewStage = permission.enableNewStage(pno, staff.getStaffno());
+			if(enableNewStage){
+				request.setAttribute("pno", pno);
+				request.getRequestDispatcher("/jsp/projectManage/PlanManagement_NewMilestone.jsp").forward(request, response);
+			}else{
+				request.getRequestDispatcher("/jsp/projectManage/nothing.jsp").forward(request, response);
+			}
 		}else{
-			System.out.println("跳转树状图啦");
 			response.sendRedirect("/RealProject/servlet/DTreeNodeServlet?pno="+pno);
 		}
 		
