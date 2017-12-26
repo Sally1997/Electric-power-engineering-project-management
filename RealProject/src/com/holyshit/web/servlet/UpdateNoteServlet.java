@@ -30,24 +30,18 @@ public class UpdateNoteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("床前明月光，头发掉光光！！！！");
 		String pno = request.getParameter("pno");
 		String notedno = request.getParameter("staffno");
 		String noterno=((Staff) request.getSession().getAttribute("staff")).getStaffno();
-		System.out.println("圣诞节愤怒愤怒经济法");
 		String notes = request.getParameter(notedno);
-		System.out.println("都案例和福利呢为了减肥38958");
-		System.out.println(notes+"jijijijijiij");
-		System.out.println("jijijijijiij");
 		String notesbefore = request.getParameter("notesofnow");
-		System.out.println("notesbrfore"+notesbefore);
-		System.out.println("巨头望明月");
 		NoteService ns = new NoteServiceImpl();
+		notes=new String(notes.getBytes("iso-8859-1"),"UTF-8");
+		System.out.println(notes);
 		if(notes.equals(""))
 		{
 			if(notesbefore!=null)
 			{
-				System.out.println("在Servlet里进行删除操作");
 				ns.delNote(pno, noterno, notedno);
 			}
 		}
@@ -55,11 +49,9 @@ public class UpdateNoteServlet extends HttpServlet {
 		{
 			if(notesbefore!=notes)
 			{
-				System.out.println("在Servlet里进行修改操作");
 				ns.updateNote(pno, noterno, notedno, notes);
 			}
 		}
-		System.out.println("低头都是伤");
 		request.getRequestDispatcher("/web/servlet/staffListServlet").forward(request,response);	
 		
 	}

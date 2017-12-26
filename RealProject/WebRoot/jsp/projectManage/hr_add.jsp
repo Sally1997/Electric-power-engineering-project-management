@@ -77,19 +77,7 @@
 
  </head>
  <body> 
-<<<<<<< HEAD
 
-   <%@include file="/head.jsp" %>
-	<script type="text/javascript">
-		menus[1].className="active nav-current";
-		menus[1].role="presentation";	
-	</script>
-
-=======
-
-
-
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
 <!--  主要内容-->
 <section>
     <div class=container-fluid>

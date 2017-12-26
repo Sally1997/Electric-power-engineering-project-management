@@ -104,7 +104,7 @@
 											<div class="input-group">
 						  						<input type="text" class="form-control" placeholder="修改备注" name=${s.staffno } >
 						 						<span class="input-group-btn">
-												<button class="btn btn-default" type="button" onclick="updatenote('${s.staffno }','${pb.notes[staffs.index] }')" >修改</button>
+												<button class="btn btn-default" type="submit" onclick="updatenote('${s.staffno }','${pb.notes[staffs.index] }')" >修改</button>
 						  						</span>
 												</div><!-- /input-group -->
 					  </div>
@@ -136,15 +136,11 @@
 				  </ul>
 				</nav>
 				<div>
-<<<<<<< HEAD
-                <button type="submit" class="btn btn-primary" style="float: right;" data-toggle="modal" onclick="delAllStaffs()" >删除</button>
-=======
 				<!-- 权限认证 -->
 				<c:if test="${not empty deleteAndAddStaff }">
 					<button type="submit" class="btn btn-primary" style="float: right;" data-toggle="modal" >删除</button>
 				</c:if>
                 
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
                 <br/><br/>
                 </div>
             </form>		
