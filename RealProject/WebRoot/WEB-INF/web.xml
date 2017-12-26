@@ -178,8 +178,6 @@
     <servlet-name>UploadDocument</servlet-name>
     <servlet-class>com.holyshit.web.servlet.UploadDocument</servlet-class>
   </servlet>
-<<<<<<< HEAD
-=======
   <servlet>
     <servlet-name>EnableChangeCharge</servlet-name>
     <servlet-class>com.holyshit.web.servlet.EnableChangeCharge</servlet-class>
@@ -201,7 +199,6 @@
 
 
 
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
   <servlet-mapping>
     <servlet-name>ValidateCode</servlet-name>
     <url-pattern>/web/servlet/validatecode</url-pattern>
@@ -326,14 +323,10 @@
     <servlet-name>UploadDocument</servlet-name>
     <url-pattern>/web/servlet/uploadDocument</url-pattern>
   </servlet-mapping>
-<<<<<<< HEAD
-=======
   <servlet-mapping>
     <servlet-name>EnableChangeCharge</servlet-name>
     <url-pattern>/web/servlet/enableChangeCharge</url-pattern>
   </servlet-mapping>
-  
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
