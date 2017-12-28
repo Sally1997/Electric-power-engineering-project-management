@@ -33,6 +33,7 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>StaffListServletFilter</filter-name>
+    <url-pattern>/web/servlet/findAStaffServlet</url-pattern>
     <servlet-name>StaffListServlet</servlet-name>
     <servlet-name>HrMainJumpaddServlet</servlet-name>
     <dispatcher>REQUEST</dispatcher>
