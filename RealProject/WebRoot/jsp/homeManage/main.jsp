@@ -70,7 +70,7 @@
     	    <div class="col-lg-12">  
 			  <div class="col-lg-8"> 
     	        <div class="panel panel-primary">
-    	            <div class="panel-heading">项目任务列表<span class="more">more..</span></div>
+    	            <div class="panel-heading">项目任务列表</div>
     	            <div class="panel-body">
     	              <div class="row">
 					    <div class="col-lg-12">
@@ -116,7 +116,7 @@
     	        </div>
     	      </div>
     	        <div class="panel panel-primary">
-						<div class="panel-heading">项目进度列表<span class="more">more..</span></div>
+						<div class="panel-heading">项目进度列表</div>
 						<div class="panel-body">
 						  <div class="row">
 						  <div class="col-lg-12">
@@ -255,5 +255,21 @@
 		mylist[i].innerHTML = mylist[i].innerHTML.substring(0, 8)+"...";
 	}
 	</script>
+	
+	<!-- <script type="text/javascript">
+        window.onbeforeunload = onbeforeunload_handler;     
+        window.onunload = onunload_handler;     
+        function onbeforeunload_handler()  
+        {     
+            var warning="确认退出?";             
+            return warning;     
+        }     
+             
+        function onunload_handler()  
+        {     
+            var warning="谢谢光临";     
+            alert(warning);     
+        }     
+    </script> -->
 </body>
 </html>
