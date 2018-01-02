@@ -9,4 +9,4 @@ public interface NoteDao {
 	public void updateNote(String pno,String noterno,String notedno,String notes) throws SQLException;
 	public void addNote(String pno,String noterno,String notedno,String notes) throws SQLException;
 	public void delNote(String pno,String noterno,String notedno) throws SQLException;
-}
+}   
