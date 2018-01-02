@@ -1,13 +1,14 @@
 package com.holyshit.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Document {
 	private String dno;
 	private String pno;
 	private String dtitle;
 	private String dpath;
-	private Date uploadtime;
+	private Timestamp uploadtime;
 	private int dloadtimes;
 	private String ftype;
 	private String dtype;
@@ -19,6 +20,12 @@ public class Document {
 	}
 	public void setDno(String dno) {
 		this.dno = dno;
+	}
+	public Timestamp getUploadtime() {
+		return uploadtime;
+	}
+	public void setUploadtime(Timestamp uploadtime) {
+		this.uploadtime = uploadtime;
 	}
 	public String getPno() {
 		return pno;
@@ -43,12 +50,6 @@ public class Document {
 	}
 	public void setDpath(String dpath) {
 		this.dpath = dpath;
-	}
-	public Date getUploadtime() {
-		return uploadtime;
-	}
-	public void setUploadtime(Date uploadtime) {
-		this.uploadtime = uploadtime;
 	}
 	public int getDloadtimes() {
 		return dloadtimes;

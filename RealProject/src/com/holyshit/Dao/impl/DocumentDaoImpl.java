@@ -160,5 +160,15 @@ public class DocumentDaoImpl implements DocumentDao{
 		
 		return qr.update(ConnectionManager.getConnection(), sql,dno,uloadpno,pno,dtitle,dpath,new Timestamp(new java.util.Date().getTime()),0,ftype,dtype,fsize,"0");
 	}
+	
+	@Override
+	public int insertDocument(Document doc) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(),"insert into document(dno,UloadPNo,pno,dtitle,dpath,UploadTime,DloadTimes,FType,dtype,FSize,auditres) "+
+				"values(?,?,?,?,?,?,?,?,?,?,?)",doc.getDno(),doc.getUloadpno(),doc.getPno(),
+				doc.getDtitle(),doc.getDpath(),doc.getUploadtime(),doc.getDloadtimes(),doc.getFtype(),
+				doc.getDtype(),doc.getFsize(),doc.getAuditres());
+	}
 
 }

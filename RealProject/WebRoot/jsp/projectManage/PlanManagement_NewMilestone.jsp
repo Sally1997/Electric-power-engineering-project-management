@@ -15,12 +15,17 @@
 	</script>
  </head>
  <body> 
-   
+   <% 
+		if(request.getParameter("pno")==null){
+	  		response.sendRedirect("/servlet/ShowProjectServlet");
+	  	} 
+	  	request.setAttribute("pno",request.getParameter("pno"));
+ 	%>
 	
 	<%-- div下拉菜单 --%>
 	<div id="fozza1" class="fozza2"></div>
 	<%-- 我是一个隐藏表单域 --%>
-	<form method="post" name="postform" action = "${pageContext.request.contextPath}/web/servlet/stageServlet">
+	<form method="post" name="postform" action = "${pageContext.request.contextPath}/web/servlet/stageServlet?pno=${pno }">
 	<div id="hiddenarea"></div>
 	</form>
 	
@@ -60,10 +65,10 @@
 					<form action="" method="post" name="form1">
 						<!--阶段名称 -->
 						<div id="milestone_name" class="block">
-						<div id="first_left">
-						<font class="text">阶段名称:</font>
+						<div class="hehe_left">
+						<font class="text">阶段名称:</font><span style="color:red">&nbsp;*</span>
 						</div>
-						<div id="first_right">
+						<div class="hehe_right">
 						<input type="text" name="msname" size="40px;">
 						</div>
 						<div class="clear"></div>
@@ -71,10 +76,10 @@
 
 						<!-- 负责人： -->
 						<div id="manager_name" class="block">
-						<div id="first_left">
-						<font class="text">负责人：</font>
+						<div class="hehe_left">
+						<font class="text">负责人：</font><span style="color:red">&nbsp;*</span>
 						</div>
-						<div id="first_right">
+						<div class="hehe_right">
 						<input type="text" name="mngname" size="40px" disabled="disabled" style="display:none">
 						<button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target= "#search" onclick="search_member()">查找</button>
 						</div>
@@ -83,10 +88,10 @@
 
 						<!-- 开始日期 -->
 						<div id="start_time" class="block">
-						<div id="first_left">
-						<font class="text">开始日期：</font>
+						<div class="hehe_left">
+						<font class="text">开始日期：</font><span style="color:red">&nbsp;*</span>
 						</div>
-						<div id="first_right">
+						<div class="hehe_right">
 						<input type="date" name="StartDate" size="40px;">
 						</div>
 						<div class="clear"></div>
@@ -95,10 +100,10 @@
 
 						<!-- 截止日期 -->
 						<div id="end_time" class="block">
-						<div id="first_left">
-						<font class="text">截止日期：</font>
+						<div class="hehe_left">
+						<font class="text">截止日期：</font><span style="color:red">&nbsp;*</span>
 						</div>
-						<div id="first_right">
+						<div class="hehe_right">
 						<input type="date" name="EndDate" size="40px;">
 						</div>
 						<div class="clear"></div>
@@ -106,10 +111,10 @@
 
 						<!-- 预算 -->
 						<div id="budget" class="block">
-						<div id="first_left">
-						<font class="text">预算：</font>
+						<div class="hehe_left">
+						<font class="text">预算：</font><span style="color:red">&nbsp;*</span>
 						</div>
-						<div id="first_right">
+						<div class="hehe_right">
 						<input type="number" name="budget" size="40px;"><span>&nbsp;&nbsp;元</span>
 						</div>
 						<div class="clear"></div>
@@ -117,7 +122,7 @@
 
                     <div id="responsible_per" class="block">
 						<div style="text-align: right">
-						    <input type = "button" name = "submit" class="btn btn-primary" value = "新建任务" onClick="return addElement();">	
+						    <input type = "button" name = "submit" class="btn btn-primary" value = "新建阶段" onClick="return addElement();">	
 							<button type="button" class="btn btn-primary" ><a href="javascript:dsubmit()" style="color:white;">结束新建</a></button>
 						</div>
 						<div class="clear"></div>
@@ -143,11 +148,11 @@
     <div class="modal-body">
     	<form action="" method="post" name="form2">
     	<div id="others" class="block">
-			<div id="first_left">
+			<div class="hehe_left">
 			<font class="text">指标:</font>
 			</div>
-			<div id="first_right">
-			<input type="text" name="goal" size="20px;">&nbsp;&nbsp;&nbsp;&nbsp;<input type = "submit" name = "ok" class="btn btn-primary" value = "新建指标" onClick="return addGoal();">
+			<div class="hehe_right">
+			<input type="text" name="goal" size="20px;">&nbsp;&nbsp;&nbsp;&nbsp;<input type = "button" name = "ok" class="btn btn-primary" value = "新建指标" onClick="return addGoal();">
 			</div>
 			</div>
 			<div class="clear"></div>
@@ -186,10 +191,10 @@
     <div class="modal-body">
     	<form action="" method="post" name="form2">
     	<div id="others" class="block">
-			<div id="first_left">
+			<div class="hehe_left">
 			<font class="text">输入:</font>
 			</div>
-			<div id="first_right">
+			<div class="hehe_right">
 			<input type="text" id="getme" name="goal" size="20px;">&nbsp;&nbsp;
 			<input type = "button" name = "ok" class="btn btn-primary" value = "查找" onClick="search_staff()">
 			<input name = "where" type = "radio" value = "in" checked="checked" onclick="choosepoc(this)"><span>项目内</span>
@@ -237,7 +242,7 @@
 
   
  <div>
-	<input type="button" value="开发人员测试" onclick="root()" style="position:fixed;top:40%;right:5%;z-index:999">
+	<input type="hidden" value="开发人员测试" onclick="root()" style="position:fixed;top:40%;right:5%;z-index:999">
  </div>
   
 <%@include file="/footer.jsp" %>
@@ -268,7 +273,7 @@ function ifclick(v){
 		if(bigar[i].dj_sn==bigsn){
 			//如果在bigar数组里面找到对象的名字和当前阶段的名字相同的话就循环创建节点
 			for(j=0;j<bigar[i].dj_ii.length;j++){
-				<!-- 我这么重要当然要输出啦-->
+				//<!-- 我这么重要当然要输出啦-->
 				//alert(bigar[i].dj_ii[j]);
 				
 				//创建一个文本节点
@@ -350,7 +355,7 @@ function addGoal()
 	cursor_ii = form2.goal.value;//获取指标内容
 	//alert(cursor_ii);
 	
-	<!-- 我是分割线啊，你是谁啊-->
+	//<!-- 我是分割线啊，你是谁啊-->
 	
     var dlt = document.createElement("input");
 	dlt.setAttribute("name","deletenode");//复选框name为deletenode
@@ -407,7 +412,7 @@ function addGoal()
 	tComment.appendChild(tbody); //将节点tbody加入节点尾部
 	
 	form2.goal.value="";
-	<!-- 将index content 和 if need upload 加入数组中 -->
+	//<!-- 将index content 和 if need upload 加入数组中 -->
 	dxi.dj_ii.push(cursor_ii);
 	return false;
 
@@ -461,11 +466,59 @@ function removeIndex(){
 
 function addElement()
 {
-	var msname = document.createTextNode(form1.msname.value);
-	var mngname = document.createTextNode(form1.mngname.value);
-	var StartDate = document.createTextNode(form1.StartDate.value);
-	var EndDate = document.createTextNode(form1.EndDate.value);
-	var budget = document.createTextNode(form1.budget.value);
+	var vname = form1.msname.value;
+	var vcharp = form1.mngname.value;
+	var vstartdate = form1.StartDate.value;
+	var venddate = form1.EndDate.value;
+	var vbudget = form1.budget.value;
+	
+	var xxx=true;
+	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+	xxx = pppp.test(vbudget);
+	
+	var yyy=true;
+	var vs = vstartdate.split("-");
+	var ve = venddate.split("-");
+	if(vs[0]<ve[0]){
+		yyy = false;
+	}
+	else if(vs[1]<ve[1]){
+		yyy = false;
+	}
+	else if(vs[2]<ve[2]){
+		yyy = false;
+	}
+	
+	if(vname==""){
+		alert("请输入任务名称!");
+		return;
+	}
+	else if(vcharp==""){
+		alert("请选择审核人!");
+		return;
+	}
+	else if(vstartdate==""||venddate==""){
+		alert("请选择时间!");
+		return;
+	}
+	else if(vbudget==""){
+		alert("请输入预算金额!");
+		return;
+	}
+	else if(!xxx){
+		alert("预算金额非法输入格式!");
+		return;
+	}
+	else if(yyy){
+		alert("日期格式错误!请重新检查!");
+		return;
+	}
+	
+	var msname = document.createTextNode(vname);
+	var mngname = document.createTextNode(vcharp);
+	var StartDate = document.createTextNode(vstartdate);
+	var EndDate = document.createTextNode(venddate);
+	var budget = document.createTextNode(vbudget);
 
     var aa = document.createElement("button");
 	aa.setAttribute("type","button");

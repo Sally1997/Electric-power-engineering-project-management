@@ -139,5 +139,23 @@ public class DocumentServiceImpl implements DocumentService {
 		}
 		return 0;
 	}
+	
+	@Override
+	public boolean addDocument(Document doc) {
+		DocumentDao dd=new DocumentDaoImpl();
+		int res=0;
+		//类型转换
+		try {
+			res=dd.insertDocument(doc);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		if(res==1)
+			return true;
+		return false;
+	}
 
 }

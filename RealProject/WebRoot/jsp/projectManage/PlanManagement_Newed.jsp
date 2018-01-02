@@ -48,7 +48,12 @@
  <!--   导航栏-->
   	   
 	
-<% request.setAttribute("pno",request.getParameter("pno")); %>
+<% 
+	if(request.getParameter("pno")==null){
+  		response.sendRedirect("/servlet/ShowProjectServlet");
+  	} 
+  	request.setAttribute("pno",request.getParameter("pno"));
+ %>
 <!--  主要内容-->
 <section>
     <div class=container-fluid>
@@ -62,6 +67,7 @@
                 <div class="col-lg-12" >
                  
                  <div class="innerUl"></div>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/proTree.js" ></script>
 <script type="text/javascript">
 //后台传入的 标题列表
@@ -113,8 +119,6 @@ $(".innerUl").ProTree({
 					}
 					nii.innerHTML = ih;
 				}
-				//权限管理
-				enableManageTask();
 			}
 		}
 		//创建连接
@@ -154,8 +158,7 @@ $(".innerUl").ProTree({
 						<input type="text" style="display:none" id="fozza_text" onblur="resetecho()">
             <!-- <span onclick="altercharp()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown"></span>
              -->
-             <!-- 权限问题 -->
-            <span onclick="permissionCheck()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1"></span>
+            <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle = "modal" data-target= "#search"></span>
             
               <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><input type="text" name="fozza_change" size="15px;"/></li>
@@ -210,7 +213,7 @@ $(".innerUl").ProTree({
                         
             <div class="clear"></div>
             <div id="responsible_per" class="block">
-            <div style="text-align: right" id="taskManage">
+            <div style="text-align: right">
               <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#handupDc" onclick="popup()">提交</button>
               <button type="submit"class="btn btn-primary" >
               <a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=<%=request.getParameter("pno") %>" style="color:white">新建子任务</a>
@@ -277,7 +280,7 @@ $(".innerUl").ProTree({
           <div class="form-group" id="bigindex">
         <label for="addfile" class="col-sm-2 control-label">任务指标:</label>
         <div class="col-sm-8">
-          <font >
+          <font>
               <ul id="pop_index"></ul>
             </font>
         </div>
@@ -366,10 +369,9 @@ $(".innerUl").ProTree({
 <script type="text/javascript">
 //提交表单
 function goServlet1(){
-	
 	 var form = document.forms[0];
-	 //form.action = "${pageContext.request.contextPath }/web/servlet/SubmitTaskServlet?pno="+${pno};
-	 form.action = "${pageContext.request.contextPath }/web/servlet/submitTaskServlet";
+	 alert("提交成功!");
+	 form.action = "${pageContext.request.contextPath }/web/servlet/submitTaskServlet?pno=${pno}";
 	 form.submit();
 }
 
@@ -443,8 +445,6 @@ var aja = new XMLHttpRequest();
 				p.style.display = "none";
 				p = document.getElementById("new_index");
 				p.style.display = "none";
-				
-				enableManageTask();
 			}
 		}
 		//创建连接
@@ -523,47 +523,6 @@ function search_member(){
 	
 	aja.send(null);
 }
-
-//进行权限的判断
-function permissionCheck(){
-	var req=new XMLHttpRequest();
-	req.onreadystatechange=function(){
-		if(req.readyState==4){
-			if(req.status==200){
-				if(req.responseText=="ok"){
-					//当前用户为负责人
-					$('#search').modal('show'); 
-					search_member();
-				}
-				else
-					alert("您没有权限进行此操作");
-			}
-		}
-	};
-	req.open("get", "${pageContext.request.contextPath}/web/servlet/enableChangeCharge?id="+document.getElementById("task_name").innerHTML);
-	req.send(null);
-	
-}
-//新建以及提交子任务的权限
-function enableManageTask(){
-	var req=new XMLHttpRequest();
-	req.onreadystatechange=function(){
-		if(req.readyState==4){
-			if(req.status==200){
-				if(req.responseText=="ok"){
-					//当前用户为负责人
-					document.getElementById("taskManage").style.display="block";
-				}
-				else
-					document.getElementById("taskManage").style.display="none";
-			}
-		}
-	};
-	req.open("get", "${pageContext.request.contextPath}/web/servlet/enableChangeCharge?id="+document.getElementById("task_name").innerHTML);
-	req.send(null);
-}
-
-
 
 function choosepoc(poc){
 	var tbody_t = document.getElementById("iamtbody");
