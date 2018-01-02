@@ -183,6 +183,11 @@
     <servlet-name>EnableChangeCharge</servlet-name>
     <servlet-class>com.holyshit.web.servlet.EnableChangeCharge</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ShowProjectInfoById</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowProjectInfoById</servlet-class>
+  </servlet>
+
 
 
 
@@ -327,6 +332,10 @@
   <servlet-mapping>
     <servlet-name>EnableChangeCharge</servlet-name>
     <url-pattern>/web/servlet/enableChangeCharge</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowProjectInfoById</servlet-name>
+    <url-pattern>/web/servlet/showProjectInfoById</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

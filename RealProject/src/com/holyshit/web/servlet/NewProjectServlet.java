@@ -1,6 +1,7 @@
 package com.holyshit.web.servlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -52,7 +53,7 @@ public class NewProjectServlet extends HttpServlet {
 		//项目阶段初始化为立项中
 		pro.setPstate("0");
 		//阶段初始化为0
-		pro.setPstage("0");
+		pro.setPstage(0);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		pro.setStime((java.sql.Date) new Date());

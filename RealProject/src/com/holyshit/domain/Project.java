@@ -1,5 +1,6 @@
 package com.holyshit.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class Project {
@@ -10,7 +11,7 @@ public class Project {
 	private Date etime;
 	private String ptype;
 	private double pbudget;
-	private String pstage;
+	private double pstage;
 	private String pstate;
 	public String getPno() {
 		return pno;
@@ -55,10 +56,12 @@ public class Project {
 	public void setPbudget(double pbudget) {
 		this.pbudget = pbudget;
 	}
-	public String getPstage() {
+	
+	
+	public double getPstage() {
 		return pstage;
 	}
-	public void setPstage(String pstage) {
+	public void setPstage(double pstage) {
 		this.pstage = pstage;
 	}
 	public String getPstate() {
