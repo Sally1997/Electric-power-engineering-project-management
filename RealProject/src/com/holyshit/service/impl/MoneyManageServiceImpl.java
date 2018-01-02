@@ -66,7 +66,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				double totalSurplus=0;
 				double totalOver=0;
 				double totalHasAudit=pd.selectProjectHasFee(p.getPno());
-				double tmp_total=totalHasAudit- p.getPbudget();
+				double tmp_budget = Double.parseDouble(p.getPbudget());
+				double tmp_total=totalHasAudit- tmp_budget;
 				if(tmp_total>0){
 					totalSurplus=0;
 					totalOver=tmp_total;

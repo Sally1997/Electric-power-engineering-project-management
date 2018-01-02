@@ -9,7 +9,7 @@ public class Project {
 	private Date stime;
 	private Date etime;
 	private String ptype;
-	private double pbudget;
+	private String pbudget;
 	private String pstage;
 	private String pstate;
 	public String getPno() {
@@ -49,10 +49,10 @@ public class Project {
 		this.ptype = ptype;
 	}
 	
-	public double getPbudget() {
+	public String getPbudget() {
 		return pbudget;
 	}
-	public void setPbudget(double pbudget) {
+	public void setPbudget(String pbudget) {
 		this.pbudget = pbudget;
 	}
 	public String getPstage() {

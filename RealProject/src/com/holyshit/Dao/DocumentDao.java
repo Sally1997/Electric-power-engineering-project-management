@@ -82,4 +82,10 @@ public interface DocumentDao {
 	 * @throws SQLException
 	 */
 	long totalSizeWithId(String id)throws SQLException;
+	/**
+	 * 插入新的文档信息
+	 * @param doc
+	 * @throws SQLException 
+	 */
+	int insertDocument(Document doc) throws SQLException;
 }

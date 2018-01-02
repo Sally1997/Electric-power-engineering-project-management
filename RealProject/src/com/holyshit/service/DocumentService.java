@@ -36,6 +36,13 @@ public interface DocumentService {
 	boolean uploadDocument(String dno,String dtitle,String dpath,String uloadpno,String pno,String ftype,String dtype,int fsize);
 	
 	/**
+	 * 上传文件 --fozza
+	 * @param doc
+	 * @return
+	 */
+	boolean addDocument(Document doc);
+	
+	/**
 	 * 根据条件查询文档
 	 * @param ftype
 	 * @param datefrom

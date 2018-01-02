@@ -1,6 +1,9 @@
 package com.holyshit.Dao;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import com.holyshit.domain.Projaprlaudit;
 
 public interface AuditDao {
 	/**
@@ -9,4 +12,11 @@ public interface AuditDao {
 	 * @return
 	 */
 	List<Object> selectAuditedPro(String staffno);
+	
+	/**
+	 * 插入理想审核信息
+	 * @param paa 立项审核信息对象
+	 * @throws SQLException
+	 */
+	void insertprojaprlaudit(Projaprlaudit paa) throws SQLException;
 }

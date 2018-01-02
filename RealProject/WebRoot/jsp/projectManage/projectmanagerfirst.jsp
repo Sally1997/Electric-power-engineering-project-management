@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"    
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -20,10 +20,14 @@
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
 	</script>
+	
+      <!-- bootstrap-datetimepicker -->
+  <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
   </head>
   <body> 
-   
-	
  <section>
  	<script type="text/javascript">
 	 	var dataJson;
@@ -198,15 +202,16 @@
         <h4 class="modal-title" id="myModalLabel">新建项目</h4>
       </div>
       <div class="modal-body">
-	 <form class="form-horizontal" action="${pageContext.request.contextPath }/servlet/NewProjectServlet" method="post">
+	 <form class="form-horizontal" method="post" enctype="multipart/form-data">
 		  		<div class="form-group">
-				<label for="projectname" class="col-sm-2 control-label">项目名称</label>
+				<label for="projectname" class="col-sm-2 control-label">项目名称<span style="color:red">&nbsp;*</span></label> 
 				<div class="col-sm-8">
 		            <input class="form-control" id="projectname" name="ProjectName">
 				</div>
 				</div>
+				
 				<div class="form-group">
-				<label for="projecttype" class="col-sm-2 control-label">项目类型</label>
+				<label for="projecttype" class="col-sm-2 control-label">项目类型<span style="color:red">&nbsp;*</span></label>
 				<div class="col-sm-8">
 			    <select class="form-control" name="ProjectType" id="projecttype">
 				  <option>工程类</option>
@@ -214,45 +219,106 @@
 				 </select>
 				</div>
 			  	</div>
+				
 				<div class="form-group">
-				<label for="checkman" class="col-sm-2 control-label">审批人</label>
+				<label for="checkman" class="col-sm-2 control-label">审批人<span style="color:red">&nbsp;*</span></label>
 				<div class="col-sm-8">
-		            <input class="form-control" id="checkman" name="PersonInCharge">
+				    <div class="input-group">
+		            <input class="form-control" id="checkman" name="PersonInCharge" style="display:none" readonly="readonly">
+		            <span class="input-group-btn"><button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target= "#search" onclick="search_member()">查找</button>
+				    </span>
+				    </div>
 				</div>
 			  	</div>
+			  	
 			  	<div class="form-group">
-				<label for="addfile" class="col-sm-2 control-label">相关附件</label>
+				<label for="what" class="col-sm-2 control-label">预算金额<span style="color:red">&nbsp;*</span></label> 
 				<div class="col-sm-8">
-		            <input type = "file" multiple="multiple" id="file">
+		            <input class="form-control" id="projectbudget" type="number" name="ProjectBudget">
+				</div>
+				</div>
+			  	
+			  	<div class="form-group">
+				<label for="addfile" class="col-sm-2 control-label">相关附件<span style="color:red">&nbsp;*</span></label>
+				<div class="col-sm-8">
+		            <input type = "file" id="file" name="worinima">
 				</div>
 			  </div>
-             <div class="form-group">
-				<label for="others" class="col-sm-2 control-label">其他备注</label>
+            
+             <!-- <div class="form-group">
+				<label for="others" class="col-sm-2 control-label">其他备注&nbsp;&nbsp;</label>
 				<div class="col-lg-8">
 				  <textarea class="form-control" rows="4" name="OtherRemark" id="others"></textarea>
 				</div>
-			  </div>
-      </div>
+			  </div> -->
+			  
+			 <div class="form-group">
+			    <label for="addfile" class="col-sm-2 control-label">开始时间<span style="color:red">&nbsp;*</span></label>
+				<div class="col-sm-8">	
+					<input name="stime" type='text' class="form-control" placeholder="选择时间范围" id='datetimepicker1'/>
+				</div>
+			 </div>
+			  
+			
+			<div class="form-group">
+				<label for="addfile" class="col-sm-2 control-label">结束时间<span style="color:red">&nbsp;*</span></label>
+				<div class="col-sm-8">	
+					<input name="etime" type='text' class="form-control" placeholder="选择时间范围" id='datetimepicker2'/>
+				</div>
+			</div>
+			
+      
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
         <input type="button" class="btn btn-primary" value="提交" onclick="submitProject();">
       </div>
-      </form>
+     </form>
+      </div>
+      
       <script type="text/javascript">
       		//发送ajax请求
       		function submitProject(){
       			var projectname=document.getElementById("projectname");
       			var projecttype=document.getElementById("projecttype");
+      			var projectbudget=document.getElementById("projectbudget");
       			var checkman=document.getElementById("checkman");
-      			var file=document.getElementById("file").files[0];
+      			var file=document.getElementById("file");
+      			var stime = document.getElementsByName("stime");
+      			var etime = document.getElementsByName("etime");
+      			
       			var others=document.getElementById("others");
+      			
+      			var x=true;
+      			var p = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
+      			x = p.test(projectbudget.value);
       			
       			//进行验证
       			if(projectname.value==""){
-      				alert("请输入项目名称");
+      				alert("请输入项目名称!");
+      				return;
+      			}
+      			else if(checkman.value==""){
+      				alert("请选择审批人!");
+      				return;
+      			}
+      			else if(!x){
+      				alert("预算金额非法输入格式!");
+      				return;
+      			}
+      			else if(file.value==""){
+      				alert("请上传项目相关文件!");
+      				return;
+      			}
+      			else if(stime.value==""||etime.value==""){
+      				alert("请选择时间!");
       				return;
       			}
       			
+      			var form = document.forms[0];
+      			
+      			alert("提交成功");
+      			form.action = "${pageContext.request.contextPath }/servlet/NewProjectServlet";
+      			form.submit();
       		}
       	
       </script>
@@ -260,6 +326,65 @@
   </div>
   <div id="fozza1" class="fozza3"></div> 
 </div>
+ 
+ 
+ <!--      默认隐藏的内容:查找人員-->
+ <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">人员查找</h4>
+    </div>
+    <div class="modal-body">
+    	<form action="" method="post" name="form2">
+    	<div id="others" class="block">
+			<div class="hehe_left">
+			<span class="text">输入:</span>
+			</div>
+			<div class="hehe_right">
+			<input type="text" id="getme" value="请输入关键字" name="goal" size="20px;">&nbsp;&nbsp;
+			<input type = "button" name = "ok" class="btn btn-primary" value = "查找" onClick="search_staff()">
+			</div>
+			</div>
+			<div class="clear"></div>
+			<br/>
+		</form>
+		<form action="" method="post" name="form3">
+			<table id = "member_table" class="table table-striped table-condensed" style="font-size: 15px">
+ 		    <tr>
+			    <th>选择</th>
+			    <th>标号</th>
+			    <th>姓名</th>
+			    <th>联系方式</th>
+			    <th>职责</th>
+			    <th>备注</th>
+			    <!-- 编号，名字，电话号，职责，备注 -->
+		    </tr>
+		    <tbody id="iamtbody"></tbody>
+		    <!-- <tr>
+		    	<td>
+		    		<input name = "choose_char_per" type= "radio" value = "'开发人员'+'('+'201526010001'+')'" />
+		    	</td>
+			    <td>201526010001</td>
+			    <td>OO</td>
+			    <td>12222222221</td>
+			    <td>开发人员</td>
+			    <td>老大</td>
+		    </tr> -->
+		    
+	        </table>
+		</form>
+		   
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="give_option()">选择</button>
+    </div>
+	</div>
+</div>
+</div>
+ 
  
 
  
@@ -289,9 +414,186 @@
 			req.open("get", "/RealProject/servlet/ShowProjectServlet2?current_page="+cur);
 			req.send(null);
 		}
-
+		
+		
 </script>
-</html>
 
-  
+<script type="text/javascript">
+//以下应该都是选择用户弹窗功能
+function give_option(){
+	var ccp = document.getElementsByName("choose_char_per");
+	//这个是弹窗的id
+	var ser = document.getElementsByName("search")[0];
+	var mng = document.getElementsByName("PersonInCharge")[0];  
+	for(var i=0;i<ccp.length;i++){
+		if(ccp[i].checked==true){
+			mng.value = ccp[i].value;
+			mng.style.display = "";
+			break;
+		}
+	}
+}
+
+//以下是选择用户功能
+function search_member(){
+	var tbody_t = document.getElementById("iamtbody");
+	var childs = tbody_t.childNodes;
+	for(var i=childs.length-1;i>=0;i--){
+		tbody_t.removeChild(childs[i]);
+	}
+	
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				var dutytxt = document.createTextNode(str[i].duty);
+				var notestxt = document.createTextNode(str[i].notes);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				var td_duty = document.createElement("td");
+				var td_notes = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				td_duty.appendChild(dutytxt);
+				td_notes.appendChild(notestxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				tr_t.appendChild(td_duty);
+				tr_t.appendChild(td_notes);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype");
+	
+	aja.send(null);
+}
+
+function search_staff(){
+	var tbody_t = document.getElementById("iamtbody");
+	var childs = tbody_t.childNodes;
+	for(var i=childs.length-1;i>=0;i--){
+		tbody_t.removeChild(childs[i]);
+	}
+	
+	var g = document.getElementById("getme");
+	var keyword = g.value;
+	
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				var dutytxt = document.createTextNode(str[i].duty);
+				var notestxt = document.createTextNode(str[i].notes);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				var td_duty = document.createElement("td");
+				var td_notes = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				td_duty.appendChild(dutytxt);
+				td_notes.appendChild(notestxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				tr_t.appendChild(td_duty);
+				tr_t.appendChild(td_notes);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+keyword);
+	
+	aja.send(null);
+}
+
+$(function () {
+        $('#datetimepicker1').datetimepicker({
+			locale:'zh-cn',
+			viewMode:'days',
+			format:'YYYY-MM-DD'
+		});
+        $('#datetimepicker2').datetimepicker({
+            useCurrent: false,
+			locale:'zh-cn',
+			viewMode:'days',
+			format:'YYYY-MM-DD'
+        });
+        $("#datetimepicker1").on("dp.change", function (e) {
+            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker2").on("dp.change", function (e) {
+            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+</script>
 </html>
