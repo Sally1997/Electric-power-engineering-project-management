@@ -49,4 +49,13 @@ public interface ProjectService {
 	 * @return
 	 */
 	boolean ifIsEmptyProject(String pno);
+	
+	/**
+	 * 分页显示正在进行的项目信息
+	 * @param staffno
+	 * @param cur
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String, Object> showProjectInfoByPage(String staffno,int cur,int pageSize);
 }

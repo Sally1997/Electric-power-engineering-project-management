@@ -117,7 +117,11 @@
 				  </ul>
 				</nav>
 				<div>
-                <button type="submit" class="btn btn-primary" style="float: right;" data-toggle="modal" >删除</button>
+
+				<!-- 权限认证 -->
+				<c:if test="${not empty deleteAndAddStaff }">
+					<button type="submit" class="btn btn-primary" style="float: right;" data-toggle="modal" onclick="delAllStaffs()">删除</button>
+				</c:if>
                 <br/><br/>
                 </div>
             </form>		

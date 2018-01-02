@@ -112,4 +112,30 @@ public class ProjectServiceImpl implements ProjectService {
 		return iep;
 	}
 
+	@Override
+	public Map<String, Object> showProjectInfoByPage(String staffno, int cur,
+			int pageSize) {
+		// TODO Auto-generated method stub
+		ProjectDao pd=new ProjectDaoImpl();
+		List<Project> projects=null;
+		long total=0;
+		try {
+			projects=pd.showPage(cur, pageSize, staffno);
+			total=pd.selectWorkingProjectNumberById(staffno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		//将分页结果封装成hashmap
+		Map<String, Object> res=new HashMap<String, Object>();
+		res.put("projects", projects);
+		res.put("totalNum", total);
+		res.put("currentPage", cur);
+		res.put("pageSize", pageSize);
+		res.put("pageNum", total%pageSize==0?total/pageSize:total/pageSize+1);
+		return res;
+	}
+
 }

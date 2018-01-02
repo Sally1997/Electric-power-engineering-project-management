@@ -16,14 +16,47 @@
 		menus[0].className="active nav-current";
 		menus[0].role="presentation";	
 	</script>
+	<script type="text/javascript" src="${pageContext.request.contextPath }/js/main.js"></script>
     <!-- Bootstrap -->
-	
+	<style type="text/css">
+		.pagination{
+                display: inline-block;
+                margin-left: 0;
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+            }
+                .pagination a, .pagination span {
+                    text-decoration: none;
+                    position: relative;
+                    padding: 7px 12px;
+                    margin-left: -1px;
+                    font-size: 13px;
+                    font-style: normal;
+                    font-weight: 600;
+                    color: #0366d6;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    cursor: pointer;
+                    background: #fff;
+                    border: 1px solid #e1e4e8;
+        }
+        .pagination .disabled,.pagination .disabled:hover {
+            color: #d1d5da;
+            cursor: default;
+            background-color: #fafbfc;
+        }
+	</style>
 </head>
 
 <body>
 	
 	
 	<script type="text/javascript">
+		//全局变量定义
+		var task_cur=1;
+		var project_cur=1;
+		
+		
 		//ajax请求上传文件
 		function submitNotice(){
 			
@@ -70,7 +103,7 @@
     	    <div class="col-lg-12">  
 			  <div class="col-lg-8"> 
     	        <div class="panel panel-primary">
-    	            <div class="panel-heading">项目任务列表<span class="more">more..</span></div>
+    	            <div class="panel-heading">项目任务列表</div>
     	            <div class="panel-body">
     	              <div class="row">
 					    <div class="col-lg-12">
@@ -111,12 +144,16 @@
   						  </c:choose>
   						</c:forEach>
     	              </table>
+    	              <div class="pagination" style="margin-left: 50%;" id="task_page">
+				        <a class="disabled">Newer</a>
+				        <a href="javascript:getNextTaskPage()">Older</a>
+    				</div>
     	              </div>
     	            </div>
     	        </div>
     	      </div>
     	        <div class="panel panel-primary">
-						<div class="panel-heading">项目进度列表<span class="more">more..</span></div>
+						<div class="panel-heading">项目进度列表</div>
 						<div class="panel-body">
 						  <div class="row">
 						  <div class="col-lg-12">
@@ -168,6 +205,27 @@
 	  						
 						  </c:forEach>   	          
 						  </table>
+						  <div class="pagination" style="margin-left: 50%;" id="project_page">
+						        <a class="disabled">Newer</a>
+						        <a href="javascript:getNextProjectPage()">Older</a>
+    					  </div>
+    					  <script type="text/javascript">
+    					  	//相关数据的获取刷新
+								function project_getProjectData(){
+    					  			var req=new XMLHttpRequest();
+    					  			req.onreadystatechange=function(){
+    					  				if(req.readyState==4&&req.status==200)
+    					  					alert(req.responseText);
+    					  				
+    					  			};
+    					  			req.open("get", "${pageContext.request.contextPath}/web/servlet/showProjectInfoById?currentPage="+project_cur+"&pageSize=5");
+    					  			req.send(null);
+    					  		}
+								function project_refreshData(){
+									
+									
+								}
+    					  </script>
 						  </div>
 						</div>
 					</div>
@@ -255,5 +313,21 @@
 		mylist[i].innerHTML = mylist[i].innerHTML.substring(0, 8)+"...";
 	}
 	</script>
+	
+	<!-- <script type="text/javascript">
+        window.onbeforeunload = onbeforeunload_handler;     
+        window.onunload = onunload_handler;     
+        function onbeforeunload_handler()  
+        {     
+            var warning="确认退出?";             
+            return warning;     
+        }     
+             
+        function onunload_handler()  
+        {     
+            var warning="谢谢光临";     
+            alert(warning);     
+        }     
+    </script> -->
 </body>
 </html>

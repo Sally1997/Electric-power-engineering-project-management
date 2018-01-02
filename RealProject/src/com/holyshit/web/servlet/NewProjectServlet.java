@@ -92,7 +92,7 @@ public class NewProjectServlet extends HttpServlet {
 		//项目阶段初始化为立项中
 		pro.setPstate("0");
 		//阶段初始化为0
-		pro.setPstage("0");
+		pro.setPstage(0);
 		
 		//初始化审核状态
 		paa.setAuditstate("0");
@@ -244,7 +244,8 @@ public class NewProjectServlet extends HttpServlet {
 			info.setDstpno(cpn);
 		}
 		else if(filename.equals("ProjectBudget")){
-			pro.setPbudget(filevalue);
+			double bg = Double.parseDouble(filevalue);
+			pro.setPbudget(bg);
 		}
 		else if(filename.equals("stime")){
 			java.util.Date d= sdf.parse(filevalue);
