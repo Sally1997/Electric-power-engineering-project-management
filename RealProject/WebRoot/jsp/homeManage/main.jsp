@@ -55,8 +55,10 @@
 		//全局变量定义
 		var task_cur=1;
 		var project_cur=1;
-		
-		
+		var task_pageNum=999;
+		var project_pageNum=999;
+		var taskData;
+		var projectData;
 		//ajax请求上传文件
 		function submitNotice(){
 			
@@ -164,7 +166,7 @@
 							</div>
 						  <div class="col-lg-10 jimode">
 					<!--	  进度条的占比需要修改标签内的style:width属性-->
-						  <table class="table table-striped">
+						  <table class="table table-striped" id="projecttable">
 							<tr>
 							<th>项目名称</th>
 							<th>项目进度</th>
@@ -179,7 +181,7 @@
 								<tr>
 							    <td onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${project.pno }')" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
-							    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;" name="processNum">
 							    ${project.pstage*100}%
 							    </div>
 							    </div></td>
@@ -193,7 +195,7 @@
 								<tr>
 							    <td onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${project.pno }')" title="${project.pname }" name="myabbr" >${project.pname }</td>
 							    <td><div class="progress">
-							    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;">
+							    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;" name="processNum">
 							    ${project.pstage*100}%
 							    </div>
 							    </div></td>
@@ -206,7 +208,7 @@
 						  </c:forEach>   	          
 						  </table>
 						  <div class="pagination" style="margin-left: 50%;" id="project_page">
-						        <a class="disabled">Newer</a>
+						        <a href="javascript:getPreProjectPage()" class="disabled">Newer</a>
 						        <a href="javascript:getNextProjectPage()">Older</a>
     					  </div>
     					  <script type="text/javascript">
@@ -214,15 +216,56 @@
 								function project_getProjectData(){
     					  			var req=new XMLHttpRequest();
     					  			req.onreadystatechange=function(){
-    					  				if(req.readyState==4&&req.status==200)
-    					  					alert(req.responseText);
+    					  				if(req.readyState==4&&req.status==200){
+    					  					var res=req.responseText;
+    				   						//数据刷新
+    				   						var data=eval('('+res+')');
+    				   						projectData=data.projectlist;
+    				   						project_cur=data.currentPage;
+    									    project_pageNum=data.pageNum;
+    									    project_refreshData();
+    					  				}
     					  				
     					  			};
     					  			req.open("get", "${pageContext.request.contextPath}/web/servlet/showProjectInfoById?currentPage="+project_cur+"&pageSize=5");
     					  			req.send(null);
     					  		}
 								function project_refreshData(){
-									
+									var projecttable=document.getElementById("projecttable");
+									var trs=projecttable.getElementsByTagName("tr");
+									var processes=document.getElementsByName("processNum");
+									for(var i=0;i<projectData.length;i++){
+										var tds=trs[i+1].getElementsByTagName("td");
+										tds[0].onclick=function(){
+											window.open('/RealProject/web/servlet/judgeStageExist?pno="+projectData[i].pno+"');	
+										};
+										tds[0].title=projectData[i].pname;
+										tds[0].innerHTML=projectData[i].pname;
+										
+										processes[i].style.width=projectData[i].pstage*100+"%";
+										processes[i].innerHTML=(projectData[i].pstage*100).toFixed(1)+"%";
+										processes[i].style.display="block";
+										tds[2].innerHTML=projectData[i].stime;
+										tds[3].innerHTML=projectData[i].etime;
+										
+										if(projectData[i].pstate==1){
+											tds[4].className="text-success";
+											tds[4].innerHTML="正在进行中";
+										}else if(projectData[i].pstate==2){
+											tds[4].className="text-danger";
+											tds[4].innerHTML="逾期进行中";
+										}
+									}
+									for(var i=projectData.length;i<5;i++){
+										var tds=trs[i+1].getElementsByTagName("td");
+										tds[0].innerHTML="-";
+										processes[i].style.width="0";
+										processes[i].innerHTML="";
+										processes[i].style.display="none";
+										tds[2].innerHTML="-";
+										tds[3].innerHTML="-";
+										tds[4].innerHTML="-";
+									}
 									
 								}
     					  </script>
