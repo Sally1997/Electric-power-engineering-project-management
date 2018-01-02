@@ -11,6 +11,7 @@ import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
+import com.holyshit.domain.Project;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.domain.TaskInfo;
@@ -124,6 +125,32 @@ public class StageTasksServiceImpl implements StageTasksService{
 		} finally{
 			ConnectionManager.closeConnection();
 		}
+	}
+
+	@Override
+	public Map<String, Object> showTaskInfoByPage(String staffno, int cur,
+			int pageSize) {
+		// TODO Auto-generated method stub
+		StageTaskDao std=new StageTaskDaoImpl();
+		List<TaskInfo> tasks=null;
+		long total=0;
+		try {
+			tasks=std.selectTaskInfoByPage(staffno, cur, pageSize);
+			total=std.selectTotalTaskById(staffno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		//将分页结果封装成hashmap
+		Map<String, Object> res=new HashMap<String, Object>();
+		res.put("tasks", tasks);
+		res.put("totalNum", total);
+		res.put("currentPage", cur);
+		res.put("pageSize", pageSize);
+		res.put("pageNum", total%pageSize==0?total/pageSize:total/pageSize+1);
+		return res;
 	}
 
 }

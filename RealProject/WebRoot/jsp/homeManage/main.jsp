@@ -115,7 +115,7 @@
 							</span>
 						</div>
    	                  <div class="col-lg-10 jimode">
-    	              <table class="table table-striped">
+    	              <table class="table table-striped" id="tasktable">
     	                <tr>
     	                <th>项目名称</th>
     	                <th>任务</th>
@@ -127,7 +127,7 @@
 						  <c:choose>
   							<c:when test="${task.tstate=='1' }">
     	                      <tr>
-							  <td onclick="window.open(${pageContext.request.contextPath})" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
+							  <td title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
 							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
@@ -147,9 +147,62 @@
   						</c:forEach>
     	              </table>
     	              <div class="pagination" style="margin-left: 50%;" id="task_page">
-				        <a class="disabled">Newer</a>
+				        <a href="javascript:getPreTaskPage()" class="disabled">Newer</a>
 				        <a href="javascript:getNextTaskPage()">Older</a>
-    				</div>
+    				  </div>
+    				  <script type="text/javascript">
+    					  	//相关数据的获取刷新
+								function task_getTaskData(){
+    					  			var req=new XMLHttpRequest();
+    					  			req.onreadystatechange=function(){
+    					  				if(req.readyState==4&&req.status==200){
+    					  					var res=req.responseText;
+    				   						//数据刷新
+    				   						var data=eval('('+res+')');
+    				   						taskData=data.tasklist;
+    				   						task_cur=data.currentPage;
+    									    task_pageNum=data.pageNum;
+    									    task_refreshData();
+    					  				}
+    					  				
+    					  			};
+    					  			req.open("get", "${pageContext.request.contextPath}/web/servlet/showTaskInfoById?currentPage="+task_cur+"&pageSize=5");
+    					  			req.send(null);
+    					  		}
+								function task_refreshData(){
+									var tasktable=document.getElementById("tasktable");
+									var trs=tasktable.getElementsByTagName("tr");
+									for(var i=0;i<taskData.length;i++){
+										var tds=trs[i+1].getElementsByTagName("td");
+										
+										tds[0].title=taskData[i].pname;
+										tds[0].innerHTML=taskData[i].pname;
+										tds[1].innerHTML=taskData[i].taskname;
+										tds[1].title=taskData[i].taskname;
+										
+										
+										tds[2].innerHTML=taskData[i].stime;
+										tds[3].innerHTML=taskData[i].etime;
+										
+										if(taskData[i].tstate==1){
+											tds[4].className="text-success";
+											tds[4].innerHTML="正在进行中";
+										}else if(taskData[i].tstate==2){
+											tds[4].className="text-danger";
+											tds[4].innerHTML="逾期进行中";
+										}
+									}
+									for(var i=taskData.length;i<5;i++){
+										var tds=trs[i+1].getElementsByTagName("td");
+										tds[0].innerHTML="-";
+										tds[1].innerHTML="-";
+										tds[2].innerHTML="-";
+										tds[3].innerHTML="-";
+										tds[4].innerHTML="-";
+									}
+									
+								}
+    					  </script>
     	              </div>
     	            </div>
     	        </div>
@@ -248,10 +301,10 @@
 										tds[2].innerHTML=projectData[i].stime;
 										tds[3].innerHTML=projectData[i].etime;
 										
-										if(projectData[i].pstate==1){
+										if(projectData[i].pstate=="1"){
 											tds[4].className="text-success";
 											tds[4].innerHTML="正在进行中";
-										}else if(projectData[i].pstate==2){
+										}else if(projectData[i].pstate=="2"){
 											tds[4].className="text-danger";
 											tds[4].innerHTML="逾期进行中";
 										}

@@ -88,4 +88,22 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	void insertIndexInfo(TaskIndexs task_index) throws SQLException;
+	
+	/**
+	 * 分页查询用户正在参与的任务信息
+	 * @param staffno
+	 * @param cur
+	 * @param pageSize
+	 * @return
+	 * @throws SQLException
+	 */
+	List<TaskInfo> selectTaskInfoByPage(String staffno,int cur,int pageSize)throws SQLException;
+	
+	/**
+	 * 查询某个用户正在参与的任务数量
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectTotalTaskById(String staffno)throws SQLException;
 }

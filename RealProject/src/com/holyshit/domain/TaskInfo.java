@@ -1,5 +1,7 @@
 package com.holyshit.domain;
 
+import java.sql.Date;
+
 public class TaskInfo {
 	private String pname;
 	private String sname;
@@ -11,7 +13,28 @@ public class TaskInfo {
 	private String charpno;
 	private String ptaskno;
 	private String ptasktype;
+	private Date stime;
+	private Date etime;
+	private String tstate;
 	
+	public String getTstate() {
+		return tstate;
+	}
+	public void setTstate(String tstate) {
+		this.tstate = tstate;
+	}
+	public Date getStime() {
+		return stime;
+	}
+	public void setStime(Date stime) {
+		this.stime = stime;
+	}
+	public Date getEtime() {
+		return etime;
+	}
+	public void setEtime(Date etime) {
+		this.etime = etime;
+	}
 	public String getPtasktype() {
 		return ptasktype;
 	}
