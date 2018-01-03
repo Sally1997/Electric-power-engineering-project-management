@@ -34,4 +34,12 @@ public interface AccountDao {
 	 * @throws SQLException
 	 */
 	int editAccount(String staffno,String password)throws SQLException;
+	
+	/**
+	 * 删除登录关系
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] deleteAccount(String[] staffs)throws SQLException;
 }

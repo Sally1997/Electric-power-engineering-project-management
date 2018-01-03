@@ -71,4 +71,11 @@ public interface StaffService {
 	 * @return
 	 */
 	boolean editStaffInfo(Staff staff,boolean change,String password);
+	
+	/**
+	 * 删除员工信息
+	 * @param staffno
+	 * @return
+	 */
+	boolean deleteStaffInfo(String[] staffno);
 }

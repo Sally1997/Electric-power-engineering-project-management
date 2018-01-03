@@ -178,4 +178,15 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.update(ConnectionManager.getConnection(), "update staff set name=?,sex=?,birthday=?,te=?,email=? where staffno=?",staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail(),staff.getStaffno());
 	}
 
+	@Override
+	public int[] deleteStaff(String[] staffs) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] para=new Object[staffs.length][1];
+		for(int i=0;i<staffs.length;i++){
+			para[i][0]=staffs[i];
+		}
+		return qr.batch(ConnectionManager.getConnection(), "delete from staff where staffno=?",para);
+	}
+
 }

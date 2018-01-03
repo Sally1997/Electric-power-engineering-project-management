@@ -408,7 +408,32 @@
 			});
 			
 			//初始化删除按钮
-			
+			$('#btn_delete').bind("click",function(){
+				//获取用户的id
+				var res=$('#stafflist').bootstrapTable('getSelections');
+				var ids="";
+				var warning="您确定要删除一下员工么?\n";
+				for(var i=0;i<res.length;i++){
+					ids+=res[i].staffno+":";
+					warning+="    --"+res[i].staffno+"\n";
+				}
+				var flag=confirm(warning);
+				if(!flag)
+					return;
+				var req=new XMLHttpRequest();
+				req.onreadystatechange=function(){
+					if(req.readyState==4&&req.status==200){
+						if(req.responseText=="ok"){
+							alert("删除成功");
+							location.reload();
+						}else{
+							alert(req.responseText);
+						}
+					}
+				};
+				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+ids);
+				req.send(null);
+			});
 			//初始化修改按钮
 			$('#btn_edit').bind("click",function(){
 				//清空密码框

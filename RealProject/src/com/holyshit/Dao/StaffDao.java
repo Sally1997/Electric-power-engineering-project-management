@@ -111,5 +111,13 @@ public interface StaffDao {
 	 * @throws SQLException
 	 */
 	int editStaff(Staff staff)throws SQLException;
+	
+	/**
+	 * 从公司删除员工
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] deleteStaff(String[] staffs)throws SQLException;
 }   
  

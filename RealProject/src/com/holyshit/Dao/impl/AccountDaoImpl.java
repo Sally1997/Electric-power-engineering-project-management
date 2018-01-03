@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 
 
+
+
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
@@ -45,6 +47,19 @@ public class AccountDaoImpl implements AccountDao{
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return qr.update(ConnectionManager.getConnection(),"update account set password=? where staffno=?",password,staffno);
+	}
+
+	@Override
+	public int[] deleteAccount(String[] staffs) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] para=new Object[staffs.length][1];
+		
+		for(int i=0;i<staffs.length;i++){
+			para[i][0]=staffs[i];
+		}
+		
+		return qr.batch(ConnectionManager.getConnection(), "delete from account where staffno=?", para);
 	}
 
 }

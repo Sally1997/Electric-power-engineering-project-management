@@ -258,4 +258,36 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return false;
 	}
+	@Override
+	public boolean deleteStaffInfo(String[] staffs) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		AccountDao ad=new AccountDaoImpl();
+		boolean resFlag=false;
+		try {
+			ConnectionManager.startTransaction();
+			//有先后关系
+			int[] res2 = ad.deleteAccount(staffs);
+			int[] res1 = sd.deleteStaff(staffs);
+			boolean flag=false;
+			for(int i=0;i<res1.length;i++)
+				if(res1[i]!=res2[i]){
+					flag=true;
+					break;
+				}
+			if(!flag){
+				resFlag=true;
+				ConnectionManager.commit();
+			}else {
+				ConnectionManager.rollback();
+			}
+		} catch (SQLException e) {
+			ConnectionManager.rollback();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return resFlag;
+	}
 }

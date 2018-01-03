@@ -220,6 +220,11 @@
     <servlet-name>EditStaff</servlet-name>
     <servlet-class>com.holyshit.web.servlet.EditStaff</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>DeleteStaff</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DeleteStaff</servlet-class>
+  </servlet>
+
 
 
 
@@ -400,6 +405,10 @@
   <servlet-mapping>
     <servlet-name>EditStaff</servlet-name>
     <url-pattern>/web/servlet/editStaff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteStaff</servlet-name>
+    <url-pattern>/web/servlet/deleteStaff</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
