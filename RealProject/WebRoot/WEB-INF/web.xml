@@ -193,6 +193,10 @@
     <servlet-name>ShowProAuditServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowProAuditServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ShowTaskInfoById</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowTaskInfoById</servlet-class>
+  </servlet>
 
 
 
@@ -347,6 +351,10 @@
   <servlet-mapping>
     <servlet-name>ShowProAuditServlet</servlet-name>
     <url-pattern>/web/servlet/showProAuditServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowTaskInfoById</servlet-name>
+    <url-pattern>/web/servlet/showTaskInfoById</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

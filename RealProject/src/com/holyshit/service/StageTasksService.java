@@ -60,4 +60,13 @@ public interface StageTasksService {
 	 * @param stage_task
 	 */
 	public void addTask(StageTask stage_task);
+	
+	/**
+	 * 分页查询任务的信息
+	 * @param staffno
+	 * @param cur
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String, Object> showTaskInfoByPage(String staffno,int cur,int pageSize);
 }

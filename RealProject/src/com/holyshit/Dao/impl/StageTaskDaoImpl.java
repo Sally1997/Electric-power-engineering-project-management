@@ -116,4 +116,18 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		return (String) qr.query(ConnectionManager.getConnection(), "select charpno from stagetasks where taskno=?",new ScalarHandler(),taskno);
 	}
 
+	@Override
+	public List<TaskInfo> selectTaskInfoByPage(String staffno, int cur,
+			int pageSize) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(), "SELECT * FROM stagetasks JOIN project ON stagetasks.pno=project.pno WHERE charpno=? AND (tstate='1' OR tstate='2') LIMIT ?,?",new BeanListHandler<TaskInfo>(TaskInfo.class),staffno,(cur-1)*pageSize,pageSize);
+	}
+
+	@Override
+	public long selectTotalTaskById(String staffno) throws SQLException {
+		QueryRunner qr=new QueryRunner();
+		return (long) qr.query(ConnectionManager.getConnection(), "SELECT count(*) FROM stagetasks JOIN project ON stagetasks.pno=project.pno WHERE charpno=? AND (tstate='1' OR tstate='2')",new ScalarHandler(),staffno);
+	}
+
 }
