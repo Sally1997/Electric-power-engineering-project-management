@@ -33,7 +33,6 @@ public class MainServlet extends HttpServlet {
 				ProjectService ps=new ProjectServiceImpl();
 				String staffno=((Staff) request.getSession().getAttribute("staff")).getStaffno();
 				projects=ps.findAllProjectsById(staffno);
-				System.out.println();
 				//获取当前用户的任务列表
 				List<StageTask> tasks;
 				List<StageTask> projectNames;
@@ -67,7 +66,10 @@ public class MainServlet extends HttpServlet {
 				Map<String, Object> notices = ns.showAllNoticeByPage(1, 5);
 				request.setAttribute("notices",notices );
 				//转向到主页
-				request.getRequestDispatcher("/jsp/homeManage/main.jsp").forward(request, response);
+				if(staffno.equals("root")){
+					request.getRequestDispatcher("/jsp/homeManage/adminManage.jsp").forward(request, response);
+				}else
+					request.getRequestDispatcher("/jsp/homeManage/main.jsp").forward(request, response);
 	}
 
 }

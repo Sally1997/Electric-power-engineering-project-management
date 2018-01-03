@@ -191,6 +191,16 @@
     <servlet-name>ShowTaskInfoById</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowTaskInfoById</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>TestBootstrap</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.TestBootstrap</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowStaffByPage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowStaffByPage</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -345,6 +355,14 @@
   <servlet-mapping>
     <servlet-name>ShowTaskInfoById</servlet-name>
     <url-pattern>/web/servlet/showTaskInfoById</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestBootstrap</servlet-name>
+    <url-pattern>/web/servlet/testBootstrap</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowStaffByPage</servlet-name>
+    <url-pattern>/web/servlet/showStaffByPage</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

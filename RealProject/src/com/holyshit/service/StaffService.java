@@ -48,4 +48,12 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> queryStaffInCompany(String pno,String userno,String keyword);
+	
+	/**
+	 * 分页查询员工
+	 * @param cur
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String, Object> findStaffByPage(int cur,int pageSize);
 }

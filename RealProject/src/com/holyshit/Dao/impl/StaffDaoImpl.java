@@ -110,4 +110,19 @@ public class StaffDaoImpl implements StaffDao {
 			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
 	}
 
+	@Override
+	public List<Staff> selectStaffByPage(int cur, int pageSize)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		return qr.query(ConnectionManager.getConnection(),"select * from staff limit ?,?",new BeanListHandler<Staff>(Staff.class),(cur-1)*pageSize,pageSize);
+	}
+
+	@Override
+	public long selectStaffNum() throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		return (long) qr.query(ConnectionManager.getConnection(),"select count(*) from staff",new ScalarHandler());
+	}
+
 }

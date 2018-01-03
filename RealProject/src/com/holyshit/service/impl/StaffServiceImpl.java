@@ -3,6 +3,7 @@ import com.holyshit.Dao.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -167,5 +168,29 @@ public class StaffServiceImpl implements StaffService{
 			e.printStackTrace();
 		}
 		return list;
+	}
+	@Override
+	public Map<String, Object> findStaffByPage(int cur, int pageSize) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		List<Staff> list=null;
+		long totalNum=0;
+		try {
+			list=sd.selectStaffByPage(cur, pageSize);
+			totalNum=sd.selectStaffNum();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		Map<String, Object> resMap=new HashMap<String, Object>();
+		
+		resMap.put("staffs", list);
+		resMap.put("totalNum", totalNum);
+		resMap.put("currentPage", cur);
+		resMap.put("pageSize", pageSize);
+		resMap.put("pageNum", totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1);
+		return resMap;
 	}
 }
