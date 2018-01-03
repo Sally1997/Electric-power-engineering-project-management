@@ -197,6 +197,13 @@
     <servlet-name>ShowTaskInfoById</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowTaskInfoById</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ProjectAuditServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ProjectAuditServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -355,6 +362,10 @@
   <servlet-mapping>
     <servlet-name>ShowTaskInfoById</servlet-name>
     <url-pattern>/web/servlet/showTaskInfoById</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProjectAuditServlet</servlet-name>
+    <url-pattern>/web/servlet/projectAuditServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
@@ -42,7 +43,7 @@ public class AuditDaoImpl implements AuditDao {
 	public Map<String, Object> selectProAuditInfo(String mno) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT pname,pbudget,ptype,stime,etime,NAME,DTitle,DPath "+
+		return qr.query("SELECT pname,pbudget,ptype,stime,etime,NAME,DTitle,DPath,staffno "+
 				"FROM project,staff,document,projaprlaudit,pdocaudit "+
 				"WHERE projaprlaudit.paauditno= ? AND projaprlaudit.PNo=pdocaudit.PNo "+
 				"AND pdocaudit.PDocNo=document.DNo AND projaprlaudit.ApplicantNo=staff.StaffNo "+
@@ -56,6 +57,24 @@ public class AuditDaoImpl implements AuditDao {
 		return qr.query("SELECT NAME,auditadv,auditstate,audittime FROM projaprlaudit,staff "+
 				"WHERE staffno=AuditorNo AND pno IN (SELECT pno FROM projaprlaudit "+
 				"WHERE paauditno=?)", new MapListHandler(),mno);
+	}
+
+	@Override
+	public void updateProAuditInfo(String mno, String auditstate,
+			String auditadv, String NAuditorNo) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(), "UPDATE projaprlaudit SET auditstate=?, "+
+					"NAuditorNo=?,auditadv=?,audittime=CURRENT_TIMESTAMP() WHERE paauditno IN "+
+					"(SELECT busno FROM inform WHERE mno=?)",auditstate,NAuditorNo,auditadv,mno);
+	}
+
+	@Override
+	public Projaprlaudit selectPAAByMno(String mno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT * FROM projaprlaudit WHERE paauditno IN (SELECT busno FROM inform WHERE mno=?)"
+					, new BeanHandler<Projaprlaudit>(Projaprlaudit.class),mno);
 	}
 
 }

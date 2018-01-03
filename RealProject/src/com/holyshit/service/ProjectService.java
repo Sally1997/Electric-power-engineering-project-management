@@ -7,6 +7,7 @@ import java.util.Map;
 import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
@@ -72,5 +73,5 @@ public interface ProjectService {
 	 * @param pda 立项文档
 	 * @return
 	 */
-	boolean newPeojectManage(Project pro,Projaprlaudit paa,Inform info,Document doc,PDocAudit pda);
+	boolean newPeojectManage(Project pro,PSRelation psr,Inform info,Document doc,PDocAudit pda);
 }

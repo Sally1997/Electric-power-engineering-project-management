@@ -10,19 +10,18 @@ import com.holyshit.Dao.AuditDao;
 import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.ProjectDao;
+import com.holyshit.Dao.StaffDao;
 import com.holyshit.Dao.impl.AuditDaoImpl;
 import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
+import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
-import com.holyshit.domain.Projaprlaudit;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
-import com.holyshit.service.AuditService;
-import com.holyshit.service.DocumentService;
-import com.holyshit.service.InformService;
 import com.holyshit.service.ProjectService;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.utils.StateConversion;
@@ -152,7 +151,7 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public boolean newPeojectManage(Project pro, Projaprlaudit paa,
+	public boolean newPeojectManage(Project pro, PSRelation psr,
 			Inform info, Document doc, PDocAudit pda) {
 		ConnectionManager.startTransaction();
 		
@@ -170,6 +169,7 @@ public class ProjectServiceImpl implements ProjectService {
 		AuditDao ad = new AuditDaoImpl();
 		InformDao id = new InformDaoImpl();
 		DocumentDao dd=new DocumentDaoImpl();
+		StaffDao sd = new StaffDaoImpl();
 		
 		boolean iff = true;
 		
@@ -177,8 +177,9 @@ public class ProjectServiceImpl implements ProjectService {
 			pd.addProject(pro);
 			dd.insertDocument(doc);
 			ad.insertpdocaudit(pda);
-			ad.insertprojaprlaudit(paa);
+			//ad.insertprojaprlaudit(paa); 为了获得最新生成的理想审核编号，应该把插入立项审核信息提取出来
 			id.insertInform(info);
+			sd.addAStaff(psr);
 			ConnectionManager.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

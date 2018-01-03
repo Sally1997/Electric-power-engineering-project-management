@@ -31,7 +31,7 @@ public class TestFozza {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println(map);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		java.sql.Date sd1 = (java.sql.Date) map.get("stime");

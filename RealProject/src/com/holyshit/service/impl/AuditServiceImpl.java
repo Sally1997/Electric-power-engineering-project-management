@@ -115,11 +115,44 @@ public class AuditServiceImpl implements AuditService {
 			}
 		}
 		
+		map.put("mno", mno);
 		map.put("list", list);
 		
 		String str = JSONObject.fromObject(map).toString();
 		str = an.transToLowerObject(str).toString();
 		return str;
+	}
+
+	@Override
+	public Projaprlaudit getPAAInfoByMno(String mno) {
+		// TODO Auto-generated method stub
+		AuditDao ad = new AuditDaoImpl();
+		Projaprlaudit paa = new Projaprlaudit();
+		try {
+			paa = ad.selectPAAByMno(mno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return paa;
+	}
+
+	@Override
+	public void changePAAInfo(String mno, String auditstate, String auditadv,
+			String NAuditorNo) {
+		// TODO Auto-generated method stub
+		ConnectionManager.startTransaction();
+		AuditDao ad = new AuditDaoImpl();
+		try {
+			ad.updateProAuditInfo(mno, auditstate, auditadv, NAuditorNo);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
 	}
 
 }

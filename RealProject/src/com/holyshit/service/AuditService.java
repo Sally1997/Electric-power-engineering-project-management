@@ -24,4 +24,20 @@ public interface AuditService {
 	 * @return
 	 */
 	String getProAuditInfo(String mno);
+	
+	/**
+	 * 得到项目审核整个javabean类，多是编号类后台数据，和getProAuditInfo不同
+	 * @param mno
+	 * @return
+	 */
+	Projaprlaudit getPAAInfoByMno(String mno);
+	
+	/**
+	 * 改变项目审核表信息
+	 * @param mno
+	 * @param auditstate
+	 * @param auditadv
+	 * @param NAuditorNo
+	 */
+	void changePAAInfo(String mno, String auditstate,String auditadv, String NAuditorNo);
 }

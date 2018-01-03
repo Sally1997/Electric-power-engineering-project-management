@@ -44,4 +44,19 @@ public interface AuditDao {
 	 * @throws SQLException 
 	 */
 	List<Map<String,Object>> selectProAuditAdvInfo(String mno) throws SQLException;
+	
+	/**
+	 * 更新立项审核表
+	 * @param map
+	 * @throws SQLException 
+	 */
+	void updateProAuditInfo(String mno,String auditstate,String auditadv,String NAuditorNo) throws SQLException;
+	
+	/**
+	 * 根据消息表编号查找立项审核表信息
+	 * @param mno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Projaprlaudit selectPAAByMno(String mno) throws SQLException;
 }

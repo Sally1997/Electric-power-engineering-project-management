@@ -24,6 +24,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
@@ -46,6 +47,7 @@ public class NewProjectServlet extends HttpServlet {
 	Inform info = new Inform();
 	Document doc = new Document();
 	PDocAudit pda = new PDocAudit();
+	PSRelation psr = new PSRelation();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -91,6 +93,7 @@ public class NewProjectServlet extends HttpServlet {
 		paa.setApplicantno(staffno);//申请人编号1
 		pda.setApplicantno(staffno);
 		doc.setUloadpno(staffno);//doc 2
+		psr.setStaffno(staffno);
 		
 		//项目阶段初始化为立项中
 		pro.setPstate("0");
@@ -101,11 +104,12 @@ public class NewProjectServlet extends HttpServlet {
 		paa.setAuditstate("0");
 		pda.setAuditstate("0");
 		
-		/*ProjectService ps = new ProjectServiceImpl();//1
-		ps.NewProject(pro);*/
+		ProjectService ps = new ProjectServiceImpl();//1
+		/*ps.NewProject(pro);*/
 		
-		/*AuditService as = new AuditServiceImpl();//2
-		as.addProAuditInfo(paa);*/
+		//因为项目审核的主键是自增长数列，所以必须先插入paa，才能得到他的最新的主键
+		AuditService as = new AuditServiceImpl();//2
+		as.addProAuditInfo(paa);
 		
 		//处理消息表的业务逻辑
 		InformService infoser = new InformServiceImpl();
@@ -121,14 +125,14 @@ public class NewProjectServlet extends HttpServlet {
 		doc.setDloadtimes(0);
 		doc.setAuditres("0");
 		
+		psr.setDuty("项目经理");
 		/*DocumentService ds = new DocumentServiceImpl();
 		boolean bool = ds.addDocument(doc);//4
 		if(!bool){
 			response.getWriter().write("<script type='text/javascript'>alert('服务器繁忙……上传失败!')</script>");
 		}*/
 		
-		ProjectService ps = new ProjectServiceImpl();
-		boolean iffailed = ps.newPeojectManage(pro, paa, info, doc, pda);
+		boolean iffailed = ps.newPeojectManage(pro, psr, info, doc, pda);
 		if(iffailed){
 			response.getWriter().write("<script type='text/javascript'>alert('项目异常……新建失败!')</script>");
 		}
@@ -244,6 +248,7 @@ public class NewProjectServlet extends HttpServlet {
 			paa.setPno(pno);//设置项目编号3
 			pda.setPno(pno);
 			doc.setPno(pno);//doc 3 设置项目编号
+			psr.setPno(pno);
 		}
 		else if(filename.equals("PersonInCharge")){
 			String cpn = "";

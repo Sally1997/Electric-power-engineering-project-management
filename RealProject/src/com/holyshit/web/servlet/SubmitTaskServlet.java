@@ -101,7 +101,7 @@ public class SubmitTaskServlet extends HttpServlet {
 			PSRelation psr = new PSRelation();
 			psr.setStaffno(cpn);
 			psr.setPno(pno);
-			psr.setDuty("审核人");
+			psr.setDuty("负责人");
 			ss.addAStaff(psr);
 		}
 		
