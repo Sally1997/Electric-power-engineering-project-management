@@ -133,6 +133,7 @@
 				<label class="col-sm-2 control-label">员工性别<span style="color: red;">*</span></label>
                 <div class="col-sm-8">
 			    	<select class="selectpicker" data-width="100%" id="addStaff_sex">
+			    	  <option>请选择</option>
 					  <option>男</option>
 					  <option>女</option>
 					</select>
@@ -193,6 +194,10 @@
       				alert("员工姓名不能为空");
       				return;
       			}
+      			if(addStaff_sex=="请选择"){
+      				alert("请选择性别");
+      				return;
+      			}
       			if(addStaff_birthday==""){
       				alert("出生日期不能为空");
       				return;
@@ -234,6 +239,142 @@
     </div>
   </div>
 </div>
+
+
+	<!-- 修改人员界面 -->
+<div class="modal fade" id="staff_edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改人员信息</h4>
+      </div>
+      <div class="modal-body">
+		  <form class="form-horizontal">
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">员工编号</label>
+				<div class="col-sm-8">
+			    <input type="text" class="form-control" id="editStaff_staffno" placeholder="请输入编号" readonly="readonly">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">员工姓名<span style="color: green;">#</span></label>
+                <div class="col-sm-8">
+			    <input type="text" class="form-control" id="editStaff_name" placeholder="请输入姓名">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">员工性别<span style="color: green;">#</span></label>
+                <div class="col-sm-8">
+			    	<select class="selectpicker" data-width="100%" id="editStaff_sex">
+					  <option>男</option>
+					  <option>女</option>
+					</select>
+				</div>
+			  </div>
+		      <div class="form-group">
+			    <label class="col-sm-2 control-label">出生日期<span style="color: green;">#</span></label>
+			   	<div class="col-sm-3">
+					<input type='text' class="form-control" placeholder="选择时间"  id='editStaff_birthday'>
+				</div>
+			  </div>			  
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">电话号码<span style="color: green;">#</span></label>
+				<div class="col-sm-8">
+		          <input type="text" class="form-control" id="editStaff_te" placeholder="请输入电话">
+				</div>
+			  </div>
+             <div class="form-group">
+				<label  class="col-sm-2 control-label">电子邮箱<span style="color: green;">#</span></label>
+				<div class="col-lg-8">
+				  <input type="text" class="form-control" id="editStaff_email" placeholder="请输入邮箱">
+				</div>
+			  </div>
+			 <div class="form-group">
+				<label  class="col-sm-2 control-label">重置密码<span style="color: green;">#</span></label>
+				<div class="col-lg-8">
+				  <input type="text" class="form-control" id="editStaff_password" placeholder="请勿随意重置密码">
+				</div>
+			  </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button2" class="btn btn-primary" onclick="editStaff()">确认添加</button>
+      </div>
+      <script type="text/javascript">
+      		function editStaff(){
+      			
+      			var editStaff_staffno=$('#editStaff_staffno').val();
+      			var editStaff_name=$('#editStaff_name').val();
+      			var editStaff_sex=$('#editStaff_sex').val();
+      			var editStaff_birthday=$('#editStaff_birthday').val();
+      			var editStaff_te=$('#editStaff_te').val();
+      			var editStaff_email=$('#editStaff_email').val();
+      			var editStaff_password=$('#editStaff_password').val();
+      			var editStaff_confirm=$('#editStaff_confirm').val();
+      
+      			if(editStaff_name==""){
+      				alert("员工姓名不能为空");
+      				return;
+      			}
+      			if(editStaff_birthday==""){
+      				alert("出生日期不能为空");
+      				return;
+      			}
+      			if(editStaff_te==""){
+      				alert("电话号码不能为空");
+      				return;
+      			}
+      			if(editStaff_email==""){
+      				alert("电子邮箱不能为空");
+      				return;
+      			}
+      			if(editStaff_password!=""){
+      				var flag=confirm("您确定要重置编号为"+editStaff_staffno+"的密码么？请及时通知相关员工以免造成损失");
+      				if(!flag)
+      					return;
+      			}
+      			var warning="您刚才做了如下修改:\n";
+      			var res=$('#stafflist').bootstrapTable('getSelections');
+      			var data=res[0];
+      			if(data.name!=editStaff_name)
+      				warning+="    -- 将员工姓名从 ["+data.name+"] 改变为了 ["+editStaff_name+"] \n";
+      			if(data.sex!=editStaff_sex)
+      				warning+="    -- 将员工性别从 ["+data.sex+"] 改变为了 ["+editStaff_sex+"] \n";
+      			if(data.birthday!=editStaff_birthday)
+      				warning+="    -- 将出生日期从 ["+data.birthday+"] 改变为了 ["+editStaff_birthday+"] \n";
+      			if(data.te!=editStaff_te)
+      				warning+="    -- 将员工电话号码从 ["+data.te+"] 改变为了 ["+editStaff_te+"] \n";
+      			if(data.email!=editStaff_email)
+      				warning+="    -- 将员工邮箱从 ["+data.email+"] 改变为了 ["+editStaff_email+"] \n";
+      			if(editStaff_password!="")
+      				warning+="    -- 重置了员工密码 \n";
+      			warning+="您确定要进行以上改变吗？";
+      			var isSend=confirm(warning);
+	
+      			//发送请求
+      			var req=new XMLHttpRequest();
+      			req.onreadystatechange=function(){
+      				if(req.readyState==4&&req.status==200){
+      					if(req.responseText=="ok"){
+      						alert("员工信息修改成功");
+      						$('#staff_edit_modal').modal("hide");
+      						location.reload();
+      					}else{
+      						alert(req.responseText);
+      					}
+      				}
+      			};
+      			if(isSend){
+	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+editStaff_name+"&sex="+editStaff_sex+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password);
+	      			req.send(null);
+      			}
+      		}
+      </script>
+    </div>
+  </div>
+</div>
 	<script type="text/javascript">
 		$(function() {
 			//日期插件的初始化
@@ -243,6 +384,11 @@
 				format:'YYYY-MM-DD'
 			});
 	        $('#addStaff_birthday').datetimepicker({
+				locale:'zh-cn',
+				viewMode:'days',
+				format:'YYYY-MM-DD'
+			});
+	        $('#editStaff_birthday').datetimepicker({
 				locale:'zh-cn',
 				viewMode:'days',
 				format:'YYYY-MM-DD'
@@ -265,6 +411,8 @@
 			
 			//初始化修改按钮
 			$('#btn_edit').bind("click",function(){
+				//清空密码框
+				$('#editStaff_password').val("");
 				var res=$('#stafflist').bootstrapTable('getSelections');
 				if(res.length==0){
 					alert("请选择需要修改的记录");
@@ -274,8 +422,27 @@
 					alert("您一次只能修改一条记录");
 					return;
 				}
-				//修改人员信息
+				//显示当前人员信息
+				var data=res[0];
+				$('#editStaff_staffno').val(data.staffno);
+				$('#editStaff_name').val(data.name);
+				//错误设置select的默认值
+				/* $('#editStaff_sex').val(data.sex); */
+				var options=document.getElementById("editStaff_sex").getElementsByTagName("option");
 				
+				if(data.sex=="男"){
+					options[0].selected="selected";
+				}
+				else{
+					options[1].selected="selected";
+				}
+				$('#editStaff_sex').selectpicker('refresh');
+				
+				$('#editStaff_birthday').val(data.birthday);
+				$('#editStaff_te').val(data.te);
+				$('#editStaff_email').val(data.email);
+				//显示修改模态框
+				$('#staff_edit_modal').modal("show");
 			});
 			//1.初始化Table
 			var oTable = new TableInit();
@@ -320,6 +487,9 @@
 					}, {
 						field : 'name',
 						title : '姓名'
+					},{
+						field : 'sex',
+						title : '性别'
 					}, {
 						field : 'birthday',
 						title : '出生日期'

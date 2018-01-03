@@ -103,5 +103,13 @@ public interface StaffDao {
 	 * @throws SQLException
 	 */
 	int addStaff(Staff staff)throws SQLException;
+	
+	/**
+	 * 修改员工信息
+	 * @param staff
+	 * @return
+	 * @throws SQLException
+	 */
+	int editStaff(Staff staff)throws SQLException;
 }   
  

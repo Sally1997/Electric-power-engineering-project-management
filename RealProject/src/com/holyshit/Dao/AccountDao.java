@@ -27,4 +27,11 @@ public interface AccountDao {
 	 * @throws SQLException
 	 */
 	int addAccount(String staffno,String password)throws SQLException;
+	
+	/**
+	 * 修改密码
+	 * @return
+	 * @throws SQLException
+	 */
+	int editAccount(String staffno,String password)throws SQLException;
 }

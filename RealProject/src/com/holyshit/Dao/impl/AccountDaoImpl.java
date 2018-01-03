@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 
 
+
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
@@ -37,6 +38,13 @@ public class AccountDaoImpl implements AccountDao{
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return qr.update(ConnectionManager.getConnection(),"insert into account values(?,?,null)",staffno,password);
+	}
+
+	@Override
+	public int editAccount(String staffno, String password) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(),"update account set password=? where staffno=?",password,staffno);
 	}
 
 }

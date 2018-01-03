@@ -219,4 +219,43 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return false;
 	}
+	@Override
+	public boolean editStaffInfo(Staff staff, boolean change,String password) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		AccountDao ad=new AccountDaoImpl();
+		int res1=0,res2=0;
+		if(change){
+			//重置了密码
+			try {
+				ConnectionManager.startTransaction();
+				res1=sd.editStaff(staff);
+				res2=ad.editAccount(staff.getStaffno(), password);
+				ConnectionManager.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				ConnectionManager.rollback();
+				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
+			}
+			if(res1==1&&res2==1){
+				return true;
+			}
+		}else{
+			//未重置密码
+			try {
+				res1=sd.editStaff(staff);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
+			}
+			if(res1==1){
+				return true;
+			}
+		}
+		return false;
+	}
 }

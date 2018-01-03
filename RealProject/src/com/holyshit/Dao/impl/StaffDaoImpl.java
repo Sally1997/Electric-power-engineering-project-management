@@ -171,4 +171,11 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.update(ConnectionManager.getConnection(), "insert into staff values(?,?,?,?,?,?)",staff.getStaffno(),staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail());
 	}
 
+	@Override
+	public int editStaff(Staff staff) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(), "update staff set name=?,sex=?,birthday=?,te=?,email=? where staffno=?",staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail(),staff.getStaffno());
+	}
+
 }

@@ -63,4 +63,12 @@ public interface StaffService {
 	 * @return
 	 */
 	boolean addStaffByRoot(Staff staff,String password);
+	
+	/**
+	 * 编辑员工信息
+	 * @param staff
+	 * @param change
+	 * @return
+	 */
+	boolean editStaffInfo(Staff staff,boolean change,String password);
 }
