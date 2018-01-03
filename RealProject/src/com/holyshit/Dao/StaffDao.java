@@ -87,13 +87,21 @@ public interface StaffDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<Staff> selectStaffByPage(int cur,int pageSize) throws SQLException;
+	List<Staff> selectStaffByPage(int cur,int pageSize,Staff condition) throws SQLException;
 	
 	/**
 	 * 查询员工数量
 	 * @return
 	 * @throws SQLException
 	 */
-	long selectStaffNum()throws SQLException;
+	long selectStaffNum(Staff condition)throws SQLException;
+	
+	/**
+	 * 添加员工
+	 * @param staff
+	 * @return
+	 * @throws SQLException
+	 */
+	int addStaff(Staff staff)throws SQLException;
 }   
  

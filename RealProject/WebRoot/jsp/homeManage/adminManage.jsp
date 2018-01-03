@@ -65,6 +65,7 @@
 						<label class="control-label col-sm-1" for="search_sex">性别</label>
 						<div class="col-sm-3">
 							<select class="selectpicker" data-width="100%" id="search_sex">
+							  <option>请选择</option>	
 							  <option>男</option>
 							  <option>女</option>
 							</select>
@@ -104,6 +105,135 @@
 		</div>
 		<table id="stafflist"></table>
 	</div>
+	
+	 <!--      默认隐藏的内容:添加人员，然而并不能实现添加，后台爸爸看看还有救吗-->
+     
+  <div class="modal fade" id="staff_add_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加人员信息</h4>
+      </div>
+      <div class="modal-body">
+		  <form class="form-horizontal">
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">员工编号<span style="color: red;">*</span></label>
+				<div class="col-sm-8">
+			    <input type="text" class="form-control" id="addStaff_staffno" placeholder="请输入编号">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">员工姓名<span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+			    <input type="text" class="form-control" id="addStaff_name" placeholder="请输入姓名">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">员工性别<span style="color: red;">*</span></label>
+                <div class="col-sm-8">
+			    	<select class="selectpicker" data-width="100%" id="addStaff_sex">
+					  <option>男</option>
+					  <option>女</option>
+					</select>
+				</div>
+			  </div>
+		      <div class="form-group">
+			    <label class="col-sm-2 control-label">出生日期<span style="color: red;">*</span></label>
+			   	<div class="col-sm-3">
+					<input type='text' class="form-control" placeholder="选择时间" id='addStaff_birthday'>
+				</div>
+			  </div>			  
+			  <div class="form-group">
+				<label class="col-sm-2 control-label">电话号码<span style="color: red;">*</span></label>
+				<div class="col-sm-8">
+		          <input type="text" class="form-control" id="addStaff_te" placeholder="请输入电话">
+				</div>
+			  </div>
+             <div class="form-group">
+				<label  class="col-sm-2 control-label">电子邮箱<span style="color: red;">*</span></label>
+				<div class="col-lg-8">
+				  <input type="text" class="form-control" id="addStaff_email" placeholder="请输入邮箱">
+				</div>
+			  </div>
+			 <div class="form-group">
+				<label  class="col-sm-2 control-label">设置密码<span style="color: red;">*</span></label>
+				<div class="col-lg-8">
+				  <input type="password" class="form-control" id="addStaff_password">
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label  class="col-sm-2 control-label">确认密码<span style="color: red;">*</span></label>
+				<div class="col-lg-8">
+				  <input type="password" class="form-control" id="addStaff_confirm">
+				</div>
+			  </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button2" class="btn btn-primary" onclick="addStaff()">确认添加</button>
+      </div>
+      <script type="text/javascript">
+      		function addStaff(){
+      			
+      			var addStaff_staffno=$('#addStaff_staffno').val();
+      			var addStaff_name=$('#addStaff_name').val();
+      			var addStaff_sex=$('#addStaff_sex').val();
+      			var addStaff_birthday=$('#addStaff_birthday').val();
+      			var addStaff_te=$('#addStaff_te').val();
+      			var addStaff_email=$('#addStaff_email').val();
+      			var addStaff_password=$('#addStaff_password').val();
+      			var addStaff_confirm=$('#addStaff_confirm').val();
+      			if(addStaff_staffno==""){
+      				alert("员工编号不能为空");
+      				return;
+      			}
+      			if(addStaff_name==""){
+      				alert("员工姓名不能为空");
+      				return;
+      			}
+      			if(addStaff_birthday==""){
+      				alert("出生日期不能为空");
+      				return;
+      			}
+      			if(addStaff_te==""){
+      				alert("电话号码不能为空");
+      				return;
+      			}
+      			if(addStaff_email==""){
+      				alert("电子邮箱不能为空");
+      				return;
+      			}
+      			if(addStaff_password==""){
+      				alert("密码不能为空");
+      				return;
+      			}
+      			if(addStaff_confirm!=addStaff_password){
+      				alert("输入密码不同");
+      				return;
+      			}
+      			//发送请求
+      			var req=new XMLHttpRequest();
+      			req.onreadystatechange=function(){
+      				if(req.readyState==4&&req.status==200){
+      					if(req.responseText=="ok"){
+      						alert("人员添加成功");
+      						$('#staff_add_modal').modal("hide");
+      						location.reload();
+      					}else{
+      						alert(req.responseText);
+      						
+      					}
+      				}
+      			};
+      			req.open("get","/RealProject/web/servlet/addStaff?staffno="+addStaff_staffno+"&name="+addStaff_name+"&sex="+addStaff_sex+"&birthday="+addStaff_birthday+"&te="+addStaff_te+"&email="+addStaff_email+"&password="+addStaff_password);
+      			req.send(null);
+      		}
+      </script>
+    </div>
+  </div>
+</div>
 	<script type="text/javascript">
 		$(function() {
 			//日期插件的初始化
@@ -112,7 +242,41 @@
 				viewMode:'days',
 				format:'YYYY-MM-DD'
 			});
+	        $('#addStaff_birthday').datetimepicker({
+				locale:'zh-cn',
+				viewMode:'days',
+				format:'YYYY-MM-DD'
+			});
 	        
+			//初始化添加按钮
+			$('#btn_add').bind("click",function(){
+				//清空输入框
+      			$('#addStaff_staffno').val("");
+      			$('#addStaff_name').val("");
+      			$('#addStaff_birthday').val("");
+      			$('#addStaff_te').val("");
+      			$('#addStaff_email').val("");
+      			$('#addStaff_password').val("");
+				//显示模态框
+				$("#staff_add_modal").modal("show");
+			});
+			
+			//初始化删除按钮
+			
+			//初始化修改按钮
+			$('#btn_edit').bind("click",function(){
+				var res=$('#stafflist').bootstrapTable('getSelections');
+				if(res.length==0){
+					alert("请选择需要修改的记录");
+					return;
+				}
+				if(res.length!=1){
+					alert("您一次只能修改一条记录");
+					return;
+				}
+				//修改人员信息
+				
+			});
 			//1.初始化Table
 			var oTable = new TableInit();
 			oTable.Init();
@@ -137,10 +301,10 @@
 					sortable : false, //是否启用排序
 					sortOrder : "asc", //排序方式
 					queryParams : oTableInit.queryParams,//传递参数（*）
-					sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
+					sidePagination : "server" , //分页方式：client客户端分页，server服务端分页（*）
+					queryParamsType : "undefined",
 					pageNumber : 1, //初始化加载第一页，默认第一页
 					pageSize : 8, //每页的记录行数（*）
-					search : true, //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 					strictSearch : true,
 					showColumns : true, //是否显示所有的列
 					showRefresh : true, //是否显示刷新按钮
@@ -176,8 +340,8 @@
 			//得到查询的参数
 			oTableInit.queryParams = function(params) {
 				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-					limit : params.limit, //页面大小
-					offset : params.offset, //页码
+					pageNumber: params.pageNumber,    
+	                pageSize: params.pageSize, 
 					staffno: $('#search_staffno').val(),
 					name: $("#search_name").val(),
 					sex: $("#search_sex").val(),
@@ -197,13 +361,7 @@
 			oInit.Init = function() {
 				//初始化页面上面的按钮事件
 				$("#search").bind("click", function(){
-					//消除搜索历史
-					$('#search_staffno').val("");
-					$("#search_name").val("");
-					$("#search_sex").val("");
-					$("#search_birthday").val("");
-					$("#search_te").val("");
-					$("#search_email").val("");
+					
 					//先销毁表格  
 			        $('#stafflist').bootstrapTable('destroy'); 
 			      //1.初始化Table

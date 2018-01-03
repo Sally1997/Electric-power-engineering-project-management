@@ -111,18 +111,64 @@ public class StaffDaoImpl implements StaffDao {
 	}
 
 	@Override
-	public List<Staff> selectStaffByPage(int cur, int pageSize)
+	public List<Staff> selectStaffByPage(int cur, int pageSize,Staff condition)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"select * from staff limit ?,?",new BeanListHandler<Staff>(Staff.class),(cur-1)*pageSize,pageSize);
+		String sql="select * from staff where '1'='1'";
+		if(condition.getStaffno()!=null){
+			sql+=" and staffno like '%"+condition.getStaffno()+"%'";
+		}
+		if(condition.getName()!=null){
+			sql+=" and name like '%"+condition.getName()+"%'";
+		}
+		if(condition.getSex()!=null){
+			sql+=" and sex='"+condition.getSex()+"'";
+		}
+		if(condition.getBirthday()!=null){
+			sql+=" and birthday='"+condition.getBirthday().toString()+"'";
+		}
+		if(condition.getTe()!=null){
+			sql+=" and te like '%"+condition.getTe()+"%'";
+		}
+		if(condition.getEmail()!=null){
+			sql+=" and email like '%"+condition.getEmail()+"%'";
+		}
+		sql+=" limit ?,?";
+		return qr.query(ConnectionManager.getConnection(),sql,new BeanListHandler<Staff>(Staff.class),(cur-1)*pageSize,pageSize);
 	}
 
 	@Override
-	public long selectStaffNum() throws SQLException {
+	public long selectStaffNum(Staff condition) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
-		return (long) qr.query(ConnectionManager.getConnection(),"select count(*) from staff",new ScalarHandler());
+		String sql="select count(*) from staff where '1'='1'";
+		if(condition.getStaffno()!=null){
+			sql+=" and staffno like '%"+condition.getStaffno()+"%'";
+		}
+		if(condition.getName()!=null){
+			sql+=" and name like '%"+condition.getName()+"%'";
+		}
+		if(condition.getSex()!=null){
+			sql+=" and sex='"+condition.getSex()+"'";
+		}
+		if(condition.getBirthday()!=null){
+			sql+=" and birthday='"+condition.getBirthday().toString()+"'";
+		}
+		if(condition.getTe()!=null){
+			sql+=" and te like '%"+condition.getTe()+"%'";
+		}
+		if(condition.getEmail()!=null){
+			sql+=" and email like '%"+condition.getEmail()+"%'";
+		}
+		return (long) qr.query(ConnectionManager.getConnection(),sql,new ScalarHandler());
+	}
+
+	@Override
+	public int addStaff(Staff staff) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(), "insert into staff values(?,?,?,?,?,?)",staff.getStaffno(),staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail());
 	}
 
 }

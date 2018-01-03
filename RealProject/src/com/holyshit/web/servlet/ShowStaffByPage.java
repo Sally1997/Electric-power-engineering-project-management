@@ -2,6 +2,9 @@ package com.holyshit.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +24,40 @@ public class ShowStaffByPage extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		int pageSize=Integer.parseInt(request.getParameter("limit"));
-		int cur=(Integer.parseInt(request.getParameter("offset"))/pageSize)+1;
+		int pageSize=Integer.parseInt(request.getParameter("pageSize"));
+		int cur=Integer.parseInt(request.getParameter("pageNumber"));
+
+		
+		request.setCharacterEncoding("UTF-8");
+		String staffno=request.getParameter("staffno");
+		String name=request.getParameter("name");
+		String sex=request.getParameter("sex");
+		String birthday=request.getParameter("birthday");
+		String te=request.getParameter("te");
+		String email=request.getParameter("email");
+		Staff queryStaff=new Staff();
+		if(!staffno.equals(""))
+			queryStaff.setStaffno(staffno);
+		if(!name.equals(""))
+			queryStaff.setName(name);
+		if(!sex.equals("请选择"))
+			queryStaff.setSex(sex);
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date parse = sdf.parse(birthday);
+			queryStaff.setBirthday(new java.sql.Date(parse.getTime()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+		}
+		if(!te.equals(""))
+			queryStaff.setTe(te);
+		if(!email.equals(""))
+			queryStaff.setEmail(email);
+		
 		//获取员工信息
 		StaffService ss=new StaffServiceImpl();
-		Map<String, Object> res = ss.findStaffByPage(cur, pageSize);
+		Map<String, Object> res = ss.findStaffByPage(cur, pageSize,queryStaff);
 		
 		//封装json数组
 		JSONArray ja=new JSONArray();

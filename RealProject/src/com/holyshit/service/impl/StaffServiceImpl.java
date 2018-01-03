@@ -10,6 +10,7 @@ import java.util.Map;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
+import com.holyshit.Dao.impl.AccountDaoImpl;
 import com.holyshit.Dao.impl.NoteDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.domain.Note;
@@ -170,14 +171,14 @@ public class StaffServiceImpl implements StaffService{
 		return list;
 	}
 	@Override
-	public Map<String, Object> findStaffByPage(int cur, int pageSize) {
+	public Map<String, Object> findStaffByPage(int cur, int pageSize,Staff condition) {
 		// TODO Auto-generated method stub
 		StaffDao sd=new StaffDaoImpl();
 		List<Staff> list=null;
 		long totalNum=0;
 		try {
-			list=sd.selectStaffByPage(cur, pageSize);
-			totalNum=sd.selectStaffNum();
+			list=sd.selectStaffByPage(cur, pageSize,condition);
+			totalNum=sd.selectStaffNum(condition);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -192,5 +193,30 @@ public class StaffServiceImpl implements StaffService{
 		resMap.put("pageSize", pageSize);
 		resMap.put("pageNum", totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1);
 		return resMap;
+	}
+	@Override
+	public boolean addStaffByRoot(Staff staff,String password) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		AccountDao ad=new AccountDaoImpl();
+		int res1=0,res2=0;
+		try {
+			//使用事务插入两张表
+			ConnectionManager.startTransaction();
+			res1=sd.addStaff(staff);
+			res2=ad.addAccount(staff.getStaffno(),password);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			System.out.println("发生呢个异常");
+			ConnectionManager.rollback();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		if(res1==1&&res2==1){
+			return true;
+		}
+		return false;
 	}
 }

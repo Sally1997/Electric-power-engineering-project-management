@@ -18,4 +18,13 @@ public interface AccountDao {
 	 * @throws SQLException
 	 */  
 	void updateLltime(Account account)throws SQLException;       
+	
+	/**
+	 * 向账户表里插入数据
+	 * @param staffno
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
+	int addAccount(String staffno,String password)throws SQLException;
 }

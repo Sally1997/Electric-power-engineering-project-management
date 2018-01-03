@@ -55,5 +55,12 @@ public interface StaffService {
 	 * @param pageSize
 	 * @return
 	 */
-	Map<String, Object> findStaffByPage(int cur,int pageSize);
+	Map<String, Object> findStaffByPage(int cur,int pageSize,Staff condition);
+	
+	/**
+	 * 添加员工
+	 * @param staff
+	 * @return
+	 */
+	boolean addStaffByRoot(Staff staff,String password);
 }

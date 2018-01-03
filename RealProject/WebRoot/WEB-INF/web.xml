@@ -199,6 +199,11 @@
     <servlet-name>ShowStaffByPage</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowStaffByPage</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AddStaff</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.AddStaff</servlet-class>
+  </servlet>
+
 
 
 
@@ -363,6 +368,10 @@
   <servlet-mapping>
     <servlet-name>ShowStaffByPage</servlet-name>
     <url-pattern>/web/servlet/showStaffByPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddStaff</servlet-name>
+    <url-pattern>/web/servlet/addStaff</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
