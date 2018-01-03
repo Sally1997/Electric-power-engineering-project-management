@@ -6,8 +6,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.holyshit.Dao.AuditDao;
+import com.holyshit.Dao.DocumentDao;
+import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.ProjectDao;
+import com.holyshit.Dao.StaffDao;
+import com.holyshit.Dao.impl.AuditDaoImpl;
+import com.holyshit.Dao.impl.DocumentDaoImpl;
+import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
+import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.domain.Document;
+import com.holyshit.domain.Inform;
+import com.holyshit.domain.PDocAudit;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
 import com.holyshit.service.ProjectService;
@@ -136,6 +148,48 @@ public class ProjectServiceImpl implements ProjectService {
 		res.put("pageSize", pageSize);
 		res.put("pageNum", total%pageSize==0?total/pageSize:total/pageSize+1);
 		return res;
+	}
+
+	@Override
+	public boolean newPeojectManage(Project pro, PSRelation psr,
+			Inform info, Document doc, PDocAudit pda) {
+		ConnectionManager.startTransaction();
+		
+		/*ProjectService ps = new ProjectServiceImpl();
+		AuditService as = new AuditServiceImpl();
+		InformService infoser = new InformServiceImpl();
+		DocumentService ds = new DocumentServiceImpl();
+		
+		ps.NewProject(pro);
+		as.addPdocauditInfo(pda);
+		as.addProAuditInfo(paa);
+		infoser.addInform(info);
+		ds.addDocument(doc);*/
+		ProjectDao pd = new ProjectDaoImpl();
+		AuditDao ad = new AuditDaoImpl();
+		InformDao id = new InformDaoImpl();
+		DocumentDao dd=new DocumentDaoImpl();
+		StaffDao sd = new StaffDaoImpl();
+		
+		boolean iff = true;
+		
+		try {
+			pd.addProject(pro);
+			dd.insertDocument(doc);
+			ad.insertpdocaudit(pda);
+			//ad.insertprojaprlaudit(paa); 为了获得最新生成的理想审核编号，应该把插入立项审核信息提取出来
+			id.insertInform(info);
+			sd.addAStaff(psr);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+			iff = false;
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+		return iff;
 	}
 
 }

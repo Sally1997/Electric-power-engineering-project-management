@@ -4,6 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.holyshit.domain.Document;
+import com.holyshit.domain.Inform;
+import com.holyshit.domain.PDocAudit;
+import com.holyshit.domain.PSRelation;
+import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
 
@@ -58,4 +63,15 @@ public interface ProjectService {
 	 * @return
 	 */
 	Map<String, Object> showProjectInfoByPage(String staffno,int cur,int pageSize);
+	
+	/**
+	 * 新建项目时候的处理
+	 * @param pro 项目信息
+	 * @param paa 立项审核信息
+	 * @param info 消息
+	 * @param doc 文档
+	 * @param pda 立项文档
+	 * @return
+	 */
+	boolean newPeojectManage(Project pro,PSRelation psr,Inform info,Document doc,PDocAudit pda);
 }

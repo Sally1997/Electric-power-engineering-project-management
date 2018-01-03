@@ -23,6 +23,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
+import com.holyshit.domain.PDocAudit;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
@@ -38,12 +40,14 @@ import com.holyshit.utils.AutoNumber;
 
 @WebServlet({ "/NewProjectServlet", "/servlet/NewProjectServlet" })
 public class NewProjectServlet extends HttpServlet {
-	//新建项目插入的表有：项目表，立项审核表，项目文档审核表，文档表，文档审核表，消息表
+	//新建项目插入的表有：项目表，立项审核表，项目文档审核表，文档表,消息表
 	Project pro = new Project();
 	Projaprlaudit paa = new Projaprlaudit();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	Inform info = new Inform();
 	Document doc = new Document();
+	PDocAudit pda = new PDocAudit();
+	PSRelation psr = new PSRelation();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -87,7 +91,9 @@ public class NewProjectServlet extends HttpServlet {
 		
 		pro.setPmno(staffno);
 		paa.setApplicantno(staffno);//申请人编号1
+		pda.setApplicantno(staffno);
 		doc.setUloadpno(staffno);//doc 2
+		psr.setStaffno(staffno);
 		
 		//项目阶段初始化为立项中
 		pro.setPstate("0");
@@ -96,11 +102,13 @@ public class NewProjectServlet extends HttpServlet {
 		
 		//初始化审核状态
 		paa.setAuditstate("0");
+		pda.setAuditstate("0");
 		
-		ProjectService ps = new ProjectServiceImpl();
-		ps.NewProject(pro);
+		ProjectService ps = new ProjectServiceImpl();//1
+		/*ps.NewProject(pro);*/
 		
-		AuditService as = new AuditServiceImpl();
+		//因为项目审核的主键是自增长数列，所以必须先插入paa，才能得到他的最新的主键
+		AuditService as = new AuditServiceImpl();//2
 		as.addProAuditInfo(paa);
 		
 		//处理消息表的业务逻辑
@@ -113,17 +121,21 @@ public class NewProjectServlet extends HttpServlet {
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
 		info.setMdate(ts);
 		doc.setUploadtime(ts);//文档上传时间
-		infoser.addInform(info);
 		
 		doc.setDloadtimes(0);
 		doc.setAuditres("0");
 		
-		DocumentService ds = new DocumentServiceImpl();
-		boolean bool = ds.addDocument(doc);
+		psr.setDuty("项目经理");
+		/*DocumentService ds = new DocumentServiceImpl();
+		boolean bool = ds.addDocument(doc);//4
 		if(!bool){
 			response.getWriter().write("<script type='text/javascript'>alert('服务器繁忙……上传失败!')</script>");
-		}
+		}*/
 		
+		boolean iffailed = ps.newPeojectManage(pro, psr, info, doc, pda);
+		if(iffailed){
+			response.getWriter().write("<script type='text/javascript'>alert('项目异常……新建失败!')</script>");
+		}
 		response.sendRedirect(request.getContextPath()+"/servlet/ShowProjectServlet");
 	}
 	
@@ -146,6 +158,8 @@ public class NewProjectServlet extends HttpServlet {
 			//解决同名问题
 			String uu = UUID.randomUUID().toString();
 			doc.setDno(uu);//doc 1
+			pda.setPdocno(uu);
+			
 			filename = uu +"_"+ filename;
 			
 			//创建一个本地目录 directory path 目录路径
@@ -232,7 +246,9 @@ public class NewProjectServlet extends HttpServlet {
 			String pno = au.PTypeToPNo(x);
 			pro.setPno(pno);
 			paa.setPno(pno);//设置项目编号3
+			pda.setPno(pno);
 			doc.setPno(pno);//doc 3 设置项目编号
+			psr.setPno(pno);
 		}
 		else if(filename.equals("PersonInCharge")){
 			String cpn = "";
@@ -241,6 +257,7 @@ public class NewProjectServlet extends HttpServlet {
 			}
 			pro.setPmno(cpn);
 			paa.setAuditorno(cpn);//设置审核人编号 2
+			pda.setAuditorno(cpn);
 			info.setDstpno(cpn);
 		}
 		else if(filename.equals("ProjectBudget")){

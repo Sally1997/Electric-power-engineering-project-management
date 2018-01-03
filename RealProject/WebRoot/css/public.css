@@ -122,3 +122,15 @@
 		    background: url(https://m.baidu.com/static/search/ico_loading.gif) no-repeat;  
 		    z-index:9999;  
 		}
+		.fozza_a{
+			display:inline;
+		}
+		#first_left{
+			padding-left: 50px;
+			float: left;
+			width: 200px;
+			height: 25px;
+		}
+		#first_right{
+			float: left;
+		}

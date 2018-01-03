@@ -890,5 +890,6 @@ function search_staff(){
 	
 	aja.send(null);
 }
+//到此为止
 </script>
 </html>

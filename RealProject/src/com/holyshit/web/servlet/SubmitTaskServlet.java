@@ -75,7 +75,6 @@ public class SubmitTaskServlet extends HttpServlet {
 		
 		//1.根据编号和指标名添加指标附件的路径
 		int len = upload_list.size();
-		System.out.println(form_map.toString());
 		String no = (String) form_map.get("ftask_no");
 		//将map中
 		for(int i=0;i<len;i++){
@@ -102,7 +101,7 @@ public class SubmitTaskServlet extends HttpServlet {
 			PSRelation psr = new PSRelation();
 			psr.setStaffno(cpn);
 			psr.setPno(pno);
-			psr.setDuty("审核人");
+			psr.setDuty("负责人");
 			ss.addAStaff(psr);
 		}
 		
