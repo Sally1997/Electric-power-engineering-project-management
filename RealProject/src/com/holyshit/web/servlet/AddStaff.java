@@ -21,11 +21,13 @@ import com.holyshit.utils.MD5Util;
 public class AddStaff extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+		request.setCharacterEncoding("UTF-8");
 		Staff newStaff=new Staff();
 		newStaff.setStaffno(request.getParameter("staffno"));
-		newStaff.setName(request.getParameter("name"));
-		newStaff.setSex(request.getParameter("sex"));
+		String name=request.getParameter("name");
+		newStaff.setName(name);
+		String sex=request.getParameter("sex");
+		newStaff.setSex(sex);
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date parse = sdf.parse(request.getParameter("birthday"));

@@ -30,6 +30,7 @@ public class DownLoadMessage extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		//获取文档id
 		String dno=request.getParameter("dno");
 		if(dno==null){

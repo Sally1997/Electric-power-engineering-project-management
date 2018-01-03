@@ -14,6 +14,7 @@ import com.holyshit.service.impl.StaffServiceImpl;
 public class DeleteStaff extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String ids=request.getParameter("ids");
 		String[] idArray = ids.split(":");
 		

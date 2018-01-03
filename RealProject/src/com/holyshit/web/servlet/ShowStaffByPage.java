@@ -23,12 +23,9 @@ import com.holyshit.service.impl.StaffServiceImpl;
 public class ShowStaffByPage extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		int pageSize=Integer.parseInt(request.getParameter("pageSize"));
 		int cur=Integer.parseInt(request.getParameter("pageNumber"));
-
-		
-		request.setCharacterEncoding("UTF-8");
 		String staffno=request.getParameter("staffno");
 		String name=request.getParameter("name");
 		String sex=request.getParameter("sex");
@@ -42,7 +39,6 @@ public class ShowStaffByPage extends HttpServlet {
 			queryStaff.setName(name);
 		if(!sex.equals("请选择"))
 			queryStaff.setSex(sex);
-		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date parse = sdf.parse(birthday);
