@@ -31,8 +31,8 @@ public class TaskServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("text/html", "charset=UTF-8");
 		
-		
-		String ptn = "100010";
+		String ptn = request.getParameter("pno");
+		//String ptn = "100010";
 		
 		StageTask stage_task = new StageTask();
 		TaskIndexs task_index = new TaskIndexs();

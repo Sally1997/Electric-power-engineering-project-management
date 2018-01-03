@@ -6,10 +6,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.holyshit.Dao.AuditDao;
+import com.holyshit.Dao.DocumentDao;
+import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.ProjectDao;
+import com.holyshit.Dao.impl.AuditDaoImpl;
+import com.holyshit.Dao.impl.DocumentDaoImpl;
+import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
+import com.holyshit.domain.Document;
+import com.holyshit.domain.Inform;
+import com.holyshit.domain.PDocAudit;
+import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
+import com.holyshit.service.AuditService;
+import com.holyshit.service.DocumentService;
+import com.holyshit.service.InformService;
 import com.holyshit.service.ProjectService;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.utils.StateConversion;
@@ -136,6 +149,46 @@ public class ProjectServiceImpl implements ProjectService {
 		res.put("pageSize", pageSize);
 		res.put("pageNum", total%pageSize==0?total/pageSize:total/pageSize+1);
 		return res;
+	}
+
+	@Override
+	public boolean newPeojectManage(Project pro, Projaprlaudit paa,
+			Inform info, Document doc, PDocAudit pda) {
+		ConnectionManager.startTransaction();
+		
+		/*ProjectService ps = new ProjectServiceImpl();
+		AuditService as = new AuditServiceImpl();
+		InformService infoser = new InformServiceImpl();
+		DocumentService ds = new DocumentServiceImpl();
+		
+		ps.NewProject(pro);
+		as.addPdocauditInfo(pda);
+		as.addProAuditInfo(paa);
+		infoser.addInform(info);
+		ds.addDocument(doc);*/
+		ProjectDao pd = new ProjectDaoImpl();
+		AuditDao ad = new AuditDaoImpl();
+		InformDao id = new InformDaoImpl();
+		DocumentDao dd=new DocumentDaoImpl();
+		
+		boolean iff = true;
+		
+		try {
+			pd.addProject(pro);
+			dd.insertDocument(doc);
+			ad.insertpdocaudit(pda);
+			ad.insertprojaprlaudit(paa);
+			id.insertInform(info);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+			iff = false;
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+		return iff;
 	}
 
 }

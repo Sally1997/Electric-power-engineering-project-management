@@ -99,7 +99,8 @@ public class StageServlet extends HttpServlet {
 		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/jsp/projectManage/PlanManagement_NewMilestone.jsp");*/	
 		
 		//Project project = (Project) request.getParameter("project");
-		String pn = "10001";
+		//String pn = "10001";
+		String pn = request.getParameter("pno");
 		
 		PSPlan pro_stage = new PSPlan();
 		TaskIndexs task_index = new TaskIndexs();
@@ -119,7 +120,7 @@ public class StageServlet extends HttpServlet {
 		while(e.hasMoreElements()){
 			String name = (String) e.nextElement();
 			String value=request.getParameter(name);
-			out.write(name+"="+value);
+			//out.write(name+"="+value);
 		    if(name.equals("fozza_sn")){
 		    	pro_stage.setSname(value);
 		    }

@@ -1,4 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpServletRequest" %>
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="com.holyshit.domain.Staff" %>
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap.min.css">
@@ -7,6 +10,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/yqz.js"></script>
 <!-- 项目logo -->
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/image/1.ico" type="image/x-icon" />
+
 <!-- 页眉-->   
      <header>
         <div class="container-fluid">
@@ -50,7 +54,7 @@
 			</script>
             <ul class="nav navbar-nav navbar-right">
               <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer" href="${pageContext.request.contextPath}/web/servlet/logout"></a></li>
-              <li><a href="#">用户XXX</a></li>
+              <li><a href="#">${staff.name }</a></li>
               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
 				  <ul class="dropdown-menu">
 					<li><a href="#">任务消息<span class="badge" style="float: right">4</span></a></li>

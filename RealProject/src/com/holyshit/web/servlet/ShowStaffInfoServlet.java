@@ -52,7 +52,6 @@ public class ShowStaffInfoServlet extends HttpServlet {
 			AutoNumber an = new AutoNumber();
 			str = an.transToArray(ja).toString();
 		}
-		System.out.println(str);
 		//返回字符串
 		response.getWriter().write(str);
 	}
