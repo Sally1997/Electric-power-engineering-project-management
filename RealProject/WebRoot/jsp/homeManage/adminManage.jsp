@@ -1,3 +1,9 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.holyshit.domain.Authority"%>
+<%@page import="java.util.List"%>
+<%@page import="com.holyshit.service.impl.AuthorityServiceImpl"%>
+<%@page import="com.holyshit.service.AuthorityService"%>
 <%@page language="java" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -241,6 +247,86 @@
 </div>
 
 
+	<!--   权限设置模态框-->
+     
+  <div class="modal fade" id="set_authority_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">设置权限</h4>
+      </div>
+      <div class="modal-body">
+      	<form role="form">
+			<div class="checkbox" id="authoritytable">
+			</div>
+			<script type="text/javascript">
+				var global_staff="";
+				var global_authority="";
+				function refreshAuthority(data){
+					var authoritytable=document.getElementById("authoritytable");
+					authoritytable.innerHTML="";
+					for(var i=0;i<data.length;i++){
+						var label=document.createElement("label");
+						var br=document.createElement("br");
+						label.style.marginLeft="40%";
+						if(data[i].has==1){
+							label.innerHTML='<input type="checkbox" value="'+data[i].perno+'" name="staffAuthority" checked="checked" >'+data[i].pername;
+						}else{
+							label.innerHTML='<input type="checkbox" value="'+data[i].perno+'" name="staffAuthority">'+data[i].pername;
+						}
+						authoritytable.appendChild(label);
+						authoritytable.appendChild(br);
+					}
+				}
+				
+			</script>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button2" class="btn btn-primary" onclick="setAuthority()">确认</button>
+      </div>
+      <script type="text/javascript">
+      		function setAuthority(){
+      			var authoritytable=document.getElementById("authoritytable");
+      			var values=document.getElementsByName("staffAuthority");
+      			var para="";
+      			for(var i=0;i<values.length;i++){
+      				//优化算法，保存改变
+      				if(values[i].checked&&global_authority[i].has!=1)
+      					para+=values[i].value+"-"+1+":";
+      				if((!values[i].checked)&&global_authority[i].has==1)
+      					para+=values[i].value+"-"+0+":";
+      			}
+      			if(para==""){
+      				var flag=confirm("您尚未做任何改变，是否退出？");
+      				if(flag){
+      					$('#set_authority_modal').modal("hide");
+      					return;
+      				}
+      			}
+      			var req=new XMLHttpRequest();
+      			req.onreadystatechange=function(){
+      				if(req.readyState==4&&req.status==200){
+      					if(req.responseText=="ok"){
+      						alert("设置成功");
+      						location.reload();
+      					}else{
+      						alert("设置失败,请稍后再试");
+      					}
+      				}
+      				
+      			};
+      			req.open("get", "/RealProject/web/servlet/setAuthority?staffno="+global_staff.staffno+"&list="+para);
+      			req.send(null);
+      			
+      		}
+      </script>
+    </div>
+  </div>
+</div>
+
 	<!-- 修改人员界面 -->
 <div class="modal fade" id="staff_edit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -300,7 +386,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button2" class="btn btn-primary" onclick="editStaff()">确认添加</button>
+        <button type="button2" class="btn btn-primary" onclick="editStaff()">确认修改</button>
       </div>
       <script type="text/javascript">
       		function editStaff(){
@@ -336,8 +422,7 @@
       					return;
       			}
       			var warning="您刚才做了如下修改:\n";
-      			var res=$('#stafflist').bootstrapTable('getSelections');
-      			var data=res[0];
+      			var data=global_staff;
       			if(data.name!=editStaff_name)
       				warning+="    -- 将员工姓名从 ["+data.name+"] 改变为了 ["+editStaff_name+"] \n";
       			if(data.sex!=editStaff_sex)
@@ -370,6 +455,51 @@
 	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+editStaff_name+"&sex="+editStaff_sex+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password);
 	      			req.send(null);
       			}
+      		}
+      		
+      		//删除单个员工
+      		function deleteStaff(id,staffname){
+      			var res=confirm("您确定删除一下员工吗？\n    --"+id+":"+staffname);
+      			if(!res)
+      				return;
+      			var req=new XMLHttpRequest();
+				req.onreadystatechange=function(){
+					if(req.readyState==4&&req.status==200){
+						if(req.responseText=="ok"){
+							alert("删除成功");
+							location.reload();
+						}else{
+							alert(req.responseText);
+						}
+					}
+				};
+				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+id+":");
+				req.send(null);
+      		}
+      		
+      		
+      		//刷新修改信息框
+      		function showInfo(row){
+      			var dataInfo=row;
+				$('#editStaff_staffno').val(dataInfo.staffno);
+				$('#editStaff_name').val(dataInfo.name);
+				//错误设置select的默认值
+				/* $('#editStaff_sex').val(data.sex); */
+				var options=document.getElementById("editStaff_sex").getElementsByTagName("option");
+				
+				if(dataInfo.sex=="男"){
+					options[0].selected="selected";
+				}
+				else{
+					options[1].selected="selected";
+				}
+				$('#editStaff_sex').selectpicker('refresh');
+				
+				$('#editStaff_birthday').val(dataInfo.birthday);
+				$('#editStaff_te').val(dataInfo.te);
+				$('#editStaff_email').val(dataInfo.email);
+				//显示修改模态框
+				$('#staff_edit_modal').modal("show");
       		}
       </script>
     </div>
@@ -411,11 +541,15 @@
 			$('#btn_delete').bind("click",function(){
 				//获取用户的id
 				var res=$('#stafflist').bootstrapTable('getSelections');
+				if(res.length==0){
+					alert("请选择需要删除的员工");
+					return;
+				}
 				var ids="";
 				var warning="您确定要删除一下员工么?\n";
 				for(var i=0;i<res.length;i++){
 					ids+=res[i].staffno+":";
-					warning+="    --"+res[i].staffno+"\n";
+					warning+="    --"+res[i].staffno+":"+res[i].name+"\n";
 				}
 				var flag=confirm(warning);
 				if(!flag)
@@ -501,7 +635,6 @@
 					showColumns : true, //是否显示所有的列
 					showRefresh : true, //是否显示刷新按钮
 					minimumCountColumns : 2, //最少允许的列数
-					clickToSelect : true, //是否启用点击选中行
 					height : 500, //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
 					uniqueId : "staffno", //每一行的唯一标识，一般为主键列
 					columns : [ {
@@ -525,13 +658,55 @@
 						field : 'email',
 						title : '电子邮箱'
 					},{
-						field : 'authority',
-						title : '权限分配'
-					}
+                         field: 'operate',
+                         title: '操作',
+                         formatter: function(value,row,index){
+                        	 var a1='<span class="authority_staff	glyphicon glyphicon-wrench" title="权限分配" style="cursor: pointer" ></span>&nbsp;&nbsp;&nbsp;';
+                        	 var p1='<span class="edit_staff	glyphicon glyphicon-pencil" title="修改" style="cursor: pointer" ></span>&nbsp;&nbsp;&nbsp;';
+                        	 var p2='<span class="delete_staff	glyphicon glyphicon-trash" title="删除" style="cursor: pointer"></span>';
+                         	 return a1+p1+p2;
+                         },
+                         events: {
+                             'click .edit_staff': function(e, value, row, index) {  
+                            	//初始化全局变量staffno
+               				  	 global_staff=row;
+                                 showInfo(row);
+                                 
+                            },
+                         	'click .delete_staff': function(e, value, row, index) {  
+                         		//初始化全局变量staffno
+              				 global_staff=row;
+                             deleteStaff(row.staffno,row.name);
+                             
+                        },
+                        'click .authority_staff': function(e, value, row, index) { 
+                        		
+                        	  //获取权限列表
+                        	  var req=new XMLHttpRequest();
+                        	  req.onreadystatechange=function(){
+                        		  if(req.readyState==4){
+                        			  if(req.status==200){
+                        				  var res=eval('('+req.responseText+')');
+                        				  //初始化全局变量staffno
+                        				  global_staff=row;
+                        				  global_authority=res;
+                        				  refreshAuthority(res);
+                        			  }else{
+                        				  alert("获取权限列表失败");
+                        			  }
+                        		  }
+                        	  };
+                        	  req.open("get", "/RealProject/web/servlet/getAuthorityList?staffno="+row.staffno);
+                        	  req.send(null);
+                              $('#set_authority_modal').modal("show");
+                        }
+                          }
+                  }
 					]
 				});
 			};
-
+			
+			
 			//得到查询的参数
 			oTableInit.queryParams = function(params) {
 				var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
@@ -548,7 +723,6 @@
 			};
 			return oTableInit;
 		};
-
 		var ButtonInit = function() {
 			var oInit = new Object();
 			var postdata = {};

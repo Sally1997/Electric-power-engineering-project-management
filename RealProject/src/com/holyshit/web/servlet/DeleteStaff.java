@@ -24,7 +24,7 @@ public class DeleteStaff extends HttpServlet {
 			response.getWriter().write("ok");
 		else{
 			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write("删除失败");
+			response.getWriter().write("删除失败,请确认所选成员已经离开所有项目组");
 		}
 	}
 

@@ -274,6 +274,9 @@ public class StaffServiceImpl implements StaffService{
 				if(res1[i]!=res2[i]){
 					flag=true;
 					break;
+				}else if(res1[i]==0){
+					flag=true;
+					break;
 				}
 			if(!flag){
 				resFlag=true;

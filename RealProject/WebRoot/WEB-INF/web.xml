@@ -224,6 +224,16 @@
     <servlet-name>DeleteStaff</servlet-name>
     <servlet-class>com.holyshit.web.servlet.DeleteStaff</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetAuthorityList</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetAuthorityList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SetAuthority</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SetAuthority</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -409,6 +419,14 @@
   <servlet-mapping>
     <servlet-name>DeleteStaff</servlet-name>
     <url-pattern>/web/servlet/deleteStaff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetAuthorityList</servlet-name>
+    <url-pattern>/web/servlet/getAuthorityList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SetAuthority</servlet-name>
+    <url-pattern>/web/servlet/setAuthority</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
