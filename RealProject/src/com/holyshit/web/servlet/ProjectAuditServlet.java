@@ -62,30 +62,29 @@ public class ProjectAuditServlet extends HttpServlet {
 			ss.addAStaff(psr);
 		}
 		
-		if(pc!=null){//有下一审核人的情况下，给审核人发送信息和立项审核表
+		//有下一审核人的情况下，给审核人发送信息和立项审核表
 			
-			paa2.setPno(paa1.getPno());
-			paa2.setApplicantno(paa1.getApplicantno());
-			paa2.setAuditorno(cpn);
-			paa2.setAuditstate("0");
-			
-			as.addProAuditInfo(paa2);
-			
-			//处理消息表的业务逻辑
-			InformService infoser = new InformServiceImpl();
-			info.setBusno(infoser.getNewPaauditNo());
-			
-			info.setSrcpno(paa1.getAuditorno());
-			info.setDstpno(paa1.getNauditorno());
-			info.setMtype("3");
-			info.setHasread("0");
-			
-			Timestamp ts = new Timestamp(System.currentTimeMillis());
-			info.setMdate(ts);
-			
-			infoser.addInform(info);
-		}
+		paa2.setPno(paa1.getPno());
+		paa2.setApplicantno(paa1.getApplicantno());
+		paa2.setAuditorno(cpn);
+		paa2.setAuditstate("0");
 		
+		as.addProAuditInfo(paa2);
+		
+		//处理消息表的业务逻辑
+		InformService infoser = new InformServiceImpl();
+		info.setBusno(infoser.getNewPaauditNo());
+		
+		info.setSrcpno(paa1.getAuditorno());
+		info.setDstpno(paa1.getNauditorno());
+		info.setMtype("3");
+		info.setHasread("0");
+		
+		Timestamp ts = new Timestamp(System.currentTimeMillis());
+		info.setMdate(ts);
+		
+		infoser.addInform(info);
+			
 		//跳转到消息界面？？？？
 		//request.getRequestDispatcher("/")
 	}

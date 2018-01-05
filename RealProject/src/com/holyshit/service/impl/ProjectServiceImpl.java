@@ -174,7 +174,7 @@ public class ProjectServiceImpl implements ProjectService {
 		boolean iff = true;
 		
 		try {
-			pd.addProject(pro);
+			//pd.addProject(pro);
 			dd.insertDocument(doc);
 			ad.insertpdocaudit(pda);
 			//ad.insertprojaprlaudit(paa); 为了获得最新生成的理想审核编号，应该把插入立项审核信息提取出来

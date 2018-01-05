@@ -59,4 +59,12 @@ public interface AuditDao {
 	 * @throws SQLException 
 	 */
 	Projaprlaudit selectPAAByMno(String mno) throws SQLException;
+	
+	/**
+	 * 文档审核相关信息
+	 * @param pdauditno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Map<String,Object> selectDocAudit(String pdauditno) throws SQLException;
 }

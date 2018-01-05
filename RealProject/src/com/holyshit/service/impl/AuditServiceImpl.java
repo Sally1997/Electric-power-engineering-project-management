@@ -8,11 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.holyshit.Dao.AuditDao;
+import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.impl.AuditDaoImpl;
+import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.domain.PDocAudit;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.service.AuditService;
@@ -153,6 +154,38 @@ public class AuditServiceImpl implements AuditService {
 		} finally{
 			ConnectionManager.closeConnection();
 		}
+	}
+
+	@Override
+	public Map<String, Object> getDocAuditInfo(String pdauditno) {
+		AuditDao ad = new AuditDaoImpl();
+		Map<String,Object> map = new HashMap<String, Object>();
+		try {
+			map = ad.selectDocAudit(pdauditno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	@Override
+	public void changeDocAuditState(String adv, String auditstate, String dno) {
+		// TODO Auto-generated method stub
+		DocumentDao dd = new DocumentDaoImpl();
+		ConnectionManager.startTransaction();
+		try {
+			dd.updateDocAuditState(auditstate, dno);
+			dd.updatePDocAudit(adv, auditstate, dno);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+		
 	}
 
 }

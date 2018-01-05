@@ -28,4 +28,13 @@ public class InformDaoImpl implements InformDao {
 				info.getHasread(),info.getMdate());
 	}
 
+	@Override
+	public Inform selectInformByMno(String mno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT * FROM inform WHERE mno=?", new BeanHandler<Inform>(Inform.class),mno);
+	}
+	
+	
+
 }

@@ -14,4 +14,11 @@ public interface InformService {
 	 * @param info
 	 */
 	void addInform(Inform info);
+	
+	/**
+	 * 获得inform
+	 * @param mno
+	 * @return
+	 */
+	Inform getInformByMno(String mno);
 }

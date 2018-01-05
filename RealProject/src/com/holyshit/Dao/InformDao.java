@@ -19,4 +19,12 @@ public interface InformDao {
 	 * @throws SQLException 
 	 */
 	void insertInform(Inform info) throws SQLException;
+	
+	/**
+	 * 根据mno获得inform
+	 * @param mno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Inform selectInformByMno(String mno) throws SQLException;
 }

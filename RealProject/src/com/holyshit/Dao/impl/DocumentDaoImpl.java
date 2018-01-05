@@ -171,4 +171,20 @@ public class DocumentDaoImpl implements DocumentDao{
 				doc.getDtype(),doc.getFsize(),doc.getAuditres());
 	}
 
+	@Override
+	public void updatePDocAudit(String adv, String auditstate, String dno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE gdocaudit SET auditadv=?,"+
+				"audittime=CURRENT_TIMESTAMP,auditstate=? WHERE gdocno=?",adv,auditstate,dno);
+	}
+
+	@Override
+	public void updateDocAuditState(String agree, String dno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE document SET auditres=? WHERE dno=?",
+				agree,dno);
+	}
+
 }

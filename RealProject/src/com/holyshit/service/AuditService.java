@@ -40,4 +40,19 @@ public interface AuditService {
 	 * @param NAuditorNo
 	 */
 	void changePAAInfo(String mno, String auditstate,String auditadv, String NAuditorNo);
+	
+	/**
+	 * 展示文档审核文档相关信息
+	 * @param pdauditno
+	 * @return
+	 */
+	Map<String,Object> getDocAuditInfo(String pdauditno);
+	
+	/**
+	 * 改变文档审核状态，文档审核表和文档表
+	 * @param adv
+	 * @param auditstate
+	 * @param dno
+	 */
+	void changeDocAuditState(String adv,String auditstate,String dno);
 }

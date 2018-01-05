@@ -1,42 +1,40 @@
 package com.holyshit.web.servlet;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
-import com.holyshit.domain.Inform;
 import com.holyshit.service.AuditService;
-import com.holyshit.service.InformService;
 import com.holyshit.service.impl.AuditServiceImpl;
-import com.holyshit.service.impl.InformServiceImpl;
 
-public class ShowProAuditServlet extends HttpServlet {
+
+public class DocAuditServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//String mno = request.getParameter("mno");
-		String mno = "6";
-		InformService is = new InformServiceImpl();
-		Inform info = is.getInformByMno(mno);
+		request.setCharacterEncoding("UTF-8");
 		
-		mno = info.getBusno();
+		String dno = request.getParameter("dno");
+		String agree = request.getParameter("agree");
+		String adv = request.getParameter("auditinfo");
 		
+		if(agree.equals("agree")){
+			agree="2";
+		}
+		else{
+			agree="1";
+		}
 		AuditService as = new AuditServiceImpl();
-		String str = as.getProAuditInfo(mno);
-		JSONObject jo = JSONObject.fromObject(str);
-		Map map = jo;
-		request.setAttribute("map", map);
-		request.getRequestDispatcher("/jsp/notice/checkinfo.jsp").forward(request, response);
+		as.changeDocAuditState(adv, agree, dno);
+		
+		//审核完了跳转到消息界面？
+		//request.getRequestDispatcher("").forward(request, response);;
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request,response);
 	}
-
 }

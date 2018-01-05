@@ -38,4 +38,19 @@ public class InformServiceImpl implements InformService {
 		}
 	}
 
+	@Override
+	public Inform getInformByMno(String mno) {
+		InformDao id = new InformDaoImpl();
+		Inform info = new Inform();
+		try {
+			info = id.selectInformByMno(mno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+		return info;
+	}
+
 }

@@ -105,7 +105,7 @@ public class NewProjectServlet extends HttpServlet {
 		pda.setAuditstate("0");
 		
 		ProjectService ps = new ProjectServiceImpl();//1
-		/*ps.NewProject(pro);*/
+		ps.NewProject(pro);
 		
 		//因为项目审核的主键是自增长数列，所以必须先插入paa，才能得到他的最新的主键
 		AuditService as = new AuditServiceImpl();//2

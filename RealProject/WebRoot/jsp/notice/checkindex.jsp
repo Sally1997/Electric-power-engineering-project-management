@@ -41,7 +41,7 @@
  
 						<div id="responsible_per" class="block"><!--这里我就不给你把缩进改到后面了。。。太难改了。。。你反正晓得下面都是一块的-->
 						<div id="first_left">
-						<font>项目类型:</font>
+						<font>项目名称:</font>
 						</div>
 						<div id="first_right">
 						<font>${map.ptype }</font>
@@ -51,7 +51,7 @@
 
 						<div id="responsible_per" class="block">
 						<div id="first_left">
-						<font >项目名称:</font>
+						<font ><font>阶段或者任务</font>名称:</font>
 						</div>
 						<div id="first_right">
 						<font >${map.pname }</font>
