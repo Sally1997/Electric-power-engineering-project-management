@@ -110,4 +110,83 @@ public class StaffDaoImpl implements StaffDao {
 			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
 	}
 
+	@Override
+	public List<Staff> selectStaffByPage(int cur, int pageSize,Staff condition)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		String sql="select * from staff where '1'='1'";
+		if(condition.getStaffno()!=null){
+			sql+=" and staffno like '%"+condition.getStaffno()+"%'";
+		}
+		if(condition.getName()!=null){
+			sql+=" and name like '%"+condition.getName()+"%'";
+		}
+		if(condition.getSex()!=null){
+			sql+=" and sex='"+condition.getSex()+"'";
+		}
+		if(condition.getBirthday()!=null){
+			sql+=" and birthday='"+condition.getBirthday().toString()+"'";
+		}
+		if(condition.getTe()!=null){
+			sql+=" and te like '%"+condition.getTe()+"%'";
+		}
+		if(condition.getEmail()!=null){
+			sql+=" and email like '%"+condition.getEmail()+"%'";
+		}
+		sql+=" limit ?,?";
+		return qr.query(ConnectionManager.getConnection(),sql,new BeanListHandler<Staff>(Staff.class),(cur-1)*pageSize,pageSize);
+	}
+
+	@Override
+	public long selectStaffNum(Staff condition) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		String sql="select count(*) from staff where '1'='1'";
+		if(condition.getStaffno()!=null){
+			sql+=" and staffno like '%"+condition.getStaffno()+"%'";
+		}
+		if(condition.getName()!=null){
+			sql+=" and name like '%"+condition.getName()+"%'";
+		}
+		if(condition.getSex()!=null){
+			sql+=" and sex='"+condition.getSex()+"'";
+		}
+		if(condition.getBirthday()!=null){
+			sql+=" and birthday='"+condition.getBirthday().toString()+"'";
+		}
+		if(condition.getTe()!=null){
+			sql+=" and te like '%"+condition.getTe()+"%'";
+		}
+		if(condition.getEmail()!=null){
+			sql+=" and email like '%"+condition.getEmail()+"%'";
+		}
+		return (long) qr.query(ConnectionManager.getConnection(),sql,new ScalarHandler());
+	}
+
+	@Override
+	public int addStaff(Staff staff) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(), "insert into staff values(?,?,?,?,?,?)",staff.getStaffno(),staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail());
+	}
+
+	@Override
+	public int editStaff(Staff staff) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(), "update staff set name=?,sex=?,birthday=?,te=?,email=? where staffno=?",staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail(),staff.getStaffno());
+	}
+
+	@Override
+	public int[] deleteStaff(String[] staffs) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] para=new Object[staffs.length][1];
+		for(int i=0;i<staffs.length;i++){
+			para[i][0]=staffs[i];
+		}
+		return qr.batch(ConnectionManager.getConnection(), "delete from staff where staffno=?",para);
+	}
+
 }

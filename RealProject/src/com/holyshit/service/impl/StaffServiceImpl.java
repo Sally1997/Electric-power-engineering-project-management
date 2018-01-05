@@ -3,12 +3,14 @@ import com.holyshit.Dao.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
+import com.holyshit.Dao.impl.AccountDaoImpl;
 import com.holyshit.Dao.impl.NoteDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.domain.Note;
@@ -167,5 +169,128 @@ public class StaffServiceImpl implements StaffService{
 			e.printStackTrace();
 		}
 		return list;
+	}
+	@Override
+	public Map<String, Object> findStaffByPage(int cur, int pageSize,Staff condition) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		List<Staff> list=null;
+		long totalNum=0;
+		try {
+			list=sd.selectStaffByPage(cur, pageSize,condition);
+			totalNum=sd.selectStaffNum(condition);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		Map<String, Object> resMap=new HashMap<String, Object>();
+		
+		resMap.put("staffs", list);
+		resMap.put("totalNum", totalNum);
+		resMap.put("currentPage", cur);
+		resMap.put("pageSize", pageSize);
+		resMap.put("pageNum", totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1);
+		return resMap;
+	}
+	@Override
+	public boolean addStaffByRoot(Staff staff,String password) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		AccountDao ad=new AccountDaoImpl();
+		int res1=0,res2=0;
+		try {
+			//使用事务插入两张表
+			ConnectionManager.startTransaction();
+			res1=sd.addStaff(staff);
+			res2=ad.addAccount(staff.getStaffno(),password);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			System.out.println("发生呢个异常");
+			ConnectionManager.rollback();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		if(res1==1&&res2==1){
+			return true;
+		}
+		return false;
+	}
+	@Override
+	public boolean editStaffInfo(Staff staff, boolean change,String password) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		AccountDao ad=new AccountDaoImpl();
+		int res1=0,res2=0;
+		if(change){
+			//重置了密码
+			try {
+				ConnectionManager.startTransaction();
+				res1=sd.editStaff(staff);
+				res2=ad.editAccount(staff.getStaffno(), password);
+				ConnectionManager.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				ConnectionManager.rollback();
+				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
+			}
+			if(res1==1&&res2==1){
+				return true;
+			}
+		}else{
+			//未重置密码
+			try {
+				res1=sd.editStaff(staff);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
+			}
+			if(res1==1){
+				return true;
+			}
+		}
+		return false;
+	}
+	@Override
+	public boolean deleteStaffInfo(String[] staffs) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		AccountDao ad=new AccountDaoImpl();
+		boolean resFlag=false;
+		try {
+			ConnectionManager.startTransaction();
+			//有先后关系
+			int[] res2 = ad.deleteAccount(staffs);
+			int[] res1 = sd.deleteStaff(staffs);
+			boolean flag=false;
+			for(int i=0;i<res1.length;i++)
+				if(res1[i]!=res2[i]){
+					flag=true;
+					break;
+				}else if(res1[i]==0){
+					flag=true;
+					break;
+				}
+			if(!flag){
+				resFlag=true;
+				ConnectionManager.commit();
+			}else {
+				ConnectionManager.rollback();
+			}
+		} catch (SQLException e) {
+			ConnectionManager.rollback();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return resFlag;
 	}
 }

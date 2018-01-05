@@ -80,5 +80,44 @@ public interface StaffDao {
 	 */
 	List<Map<String,Object>> selectStaffInCompany(String pno,String userno,String keyword) throws SQLException;
 	
+	/**
+	 * 分页查询所有的员工信息
+	 * @param cur
+	 * @param pageSize
+	 * @return
+	 * @throws SQLException
+	 */
+	List<Staff> selectStaffByPage(int cur,int pageSize,Staff condition) throws SQLException;
+	
+	/**
+	 * 查询员工数量
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectStaffNum(Staff condition)throws SQLException;
+	
+	/**
+	 * 添加员工
+	 * @param staff
+	 * @return
+	 * @throws SQLException
+	 */
+	int addStaff(Staff staff)throws SQLException;
+	
+	/**
+	 * 修改员工信息
+	 * @param staff
+	 * @return
+	 * @throws SQLException
+	 */
+	int editStaff(Staff staff)throws SQLException;
+	
+	/**
+	 * 从公司删除员工
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] deleteStaff(String[] staffs)throws SQLException;
 }   
  

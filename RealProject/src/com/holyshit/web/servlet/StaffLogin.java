@@ -91,6 +91,9 @@ public class StaffLogin extends HttpServlet {
 			//获取用户的信息
 			Staff staff = as.getUserById(account.getStaffno());
 			session.setAttribute("staff", staff);
+			//获取权限列表以及用户基本权限表
+			
+			
 			//跳转到相应的uri
 			String uri=request.getParameter("uri");
 			if(uri!=null){

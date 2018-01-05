@@ -48,4 +48,34 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> queryStaffInCompany(String pno,String userno,String keyword);
+	
+	/**
+	 * 分页查询员工
+	 * @param cur
+	 * @param pageSize
+	 * @return
+	 */
+	Map<String, Object> findStaffByPage(int cur,int pageSize,Staff condition);
+	
+	/**
+	 * 添加员工
+	 * @param staff
+	 * @return
+	 */
+	boolean addStaffByRoot(Staff staff,String password);
+	
+	/**
+	 * 编辑员工信息
+	 * @param staff
+	 * @param change
+	 * @return
+	 */
+	boolean editStaffInfo(Staff staff,boolean change,String password);
+	
+	/**
+	 * 删除员工信息
+	 * @param staffno
+	 * @return
+	 */
+	boolean deleteStaffInfo(String[] staffno);
 }

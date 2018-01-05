@@ -45,6 +45,12 @@ public class Staff {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Override
+	public String toString() {
+		return "Staff [staffno=" + staffno + ", name=" + name + ", sex=" + sex
+				+ ", birthday=" + birthday + ", te=" + te + ", email=" + email
+				+ "]";
+	}
 
 	
 }
