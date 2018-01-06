@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
+              </button>    
               <a class="navbar-brand" href="#">Brand</a>
             </div>
 
@@ -55,7 +55,10 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer" href="${pageContext.request.contextPath}/web/servlet/logout"></a></li>
               <li><a href="#">${staff.name }</a></li>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
+              <li><a href="#">通知<span class="badge">10</span></a></li>
+              <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+              		 
+              		<!--  通知<span class="badge">10</span> -->
 				  <ul class="dropdown-menu">
 					<li><a href="#">任务消息<span class="badge" style="float: right">4</span></a></li>
 					<li><a href="#">系统信息<span class="badge" style="float: right">4</span></a></li>

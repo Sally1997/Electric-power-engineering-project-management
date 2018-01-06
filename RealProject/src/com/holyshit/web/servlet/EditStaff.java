@@ -52,6 +52,7 @@ public class EditStaff extends HttpServlet {
 		if(flag){
 			response.getWriter().write("ok");
 		}else{
+			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write("员工信息修改失败，请仔细检查您的修改,稍后可再次提交");
 		}
 	}
