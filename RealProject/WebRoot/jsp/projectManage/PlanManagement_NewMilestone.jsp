@@ -531,7 +531,7 @@ function addElement()
 	td_msname.setAttribute("width","18%");
 	td_msname.setAttribute("height","27");
 	var td_mngname = document.createElement("td");
-	td_mngname.setAttribute("width","18%");
+	td_mngname.setAttribute("width","30%");
 	td_mngname.setAttribute("height","27");
 	var td_StartDate = document.createElement("td");
 	td_StartDate.setAttribute("width","18%");

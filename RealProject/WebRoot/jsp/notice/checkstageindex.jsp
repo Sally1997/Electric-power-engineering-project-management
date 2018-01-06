@@ -169,10 +169,10 @@
 						<!-- 审批意见 -->
 						<div id="start_date" class="block">
 						<div id="first_left">
-						<font class="text">审批意见：</font>
+						<!-- <font class="text">审批意见：</font> -->
 						</div>
 						<div id="first_right">
-						<input type="text" name="auditinfo" size="40px;">
+						<!-- <input type="text" name="auditinfo" size="40px;"> -->
 						</div>
 						<div class="clear"></div>
 						</div>

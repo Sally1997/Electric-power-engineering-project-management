@@ -49,6 +49,8 @@ public class NewProjectServlet extends HttpServlet {
 	PDocAudit pda = new PDocAudit();
 	PSRelation psr = new PSRelation();
 	
+	//这条消息是插这个项目管理的
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");

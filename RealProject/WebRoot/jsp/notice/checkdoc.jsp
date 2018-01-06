@@ -111,7 +111,6 @@
                         
                         <div class="clear"></div>
 						<div>
-						<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupAc">审核相关</button>
 						<br/><br/>
 						</div>
 

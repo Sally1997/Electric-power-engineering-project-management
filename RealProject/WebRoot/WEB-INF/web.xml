@@ -176,10 +176,6 @@
     <servlet-class>com.holyshit.web.servlet.ShowStaffInfoServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>StaffInfoFindServlet</servlet-name>
-    <servlet-class>com.holyshit.web.servlet.StaffInfoFindServlet</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>FindDocument</servlet-name>
     <servlet-class>com.holyshit.web.servlet.FindDocument</servlet-class>
   </servlet>
@@ -283,6 +279,10 @@
     <servlet-class>com.holyshit.web.servlet.GetInformList</servlet-class>
   </servlet>
 
+   <servlet>
+    <servlet-name>StaffInfoFindServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffInfoFindServlet</servlet-class>
+  </servlet>
 
 
 
@@ -418,10 +418,6 @@
     <url-pattern>/web/servlet/showStaffInfoServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>StaffInfoFindServlet</servlet-name>
-    <url-pattern>/web/servlet/staffInfoFindServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>FindDocument</servlet-name>
     <url-pattern>/web/servlet/findDocument</url-pattern>
   </servlet-mapping>
@@ -508,6 +504,10 @@
   <servlet-mapping>
     <servlet-name>GetInformList</servlet-name>
     <url-pattern>/web/servlet/GetInformList</url-pattern>
+   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffInfoFindServlet</servlet-name>
+    <url-pattern>/web/servlet/staffInfoFindServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
