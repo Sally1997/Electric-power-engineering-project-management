@@ -106,4 +106,12 @@ public interface StageTaskDao {
 	 * @throws SQLException
 	 */
 	long selectTotalTaskById(String staffno)throws SQLException;
+	
+	/**
+	 * 查找任务所有信息
+	 * @param taskno
+	 * @return
+	 * @throws SQLException 
+	 */
+	StageTask selectStageTasks(String taskno) throws SQLException;
 }

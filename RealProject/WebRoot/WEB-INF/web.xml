@@ -217,7 +217,6 @@
     <servlet-class>com.holyshit.web.servlet.ProjectAuditServlet</servlet-class>
   </servlet>
   <servlet>
-<<<<<<< HEAD
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>ShowDocAudit</servlet-name>
@@ -245,26 +244,25 @@
     <servlet-name>SetAuthority</servlet-name>
     <servlet-class>com.holyshit.web.servlet.SetAuthority</servlet-class>
   </servlet>
-
-
-
-=======
-    <servlet-name>EditStaff</servlet-name>
-    <servlet-class>com.holyshit.web.servlet.EditStaff</servlet-class>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowIndexAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowIndexAudit</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>DeleteStaff</servlet-name>
-    <servlet-class>com.holyshit.web.servlet.DeleteStaff</servlet-class>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>StageIndexAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StageIndexAudit</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>GetAuthorityList</servlet-name>
-    <servlet-class>com.holyshit.web.servlet.GetAuthorityList</servlet-class>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TaskIndexAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.TaskIndexAudit</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>SetAuthority</servlet-name>
-    <servlet-class>com.holyshit.web.servlet.SetAuthority</servlet-class>
-  </servlet>
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
+
 
 
 
@@ -434,7 +432,6 @@
     <url-pattern>/web/servlet/projectAuditServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-<<<<<<< HEAD
     <servlet-name>ShowDocAudit</servlet-name>
     <url-pattern>/web/servlet/showDocAudit</url-pattern>
   </servlet-mapping>
@@ -443,8 +440,6 @@
     <url-pattern>/web/servlet/docAuditServlet</url-pattern>
   </servlet-mapping> 
   <servlet-mapping>
-=======
->>>>>>> branch 'devolope' of git@github.com:Sally1997/Electric-power-engineering-project-management.git
     <servlet-name>TestBootstrap</servlet-name>
     <url-pattern>/web/servlet/testBootstrap</url-pattern>
   </servlet-mapping>
@@ -471,6 +466,18 @@
   <servlet-mapping>
     <servlet-name>SetAuthority</servlet-name>
     <url-pattern>/web/servlet/setAuthority</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowIndexAudit</servlet-name>
+    <url-pattern>/web/servlet/showIndexAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StageIndexAudit</servlet-name>
+    <url-pattern>/web/servlet/stageIndexAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TaskIndexAudit</servlet-name>
+    <url-pattern>/web/servlet/taskIndexAudit</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

@@ -27,4 +27,10 @@ public interface InformDao {
 	 * @throws SQLException 
 	 */
 	Inform selectInformByMno(String mno) throws SQLException;
+	
+	/**
+	 * 修改信息表未读状态
+	 * @throws SQLException 
+	 */
+	void updateInformState(String mno) throws SQLException;
 }

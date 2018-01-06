@@ -153,4 +153,17 @@ public class StageTasksServiceImpl implements StageTasksService{
 		return res;
 	}
 
+	@Override
+	public StageTask getStageTask(String taskno) {
+		StageTask st = new StageTask();
+		StageTaskDao std = new StageTaskDaoImpl();
+		try {
+			st = std.selectStageTasks(taskno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return st;
+	}
+
 }

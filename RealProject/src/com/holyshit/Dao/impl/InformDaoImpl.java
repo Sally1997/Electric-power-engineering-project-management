@@ -23,9 +23,9 @@ public class InformDaoImpl implements InformDao {
 	@Override
 	public void insertInform(Inform info) throws SQLException {
 		QueryRunner qr = new QueryRunner();
-		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(busno,srcpno,dstpno,mtype,hasread,mdate) "+
-				"VALUES(?,?,?,?,?,?)",info.getBusno(),info.getSrcpno(),info.getDstpno(),info.getMtype(),
-				info.getHasread(),info.getMdate());
+		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(busno,srcpno,dstpno,mtype,hasread) "+
+				"VALUES(?,?,?,?,?)",info.getBusno(),info.getSrcpno(),info.getDstpno(),info.getMtype(),
+				info.getHasread());
 	}
 
 	@Override
@@ -34,7 +34,14 @@ public class InformDaoImpl implements InformDao {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT * FROM inform WHERE mno=?", new BeanHandler<Inform>(Inform.class),mno);
 	}
-	
+
+	@Override
+	public void updateInformState(String mno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE inform SET hasread='1' WHERE mno=?",mno);
+	}
+
 	
 
 }

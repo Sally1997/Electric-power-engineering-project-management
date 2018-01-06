@@ -34,27 +34,37 @@
     		
     		<div class="col-lg-8" style="float:none; margin: 20px auto">
    	        <div class="panel panel-primary" style="margin: 20px auto">
-    	        <div class="panel-heading">项目相关</div>
+    	        <div class="panel-heading">任务相关</div>
       	        <div class="panel-body">
                 <div class="col-lg-12" >
                  <!-- style="margin-top: 20px;margin-left: 5%" -->
- 
-						<div id="responsible_per" class="block"><!--这里我就不给你把缩进改到后面了。。。太难改了。。。你反正晓得下面都是一块的-->
+                 
+                 		<div id="responsible_per" class="block">
 						<div id="first_left">
-						<font>项目名称:</font>
+						<font >项目名称:</font>
 						</div>
 						<div id="first_right">
-						<font>${map.ptype }</font>
+						<font >${map.pname }</font>
 						</div>
 						<div class="clear"></div>
 						</div>
 
 						<div id="responsible_per" class="block">
 						<div id="first_left">
-						<font ><font>阶段或者任务</font>名称:</font>
+						<font >阶段名称:</font>
 						</div>
 						<div id="first_right">
-						<font >${map.pname }</font>
+						<font >${map.sname }</font>
+						</div>
+						<div class="clear"></div>
+						</div>
+						
+						<div id="responsible_per" class="block">
+						<div id="first_left">
+						<font >阶段名称:</font>
+						</div>
+						<div id="first_right">
+						<font >${map.taskname }</font>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -68,23 +78,40 @@
 						</div>
 						<div class="clear"></div>
 						</div>
-
+						
+					
 						<div id="responsible_per" class="block">
 						<div id="first_left">
 						<font >相关附件:</font>
 						</div>
 						<div id="first_right">
-						<font ><a href="${pageContext.request.contextPath }/web/servlet/downLoadMessage?dno=${map.dno }">${map.dtitle }</a></font>
+						<c:forEach items="${map.list }" var="l">
+						<font >
+							<ul>
+								<c:if test="${l.attachpath!=null }">
+								<li>${l.indexinfo }
+									<a href="${pageContext.request.contextPath }/web/servlet/downLoadMessage?dno=${l.attachpath }">
+									<span class="glyphicon glyphicon-download-alt" style="cursor: pointer;"></span></a>
+								</li>
+								</c:if>
+								<c:if test="${l.attachpath==null }">
+								<li><font color="grey">${l.indexinfo }</font>
+								</li>
+								</c:if>
+							</ul>
+						</font>
+						</c:forEach>
 						</div>
 						<div class="clear"></div>
 						</div>
+					
 
 						<div id="responsible_per" class="block">
 						<div id="first_left">
 						<font >预算:</font>
 						</div>
 						<div id="first_right">
-						<font >${map.pbudget }</font>
+						<font >${map.budget }</font>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -111,7 +138,6 @@
                         
                         <div class="clear"></div>
 						<div>
-						<button type="button" class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#handupAc">审核相关</button>
 						<br/><br/>
 						</div>
 
@@ -121,14 +147,25 @@
     		</div>
     		
     		<!-- 如果申请人id为当前用户编号，则不显示，不同则说明当前用户是审核人，其他人没有消息提醒 -->
-    		<c:if test="${staff.staffno!=map.staffno}">
+    		<c:if test="${staff.staffno!=map.charpno}">
 			<div class="col-lg-8 xumode">
    	        <div class="panel panel-primary">
-    	        <div class="panel-heading">项目审批</div>
+    	        <div class="panel-heading">任务审批</div>
       	        <div class="panel-body">
                 <div class="col-lg-12" >
 						<!-- 同意 -->
 					<form>
+						<font >
+							<ul>
+							
+							<c:forEach items="${map.list }" var="l">
+								<li><input name="target" type="checkbox" value="${l.indexno }" />
+									${l.indexinfo }
+								</li>
+							</c:forEach>
+							</ul>
+						</font>
+					
 						<div id="responsible_per" class="block">
 						<div>
 						<div id="first_left">
@@ -151,39 +188,6 @@
 						</div>
 						<div class="clear"></div>
 						</div>
-
-						<!-- 是否继续 -->
-						<div id="responsible_per" class="block">
-						<div>
-						<div id="first_left">
-						<input type="radio" name="audit" value="next" checked="checked" onclick="option(this)">继续审批
-						</div>
-						<div id="first_right">
-						<input type="radio" name="audit" value="end" onclick="option(this)">结束审批
-						</div>
-						</div> 
-						<div class="clear"></div>
-						</div>
-
-						<!-- 审批人 -->
-						<div id="fozza_charp" class="block" style="display:block">
-						<div id="first_left">
-						<font class="text">审批人:</font>
-						</div>
-						<div id="first_right">
-						<input type="text" id="checkman" name="PersonInCharge" size="40px" readonly="readonly" style="display:none">
-						<button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target= "#search" onclick="search_member()">查找</button>
-						</div>
-						<div class="clear"></div>
-						</div>
-						
-						<!-- block -->
-						<div id="fozza_block" class="block" style="display:none">
-						<div id="first_left">
-						</div>
-						<div id="first_right">
-						</div>
-						<div class="clear"></div>
 						</div>
 						
 						<div class="clear"></div>
@@ -201,64 +205,6 @@
 	    </div>
 	</div>
  </section>
- <!--      默认隐藏的内容:审批意见-->
- <div class="modal fade" id="handupAc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
- <div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">审批意见</h4>
-    </div>
-    <div class="modal-body">
-		  <table class="table table-striped table-condensed" style="font-size: 15px">
-		  
-		  
- 		    <tr>
-			    <th >审批人</th>
-			    <th>审批意见</th>
-			    <th>是否结束</th>
-			    <th>是否同意</th>
-			    <th>日期</th>
-		    </tr>
-		  
-		  <c:forEach items="${map.list }" var="l">
-		    <tr>
-			    <td align="center">${l.name }</td>
-			    <td align="center">${l.auditadv }</td>
-			    <td align="center">${l.auditstate }</td>
-			    <td align="center">${l.ifpassed }</td>
-			    <td align="center">${l.audittime }</td>
-			</tr>
-		  </c:forEach>
-		    <!-- <tr>
-			    <td align="center">审批人b</td>
-			    <td align="center">有较大风险</td>
-			    <td align="center">否</td>
-			    <td align="center">否</td>
-			    <td align="center">A年B月D日</td>
-			</tr>
-		    <tr>
-			    <td align="center">审批人c</td>
-			    <td align="center">利润高</td>
-			    <td align="center">否</td>
-			    <td align="center">是</td>
-			    <td align="center">A年B月E日</td>
-			</tr>
-		    <tr>
-			    <td align="center">审批人d</td>
-			    <td align="center">总体来说还是很有希望</td>
-			    <td align="center">是</td>
-			    <td align="center">是</td>
-			    <td align="center">A年B月G日</td>
-			</tr> -->
-	        </table> 
-    </div>
-    <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-    </div>
-	</div>
-</div>
-</div>
  <!--      默认隐藏的内容:查找人員-->
  <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
  <div class="modal-dialog" role="document">
@@ -492,26 +438,12 @@ function search_staff(){
 //操此位置
 
 function submitAudit(){
-	var v_agree = document.getElementsByName("agree");
-	var v_ai = document.getElementsByName("auditinfo")[0];
-	var v_audit = document.getElementsByName("audit");
-	var v_pc = document.getElementsByName("PersonInCharge")[0];
-	
-	if(v_ai.value==""){
-		alert("请填写审核意见!");
-		return;
-	}
-	else if(v_audit[0].checked){
-		if(v_pc.value==""){
-			alert("请选择审核人!");
-			return;
-		}
-	}
 	var fm = document.forms[0];
-	fm.action="${pageContext.request.contextPath }/web/servlet/projectAuditServlet?mno=${map.mno}";
+	fm.action="${pageContext.request.contextPath }/web/servlet/stageIndexAudit?taskno=${map.taskno}&charpno=${map.charpno}";
 	fm.method="post";
 	fm.submit();
 }
+
 
 </script>
 </html>

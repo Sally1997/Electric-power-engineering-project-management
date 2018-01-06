@@ -83,7 +83,24 @@ public class AuditDaoImpl implements AuditDao {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT dno,UloadPNo,name,DTitle,ftype,dtype,FSize,UploadTime FROM document,pdocaudit,staff "+
 				"WHERE document.DNo=pdocaudit.pdocno AND UloadPNo=staffno AND pdauditno=?", new MapHandler(),pdauditno);
+	}
+
+	@Override
+	public Map<String, Object> selectStageAudit(String stageno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT pname,stageno,sname,charpno,NAME,psplan.stime,psplan.etime,psplan.budget "+
+				"FROM psplan,project,staff WHERE stageno=? AND project.pno=psplan.PNo AND staffno=charpno", 
+				new MapHandler(),stageno);
 		
+	}
+
+	@Override
+	public Map<String, Object> selectTaskAudit(String taskno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT pname,taskno,taskname,sname,stagetasks.charpno,NAME,stagetasks.stime, "+
+				"stagetasks.etime,stagetasks.budget FROM stagetasks,project,staff,psplan "+
+				"WHERE taskno=? AND project.pno=stagetasks.PNo AND staffno=stagetasks.charpno "+
+				"AND stagetasks.stageno=psplan.StageNo", new MapHandler(),taskno);
 	}
 	
 	

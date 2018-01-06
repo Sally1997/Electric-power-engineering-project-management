@@ -130,4 +130,12 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		return (long) qr.query(ConnectionManager.getConnection(), "SELECT count(*) FROM stagetasks JOIN project ON stagetasks.pno=project.pno WHERE charpno=? AND (tstate='1' OR tstate='2')",new ScalarHandler(),staffno);
 	}
 
+	@Override
+	public StageTask selectStageTasks(String taskno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("select * from stagetasks where taskno=?", new BeanHandler<StageTask>(StageTask.class),
+				taskno);
+	}
+
 }
