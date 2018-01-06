@@ -19,4 +19,36 @@ public interface InformDao {
 	 * @throws SQLException 
 	 */
 	void insertInform(Inform info) throws SQLException;
+	
+	/**
+	 * 根据mno获得inform
+	 * @param mno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Inform selectInformByMno(String mno) throws SQLException;
+	
+	/**
+	 * 修改信息表未读状态
+	 * @throws SQLException 
+	 */
+	void updateInformState(String mno) throws SQLException;
+	
+	/**
+	 * 查询某种类型的数据
+	 * @param staffno
+	 * @param types
+	 * @return
+	 * @throws SQLException
+	 */
+	List<Inform> selectInformByTypePage(String staffno,String[] types)throws SQLException;
+	
+	/**
+	 * 查询某种类型消息的数量
+	 * @param staffno
+	 * @param types
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectInformNumberBytype(String staffno,String[] types)throws SQLException;
 }

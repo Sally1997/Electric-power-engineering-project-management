@@ -8,30 +8,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
 import com.holyshit.domain.Inform;
 import com.holyshit.service.AuditService;
 import com.holyshit.service.InformService;
 import com.holyshit.service.impl.AuditServiceImpl;
 import com.holyshit.service.impl.InformServiceImpl;
 
-public class ShowProAuditServlet extends HttpServlet {
+public class ShowIndexAudit extends HttpServlet {
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//String mno = request.getParameter("mno");
-		String mno = "6";
+		String mno = "13";
+		Inform info = new Inform();
 		InformService is = new InformServiceImpl();
-		Inform info = is.getInformByMno(mno);
-		
-		mno = info.getBusno();
+		info = is.getInformByMno(mno);
+		String taskno = info.getBusno();
 		
 		AuditService as = new AuditServiceImpl();
-		String str = as.getProAuditInfo(mno);
-		JSONObject jo = JSONObject.fromObject(str);
-		Map map = jo;
+		Map<String,Object> map = as.getIndexAudit(taskno);
+		
 		request.setAttribute("map", map);
-		request.getRequestDispatcher("/jsp/notice/checkinfo.jsp").forward(request, response);
+		
+		//分发转向
+		if(map.get("taskno")==null){//阶段
+			request.getRequestDispatcher("/jsp/notice/checkstageindex.jsp").forward(request, response);
+		}
+		else{//任务
+			request.getRequestDispatcher("/jsp/notice/checktaskindex.jsp").forward(request, response);
+		}
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

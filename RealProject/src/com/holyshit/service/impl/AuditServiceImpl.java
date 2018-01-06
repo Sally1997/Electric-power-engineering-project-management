@@ -8,11 +8,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.holyshit.Dao.AuditDao;
+import com.holyshit.Dao.DocumentDao;
+import com.holyshit.Dao.InformDao;
+import com.holyshit.Dao.TaskIndexesDao;
 import com.holyshit.Dao.impl.AuditDaoImpl;
+import com.holyshit.Dao.impl.DocumentDaoImpl;
+import com.holyshit.Dao.impl.InformDaoImpl;
+import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
+import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.service.AuditService;
@@ -145,6 +151,91 @@ public class AuditServiceImpl implements AuditService {
 		AuditDao ad = new AuditDaoImpl();
 		try {
 			ad.updateProAuditInfo(mno, auditstate, auditadv, NAuditorNo);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+
+	@Override
+	public Map<String, Object> getDocAuditInfo(String pdauditno) {
+		AuditDao ad = new AuditDaoImpl();
+		Map<String,Object> map = new HashMap<String, Object>();
+		try {
+			map = ad.selectDocAudit(pdauditno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	@Override
+	public void changeDocAuditState(String adv, String auditstate, String dno) {
+		// TODO Auto-generated method stub
+		DocumentDao dd = new DocumentDaoImpl();
+		ConnectionManager.startTransaction();
+		try {
+			dd.updateDocAuditState(auditstate, dno);
+			dd.updatePDocAudit(adv, auditstate, dno);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+		
+	}
+
+	@Override
+	public Map<String, Object> getIndexAudit(String taskno) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		AuditDao as = new AuditDaoImpl();
+		TaskIndexesDao  tid = new TaskIndexesDaoImpl();
+		if(taskno.length()==6){
+			try {//阶段
+				map = as.selectStageAudit(taskno);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			try {//任务
+				map = as.selectTaskAudit(taskno);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		try {//将指标放进map
+			map.put("list", tid.selectTaskIndexes(taskno));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	@Override
+	public void StageIndexAudit(Inform info, String[] str) {
+		// TODO Auto-generated method stub
+		InformDao id = new InformDaoImpl();
+		TaskIndexesDao tid = new TaskIndexesDaoImpl();
+		String indexstate = "1";
+		
+		ConnectionManager.startTransaction();
+		try {
+			id.insertInform(info);
+			for(int i=0;i<str.length;i++){
+				tid.updateIndexState(str[i], indexstate);
+			}
 			ConnectionManager.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

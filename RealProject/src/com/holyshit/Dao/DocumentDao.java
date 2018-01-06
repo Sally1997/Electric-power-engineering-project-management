@@ -88,4 +88,19 @@ public interface DocumentDao {
 	 * @throws SQLException 
 	 */
 	int insertDocument(Document doc) throws SQLException;
+	
+	/**
+	 * 更新文档审核表审核意见，审核状态，审核时间
+	 * @param adv
+	 * @param auditstate
+	 * @throws SQLException 
+	 */
+	void updatePDocAudit(String adv,String auditstate,String dno) throws SQLException;
+	
+	/**
+	 * 更新文档表审核意见
+	 * @param agree
+	 * @throws SQLException 
+	 */
+	void updateDocAuditState(String agree,String dno) throws SQLException;
 }

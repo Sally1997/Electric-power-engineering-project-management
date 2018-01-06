@@ -2,6 +2,7 @@ package com.holyshit.service;
 
 import java.util.Map;
 
+import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
 import com.holyshit.domain.Projaprlaudit;
 
@@ -40,4 +41,33 @@ public interface AuditService {
 	 * @param NAuditorNo
 	 */
 	void changePAAInfo(String mno, String auditstate,String auditadv, String NAuditorNo);
+	
+	/**
+	 * 展示文档审核文档相关信息
+	 * @param pdauditno
+	 * @return
+	 */
+	Map<String,Object> getDocAuditInfo(String pdauditno);
+	
+	/**
+	 * 改变文档审核状态，文档审核表和文档表
+	 * @param adv
+	 * @param auditstate
+	 * @param dno
+	 */
+	void changeDocAuditState(String adv,String auditstate,String dno);
+	
+	/**
+	 * 根据任务或者阶段编号获取指标审核内容
+	 * @param taskno
+	 * @return
+	 */
+	Map<String,Object> getIndexAudit(String taskno);
+	
+	/**
+	 * 改变指标表状态和更新信息表
+	 * @param info
+	 * @param str
+	 */
+	void StageIndexAudit(Inform info,String [] str);
 }

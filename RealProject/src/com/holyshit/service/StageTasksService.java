@@ -69,4 +69,11 @@ public interface StageTasksService {
 	 * @return
 	 */
 	Map<String, Object> showTaskInfoByPage(String staffno,int cur,int pageSize);
+	
+	/**
+	 * 获取任务信息
+	 * @param taskno
+	 * @return
+	 */
+	StageTask getStageTask(String taskno);
 }

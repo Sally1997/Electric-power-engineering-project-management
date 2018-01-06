@@ -59,4 +59,28 @@ public interface AuditDao {
 	 * @throws SQLException 
 	 */
 	Projaprlaudit selectPAAByMno(String mno) throws SQLException;
+	
+	/**
+	 * 文档审核相关信息
+	 * @param pdauditno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Map<String,Object> selectDocAudit(String pdauditno) throws SQLException;
+	
+	/**
+	 * 根据阶段表好获取阶段审核信息
+	 * @param stageno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Map<String,Object> selectStageAudit(String stageno) throws SQLException;
+	
+	/**
+	 * 根据任务编号获取任务审核信息
+	 * @param stageno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Map<String,Object> selectTaskAudit(String taskno) throws SQLException;
 }

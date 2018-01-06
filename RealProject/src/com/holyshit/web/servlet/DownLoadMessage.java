@@ -37,7 +37,6 @@ public class DownLoadMessage extends HttpServlet {
 			request.getRequestDispatcher("/jsp/error/error_500.jsp").forward(request, response);
 			return;
 		}
-		
 		DocumentService ds=new DocumentServiceImpl();
 		Document doc = ds.findDocumentById(dno);
 		if(doc==null){
@@ -47,13 +46,21 @@ public class DownLoadMessage extends HttpServlet {
 		}
 		String filepath=doc.getDpath();
 		String filename=doc.getDtitle()+filepath.substring(filepath.lastIndexOf("."));
+		
+		//设置文件的编码
+		if(request.getHeader("user-agent").toLowerCase().contains("msie")){
+			filename = URLEncoder.encode(filename,"UTF-8");//将不安全的文件改成UTF-8格式
+		}
+		else{
+			filename = new String(filename.getBytes("UTF-8"),"iso-8859-1");//火狐浏览器
+		}
+		
 		filename = new String(filename.getBytes(), "ISO-8859-1");
-		response.setHeader("content-disposition", "attachment;filename=" +URLEncoder.encode(filename, "ISO-8859-1"));
+		response.setHeader("content-disposition", "attachment;filename=" +filename);
 		InputStream input=new FileInputStream(filepath);
 		OutputStream out=response.getOutputStream();
 		int len=0;
 	
-		
 		//缓冲区
 		byte b[]=new byte[1024];
 		while((len=input.read(b))!=-1){
