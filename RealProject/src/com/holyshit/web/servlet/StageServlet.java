@@ -205,7 +205,7 @@ public class StageServlet extends HttpServlet {
 		}
 		
 		//分发转向
-		response.setHeader("refresh", "0.5;url=/RealProject/servlet/DTreeNodeServlet?pno="+pn);		
+		//response.setHeader("refresh", "0.5;url=/RealProject/servlet/DTreeNodeServlet?pno="+pn);		
 			
 		
 	}
