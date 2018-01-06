@@ -44,8 +44,13 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>GetInformNumber</filter-name>
-    <url-pattern>/head.jsp</url-pattern>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-name>ShowPageProjectBudget</servlet-name>
+    <servlet-name>ShowProjectServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
+    
   </filter-mapping>
   
   
@@ -273,6 +278,11 @@
     <servlet-name>GetInformNumber</servlet-name>
     <servlet-class>com.holyshit.web.servlet.GetInformNumber</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetInformList</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetInformList</servlet-class>
+  </servlet>
+
 
 
 
@@ -494,6 +504,10 @@
   <servlet-mapping>
     <servlet-name>GetInformNumber</servlet-name>
     <url-pattern>/web/servlet/getInformNumber</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetInformList</servlet-name>
+    <url-pattern>/web/servlet/GetInformList</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

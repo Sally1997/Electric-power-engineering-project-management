@@ -59,12 +59,7 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer" href="${pageContext.request.contextPath}/web/servlet/logout"></a></li>
               <li><a href="#">${staff.name }</a></li>
-              <c:if test="${all_num==0 }">
-              	<li><a href="#">通知</a></li>
-              </c:if>
-              <c:if test="${all_num!=0 }">
-              	<li><a href="#">通知<span class="badge">${all_num }</span></a></li>
-              </c:if>
+              <li><a href="#">通知<span class="badge">${all_num }</span></a></li>
               <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
               		 
               		<!--  通知<span class="badge">10</span> -->
