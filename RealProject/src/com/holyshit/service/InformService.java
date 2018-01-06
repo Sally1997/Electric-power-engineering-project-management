@@ -1,5 +1,7 @@
 package com.holyshit.service;
 
+import java.util.Map;
+
 import com.holyshit.domain.Inform;
 
 public interface InformService {
@@ -22,6 +24,12 @@ public interface InformService {
 	 */
 	Inform getInformByMno(String mno);
 	
-	
+	/**
+	 * 查询各种类型消息的数量 
+	 * @param staffno
+	 * @param type
+	 * @return
+	 */
+	Map<String,Object> findInformNumber(String staffno);
 	
 }

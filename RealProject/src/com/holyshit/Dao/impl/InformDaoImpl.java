@@ -49,11 +49,11 @@ public class InformDaoImpl implements InformDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="select * from inform where dstno='"+staffno+"'";
-		if(types.length!=0){
+		String sql="select * from inform where dstpno='"+staffno+"'";
+		if(types.length>1){
 			for(int i=0;i<types.length;i++){
 				if(i!=0){
-					if(i!=types.length-1){
+					if(i!=(types.length-1)){
 						sql+=" or mtype='"+types[i]+"'";
 					}else{
 						sql+=" or mtype='"+types[i]+"')";
@@ -62,7 +62,10 @@ public class InformDaoImpl implements InformDao {
 					sql+=" and (mtype='"+types[i]+"'";
 				}
 			}
+		}else if(types.length==1){
+			sql+=" and mtype='"+types[0]+"'";
 		}
+		System.out.println(sql);
 		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<Inform>(Inform.class));
 	}
 
@@ -71,11 +74,11 @@ public class InformDaoImpl implements InformDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="select count(*) from inform where dstno='"+staffno+"'";
-		if(types.length!=0){
+		String sql="select count(*) from inform where dstpno='"+staffno+"'";
+		if(types.length>1){
 			for(int i=0;i<types.length;i++){
 				if(i!=0){
-					if(i!=types.length-1){
+					if(i!=(types.length-1)){
 						sql+=" or mtype='"+types[i]+"'";
 					}else{
 						sql+=" or mtype='"+types[i]+"')";
@@ -84,7 +87,10 @@ public class InformDaoImpl implements InformDao {
 					sql+=" and (mtype='"+types[i]+"'";
 				}
 			}
+		}else if(types.length==1){
+			sql+=" and mtype='"+types[0]+"'";
 		}
+		System.out.println(sql);
 		return (long) qr.query(ConnectionManager.getConnection(), sql, new ScalarHandler());
 	}
 
