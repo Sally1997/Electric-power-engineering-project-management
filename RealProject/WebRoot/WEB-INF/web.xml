@@ -164,10 +164,6 @@
     <servlet-class>com.holyshit.web.servlet.ShowStaffInfoServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>StaffInfoFindServlet</servlet-name>
-    <servlet-class>com.holyshit.web.servlet.StaffInfoFindServlet</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>FindDocument</servlet-name>
     <servlet-class>com.holyshit.web.servlet.FindDocument</servlet-class>
   </servlet>
@@ -262,6 +258,11 @@
     <servlet-name>TaskIndexAudit</servlet-name>
     <servlet-class>com.holyshit.web.servlet.TaskIndexAudit</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>StaffInfoFindServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffInfoFindServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -396,10 +397,6 @@
     <url-pattern>/web/servlet/showStaffInfoServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>StaffInfoFindServlet</servlet-name>
-    <url-pattern>/web/servlet/staffInfoFindServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>FindDocument</servlet-name>
     <url-pattern>/web/servlet/findDocument</url-pattern>
   </servlet-mapping>
@@ -478,6 +475,10 @@
   <servlet-mapping>
     <servlet-name>TaskIndexAudit</servlet-name>
     <url-pattern>/web/servlet/taskIndexAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffInfoFindServlet</servlet-name>
+    <url-pattern>/web/servlet/staffInfoFindServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
