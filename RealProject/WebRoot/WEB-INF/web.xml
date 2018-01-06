@@ -17,7 +17,10 @@
     <filter-name>GetInformNumber</filter-name>
     <filter-class>com.holyshit.filter.GetInformNumber</filter-class>
   </filter>
-  
+  <filter>
+    <filter-name>InformFilter</filter-name>
+    <filter-class>com.holyshit.filter.InformFilter</filter-class>
+  </filter>
   
   
   <filter-mapping>
@@ -50,7 +53,13 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
-    
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>InformFilter</filter-name>
+    <url-pattern>/jsp/notice/inform.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
   </filter-mapping>
   
   
@@ -503,7 +512,7 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>GetInformList</servlet-name>
-    <url-pattern>/web/servlet/GetInformList</url-pattern>
+    <url-pattern>/web/servlet/getInformList</url-pattern>
    </servlet-mapping>
   <servlet-mapping>
     <servlet-name>StaffInfoFindServlet</servlet-name>

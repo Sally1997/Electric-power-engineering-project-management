@@ -59,14 +59,14 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer" href="${pageContext.request.contextPath}/web/servlet/logout"></a></li>
               <li><a href="#">${staff.name }</a></li>
-              <li><a href="#">通知<span class="badge">${all_num }</span></a></li>
+              <li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=1">通知<span class="badge">${all_num }</span></a></li>
               <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
               		 
               		<!--  通知<span class="badge">10</span> -->
 				  <ul class="dropdown-menu">
-					<li><a href="#">任务消息<span class="badge" style="float: right">${task_num }</span></a></li>
-					<li><a href="#">系统信息<span class="badge" style="float: right">${system_num }</span></a></li>
-		            <li><a href="${pageContext.request.contextPath }/web/servlet/showNoticeServlet">审批消息<span class="badge" style="float: right">${audit_num }</span></a></li>
+					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=1">任务消息<span class="badge" style="float: right">${task_num }</span></a></li>
+					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=2">系统信息<span class="badge" style="float: right">${system_num }</span></a></li>
+		            <li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=3">审批消息<span class="badge" style="float: right">${audit_num }</span></a></li>
 			      </ul>
               </li>
             </ul>

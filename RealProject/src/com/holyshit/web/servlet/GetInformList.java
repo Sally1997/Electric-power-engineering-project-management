@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+
 import com.holyshit.domain.Staff;
+import com.holyshit.service.InformService;
+import com.holyshit.service.impl.InformServiceImpl;
 
 public class GetInformList extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,6 +30,12 @@ public class GetInformList extends HttpServlet {
 			return;
 		}
 		
+		//调用服务
+		InformService is=new InformServiceImpl();
+		JSONArray res = is.findInformByType(staff.getStaffno(), type);
+		
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(res.toString());
 		
 	}
 
