@@ -22,9 +22,11 @@ import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.AccountService;
+import com.holyshit.service.PermissionService;
 import com.holyshit.service.ProjectService;
 import com.holyshit.service.StageTasksService;
 import com.holyshit.service.impl.AccountServiceImpl;
+import com.holyshit.service.impl.PermissionServiceImpl;
 import com.holyshit.service.impl.ProjectServiceImpl;
 import com.holyshit.service.impl.StageTasksServiceImpl;
 
@@ -91,8 +93,11 @@ public class StaffLogin extends HttpServlet {
 			//获取用户的信息
 			Staff staff = as.getUserById(account.getStaffno());
 			session.setAttribute("staff", staff);
-			//获取权限列表以及用户基本权限表
-			
+			//文档审批权限是否具有
+			PermissionService ps=new PermissionServiceImpl();
+			boolean enableCheckDocument = ps.enableCheckDocument(staff.getStaffno());
+			if(enableCheckDocument)
+				session.setAttribute("enableCheckDocument", 1);
 			
 			//跳转到相应的uri
 			String uri=request.getParameter("uri");

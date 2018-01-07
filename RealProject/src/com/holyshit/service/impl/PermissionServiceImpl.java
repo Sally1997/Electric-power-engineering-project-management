@@ -2,6 +2,8 @@ package com.holyshit.service.impl;
 
 import java.sql.SQLException;
 
+import org.apache.commons.dbutils.QueryRunner;
+
 import com.holyshit.Dao.AuthorityDao;
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.Dao.ProjectDao;
@@ -99,6 +101,22 @@ public class PermissionServiceImpl implements PermissionService {
 		}
 		
 		return res;
+	}
+
+	@Override
+	public boolean enableCheckDocument(String staffno) {
+		// TODO Auto-generated method stub
+		AuthorityDao ad=new AuthorityDaoImpl();
+		int res=0;
+		try {
+			res=ad.selectHasPermission(staffno, 3);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(res==1)
+			return true;
+		return false;
 	}
 
 }

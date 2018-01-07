@@ -1,6 +1,7 @@
 package com.holyshit.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class FeeAudit {
 	private String fauditno;
@@ -13,7 +14,7 @@ public class FeeAudit {
 	private double fee;
 	private String ofeereason;
 	private String taskno;
-	private Date stime;
+	private Timestamp stime;
 	
 	public String getFauditno() {
 		return fauditno;
@@ -75,11 +76,12 @@ public class FeeAudit {
 	public void setTaskno(String taskon) {
 		this.taskno = taskon;
 	}
-	public Date getStime() {
+	public Timestamp getStime() {
 		return stime;
 	}
-	public void setStime(Date stime) {
+	public void setStime(Timestamp stime) {
 		this.stime = stime;
 	}
+	
 	
 }

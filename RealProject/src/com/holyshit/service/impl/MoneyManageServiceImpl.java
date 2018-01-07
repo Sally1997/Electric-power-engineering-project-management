@@ -17,16 +17,19 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.holyshit.Dao.FeeAuditDao;
+import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StaffDao;
 import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.impl.FeeAuditDaoImpl;
+import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.PSPlanDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.domain.FeeAudit;
+import com.holyshit.domain.Inform;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectStageBudget;
 import com.holyshit.domain.StageTask;
@@ -254,8 +257,16 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		StageTaskDao std=new StageTaskDaoImpl();
 		PSPlanDao pd=new PSPlanDaoImpl();
 		String pubpno=null;
-		
+		InformDao inform=new InformDaoImpl();
+		Inform data=new Inform();
+		data.setBusno("00000");
+		data.setSrcpno(task.getCharpno());
+		data.setMtype("A0");
+		data.setHasread("0");
+		int res1=0,res2=0;
+		int result=1;
 		try {
+			ConnectionManager.startTransaction();
 			if(task.getPtasktype().equals("1")){
 				pubpno=std.selectTaskInfoByTaskNo(task.getPtaskno()).getCharpno();
 			}else{
@@ -263,19 +274,31 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				}
 				pubpno=pd.selectPsPlanInfo(task.getPtaskno()).getCharpno();
 			}
+			data.setDstpno(pubpno);
 			if(over){
-				return fd.addFeeAuditOver(task.getTaskno(), fee, cause, task.getCharpno(), pubpno, task.getPno());	
+				res1=fd.addFeeAuditOver(task.getTaskno(), fee, cause, task.getCharpno(), pubpno, task.getPno());	
+				FeeAudit last = fd.selectLastFeeAuditByTaskNo(task.getTaskno());
+				data.setBusno(last.getFauditno());
+				res2=inform.insertInform(data, 1);
 			}else{
-				fd=new FeeAuditDaoImpl();
-				return fd.addFeeAudit(task.getTaskno(), fee, task.getCharpno(), pubpno, task.getPno());
+				res1=fd.addFeeAudit(task.getTaskno(), fee, task.getCharpno(), pubpno, task.getPno());
+				FeeAudit last = fd.selectLastFeeAuditByTaskNo(task.getTaskno());
+				data.setBusno(last.getFauditno());
+				res2=inform.insertInform(data, 1);
 			}
+			if(res1==0||res2==0){
+				throw new SQLException();
+			}
+			ConnectionManager.commit();
 		} catch (SQLException e) {
+			result=0;
+			ConnectionManager.rollback();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			ConnectionManager.closeConnection();
 		}
-		return 0;
+		return result;
 	}
 
 
@@ -344,14 +367,37 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			String fauditno) {
 		// TODO Auto-generated method stub
 		FeeAuditDao fd=new FeeAuditDaoImpl();
+		InformDao inform=new InformDaoImpl();
+		Inform data=new Inform();
+		int res1=0,res2=0;
+		int result=1;
 		try {
-			return fd.updateAudit(fauditno, state, cause);
+			ConnectionManager.startTransaction();
+			FeeAudit feeBean = fd.selectFeeAuditInfoById(fauditno);
+			if(feeBean==null)
+				throw new SQLException();
+			data.setBusno(feeBean.getFauditno());
+			data.setSrcpno(feeBean.getAuditorno());
+			data.setDstpno(feeBean.getApplicantno());
+			data.setHasread("0");
+			if(state.equals("1"))
+				data.setMtype("A1");
+			else {
+				data.setMtype("A2");
+			}
+			res1=fd.updateAudit(fauditno, state, cause);
+			res2=inform.insertInform(data, 1);
+			if(res1==0||res2==0)
+				throw new SQLException();
+			ConnectionManager.commit();
 		} catch (SQLException e) {
+			result=0;
+			ConnectionManager.rollback();
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			ConnectionManager.closeConnection();
 		}
-		return 0;
+		return result;
 	}
 }

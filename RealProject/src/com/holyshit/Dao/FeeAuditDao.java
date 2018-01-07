@@ -78,4 +78,20 @@ public interface FeeAuditDao {
 	 * @throws SQLException
 	 */
 	int updateAudit(String fauditno,String state,String cause)throws SQLException;
+	
+	/**
+	 * 根据id获取报账信息
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	FeeAudit selectFeeAuditInfoById(String id)throws SQLException;
+	
+	/**
+	 * 根据任务编号查询最近一次的报账信息
+	 * @param taskno
+	 * @return
+	 * @throws SQLException
+	 */
+	FeeAudit selectLastFeeAuditByTaskNo(String taskno)throws SQLException;
 }

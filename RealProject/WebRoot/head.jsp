@@ -67,8 +67,12 @@
 					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=1">任务消息<span class="badge" style="float: right">${task_num }</span></a></li>
 					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=2">系统信息<span class="badge" style="float: right">${system_num }</span></a></li>
 		            <li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=3">审批消息<span class="badge" style="float: right">${audit_num }</span></a></li>
+			     	<c:if test="${not empty enableCheckDocument }">
+              			<li><a href="#">文档审核</a></li>
+              		</c:if>
 			      </ul>
               </li>
+              
             </ul>
          </div><!-- /.navbar-collapse -->
        </div><!-- /.container-fluid -->

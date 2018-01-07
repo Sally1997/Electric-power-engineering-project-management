@@ -31,6 +31,14 @@ public interface InformDao {
 	void insertInform(Inform info) throws SQLException;
 	
 	/**
+	 * 兼容上面那个傻逼写的代码
+	 * @param info
+	 * @return
+	 * @throws SQLException
+	 */
+	int insertInform(Inform info,int flag)throws SQLException;
+	
+	/**
 	 * 根据mno获得inform
 	 * @param mno
 	 * @return

@@ -14,6 +14,7 @@ import com.holyshit.Dao.impl.AccountDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.NoteDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.domain.Inform;
 import com.holyshit.domain.Note;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.PageBean;
@@ -274,14 +275,35 @@ public class StaffServiceImpl implements StaffService{
 	public boolean editStaffInfo(Staff staff, boolean change,String password) {
 		// TODO Auto-generated method stub
 		StaffDao sd=new StaffDaoImpl();
+		boolean flag=false;
 		AccountDao ad=new AccountDaoImpl();
-		int res1=0,res2=0;
+		InformDao inform=new InformDaoImpl();
+		Inform data=new Inform();
+		Inform data2=new Inform();
+		data.setBusno(staff.getStaffno());
+		data.setSrcpno("root");
+		data.setDstpno(staff.getStaffno());
+		data.setMtype("S2");
+		data.setHasread("0");
+		
+		data2.setBusno(staff.getStaffno());
+		data2.setSrcpno("root");
+		data2.setDstpno(staff.getStaffno());
+		data2.setMtype("S3");
+		data2.setHasread("0");
+		int res1=0,res2=0,res3=0,res4=0;
 		if(change){
 			//重置了密码
 			try {
 				ConnectionManager.startTransaction();
 				res1=sd.editStaff(staff);
 				res2=ad.editAccount(staff.getStaffno(), password);
+				res3=inform.insertInform(data,1);
+				res4=inform.insertInform(data2, 1);
+				if(!(res1==1&&res2==1&&res3==1&&res4==1)){
+					throw new SQLException();
+				}
+				
 				ConnectionManager.commit();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -290,20 +312,28 @@ public class StaffServiceImpl implements StaffService{
 			}finally{
 				ConnectionManager.closeConnection();
 			}
-			if(res1==1&&res2==1){
+			if(res1==1&&res2==1&&res3==1&&res4==1){
 				return true;
 			}
 		}else{
 			//未重置密码
 			try {
+				ConnectionManager.startTransaction();
 				res1=sd.editStaff(staff);
+				res3=inform.insertInform(data, 1);
+				if(!(res1==1&&res3==1)){
+					throw new SQLException();
+				}
+				
+				ConnectionManager.commit();
 			} catch (SQLException e) {
+				ConnectionManager.rollback();
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally{
 				ConnectionManager.closeConnection();
 			}
-			if(res1==1){
+			if(res1==1&&res3==1){
 				return true;
 			}
 		}
