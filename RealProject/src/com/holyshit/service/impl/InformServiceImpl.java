@@ -1,10 +1,19 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.domain.Inform;
+import com.holyshit.domain.InformDocument;
+import com.holyshit.domain.InformFee;
+import com.holyshit.domain.InformProject;
 import com.holyshit.service.InformService;
 import com.holyshit.utils.ConnectionManager;
 
@@ -53,4 +62,156 @@ public class InformServiceImpl implements InformService {
 		return info;
 	}
 
+	@Override
+	public Map<String, Object> findInformNumber(String staffno) {
+		// TODO Auto-generated method stub
+		Map<String, Object> res=new HashMap<String, Object>();
+		InformDao inform=new InformDaoImpl();
+		try {
+			ConnectionManager.startTransaction();
+			
+			long task_num = inform.selectInformNumberBytype(staffno, "T");
+			
+			long system_num = inform.selectInformNumberBytype(staffno, "S");
+			long audit_num = inform.selectInformNumberBytype(staffno, "A");
+			res.put("task_num", task_num);
+			res.put("system_num", system_num);
+			res.put("audit_num", audit_num);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			ConnectionManager.rollback();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+			
+		}
+		return res;
+	}
+
+	@Override
+	public JSONArray findInformByType(String staffno, String type) {
+		// TODO Auto-generated method stub
+		InformDao inform=new InformDaoImpl();
+		JSONArray list=new JSONArray();
+		try {
+			List<Object> types = inform.selectTypeById(staffno);
+			//对于报账类型
+			boolean flag1=false;
+			for(Object o:types){
+				String s=(String) o;
+				if(s.equals("A0")||s.equals("A1")||s.equals("A2")){
+					flag1=true;
+					break;
+				}
+			}
+			if(flag1){
+				List<InformFee> res = inform.selectInformByTypeInFee(staffno);
+				for(InformFee iFee:res){
+					JSONObject jo=new JSONObject();
+					jo.put("mno", iFee.getMno());
+					jo.put("busno", iFee.getBusno());
+					jo.put("mdate", iFee.getMdate().toString());
+					jo.put("mtype",iFee.getMtype());
+					jo.put("taskname", iFee.getTaskname());
+					jo.put("fee", iFee.getFee());
+					list.add(jo);
+				}
+			}
+			
+			//对于普通文档审核
+			boolean flag2=false;
+			for(Object o:types){
+				String s=(String) o;
+				if(s.equals("A3")||s.equals("A4")){
+					flag2=true;
+					break;
+				}
+			}
+			if(flag2){
+				List<InformDocument> res = inform.selectInformByTypeInDocument(staffno);
+				for(InformDocument iFee:res){
+					JSONObject jo=new JSONObject();
+					jo.put("mno", iFee.getMno());
+					jo.put("busno", iFee.getBusno());
+					jo.put("mdate", iFee.getMdate().toString());
+					jo.put("mtype",iFee.getMtype());
+					jo.put("dtitle", iFee.getDtitle());
+					list.add(jo);
+				}
+			}
+			
+			//对于任务指标
+			boolean flag3=false;
+			for(Object o:types){
+				String s=(String) o;
+				if(s.equals("A5")||s.equals("A6")||s.equals("A7")){
+					flag3=true;
+					break;
+				}
+			}
+			if(flag3){
+				List<InformDocument> res = inform.selectInformByTypeInTaskIndex(staffno);
+				for(InformDocument iFee:res){
+					JSONObject jo=new JSONObject();
+					jo.put("mno", iFee.getMno());
+					jo.put("busno", iFee.getBusno());
+					jo.put("mdate", iFee.getMdate().toString());
+					jo.put("mtype",iFee.getMtype());
+					jo.put("dtitle", iFee.getDtitle());
+					list.add(jo);
+				}
+			}
+			
+			//对于阶段指标
+			boolean flag4=false;
+			for(Object o:types){
+				String s=(String) o;
+				if(s.equals("A8")||s.equals("A9")||s.equals("A10")){
+					flag4=true;
+					break;
+				}
+			}
+			if(flag4){
+				List<InformDocument> res = inform.selectInformByTypeInStageIndex(staffno);
+				for(InformDocument iFee:res){
+					JSONObject jo=new JSONObject();
+					jo.put("mno", iFee.getMno());
+					jo.put("busno", iFee.getBusno());
+					jo.put("mdate", iFee.getMdate().toString());
+					jo.put("mtype",iFee.getMtype());
+					jo.put("dtitle", iFee.getDtitle());
+					list.add(jo);
+				}
+			}
+			
+			//对于项目立项审核
+			boolean flag5=false;
+			for(Object o:types){
+				String s=(String) o;
+				if(s.equals("A11")||s.equals("A12")||s.equals("A13")){
+					flag5=true;
+					break;
+				}
+			}
+			if(flag5){
+				List<InformProject> res = inform.selectInformByTypeInProject(staffno);
+				for(InformProject iFee:res){
+					JSONObject jo=new JSONObject();
+					jo.put("mno", iFee.getMno());
+					jo.put("busno", iFee.getBusno());
+					jo.put("mdate", iFee.getMdate().toString());
+					jo.put("mtype",iFee.getMtype());
+					jo.put("pname", iFee.getPname());
+					list.add(jo);
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

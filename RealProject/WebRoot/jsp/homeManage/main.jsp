@@ -147,8 +147,8 @@
   						</c:forEach>
     	              </table>
     	              <div class="pagination" style="margin-left: 50%;" id="task_page">
-				        <a href="javascript:getPreTaskPage()" class="disabled">Newer</a>
-				        <a href="javascript:getNextTaskPage()">Older</a>
+				        <a href="javascript:getPreTaskPage()" class="disabled">&laquo;</a>
+				        <a href="javascript:getNextTaskPage()">&raquo;</a>
     				  </div>
     				  <script type="text/javascript">
     					  	//相关数据的获取刷新
@@ -261,8 +261,8 @@
 						  </c:forEach>   	          
 						  </table>
 						  <div class="pagination" style="margin-left: 50%;" id="project_page">
-						        <a href="javascript:getPreProjectPage()" class="disabled">Newer</a>
-						        <a href="javascript:getNextProjectPage()">Older</a>
+						        <a href="javascript:getPreProjectPage()" class="disabled">&laquo;</a>
+						        <a href="javascript:getNextProjectPage()">&raquo;</a>
     					  </div>
     					  <script type="text/javascript">
     					  	//相关数据的获取刷新

@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.Inform;
+import com.holyshit.domain.InformDocument;
+import com.holyshit.domain.InformFee;
+import com.holyshit.domain.InformProject;
 
 public interface InformDao {
 	/**
@@ -33,4 +36,62 @@ public interface InformDao {
 	 * @throws SQLException 
 	 */
 	void updateInformState(String mno) throws SQLException;
+	
+	/**
+	 * 查询资金审核通知
+	 * @param staffno
+	 * @param types
+	 * @return
+	 * @throws SQLException
+	 */
+	List<InformFee> selectInformByTypeInFee(String staffno)throws SQLException;
+	
+	/**
+	 * 查询普通文档消息
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	List<InformDocument> selectInformByTypeInDocument(String staffno)throws SQLException;
+	
+	/**
+	 * 查询任务指标消息
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	List<InformDocument> selectInformByTypeInTaskIndex(String staffno)throws SQLException;
+	
+	/**
+	 * 查询阶段指标信息
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	List<InformDocument> selectInformByTypeInStageIndex(String staffno)throws SQLException;
+	
+	/**
+	 * 查询项目立项信息
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	List<InformProject>  selectInformByTypeInProject(String staffno)throws SQLException;
+	
+	/**
+	 * 查询某种类型消息的数量
+	 * @param staffno
+	 * @param types
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectInformNumberBytype(String staffno,String types)throws SQLException;
+	
+	/**
+	 * 获取需要查询的消息种类
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	List<Object> selectTypeById(String staffno)throws SQLException;
 }

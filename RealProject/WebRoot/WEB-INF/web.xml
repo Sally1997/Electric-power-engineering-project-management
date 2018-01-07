@@ -13,8 +13,14 @@
     <filter-name>StaffListServletFilter</filter-name>
     <filter-class>com.holyshit.filter.StaffListServletFilter</filter-class>
   </filter>
-  
-  
+  <filter>
+    <filter-name>GetInformNumber</filter-name>
+    <filter-class>com.holyshit.filter.GetInformNumber</filter-class>
+  </filter>
+  <filter>
+    <filter-name>InformFilter</filter-name>
+    <filter-class>com.holyshit.filter.InformFilter</filter-class>
+  </filter>
   
   
   <filter-mapping>
@@ -39,7 +45,22 @@
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>
-  
+  <filter-mapping>
+    <filter-name>GetInformNumber</filter-name>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-name>ShowPageProjectBudget</servlet-name>
+    <servlet-name>ShowProjectServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>InformFilter</filter-name>
+    <url-pattern>/jsp/notice/inform.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
   
   
   
@@ -259,6 +280,15 @@
     <servlet-class>com.holyshit.web.servlet.TaskIndexAudit</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>GetInformNumber</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetInformNumber</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetInformList</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetInformList</servlet-class>
+  </servlet>
+
+   <servlet>
     <servlet-name>StaffInfoFindServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.StaffInfoFindServlet</servlet-class>
   </servlet>
@@ -476,6 +506,14 @@
     <servlet-name>TaskIndexAudit</servlet-name>
     <url-pattern>/web/servlet/taskIndexAudit</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetInformNumber</servlet-name>
+    <url-pattern>/web/servlet/getInformNumber</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetInformList</servlet-name>
+    <url-pattern>/web/servlet/getInformList</url-pattern>
+   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>StaffInfoFindServlet</servlet-name>
     <url-pattern>/web/servlet/staffInfoFindServlet</url-pattern>

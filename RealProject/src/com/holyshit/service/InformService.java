@@ -1,5 +1,10 @@
 package com.holyshit.service;
 
+import java.util.Map;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.holyshit.domain.Inform;
 
 public interface InformService {
@@ -21,4 +26,21 @@ public interface InformService {
 	 * @return
 	 */
 	Inform getInformByMno(String mno);
+	
+	/**
+	 * 查询各种类型消息的数量 
+	 * @param staffno
+	 * @param type
+	 * @return
+	 */
+	Map<String,Object> findInformNumber(String staffno);
+	
+	/**
+	 * 查找相应类型的消息数据
+	 * @param staffno
+	 * @param type
+	 * @return
+	 */
+	JSONArray findInformByType(String staffno,String type);
+	
 }
