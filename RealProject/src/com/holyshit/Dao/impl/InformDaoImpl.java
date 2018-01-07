@@ -33,6 +33,12 @@ public class InformDaoImpl implements InformDao {
 				"VALUES(?,?,?,?,?)",info.getBusno(),info.getSrcpno(),info.getDstpno(),info.getMtype(),
 				info.getHasread());
 	}
+	
+	public void insertInformhr(String type,String staffno) throws SQLException {
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(dstpno,mtype,hasread) "+
+				"VALUES(?,?,?)",staffno,type,"0");
+	}
 
 	@Override
 	public Inform selectInformByMno(String mno) throws SQLException {
@@ -90,7 +96,7 @@ public class InformDaoImpl implements InformDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="SELECT mno,busno,mdate,mtype,dtitle FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A5' OR mtype='A6' OR mtype='A7')) a JOIN document ON a.busno=document.DNo";
+		String sql="SELECT mno,busno,mdate,mtype,dtitle,pno FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A5' OR mtype='A6' OR mtype='A7')) a JOIN document ON a.busno=document.DNo";
 		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformDocument>(InformDocument.class));
 	}
 
@@ -99,7 +105,7 @@ public class InformDaoImpl implements InformDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="SELECT mno,busno,mdate,mtype,dtitle FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A8' OR mtype='A9' OR mtype='A10')) a JOIN document ON a.busno=document.DNo";
+		String sql="SELECT mno,busno,mdate,mtype,dtitle,pno FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A8' OR mtype='A9' OR mtype='A10')) a JOIN document ON a.busno=document.DNo";
 		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformDocument>(InformDocument.class));
 	}
 
@@ -110,6 +116,14 @@ public class InformDaoImpl implements InformDao {
 		QueryRunner qr=new QueryRunner();
 		String sql="SELECT mno,busno,mdate,mtype,pname FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A11' OR mtype='A12' OR mtype='A13')) a JOIN project ON a.busno=project.pno";
 		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformProject>(InformProject.class));
+	}
+
+	@Override
+	public int hasRead(String mno, String flag) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="update inform set hasread=? where mno=?";
+		return qr.update(ConnectionManager.getConnection(), sql,flag,mno);
 	}
 
 	

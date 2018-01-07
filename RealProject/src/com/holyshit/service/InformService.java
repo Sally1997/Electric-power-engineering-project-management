@@ -43,4 +43,10 @@ public interface InformService {
 	 */
 	JSONArray findInformByType(String staffno,String type);
 	
+	/**
+	 * 读取消息，设置已读标记
+	 * @param mno
+	 * @return
+	 */
+	boolean readInform(String mno);
 }

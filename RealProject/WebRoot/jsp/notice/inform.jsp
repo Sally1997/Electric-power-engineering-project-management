@@ -73,6 +73,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>的报账需要您审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A1"){
@@ -80,6 +87,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>未通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A2"){
@@ -87,6 +101,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>已经通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A3"){
@@ -94,6 +115,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您最近上传的文件：<strong>"+jsonData[i].dtitle+"</strong>已经通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A4"){
@@ -101,6 +129,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您最近上传的文件：<strong>"+jsonData[i].dtitle+"</strong>未通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A5"){
@@ -108,6 +143,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="任务指标：<strong>"+jsonData[i].dtitle+"</strong>已经上传，等待您的审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A6"){
@@ -115,6 +157,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您最近上传的任务指标：<strong>"+jsonData[i].dtitle+"</strong>已经通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A7"){
@@ -122,6 +171,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您最近上传的任务指标：<strong>"+jsonData[i].dtitle+"</strong>没有通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A8"){
@@ -129,6 +185,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="阶段指标：<strong>"+jsonData[i].dtitle+"</strong>已经上传，等待您的审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A9"){
@@ -136,6 +199,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您最近上传的阶段指标：<strong>"+jsonData[i].dtitle+"</strong>已经通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A10"){
@@ -143,6 +213,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您最近上传的阶段指标：<strong>"+jsonData[i].dtitle+"</strong>没有通过审核!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A11"){
@@ -150,6 +227,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="项目：<strong>"+jsonData[i].pname+"</strong>正在立项，等待您的审批!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A12"){
@@ -157,6 +241,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您的项目：<strong>"+jsonData[i].pname+"</strong>立项成功!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     				if(jsonData[i].mtype=="A13"){
@@ -164,6 +255,13 @@
     					node.type="button";
     					node.className="list-group-item";
     					node.innerHTML="您的项目：<strong>"+jsonData[i].pname+"</strong>立项失败!";
+    					node.value=i;
+    					//test
+    					
+    					node.onclick=function(){
+    						var i=window.parseInt(this.value);
+   							hasRead(i);
+    					};
     					e.appendChild(node);
     				}
     			}
@@ -172,6 +270,41 @@
     	req.open("get", "/RealProject/web/servlet/getInformList?type="+type);
     	req.send(null);
     }
+    
+    //读取消息
+    function hasRead(index){
+    	var req=new XMLHttpRequest();
+    	req.onreadystatechange=function(){
+    		if(req.readyState==4&&req.status==200){
+    			if(req.responseText=="ok"){
+    				//进行跳转
+    				//跳转到资金管理界面
+    				if(jsonData[index].mtype=="A0"||jsonData[index].mtype=="A1"||jsonData[index].mtype=="A2"){
+    					location.href="/RealProject/web/servlet/showbudgetpage?currentPage=1&pageSize=3";
+    				}
+    				//跳转到文档管理界面
+    				if(jsonData[index].mtype=="A3"||jsonData[index].mtype=="A4"){
+    					location.href="/RealProject/jsp/documentManage/document.jsp";
+    				}
+    				//跳转到树状图
+    				if(jsonData[index].mtype=="A5"||jsonData[index].mtype=="A6"||jsonData[index].mtype=="A7"||jsonData[index].mtype=="A8"||jsonData[index].mtype=="A9"||jsonData[index].mtype=="A10"){
+    					location.href="/RealProject/servlet/DTreeNodeServlet?pno="+jsonData[index].pno;
+    				}
+    				//跳转到项目管理首页
+    				if(jsonData[index].mtype=="A11"||jsonData[index].mtype=="A12"||jsonData[index].mtype=="A13"){
+    					location.href="/RealProject/servlet/ShowProjectServlet";
+    				}
+    				
+    				
+    			}else{
+    				alert("服务器繁忙，请稍后重试！");
+    			}
+    		}
+    	};
+    	req.open("get", "/RealProject/web/servlet/readInform?mno="+jsonData[index].mno);
+    	req.send(null); 
+    }
+    
 	$(function () {
 		$('#myTab li:eq(${cur}) a').tab('show');
 		getData("A",document.getElementById("auditTable"));

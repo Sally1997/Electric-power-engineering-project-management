@@ -159,6 +159,7 @@ public class InformServiceImpl implements InformService {
 					jo.put("mdate", iFee.getMdate().toString());
 					jo.put("mtype",iFee.getMtype());
 					jo.put("dtitle", iFee.getDtitle());
+					jo.put("pno", iFee.getPno());
 					list.add(jo);
 				}
 			}
@@ -181,6 +182,7 @@ public class InformServiceImpl implements InformService {
 					jo.put("mdate", iFee.getMdate().toString());
 					jo.put("mtype",iFee.getMtype());
 					jo.put("dtitle", iFee.getDtitle());
+					jo.put("pno", iFee.getPno());
 					list.add(jo);
 				}
 			}
@@ -213,5 +215,23 @@ public class InformServiceImpl implements InformService {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public boolean readInform(String mno) {
+		// TODO Auto-generated method stub
+		InformDao inform=new InformDaoImpl();
+		int res=0;
+		try {
+			res=inform.hasRead(mno, "1");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		if(res==1)
+			return true;
+		return false;
 	}
 }

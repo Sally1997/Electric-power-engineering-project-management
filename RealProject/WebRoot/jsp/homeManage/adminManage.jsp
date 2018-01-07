@@ -110,7 +110,7 @@
 						</div>
 		
 
-					<div class="col-sm-4">
+					<div class="col-lg-12" style="text-align: center; margin-top: 10px">
 							<button type="button" id="search"
 								class="btn btn-primary">查询</button>
 					</div>

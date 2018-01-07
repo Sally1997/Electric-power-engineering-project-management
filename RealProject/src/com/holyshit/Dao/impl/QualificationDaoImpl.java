@@ -16,4 +16,9 @@ public class QualificationDaoImpl implements QualificationDao {
 		return qr.query(ConnectionManager.getConnection(),"select * from qualification where staffno=?", new BeanListHandler<Qualification>(Qualification.class),staffno);
 		
 	}
+	
+	public void AddAQualification(String staffno,String qua) throws SQLException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		qr.update("insert into qualification(staffno,qualifdesc) values(?,?)",staffno,qua);
+	}
 }

@@ -10,6 +10,24 @@ import com.holyshit.domain.StaffDuty;
 
 public interface StaffDao {
 	/**
+	 * 查看人员是否在项目组里。
+	 * @param staffno
+	 * @param pno
+	 * @return
+	 * @throws SQLException
+	 */
+	Staff isinproject(String staffno,String pno) throws SQLException;
+	/*
+	 * 
+	 * 修改用户表中的email
+	 */
+	void updateemail(String staffno,String email) throws SQLException;
+	/*
+	 * 
+	 * 修改用户表中的联系方式te
+	 */
+	void updatete(String staffno,String te) throws SQLException;
+	/**
 	 * ����Ա��id��ѯԱ������Ϣ
 	 * @param id Ա��id
 	 * @return  Ա������Ϣ

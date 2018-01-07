@@ -11,6 +11,7 @@ import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.Dao.impl.AccountDaoImpl;
+import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.NoteDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.domain.Note;
@@ -20,6 +21,49 @@ import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
 public class StaffServiceImpl implements StaffService{
+	public void updatete(String staffno,String te){
+		StaffDao staffDao = new StaffDaoImpl();
+		try {
+			staffDao.updatete(staffno, te);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+	
+	public void updateemail(String staffno,String email){
+		StaffDao staffDao = new StaffDaoImpl();
+		try {
+			staffDao.updateemail(staffno, email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+	
+	public int isinproject(String staffno,String pno){
+		StaffDao sd = new StaffDaoImpl();
+		Staff a=null;
+		try {
+			a = sd.isinproject(staffno, pno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(a==null)
+		{
+			return 0;
+		}
+		else {
+			return 1;
+		}
+		
+	}
+	
 	//list staffs service
 	public PageBean findAllStaffs(String pno,int CurrentPage,int PageSize,String noterno){
 		StaffDao StaffDao = new StaffDaoImpl();
@@ -57,10 +101,15 @@ public class StaffServiceImpl implements StaffService{
 	//delete staffs service
 	public void delAllStaffs(String[] staffnos,String pno) {
 		// TODO Auto-generated method stub
+		InformDao ifd = new InformDaoImpl();
 		StaffDao StaffDao = new StaffDaoImpl();
 		try{
 
 			StaffDao.delAllStaffs(staffnos, pno);
+			for(int i=0;i<staffnos.length;i++)
+			{
+				ifd.insertInformhr("S1", staffnos[i]);
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
@@ -84,9 +133,11 @@ public class StaffServiceImpl implements StaffService{
 	}
 	
 	public void addAStaff(PSRelation psr){
+		InformDao ifd = new InformDaoImpl();
 		StaffDao StaffDao = new StaffDaoImpl();
 		try {
 			StaffDao.addAStaff(psr);
+			ifd.insertInformhr("S0", psr.getStaffno());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
