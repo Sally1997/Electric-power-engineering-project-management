@@ -16,7 +16,10 @@ import com.holyshit.service.ProjectService;
 import com.holyshit.service.impl.ProjectServiceImpl;
 
 
-@WebServlet("/servlet/ShowProjectServlet")
+@WebServlet(
+	    name="ShowProjectServlet",
+	    urlPatterns={"/servlet/ShowProjectServlet"}
+	)
 public class ShowProjectServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

@@ -1,7 +1,11 @@
+<%@page import="java.util.Map"%>
+<%@page import="com.holyshit.service.impl.InformServiceImpl"%>
+<%@page import="com.holyshit.service.InformService"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="com.holyshit.domain.Staff" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap/css/bootstrap.min.css">
@@ -36,7 +40,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
+              </button>    
               <a class="navbar-brand" href="#">Brand</a>
             </div>
 
@@ -55,11 +59,14 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a class="glyphicon glyphicon-off" title="注销" style="cursor: pointer" href="${pageContext.request.contextPath}/web/servlet/logout"></a></li>
               <li><a href="#">${staff.name }</a></li>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false">通知<span class="badge">10</span> <span class="caret"></span></a>
+              <li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=1">通知<span class="badge">${all_num }</span></a></li>
+              <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+              		 
+              		<!--  通知<span class="badge">10</span> -->
 				  <ul class="dropdown-menu">
-					<li><a href="#">任务消息<span class="badge" style="float: right">4</span></a></li>
-					<li><a href="#">系统信息<span class="badge" style="float: right">4</span></a></li>
-		            <li><a href="${pageContext.request.contextPath }/web/servlet/showNoticeServlet">审批消息<span class="badge" style="float: right">2</span></a></li>
+					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=1">任务消息<span class="badge" style="float: right">${task_num }</span></a></li>
+					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=2">系统信息<span class="badge" style="float: right">${system_num }</span></a></li>
+		            <li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=3">审批消息<span class="badge" style="float: right">${audit_num }</span></a></li>
 			      </ul>
               </li>
             </ul>
@@ -67,4 +74,5 @@
        </div><!-- /.container-fluid -->
      </nav>
   </div>
+
   

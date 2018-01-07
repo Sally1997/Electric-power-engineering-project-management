@@ -52,44 +52,63 @@
 	href="${pageContext.request.contextPath}/css/bootstrap-editable.css">
 </head>
 
+<style>
+	.inputpad{
+		padding-bottom: 10px;
+	}
+</style>
+
+
+
 <body>
 	<div class="panel-body" style="padding-bottom:0px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">员工查询</div>
 			<div class="panel-body">
 					<div class="form-group" style="margin-top:15px;padding: 10px;">
-						<label class="control-label col-sm-1"
-							for="search_staffno">编号</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control" placeholder="编号关键字"
-								id="search_staffno">
+					    <div class="inputpad col-lg-4 col-md-6 col-sm-6">
+							<label class="control-label col-sm-4"
+								for="search_staffno">编号</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" placeholder="编号关键字"
+									id="search_staffno">
+							</div>
 						</div>
-						<label class="control-label col-sm-1" for="search_name">姓名</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control" id="search_name"  placeholder="姓名关键字">
+						<div class="inputpad col-lg-4 col-md-6 col-sm-6">
+							<label class="control-label col-sm-4" for="search_name">姓名</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="search_name"  placeholder="姓名关键字">
+							</div>
 						</div>
-						<label class="control-label col-sm-1" for="search_sex">性别</label>
-						<div class="col-sm-3">
-							<select class="selectpicker" data-width="100%" id="search_sex">
-							  <option>请选择</option>	
-							  <option>男</option>
-							  <option>女</option>
-							</select>
+						<div class="inputpad col-lg-4 col-md-6 col-sm-6">
+							<label class="control-label col-sm-4" for="search_sex">性别</label>
+							<div class="col-sm-8">
+								<select class="selectpicker" data-width="100%" id="search_sex">
+								  <option>请选择</option>	
+								  <option>男</option>
+								  <option>女</option>
+								</select>
+							</div>
 						</div>
-						<label class="control-label col-sm-1" for="search_birthday">出生日期</label>
-						<div class="col-sm-3">
-							<input type='text' class="form-control" placeholder="选择时间" id='search_birthday'/>
+						<div class="inputpad col-lg-4 col-md-6 col-sm-6">
+							<label class="control-label col-sm-4" for="search_birthday">出生日期</label>
+							<div class="col-sm-8">
+								<input type='text' class="form-control" placeholder="选择时间" id='search_birthday'/>
+							</div>
 						</div>
-						<label class="control-label col-sm-1" for="search_te">电话号码</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control" id="search_te"  placeholder="电话号码关键字">
+						<div class="inputpad col-lg-4 col-md-6 col-sm-6">
+							<label class="control-label col-sm-4" for="search_te">电话号码</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="search_te"  placeholder="电话号码关键字">
+							</div>
 						</div>
-						<label class="control-label col-sm-1" for="search_email">电子邮箱</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control" id="search_email"  placeholder="邮箱关键字">
-						</div> 
-						
-					</div>
+						<div class="inputpad col-lg-4 col-md-6 col-sm-6">
+							<label class="control-label col-sm-4" for="search_email">电子邮箱</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="search_email"  placeholder="邮箱关键字">
+							</div> 
+						</div>
+		
 
 					<div class="col-sm-4">
 							<button type="button" id="search"
@@ -97,6 +116,7 @@
 					</div>
 			</div>
 		</div>
+</div>
 
 		<div id="toolbar" class="btn-group">
 			<button id="btn_add" type="button" class="btn btn-default">
@@ -340,7 +360,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">员工编号</label>
 				<div class="col-sm-8">
-			    <input type="text" class="form-control" id="editStaff_staffno" placeholder="请输入编号" readonly="readonly">
+			    <input type="text" class="form-control" id="editStaff_staffno" placeholder="请输入编号" readonly>
 				</div>
 			  </div>
 			  <div class="form-group">
