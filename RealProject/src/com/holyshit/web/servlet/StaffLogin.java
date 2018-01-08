@@ -4,10 +4,14 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javassist.compiler.ast.Variable;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +49,7 @@ public class StaffLogin extends HttpServlet {
 			e.printStackTrace();
 		}
 		String code=request.getParameter("validatecode");
+		String over=request.getParameter("over");
 		//�Ƿ��½�ɹ�
 		AccountService as=new AccountServiceImpl();
 		boolean res=false;
@@ -88,6 +93,58 @@ public class StaffLogin extends HttpServlet {
 				response.addCookie(cname);
 				response.addCookie(cpassword);
 			}
+			//添加到一登录人员链表！
+			ServletContext application = request.getServletContext();
+			List<String> list=(List<String>) application.getAttribute("hasLoginedStaff");
+			if(list==null){
+				list=new LinkedList<String>();
+				list.add(account.getStaffno());
+				//压回session
+				application.setAttribute("hasLoginedStaff", list);
+				
+			}else{
+				if(over!=null){
+					//确认登录
+					
+					//进行的操作，使对方掉线   可能很慢
+					List<HttpSession> sessionlist=(List<HttpSession>) application.getAttribute("sessionlist");
+					//遍历寻找对应的session，销毁
+					for(Iterator<HttpSession> it=sessionlist.iterator();it.hasNext();){
+						HttpSession s=it.next();
+						if(s!=null){
+							Staff loginStaff=(Staff)s.getAttribute("staff");
+							if(loginStaff!=null){
+								if(loginStaff.getStaffno().equals(account.getStaffno())){
+									System.out.println("强制对方掉线");
+									s.invalidate();
+									it.remove();
+									break;
+								}
+							}
+						}
+						else{
+							it.remove();
+						}
+					}
+					
+				}else{
+					//是否存在
+					if(list.contains(account.getStaffno())){
+						request.setAttribute("overLogin_staffno", account.getStaffno());
+						request.setAttribute("overLogin_password", account.getPassword());
+						request.setAttribute("overLogin_validatecode", code);
+						request.setAttribute("overLogin_remember", remember);
+						request.getRequestDispatcher("/overLogin.jsp").forward(request, response);
+						return;
+					}else{
+						list.add(account.getStaffno());
+						application.setAttribute("hasLoginedStaff", list);
+					}
+				}
+			}
+			
+			
+			
 			//����session
 			session.removeAttribute("validatecode");
 			//获取用户的信息
@@ -98,6 +155,13 @@ public class StaffLogin extends HttpServlet {
 			boolean enableCheckDocument = ps.enableCheckDocument(staff.getStaffno());
 			if(enableCheckDocument)
 				session.setAttribute("enableCheckDocument", 1);
+			//发布公告权限
+			boolean enablePublicNotice=ps.enablePublicNotice(staff.getStaffno());
+			if(enablePublicNotice){
+				session.setAttribute("enablePublicNotice", 1);
+			}
+			
+			
 			
 			//跳转到相应的uri
 			String uri=request.getParameter("uri");
@@ -117,5 +181,10 @@ public class StaffLogin extends HttpServlet {
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 	}
-
+	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(req, resp);
+	}
 }

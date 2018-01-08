@@ -66,5 +66,16 @@ public class AuthorityDaoImpl implements AuthorityDao {
 		QueryRunner qr=new QueryRunner();
 		return qr.update(ConnectionManager.getConnection(), "delete from asrelation where staffno=? and perno=?",staffno,perno);
 	}
+
+	@Override
+	public int[] deleteAllAuthorityById(String[] staffs) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] para=new Object[staffs.length][1];
+		for(int i=0;i<staffs.length;i++)
+			para[i][0]=staffs[i];
+		String sql="delete from asrelation where staffno=?";
+		return qr.batch(ConnectionManager.getConnection(), sql, para);
+	}
 	
 }

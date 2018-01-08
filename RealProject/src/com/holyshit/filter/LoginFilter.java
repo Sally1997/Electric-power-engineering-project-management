@@ -31,11 +31,11 @@ public class LoginFilter implements Filter{
 		HttpSession session=req.getSession();
 		if(session.getAttribute("staff")!=null){
 			//重复登录
-			if(path.indexOf("login.jsp")!=-1||path.equals(req.getContextPath()+"/")){
+			if(path.indexOf("login.jsp")!=-1||path.indexOf("overLogin.jsp")!=-1||path.equals(req.getContextPath()+"/")){
 				request.getRequestDispatcher("/web/servlet/mainServlet").forward(request, response);
 			}
 			chain.doFilter(request, response);
-		}else if(path.indexOf("login.jsp")!=-1||path.equals(req.getContextPath()+"/")){
+		}else if(path.indexOf("login.jsp")!=-1||path.indexOf("overLogin.jsp")!=-1||path.equals(req.getContextPath()+"/")){
 			
 			Cookie[] cookies = req.getCookies();
 			String name=null;

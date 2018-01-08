@@ -9,6 +9,21 @@ public class InformFee {
 	private Timestamp mdate;
 	private String taskname;
 	private double fee;
+	private String auditadv;
+	private String ofeereason;
+	
+	public String getAuditadv() {
+		return auditadv;
+	}
+	public void setAuditadv(String auditadv) {
+		this.auditadv = auditadv;
+	}
+	public String getOfeereason() {
+		return ofeereason;
+	}
+	public void setOfeereason(String ofeereason) {
+		this.ofeereason = ofeereason;
+	}
 	public double getFee() {
 		return fee;
 	}

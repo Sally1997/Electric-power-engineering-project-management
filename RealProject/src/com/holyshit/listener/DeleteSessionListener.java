@@ -24,11 +24,10 @@ public class DeleteSessionListener implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
-		//新建livingcount存储系统在线人数
+		//新建livingcount存储系统在线人数    stafflist统计登录用户
 		int num=0;
 		final ServletContext application= arg0.getServletContext();
 		application.setAttribute("livingcount", num);
-		
 		//新建安全链表
 		final List<HttpSession> list=Collections.synchronizedList(new LinkedList<HttpSession>());
 		application.setAttribute("sessionlist", list);

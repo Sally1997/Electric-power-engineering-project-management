@@ -146,8 +146,44 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">员工编号<span style="color: red;">*</span></label>
 				<div class="col-sm-8">
-			    <input type="text" class="form-control" id="addStaff_staffno" placeholder="请输入编号">
+			    <input type="text" class="form-control" id="addStaff_staffno" placeholder="请输入12位数字编号">
 				</div>
+				<label class="col-sm-2 control-label" id="showRes" style="display: none;">可以使用</label>
+				<script type="text/javascript">
+					document.getElementById("addStaff_staffno").onblur=function(){
+						//发送请求查询用户是否存在
+						var warn=document.getElementById("showRes");
+						var reg=/^[0-9]{12}$/;
+						if(!reg.test($('#addStaff_staffno').val())){
+							alert("请输入正确格式的编号");
+							return;
+						}
+						//查询用户是否存在
+						var req=new XMLHttpRequest();
+						req.onreadystatechange=function(){
+							if(req.readyState==4&&req.status==200){
+								if(req.responseText=="ok"){
+									warn.style.color="red";
+									warn.style.display="block";
+									warn.innerHTML="已被注册";
+								}else{
+									warn.style.color="green";
+									warn.style.display="block";
+									warn.innerHTML="可以注册";
+								}
+							}
+						};
+						
+						
+						req.open("get", "/RealProject/web/servlet/staffIsExist?staffno="+$('#addStaff_staffno').val()+"&time="+new Date().getTime());
+						req.send(null);
+					};
+					document.getElementById("addStaff_staffno").onclick=function(){
+						var warn=document.getElementById("showRes");
+						warn.style.display="none";
+						
+					};
+				</script>
 			  </div>
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">员工姓名<span style="color: red;">*</span></label>
@@ -174,7 +210,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">电话号码<span style="color: red;">*</span></label>
 				<div class="col-sm-8">
-		          <input type="text" class="form-control" id="addStaff_te" placeholder="请输入电话">
+		          <input type="text" class="form-control" id="addStaff_te" placeholder="请输入11位电话号码">
 				</div>
 			  </div>
              <div class="form-group">
@@ -212,12 +248,14 @@
       			var addStaff_email=$('#addStaff_email').val();
       			var addStaff_password=$('#addStaff_password').val();
       			var addStaff_confirm=$('#addStaff_confirm').val();
-      			if(addStaff_staffno==""){
-      				alert("员工编号不能为空");
+      			var staffno_reg=/^[0-9]{12}$/;
+      			if(!staffno_reg.test(addStaff_staffno)){
+      				alert("请输入12位数字编号");
       				return;
       			}
-      			if(addStaff_name==""){
-      				alert("员工姓名不能为空");
+      			var name_reg=/^[\u4E00-\u9FA5\uf900-\ufa2d·]{2,20}$/; 		
+      			if(!name_reg.test(addStaff_name)){
+      				alert("姓名格式不符合规则");
       				return;
       			}
       			if(addStaff_sex=="请选择"){
@@ -228,20 +266,26 @@
       				alert("出生日期不能为空");
       				return;
       			}
-      			if(addStaff_te==""){
-      				alert("电话号码不能为空");
+      			
+      			var te_reg=/^[1][3,4,5,7,8][0-9]{9}$/;
+      			if(!te_reg.test(addStaff_te)){
+      				alert("请输入正确的11位手机号码");
       				return;
       			}
-      			if(addStaff_email==""){
-      				alert("电子邮箱不能为空");
+      			var email_reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+      			
+      			if(!email_reg.test(addStaff_email)){
+      				alert("电子邮箱格式错误");
       				return;
       			}
-      			if(addStaff_password==""){
-      				alert("密码不能为空");
+      			
+      			var password_reg=/^[0-9A-z]{6,16}$/;
+      			if(!password_reg.test(addStaff_password)){
+      				alert("请输入正确的密码格式:\n"+"    1.密码由数字，小写字母，大写字母中的一种或者几种类型组成\n"+"    2.密码长度最短为6位，最长为20位");
       				return;
       			}
       			if(addStaff_confirm!=addStaff_password){
-      				alert("输入密码不同");
+      				alert("两次输入的密码不同");
       				return;
       			}
       			//发送请求
@@ -420,22 +464,39 @@
       			var editStaff_password=$('#editStaff_password').val();
       			var editStaff_confirm=$('#editStaff_confirm').val();
       
-      			if(editStaff_name==""){
-      				alert("员工姓名不能为空");
+      			var name_reg=/^[\u4E00-\u9FA5\uf900-\ufa2d·]{2,20}$/; 		
+      			if(!name_reg.test(editStaff_name)){
+      				alert("姓名格式不符合规则");
+      				return;
+      			}
+      			if(editStaff_sex=="请选择"){
+      				alert("请选择性别");
       				return;
       			}
       			if(editStaff_birthday==""){
       				alert("出生日期不能为空");
       				return;
       			}
-      			if(editStaff_te==""){
-      				alert("电话号码不能为空");
+      			
+      			var te_reg=/^[1][3,4,5,7,8][0-9]{9}$/;
+      			if(!te_reg.test(editStaff_te)){
+      				alert("请输入正确的11位手机号码");
       				return;
       			}
-      			if(editStaff_email==""){
-      				alert("电子邮箱不能为空");
+      			var email_reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+      			
+      			if(!email_reg.test(editStaff_email)){
+      				alert("电子邮箱格式错误");
       				return;
       			}
+      			
+      			var password_reg=/^[0-9A-z]{6,16}$/;
+      			if((editStaff_password!="")&&(!password_reg.test(editStaff_password))){
+      				alert("请输入正确的密码格式:\n"+"    1.密码由数字，小写字母，大写字母中的一种或者几种类型组成\n"+"    2.密码长度最短为6位，最长为20位");
+      				return;
+      			}
+      			
+      			
       			if(editStaff_password!=""){
       				var flag=confirm("您确定要重置编号为"+editStaff_staffno+"的密码么？请及时通知相关员工以免造成损失");
       				if(!flag)
@@ -455,6 +516,10 @@
       				warning+="    -- 将员工邮箱从 ["+data.email+"] 改变为了 ["+editStaff_email+"] \n";
       			if(editStaff_password!="")
       				warning+="    -- 重置了员工密码 \n";
+      			if(warning=="您刚才做了如下修改:\n"){
+      				alert("您尚未做出任何改变");
+      				return;
+      			}
       			warning+="您确定要进行以上改变吗？";
       			var isSend=confirm(warning);
 	
@@ -620,6 +685,9 @@
 				$('#editStaff_birthday').val(data.birthday);
 				$('#editStaff_te').val(data.te);
 				$('#editStaff_email').val(data.email);
+				
+				//赋值
+				global_staff=data;
 				//显示修改模态框
 				$('#staff_edit_modal').modal("show");
 			});
@@ -716,7 +784,7 @@
                         			  }
                         		  }
                         	  };
-                        	  req.open("get", "/RealProject/web/servlet/getAuthorityList?staffno="+row.staffno);
+                        	  req.open("get", "/RealProject/web/servlet/getAuthorityList?staffno="+row.staffno+"&timeid="+new Date().getTime());
                         	  req.send(null);
                               $('#set_authority_modal').modal("show");
                         }

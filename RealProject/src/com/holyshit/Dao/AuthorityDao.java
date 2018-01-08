@@ -56,4 +56,12 @@ public interface AuthorityDao {
 	 * @throws SQLException
 	 */
 	int deleteAuthorityById(String staffno,String perno)throws SQLException;
+	
+	/**
+	 * 批量删除全部权限
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] deleteAllAuthorityById(String[] staffs)throws SQLException;
 }

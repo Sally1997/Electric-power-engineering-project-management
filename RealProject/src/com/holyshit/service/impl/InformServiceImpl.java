@@ -115,6 +115,13 @@ public class InformServiceImpl implements InformService {
 					jo.put("mtype",iFee.getMtype());
 					jo.put("taskname", iFee.getTaskname());
 					jo.put("fee", iFee.getFee());
+					jo.put("auditadv", iFee.getAuditadv());
+					if(iFee.getOfeereason()!=null){
+						jo.put("ofeereason", iFee.getOfeereason());
+					}else{
+						jo.put("ofeereason", "");
+					}
+					
 					list.add(jo);
 				}
 			}

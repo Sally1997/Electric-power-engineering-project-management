@@ -14,6 +14,7 @@ import com.holyshit.service.impl.MoneyManageServiceImpl;
 public class SubmitAudit extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		//获取数据
 		String fauditno=request.getParameter("fauditno");
 		String cause=request.getParameter("cause");

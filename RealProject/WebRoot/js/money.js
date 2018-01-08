@@ -8,6 +8,12 @@ function updateAuditDialog(e){
 	   			document.getElementById("audit_appname").innerHTML=auditData[e].appname;
 	   			document.getElementById("audit_stime").innerHTML=auditData[e].stime;
 	   			document.getElementById("audit_fee").innerHTML=auditData[e].fee;
+	   			document.getElementById("audit_ofeereason").innerHTML=auditData[e].ofeereason;
+	   			
+	   			if(auditData[e].ofeereason=="")
+	   				document.getElementById("overCause").style.display="none";
+	   			else
+	   				document.getElementById("overCause").style.display="block";
 	   			var state=document.getElementById("audit_auditstate");
 	   			var tmp=auditData[e].auditstate;
 	   			if(tmp=="0"){
@@ -54,7 +60,7 @@ function submitFeeInfo(){
    						
    					}
    				};
-   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+window.encodeURI(document.getElementById("fee_cause").value));
    				req.send(null);
    			}
    		}
@@ -89,7 +95,7 @@ function submitFeeInfo(){
 				}
 				
 			};
-			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+cause);
+			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+window.encodeURI(cause));
 			req.send(null); 
 		}
    		function showAuditData(){
