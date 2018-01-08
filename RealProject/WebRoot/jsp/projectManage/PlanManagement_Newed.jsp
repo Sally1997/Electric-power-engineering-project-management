@@ -62,7 +62,7 @@
     		
     		<div class="col-lg-6" >
    	        <div class="panel panel-primary" >
-    	        <div class="panel-heading">test01</div><!-- 这里是这个项目的名字 -->
+    	        <div class="panel-heading">项目相关</div><!-- 这里是这个项目的名字 -->
       	        <div class="panel-body">
                 <div class="col-lg-12" >
                  

@@ -61,6 +61,21 @@ public class AutoNumber {
 		return ss;
 	}
 	
+	public String SNToSN(String sn){
+		//获取阶段编号最后一位
+		char x = sn.charAt(sn.length()-1);
+		sn = sn.substring(0,5);
+		if(x!=9){
+			x+=1;
+		}
+		else{//9的话进位到a,其他情况下加一
+			x='a';
+		}
+		sn += x;
+		//项目编号加上x
+		return sn;
+	}
+	
 	/**
 	 * 任务指标表，当存入阶段编号时，用zzzz填充阶段编号的后四位
 	 * @param pn1
@@ -147,16 +162,60 @@ public class AutoNumber {
 		ProjectService ps = new ProjectServiceImpl();
 		List<Object> list = new ArrayList<Object>();
 		list = ps.getNewProjectNo(x);
+		if(list.isEmpty()){//如果链表为空，则直接返回
+			Pno = x + "0000";
+			return Pno;
+		}
 		String str = list.get(0).toString();
-		Pno = str.substring(0, str.length()-1);
-		char c = str.charAt(str.length()-1);
-		if(c=='9'){
-			c='a';
+		
+		//最后一位
+		char c5 = str.charAt(str.length()-1);
+		char c4 = str.charAt(str.length()-2);
+		char c3 = str.charAt(str.length()-3);
+		char c2 = str.charAt(str.length()-4);
+		if(c5=='9'){
+			c5='a';
+		}
+		else if(c5=='z'){
+			c5='0';
+			//纯偷懒行为，发现当初没写进制~~~不过只有四位，情况不大,相当于做了循环展开，优化代码
+			if(c4=='9'){
+				c4='a';
+			}
+			else if(c4=='z'){
+				c4='0';
+				//c3进位
+				if(c3=='9'){
+					c3='a';
+				}
+				else if(c3=='z'){
+					c3='0';
+					//第二位的进位
+					if(c2=='9'){
+						c2='a';
+					}
+					else if(c2=='z'){
+						
+					}
+					else{
+						c2++;
+					}
+					//第二位进位结束
+				}
+				else{
+					c3++;
+				}
+				//c3进位
+			}
+			else{
+				c4++;
+			}
 		}
 		else{
-			c++;
+			c5++;
 		}
-		Pno += c;
+		
+		Pno += x+c2+c3+c4+c5;
 		return Pno;
 	}
 	
