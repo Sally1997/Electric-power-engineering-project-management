@@ -685,6 +685,9 @@
 				$('#editStaff_birthday').val(data.birthday);
 				$('#editStaff_te').val(data.te);
 				$('#editStaff_email').val(data.email);
+				
+				//赋值
+				global_staff=data;
 				//显示修改模态框
 				$('#staff_edit_modal').modal("show");
 			});
