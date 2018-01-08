@@ -131,7 +131,7 @@ public class StageServlet extends HttpServlet {
 		ProjectStageSercvice pss = new ProjectStageServiceImpl();
 		pss.addStageAndIndex(pn, parray, icArray, anArray, iArray, prArray);
 		
-		
+		response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
 		//分发转向
 		response.setHeader("refresh", "0.5;url=/RealProject/servlet/DTreeNodeServlet?pno="+pn);		
 	}

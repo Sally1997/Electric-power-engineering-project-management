@@ -90,7 +90,7 @@
 							<ul>
 								<c:if test="${l.attachpath!=null }">
 								<li>${l.indexinfo }
-									<a href="${pageContext.request.contextPath }/web/servlet/downLoadMessage?dno=${l.attachpath }">
+									<a href="${pageContext.request.contextPath }/web/servlet/downLoadIndex?dno=${l.attachpath }">
 									<span class="glyphicon glyphicon-download-alt" style="cursor: pointer;"></span></a>
 								</li>
 								</c:if>
@@ -438,6 +438,7 @@ function search_staff(){
 //操此位置
 
 function submitAudit(){
+	alert("数据提交中……请等待服务器结果");
 	var fm = document.forms[0];
 	fm.action="${pageContext.request.contextPath }/web/servlet/stageIndexAudit?taskno=${map.taskno}&charpno=${map.charpno}";
 	fm.method="post";

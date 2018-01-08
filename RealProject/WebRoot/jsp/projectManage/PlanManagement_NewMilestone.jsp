@@ -752,7 +752,8 @@ function dsubmit(){
 			return;
 		}
 	}
-
+	
+	alert("数据提交中……请等待服务器结果");
 	var pf = document.getElementsByName("postform")[0];
 	pf.submit();
 }

@@ -175,7 +175,7 @@
 </body>
 <script type="text/javascript">
 function submitAudit(){
-	alert("提交成功");
+	alert("数据提交中……请等待服务器结果");
 	var fm = document.forms[0];
 	fm.action="${pageContext.request.contextPath }/web/servlet/docAuditServlet?dno=${map.dno }";
 	fm.method="post";
