@@ -114,4 +114,20 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	StageTask selectStageTasks(String taskno) throws SQLException;
+	
+	/**
+	 * 查找任务的发布人即审核人
+	 * @param tno
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> selectTaskChargePerson(String tno) throws SQLException;
+	
+	/**
+	 * 查找父节点编号
+	 * @param tno
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Object> selectPTaskNo(String tno) throws SQLException;
 }

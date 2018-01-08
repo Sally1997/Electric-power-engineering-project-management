@@ -43,7 +43,6 @@ public class DTreeDaoImpl implements DTreeDao {
 		return qr.query("select * from project "
 				+"where pno = ?", new BeanHandler<Project>(Project.class)
 				, pn);
-		
 	}
 
 	@Override
@@ -94,6 +93,13 @@ public class DTreeDaoImpl implements DTreeDao {
 		return qr.query("SELECT indexinfo FROM taskindexes "+
 					"WHERE taskno=?", new ColumnListHandler(),no);
 	}
+	
+	@Override
+	public List<Object> selectAchReq(String no) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT achReq FROM taskindexes "+
+					"WHERE taskno=?", new ColumnListHandler(),no);
+	}
 
 	@Override
 	public void insertIndexPath(String no, String indexinfo, String path) throws SQLException {
@@ -118,4 +124,10 @@ public class DTreeDaoImpl implements DTreeDao {
 			"WHERE taskno=?",tno);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectIndexAndReq(String taskno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT indexinfo,achreq FROM taskindexes "+
+					"WHERE taskno=?", new MapListHandler(),taskno);
+	}
 }

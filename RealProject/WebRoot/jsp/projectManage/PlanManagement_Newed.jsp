@@ -81,6 +81,18 @@ $(".innerUl").ProTree({
   mouIconClose:"glyphicon glyphicon-folder-close",//含多个标题的关闭的字体图标
   callback: function(id) {
     //alert("你选择的id是" + id + "，名字是" + name);
+    var tb = document.getElementById("thisBlock");
+    var bitch = document.getElementById("bitch");
+    
+    if(id<99999){
+    	tb.style.display = "none";
+    	bitch.style.display = "";
+    }
+    else{
+    	tb.style.display = "";
+    	bitch.style.display = "none";
+    }
+    
     var aja = new XMLHttpRequest();
     aja.onreadystatechange = function(){
 			if(aja.readyState==4&&aja.status==200){
@@ -114,9 +126,11 @@ $(".innerUl").ProTree({
 					var nii = document.getElementById("new_indexinfo");
 					//获取到指标数组
 					var ii = ss.indexinfo;
+					var aq = ss.achreq;
+					
 					var ih = "";
 					for(var i=0;i<ii.length;i++){
-						 ih += "<li name='createli'>"+ii[i]+"</li>";
+						ih += "<li name='createli' value="+aq[i]+">"+ii[i]+"</li>";
 					}
 					nii.innerHTML = ih;
 				}
@@ -214,12 +228,14 @@ $(".innerUl").ProTree({
                         
             <div class="clear"></div>
             <div id="responsible_per" class="block">
-            <div style="text-align: right">
-              <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#handupDc" onclick="popup()">提交</button>
-              <button type="submit"class="btn btn-primary" >
+            <div style="text-align: right;display:none"  id="thisBlock">
+              <button id="tijiao" type="button" class="btn btn-primary"data-toggle="modal" onclick="popup()">提交</button>
+              <button type="submit"class="btn btn-primary" id="zirenwu">
               <a href="javascript:newChildTask()" style="color:white">新建子任务</a>
               </button>
             </div>
+            <div id="bitch" style="height:34px"></div>
+            
             <div class="clear"></div>
             </div>
 
@@ -370,13 +386,31 @@ $(".innerUl").ProTree({
 <script type="text/javascript">
 //新建子任务跳转
 function newChildTask(){
+	//提交和新建子任务是负责人的权限
+	var djp = document.getElementById("CharP");
+
+	var judge = "${staff.name}(${staff.staffno})";
+	
+	if(judge!=djp.innerHTML){
+		alert("只有负责人才可以新建子任务!");
+		return;
+	}
+	
     var links_ti = document.getElementById("task_name").innerHTML;
     window.location.href = "${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=${pno}&ptn="+links_ti;
 }
 
 //提交表单
 function goServlet1(){
-	 var form = document.forms[0];
+	var file = document.getElementsByName("indexfile");
+	for(var i=0;i<file.length;i++){
+		if(file[i].value==""){
+			alert("请确认需要上传文件的指标信息!");
+			return;
+		}
+	}
+
+	 var form = document.getElementById("popform");
 	 alert("提交成功!");
 	 form.action = "${pageContext.request.contextPath }/web/servlet/submitTaskServlet?pno=${pno}";
 	 form.submit();
@@ -384,6 +418,22 @@ function goServlet1(){
 
 //弹窗显示
 function popup(){
+	//提交和新建子任务是负责人的权限
+	var djp = document.getElementById("CharP");
+
+	var judge = "${staff.name}(${staff.staffno})";
+	var tj = document.getElementById("tijiao");//data-target="#handupDc"
+	
+	if(judge!=djp.innerHTML){
+		tj.setAttribute("data-target", "");
+		alert("只有负责人才可以提交任务!");
+		return;
+	}
+	else{
+		tj.setAttribute("data-target", "#handupDc");
+	}
+	//权限部分
+
 	//dg=dpcument.get 弹出的窗口
 	var dg = document.getElementById("pop_taskno");
 	//p代表获取值
@@ -402,11 +452,10 @@ function popup(){
 	
 	
 	dg = document.getElementById("pop_charpname");
-	p = document.getElementById("CharP");
 	hiddenvalue = document.getElementsByName("fchar_per")[0];
+	p = document.getElementById("CharP");
 	dg.innerHTML = p.innerHTML;
 	hiddenvalue.value = p.innerHTML;
-	
 	
 	//根据指标数量动态生成上传文件按钮
 	p = document.getElementsByName("createli");
@@ -421,8 +470,13 @@ function popup(){
 	else{
 		bi.style.display = "";
 		for(var i=0; i<len; i++){
-		dg.innerHTML += "<li>"+p[i].innerHTML+"<input type='file' name='indexfile'>"+
-			"<input type='hidden' value="+p[i].innerHTML+" name='index"+i+"'></li>";
+			if(p[i].value=="1"){
+				dg.innerHTML += "<li>"+p[i].innerHTML+"<input type='file' name='indexfile'>"+
+					"<input type='hidden' value="+p[i].innerHTML+" name='index'></li>";
+			}
+			else{
+				dg.innerHTML += "<li>"+p[i].innerHTML+"<div style='height:20px'></div>";
+			}
 		}
 	}
 }

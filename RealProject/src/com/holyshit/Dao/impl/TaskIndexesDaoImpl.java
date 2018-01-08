@@ -40,4 +40,12 @@ public class TaskIndexesDaoImpl implements TaskIndexesDao {
 		
 	}
 
+	@Override
+	public void updateIndexAttachPath(String no, String indexinfo, String path) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE taskindexes SET attachpath=? WHERE taskno=? "+
+				"AND indexinfo=?",path,no,indexinfo);
+	}
+
 }

@@ -37,4 +37,41 @@ public interface ProjectStageSercvice {
 	 */
 	public void addStageAndIndex(String pno,PSPlan[] parray,String[] icArray,
 			String[] anArray,Inform[] iArray,PSRelation[] prArray);
+	
+	/**
+	 * 根据阶段编号获取项目经理编号
+	 * @param sno
+	 * @return
+	 */
+	public String getPMno(String sno);
+	
+	/**
+	 * 根据任务编号获取父节点编号
+	 * @param tno
+	 * @return
+	 */
+	public String getPTaskNo(String tno);
+	
+	/**
+	 * 根据任务编号获取任务负责人
+	 * @param tno
+	 * @return
+	 */
+	public String getTaskChargePerson(String tno);
+	
+	/**
+	 * 根据阶段编号获取阶段负责人
+	 * @param sno
+	 * @return
+	 */
+	public String getStageChargePerson(String sno);
+	
+	/**
+	 * 提交阶段或者任务指标，并给发布人发送消息
+	 * @param no
+	 * @param upload_list
+	 * @param info_list
+	 * @param info
+	 */
+	public void submitTask(String no,List<String> upload_list,List<String> info_list,Inform info);
 }
