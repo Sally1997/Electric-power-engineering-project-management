@@ -13,11 +13,14 @@
  		
  		var file=document.getElementById("newfile").files[0];
  		var formdata=new FormData();
+ 		alert(11);
+ 		alert(document.getElementById("newstitle").value);
  		if(document.getElementById("newstitle").value==""){
  			alert("文件标题不能为空！");
  			return;
  		}
  		var hehe=document.getElementById("newfile").value;
+ 		
 		if(hehe.lastIndexOf(".")==-1){
 			alert("请上传格式正确的文件!");
 			return ;

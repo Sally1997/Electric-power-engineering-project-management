@@ -68,7 +68,7 @@
 					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=2">系统信息<span class="badge" style="float: right">${system_num }</span></a></li>
 		            <li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=3">审批消息<span class="badge" style="float: right">${audit_num }</span></a></li>
 			     	<c:if test="${not empty enableCheckDocument }">
-              			<li><a href="#">文档审核&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span></a></li>
+              			<li><a href="${pageContext.request.contextPath }/web/servlet/showDocumentCheckServlet">文档审核&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span></a></li>
               		</c:if>
               		<c:if test="${not empty enablePublicNotice }">
               			<li><a href="javascript:$('#handupNews').modal('show')">发布公告&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="	glyphicon glyphicon-list-alt"></span></a></li>

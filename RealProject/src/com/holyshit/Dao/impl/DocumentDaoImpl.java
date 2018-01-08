@@ -83,7 +83,7 @@ public class DocumentDaoImpl implements DocumentDao{
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from document join project on document.pno=project.pno where ";
+		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from document join project on document.pno=project.pno where auditres='2' and";
 		if(!dtype.equals("")){
 			sql+=" dtype='"+dtype+"'";
 		}else{
@@ -125,7 +125,7 @@ public class DocumentDaoImpl implements DocumentDao{
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		
-		String sql="select count(*) from document join project on document.pno=project.pno where";
+		String sql="select count(*) from document join project on document.pno=project.pno where auditres='2' and";
 		if(!dtype.equals("")){
 			sql+=" dtype='"+dtype+"'";
 		}else{

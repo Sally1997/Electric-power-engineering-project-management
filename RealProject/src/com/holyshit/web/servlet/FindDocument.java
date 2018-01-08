@@ -25,8 +25,6 @@ public class FindDocument extends HttpServlet {
 		String dateFrom=request.getParameter("dateFrom");
 		String dateTo=request.getParameter("dateTo");
 		String keywords=request.getParameter("keywords");
-		//linux服务器出现问题，乱码
-		keywords=new String(keywords.getBytes("ISO-8859-1"),"UTF-8"); 
 		System.out.println(keywords);
 		String ftype=request.getParameter("ftype");
 		int cur=Integer.parseInt(request.getParameter("currentPage"));
