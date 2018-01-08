@@ -103,6 +103,8 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 		Map<String, Object> map1 = new HashMap<String, Object>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Object> list = new ArrayList<Object>();
+		List<Object> l1 = new ArrayList<Object>();
+		
 		try {
 			//获取节点信息
 			map1 = dtd.selectNodeInfo(no);
@@ -125,8 +127,10 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 			
 			//获取指标信息
 			list = dtd.selectIndexInfo(no);
+			l1 = dtd.selectAchReq(no);
 			
 			map.put("indexinfo", list);
+			map.put("achreq", l1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

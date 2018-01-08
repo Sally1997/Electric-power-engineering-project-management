@@ -4,9 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.holyshit.domain.Project;
-
 import com.holyshit.domain.PSPlan;
+import com.holyshit.domain.Project;
 import com.holyshit.domain.StageTask;
 
 public interface DTreeDao {
@@ -71,6 +70,14 @@ public interface DTreeDao {
 	List<Object> selectIndexInfo(String no) throws SQLException;
 	
 	/**
+	 * 获取指标信息
+	 * @param no
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> selectAchReq(String no) throws SQLException;
+	
+	/**
 	 * 根据任务的编号和指标信息添加插入指标附件的路径
 	 * @throws SQLException 
 	 */
@@ -89,4 +96,12 @@ public interface DTreeDao {
 	 * @throws SQLException 
 	 */
 	public void updateTState(String tno) throws SQLException;
+	
+	/**
+	 * 搜索指标信息以及是否需要附件
+	 * @param taskno
+	 * @return
+	 * @throws SQLException
+	 */
+	List<Map<String,Object>> selectIndexAndReq(String taskno) throws SQLException;
 }

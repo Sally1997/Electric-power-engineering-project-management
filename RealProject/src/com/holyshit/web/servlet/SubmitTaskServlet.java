@@ -39,8 +39,7 @@ public class SubmitTaskServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setHeader("text/html", "charset=UTF-8");
 		
-		//String pno = request.getParameter("pno");
-		String pno = "10001";
+		String pno = request.getParameter("pno");
 		
 		//处理表单数据
 		boolean ismpc = ServletFileUpload.isMultipartContent(request);
@@ -123,7 +122,7 @@ public class SubmitTaskServlet extends HttpServlet {
 			filename = UUID.randomUUID()+"_"+filename;
 			
 			//创建一个本地目录
-			String directorypath = "D:\\RealProject\\Upload";
+			String directorypath = "D:\\RealProject\\Index";
 			//新建文件夹
 			File store_directory = new File(directorypath);
 			if(!store_directory.exists()){
