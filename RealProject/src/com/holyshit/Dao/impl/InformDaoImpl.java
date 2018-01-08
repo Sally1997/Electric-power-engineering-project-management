@@ -58,7 +58,7 @@ public class InformDaoImpl implements InformDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="SELECT mno,busno,mdate,mtype,taskname,fee FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A0' OR mtype='A1' OR mtype='A2') and hasread='0') a JOIN feeaudit ON a.busno=feeaudit.fauditno JOIN stagetasks ON feeaudit.taskno=stagetasks.TaskNo";
+		String sql="SELECT mno,busno,mdate,mtype,taskname,fee,ofeereason,auditadv FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A0' OR mtype='A1' OR mtype='A2') and hasread='0') a JOIN feeaudit ON a.busno=feeaudit.fauditno JOIN stagetasks ON feeaudit.taskno=stagetasks.TaskNo";
 		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformFee>(InformFee.class));
 	}
 

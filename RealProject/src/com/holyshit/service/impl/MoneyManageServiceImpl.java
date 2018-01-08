@@ -3,7 +3,9 @@ package com.holyshit.service.impl;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -332,20 +334,33 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				t.put("taskname", task.getTaskname());
 				String name = sd.selectStaffById(f.getApplicantno()).getName();
 				t.put("appname", name);
-				t.put("stime", f.getStime().toString());
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String format = sdf.format(new java.util.Date(f.getStime().getTime()));
+				t.put("stime",format);
 				t.put("fee", f.getFee());
 				t.put("auditstate", f.getAuditstate());
 				t.put("fauditno", f.getFauditno());
-				//查询是否超标
+				
+				if(f.getOfeereason()==null){
+					t.put("over", 0);
+					t.put("ofeereason", "");
+				}else{
+					t.put("over", 1);
+					t.put("ofeereason", f.getOfeereason());
+				}
+				/*//查询是否超标
 				double hasused=0;
 				BigDecimal ss = std.selectFeeUsedByTaskno(f.getTaskno());
 				if(ss!=null)
 					hasused=Double.parseDouble(ss.toString());
 				if(hasused>task.getBudget()){
 					t.put("over", 1);
+					t.put("ofeereason", f.getOfeereason());
 				}else {
 					t.put("over", 0);
-				}
+					System.out.println("nononon");
+					t.put("ofeereason", "");
+				}*/
 				
 				audits.add(t);
 			}

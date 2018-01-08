@@ -72,8 +72,13 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>的报账需要您审核!";
+    					var msg="任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>";
+    					if(jsonData[i].ofeereason!="")
+    						msg+=",超标原因：<strong>"+jsonData[i].ofeereason+"</strong>";
+    					msg+="报账需要您审核！";
+    					node.innerHTML=msg;
     					node.value=i;
+    					
     					//test
     					
     					node.onclick=function(){
@@ -86,7 +91,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>未通过审核!";
+    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>,审批意见:<strong>"+jsonData[i].auditadv+"</strong>未通过审核!";
     					node.value=i;
     					//test
     					
@@ -100,7 +105,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>已经通过审核!";
+    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>,审批意见:<strong>"+jsonData[i].auditadv+"</strong>已经通过审核!";
     					node.value=i;
     					//test
     					

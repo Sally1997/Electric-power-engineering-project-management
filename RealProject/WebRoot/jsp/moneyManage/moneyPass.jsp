@@ -318,7 +318,15 @@
 							</div>
 							<div class="clear"></div>
 							</div>
-
+				<div id="overCause" class="block">
+							<div class="hehe_left">
+							<font>超标原因:</font>
+							</div>
+							<div class="hehe_right">
+							<font id="audit_ofeereason" ></font>
+							</div>
+							<div class="clear"></div>
+							</div>
 				<div id="responsible_per" class="block">
 							<div class="hehe_left">
 							<font>当前状态:</font>

@@ -11,6 +11,7 @@ import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.Dao.impl.AccountDaoImpl;
+import com.holyshit.Dao.impl.AuthorityDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.NoteDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
@@ -344,6 +345,7 @@ public class StaffServiceImpl implements StaffService{
 		// TODO Auto-generated method stub
 		StaffDao sd=new StaffDaoImpl();
 		AccountDao ad=new AccountDaoImpl();
+		AuthorityDao authorityDao=new AuthorityDaoImpl();
 		boolean resFlag=false;
 		try {
 			ConnectionManager.startTransaction();
@@ -352,10 +354,7 @@ public class StaffServiceImpl implements StaffService{
 			int[] res1 = sd.deleteStaff(staffs);
 			boolean flag=false;
 			for(int i=0;i<res1.length;i++)
-				if(res1[i]!=res2[i]){
-					flag=true;
-					break;
-				}else if(res1[i]==0){
+				if(res1[i]==0||res2[i]==0){
 					flag=true;
 					break;
 				}
