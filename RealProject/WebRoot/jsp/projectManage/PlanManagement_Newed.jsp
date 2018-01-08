@@ -749,25 +749,5 @@ function give_option(){
 	}
 }
 
-/* //修改审核人名字
-function altercharp()
-{
-	var txt = document.getElementById("");
-	var p = document.getElementById("CharP");
-	
-	p.style.display = "none";
-	txt.value = p.innerHTML;
-	txt.style.display = "";
-	txt.focus();
-}
-
-//回复输入框
-function resetecho(){
-	var txt = document.getElementById("fozza_text");
-	var p = document.getElementById("CharP");
-	p.innerHTML = txt.value;
-	txt.style.display = "none";
-	p.style.display = "";
-} */
 </script>
 </html>
