@@ -8,11 +8,13 @@ import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.Dao.PSRelationDao;
 import com.holyshit.Dao.ProjectDao;
+import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.TaskIndexesDao;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.PSPlanDaoImpl;
 import com.holyshit.Dao.impl.PSRelationDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
+import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PSPlan;
@@ -126,6 +128,83 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 		} finally{
 			ConnectionManager.closeConnection();
 		}
+	}
+
+	@Override
+	public String getPMno(String sno) {
+		PSPlanDao ppd = new PSPlanDaoImpl();
+		String pmno = null;
+		try {
+			pmno = (String) ppd.selectPMNo(sno).get(0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pmno;
+	}
+
+	@Override
+	public String getPTaskNo(String tno) {
+		StageTaskDao std = new StageTaskDaoImpl();
+		String ptno = null;
+		try {
+			ptno = (String) std.selectPTaskNo(tno).get(0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ptno;
+	}
+
+	@Override
+	public String getTaskChargePerson(String tno) {
+		StageTaskDao std = new StageTaskDaoImpl();
+		String charp = null;
+		try {
+			charp = (String) std.selectTaskChargePerson(tno).get(0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return charp;
+	}
+
+	@Override
+	public String getStageChargePerson(String sno) {
+		PSPlanDao ppd = new PSPlanDaoImpl();
+		String charp = null;
+		try {
+			charp = (String) ppd.selectStageChargePerson(sno).get(0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return charp;
+	}
+
+	@Override
+	public void submitTask(String no, List<String> upload_list,
+			List<String> info_list, Inform info) {
+		// TODO Auto-generated method stub
+		InformDao id = new InformDaoImpl();
+		TaskIndexesDao tid = new TaskIndexesDaoImpl();
+		
+		ConnectionManager.startTransaction();
+		
+		try {
+			for(int i=0;i<upload_list.size();i++){
+				tid.updateIndexAttachPath(no, info_list.get(i), upload_list.get(i));
+			}
+			id.insertInform(info);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+		
 	}
 
 }

@@ -410,7 +410,7 @@ function goServlet1(){
 		}
 	}
 
-	 var form = document.forms[0];
+	 var form = document.getElementById("popform");
 	 alert("提交成功!");
 	 form.action = "${pageContext.request.contextPath }/web/servlet/submitTaskServlet?pno=${pno}";
 	 form.submit();
@@ -472,11 +472,10 @@ function popup(){
 		for(var i=0; i<len; i++){
 			if(p[i].value=="1"){
 				dg.innerHTML += "<li>"+p[i].innerHTML+"<input type='file' name='indexfile'>"+
-					"<input type='hidden' value="+p[i].innerHTML+" name='index"+i+"'></li>";
+					"<input type='hidden' value="+p[i].innerHTML+" name='index'></li>";
 			}
 			else{
-				dg.innerHTML += "<li>"+p[i].innerHTML+"<div style='height:20px'></div>"
-					"<input type='hidden' value="+p[i].innerHTML+" name='index"+i+"'></li>";
+				dg.innerHTML += "<li>"+p[i].innerHTML+"<div style='height:20px'></div>";
 			}
 		}
 	}

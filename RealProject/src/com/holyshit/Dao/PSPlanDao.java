@@ -1,6 +1,7 @@
 package com.holyshit.Dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.holyshit.domain.PSPlan;
 
@@ -20,4 +21,20 @@ public interface PSPlanDao {
 	 * @throws SQLException 
 	 */
 	void insertStage(PSPlan pro_stage) throws SQLException;
+	
+	/**
+	 * 查找到阶段的负责人也就是项目经理
+	 * @param sno
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> selectPMNo(String sno) throws SQLException;
+	
+	/**
+	 * 查阶段负责人
+	 * @param sno
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> selectStageChargePerson(String sno) throws SQLException;
 }

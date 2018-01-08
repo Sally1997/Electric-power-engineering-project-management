@@ -1,13 +1,16 @@
 package com.holyshit.Dao.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.TaskIndexs;
+import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 
 public class PSPlanDaoImpl implements PSPlanDao {
@@ -29,6 +32,22 @@ public class PSPlanDaoImpl implements PSPlanDao {
 				pro_stage.getCharpno(),pro_stage.getStime(),
 				pro_stage.getEtime(),pro_stage.getBudget(),
 				pro_stage.getSstate());
+	}
+
+	@Override
+	public List<Object> selectPMNo(String sno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT pmno FROM psplan,project WHERE stageno=? AND psplan.PNo=project.pno", 
+				new ColumnListHandler(),sno);
+		
+	}
+
+	@Override
+	public List<Object> selectStageChargePerson(String sno) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT charpno FROM psplan WHERE stageno=?", new ColumnListHandler(),
+				sno);
 	}
 
 }

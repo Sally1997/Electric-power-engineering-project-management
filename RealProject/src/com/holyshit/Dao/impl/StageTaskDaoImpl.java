@@ -138,4 +138,18 @@ public class StageTaskDaoImpl implements StageTaskDao {
 				taskno);
 	}
 
+	@Override
+	public List<Object> selectPTaskNo(String tno) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT ptaskno FROM stagetasks WHERE taskno=?", new ColumnListHandler(),
+				tno);
+	}
+
+	@Override
+	public List<Object>  selectTaskChargePerson(String tno) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT charpno FROM stagetasks WHERE taskno=?", new ColumnListHandler(),
+				tno);
+	}
+
 }

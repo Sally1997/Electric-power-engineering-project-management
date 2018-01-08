@@ -28,4 +28,12 @@ public interface TaskIndexesDao {
 	 * @throws SQLException 
 	 */
 	void insertTaskIndexes(TaskIndexs ti) throws SQLException;
+	
+	/**
+	 * 根据编号和指标内容该表指标附件路径
+	 * @param no
+	 * @param indexinfo
+	 * @throws SQLException 
+	 */
+	void updateIndexAttachPath(String no,String indexinfo,String path) throws SQLException;
 }
