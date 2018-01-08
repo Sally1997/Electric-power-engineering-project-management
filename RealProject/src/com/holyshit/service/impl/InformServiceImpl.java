@@ -1,9 +1,13 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.enterprise.inject.New;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -14,11 +18,32 @@ import com.holyshit.domain.Inform;
 import com.holyshit.domain.InformDocument;
 import com.holyshit.domain.InformFee;
 import com.holyshit.domain.InformProject;
+import com.holyshit.domain.InformStageIndex;
+import com.holyshit.domain.InformTaskIndex;
 import com.holyshit.service.InformService;
 import com.holyshit.utils.ConnectionManager;
 
 public class InformServiceImpl implements InformService {
-
+	public void insertinformdocaudit(String dno,String staffno,String me,String type)
+	{
+		InformDao id = new InformDaoImpl();
+		try {
+			id.insertInformdocaudit(dno, type, staffno, me);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void updatehasread(String mno){
+		InformDao id = new InformDaoImpl();
+		try {
+			id.updatehasread(mno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public String getNewPaauditNo() {
 		InformDao id = new InformDaoImpl();
@@ -111,7 +136,9 @@ public class InformServiceImpl implements InformService {
 					JSONObject jo=new JSONObject();
 					jo.put("mno", iFee.getMno());
 					jo.put("busno", iFee.getBusno());
-					jo.put("mdate", iFee.getMdate().toString());
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String format = sdf.format(new Date(iFee.getMdate().getTime()));
+					jo.put("mdate", format);
 					jo.put("mtype",iFee.getMtype());
 					jo.put("taskname", iFee.getTaskname());
 					jo.put("fee", iFee.getFee());
@@ -141,7 +168,9 @@ public class InformServiceImpl implements InformService {
 					JSONObject jo=new JSONObject();
 					jo.put("mno", iFee.getMno());
 					jo.put("busno", iFee.getBusno());
-					jo.put("mdate", iFee.getMdate().toString());
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String format = sdf.format(new Date(iFee.getMdate().getTime()));
+					jo.put("mdate", format);
 					jo.put("mtype",iFee.getMtype());
 					jo.put("dtitle", iFee.getDtitle());
 					list.add(jo);
@@ -158,15 +187,17 @@ public class InformServiceImpl implements InformService {
 				}
 			}
 			if(flag3){
-				List<InformDocument> res = inform.selectInformByTypeInTaskIndex(staffno);
-				for(InformDocument iFee:res){
+				List<InformTaskIndex> res = inform.selectInformByTypeInTaskIndex(staffno);
+				for(InformTaskIndex iFee:res){
 					JSONObject jo=new JSONObject();
 					jo.put("mno", iFee.getMno());
 					jo.put("busno", iFee.getBusno());
-					jo.put("mdate", iFee.getMdate().toString());
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String format = sdf.format(new Date(iFee.getMdate().getTime()));
+					jo.put("mdate", format);
 					jo.put("mtype",iFee.getMtype());
-					jo.put("dtitle", iFee.getDtitle());
-					jo.put("pno", iFee.getPno());
+					jo.put("taskname", iFee.getTaskname());
+					jo.put("taskno", iFee.getTaskno());
 					list.add(jo);
 				}
 			}
@@ -181,15 +212,17 @@ public class InformServiceImpl implements InformService {
 				}
 			}
 			if(flag4){
-				List<InformDocument> res = inform.selectInformByTypeInStageIndex(staffno);
-				for(InformDocument iFee:res){
+				List<InformStageIndex> res = inform.selectInformByTypeInStageIndex(staffno);
+				for(InformStageIndex iFee:res){
 					JSONObject jo=new JSONObject();
 					jo.put("mno", iFee.getMno());
 					jo.put("busno", iFee.getBusno());
-					jo.put("mdate", iFee.getMdate().toString());
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String format = sdf.format(new Date(iFee.getMdate().getTime()));
+					jo.put("mdate", format);
 					jo.put("mtype",iFee.getMtype());
-					jo.put("dtitle", iFee.getDtitle());
-					jo.put("pno", iFee.getPno());
+					jo.put("sname", iFee.getSname());
+					jo.put("stageno", iFee.getStageno());
 					list.add(jo);
 				}
 			}
@@ -209,7 +242,9 @@ public class InformServiceImpl implements InformService {
 					JSONObject jo=new JSONObject();
 					jo.put("mno", iFee.getMno());
 					jo.put("busno", iFee.getBusno());
-					jo.put("mdate", iFee.getMdate().toString());
+					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String format = sdf.format(new Date(iFee.getMdate().getTime()));
+					jo.put("mdate", format);
 					jo.put("mtype",iFee.getMtype());
 					jo.put("pname", iFee.getPname());
 					list.add(jo);

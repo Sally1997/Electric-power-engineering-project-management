@@ -156,7 +156,9 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				fad.put("sname", t.getSname());
 				fad.put("taskname", t.getTaskname());
 				fad.put("appname", appname);
-				fad.put("stime", fa.getStime().toString());
+				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String format = sdf.format(new java.util.Date(fa.getStime().getTime()));
+				fad.put("stime", format);
 				fad.put("fee", fa.getFee());
 				fad.put("auditstate", fa.getAuditstate());
 				//压入数组

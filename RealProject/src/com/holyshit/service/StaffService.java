@@ -28,11 +28,11 @@ public interface StaffService {
 	 */
 	void updatete(String staffno,String te);
 	
-	void delAllStaffs(String[] staffnos,String pno);
+	void delAllStaffs(String[] staffnos,String pno,String me);
 	
 	PageBean findAllStaffs(String pno,int CurrentPage,int PageSize,String noterno);
 	
-	void addAStaff(PSRelation psr);
+	void addAStaff(PSRelation psr,String me);
 	
 	/**
 	 * 判断该人员是否在psrelation关系表中

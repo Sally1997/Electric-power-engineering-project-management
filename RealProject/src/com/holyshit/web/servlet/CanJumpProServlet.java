@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.holyshit.domain.Staff;
+import com.holyshit.service.InformService;
 import com.holyshit.service.StaffService;
+import com.holyshit.service.impl.InformServiceImpl;
 import com.holyshit.service.impl.StaffServiceImpl;
 
 /**
@@ -32,7 +34,7 @@ public class CanJumpProServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String me=((Staff) request.getSession().getAttribute("staff")).getStaffno();
 		String pno = request.getParameter("pno");
-		
+		String mno = request.getParameter("mno");
 		StaffService ss = new StaffServiceImpl();
 		int a = ss.isinproject(me, pno);
 		if(a==0)
@@ -40,7 +42,9 @@ public class CanJumpProServlet extends HttpServlet {
 			request.getRequestDispatcher("/web/servlet/shouInformServlet").forward(request, response);
 		}
 		else {
-			
+			InformService is = new InformServiceImpl();
+			is.updatehasread(mno);
+			request.setAttribute("pno", pno);
 			request.getRequestDispatcher("/web/servlet/staffListServlet").forward(request, response);
 		}
 		

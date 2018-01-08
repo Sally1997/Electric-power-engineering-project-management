@@ -37,8 +37,8 @@
 								</div>
 								<div class="col-lg-3">
 								    <button type="submit" class="btn btn-default" onclick="downloadfile('${document.dno}')" >下载查看</button>
-									<button type="submit" class="btn btn-primary" onclick="auditpass('${document.dno}')" >通过</button>
-									<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#noPassInfo" onclick="auditfail('${document.dno}')">不通过</button>
+									<button type="submit" class="btn btn-primary" onclick="auditpass('${document.dno}','${document.uloadpno }')" >通过</button>
+									<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#noPassInfo" onclick="auditfail('${document.dno}','${document.uloadpno }')">不通过</button>
 								</div>
                             </div>		                       
 						   </p>
@@ -80,16 +80,16 @@
     <%@include file="/footer.jsp" %>
 </body>
 <script type="text/javascript">
-  	function auditpass(a){
-  		alert("ojbk");
+  	function auditpass(a,b){
+  		
   		var p = document.getElementsByName("documentcheck")[0];
-  		alert("ojbk2");
-  		p.action="${pageContext.request.contextPath}/web/servlet/auditGeneralFileServlet?type=true&dno="+a;
+  		
+  		p.action="${pageContext.request.contextPath}/web/servlet/auditGeneralFileServlet?type=true&dno="+a+"&who="+b;
   	}
-  	function auditfail(a){
-  		alert("ojbk3");
+  	function auditfail(a,b){
+  		
   		var p = document.getElementsByName("documentcheck")[0];
-  		p.action="${pageContext.request.contextPath}/web/servlet/auditGeneralFileServlet?type=&dno="+a;
+  		p.action="${pageContext.request.contextPath}/web/servlet/auditGeneralFileServlet?type=&dno="+a+"&who="+b;
   		
   	}
   	function downloadfile(a){

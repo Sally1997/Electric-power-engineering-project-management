@@ -28,19 +28,16 @@ public class ShouInformServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String type = request.getParameter("type");
 		TaskMesgService tms = new TaskMesgServiceImpl();
 		String me=((Staff) request.getSession().getAttribute("staff")).getStaffno();
 		List<TaskMesg> tasksinfo = tms.findAllTaskMesg(me);
-		System.out.println(tasksinfo.size());
-		for(int i=0;i<tasksinfo.size();i++)
-		{
-			System.out.println(tasksinfo.get(i).getMdate());
-		}
 		SystemMesgService sms = new SystemMesgServiceImpl();
 		List<TaskMesg> systemsinfo = sms.findAllSystemMesg(me);
 		request.setAttribute("systemsinfo",systemsinfo );
 		request.setAttribute("tasksinfo",tasksinfo );
-		request.getRequestDispatcher("/jsp/projectManage/inform.jsp").forward(request, response);
+		request.setAttribute("type",type );
+		request.getRequestDispatcher("/jsp/notice/inform.jsp").forward(request, response);
 	}
 
 	/**

@@ -9,6 +9,16 @@ import com.holyshit.domain.Inform;
 
 public interface InformService {
 	/**
+	 * 向消息表插入文档审核消息
+	 * @param dno
+	 * @param staffno
+	 * @param me
+	 * @param type
+	 */
+	void insertinformdocaudit(String dno,String staffno,String me,String type);
+	
+	void updatehasread(String mno);
+	/**
 	 * 获得最新生成的项目审核主键编号
 	 * @return
 	 */

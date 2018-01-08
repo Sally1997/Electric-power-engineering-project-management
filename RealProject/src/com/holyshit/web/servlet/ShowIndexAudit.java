@@ -3,6 +3,7 @@ package com.holyshit.web.servlet;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.persistence.Parameter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ public class ShowIndexAudit extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//String mno = request.getParameter("mno");
-		String mno = "13";
+		String mno=request.getParameter("mno");
 		Inform info = new Inform();
 		InformService is = new InformServiceImpl();
 		info = is.getInformByMno(mno);

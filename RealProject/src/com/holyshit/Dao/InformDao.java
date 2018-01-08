@@ -7,15 +7,27 @@ import com.holyshit.domain.Inform;
 import com.holyshit.domain.InformDocument;
 import com.holyshit.domain.InformFee;
 import com.holyshit.domain.InformProject;
+import com.holyshit.domain.InformStageIndex;
+import com.holyshit.domain.InformTaskIndex;
 
 public interface InformDao {
+	/**
+	 * 插入文件审核结果消息表
+	 * @param dno
+	 * @param type
+	 * @param staffno
+	 * @param me
+	 * @throws SQLException
+	 */
+	void insertInformdocaudit(String dno,String type,String staffno,String me) throws SQLException;
+	void updatehasread(String mno) throws SQLException;
 	/**
 	 * 插入人员的系统消息
 	 * @param type
 	 * @param staffno
 	 * @throws SQLException
 	 */
-	void insertInformhr(String type,String staffno) throws SQLException;
+	void insertInformhr(String pno,String type,String staffno,String me) throws SQLException;
 	/**
 	 * 返回当前新建的立项审核编号，因为时自增数列，直接返回最大值即可
 	 * @return
@@ -75,7 +87,7 @@ public interface InformDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<InformDocument> selectInformByTypeInTaskIndex(String staffno)throws SQLException;
+	List<InformTaskIndex> selectInformByTypeInTaskIndex(String staffno)throws SQLException;
 	
 	/**
 	 * 查询阶段指标信息
@@ -83,7 +95,7 @@ public interface InformDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<InformDocument> selectInformByTypeInStageIndex(String staffno)throws SQLException;
+	List<InformStageIndex> selectInformByTypeInStageIndex(String staffno)throws SQLException;
 	
 	/**
 	 * 查询项目立项信息

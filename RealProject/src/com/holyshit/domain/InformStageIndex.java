@@ -2,13 +2,13 @@ package com.holyshit.domain;
 
 import java.sql.Timestamp;
 
-public class InformTaskIndex {
+public class InformStageIndex {
 	private String mno;
 	private String busno;
 	private String mtype;
 	private Timestamp mdate;
-	private String taskname;
-	private String taskno;
+	private String sname;
+	private String stageno;
 	public String getMno() {
 		return mno;
 	}
@@ -33,17 +33,18 @@ public class InformTaskIndex {
 	public void setMdate(Timestamp mdate) {
 		this.mdate = mdate;
 	}
-	public String getTaskname() {
-		return taskname;
+	public String getSname() {
+		return sname;
 	}
-	public void setTaskname(String taskname) {
-		this.taskname = taskname;
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
-	public String getTaskno() {
-		return taskno;
+	public String getStageno() {
+		return stageno;
 	}
-	public void setTaskno(String taskno) {
-		this.taskno = taskno;
+	public void setStageno(String stageno) {
+		this.stageno = stageno;
 	}
+	
 	
 }

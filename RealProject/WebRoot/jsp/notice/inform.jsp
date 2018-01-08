@@ -28,23 +28,59 @@
 		  <!-- Tab panes -->
 		  <div class="tab-content">
 			<div role="tabpanel" class="tab-pane" id="taskinform">
-				<div class="list-group" id="taskTable">
-				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
-				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
-				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
-				  <button type="button" class="list-group-item list-group-item-warning">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
-				  <button type="button" class="list-group-item">您有<strong>新的任务</strong><span class="small">&nbsp;>项目A的名字特别特别特别长</span><span class="small">>>阶段名字可能短一些</span><span class="small"><a>&nbsp;>查看</a></span></button>
+				<form method="post" name="taskinfomation">
+				<div class="list-group">
+				<c:forEach items="${tasksinfo }" var="t">
+				<c:choose>
+				  <c:when test="${t.mtype=='T2'&&t.hasread=='0' }">
+				  <button type="button" class="list-group-item">您有<strong>新的任务</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span></span><span class="small">>>${t.taskname}></span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')" >&nbsp;查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  </c:when>
+				  <c:when test="${t.mtype=='T0'&&t.hasread=='0' }">
+				  <button type="button" class="list-group-item">您有<strong>新的阶段任务</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}></span></span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')">&nbsp;查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  </c:when>
+				  <c:when test="${t.mtype=='T3'&&t.hasread=='0' }">
+				  <button type="button" class="list-group-item" >您有<strong>新的任务(成为负责人)</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span></span><span class="small">>>${t.taskname}</span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')">&nbsp;>查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  </c:when>
+				  <c:when test="${t.mtype=='T1'&&t.hasread=='0' }">
+				  <button type="button" class="list-group-item" >您有<strong>新的阶段任务(成为负责人)</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')">&nbsp;>查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  </c:when>
+				</c:choose>
+				</c:forEach>
 				</div>
+				
+				</form>
 			</div>
-			<div role="tabpanel" class="tab-pane" id="sysinform">				
-			  <div class="list-group" id="systemTable">
-				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉入项目组<strong>进入项目A的名字特别特别特别长</strong><span class="small"><a>&nbsp;>进入项目</a></span></button>
-				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉出项目组<strong>进入项目A的名字特别特别特别长</strong></button>
-				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉入项目组<strong>进入项目A的名字特别特别特别长</strong><span class="small"><a>&nbsp;>进入项目</a></span></button>
-				  <button type="button" class="list-group-item list-group-item-warning">您已经被<strong>用户A</strong>拉出项目组<strong>进入项目A的名字特别特别特别长</strong></button>
-				  <button type="button" class="list-group-item">您已经被<strong>用户A</strong>拉入项目组<strong>进入项目A的名字特别特别特别长</strong><span class="small"><a>&nbsp;>进入项目</a></span></button>
-				</div>
-				</div>
+			<div role="tabpanel" class="tab-pane" id="sysinform">
+			   <form method="post" name="sysinfomation">			
+			    <div class="list-group">
+			    <c:forEach items="${systemsinfo}" var="s">
+			    <c:choose>
+			     <c:when test="${s.mtype=='S0'&&s.hasread=='0' }">
+				  <button type="button" class="list-group-item">您已经被拉入项目组<strong>${s.pname}</strong><span class="small">><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${s.pno}')">&nbsp;进入项目</a></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				 </c:when>
+				  
+				 <c:when test="${s.mtype=='S1'&&s.hasread=='0' }">
+				  <button type="button" class="list-group-item">您已经被拉出项目组<strong>${s.pname}</strong><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				 </c:when> 
+				 
+				 <c:when test="${s.mtype=='S2'&&s.hasread=='0' }">
+				  <button type="button" class="list-group-item">您的信息已被管理员修改><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/showUserCenterServlet')">&nbsp;进入个人中心查看</a></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				 </c:when>
+				  
+				 <c:when test="${s.mtype=='S3'&&s.hasread=='0' }">
+				  <button type="button" class="list-group-item">您的密码已被管理员修改<span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				 </c:when> 
+				 
+				 <c:when test="${s.mtype=='S4'&&s.hasread=='0' }">
+				  <button type="button" class="list-group-item">您的权限已被管理员修改<span class="small"></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				 </c:when> 
+				  
+			   </c:choose>
+			   </c:forEach>
+			  </div>
+			 </form>
+
+			</div>
 				
 				
 			<!-- 在下要处理的审批信息 -->
@@ -72,7 +108,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					var msg="任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>";
+    					var msg="任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					if(jsonData[i].ofeereason!="")
     						msg+=",超标原因：<strong>"+jsonData[i].ofeereason+"</strong>";
     					msg+="报账需要您审核！";
@@ -91,7 +127,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>,审批意见:<strong>"+jsonData[i].auditadv+"</strong>未通过审核!";
+    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>,审批意见:<strong>"+jsonData[i].auditadv+"</strong>未通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -105,7 +141,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>,审批意见:<strong>"+jsonData[i].auditadv+"</strong>已经通过审核!";
+    					node.innerHTML="您的报账任务：<strong>"+jsonData[i].taskname+"</strong>，金额：<strong>"+jsonData[i].fee+"</strong>,审批意见:<strong>"+jsonData[i].auditadv+"</strong>已经通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -119,7 +155,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您最近上传的文件：<strong>"+jsonData[i].dtitle+"</strong>已经通过审核!";
+    					node.innerHTML="您最近上传的文件：<strong>"+jsonData[i].dtitle+"</strong>已经通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -133,7 +169,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您最近上传的文件：<strong>"+jsonData[i].dtitle+"</strong>未通过审核!";
+    					node.innerHTML="您最近上传的文件：<strong>"+jsonData[i].dtitle+"</strong>未通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -147,7 +183,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="任务指标：<strong>"+jsonData[i].dtitle+"</strong>已经上传，等待您的审核!";
+    					node.innerHTML="任务：<strong>"+jsonData[i].taskname+"</strong>已经提交，等待您的审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -161,7 +197,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您最近上传的任务指标：<strong>"+jsonData[i].dtitle+"</strong>已经通过审核!";
+    					node.innerHTML="您最近提交的任务：<strong>"+jsonData[i].taskname+"</strong>已经通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -175,7 +211,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您最近上传的任务指标：<strong>"+jsonData[i].dtitle+"</strong>没有通过审核!";
+    					node.innerHTML="您最近提交的任务：<strong>"+jsonData[i].taskname+"</strong>没有通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -189,7 +225,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="阶段指标：<strong>"+jsonData[i].dtitle+"</strong>已经上传，等待您的审核!";
+    					node.innerHTML="阶段：<strong>"+jsonData[i].sname+"</strong>已经提交，等待您的审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -203,7 +239,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您最近上传的阶段指标：<strong>"+jsonData[i].dtitle+"</strong>已经通过审核!";
+    					node.innerHTML="您最近提交的阶段：<strong>"+jsonData[i].sname+"</strong>已经通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -217,7 +253,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您最近上传的阶段指标：<strong>"+jsonData[i].dtitle+"</strong>没有通过审核!";
+    					node.innerHTML="您最近提交的阶段：<strong>"+jsonData[i].sname+"</strong>没有通过审核!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -231,7 +267,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="项目：<strong>"+jsonData[i].pname+"</strong>正在立项，等待您的审批!";
+    					node.innerHTML="项目：<strong>"+jsonData[i].pname+"</strong>正在立项，等待您的审批!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -245,7 +281,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您的项目：<strong>"+jsonData[i].pname+"</strong>立项成功!";
+    					node.innerHTML="您的项目：<strong>"+jsonData[i].pname+"</strong>立项成功!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -259,7 +295,7 @@
     					var node=document.createElement("button");
     					node.type="button";
     					node.className="list-group-item";
-    					node.innerHTML="您的项目：<strong>"+jsonData[i].pname+"</strong>立项失败!";
+    					node.innerHTML="您的项目：<strong>"+jsonData[i].pname+"</strong>立项失败!"+'<span class="list-group-item-text" style="float:right">'+jsonData[i].mdate+'</span>';
     					node.value=i;
     					//test
     					
@@ -291,14 +327,26 @@
     				if(jsonData[index].mtype=="A3"||jsonData[index].mtype=="A4"){
     					location.href="/RealProject/jsp/documentManage/document.jsp";
     				}
-    				//跳转到树状图
-    				if(jsonData[index].mtype=="A5"||jsonData[index].mtype=="A6"||jsonData[index].mtype=="A7"||jsonData[index].mtype=="A8"||jsonData[index].mtype=="A9"||jsonData[index].mtype=="A10"){
-    					location.href="/RealProject/servlet/DTreeNodeServlet?pno="+jsonData[index].pno;
+    				//任务指标审批
+    				if(jsonData[index].mtype=="A5"||jsonData[index].mtype=="A6"||jsonData[index].mtype=="A7"){
+    					location.href="/RealProject/web/servlet/showIndexAudit?mno="+jsonData[index].mno;
+    				}
+    				//阶段指标审核
+    				if(jsonData[index].mtype=="A8"||jsonData[index].mtype=="A9"||jsonData[index].mtype=="A10"){
+    					location.href="/RealProject/web/servlet/showIndexAudit?mno="+jsonData[index].mno;
     				}
     				//跳转到项目管理首页
-    				if(jsonData[index].mtype=="A11"||jsonData[index].mtype=="A12"||jsonData[index].mtype=="A13"){
+    				if(jsonData[index].mtype=="A11"){
+    					location.href="/RealProject/web/servlet/showProAuditServlet?mno="+jsonData[index].mno;
+    				}
+    				if(jsonData[index].mtype=="A12"){
+    					location.href="/RealProject/web/servlet/judgeStageExist?pno="+jsonData[index].mno;
+    				}
+    				if(jsonData[index].mtype=="A13"){
     					location.href="/RealProject/servlet/ShowProjectServlet";
     				}
+    				//跳转
+    				
     				
     				
     			}else{
