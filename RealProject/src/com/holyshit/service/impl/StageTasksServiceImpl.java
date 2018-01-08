@@ -7,15 +7,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.holyshit.Dao.InformDao;
+import com.holyshit.Dao.PSPlanDao;
+import com.holyshit.Dao.PSRelationDao;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StageTaskDao;
+import com.holyshit.Dao.TaskIndexesDao;
+import com.holyshit.Dao.impl.InformDaoImpl;
+import com.holyshit.Dao.impl.PSPlanDaoImpl;
+import com.holyshit.Dao.impl.PSRelationDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
+import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
+import com.holyshit.domain.Inform;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.domain.TaskInfo;
 import com.holyshit.service.StageTasksService;
+import com.holyshit.utils.AutoNumber;
 import com.holyshit.utils.ConnectionManager;
 
 public class StageTasksServiceImpl implements StageTasksService{
@@ -164,6 +175,76 @@ public class StageTasksServiceImpl implements StageTasksService{
 			e.printStackTrace();
 		}
 		return st;
+	}
+
+	@Override
+	public void addTaskAndIndex(String ptn,String pno, StageTask[] parray,
+			String[] icArray, String[] anArray, Inform[] iArray,PSRelation[] prArray) {
+			//开启事务
+			ConnectionManager.startTransaction();
+			StageTaskDao std = new StageTaskDaoImpl();
+			AutoNumber an = new AutoNumber();
+			InformDao id = new InformDaoImpl();
+			TaskIndexesDao tid = new TaskIndexesDaoImpl();
+			PSRelationDao psr = new PSRelationDaoImpl();
+			
+			int len = parray.length;
+			String tn = null;
+			
+			try {
+				for(int i=0;i<len;i++){
+					String cpn = parray[i].getCharpno();
+					
+					if(i==0){
+						tn = an.TrueNewTaskNo(ptn);
+					}
+					else{
+						tn = an.TNToTn(tn);
+					}
+					
+					parray[i].setTaskno(tn);
+					iArray[i].setBusno(tn);
+					
+					std.insertTask((parray[i]));
+					id.insertInform(iArray[i]);
+					
+					//如果不在项目组里就把该人员拉进项目组里面
+					if(!psr.selectIfInProject(pno, cpn)){
+						psr.insertPSRelation(prArray[i]);
+						
+						Inform info = new Inform();
+						info.setBusno(tn);
+						info.setSrcpno("root");
+						info.setDstpno(cpn);
+						info.setMtype("S0");
+						//给负责人发送被拉进项目组的系统消息
+						id.insertInform(info);
+					}
+						
+					//阶段指标的插入
+					String[] ia = icArray[i].split(",");
+					String[] aa = anArray[i].split(",");
+					int l = ia.length;
+					
+					//根据该阶段指标内容的数据创建对应的指标对象个数
+					for(int j=0;j<l;j++){
+						TaskIndexs ti = new TaskIndexs();
+						
+						ti.setAchreq(aa[j]);
+						ti.setIndexinfo(ia[j]);
+						ti.setTaskno(tn);
+						//插入指标信息
+						tid.insertTaskIndexes(ti);
+					}
+				}
+				ConnectionManager.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				ConnectionManager.rollback();
+			} finally{
+				ConnectionManager.closeConnection();
+			}
 	}
 
 }

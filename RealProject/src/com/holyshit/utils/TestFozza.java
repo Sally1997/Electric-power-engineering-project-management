@@ -18,23 +18,14 @@ import com.holyshit.service.impl.StageTasksServiceImpl;
 public class TestFozza {
 	@Test
 	public void forTest() throws SQLException, ParseException{
-		StageTasksService sts = new StageTasksServiceImpl();
-		StageTask st = sts.getStageTask("0000400002");
-		System.out.println(st.getTaskname());
+		AutoNumber an = new AutoNumber();
 		
-		PSPlanDao ppd = new PSPlanDaoImpl();
-		PSPlan psp = ppd.selectPsPlanInfo("000040");
-		System.out.println(psp.getSname());
+		String ptn = "1002v10021";
 		
-		AuditService as = new AuditServiceImpl();
-		Map<String,Object> map = as.getIndexAudit("0000400002");
+		String tno = an.TrueNewTaskNo(ptn);
+		tno = an.TNToTn(tno);
 		
-		if(map.get("taskno")==null){//阶段
-			System.out.println("这是阶段");
-		}
-		else{//任务
-			System.out.println("这是rew");
-		}
+		System.out.println(tno);
 	}
 	
 	

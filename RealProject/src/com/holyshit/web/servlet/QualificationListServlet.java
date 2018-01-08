@@ -21,11 +21,9 @@ import com.holyshit.service.impl.QualificationServiceImpl;
 public class QualificationListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("跳到了资格SERVLET");
 		String staffno = request.getParameter("staffno");
 		QualificationService qfsi = new QualificationServiceImpl();
 		List<Qualification> Qualifications = qfsi.findAllQualifications(staffno);
-		System.out.println("00000000");
 		for(int i=0;i<Qualifications.size();i++)
 		{
 			System.out.println(Qualifications.get(i).getQualifdesc());

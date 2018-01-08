@@ -29,9 +29,8 @@ public class InformDaoImpl implements InformDao {
 	@Override
 	public void insertInform(Inform info) throws SQLException {
 		QueryRunner qr = new QueryRunner();
-		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(busno,srcpno,dstpno,mtype,hasread) "+
-				"VALUES(?,?,?,?,?)",info.getBusno(),info.getSrcpno(),info.getDstpno(),info.getMtype(),
-				info.getHasread());
+		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(busno,srcpno,dstpno,mtype) "+
+				"VALUES(?,?,?,?)",info.getBusno(),info.getSrcpno(),info.getDstpno(),info.getMtype());
 	}
 	
 	public void insertInformhr(String type,String staffno) throws SQLException {

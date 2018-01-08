@@ -33,6 +33,8 @@ public class StaffInfoFindServlet extends HttpServlet {
 		String userno = staff.getStaffno();
 		
 		String keyword = request.getParameter("keyword");
+		//linux服务器出现问题，乱码
+		keyword = new String(keyword.getBytes("ISO-8859-1"),"UTF-8"); 
 		
 		//返回的字符串str
 		String str = "";

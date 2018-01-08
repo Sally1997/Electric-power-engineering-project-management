@@ -22,12 +22,10 @@ import com.mchange.v2.codegen.bean.BeangenUtils;
 public class AddAStaff extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("跳到了AddAStaff SERVLET");
 		String pno = request.getParameter("pno");
 		PSRelation psr = new PSRelation();
 		String duty = request.getParameter("duty");
 		String SearchStaffNo = request.getParameter("SearchStaffNo");
-		System.out.println("Staffno:"+SearchStaffNo+" pno="+pno+" duty="+duty);
 		psr.setPno(pno);
 		psr.setDuty(duty);
 		psr.setStaffno(SearchStaffNo);	

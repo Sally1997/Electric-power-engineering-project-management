@@ -31,7 +31,7 @@
     		
     		<div class="col-lg-8" style="float:none; margin: 20px auto">
    	        <div class="panel panel-primary" style="margin: 20px auto">
-    	        <div class="panel-heading">test01</div><!-- 这里是这个项目的名字 -->
+    	        <div class="panel-heading">新建阶段内容</div><!-- 这里是这个项目的名字 -->
       	        <div class="panel-body">
                 <div class="col-lg-12" >
                  <table id = "newms" class="table table-striped table-condensed" style="font-size: 15px">
@@ -278,7 +278,7 @@ function addElement()
 		return;
 	}
 	else if(vcharp==""){
-		alert("请选择审核人!");
+		alert("请选择发布人!");
 		return;
 	}
 	else if(vstartdate==""||venddate==""){
@@ -296,6 +296,13 @@ function addElement()
 	else if(yyy){
 		alert("日期格式错误!请重新检查!");
 		return;
+	}
+	
+	var comfirm_sn = document.getElementsByName("fozza_sn");
+	for(var dj=0;dj<comfirm_sn.length;dj++){
+		if(vname==comfirm_sn[dj].value){
+			alert("重复的阶段名称");
+		}
 	}
 	
 	var msname = document.createTextNode(vname);
@@ -361,7 +368,7 @@ function addElement()
 	
 	//阶段名称
 	ci.setAttribute("name", "fozza_sn");
-	ci.setAttribute("type", "text");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value", form1.msname.value);
 	cf.appendChild(ci);
 	
@@ -370,44 +377,44 @@ function addElement()
 	
 	//审核人
 	ci = document.createElement("input");
-	ci.setAttribute("type", "text");
 	ci.setAttribute("name","fozza_cp");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.mngname.value);
 	cf.appendChild(ci);
 	
 	//开始日期
 	ci = document.createElement("input");
-	ci.setAttribute("type", "text");
 	ci.setAttribute("name","fozza_st");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.StartDate.value);
 	cf.appendChild(ci);
 	
 	//结束日期
 	ci = document.createElement("input");
-	ci.setAttribute("type", "text");
 	ci.setAttribute("name","fozza_et");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.EndDate.value);
 	cf.appendChild(ci);
 	
 	//预算
 	ci = document.createElement("input");
-	ci.setAttribute("type", "text");
 	ci.setAttribute("name","fozza_bg");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.budget.value);
 	cf.appendChild(ci);
 	
 	//指标内容
 	ci = document.createElement("input");
 	ci.setAttribute("name", "indexcontent")
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value", "");
-	ci.setAttribute("type", "text");
 	cf.appendChild(ci);
 	
 	//是否需要指标附件	
 	ci = document.createElement("input");
 	ci.setAttribute("name", "attachmentneed");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value", "");
-	//ci.setAttribute("type", "hidden");
 	cf.appendChild(ci);
 	
 	//添加到表单
@@ -524,11 +531,9 @@ function ifclick(v){
 function addGoal()
 {
 	//alert(bigsn); 通过点击指标详情，获取到你正在查看的阶段名称
-	alert(bigsn);
 	
 	//用来获取input的value值
 	var indexinfo = "";
-	var indexneed = "";
 	
 	var sn_name = document.getElementsByName("fozza_sn");
 	
@@ -539,13 +544,21 @@ function addGoal()
 		}
 	}
 	
-	
 	var clear_goal = document.getElementsByName("goal")[0];
 	var goal_value = clear_goal.value;
 	
 	if(goal_value==""){
 		alert("请输入指标内容!");
 		return;
+	}
+	
+	//检测输入指标内容是否重复
+	var array_ii = indexinfo.split(",");
+	for(j=0;j<array_ii.length;j++){
+		if(goal_value==array_ii[j]){
+			alert("重复的指标内容!请重新输入!");
+			return;
+		}
 	}
 	
 	var goal = document.createTextNode(goal_value);
@@ -618,6 +631,130 @@ function addGoal()
 	
 	document.getElementsByName("indexcontent")[i].value = indexinfo;
 	return false;
+}
+
+function confirmIndex(){
+	//点完确认以后将对象push进数组
+	//用来获取input的value值
+	var indexinfo = "";
+	var indexneed = "";
+	
+	var sn_name = document.getElementsByName("fozza_sn");
+	
+	for(i=0;i<sn_name.length;i++){
+		if(sn_name[i].value==bigsn){
+			indexinfo = document.getElementsByName("indexcontent")[i].value;
+			break;
+		}
+	}
+	
+	if(indexinfo==""){
+		return;
+	}
+	
+	//将该阶段下指标内容分割
+	var array_ii = indexinfo.split(",");
+	
+	var k = "";
+	for(i=0;i<array_ii.length;i++){
+		var tmp = document.getElementsByName(array_ii[i])[0];
+		if(tmp.checked==true){
+			k = "1";			
+		}
+		else{
+			k = "0";
+		}
+		
+		if(indexneed==""){
+			indexneed += k;
+		}
+		else{
+			indexneed += "," + k;
+		}
+	}	
+	
+	for(i=0;i<sn_name.length;i++){
+		if(sn_name[i].value==bigsn){
+			document.getElementsByName("attachmentneed")[i].value = indexneed;
+			break;
+		}
+	}
+}
+
+function removeIndex(){
+	//分割一下 删除节点的时候，因为点确认才会给是否选中附件输入框赋值，所以这里要删除指标内容
+	var indexinfo = "";
+	var new_indexinfo = "";
+	
+	var delete_indexinfo = "";
+	
+	var sn_name = document.getElementsByName("fozza_sn");
+	
+	var cursor;
+	
+	for(cursor=0;cursor<sn_name.length;cursor++){
+		if(sn_name[cursor].value==bigsn){
+			indexinfo = document.getElementsByName("indexcontent")[cursor].value;
+			break;
+		}
+	}
+	
+	var array_ii = indexinfo.split(",");//切割指标内容
+	//分割一下
+
+	var p = document.getElementsByName("deletenode");
+	var getn = document.getElementsByName("iambody");
+	var len = p.length;
+	
+	for(i=0;i<len;i++){
+		if(p[i].checked==false){
+			if(new_indexinfo==""){
+				new_indexinfo += array_ii[i];
+			}
+			else{
+				new_indexinfo += "," + array_ii[i];
+			}
+		}
+		else{
+			if(delete_indexinfo==""){
+				delete_indexinfo += array_ii[i];
+			}
+			else{
+				delete_indexinfo += "," + array_ii[i];
+			}
+		}
+	}
+	
+	alert("您删除的指标内容为:"+delete_indexinfo);
+	
+	for(i=len-1;i>=0;i--){
+		if(p[i].checked==true){
+			//直接remove索引值会改变……所以倒着删除
+			getn[i].parentNode.removeChild(getn[i]);
+		}
+	}
+	
+	document.getElementsByName("indexcontent")[cursor].value = new_indexinfo;
+}
+
+
+function dsubmit(){
+	var confirm_sn = document.getElementsByName("fozza_sn")[0];
+	if(confirm_sn==null){
+		alert("请至少创建一个阶段!")
+		return;
+	}
+	
+	var confirm_index = document.getElementsByName("indexcontent");
+	for(var i=0;i<confirm_index.length;i++){
+		if(confirm_index[i].value==""){
+			alert("请为阶段填写至少一个指标内容!");
+			return;
+		}
+	}
+
+	var pf = document.getElementsByName("postform")[0];
+	pf.submit();
 }
 
 

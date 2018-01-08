@@ -25,15 +25,12 @@ import com.holyshit.service.impl.StaffServiceImpl;
 @WebServlet("/web/servlet/findAStaffServlet")
 public class FindAStaffServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("跳到了查找的Servlet");
 		String SearchStaffNo=request.getParameter("SearchStaffNo");
-		System.out.println("搜索staffno"+SearchStaffNo);
 		String pno = request.getParameter("pno");
 		StaffService ssi = new StaffServiceImpl();
 		Staff Staff = ssi.findAStaff(SearchStaffNo);
 		if(Staff==null)
 		{
-			System.out.println("用户不存在");
 			String error = "用户不存在";
 			request.setAttribute("error", error);
 		}

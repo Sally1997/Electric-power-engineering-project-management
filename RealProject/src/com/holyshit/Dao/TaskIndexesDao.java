@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.holyshit.domain.TaskIndexs;
+
 public interface TaskIndexesDao {
 	/**
 	 * 查找阶段或者任务的指标
@@ -19,4 +21,11 @@ public interface TaskIndexesDao {
 	 * @throws SQLException 
 	 */
 	void updateIndexState(String indexno,String indexstate) throws SQLException;
+	
+	/**
+	 * 插入任务指标信息
+	 * @param ti
+	 * @throws SQLException 
+	 */
+	void insertTaskIndexes(TaskIndexs ti) throws SQLException;
 }

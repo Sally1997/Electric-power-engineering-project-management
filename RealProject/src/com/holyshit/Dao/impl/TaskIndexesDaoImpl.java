@@ -8,6 +8,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import com.holyshit.Dao.TaskIndexesDao;
+import com.holyshit.domain.TaskIndexs;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 
@@ -27,6 +28,16 @@ public class TaskIndexesDaoImpl implements TaskIndexesDao {
 		QueryRunner qr = new QueryRunner();
 		qr.update(ConnectionManager.getConnection(),"UPDATE taskindexes SET indexstate=? WHERE indexno=?", 
 				indexstate,indexno);
+	}
+
+	@Override
+	public void insertTaskIndexes(TaskIndexs ti) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"INSERT INTO taskindexes(TaskNo,IndexInfo,achReq) "+
+				"VALUES(?,?,?)",ti.getTaskno(),ti.getIndexinfo(),ti.getAchreq());
+		
+		
 	}
 
 }

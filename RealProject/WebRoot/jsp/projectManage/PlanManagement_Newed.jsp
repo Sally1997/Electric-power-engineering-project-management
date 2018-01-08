@@ -53,6 +53,7 @@
   		response.sendRedirect("/servlet/ShowProjectServlet");
   	} 
   	request.setAttribute("pno",request.getParameter("pno"));
+  	request.setAttribute("ptn", "");
  %>
 <!--  主要内容-->
 <section>
@@ -62,7 +63,7 @@
     		
     		<div class="col-lg-6" >
    	        <div class="panel panel-primary" >
-    	        <div class="panel-heading">test01</div><!-- 这里是这个项目的名字 -->
+    	        <div class="panel-heading">项目相关</div><!-- 这里是这个项目的名字 -->
       	        <div class="panel-body">
                 <div class="col-lg-12" >
                  
@@ -216,7 +217,7 @@ $(".innerUl").ProTree({
             <div style="text-align: right">
               <button type="button" class="btn btn-primary"data-toggle="modal" data-target="#handupDc" onclick="popup()">提交</button>
               <button type="submit"class="btn btn-primary" >
-              <a href="${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=<%=request.getParameter("pno") %>" style="color:white">新建子任务</a>
+              <a href="javascript:newChildTask()" style="color:white">新建子任务</a>
               </button>
             </div>
             <div class="clear"></div>
@@ -367,6 +368,12 @@ $(".innerUl").ProTree({
 <%@include file="/footer.jsp" %>
 </body>
 <script type="text/javascript">
+//新建子任务跳转
+function newChildTask(){
+    var links_ti = document.getElementById("task_name").innerHTML;
+    window.location.href = "${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=${pno}&ptn="+links_ti;
+}
+
 //提交表单
 function goServlet1(){
 	 var form = document.forms[0];
