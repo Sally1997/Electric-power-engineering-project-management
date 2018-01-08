@@ -15,6 +15,25 @@ import com.holyshit.domain.DocumentInfo;
  */
 public interface DocumentDao {
 	/**
+	 * 未审批的普通文档
+	 * @return
+	 * @throws SQLException
+	 */
+	List<Document> findallneededauditfile() throws SQLException;
+	/**
+	 * 审核通过普通文档
+	 * @param dno
+	 * @throws SQLException
+	 */
+	void auditfilepass(String dno) throws SQLException;
+	/**
+	 * 审核不通过普通文档
+	 * @param dno
+	 * @throws SQLException
+	 */
+	void auditfilefail(String dno) throws SQLException;
+	
+	/**
 	 * 添加文件到数据库
 	 * @param dno
 	 * @param uloadpno

@@ -31,4 +31,11 @@ public interface PermissionService {
 	 * @return
 	 */
 	boolean enableDeleteAndAddStaff(String staffno,String pno);
+	
+	/**
+	 * 是否具有审批普通文档的权限
+	 * @param staffno
+	 * @return
+	 */
+	boolean enableCheckDocument(String staffno);
 }

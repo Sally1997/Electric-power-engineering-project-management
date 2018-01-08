@@ -22,7 +22,19 @@ import com.holyshit.utils.ConnectionManager;
 import com.holyshit.web.servlet.NewProjectServlet;
 
 public class DocumentServiceImpl implements DocumentService {
-
+	public List<Document> findallneededauditfile(){
+		DocumentDao dd=new DocumentDaoImpl();
+		List<Document> dL=null;
+		try {
+			dL =  dd.findallneededauditfile();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return dL;
+	}
 	@Override
 	public Map<String, Object> findDocumentWithUserById(String id, int cur,
 			int pageSize) {

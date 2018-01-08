@@ -9,6 +9,24 @@ import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
 public interface StaffService {
+	/**
+	 * 人员是否在项目组里。
+	 * @param staffno
+	 * @param pno
+	 * @return
+	 */
+	int isinproject(String staffno,String pno);
+	/**
+	 * 修改人员的email
+	 * @param staffno
+	 * @param email
+	 */
+	void updateemail(String staffno,String email);
+	/*
+	 * 
+	 * 修改人员的联系方式
+	 */
+	void updatete(String staffno,String te);
 	
 	void delAllStaffs(String[] staffnos,String pno);
 	

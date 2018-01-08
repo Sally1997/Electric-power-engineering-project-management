@@ -11,8 +11,10 @@ import com.holyshit.utils.ConnectionManager;
 import com.holyshit.service.*;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.Dao.impl.AccountDaoImpl;
+import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.NoteDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.domain.Inform;
 import com.holyshit.domain.Note;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.PageBean;
@@ -20,6 +22,49 @@ import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
 
 public class StaffServiceImpl implements StaffService{
+	public void updatete(String staffno,String te){
+		StaffDao staffDao = new StaffDaoImpl();
+		try {
+			staffDao.updatete(staffno, te);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+	
+	public void updateemail(String staffno,String email){
+		StaffDao staffDao = new StaffDaoImpl();
+		try {
+			staffDao.updateemail(staffno, email);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+	
+	public int isinproject(String staffno,String pno){
+		StaffDao sd = new StaffDaoImpl();
+		Staff a=null;
+		try {
+			a = sd.isinproject(staffno, pno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(a==null)
+		{
+			return 0;
+		}
+		else {
+			return 1;
+		}
+		
+	}
+	
 	//list staffs service
 	public PageBean findAllStaffs(String pno,int CurrentPage,int PageSize,String noterno){
 		StaffDao StaffDao = new StaffDaoImpl();
@@ -57,10 +102,15 @@ public class StaffServiceImpl implements StaffService{
 	//delete staffs service
 	public void delAllStaffs(String[] staffnos,String pno) {
 		// TODO Auto-generated method stub
+		InformDao ifd = new InformDaoImpl();
 		StaffDao StaffDao = new StaffDaoImpl();
 		try{
 
 			StaffDao.delAllStaffs(staffnos, pno);
+			for(int i=0;i<staffnos.length;i++)
+			{
+				ifd.insertInformhr("S1", staffnos[i]);
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
@@ -84,9 +134,11 @@ public class StaffServiceImpl implements StaffService{
 	}
 	
 	public void addAStaff(PSRelation psr){
+		InformDao ifd = new InformDaoImpl();
 		StaffDao StaffDao = new StaffDaoImpl();
 		try {
 			StaffDao.addAStaff(psr);
+			ifd.insertInformhr("S0", psr.getStaffno());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -223,14 +275,35 @@ public class StaffServiceImpl implements StaffService{
 	public boolean editStaffInfo(Staff staff, boolean change,String password) {
 		// TODO Auto-generated method stub
 		StaffDao sd=new StaffDaoImpl();
+		boolean flag=false;
 		AccountDao ad=new AccountDaoImpl();
-		int res1=0,res2=0;
+		InformDao inform=new InformDaoImpl();
+		Inform data=new Inform();
+		Inform data2=new Inform();
+		data.setBusno(staff.getStaffno());
+		data.setSrcpno("root");
+		data.setDstpno(staff.getStaffno());
+		data.setMtype("S2");
+		data.setHasread("0");
+		
+		data2.setBusno(staff.getStaffno());
+		data2.setSrcpno("root");
+		data2.setDstpno(staff.getStaffno());
+		data2.setMtype("S3");
+		data2.setHasread("0");
+		int res1=0,res2=0,res3=0,res4=0;
 		if(change){
 			//重置了密码
 			try {
 				ConnectionManager.startTransaction();
 				res1=sd.editStaff(staff);
 				res2=ad.editAccount(staff.getStaffno(), password);
+				res3=inform.insertInform(data,1);
+				res4=inform.insertInform(data2, 1);
+				if(!(res1==1&&res2==1&&res3==1&&res4==1)){
+					throw new SQLException();
+				}
+				
 				ConnectionManager.commit();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -239,20 +312,28 @@ public class StaffServiceImpl implements StaffService{
 			}finally{
 				ConnectionManager.closeConnection();
 			}
-			if(res1==1&&res2==1){
+			if(res1==1&&res2==1&&res3==1&&res4==1){
 				return true;
 			}
 		}else{
 			//未重置密码
 			try {
+				ConnectionManager.startTransaction();
 				res1=sd.editStaff(staff);
+				res3=inform.insertInform(data, 1);
+				if(!(res1==1&&res3==1)){
+					throw new SQLException();
+				}
+				
+				ConnectionManager.commit();
 			} catch (SQLException e) {
+				ConnectionManager.rollback();
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally{
 				ConnectionManager.closeConnection();
 			}
-			if(res1==1){
+			if(res1==1&&res3==1){
 				return true;
 			}
 		}

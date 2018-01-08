@@ -10,6 +10,13 @@ import com.holyshit.domain.InformProject;
 
 public interface InformDao {
 	/**
+	 * 插入人员的系统消息
+	 * @param type
+	 * @param staffno
+	 * @throws SQLException
+	 */
+	void insertInformhr(String type,String staffno) throws SQLException;
+	/**
 	 * 返回当前新建的立项审核编号，因为时自增数列，直接返回最大值即可
 	 * @return
 	 * @throws SQLException 
@@ -22,6 +29,14 @@ public interface InformDao {
 	 * @throws SQLException 
 	 */
 	void insertInform(Inform info) throws SQLException;
+	
+	/**
+	 * 兼容上面那个傻逼写的代码
+	 * @param info
+	 * @return
+	 * @throws SQLException
+	 */
+	int insertInform(Inform info,int flag)throws SQLException;
 	
 	/**
 	 * 根据mno获得inform
@@ -94,4 +109,12 @@ public interface InformDao {
 	 * @throws SQLException
 	 */
 	List<Object> selectTypeById(String staffno)throws SQLException;
+	
+	/**
+	 * 设置消息字段
+	 * @param mno
+	 * @return
+	 * @throws SQLException
+	 */
+	int hasRead(String mno,String flag)throws SQLException;
 }

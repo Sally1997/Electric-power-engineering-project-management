@@ -30,7 +30,10 @@ public class LoginFilter implements Filter{
 		//检查用户是否已经登陆
 		HttpSession session=req.getSession();
 		if(session.getAttribute("staff")!=null){
-			
+			//重复登录
+			if(path.indexOf("login.jsp")!=-1||path.equals(req.getContextPath()+"/")){
+				request.getRequestDispatcher("/web/servlet/mainServlet").forward(request, response);
+			}
 			chain.doFilter(request, response);
 		}else if(path.indexOf("login.jsp")!=-1||path.equals(req.getContextPath()+"/")){
 			

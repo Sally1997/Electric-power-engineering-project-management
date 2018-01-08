@@ -6,4 +6,5 @@ import com.holyshit.domain.Qualification;
 
 public interface QualificationService {
 	List<Qualification> findAllQualifications(String staffno);
+	void AddAQualification(String staffno,String qua);
 }

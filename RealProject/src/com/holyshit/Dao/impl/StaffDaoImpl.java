@@ -18,7 +18,22 @@ import com.holyshit.domain.StaffDuty;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 public class StaffDaoImpl implements StaffDao {
-
+	public Staff isinproject(String staffno,String pno) throws SQLException{
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("select * from psrelation where staffno=? and pno=?", new BeanHandler<Staff>(Staff.class), staffno,pno);
+	}
+	
+	public void updateemail(String staffno,String email) throws SQLException{
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		qr.update("update staff set email=? where staffno=?", email,staffno);
+	}
+	
+	public void updatete(String staffno,String te) throws SQLException{
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		qr.update("update staff set te=? where staffno=?",te,staffno);
+	}
+	
+	
 	@Override
 	public Staff selectStaffById(String id) throws SQLException {
 		// TODO Auto-generated method stub
