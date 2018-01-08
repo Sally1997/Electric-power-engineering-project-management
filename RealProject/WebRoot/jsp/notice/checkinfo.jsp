@@ -507,6 +507,7 @@ function submitAudit(){
 			return;
 		}
 	}
+	alert("数据提交中……请等待服务器结果");
 	var fm = document.forms[0];
 	fm.action="${pageContext.request.contextPath }/web/servlet/projectAuditServlet?mno=${map.mno}";
 	fm.method="post";

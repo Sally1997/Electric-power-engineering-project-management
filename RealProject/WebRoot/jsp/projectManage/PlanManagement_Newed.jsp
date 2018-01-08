@@ -411,7 +411,7 @@ function goServlet1(){
 	}
 
 	 var form = document.getElementById("popform");
-	 alert("提交成功!");
+	 alert("数据提交中……请等待服务器结果");
 	 form.action = "${pageContext.request.contextPath }/web/servlet/submitTaskServlet?pno=${pno}";
 	 form.submit();
 }

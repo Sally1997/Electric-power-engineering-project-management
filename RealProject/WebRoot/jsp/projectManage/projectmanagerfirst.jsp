@@ -316,7 +316,7 @@
       			
       			var form = document.forms[0];
       			
-      			alert("提交成功");
+      			alert("数据提交中……请等待服务器结果");
       			form.action = "${pageContext.request.contextPath }/servlet/NewProjectServlet";
       			form.submit();
       		}

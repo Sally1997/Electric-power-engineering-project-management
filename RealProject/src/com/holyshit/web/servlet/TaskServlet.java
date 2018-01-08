@@ -154,6 +154,7 @@ request.setCharacterEncoding("UTF-8");
 		StageTasksService sts = new StageTasksServiceImpl();
 		sts.addTaskAndIndex(ptn, pn, parray, icArray, anArray, iArray, prArray);
 		
+		response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
 		//分发转向
 		response.setHeader("refresh", "0.5;url=/RealProject/servlet/DTreeNodeServlet?pno="+pn);		
 	}

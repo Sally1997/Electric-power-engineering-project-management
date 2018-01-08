@@ -138,6 +138,9 @@ public class NewProjectServlet extends HttpServlet {
 		if(iffailed){
 			response.getWriter().write("<script type='text/javascript'>alert('项目异常……新建失败!')</script>");
 		}
+		else{
+			response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
+		}
 		response.sendRedirect(request.getContextPath()+"/servlet/ShowProjectServlet");
 	}
 	
