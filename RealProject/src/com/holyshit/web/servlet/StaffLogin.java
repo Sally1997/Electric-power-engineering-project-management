@@ -98,6 +98,11 @@ public class StaffLogin extends HttpServlet {
 			boolean enableCheckDocument = ps.enableCheckDocument(staff.getStaffno());
 			if(enableCheckDocument)
 				session.setAttribute("enableCheckDocument", 1);
+			//发布公告权限
+			boolean enablePublicNotice=ps.enablePublicNotice(staff.getStaffno());
+			if(enablePublicNotice){
+				session.setAttribute("enablePublicNotice", 1);
+			}
 			
 			//跳转到相应的uri
 			String uri=request.getParameter("uri");

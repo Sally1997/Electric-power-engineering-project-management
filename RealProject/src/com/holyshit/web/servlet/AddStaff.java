@@ -49,6 +49,7 @@ public class AddStaff extends HttpServlet {
 		if(res){
 			response.getWriter().write("ok");
 		}else{
+			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write("添加失败,编号可能重复或是服务器繁忙");
 		}
 		//

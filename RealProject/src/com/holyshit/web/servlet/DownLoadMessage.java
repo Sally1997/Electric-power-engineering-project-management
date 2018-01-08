@@ -55,7 +55,6 @@ public class DownLoadMessage extends HttpServlet {
 			filename = new String(filename.getBytes("UTF-8"),"iso-8859-1");//火狐浏览器
 		}
 		
-		filename = new String(filename.getBytes(), "ISO-8859-1");
 		response.setHeader("content-disposition", "attachment;filename=" +filename);
 		InputStream input=new FileInputStream(filepath);
 		OutputStream out=response.getOutputStream();

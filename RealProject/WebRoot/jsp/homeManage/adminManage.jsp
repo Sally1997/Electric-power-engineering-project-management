@@ -146,8 +146,23 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">员工编号<span style="color: red;">*</span></label>
 				<div class="col-sm-8">
-			    <input type="text" class="form-control" id="addStaff_staffno" placeholder="请输入编号">
+			    <input type="text" class="form-control" id="addStaff_staffno" placeholder="请输入12位数字编号">
 				</div>
+				<label class="col-sm-2 control-label" id="showRes" style="display: none;">可以使用</label>
+				<script type="text/javascript">
+					document.getElementById("addStaff_staffno").onblur=function(){
+						//发送请求查询用户是否存在
+						var warn=document.getElementById("showRes");
+						warn.style.color="red";
+						warn.innerHTML="已经存在";
+						warn.style.display="block";
+					};
+					document.getElementById("addStaff_staffno").onclick=function(){
+						var warn=document.getElementById("showRes");
+						warn.style.display="none";
+						
+					};
+				</script>
 			  </div>
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">员工姓名<span style="color: red;">*</span></label>
@@ -174,7 +189,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">电话号码<span style="color: red;">*</span></label>
 				<div class="col-sm-8">
-		          <input type="text" class="form-control" id="addStaff_te" placeholder="请输入电话">
+		          <input type="text" class="form-control" id="addStaff_te" placeholder="请输入11位电话号码">
 				</div>
 			  </div>
              <div class="form-group">
@@ -212,12 +227,14 @@
       			var addStaff_email=$('#addStaff_email').val();
       			var addStaff_password=$('#addStaff_password').val();
       			var addStaff_confirm=$('#addStaff_confirm').val();
-      			if(addStaff_staffno==""){
-      				alert("员工编号不能为空");
+      			var staffno_reg=/^[0-9]{12}$/;
+      			if(!staffno_reg.test(addStaff_staffno)){
+      				alert("请输入12位数字编号");
       				return;
       			}
-      			if(addStaff_name==""){
-      				alert("员工姓名不能为空");
+      			var name_reg=/^[\u4E00-\u9FA5\uf900-\ufa2d·]{2,20}$/; 		
+      			if(!name_reg.test(addStaff_name)){
+      				alert("姓名格式不符合规则");
       				return;
       			}
       			if(addStaff_sex=="请选择"){
@@ -228,12 +245,16 @@
       				alert("出生日期不能为空");
       				return;
       			}
-      			if(addStaff_te==""){
-      				alert("电话号码不能为空");
+      			
+      			var te_reg=/^[1][3,4,5,7,8][0-9]{9}$/;
+      			if(!te_reg.test(addStaff_te)){
+      				alert("请输入正确的11位手机号码");
       				return;
       			}
-      			if(addStaff_email==""){
-      				alert("电子邮箱不能为空");
+      			var email_reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+      			
+      			if(!email_reg.test(addStaff_email)){
+      				alert("电子邮箱格式错误");
       				return;
       			}
       			if(addStaff_password==""){
@@ -716,7 +737,7 @@
                         			  }
                         		  }
                         	  };
-                        	  req.open("get", "/RealProject/web/servlet/getAuthorityList?staffno="+row.staffno);
+                        	  req.open("get", "/RealProject/web/servlet/getAuthorityList?staffno="+row.staffno+"&timeid="+new Date().getTime());
                         	  req.send(null);
                               $('#set_authority_modal').modal("show");
                         }

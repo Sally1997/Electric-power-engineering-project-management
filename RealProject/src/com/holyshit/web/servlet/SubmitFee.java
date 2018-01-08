@@ -17,6 +17,8 @@ import com.holyshit.service.impl.StageTasksServiceImpl;
 public class SubmitFee extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		//获取数据
 		String taskno=request.getParameter("taskno");
 		String task_feeaudit=request.getParameter("task_feeaudit");

@@ -54,7 +54,7 @@ function submitFeeInfo(){
    						
    					}
    				};
-   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+document.getElementById("fee_cause").value);
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+window.encodeURI(document.getElementById("fee_cause").value));
    				req.send(null);
    			}
    		}
@@ -89,7 +89,7 @@ function submitFeeInfo(){
 				}
 				
 			};
-			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+cause);
+			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+window.encodeURI(cause));
 			req.send(null); 
 		}
    		function showAuditData(){

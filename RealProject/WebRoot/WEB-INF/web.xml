@@ -296,6 +296,11 @@
     <servlet-name>ReadInform</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ReadInform</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ShowDocumentCheckServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowDocumentCheckServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -526,6 +531,10 @@
   <servlet-mapping>
     <servlet-name>ReadInform</servlet-name>
     <url-pattern>/web/servlet/readInform</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowDocumentCheckServlet</servlet-name>
+    <url-pattern>/web/servlet/showDocumentCheckServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

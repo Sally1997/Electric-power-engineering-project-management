@@ -68,7 +68,10 @@
 					<li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=2">系统信息<span class="badge" style="float: right">${system_num }</span></a></li>
 		            <li><a href="${pageContext.request.contextPath }/jsp/notice/inform.jsp?type=3">审批消息<span class="badge" style="float: right">${audit_num }</span></a></li>
 			     	<c:if test="${not empty enableCheckDocument }">
-              			<li><a href="#">文档审核</a></li>
+              			<li><a href="#">文档审核&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span></a></li>
+              		</c:if>
+              		<c:if test="${not empty enablePublicNotice }">
+              			<li><a href="javascript:$('#handupNews').modal('show')">发布公告&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="	glyphicon glyphicon-list-alt"></span></a></li>
               		</c:if>
 			      </ul>
               </li>
@@ -78,5 +81,84 @@
        </div><!-- /.container-fluid -->
      </nav>
   </div>
-
   
+  
+  			<!-- 全局模块 -->
+    <!--  默认隐藏的内容:发布公告-->
+  <div class="modal fade" id="handupNews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">发布公告</h4>
+      </div>
+      <div class="modal-body">
+		  <form class="form-horizontal">
+			  <div class="form-group">
+					<span style="color: red;position: relative;left: 10%;">提示：请上传正确的html文件</span>
+			  </div>
+		  		<div class="form-group">
+				<label for="newsname" class="col-sm-2 control-label">公告主题</label>
+				<div class="col-sm-8">
+		            <input type = "text" id="newstitle">
+				</div>
+			  </div>
+		  
+			  	<div class="form-group">
+				<label for="addfile" class="col-sm-2 control-label">公告文件</label>
+				<div class="col-sm-8">
+		            <input type = "file" id="newsfile" multiple="multiple">
+				</div>
+			  </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-primary" onclick="submitNotice();">发布</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+//ajax请求上传文件
+function submitNotice(){
+	
+	var formdata=new FormData();
+	var file=document.getElementById("newsfile").files;
+	var filename=document.getElementById("newsfile").value;
+	//数据校验
+	if(document.getElementById("newstitle").value==""){
+		alert("请输入公告标题");
+		return;
+	}
+	if(filename==""){
+		alert("请选择上传公告文件");
+		return;
+	}
+	var houzhui=filename.substring(filename.indexOf(".")+1,filename.length);
+	if(houzhui!="html"){
+		alert("请上传html文件");
+		return;
+	}
+	formdata.append("file_1",file[0]);
+	formdata.append("noticetitle",document.getElementById("newstitle").value);
+	var req=new XMLHttpRequest();
+	req.onreadystatechange=function(){
+		if(req.readyState==4){
+			clearLoadPage();
+			if(req.status==200){
+				if(req.responseText=="ok"){
+					alert("公告发布成功");
+					location.reload(true);
+				}else{  //显示报错信息
+					alert(req.responseText);	
+				}
+			}
+		}
+	};
+	
+	req.open("post", "${pageContext.request.contextPath}/web/servlet/uploadNotice");
+	req.send(formdata);
+	loadPageFlag=setTimeout('loadPage()',100);
+}
+</script>
