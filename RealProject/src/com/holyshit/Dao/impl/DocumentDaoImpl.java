@@ -32,19 +32,19 @@ import com.holyshit.utils.FileSuffixConvert;
 public class DocumentDaoImpl implements DocumentDao{
 	public List<Document> findallneededauditfile() throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select * from document where dtype!='1' and auditres='0' order by uploadtime",new BeanListHandler<Document>(Document.class));
+		return qr.query("select * from document where dtype!='1' and auditres='0' order by uploadtime desc",new BeanListHandler<Document>(Document.class));
 	}
 	
 	public void auditfilepass(String dno) throws SQLException{
 		System.out.println("Daoauditfile");
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		qr.update("update document set auditres='1' where dno=?" , dno);
+		qr.update("update document set auditres='2' where dno=?" , dno);
 	}
 	
 	public void auditfilefail(String dno) throws SQLException{
 		System.out.println("Daoauditfile2");
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		qr.update("update document set auditres='2' where dno=?" , dno);
+		qr.update("update document set auditres='1' where dno=?" , dno);
 	}
 	@Override
 	public List<Document> selectAllDocumentByUserId(String id,int cur,int pageSize)

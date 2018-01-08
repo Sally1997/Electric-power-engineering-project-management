@@ -216,7 +216,7 @@
 		  		<div class="form-group">
 				<label for="newsname" class="col-sm-2 control-label">文件主题</label>
 				<div class="col-sm-8">
-		            <input id="newstitle"  type = "text" >
+		            <input type="text" class="form-control" id="document_dtitle">
 				</div>
 			  </div>
 		  		<!-- 文件类型 -->
@@ -241,7 +241,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary" onclick="submitFile();">上传</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="submitFile();">上传</button>
       </div>
     </div>
   </div>
