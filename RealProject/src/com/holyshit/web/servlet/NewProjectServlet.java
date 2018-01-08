@@ -118,7 +118,7 @@ public class NewProjectServlet extends HttpServlet {
 		InformService infoser = new InformServiceImpl();
 		info.setBusno(infoser.getNewPaauditNo());
 		info.setSrcpno(staffno);
-		info.setMtype("3");
+		info.setMtype("A11");
 		info.setHasread("0");
 		//设置时间戳，mdate取名错了，应该是mtime
 		Timestamp ts = new Timestamp(System.currentTimeMillis());
