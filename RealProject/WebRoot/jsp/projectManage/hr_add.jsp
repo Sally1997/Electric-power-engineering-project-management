@@ -97,7 +97,7 @@
 						<form method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 						<div align = "center">
 							<div class="form-group">
-							    <input class="form-control" name="SearchStaffNo" type="text" size = "70%" placeholder="请输入员工编号，长度为12位" value="${lastSearchStaffNo}"/>
+							    <input class="form-control" name="SearchStaffNo" maxlength="12" type="text" size = "70%" placeholder="请输入员工编号，长度为12位" value="${lastSearchStaffNo}"/>
 							</div><!--搜索框-->
 							<div class="form-group">
 							    <a ><button type="submit" id="b2" class="btn btn-primary" onclick="gosearchstaff()" >查看信息</button></a>
@@ -111,7 +111,7 @@
 						<font class="text">员工编号:</font>
 						</div>
 						<div class = "hehe_right">
-						<span id="sorry1" ><font class="text" name="searchofstaffno" >${Staff.staffno }</font></span>
+						<span id="sorry1"><font class="text" >${hrstaff.staffno}</font></span>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -121,7 +121,7 @@
 						<font class="text">员工姓名:</font>
 						</div>
 						<div class = "hehe_right">
-						<span id="sorry2" ><font class="text">${Staff.name }</font></span>
+						<span id="sorry2" ><font class="text">${hrstaff.name }</font></span>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -131,7 +131,7 @@
 						<font class="text">邮箱地址:</font>
 						</div>
 						<div class = "hehe_right">
-						<font class="text"><span id="sorry3" >${Staff.email }</span></font>
+						<font class="text"><span id="sorry3" >${hrstaff.email }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -141,17 +141,17 @@
 						<font class="text">联系方式:</font>
 						</div>
 						<div class = "hehe_right">
-						<font class="text"><span id="sorry4" >${Staff.te }</span></font>
+						<font class="text"><span id="sorry4" >${hrstaff.te }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
 	
 						<div id="responsible_per" class="block">
 						<div class = "hehe_left">
-						<font class="text">工龄:</font>
+						<font class="text">生日:</font>
 						</div>
 						<div class = "hehe_right">
-						<font class="text"><span id="sorry5" >${Staff.birthday }</span></font>
+						<font class="text"><span id="sorry5" >${hrstaff.birthday }</span></font>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -176,9 +176,10 @@
 						</div>
 						<div class = "hehe_right">
 						<span><select name="duty" length = "40">
-								<option value="duty1">职责1</option>
-								<option value="duty2">职责2</option>
-								<option value="duty3">职责3</option>
+								<option value="需求调研人员">需求调研人员</option>
+								<option value="设计师">设计师</option>
+								<option value="施工人员">施工人员</option>
+								<option value="项目经理">项目经理（测试用）</option>
 						</select></span>
 						</div>
 						<div class="clear"></div>

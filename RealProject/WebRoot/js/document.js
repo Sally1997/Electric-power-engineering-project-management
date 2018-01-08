@@ -13,16 +13,17 @@
  		
  		var file=document.getElementById("newfile").files[0];
  		var formdata=new FormData();
- 		if(document.getElementById("newstitle").value==""){
+ 		if(document.getElementById("document_dtitle").value==""){
  			alert("文件标题不能为空！");
  			return;
  		}
  		var hehe=document.getElementById("newfile").value;
+ 		
 		if(hehe.lastIndexOf(".")==-1){
 			alert("请上传格式正确的文件!");
 			return ;
 		}
- 		formdata.append("dtitle",document.getElementById("newstitle").value);
+ 		formdata.append("dtitle",document.getElementById("document_dtitle").value);
  		formdata.append("dtype",hehe_type);
  		formdata.append("uploadfile",file);
  		
@@ -47,7 +48,7 @@
  	}
  	//点击上传文件按钮时，清除模态框信息
  	function clearInfo(){
- 		var newstitle=document.getElementById("newstitle");
+ 		var newstitle=document.getElementById("document_dtitle");
  		var newfile=document.getElementById("newfile");
  		var document_type=document.getElementById("document_type");
  		//清除

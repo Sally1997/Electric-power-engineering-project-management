@@ -13,6 +13,8 @@ import com.holyshit.domain.Qualification;
 import com.holyshit.service.QualificationService;
 import com.holyshit.service.impl.QualificationServiceImpl;
 
+import net.sf.json.JSONArray;
+
 
 /**
  * Servlet implementation class QualificationListServlet
@@ -21,9 +23,11 @@ import com.holyshit.service.impl.QualificationServiceImpl;
 public class QualificationListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("跳到了资格SERVLET");
 		String staffno = request.getParameter("staffno");
 		QualificationService qfsi = new QualificationServiceImpl();
 		List<Qualification> Qualifications = qfsi.findAllQualifications(staffno);
+		System.out.println("00000000");
 		for(int i=0;i<Qualifications.size();i++)
 		{
 			System.out.println(Qualifications.get(i).getQualifdesc());
@@ -33,8 +37,20 @@ public class QualificationListServlet extends HttpServlet {
 		request.getRequestDispatcher("/jsp/projectManage/hr_main.jsp").forward(request,response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("跳到了资格SERVLETPOST");
+		String staffno = request.getParameter("staffno");
+		QualificationService qfsi = new QualificationServiceImpl();
+		List<Qualification> Qualifications = qfsi.findAllQualifications(staffno);
+		String a = "";
+		for(int i=0;i<Qualifications.size();i++)
+		{
+			a=a+"<tr><td><abbr title="+"大学时获得"+">"+Qualifications.get(i).getQualifdesc()+"</abbr></td></tr>";
+			System.out.println(Qualifications.get(i).getQualifdesc());
+		}
+		response.setContentType("text/xml;charset=UTF-8");
+		response.getWriter().print(a);
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
 }

@@ -101,23 +101,24 @@ public class StaffServiceImpl implements StaffService{
 		return null;
 	}
 	//delete staffs service
-	public void delAllStaffs(String[] staffnos,String pno) {
-		// TODO Auto-generated method stub
-		InformDao ifd = new InformDaoImpl();
-		StaffDao StaffDao = new StaffDaoImpl();
-		try{
+	//delete staffs service
+		public void delAllStaffs(String[] staffnos,String pno,String me) {
+			// TODO Auto-generated method stub
+			InformDao ifd = new InformDaoImpl();
+			StaffDao StaffDao = new StaffDaoImpl();
+			try{
 
-			StaffDao.delAllStaffs(staffnos, pno);
-			for(int i=0;i<staffnos.length;i++)
-			{
-				ifd.insertInformhr("S1", staffnos[i]);
+				StaffDao.delAllStaffs(staffnos, pno);
+				for(int i=0;i<staffnos.length;i++)
+				{
+					ifd.insertInformhr(pno,"S1", staffnos[i],me);
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
 			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally{
-			ConnectionManager.closeConnection();
 		}
-	}
 	@Override
 	public Staff findAStaff(String staffno) {
 		// TODO Auto-generated method stub
@@ -134,12 +135,12 @@ public class StaffServiceImpl implements StaffService{
 		
 	}
 	
-	public void addAStaff(PSRelation psr){
+	public void addAStaff(PSRelation psr,String me){
 		InformDao ifd = new InformDaoImpl();
 		StaffDao StaffDao = new StaffDaoImpl();
 		try {
 			StaffDao.addAStaff(psr);
-			ifd.insertInformhr("S0", psr.getStaffno());
+			ifd.insertInformhr(psr.getPno(),"S0", psr.getStaffno(),me);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

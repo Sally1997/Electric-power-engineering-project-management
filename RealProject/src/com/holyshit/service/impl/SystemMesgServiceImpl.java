@@ -48,9 +48,6 @@ public class SystemMesgServiceImpl implements SystemMesgService {
 				public int compare(TaskMesg o1, TaskMesg o2) {
 					// TODO Auto-generated method stub
 					int flag = o1.getMdate().compareTo(o2.getMdate());
-					System.out.println(flag);
-					System.out.println(o1.getMdate());
-					System.out.println(o2.getMdate());
 					return -flag;
 				}
 			});

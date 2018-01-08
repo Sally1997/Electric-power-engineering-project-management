@@ -101,7 +101,18 @@
 						<div class="hehe_right">${error1 }</div>
 						<div class="clear"></div>
 						</div>
-
+						
+						<div id="budget" class="block">
+						<div class="hehe_left">
+						<font class="text">拥有的权限：</font>
+						</div>
+						<div class="hehe_right">
+						<ul class="list-unstyled">
+						<c:forEach items="${alist}" var="a" >
+							<li>${a.pername}</li>
+						</c:forEach>
+						</ul>
+						</div>
 				
 						<div id="budget" class="block">
 						<div class="hehe_left">
@@ -132,7 +143,11 @@
 								    </li>
              					</ul>
           				</div>	
+          				</div>
+          				
 						</div>
+						
+						
 						<div class="clear"></div>
 						</div>
                        
@@ -148,9 +163,7 @@
 </body>
 <script type="text/javascript">
   	function updatete(){
-  		alert("ojbk");
   		var p = document.getElementsByName("usercenter")[0];
-  		alert("ojbk2");
   		p.action="${pageContext.request.contextPath}/web/updateTeServlet";
   	}
   	function updateemail(){

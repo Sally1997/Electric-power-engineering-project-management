@@ -47,5 +47,11 @@ public class InformDocument {
 	public void setDtitle(String dtitle) {
 		this.dtitle = dtitle;
 	}
+	@Override
+	public String toString() {
+		return "InformDocument [mno=" + mno + ", busno=" + busno + ", mtype="
+				+ mtype + ", mdate=" + mdate + ", dtitle=" + dtitle + ", pno="
+				+ pno + "]";
+	}
 	
 }

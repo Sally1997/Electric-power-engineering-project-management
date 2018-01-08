@@ -218,28 +218,34 @@
 					
 					var tds=nodes[i+1].getElementsByTagName("td");
 					var name1=feeData[i].pname;
-					if(name1.length>8)
-						name1=name1.substr(0,8)+"...";
+					if(name1.length>5)
+						name1=name1.substr(0,5)+"...";
 					
 					var name2=feeData[i].appname;
 					
 					if(name2.length>4)
 						name2=name2.substr(0,4)+"...";
 					tds[0].innerHTML=name1;
+					tds[0].title=feeData[i].pname;
 					tds[1].innerHTML=name2;
-					tds[2].innerHTML=feeData[i].stime;
+					tds[1].title=feeData[i].appname;
+					var time1=feeData[i].stime;
+					if(time1.length>6){
+						time1=time1.substr(0,6)+"...";
+					}
+					tds[2].innerHTML=time1;
+					tds[2].title=feeData[i].stime;
 					var state=feeData[i].auditstate;
-					
 					if(state=="0"){
 						tds[3].innerHTML="未审批";
-						tds[3].className="text-danger";
+						tds[3].style.color="black";
 					}
 					else if(state=="2"){
-						tds[3].innerHTML="审批通过";
-						tds[3].className="text-success";
-					}else{
+						tds[3].innerHTML="通过";
+						tds[3].style.color="green";
+					}else if(state=="3"){
 						tds[3].innerHTML="不通过";
-						tds[3].className="text-danger";
+						tds[3].style.color="red";
 					}
 					tds[4].innerHTML='<span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer" onclick="updateFeeAuditDialog('+i+')"></span>';
 				} 

@@ -1,6 +1,7 @@
 package com.holyshit.Dao.impl;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -14,11 +15,17 @@ import com.holyshit.domain.Inform;
 import com.holyshit.domain.InformDocument;
 import com.holyshit.domain.InformFee;
 import com.holyshit.domain.InformProject;
+import com.holyshit.domain.InformStageIndex;
+import com.holyshit.domain.InformTaskIndex;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 import com.sun.mail.auth.Ntlm;
 
 public class InformDaoImpl implements InformDao {
+	public void updatehasread(String mno) throws SQLException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		qr.update("update inform set hasread='1' where mno=?", mno);
+	}
 
 	@Override
 	public List<Object> selectCurPaauditNO() throws SQLException {
@@ -33,10 +40,17 @@ public class InformDaoImpl implements InformDao {
 				"VALUES(?,?,?,?)",info.getBusno(),info.getSrcpno(),info.getDstpno(),info.getMtype());
 	}
 	
-	public void insertInformhr(String type,String staffno) throws SQLException {
+	public void insertInformhr(String pno,String type,String staffno,String me) throws SQLException {
 		QueryRunner qr = new QueryRunner();
-		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(dstpno,mtype,hasread) "+
-				"VALUES(?,?,?)",staffno,type,"0");
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(busno,srcpno,dstpno,mtype,hasread,mdate) "+
+				"VALUES(?,?,?,?,?,?)",pno,me,staffno,type,"0",d);
+	}
+	public void insertInformdocaudit(String dno,String type,String staffno,String me) throws SQLException {
+		QueryRunner qr = new QueryRunner();
+		Timestamp d = new Timestamp(System.currentTimeMillis());
+		qr.update(ConnectionManager.getConnection(),"INSERT INTO inform(busno,srcpno,dstpno,mtype,hasread,mdate) "+
+				"VALUES(?,?,?,?,?,?)",dno,me,staffno,type,"0",d);
 	}
 
 	@Override
@@ -91,21 +105,21 @@ public class InformDaoImpl implements InformDao {
 	}
 
 	@Override
-	public List<InformDocument> selectInformByTypeInTaskIndex(String staffno)
+	public List<InformTaskIndex> selectInformByTypeInTaskIndex(String staffno)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="SELECT mno,busno,mdate,mtype,dtitle,pno FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A5' OR mtype='A6' OR mtype='A7') and hasread='0') a JOIN document ON a.busno=document.DNo";
-		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformDocument>(InformDocument.class));
+		String sql="SELECT mno,busno,mdate,mtype,taskname,taskno FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A5' OR mtype='A6' OR mtype='A7') and hasread='0') a JOIN stagetasks ON a.busno=stagetasks.taskno";
+		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformTaskIndex>(InformTaskIndex.class));
 	}
 
 	@Override
-	public List<InformDocument> selectInformByTypeInStageIndex(String staffno)
+	public List<InformStageIndex> selectInformByTypeInStageIndex(String staffno)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="SELECT mno,busno,mdate,mtype,dtitle,pno FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A8' OR mtype='A9' OR mtype='A10') and hasread='0') a JOIN document ON a.busno=document.DNo";
-		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformDocument>(InformDocument.class));
+		String sql="SELECT mno,busno,mdate,mtype,sname,stageno FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A8' OR mtype='A9' OR mtype='A10') and hasread='0') a JOIN psplan ON a.busno=psplan.stageno";
+		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformStageIndex>(InformStageIndex.class));
 	}
 
 	@Override

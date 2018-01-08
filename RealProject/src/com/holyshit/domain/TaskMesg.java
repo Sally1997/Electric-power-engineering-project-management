@@ -3,6 +3,7 @@ package com.holyshit.domain;
 import java.sql.Date;
 
 public class TaskMesg {
+	private String mno;
 	private String pno;
 	private String pname;
 	private String stageno;
@@ -66,5 +67,11 @@ public class TaskMesg {
 	}
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
+	}
+	public String getMno() {
+		return mno;
+	}
+	public void setMno(String mno) {
+		this.mno = mno;
 	}
 }

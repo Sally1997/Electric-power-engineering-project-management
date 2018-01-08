@@ -169,5 +169,35 @@ public class DocumentServiceImpl implements DocumentService {
 			return true;
 		return false;
 	}
+	@Override
+	public void auditfile(String type,String dno){
+		DocumentDao dd=new DocumentDaoImpl();
+		System.out.println("typeService:"+type+"00000");
+		System.out.println("typelength:"+type.length());
+		if(type!="")//审核通过
+		{
+			try {
+				System.out.println("pass");
+				dd.auditfilepass(dno);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
+			}
+		}
+		else 
+		{
+			try {
+				System.out.println("fail");
+				dd.auditfilefail(dno);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				ConnectionManager.closeConnection();
+			}
+		}
+	}
 
 }

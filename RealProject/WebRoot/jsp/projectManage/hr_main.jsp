@@ -16,6 +16,31 @@
 		menus[1].role="presentation";	
 	</script>
 	<script type="text/javascript">
+		function showqua(str)
+		{
+  			var xmlhttp;    
+ 			 if (window.XMLHttpRequest)
+  			{
+    			// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+    			xmlhttp=new XMLHttpRequest();
+  			}
+  			else
+  			{
+    			// IE6, IE5 浏览器执行代码
+    			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  			}
+  			xmlhttp.onreadystatechange=function()
+  			{
+    			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    			{
+      				
+            		 document.getElementById("qualif").innerHTML=xmlhttp.responseText;
+            		
+    			}
+  			}
+  			xmlhttp.open("POST","${pageContext.request.contextPath}/web/servlet/qualificationListServlet?staffno="+str,true);
+  			xmlhttp.send();
+		}
 		function checkAll(){
 			var flag=document.getElementById("ckAll").checked;
 			var ids=document.getElementsByName("ids");
@@ -78,7 +103,7 @@
 							<th>联系方式</th>
 							<th>职责</th>
 							<th>备注</th>
-							<th>发送信息</th>
+							<!--  <th>发送信息</th>-->
 							<th>资格证</th>
 						</tr>
 					<c:forEach items="${pb.staffs}" var="s" varStatus="staffs" >
@@ -99,7 +124,7 @@
                 						 --><li><div class="row">
 					  						<div class="col-lg-11 xumode">
 											<div class="input-group">
-						  						<input type="text" class="form-control" placeholder="修改备注" name=${s.staffno } >
+						  						<input type="text" class="form-control" placeholder="修改备注" name=${s.staffno } maxlength="10" >
 						 						<span class="input-group-btn">
 												<button class="btn btn-default" type="submit" onclick="updatenote('${s.staffno }','${pb.notes[staffs.index] }')" >修改</button>
 						  						</span>
@@ -111,12 +136,13 @@
           						</div>	
 							</td>
 							<!--<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupAc">发送</button></td>-->
-							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" value="${s.staffno }"  href="${pageContext.request.contextPath}/web/servlet/qualificationListServlet?staffno=${s.staffno}" >查看</button></td>
+							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" value="${s.staffno }"  onclick="showqua('${s.staffno}')" >查看</button></td>
 						</tr>
 					</c:forEach>
 					</table>
 
 					<!--  分页栏-->
+					
 					<nav aria-label="Page navigation" style="text-align: center">
 				  <ul class="pagination">
 					<li>
@@ -124,7 +150,7 @@
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
 					</li>
-					<li class="active">第${pb.currentPage}页/共${pb.totalPage}页</li>
+					<!--   <li class="active">第${pb.currentPage}页/共${pb.totalPage}页</li>-->
 					<li>
 					  <a href="${pageContext.request.contextPath }/web/servlet/staffListServlet?currPage=${pb.currentPage==pb.totalPage?pb.currentPage:pb.currentPage+1}&pno=${pno}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
@@ -143,7 +169,7 @@
                 </div>
                 </div>
             </div> 
-				<button type="button" class="btn btn-primary" style="float: right;"><a href="main.html"></a>返回</button>	
+				<a href="${pageContext.request.contextPath}/servlet/ShowProjectServlet" style="color:white;"><button type="button" class="btn btn-primary" style="float: right;" >返回</button></a>
     		</div>
     		</main>
     	</div>
@@ -207,15 +233,15 @@
         <h4 class="modal-title" id="myModalLabel">资格证查看</h4>
       </div>
       <div class="modal-body">
-		  <table class="table table-striped table-condensed" style="font-size: 15px">
+	 <table class="table table-striped table-condensed" style="font-size: 15px">
 		<tr>
 			<th>职业资格证</th>
 		</tr>
-	<c:forEach items="${Qualification}" >
+		<tbody id="qualif">
 		<tr>
-			<td><abbr title="大学时获得">${Qualification.qualifdesc }</abbr></td>
+			<td><a abbr="大学时获得" id="txtHint"></a></td>
 		</tr>
-	</c:forEach>
+		</tbody>
 	 </table>
       </div>
       <div class="modal-footer">

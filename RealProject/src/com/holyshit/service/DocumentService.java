@@ -70,4 +70,8 @@ public interface DocumentService {
 	 * @return
 	 */
 	Document findDocumentById(String id);
+	
+	List<Document> findallneededauditfile();
+	
+	void auditfile(String type,String dno);
 }
