@@ -60,6 +60,7 @@ public class NewProjectServlet extends HttpServlet {
 		boolean ismpc = ServletFileUpload.isMultipartContent(request);
 		if(!ismpc){
 			System.out.println("enctype不是multipart/form-data格式");
+			return;
 		}
 		
 		//新建工厂
@@ -145,7 +146,7 @@ public class NewProjectServlet extends HttpServlet {
 	private void processUploadField(FileItem fileitem) {
 		String filename = fileitem.getName();
 		String suffix = filename.substring(filename.lastIndexOf('.')+1);
-		String fname = filename.substring(filename.lastIndexOf('\\')+1, filename.lastIndexOf('.'));
+		String fname = filename.substring(filename.lastIndexOf(File.separator)+1, filename.lastIndexOf('.'));
 		String path = new String();
 		doc.setDtitle(fname);
 		doc.setFtype(suffix);
@@ -165,28 +166,13 @@ public class NewProjectServlet extends HttpServlet {
 			filename = uu +"_"+ filename;
 			
 			//创建一个本地目录 directory path 目录路径
-			String dp = "D:\\RealProject\\Upload";
+			String dp = "/var/ProjectData/ProjectFile";
 			
 			//新建文件夹 store directory 存储路径
 			File sd = new File(dp);
 			if(!sd.exists()){
 				sd.mkdirs();
 			}
-			
-			/**
-			 * 
-			 */
-			//test
-			String tmpd = "D:\\RealProject\\Upload\\tmp";
-			File td = new File(tmpd);
-			if(!td.exists()){
-				td.mkdirs();
-			}
-			DiskFileItemFactory fy = new DiskFileItemFactory();
-			fy.setRepository(td);
-			/**
-			 * 
-			 */
 			
 			//打散目录
 			String cdp = makeDirectoryPath(sd,filename);

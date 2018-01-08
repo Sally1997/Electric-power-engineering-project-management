@@ -202,7 +202,7 @@
         <h4 class="modal-title" id="myModalLabel">新建项目</h4>
       </div>
       <div class="modal-body">
-	 <form class="form-horizontal" method="post" enctype="multipart/form-data">
+	 <form class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="return submitProject();" action="${pageContext.request.contextPath }/servlet/NewProjectServlet">
 		  		<div class="form-group">
 				<label for="projectname" class="col-sm-2 control-label">项目名称<span style="color:red">&nbsp;*</span></label> 
 				<div class="col-sm-8">
@@ -241,7 +241,7 @@
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">相关附件<span style="color:red">&nbsp;*</span></label>
 				<div class="col-sm-8">
-		            <input type = "file" id="file" name="worinima">
+		            <input type ="file" id="file" name="worinima">
 				</div>
 			  </div>
             
@@ -270,7 +270,7 @@
       
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <input type="button" class="btn btn-primary" value="提交" onclick="submitProject();">
+        <input type="submit" class="btn btn-primary" value="提交">
       </div>
      </form>
       </div>
@@ -295,30 +295,24 @@
       			//进行验证
       			if(projectname.value==""){
       				alert("请输入项目名称!");
-      				return;
+      				return false;
       			}
       			else if(checkman.value==""){
       				alert("请选择审批人!");
-      				return;
+      				return false;
       			}
       			else if(!x){
       				alert("预算金额非法输入格式!");
-      				return;
+      				return false;
       			}
       			else if(file.value==""){
       				alert("请上传项目相关文件!");
-      				return;
+      				return false;
       			}
       			else if(stime.value==""||etime.value==""){
       				alert("请选择时间!");
-      				return;
+      				return false;
       			}
-      			
-      			var form = document.forms[0];
-      			
-      			alert("提交成功");
-      			form.action = "${pageContext.request.contextPath }/servlet/NewProjectServlet";
-      			form.submit();
       		}
       	
       </script>
