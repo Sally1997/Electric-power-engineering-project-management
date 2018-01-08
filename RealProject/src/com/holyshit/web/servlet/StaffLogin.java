@@ -111,11 +111,19 @@ public class StaffLogin extends HttpServlet {
 					//遍历寻找对应的session，销毁
 					for(Iterator<HttpSession> it=sessionlist.iterator();it.hasNext();){
 						HttpSession s=it.next();
-						if(((Staff)s.getAttribute("staff")).getStaffno().equals(account.getStaffno())){
-							System.out.println("强制对方掉线");
-							s.invalidate();
+						if(s!=null){
+							Staff loginStaff=(Staff)s.getAttribute("staff");
+							if(loginStaff!=null){
+								if(loginStaff.getStaffno().equals(account.getStaffno())){
+									System.out.println("强制对方掉线");
+									s.invalidate();
+									it.remove();
+									break;
+								}
+							}
+						}
+						else{
 							it.remove();
-							break;
 						}
 					}
 					
@@ -125,6 +133,7 @@ public class StaffLogin extends HttpServlet {
 						request.setAttribute("overLogin_staffno", account.getStaffno());
 						request.setAttribute("overLogin_password", account.getPassword());
 						request.setAttribute("overLogin_validatecode", code);
+						request.setAttribute("overLogin_remember", remember);
 						request.getRequestDispatcher("/overLogin.jsp").forward(request, response);
 						return;
 					}else{

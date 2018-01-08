@@ -87,7 +87,7 @@
   	
   	//登录
   	function login(){
-  		location.href="/RealProject/web/servlet/login?staffno=${overLogin_staffno}&password=${overLogin_password}&validatecode=${overLogin_validatecode}&over=1";
+  		location.href="/RealProject/web/servlet/login?staffno=${overLogin_staffno}&password=${overLogin_password}&validatecode=${overLogin_validatecode}&over=1&remember=${overLogin_remember}";
   	}
   </script>
   </body>
