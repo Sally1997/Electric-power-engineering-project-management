@@ -151,6 +151,10 @@
     <servlet-class>com.holyshit.web.servlet.DownLoadMessage</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>DownLoadIndex</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DownLoadIndex</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>UploadNotice</servlet-name>
     <servlet-class>com.holyshit.web.servlet.UploadNotice</servlet-class>
   </servlet>
@@ -408,6 +412,10 @@
   <servlet-mapping>
     <servlet-name>DownLoadMessage</servlet-name>
     <url-pattern>/web/servlet/downLoadMessage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DownLoadIndex</servlet-name>
+    <url-pattern>/web/servlet/downLoadIndex</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>UploadNotice</servlet-name>

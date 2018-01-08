@@ -19,7 +19,7 @@ public class ShowIndexAudit extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//String mno = request.getParameter("mno");
-		String mno = "13";
+		String mno=request.getParameter("mno");
 		Inform info = new Inform();
 		InformService is = new InformServiceImpl();
 		info = is.getInformByMno(mno);
