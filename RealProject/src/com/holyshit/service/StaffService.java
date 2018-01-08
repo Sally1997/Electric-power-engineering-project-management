@@ -96,4 +96,11 @@ public interface StaffService {
 	 * @return
 	 */
 	boolean deleteStaffInfo(String[] staffno);
+	
+	/**
+	 * 员工是否存在
+	 * @param staffno
+	 * @return
+	 */
+	boolean isExist(String staffno);
 }

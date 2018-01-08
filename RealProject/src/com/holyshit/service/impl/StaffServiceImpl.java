@@ -374,4 +374,22 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return resFlag;
 	}
+
+	@Override
+	public boolean isExist(String staffno) {
+		// TODO Auto-generated method stub
+		StaffDao sd=new StaffDaoImpl();
+		Staff staff=null;
+		try {
+			staff=sd.selectStaffById(staffno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		if(staff!=null)
+			return true;
+		return false;
+	}
 }

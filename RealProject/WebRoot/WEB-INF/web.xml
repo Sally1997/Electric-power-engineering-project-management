@@ -300,6 +300,11 @@
     <servlet-name>ShowDocumentCheckServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ShowDocumentCheckServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>StaffIsExist</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffIsExist</servlet-class>
+  </servlet>
+
 
 
 
@@ -535,6 +540,10 @@
   <servlet-mapping>
     <servlet-name>ShowDocumentCheckServlet</servlet-name>
     <url-pattern>/web/servlet/showDocumentCheckServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffIsExist</servlet-name>
+    <url-pattern>/web/servlet/staffIsExist</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
