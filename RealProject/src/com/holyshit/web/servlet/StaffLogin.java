@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -105,10 +106,19 @@ public class StaffLogin extends HttpServlet {
 				if(over!=null){
 					//确认登录
 					
-					//进行的操作，使对方掉线
-					//添加人员
-					list.add(account.getStaffno());
-					application.setAttribute("hasLoginedStaff", list);
+					//进行的操作，使对方掉线   可能很慢
+					List<HttpSession> sessionlist=(List<HttpSession>) application.getAttribute("sessionlist");
+					//遍历寻找对应的session，销毁
+					for(Iterator<HttpSession> it=sessionlist.iterator();it.hasNext();){
+						HttpSession s=it.next();
+						if(((Staff)s.getAttribute("staff")).getStaffno().equals(account.getStaffno())){
+							System.out.println("强制对方掉线");
+							s.invalidate();
+							it.remove();
+							break;
+						}
+					}
+					
 				}else{
 					//是否存在
 					if(list.contains(account.getStaffno())){
