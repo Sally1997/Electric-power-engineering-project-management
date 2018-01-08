@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.holyshit.domain.Inform;
+import com.holyshit.domain.PSPlan;
+import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.domain.TaskInfo;
@@ -76,4 +79,15 @@ public interface StageTasksService {
 	 * @return
 	 */
 	StageTask getStageTask(String taskno);
+	
+	/**
+	 * 添加一个新阶段
+	 * @param pno
+	 * @param parray
+	 * @param icArray
+	 * @param anArray
+	 * @param iArray
+	 * @param prArray
+	 */
+	void addTaskAndIndex(String ptn,String pno,StageTask[] parray, String[] icArray,String[] anArray,Inform[] iArray,PSRelation[] prArray);
 }

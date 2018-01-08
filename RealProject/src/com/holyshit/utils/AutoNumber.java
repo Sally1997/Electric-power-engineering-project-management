@@ -107,7 +107,13 @@ public class AutoNumber {
 			//按照********（++）_前八位固定，第九位+1，第十位任意值查询数据库，生成新的编号
 			String s2 = tno.substring(8, 10);
 			ntn += s2;
-			char x8 = (char) (tno.charAt(8)+1);
+			char x8 = (char) (tno.charAt(8));
+			if(x8=='9'){
+				x8 = 'a';
+			}
+			else{
+				x8++;
+			}
 			ntn += x8;
 		}
 		StageTasksService sts = new StageTasksServiceImpl();
@@ -128,6 +134,22 @@ public class AutoNumber {
 		}
 		return ntn;
 	}
+	
+	public String TNToTn(String tn){
+		//获取阶段编号最后一位
+		char x = tn.charAt(tn.length()-1);
+		tn = tn.substring(0,9);
+		if(x!=9){
+			x+=1;
+		}
+		else{//9的话进位到a,其他情况下加一
+			x='a';
+		}
+		tn += x;
+		//项目编号加上x
+		return tn;
+	}
+	
 	
 	/**
 	 * 根据任务编号获得索引编号

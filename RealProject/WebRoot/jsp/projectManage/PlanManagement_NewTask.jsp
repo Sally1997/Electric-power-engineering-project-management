@@ -20,6 +20,7 @@
 	  		response.sendRedirect("/servlet/ShowProjectServlet");
 	  	} 
 	  	request.setAttribute("pno",request.getParameter("pno"));
+	  	request.setAttribute("ptn",request.getParameter("ptn"));
  	%>
 	
 	
@@ -133,7 +134,7 @@
  
  
 <%-- 我是一个隐藏表单域 --%>
-	<form method="post" name="postform" action = "${pageContext.request.contextPath}/web/servlet/taskServlet?pno=${pno }">
+	<form method="post" name="postform" action = "${pageContext.request.contextPath}/web/servlet/taskServlet?pno=${pno }&ptn=${ptn}">
 	<div id="hiddenarea"></div>
 	</form>
  <!--      默认隐藏的内容:审批意见-->
@@ -278,7 +279,7 @@ function addElement()
 		return;
 	}
 	else if(vcharp==""){
-		alert("请选择审核人!");
+		alert("请选择发布人!");
 		return;
 	}
 	else if(vstartdate==""||venddate==""){
@@ -375,7 +376,7 @@ function addElement()
 	//给指标详情按钮添加事件
 	aa.setAttribute("onclick","javascript:ifclick('"+ci.value+"')");
 	
-	//审核人
+	//发布人
 	ci = document.createElement("input");
 	ci.setAttribute("name","fozza_cp");
 	ci.setAttribute("type", "hidden");

@@ -36,10 +36,17 @@ request.setCharacterEncoding("UTF-8");
 		Staff staff = (Staff) session.getAttribute("staff");
 		String staffno = staff.getStaffno();
 		
-		String ptn = request.getParameter("pno");
+		String ptn = request.getParameter("ptn");
+		String pn = request.getParameter("pno");
 		
+		String ptype;
+		if(ptn.length()==6){
+			ptype = "0";
+		}
+		else{
+			ptype = "1";
+		}
 		String sn = ptn.substring(0, 6);
-		String pn = ptn.substring(0, 5);
 		
 		Enumeration<String> e = request.getParameterNames();
 		
@@ -58,7 +65,7 @@ request.setCharacterEncoding("UTF-8");
 		    }
 		}
 		
-		PSPlan[] parray = new PSPlan[len];
+		StageTask[] parray = new StageTask[len];
 		Inform[] iArray = new Inform[len];
 		PSRelation[] prArray = new PSRelation[len];
 		
@@ -67,7 +74,7 @@ request.setCharacterEncoding("UTF-8");
 		String[] anArray = new String[len];
 		
 		for(int i=0;i<len;i++){
-			parray[i] = new PSPlan();
+			parray[i] = new StageTask();
 			iArray[i] = new Inform();
 			prArray[i] = new PSRelation();
 			icArray[i] = new String();
@@ -83,14 +90,17 @@ request.setCharacterEncoding("UTF-8");
 			for(int i=0;i<len;i++){
 				if(name.equals("fozza_sn")){
 					//项目名称以及其他
-					parray[i].setSname(value[i]);
+					parray[i].setTaskname(value[i]);
 					//设置项目编号和初始状态
 					parray[i].setPno(pn);
-				    parray[i].setSstate("0");
+					parray[i].setStageno(sn);
+				    parray[i].setPtaskno(ptn);
+				    parray[i].setTstate("0");
+				    parray[i].setPtasktype(ptype);
 				    
 				    //设置消息相关
 				    iArray[i].setSrcpno(staffno);
-				    iArray[i].setMtype("T1");
+				    iArray[i].setMtype("T3");
 				    
 				    //设置人员关系
 				    prArray[i].setPno(pn);
@@ -141,16 +151,14 @@ request.setCharacterEncoding("UTF-8");
 			}
 		}
 		
-		ProjectStageSercvice pss = new ProjectStageServiceImpl();
-		pss.addStageAndIndex(pn, parray, icArray, anArray, iArray, prArray);
-		
+		StageTasksService sts = new StageTasksServiceImpl();
+		sts.addTaskAndIndex(ptn, pn, parray, icArray, anArray, iArray, prArray);
 		
 		//分发转向
 		response.setHeader("refresh", "0.5;url=/RealProject/servlet/DTreeNodeServlet?pno="+pn);		
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 	

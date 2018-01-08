@@ -278,7 +278,7 @@ function addElement()
 		return;
 	}
 	else if(vcharp==""){
-		alert("请选择审核人!");
+		alert("请选择发布人!");
 		return;
 	}
 	else if(vstartdate==""||venddate==""){

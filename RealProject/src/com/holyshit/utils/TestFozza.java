@@ -20,13 +20,12 @@ public class TestFozza {
 	public void forTest() throws SQLException, ParseException{
 		AutoNumber an = new AutoNumber();
 		
-		String pn = "1002v";
-		String sn = an.PNtoSN(pn);
+		String ptn = "1002v10021";
 		
-		sn = an.SNToSN(sn);
-		System.out.println(sn);
-		sn = an.SNToSN(sn);
-		System.out.println(sn);
+		String tno = an.TrueNewTaskNo(ptn);
+		tno = an.TNToTn(tno);
+		
+		System.out.println(tno);
 	}
 	
 	
