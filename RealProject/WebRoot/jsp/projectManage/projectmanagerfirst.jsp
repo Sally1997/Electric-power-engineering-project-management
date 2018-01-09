@@ -283,8 +283,8 @@
       			var projectbudget=document.getElementById("projectbudget");
       			var checkman=document.getElementById("checkman");
       			var file=document.getElementById("file");
-      			var stime = document.getElementsByName("stime");
-      			var etime = document.getElementsByName("etime");
+      			var stime = document.getElementsByName("stime")[0];
+      			var etime = document.getElementsByName("etime")[0];
       			
       			var others=document.getElementById("others");
       			
@@ -292,6 +292,7 @@
       			var p = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
       			x = p.test(projectbudget.value);
       			//进行验证
+      			
       			if(projectname.value==""){
       				alert("请输入项目名称!");
       				return false;
