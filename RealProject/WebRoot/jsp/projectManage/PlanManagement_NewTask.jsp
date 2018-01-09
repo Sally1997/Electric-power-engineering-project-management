@@ -279,7 +279,7 @@ function addElement()
 		return;
 	}
 	else if(vcharp==""){
-		alert("请选择发布人!");
+		alert("请选择负责人!");
 		return;
 	}
 	else if(vstartdate==""||venddate==""){

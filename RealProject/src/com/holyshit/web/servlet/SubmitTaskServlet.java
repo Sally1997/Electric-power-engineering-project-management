@@ -50,7 +50,7 @@ public class SubmitTaskServlet extends HttpServlet {
 		String pno = request.getParameter("pno");
 		
 		//创建一个本地目录
-		String directorypath = "D:\\RealProject\\Index";
+		String directorypath = File.separator + "var" + File.separator + "ProjectData" + File.separator + "ProjectFile";
 		//新建文件夹
 		File store_directory = new File(directorypath);
 		if(!store_directory.exists()){
@@ -139,7 +139,7 @@ public class SubmitTaskServlet extends HttpServlet {
 		pss.submitTask(no, upload_list, info_list, info);
 		
 		//提交完成啦~跳回树状图把
-		response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
+		response.getWriter().write("<script type='text/javascript'>alert('提交成功!')</script>");
 		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/servlet/DTreeNodeServlet?pno="+pno);
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

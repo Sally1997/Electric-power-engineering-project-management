@@ -84,7 +84,8 @@ $(".innerUl").ProTree({
     var tb = document.getElementById("thisBlock");
     var bitch = document.getElementById("bitch");
     
-    if(id<99999){
+    var fozza_dj_l = id.toString();
+    if(fozza_dj_l.length==5){
     	tb.style.display = "none";
     	bitch.style.display = "";
     }

@@ -313,7 +313,7 @@
       				alert("请上传项目相关文件!");
       				return false;
       			}
-      			else if(stime.value==null||etime.value==null){
+      			else if(stime.value==null||etime.value==null||stime.value==""||etime.value==""){
       				alert("请选择时间!");
       				return false;
       			}

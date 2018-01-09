@@ -149,7 +149,7 @@ public class NewProjectServlet extends HttpServlet {
 		doc.setDtitle(fname);
 		doc.setFtype(suffix);
 		
-		doc.setDtype("3");//文件类型是使用文档
+		doc.setDtype("1");//文件类型是使用文档
 		doc.setFsize((int) fileitem.getSize());//doc 8
 		
 		if(filename.equals("")){

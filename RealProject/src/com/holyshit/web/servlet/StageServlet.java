@@ -21,6 +21,8 @@ import com.holyshit.service.impl.ProjectStageServiceImpl;
 public class StageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("text/html", "charset=UTF-8");
 		
 		HttpSession session = request.getSession();
 		Staff staff = (Staff) session.getAttribute("staff");
