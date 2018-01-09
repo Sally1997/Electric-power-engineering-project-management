@@ -97,7 +97,7 @@
 						<form method="post" name = "search" style="margin-bottom: 20px" class="form-inline">
 						<div align = "center">
 							<div class="form-group">
-							    <input class="form-control" name="SearchStaffNo" maxlength="12" type="text" size = "70%" placeholder="请输入员工编号，长度为12位" value="${lastSearchStaffNo}"/>
+							    <input class="form-control" name="SearchStaffNo" maxlength="12" type="text" size = "50%" placeholder="请输入员工编号，长度为12位" value="${lastSearchStaffNo}"/>
 							</div><!--搜索框-->
 							<div class="form-group">
 							    <a ><button type="submit" id="b2" class="btn btn-primary" onclick="gosearchstaff()" >查看信息</button></a>
