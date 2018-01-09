@@ -20,7 +20,7 @@ import com.holyshit.utils.ConnectionManager;
 public class StaffDaoImpl implements StaffDao {
 	public Staff isinproject(String staffno,String pno) throws SQLException{
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select * from psrelation where staffno=? and pno=? and enable='1'", new BeanHandler<Staff>(Staff.class), staffno,pno);
+		return qr.query("select * from psrelation where staffno=? and pno=?", new BeanHandler<Staff>(Staff.class), staffno,pno);
 	}
 	
 	public void updateemail(String staffno,String email) throws SQLException{

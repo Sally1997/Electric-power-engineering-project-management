@@ -182,8 +182,11 @@ public class StageTaskDaoImpl implements StageTaskDao {
 	public void updateCharP(String tno, String charpno) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
-		qr.update(ConnectionManager.getConnection(),"UPDATE stagetasks SET charpno=? WHERE taskno=?",
+		int res = qr.update(ConnectionManager.getConnection(),"UPDATE stagetasks SET charpno=? WHERE taskno=?",
 				charpno,tno);
+	}
+	public static void main(String[] args) {
+		StageTaskDaoImpl s=new StageTaskDaoImpl();
 	}
 
 }
