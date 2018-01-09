@@ -262,4 +262,16 @@ public class ProjectServiceImpl implements ProjectService {
 		return flag;
 	}
 
+	@Override
+	public void changeProjectStage(String pno) {
+		// TODO Auto-generated method stub
+		ProjectDao pd = new ProjectDaoImpl();
+		try {
+			pd.updateProjectStage(pno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

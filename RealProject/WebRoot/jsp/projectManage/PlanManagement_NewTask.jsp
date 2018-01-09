@@ -118,7 +118,7 @@
                     <div id="responsible_per" class="block">
 						<div style="text-align: right">
 						    <input type = "button" name = "submit" class="btn btn-primary" value = "新建任务" onClick="return addElement();">	
-							<button type="button" class="btn btn-primary" ><a href="javascript:dsubmit()" style="color:white;">结束新建</a></button>
+							<button type="button" class="btn btn-primary" onclick="dsubmit()">结束新建</button>
 						</div>
 						<div class="clear"></div>
 						</div>

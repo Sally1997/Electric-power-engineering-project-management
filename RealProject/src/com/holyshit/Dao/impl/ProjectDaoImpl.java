@@ -141,6 +141,21 @@ public class ProjectDaoImpl implements ProjectDao {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("select * from project where pno=?",new BeanHandler<Project>(Project.class),pno);
 	}
+
+	@Override
+	public void updateProjectStage(String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE project SET pstage = calRateOfProj(?) where pno=? ",pno,pno);
+	}
+
+	@Override
+	public List<Object> selectProjectStage(String pno) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT COUNT(taskno) AS haha FROM stagetasks WHERE pno=? "+
+				"UNION SELECT COUNT(taskno) AS haha FROM stagetasks "+
+				"WHERE pno=? AND tstate IN('3','4')", new ColumnListHandler(),pno,pno);
+	}
 	
 	@Override
 	public List<Project> selectAllMaybeChangeProject() throws SQLException {
@@ -162,7 +177,6 @@ public class ProjectDaoImpl implements ProjectDao {
 			hehe[i][0]=entry.getValue();
 			i++;
 		}
-		
 		//批处理执行更新任务
 		String sql="update project set pstate=? where pno=?";
 		return qr.batch(ConnectionManager.getConnection(), sql, hehe);

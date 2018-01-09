@@ -91,6 +91,12 @@ public interface ProjectService {
 	public Project getProjectInfo(String pno);
 	
 	/**
+	 * 改变项目状态
+	 * @param pno
+	 */
+	public void changeProjectStage(String pno);
+
+	/**
 	 * 获取状态可能改变的项目
 	 * @return
 	 */
