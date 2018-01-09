@@ -242,6 +242,7 @@ $(".innerUl").ProTree({
                 </div>
             </div> 
     		</div>
+    		
     		</main>
 	    </div>
 	</div>
@@ -749,6 +750,10 @@ function search_staff(){
 
 //选择按钮事件
 function give_option(){
+	var aja = new XMLHttpRequest();
+	var node = document.getElementById("task_name").innerHTML;
+	var rcpn = null;
+	
 	var ccp = document.getElementsByName("choose_char_per");
 	//这个是弹窗的id
 	var ser = document.getElementsByName("search")[0];
@@ -756,10 +761,20 @@ function give_option(){
 	for(var i=0;i<ccp.length;i++){
 		if(ccp[i].checked==true){
 			p.innerHTML = ccp[i].value;
-			mng.style.display = "";
+			rcpn = ccp[i].value;
 			break;
 		}
 	}
+	
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			alert(aja.responseText);
+		}
+	}
+	
+	alert("您将修改负责人为"+rcpn);
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/changeTaskCharP?rcpn="+rcpn+"&node="+node);
+	aja.send(null);
 }
 
 </script>
