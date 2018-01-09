@@ -285,8 +285,6 @@
 			    <th>标号</th>
 			    <th>姓名</th>
 			    <th>联系方式</th>
-			    <th>职责</th>
-			    <th>备注</th>
 			    <!-- 编号，名字，电话号，职责，备注 -->
 		    </tr>
 		    <tbody id="iamtbody"></tbody>
@@ -365,8 +363,6 @@ function search_member(){
 				var nametxt = document.createTextNode(str[i].name);
 				var staffnotxt = document.createTextNode(str[i].staffno);
 				var tetxt = document.createTextNode(str[i].te);
-				var dutytxt = document.createTextNode(str[i].duty);
-				var notestxt = document.createTextNode(str[i].notes);
 				
 				//创建td节点
 				var td_radio = document.createElement("td");
@@ -378,16 +374,12 @@ function search_member(){
 				var td_staffno = document.createElement("td");
 				var td_name = document.createElement("td");
 				var td_te = document.createElement("td");
-				var td_duty = document.createElement("td");
-				var td_notes = document.createElement("td");
 				
 				//插入节点
 				td_radio.appendChild(td_input);
 				td_staffno.appendChild(staffnotxt);
 				td_name.appendChild(nametxt);
 				td_te.appendChild(tetxt);
-				td_duty.appendChild(dutytxt);
-				td_notes.appendChild(notestxt);
 				
 				//装在tr里面
 				var tr_t = document.createElement("tr");
@@ -395,8 +387,6 @@ function search_member(){
 				tr_t.appendChild(td_staffno);
 				tr_t.appendChild(td_name);
 				tr_t.appendChild(td_te);
-				tr_t.appendChild(td_duty);
-				tr_t.appendChild(td_notes);
 				
 				//把创建的tr都保存在tbody里面，方便每次删除
 				//tbody_t = document.getElementById("iamtbody");
@@ -409,7 +399,7 @@ function search_member(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype");
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype");
 	
 	aja.send(null);
 }
@@ -437,8 +427,6 @@ function search_staff(){
 				var nametxt = document.createTextNode(str[i].name);
 				var staffnotxt = document.createTextNode(str[i].staffno);
 				var tetxt = document.createTextNode(str[i].te);
-				var dutytxt = document.createTextNode(str[i].duty);
-				var notestxt = document.createTextNode(str[i].notes);
 				
 				//创建td节点
 				var td_radio = document.createElement("td");
@@ -450,16 +438,12 @@ function search_staff(){
 				var td_staffno = document.createElement("td");
 				var td_name = document.createElement("td");
 				var td_te = document.createElement("td");
-				var td_duty = document.createElement("td");
-				var td_notes = document.createElement("td");
 				
 				//插入节点
 				td_radio.appendChild(td_input);
 				td_staffno.appendChild(staffnotxt);
 				td_name.appendChild(nametxt);
 				td_te.appendChild(tetxt);
-				td_duty.appendChild(dutytxt);
-				td_notes.appendChild(notestxt);
 				
 				//装在tr里面
 				var tr_t = document.createElement("tr");
@@ -467,8 +451,6 @@ function search_staff(){
 				tr_t.appendChild(td_staffno);
 				tr_t.appendChild(td_name);
 				tr_t.appendChild(td_te);
-				tr_t.appendChild(td_duty);
-				tr_t.appendChild(td_notes);
 				
 				//把创建的tr都保存在tbody里面，方便每次删除
 				//tbody_t = document.getElementById("iamtbody");
@@ -481,7 +463,7 @@ function search_staff(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+keyword);
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?type=nptype&keyword="+keyword);
 	
 	aja.send(null);
 }

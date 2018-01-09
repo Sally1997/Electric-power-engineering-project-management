@@ -52,7 +52,6 @@ public class ProjectAuditServlet extends HttpServlet {
 		String ai = request.getParameter("auditinfo");
 		String pc = request.getParameter("PersonInCharge");
 		
-		System.out.println(mno);
 		if(aev.equals("agree")){
 			aev="2";
 		}
@@ -64,7 +63,7 @@ public class ProjectAuditServlet extends HttpServlet {
 		ProjectService ps = new ProjectServiceImpl();
 		InformService infoser = new InformServiceImpl();
 		
-		if(pc==""||pc==null){
+		if(pc==null){
 			as.changePAAInfo(mno, aev, ai);
 			//得到更改后的paa
 			paa1 = as.getPAAInfoByMno(mno);
@@ -145,7 +144,7 @@ public class ProjectAuditServlet extends HttpServlet {
 			
 			info.setSrcpno(paa1.getAuditorno());
 			info.setDstpno(paa1.getNauditorno());
-			info.setMtype("3");
+			info.setMtype("A11");
 			info.setHasread("0");
 			
 			Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -157,7 +156,7 @@ public class ProjectAuditServlet extends HttpServlet {
 			
 		//跳转到消息界面？？？？
 		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet?type=1");
 		//request.getRequestDispatcher("/")
 	}
 

@@ -293,6 +293,10 @@ function addElement()
 		alert("预算金额非法输入格式!");
 		return;
 	}
+	else if(vbudget.length>8){
+		alert("预算金额非法输入格式!");
+		return;
+	}
 	else if(yyy){
 		alert("日期格式错误!请重新检查!");
 		return;

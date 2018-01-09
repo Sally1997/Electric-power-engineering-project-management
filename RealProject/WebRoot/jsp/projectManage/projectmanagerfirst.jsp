@@ -291,8 +291,8 @@
       			var x=true;
       			var p = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
       			x = p.test(projectbudget.value);
-      			//进行验证
       			
+      			//进行验证
       			if(projectname.value==""){
       				alert("请输入项目名称!");
       				return false;
@@ -306,6 +306,10 @@
       				return;
       			}
       			else if(!x){
+      				alert("预算金额非法输入格式!");
+      				return false;
+      			}
+      			else if(projectbudget.value.length>8){
       				alert("预算金额非法输入格式!");
       				return false;
       			}
