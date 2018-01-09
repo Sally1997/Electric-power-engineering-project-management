@@ -40,6 +40,7 @@ public class SubmitTaskServlet extends HttpServlet {
 		boolean ismpc = ServletFileUpload.isMultipartContent(request);
 		if(!ismpc){
 			System.out.println("enctype不是multipart/form-data格式");
+			return;
 		}
 		
 		//保存阶段或者任务的值

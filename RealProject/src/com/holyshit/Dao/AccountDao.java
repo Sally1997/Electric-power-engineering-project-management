@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import com.holyshit.domain.Account;
 
 public interface AccountDao {
+	
 	/**
 	 * 通锟斤拷员锟斤拷锟斤拷挪锟窖�
 	 * @param id  员锟斤拷锟斤拷锟�

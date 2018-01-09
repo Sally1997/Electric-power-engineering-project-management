@@ -1,5 +1,6 @@
 package com.holyshit.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -116,4 +117,11 @@ public interface StaffService {
 	 * @param psr
 	 */
 	void addAStaff(PSRelation psr);
+	
+	/**
+	 * 获取管理员信息
+	 * @return
+	 * 
+	 */
+	Staff findRootInfo();
 }

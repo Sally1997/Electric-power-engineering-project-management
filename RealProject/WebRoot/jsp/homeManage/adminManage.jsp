@@ -544,7 +544,7 @@
       		
       		//删除单个员工
       		function deleteStaff(id,staffname){
-      			var res=confirm("您确定删除一下员工吗？\n    --"+id+":"+staffname);
+      			var res=confirm("您确定删除以下员工吗？\n    --"+id+":"+staffname);
       			if(!res)
       				return;
       			var req=new XMLHttpRequest();

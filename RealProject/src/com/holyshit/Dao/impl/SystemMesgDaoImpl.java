@@ -13,12 +13,12 @@ import com.holyshit.utils.C3P0Util;
 public class SystemMesgDaoImpl implements SystemMesgDao{
 	public List<TaskMesg> listSystemMesghr(String me) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select b.pno,b.pname,a.mdate,a.mtype,a.hasread from inform a,project b where a.busNo=b.pno and a.dstPNo=? and a.mtype in('S0','S1')", me, new BeanListHandler<TaskMesg>(TaskMesg.class));
+		return qr.query("select a.mno,b.pno,b.pname,a.mdate,a.mtype,a.hasread from inform a,project b where a.busNo=b.pno and a.dstPNo=? and a.mtype in('S0','S1')", me, new BeanListHandler<TaskMesg>(TaskMesg.class));
 	}
 	
 	
 	public List<TaskMesg> listSystemMesgroot(String me) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select a.mdate,a.mtype,a.hasread from inform a where a.dstPNo=? and a.mtype in('S2','S3','S4')", me, new BeanListHandler<TaskMesg>(TaskMesg.class));
+		return qr.query("select a.mno,a.mdate,a.mtype,a.hasread from inform a where a.dstPNo=? and a.mtype in('S2','S3','S4')", me, new BeanListHandler<TaskMesg>(TaskMesg.class));
 	}
 }

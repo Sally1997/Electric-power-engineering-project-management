@@ -110,7 +110,7 @@
                           <p style="color:red"> ${error['username'] } ${error['validatecode'] }${locError } </p>
                           </div>
                           <div style="text-align: right;margin-top: 30px">
-                          <a href="javascript:putAdmin()" rel="联系管理员" class="btn btn-link" data-toggle="modal" data-target="#forget">忘记密码？</a>
+                          <a href="javascript:putAdmin()" rel="联系管理员" class="btn btn-link">忘记密码？</a>
                           <button type="submit" class="btn btn-primary">登录</button>
                           </div>
               	      </form>
@@ -132,9 +132,10 @@
       </div>
       <div class="modal-body">
           <dl>
-		  <dt>电话</dt><dd class="detail_right">15823145263</dd>
-		  <dt>邮箱</dt><dd class="detail_right">fuck@gmail.com</dd>
-		  <dt>QQ</dt><dd class="detail_right">952412532</dd>
+          <dt>姓名</dt><dd class="detail_right" id="admin_name">952412532</dd>
+		  <dt>电话</dt><dd class="detail_right" id="admin_tel">15823145263</dd>
+		  <dt>邮箱</dt><dd class="detail_right" id="admin_email">fuck@gmail.com</dd>
+		  
           </dl>
       </div>
     </div>
@@ -149,10 +150,20 @@
   		img.src="${pageContext.request.contextPath }/web/servlet/validatecode?times="+new Date().getTime();
   	}
   	function putAdmin(){
-  		var ele=document.getElementById("admin_detail");
-  		var ele_2=document.getElementById("find_passwd");
-  		ele.style.display="block";
-  		ele_2.style.display="none";
+  		//获取管理员信息
+  		var req=new XMLHttpRequest();
+  		req.onreadystatechange=function(){
+  			if(req.readyState==4&&req.status==200){
+  				var rootInfo=eval("("+req.responseText+")");
+  				document.getElementById("admin_name").innerHTML=rootInfo.name;
+  				document.getElementById("admin_tel").innerHTML=rootInfo.te;
+  				document.getElementById("admin_email").innerHTML=rootInfo.email;
+  				$("#forget").modal("show");
+  			}
+  			
+  		};
+  		req.open("get", "/RealProject/web/servlet/getRootInfo");
+  		req.send(null);
   	}
   </script>
 </html>

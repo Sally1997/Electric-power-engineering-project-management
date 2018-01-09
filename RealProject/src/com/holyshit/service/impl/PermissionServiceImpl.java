@@ -1,6 +1,7 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 
@@ -13,6 +14,7 @@ import com.holyshit.Dao.impl.PSPlanDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.domain.PSPlan;
+import com.holyshit.domain.Project;
 import com.holyshit.service.PermissionService;
 import com.holyshit.service.StageTasksService;
 import com.holyshit.utils.ConnectionManager;
@@ -60,10 +62,12 @@ public class PermissionServiceImpl implements PermissionService {
 		// TODO Auto-generated method stub
 		boolean res=false;
 		ProjectDao pd=new ProjectDaoImpl();
+		
 		String duty=null;
 		try {
+			Project p = pd.selectProjetById(pno);
 			duty = pd.selectDuty(staffno, pno);
-			if(duty!=null&&duty.equals("项目经理"))
+			if(duty!=null&&(!p.getPstate().equals("n"))&&(!p.getPstate().equals("0"))&&duty.equals("项目经理"))
 				res=true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
