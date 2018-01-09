@@ -89,7 +89,7 @@ public interface StaffService {
 	 * @param change
 	 * @return
 	 */
-	boolean editStaffInfo(Staff staff,boolean change,String password);
+	boolean editStaffInfo(Staff staff,boolean change,String password,String changeFlag);
 	
 	/**
 	 * 删除员工信息

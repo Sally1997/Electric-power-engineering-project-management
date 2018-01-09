@@ -274,7 +274,7 @@ public class StaffServiceImpl implements StaffService{
 		return false;
 	}
 	@Override
-	public boolean editStaffInfo(Staff staff, boolean change,String password) {
+	public boolean editStaffInfo(Staff staff, boolean change,String password,String changeFlag) {
 		// TODO Auto-generated method stub
 		StaffDao sd=new StaffDaoImpl();
 		boolean flag=false;
@@ -297,10 +297,12 @@ public class StaffServiceImpl implements StaffService{
 		if(change){
 			//重置了密码
 			try {
+				res3=1;
 				ConnectionManager.startTransaction();
 				res1=sd.editStaff(staff);
 				res2=ad.editAccount(staff.getStaffno(), password);
-				res3=inform.insertInform(data,1);
+				if(changeFlag.equals("1"))
+					res3=inform.insertInform(data,1);
 				res4=inform.insertInform(data2, 1);
 				if(!(res1==1&&res2==1&&res3==1&&res4==1)){
 					throw new SQLException();
