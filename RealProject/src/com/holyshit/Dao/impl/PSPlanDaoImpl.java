@@ -2,13 +2,16 @@ package com.holyshit.Dao.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
 
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.domain.PSPlan;
+import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
@@ -48,6 +51,33 @@ public class PSPlanDaoImpl implements PSPlanDao {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT charpno FROM psplan WHERE stageno=?", new ColumnListHandler(),
 				sno);
+	}
+
+	@Override
+	public List<PSPlan> selectAllMaybeChangeStage() throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="select * from psplan where sstate='0' or sstate='1'";
+		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<PSPlan>(PSPlan.class));
+	}
+
+	@Override
+	public int[] updateStageByPara(Map<String, String> para)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] hehe=new Object[para.size()][];
+		int i=0;
+		for(Map.Entry<String, String> entry:para.entrySet()){
+			hehe[i]=new Object[2];
+			hehe[i][1]=entry.getKey();
+			hehe[i][0]=entry.getValue();
+			i++;
+		}
+		
+		//批处理执行更新任务
+		String sql="update psplan set sstate=? where stageno=?";
+		return qr.batch(ConnectionManager.getConnection(), sql, hehe);
 	}
 
 }

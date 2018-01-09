@@ -3,9 +3,11 @@ package com.holyshit.listener;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +16,18 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSession;
 
+import com.holyshit.Dao.PSPlanDao;
+import com.holyshit.Dao.impl.PSPlanDaoImpl;
+import com.holyshit.domain.PSPlan;
+import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
+import com.holyshit.domain.StageTask;
+import com.holyshit.service.PSPlanService;
+import com.holyshit.service.ProjectService;
+import com.holyshit.service.StageTasksService;
+import com.holyshit.service.impl.PSPlanServiceImpl;
+import com.holyshit.service.impl.ProjectServiceImpl;
+import com.holyshit.service.impl.StageTasksServiceImpl;
 
 public class DeleteSessionListener implements ServletContextListener{
 
@@ -92,17 +105,99 @@ public class DeleteSessionListener implements ServletContextListener{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				StageTasksService ss=new StageTasksServiceImpl();
+				List<StageTask> res = ss.findAllChangeState();
+				Map<String, String> para=new HashMap<String, String>();
+				for(StageTask task:res){
+					long curtime=new Date().getTime();
+					if((curtime>task.getEtime().getTime())){
+						//大于截至日期
+						para.put(task.getTaskno(),"2");
+					}else if((curtime>task.getStime().getTime())&&(!task.getTstate().equals("1"))){
+						para.put(task.getTaskno(),"1");
+					}
+				}
+				//刷新任务状态
+				if(para.size()>0){
+					StageTasksService sts=new StageTasksServiceImpl();
+					boolean flag = sts.refreshTaskState(para);
+					if(flag)
+						System.out.println("任务状态更新成功");
+					else {
+						System.out.println("任务状态更新失败");
+					}
+				}
 				
 			}
-		}, time, 1000*24*60*60);
+		}, 0, 60000);
 		
 		//定时更新阶段状态
 		//每晚12点
-		
+		Timer stageTimer=new Timer();
+		stageTimer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				PSPlanService ss=new PSPlanServiceImpl();
+				List<PSPlan> res = ss.findAllChangeState();
+				Map<String, String> para=new HashMap<String, String>();
+				for(PSPlan task:res){
+					long curtime=new Date().getTime();
+					if((curtime>task.getEtime().getTime())){
+						//大于截至日期
+						para.put(task.getStageno(),"2");
+					}else if((curtime>task.getStime().getTime())&&(!task.getSstate().equals("1"))){
+						para.put(task.getStageno(),"1");
+					}
+				}
+				//刷新任务状态
+				if(para.size()>0){
+					PSPlanService sts=new PSPlanServiceImpl();
+					boolean flag = sts.refreshStageState(para);
+					if(flag)
+						System.out.println("阶段状态更新成功");
+					else {
+						System.out.println("阶段状态更新失败");
+					}
+				}
+				
+			}
+		}, 60000, 60000);
 		
 		//定时更新项目状态
 		//每晚12点
-		
+		Timer projectTimer=new Timer();
+		projectTimer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				ProjectService ss=new ProjectServiceImpl();
+				List<Project> res = ss.findAllChangeState();
+				Map<String, String> para=new HashMap<String, String>();
+				for(Project task:res){
+					long curtime=new Date().getTime();
+					if((curtime>task.getEtime().getTime())){
+						//大于截至日期
+						para.put(task.getPno(),"2");
+					}else if((curtime>task.getStime().getTime())&&(!task.getPstate().equals("1"))){
+						para.put(task.getPno(),"1");
+					}
+				}
+				//刷新任务状态
+				if(para.size()>0){
+					ProjectService sts=new ProjectServiceImpl();
+					boolean flag = sts.refreshProjectState(para);
+					if(flag)
+						System.out.println("阶段状态更新成功");
+					else {
+						System.out.println("阶段状态更新失败");
+					}
+				}
+				
+			}
+		}, 120000, 60000);
 		
 		//定时清理tmp文件夹
 		//每晚12点

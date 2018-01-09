@@ -11,17 +11,20 @@ import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StaffDao;
+import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.impl.AuditDaoImpl;
 import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
+import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
+import com.holyshit.domain.StageTask;
 import com.holyshit.service.ProjectService;
 import com.holyshit.utils.ConnectionManager;
 import com.holyshit.utils.StateConversion;
@@ -217,6 +220,46 @@ public class ProjectServiceImpl implements ProjectService {
 			e.printStackTrace();
 		}
 		return pro;
+	}
+	
+	@Override
+	public List<Project> findAllChangeState() {
+		// TODO Auto-generated method stub
+		List<Project> res=null;
+		ProjectDao std=new ProjectDaoImpl();
+		try {
+			res = std.selectAllMaybeChangeProject();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public boolean refreshProjectState(Map<String, String> para) {
+		// TODO Auto-generated method stub
+		ProjectDao std=new ProjectDaoImpl();
+		boolean flag=true;
+		try {
+			int[] res = std.updateProjectByPara(para);
+			for(int i=0;i<res.length;i++)
+				if(res[i]==0){
+					flag=false;
+					break;
+				}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			flag=false;
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return flag;
 	}
 
 	@Override

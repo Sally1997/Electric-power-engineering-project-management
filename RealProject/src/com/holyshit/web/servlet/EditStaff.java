@@ -41,12 +41,13 @@ public class EditStaff extends HttpServlet {
 		newStaff.setTe(request.getParameter("te"));
 		newStaff.setEmail(request.getParameter("email"));
 		String password=request.getParameter("password");
+		String changeFlag=request.getParameter("changeFlag");
 		StaffService ss=new StaffServiceImpl();
 		boolean flag=false;
 		if(password.equals("")){
-			flag=ss.editStaffInfo(newStaff,false,password);
+			flag=ss.editStaffInfo(newStaff,false,password,changeFlag);
 		}else{
-			flag=ss.editStaffInfo(newStaff,true,MD5Util.md5(password));
+			flag=ss.editStaffInfo(newStaff,true,MD5Util.md5(password),changeFlag);
 		}
 		
 		if(flag){

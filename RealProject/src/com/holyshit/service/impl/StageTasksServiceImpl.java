@@ -247,4 +247,44 @@ public class StageTasksServiceImpl implements StageTasksService{
 			}
 	}
 
+	@Override
+	public List<StageTask> findAllChangeState() {
+		// TODO Auto-generated method stub
+		List<StageTask> res=null;
+		StageTaskDao std=new StageTaskDaoImpl();
+		try {
+			res = std.selectAllMaybeChangeTask();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public boolean refreshTaskState(Map<String, String> para) {
+		// TODO Auto-generated method stub
+		StageTaskDao std=new StageTaskDaoImpl();
+		boolean flag=true;
+		try {
+			int[] res = std.updateTaskByPara(para);
+			for(int i=0;i<res.length;i++)
+				if(res[i]==0){
+					flag=false;
+					break;
+				}
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			flag=false;
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		return flag;
+	}
+
 }

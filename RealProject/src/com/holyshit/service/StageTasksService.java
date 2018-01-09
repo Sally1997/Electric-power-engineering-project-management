@@ -90,4 +90,17 @@ public interface StageTasksService {
 	 * @param prArray
 	 */
 	void addTaskAndIndex(String ptn,String pno,StageTask[] parray, String[] icArray,String[] anArray,Inform[] iArray,PSRelation[] prArray);
+	
+	/**
+	 * 获取状态可能改变的任务
+	 * @return
+	 */
+	List<StageTask> findAllChangeState();
+	
+	/**
+	 * 刷新任务状态
+	 * @param para
+	 * @return
+	 */
+	boolean refreshTaskState(Map<String, String> para);
 }

@@ -503,17 +503,28 @@
       					return;
       			}
       			var warning="您刚才做了如下修改:\n";
+      			var changeFlag="0";
       			var data=global_staff;
-      			if(data.name!=editStaff_name)
+      			if(data.name!=editStaff_name){
       				warning+="    -- 将员工姓名从 ["+data.name+"] 改变为了 ["+editStaff_name+"] \n";
-      			if(data.sex!=editStaff_sex)
+      				changeFlag="1";
+      			}
+      			if(data.sex!=editStaff_sex){
       				warning+="    -- 将员工性别从 ["+data.sex+"] 改变为了 ["+editStaff_sex+"] \n";
-      			if(data.birthday!=editStaff_birthday)
+      				changeFlag="1";
+      			}
+      			if(data.birthday!=editStaff_birthday){
       				warning+="    -- 将出生日期从 ["+data.birthday+"] 改变为了 ["+editStaff_birthday+"] \n";
-      			if(data.te!=editStaff_te)
+      				changeFlag="1";
+      			}
+      			if(data.te!=editStaff_te){
       				warning+="    -- 将员工电话号码从 ["+data.te+"] 改变为了 ["+editStaff_te+"] \n";
-      			if(data.email!=editStaff_email)
+      				changeFlag="1";
+      			}
+      			if(data.email!=editStaff_email){
       				warning+="    -- 将员工邮箱从 ["+data.email+"] 改变为了 ["+editStaff_email+"] \n";
+      				changeFlag="1";
+      			}
       			if(editStaff_password!="")
       				warning+="    -- 重置了员工密码 \n";
       			if(warning=="您刚才做了如下修改:\n"){
@@ -537,7 +548,7 @@
       				}
       			};
       			if(isSend){
-	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+window.encodeURI(editStaff_name)+"&sex="+window.encodeURI(editStaff_sex)+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password);
+	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+window.encodeURI(editStaff_name)+"&sex="+window.encodeURI(editStaff_sex)+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password+"&changeFlag="+changeFlag);
 	      			req.send(null);
       			}
       		}
