@@ -301,6 +301,10 @@
       				alert("请选择审批人!");
       				return false;
       			}
+      			else if(checkman.value.length<15){
+      				alert("请选择正确的审批人!");
+      				return;
+      			}
       			else if(!x){
       				alert("预算金额非法输入格式!");
       				return false;
@@ -313,6 +317,8 @@
       				alert("请选择时间!");
       				return false;
       			}
+      			
+      			alert("数据提交中……请等待服务器结果");
       		}
       	
       </script>

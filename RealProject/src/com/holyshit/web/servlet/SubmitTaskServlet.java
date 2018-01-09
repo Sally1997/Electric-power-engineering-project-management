@@ -139,7 +139,8 @@ public class SubmitTaskServlet extends HttpServlet {
 		pss.submitTask(no, upload_list, info_list, info);
 		
 		//提交完成啦~跳回树状图把
-		response.sendRedirect("/RealProject/servlet/DTreeNodeServlet?pno="+pno);
+		response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/servlet/DTreeNodeServlet?pno="+pno);
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request,response);
