@@ -14,6 +14,7 @@ import com.holyshit.Dao.impl.AccountDaoImpl;
 import com.holyshit.Dao.impl.AuthorityDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.NoteDaoImpl;
+import com.holyshit.Dao.impl.PSRelationDaoImpl;
 import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.Note;
@@ -348,25 +349,21 @@ public class StaffServiceImpl implements StaffService{
 		// TODO Auto-generated method stub
 		StaffDao sd=new StaffDaoImpl();
 		AccountDao ad=new AccountDaoImpl();
-		AuthorityDao authorityDao=new AuthorityDaoImpl();
-		boolean resFlag=false;
+		PSRelationDao pr=new PSRelationDaoImpl();
+		boolean resFlag=true;
 		try {
 			ConnectionManager.startTransaction();
-			//有先后关系
-			int[] res2 = ad.deleteAccount(staffs);
-			int[] res1 = sd.deleteStaff(staffs);
-			boolean flag=false;
-			for(int i=0;i<res1.length;i++)
-				if(res1[i]==0||res2[i]==0){
-					flag=true;
-					break;
+			int[] res1 = pr.deleteAllRelation(staffs);
+			int[] res2=ad.deleteAccount(staffs);
+			int[] res3=sd.deleteStaff(staffs);
+			for(int i=0;i<res1.length;i++){
+				if(res1[i]!=0||res2[i]==0||res3[i]==0){
+					resFlag=false;
+					throw new SQLException();
 				}
-			if(!flag){
-				resFlag=true;
-				ConnectionManager.commit();
-			}else {
-				ConnectionManager.rollback();
 			}
+			
+			ConnectionManager.commit();
 		} catch (SQLException e) {
 			ConnectionManager.rollback();
 			// TODO Auto-generated catch block
@@ -383,7 +380,7 @@ public class StaffServiceImpl implements StaffService{
 		StaffDao sd=new StaffDaoImpl();
 		Staff staff=null;
 		try {
-			staff=sd.selectStaffById(staffno);
+			staff=sd.selectStaffByIdOnRegister(staffno);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

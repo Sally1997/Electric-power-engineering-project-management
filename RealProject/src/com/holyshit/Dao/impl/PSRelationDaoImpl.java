@@ -33,4 +33,16 @@ public class PSRelationDaoImpl implements PSRelationDao {
 				psr.getPno(),psr.getStaffno(),psr.getDuty());
 	}
 
+	@Override
+	public int[] deleteAllRelation(String[] para) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] hehe=new Object[para.length][1];
+		for(int i=0;i<para.length;i++)
+			hehe[i][0]=para[i];
+		
+		String sql="delete from psrelation where staffno=?";
+		return qr.batch(ConnectionManager.getConnection(), sql,hehe);
+	}
+
 }

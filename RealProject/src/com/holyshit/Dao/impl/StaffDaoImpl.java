@@ -20,7 +20,7 @@ import com.holyshit.utils.ConnectionManager;
 public class StaffDaoImpl implements StaffDao {
 	public Staff isinproject(String staffno,String pno) throws SQLException{
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select * from psrelation where staffno=? and pno=?", new BeanHandler<Staff>(Staff.class), staffno,pno);
+		return qr.query("select * from psrelation where staffno=? and pno=? and enable='1'", new BeanHandler<Staff>(Staff.class), staffno,pno);
 	}
 	
 	public void updateemail(String staffno,String email) throws SQLException{
@@ -38,7 +38,7 @@ public class StaffDaoImpl implements StaffDao {
 	public Staff selectStaffById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"select * from staff where staffno=?",new BeanHandler<Staff>(Staff.class),id);
+		return qr.query(ConnectionManager.getConnection(),"select * from staff where staffno=? and enable='1'",new BeanHandler<Staff>(Staff.class),id);
 		
 	}
 
@@ -46,23 +46,23 @@ public class StaffDaoImpl implements StaffDao {
 	public List<Staff> selectNameNoByname(String msg) throws Exception {
 		QueryRunner qr=new QueryRunner();
 		return qr.query(ConnectionManager.getConnection(),"select name,staffno from staff "
-				+"where name like ?",new BeanListHandler<Staff>(Staff.class),msg+"%"
+				+"where name like ? and enable='1'",new BeanListHandler<Staff>(Staff.class),msg+"%"
 				);
 	}
 	
 	public List<StaffDuty> findAllStaffs(String pno,int CurrentPage,int PageSize) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("select * from psrelation join  staff on psrelation.staffno=staff.staffno where pno=? limit ?,?", new BeanListHandler<StaffDuty>(StaffDuty.class),pno,(CurrentPage-1)*PageSize,PageSize);
+		return qr.query("select * from psrelation join  staff on psrelation.staffno=staff.staffno where pno=? and enable='1' limit ?,?", new BeanListHandler<StaffDuty>(StaffDuty.class),pno,(CurrentPage-1)*PageSize,PageSize);
 		
 	}
 	public int countAllStaffs(String pno) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		long count = (Long)qr.query("select count(*) from psrelation where pno=?",new ScalarHandler(),pno);
+		long count = (Long)qr.query("select count(*) from psrelation where pno=? and enable='1'",new ScalarHandler(),pno);
 		return (int)count;
 	}
     public Staff findAStaff(String staffno) throws SQLException{
     	QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-    	return qr.query(ConnectionManager.getConnection(),"select * from staff where staffno=?",new BeanHandler<Staff>(Staff.class),staffno);
+    	return qr.query(ConnectionManager.getConnection(),"select * from staff where staffno=? and enable='1'",new BeanHandler<Staff>(Staff.class),staffno);
     }
 	@Override
 	public void delAllStaffs(String[] staffnos, String pno) throws SQLException {
@@ -72,7 +72,7 @@ public class StaffDaoImpl implements StaffDao {
 		for (int i = 0; i < params.length; i++) {
 			 params[i] = new Object[]{staffnos[i],pno};
 		}
-		qr.batch("delete from psrelation where staffno = ? and pno=?", params);
+		qr.batch("delete from psrelation where staffno = ? and pno=? and enable='1'", params);
 	}
 	
 	public void addAStaff(PSRelation psr) throws SQLException{
@@ -86,7 +86,7 @@ public class StaffDaoImpl implements StaffDao {
 	public int selectStaffByNo(String no) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		long l =  (long) qr.query("select count(*) from psrelation "+
-				"where staffno=?", new ScalarHandler(),no);
+				"where staffno=? and enable='1'", new ScalarHandler(),no);
 		return (int)l;
 	}
 
@@ -130,7 +130,7 @@ public class StaffDaoImpl implements StaffDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
-		String sql="select * from staff where '1'='1'";
+		String sql="select * from staff where '1'='1' and enable='1'";
 		if(condition.getStaffno()!=null){
 			sql+=" and staffno like '%"+condition.getStaffno()+"%'";
 		}
@@ -157,7 +157,7 @@ public class StaffDaoImpl implements StaffDao {
 	public long selectStaffNum(Staff condition) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner();
-		String sql="select count(*) from staff where '1'='1'";
+		String sql="select count(*) from staff where '1'='1' and enable='1'";
 		if(condition.getStaffno()!=null){
 			sql+=" and staffno like '%"+condition.getStaffno()+"%'";
 		}
@@ -183,14 +183,14 @@ public class StaffDaoImpl implements StaffDao {
 	public int addStaff(Staff staff) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.update(ConnectionManager.getConnection(), "insert into staff values(?,?,?,?,?,?)",staff.getStaffno(),staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail());
+		return qr.update(ConnectionManager.getConnection(), "insert into staff values(?,?,?,?,?,?,?)",staff.getStaffno(),staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail(),"1");
 	}
 
 	@Override
 	public int editStaff(Staff staff) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.update(ConnectionManager.getConnection(), "update staff set name=?,sex=?,birthday=?,te=?,email=? where staffno=?",staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail(),staff.getStaffno());
+		return qr.update(ConnectionManager.getConnection(), "update staff set name=?,sex=?,birthday=?,te=?,email=? where staffno=? and enable='1'",staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail(),staff.getStaffno());
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public class StaffDaoImpl implements StaffDao {
 		for(int i=0;i<staffs.length;i++){
 			para[i][0]=staffs[i];
 		}
-		return qr.batch(ConnectionManager.getConnection(), "delete from staff where staffno=?",para);
+		return qr.batch(ConnectionManager.getConnection(), "update staff set enable='0' where staffno=?",para);
 	}
 
 	@Override
@@ -213,6 +213,16 @@ public class StaffDaoImpl implements StaffDao {
 			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
 			"OR te LIKE ?) limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%");
+	}
+	/**
+	 * 切记，这个一定不要添加enable=‘1’
+	 */
+	@Override
+	public Staff selectStaffByIdOnRegister(String staffno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="select * from staff where staffno=?";
+		return qr.query(ConnectionManager.getConnection(), sql, new BeanHandler<Staff>(Staff.class),staffno);
 	}
 
 }

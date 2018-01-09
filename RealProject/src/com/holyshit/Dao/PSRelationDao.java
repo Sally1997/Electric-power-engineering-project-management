@@ -19,4 +19,12 @@ public interface PSRelationDao {
 	 * @throws SQLException
 	 */
 	void insertPSRelation(PSRelation psr) throws SQLException;
+	
+	/**
+	 * 批量删除所有的人员项目关系
+	 * @param para
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] deleteAllRelation(String[] para)throws SQLException;
 }

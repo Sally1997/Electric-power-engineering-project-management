@@ -9,6 +9,14 @@ public class Staff {
 	private Date birthday;
 	private String te;
 	private String email;
+	private String enable;
+	
+	public String getEnable() {
+		return enable;
+	}
+	public void setEnable(String enable) {
+		this.enable = enable;
+	}
 	public String getStaffno() {
 		return staffno;
 	}

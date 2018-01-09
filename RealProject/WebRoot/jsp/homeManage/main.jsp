@@ -55,8 +55,8 @@
 		//全局变量定义
 		var task_cur=1;
 		var project_cur=1;
-		var task_pageNum=999;
-		var project_pageNum=999;
+		var task_pageNum=${fn:length(tasks)}%5==0? Math.floor(${fn:length(tasks)}/5):Math.floor(${fn:length(tasks)}/5)+1;
+		var project_pageNum=${fn:length(projects)}%5==0? Math.floor(${fn:length(projects)}/5):Math.floor(${fn:length(projects)}/5)+1;
 		var taskData;
 		var projectData;
 		
@@ -72,9 +72,7 @@
     	              <div class="row">
 					    <div class="col-lg-12">
 							<span>当前任务数量：</span><span>${fn:length(tasks)}</span>
-							<span class="more">
-							 <a href="#" style="margin-right: 15px" onclick = "">按时间排序</a>
-							</span>
+							
 						</div>
    	                  <div class="col-lg-10 jimode">
     	              <table class="table table-striped" id="tasktable">
@@ -113,6 +111,8 @@
 				        <a href="javascript:getNextTaskPage()">&raquo;</a>
     				  </div>
     				  <script type="text/javascript">
+    				  		if(task_pageNum==1)
+    				  			document.getElementById("task_page").getElementsByTagName("a")[1].className="disabled";
     					  	//相关数据的获取刷新
 								function task_getTaskData(){
     					  			var req=new XMLHttpRequest();
@@ -145,7 +145,6 @@
 										
 										tds[2].innerHTML=taskData[i].stime;
 										tds[3].innerHTML=taskData[i].etime;
-										
 										if(taskData[i].tstate==1){
 											tds[4].className="text-success";
 											tds[4].innerHTML="正在进行中";
@@ -175,9 +174,7 @@
 						  <div class="row">
 						  <div class="col-lg-12">
 								<span>当前参与的项目数量：</span><span>${fn:length(projects) }</span>
-								<span class="more">
-								 <a href="#" style="margin-right: 15px" onclick = "">按时间排序</a>
-								</span>
+								
 							</div>
 						  <div class="col-lg-10 jimode">
 					<!--	  进度条的占比需要修改标签内的style:width属性-->
@@ -227,6 +224,8 @@
 						        <a href="javascript:getNextProjectPage()">&raquo;</a>
     					  </div>
     					  <script type="text/javascript">
+    					  if(project_pageNum==1)
+  				  			document.getElementById("project_page").getElementsByTagName("a")[1].className="disabled";
     					  	//相关数据的获取刷新
 								function project_getProjectData(){
     					  			var req=new XMLHttpRequest();

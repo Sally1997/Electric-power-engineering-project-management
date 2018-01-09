@@ -333,7 +333,7 @@ function submitFeeInfo(){
 					},
                     title: {text:dataJson[1].pname,
 							backgroundColor:'#e8e8e8',
-							link:'/RealProject/servlet/DTreeNodeServlet?pno='+dataJson[0].pno,
+							link:'/RealProject/servlet/DTreeNodeServlet?pno='+dataJson[1].pno,
 							textStyle:{
 								fontWeight:'lighter',
 								fontSize: 15,
@@ -452,7 +452,7 @@ function submitFeeInfo(){
 					},
                     title: {text:dataJson[2].pname,
 							backgroundColor:'#e8e8e8',
-							link:'/RealProject/servlet/DTreeNodeServlet?pno='+dataJson[0].pno,
+							link:'/RealProject/servlet/DTreeNodeServlet?pno='+dataJson[2].pno,
 							textStyle:{
 								fontWeight:'lighter',
 								fontSize: 15,

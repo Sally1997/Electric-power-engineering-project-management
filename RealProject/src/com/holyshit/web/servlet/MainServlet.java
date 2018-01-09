@@ -41,7 +41,6 @@ public class MainServlet extends HttpServlet {
 				Map<String, Object> res = sts.findAllTasksByid(staffno);
 				tasks=(List<StageTask>) res.get("tasks");
 				projectNames=(List<StageTask>) res.get("projectNames");
-				
 				//获取用户的文档信息
 				DocumentService ds=new DocumentServiceImpl();
 				Map<String, Object> staffDoc = ds.findDocumentWithUserById(staffno, 1, 10);

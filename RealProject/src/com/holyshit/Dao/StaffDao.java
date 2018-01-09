@@ -145,5 +145,13 @@ public interface StaffDao {
 	 * @throws SQLException 
 	 */
 	List<Map<String,Object>> selectStaffCanSetProject(String keyword) throws SQLException;
+	
+	/**
+	 * 查询人员注册时
+	 * @param staffno
+	 * @return
+	 * @throws SQLException
+	 */
+	Staff selectStaffByIdOnRegister(String staffno)throws SQLException;
 }   
  
