@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>01-hrfirst</title>
+    <title>项目人员管理</title>
     <%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[1].className="active nav-current";

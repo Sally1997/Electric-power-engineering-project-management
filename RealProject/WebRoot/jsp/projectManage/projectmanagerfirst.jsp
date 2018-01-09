@@ -8,13 +8,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.holyshit.domain.ProjectInfo" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %>
-<%@ include file="/jsp/projectManage/AddUser.jsp"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>projectmanagerfirst</title>
+    <title>项目管理首页</title>
     <%@include file="/head.jsp" %>
 	<script type="text/javascript">
 		menus[1].className="active nav-current";

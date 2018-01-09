@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>首页</title>
+<title>人员管理</title>
 <%@include file="/head.jsp"%>
 <script type="text/javascript">
 	menus[0].className = "active nav-current";

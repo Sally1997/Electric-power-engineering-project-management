@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>资金管理</title>
+    <title>项目总览</title>
 	<!-- 包含头部内容 -->
    <%@ include file="/head.jsp"%>
    <script type="text/javascript">

@@ -5,7 +5,7 @@
  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PlanManagement_NewMilestone</title>
+    <title>新建任务</title>
 	<%@include file="/head.jsp" %>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/fozza.css" type="text/css">
    
