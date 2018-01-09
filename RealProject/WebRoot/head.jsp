@@ -64,9 +64,30 @@
               		 
               		<!--  通知<span class="badge">10</span> -->
 				  <ul class="dropdown-menu">
-					<li><a href="${pageContext.request.contextPath }/web/servlet/shouInformServlet?type=1">任务消息<span class="badge" style="float: right">${task_num }</span></a></li>
-					<li><a href="${pageContext.request.contextPath }/web/servlet/shouInformServlet?type=2">系统信息<span class="badge" style="float: right">${system_num }</span></a></li>
-		            <li><a href="${pageContext.request.contextPath }/web/servlet/shouInformServlet?type=3">审批消息<span class="badge" style="float: right">${audit_num }</span></a></li>
+				  	<li>
+				  		<a href="${pageContext.request.contextPath }/web/servlet/shouInformServlet?type=1">
+				  			<div class="col-lg-6" style="text-align: left">任务消息</div>
+				  			<div class="col-lg-6" style="text-align: right">
+				  				<span class="badge" >${task_num }</span>
+				  			</div>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a href="${pageContext.request.contextPath }/web/servlet/shouInformServlet?type=2">
+				  			<div class="col-lg-6" style="text-align: left">系统消息</div>
+				  			<div class="col-lg-6" style="text-align: right">
+				  				<span class="badge" >${system_num }</span>
+				  			</div>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a href="${pageContext.request.contextPath }/web/servlet/shouInformServlet?type=3">
+				  			<div class="col-lg-6" style="text-align: left">审批消息</div>
+				  			<div class="col-lg-6" style="text-align: right">
+				  				<span class="badge" >${audit_num }</span>
+				  			</div>
+				  		</a>
+				  	</li>
 			     	<c:if test="${not empty enableCheckDocument }">
               			<li><a href="${pageContext.request.contextPath }/web/servlet/showDocumentCheckServlet">文档审核&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span></a></li>
               		</c:if>
