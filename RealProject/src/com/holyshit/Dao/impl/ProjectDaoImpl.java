@@ -3,6 +3,7 @@ package com.holyshit.Dao.impl;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.inject.New;
 
@@ -16,6 +17,7 @@ import com.holyshit.Dao.DTreeDao;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
+import com.holyshit.domain.StageTask;
 import com.holyshit.utils.C3P0Util;
 import com.holyshit.utils.ConnectionManager;
 /**
@@ -138,5 +140,31 @@ public class ProjectDaoImpl implements ProjectDao {
 	public Project selectProject(String pno) throws SQLException {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("select * from project where pno=?",new BeanHandler<Project>(Project.class),pno);
+	}
+	
+	@Override
+	public List<Project> selectAllMaybeChangeProject() throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="select * from project where pstate='y' or pstate='1'";
+		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<Project>(Project.class));
+	}
+
+	@Override
+	public int[] updateProjectByPara(Map<String, String> para) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] hehe=new Object[para.size()][];
+		int i=0;
+		for(Map.Entry<String, String> entry:para.entrySet()){
+			hehe[i]=new Object[2];
+			hehe[i][1]=entry.getKey();
+			hehe[i][0]=entry.getValue();
+			i++;
+		}
+		
+		//批处理执行更新任务
+		String sql="update project set pstate=? where pno=?";
+		return qr.batch(ConnectionManager.getConnection(), sql, hehe);
 	}
 }

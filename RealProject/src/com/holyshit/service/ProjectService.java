@@ -11,6 +11,7 @@ import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
+import com.holyshit.domain.StageTask;
 
 public interface ProjectService {
 	/**
@@ -88,4 +89,17 @@ public interface ProjectService {
 	 * @return
 	 */
 	public Project getProjectInfo(String pno);
+	
+	/**
+	 * 获取状态可能改变的项目
+	 * @return
+	 */
+	List<Project> findAllChangeState();
+	
+	/**
+	 * 刷新项目状态
+	 * @param para
+	 * @return
+	 */
+	boolean refreshProjectState(Map<String, String> para);
 }

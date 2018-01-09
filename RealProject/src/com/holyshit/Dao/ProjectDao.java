@@ -2,9 +2,11 @@ package com.holyshit.Dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectInfo;
+import com.holyshit.domain.StageTask;
 /**
  * 
  * @author yuan
@@ -120,6 +122,21 @@ public interface ProjectDao {
 	 * @throws SQLException 
 	 */
 	public Project selectProject(String pno) throws SQLException;
+	
+	/**
+	 * 获取所有的状态可能发生改变的项目
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<Project> selectAllMaybeChangeProject() throws SQLException;
+	
+	/**
+	 * 更新项目状态
+	 * @param para
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] updateProjectByPara(Map<String, String> para)throws SQLException;
 }  
 
 
