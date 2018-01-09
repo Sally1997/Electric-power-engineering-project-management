@@ -171,10 +171,10 @@ public class StaffServiceImpl implements StaffService{
 			list =  StaffDao.selectStaffInProject(pno, userno);
 			for(Map<String, Object> map:list){
 				if(map.get("duty")==null){
-					map.put("duty", "");
+					map.put("duty", "-");
 				}
 				if(map.get("notes")==null){
-					map.put("notes", "");
+					map.put("notes", "-");
 				}
 			}
 		} catch (SQLException e) {

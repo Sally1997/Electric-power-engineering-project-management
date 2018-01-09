@@ -260,6 +260,10 @@ function addElement()
 	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	xxx = pppp.test(vbudget);
 	
+	var hyt = false;
+	var dj_st = venddate.split("-");
+	for()
+	
 	var yyy=true;
 	var vs = vstartdate.split("-");
 	var ve = venddate.split("-");
