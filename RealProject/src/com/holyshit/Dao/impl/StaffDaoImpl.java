@@ -183,7 +183,7 @@ public class StaffDaoImpl implements StaffDao {
 	public int addStaff(Staff staff) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.update(ConnectionManager.getConnection(), "insert into staff values(?,?,?,?,?,?)",staff.getStaffno(),staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail());
+		return qr.update(ConnectionManager.getConnection(), "insert into staff values(?,?,?,?,?,?,?)",staff.getStaffno(),staff.getName(),staff.getSex(),staff.getBirthday(),staff.getTe(),staff.getEmail(),"1");
 	}
 
 	@Override
@@ -213,6 +213,16 @@ public class StaffDaoImpl implements StaffDao {
 			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
 			"OR te LIKE ?) AND staff.ENABLE='1' limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%");
+	}
+	/**
+	 * 切记，这个一定不要添加enable=‘1’
+	 */
+	@Override
+	public Staff selectStaffByIdOnRegister(String staffno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="select * from staff where staffno=?";
+		return qr.query(ConnectionManager.getConnection(), sql, new BeanHandler<Staff>(Staff.class),staffno);
 	}
 
 }

@@ -380,7 +380,7 @@ public class StaffServiceImpl implements StaffService{
 		StaffDao sd=new StaffDaoImpl();
 		Staff staff=null;
 		try {
-			staff=sd.selectStaffById(staffno);
+			staff=sd.selectStaffByIdOnRegister(staffno);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

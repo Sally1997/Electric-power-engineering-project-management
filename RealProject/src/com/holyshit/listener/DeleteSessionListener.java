@@ -1,5 +1,6 @@
 package com.holyshit.listener;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -201,6 +202,27 @@ public class DeleteSessionListener implements ServletContextListener{
 		
 		//定时清理tmp文件夹
 		//每晚12点
+		Timer clearTimer=new Timer();
+		clearTimer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//删除tmp下面所有的文件
+				String pathbase = application.getRealPath("/tmp");
+				File file=new File(pathbase);
+				File[] listFiles = file.listFiles();
+				if(listFiles!=null){
+					for(File f:listFiles){
+						if(f.isFile())
+							f.delete();
+					}
+				}
+			}
+		},time, 60*60*24*1000);
+		
+		
+		
 		
 		
 	}
