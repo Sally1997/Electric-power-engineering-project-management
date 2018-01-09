@@ -44,7 +44,6 @@ public class TaskIndexAudit extends HttpServlet {
 		info.setBusno(stageno);
 		info.setDstpno(charpno);
 		info.setSrcpno(staff.getStaffno());
-		info.setHasread("0");
 		
 		AuditService as = new AuditServiceImpl();
 		as.StageIndexAudit(info, index);

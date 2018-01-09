@@ -42,10 +42,6 @@ public class ProjectAuditServlet extends HttpServlet {
 		Projaprlaudit paa2 = new Projaprlaudit();//插入下一审核人立项消息
 		PSRelation psr = new PSRelation();
 		
-		Inform infox = new Inform();
-		InformService is = new InformServiceImpl();
-		
-		
 		//mno是理想审核表编号
 		String mno = request.getParameter("mno");
 		String aev = request.getParameter("agree");
@@ -62,8 +58,8 @@ public class ProjectAuditServlet extends HttpServlet {
 		AuditService as = new AuditServiceImpl();
 		ProjectService ps = new ProjectServiceImpl();
 		InformService infoser = new InformServiceImpl();
-		
-		if(pc==null){
+		System.out.println(pc);
+		if(pc==""){
 			as.changePAAInfo(mno, aev, ai);
 			//得到更改后的paa
 			paa1 = as.getPAAInfoByMno(mno);
@@ -81,7 +77,7 @@ public class ProjectAuditServlet extends HttpServlet {
 				info1.setDstpno(pro.getPmno());
 				info1.setSrcpno(staff.getStaffno());
 				info1.setMtype("A12");
-				info1.setHasread("0");
+				info1.setBusno(mno);
 				
 				infoser.addInform(info1);
 			}
@@ -96,7 +92,7 @@ public class ProjectAuditServlet extends HttpServlet {
 				info1.setDstpno(pro.getPmno());
 				info1.setSrcpno(staff.getStaffno());
 				info1.setMtype("A13");
-				info1.setHasread("0");
+				info1.setBusno(mno);
 				
 				infoser.addInform(info1);
 			}
@@ -109,9 +105,7 @@ public class ProjectAuditServlet extends HttpServlet {
 			
 			as.changePAAInfo(mno, aev, ai, cpn);
 			//得到更改后的paa
-			System.out.println(mno);
 			paa1 = as.getPAAInfoByMno(mno);
-			System.out.println(paa1.getPno());
 			String pno = paa1.getPno();
 			
 			StaffService ss = new StaffServiceImpl();
@@ -121,14 +115,6 @@ public class ProjectAuditServlet extends HttpServlet {
 				psr.setDuty("负责人");
 				ss.addAStaff(psr);
 			}
-			
-			if(aev=="2"){
-				aev = "y";
-			}
-			else{
-				aev = "n";
-			}
-			ps.changeProjectState(pno, aev);
 			
 			//有下一审核人的情况下，给审核人发送信息和立项审核表
 				
@@ -155,8 +141,8 @@ public class ProjectAuditServlet extends HttpServlet {
 		
 			
 		//跳转到消息界面？？？？
-		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet?type=1");
+		//response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
+		//response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet?type=1");
 		//request.getRequestDispatcher("/")
 	}
 
