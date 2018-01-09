@@ -205,7 +205,7 @@
 					
     			}
     	};
-    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+window.encodeURI(keywords)+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
     	req.send(null);
  	}
     function getFunction(cur){
@@ -242,7 +242,7 @@
 					}
     			}
     	};
-    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+keywords+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+window.encodeURI(keywords)+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
     	req.send(null);
     }
  	

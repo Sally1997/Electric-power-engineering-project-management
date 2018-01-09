@@ -345,7 +345,7 @@
     					location.href="/RealProject/web/servlet/showProAuditServlet?mno="+jsonData[index].mno;
     				}
     				if(jsonData[index].mtype=="A12"){
-    					location.href="/RealProject/web/servlet/judgeStageExist?pno="+jsonData[index].mno;
+    					location.href="/RealProject/web/servlet/judgeStageExist?pno="+jsonData[index].pno;
     				}
     				if(jsonData[index].mtype=="A13"){
     					location.href="/RealProject/servlet/ShowProjectServlet";

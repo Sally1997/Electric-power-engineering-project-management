@@ -990,7 +990,7 @@ function search_staff(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+keyword);
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword));
 	
 	aja.send(null);
 }

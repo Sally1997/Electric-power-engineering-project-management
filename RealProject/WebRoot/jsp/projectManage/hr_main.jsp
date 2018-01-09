@@ -16,31 +16,7 @@
 		menus[1].role="presentation";	
 	</script>
 	<script type="text/javascript">
-		function showqua(str)
-		{
-  			var xmlhttp;    
- 			 if (window.XMLHttpRequest)
-  			{
-    			// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-    			xmlhttp=new XMLHttpRequest();
-  			}
-  			else
-  			{
-    			// IE6, IE5 浏览器执行代码
-    			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  			}
-  			xmlhttp.onreadystatechange=function()
-  			{
-    			if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    			{
-      				
-            		 document.getElementById("qualif").innerHTML=xmlhttp.responseText;
-            		
-    			}
-  			}
-  			xmlhttp.open("POST","${pageContext.request.contextPath}/web/servlet/qualificationListServlet?staffno="+str,true);
-  			xmlhttp.send();
-		}
+		
 		function checkAll(){
 			var flag=document.getElementById("ckAll").checked;
 			var ids=document.getElementsByName("ids");
@@ -139,6 +115,33 @@
 							<td align="center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#handupBc" value="${s.staffno }"  onclick="showqua('${s.staffno}')" >查看</button></td>
 						</tr>
 					</c:forEach>
+					<script>
+					function showqua(str)
+					{
+			  			var xmlhttp;    
+			 			 if (window.XMLHttpRequest)
+			  			{
+			    			// IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+			    			xmlhttp=new XMLHttpRequest();
+			  			}
+			  			else
+			  			{
+			    			// IE6, IE5 浏览器执行代码
+			    			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			  			}
+			  			xmlhttp.onreadystatechange=function()
+			  			{
+			    			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    			{
+			      				
+			            		 document.getElementById("qualif").innerHTML=xmlhttp.responseText;
+			            		
+			    			}
+			  			}
+			  			xmlhttp.open("POST","${pageContext.request.contextPath}/web/servlet/qualificationListServlet?staffno="+str,true);
+			  			xmlhttp.send();
+					}
+					</script>
 					</table>
 
 					<!--  分页栏-->
