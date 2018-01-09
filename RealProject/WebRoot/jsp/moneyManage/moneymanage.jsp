@@ -171,7 +171,7 @@
 		        <table class="table table-striped " style="font-size: 15px" id="feetable">
  		    <tr>
 			    <th>项目名称</th>
-			    <th>报销人</th>
+			    <th>任务名称</th>
 			    <th>报账时间</th>
 			    <th>状态</th>
 			    <th> </th>
@@ -238,12 +238,12 @@
 					var state=feeData[i].auditstate;
 					if(state=="0"){
 						tds[3].innerHTML="未审批";
-						tds[3].style.color="black";
+						tds[3].style.color="blue";
 					}
 					else if(state=="2"){
 						tds[3].innerHTML="通过";
 						tds[3].style.color="green";
-					}else if(state=="3"){
+					}else if(state=="1"){
 						tds[3].innerHTML="不通过";
 						tds[3].style.color="red";
 					}
@@ -277,7 +277,7 @@
 		        <table class="table table-striped table-condensed" style="font-size: 15px" id="audittable">
  		    <tr>
 			    <th>项目名称</th>
-			    <th>报销人</th>
+			    <th>任务名称</th>
 			    <th>报账时间</th>
 			    <th>状态</th>
 			    <th> </th>
