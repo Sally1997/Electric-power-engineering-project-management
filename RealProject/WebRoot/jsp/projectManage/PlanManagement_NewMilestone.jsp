@@ -260,13 +260,14 @@ function addElement()
 	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	xxx = pppp.test(vbudget);
 	
-	var hyt = false;
-	var dj_st = venddate.split("-");
-	for()
-	
-	var yyy=true;
+	var hyt = true;
 	var vs = vstartdate.split("-");
 	var ve = venddate.split("-");
+	
+	var myDate = new Date();
+	if(vs.length!=3||ve.length!=3){
+		hyt = false;
+	}
 	if(vs[0]<ve[0]){
 		yyy = false;
 	}
