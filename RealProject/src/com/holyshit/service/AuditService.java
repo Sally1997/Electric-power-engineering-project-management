@@ -41,7 +41,7 @@ public interface AuditService {
 	 * @param NAuditorNo
 	 */
 	void changePAAInfo(String mno, String auditstate,String auditadv, String NAuditorNo);
-	
+	void changePAAInfo(String mno, String auditstate,String auditadv);
 	/**
 	 * 展示文档审核文档相关信息
 	 * @param pdauditno

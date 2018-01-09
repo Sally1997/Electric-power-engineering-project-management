@@ -51,6 +51,7 @@ public interface AuditDao {
 	 * @throws SQLException 
 	 */
 	void updateProAuditInfo(String mno,String auditstate,String auditadv,String NAuditorNo) throws SQLException;
+	void updateProAuditInfo(String mno,String auditstate,String auditadv) throws SQLException;
 	
 	/**
 	 * 根据消息表编号查找立项审核表信息

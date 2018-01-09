@@ -192,4 +192,31 @@ public class ProjectServiceImpl implements ProjectService {
 		return iff;
 	}
 
+	@Override
+	public void changeProjectState(String pno, String state) {
+		// TODO Auto-generated method stub
+		ProjectDao pd = new ProjectDaoImpl();
+		try {
+			pd.updateProjectState(pno, state);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
+
+	@Override
+	public Project getProjectInfo(String pno) {
+		ProjectDao pd = new ProjectDaoImpl();
+		Project pro = null;
+		try {
+			pro = pd.selectProject(pno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pro;
+	}
+
 }

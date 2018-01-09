@@ -68,6 +68,15 @@ public class AuditDaoImpl implements AuditDao {
 				"NAuditorNo=?,auditadv=?,audittime=CURRENT_TIMESTAMP() WHERE paauditno =? ",
 				auditstate,NAuditorNo,auditadv,mno);
 	}
+	
+	public void updateProAuditInfo(String mno, String auditstate,
+			String auditadv) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		qr.update(ConnectionManager.getConnection(), "UPDATE projaprlaudit SET auditstate=?, "+
+				"auditadv=?,audittime=CURRENT_TIMESTAMP() WHERE paauditno =? ",
+				auditstate,auditadv,mno);
+	}
 
 	@Override
 	public Projaprlaudit selectPAAByMno(String mno) throws SQLException {

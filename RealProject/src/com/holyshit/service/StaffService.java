@@ -113,6 +113,12 @@ public interface StaffService {
 	List<Map<String,Object>> showStaffCanSetProject(String keyword);
 	
 	/**
+	 * 添加人员关系表
+	 * @param psr
+	 */
+	void addAStaff(PSRelation psr);
+	
+	/**
 	 * 获取管理员信息
 	 * @return
 	 * 

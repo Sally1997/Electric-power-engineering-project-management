@@ -104,6 +104,22 @@ public interface ProjectDao {
 	 * @throws SQLException 
 	 */
 	public int selectCountStage(String pno) throws SQLException;
+	
+	/**
+	 * 改变项目状态
+	 * @param pno
+	 * @param state
+	 * @throws SQLException 
+	 */
+	public void updateProjectState(String pno,String state) throws SQLException;
+	
+	/**
+	 * 搜索项目信息
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	public Project selectProject(String pno) throws SQLException;
 }  
 
 

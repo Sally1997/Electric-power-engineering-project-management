@@ -127,4 +127,16 @@ public class ProjectDaoImpl implements ProjectDao {
 		return (String)qr.query(ConnectionManager.getConnection(), "select duty from psrelation where pno=? and staffno=?",new ScalarHandler(),pno,staffno);
 		
 	}
+
+	@Override
+	public void updateProjectState(String pno, String state) throws SQLException {
+		QueryRunner qr=new QueryRunner();
+		qr.update(ConnectionManager.getConnection(),"UPDATE project SET pstate=? WHERE pno=? ",state,pno);
+	}
+
+	@Override
+	public Project selectProject(String pno) throws SQLException {
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("select * from project where pno=?",new BeanHandler<Project>(Project.class),pno);
+	}
 }
