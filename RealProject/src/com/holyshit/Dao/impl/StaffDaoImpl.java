@@ -209,9 +209,9 @@ public class StaffDaoImpl implements StaffDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT StaffNo,NAME,te FROM staff "+
-			"WHERE staffno IN (SELECT staffno FROM asrelation "+
+			"WHERE staff.ENABLE='1' AND staffno IN (SELECT staffno FROM asrelation "+
 			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
-			"OR te LIKE ?) AND staff.ENABLE='1' limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
+			"OR te LIKE ?) limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%");
 	}
 

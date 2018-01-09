@@ -145,4 +145,12 @@ public interface StageTaskDao {
 	 * @throws SQLException
 	 */
 	int[] updateTaskByPara(Map<String, String> para)throws SQLException;
+	
+	/**
+	 * 修改负责人
+	 * @param sno
+	 * @param charpno
+	 * @throws SQLException 
+	 */
+	public void updateCharP(String tno,String charpno) throws SQLException;
 }

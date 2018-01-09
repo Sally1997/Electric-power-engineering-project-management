@@ -103,4 +103,12 @@ public interface StageTasksService {
 	 * @return
 	 */
 	boolean refreshTaskState(Map<String, String> para);
+	
+	/**
+	 * 修改负责人
+	 * @param pno
+	 * @param no
+	 * @param charpno
+	 */
+	public void changeCharP(String pno,String no,String charpno);
 }

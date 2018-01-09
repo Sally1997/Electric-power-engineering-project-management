@@ -80,4 +80,14 @@ public class PSPlanDaoImpl implements PSPlanDao {
 		return qr.batch(ConnectionManager.getConnection(), sql, hehe);
 	}
 
+	@Override
+	public void updateCharP(String sno, String charpno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner();
+		System.out.println(charpno);
+		System.out.println(sno);
+		qr.update(ConnectionManager.getConnection(),"UPDATE psplan SET charpno=? WHERE stageno=?",
+				charpno,sno);
+	}
+
 }

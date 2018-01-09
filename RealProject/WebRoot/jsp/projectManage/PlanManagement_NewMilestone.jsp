@@ -279,7 +279,7 @@ function addElement()
 	}
 	
 	if(vname==""){
-		alert("请输入任务名称!");
+		alert("请输入阶段名称!");
 		return;
 	}
 	else if(vcharp==""){

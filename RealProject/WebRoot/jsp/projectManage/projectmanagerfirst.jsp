@@ -370,9 +370,38 @@
 			    <td>开发人员</td>
 			    <td>老大</td>
 		    </tr> -->
-		    
 	        </table>
+	       <!--  <ul class="pagination" style="padding-left:45%;">
+					<li>
+						<span aria-hidden="true">&laquo;</span>
+					</li>
+					  <li class="active">第${pb.currentPage}页/共${pb.totalPage}页</li>
+					<li>
+						<span aria-hidden="true">&raquo;</span>
+					</li>
+				  </ul> -->
+			 <!-- <button class="col-lg-12" style="text-align:center;">
+					<li>
+						<span aria-hidden="true">&laquo;</span>
+					</li>
+					  <li class="active">第${pb.currentPage}页/共${pb.totalPage}页</li>
+					<li>
+						<span aria-hidden="true">&raquo;</span>
+					</li>
+				  </button> -->
 		</form>
+		   
+		  <!--  <li>
+					  <a href="javascript:getPrevious(showpage);" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					  </a>
+					</li>
+					<li class="active"><a href="javascript:jmpPage(1)">1</a></li>
+			<li>
+					  <a href="javascript:getNext(showpage);" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					  </a>
+					</li> -->
 		   
     </div>
     <div class="modal-footer">

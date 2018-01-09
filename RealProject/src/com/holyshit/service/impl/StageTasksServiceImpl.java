@@ -11,17 +11,19 @@ import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.Dao.PSRelationDao;
 import com.holyshit.Dao.ProjectDao;
+import com.holyshit.Dao.StaffDao;
 import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.TaskIndexesDao;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.PSPlanDaoImpl;
 import com.holyshit.Dao.impl.PSRelationDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
+import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PSRelation;
-import com.holyshit.domain.Project;
+import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskIndexs;
 import com.holyshit.domain.TaskInfo;
@@ -237,7 +239,6 @@ public class StageTasksServiceImpl implements StageTasksService{
 						tid.insertTaskIndexes(ti);
 					}
 				}
-				ConnectionManager.commit();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -285,6 +286,43 @@ public class StageTasksServiceImpl implements StageTasksService{
 			ConnectionManager.closeConnection();
 		}
 		return flag;
+	}
+
+	@Override
+	public void changeCharP(String pno, String no, String charpno) {
+		// TODO Auto-generated method stub
+		ConnectionManager.startTransaction();
+		PSPlanDao ppd = new PSPlanDaoImpl();
+		StageTaskDao std=new StageTaskDaoImpl();
+		StaffDao sd = new StaffDaoImpl();
+		Staff staff = new Staff();
+		
+		try {
+			staff = sd.isinproject(charpno, pno);
+			
+			if(no.length()==6){
+				ppd.updateCharP(charpno, no);
+			}
+			else{
+				std.updateCharP(charpno, no);
+			}
+			
+			if(staff==null){
+				PSRelation psr = new PSRelation();
+				psr.setDuty("负责人");
+				psr.setPno(pno);
+				psr.setStaffno(charpno);
+				sd.addAStaff(psr);
+			}
+			
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
 	}
 
 }

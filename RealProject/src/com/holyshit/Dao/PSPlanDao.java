@@ -54,4 +54,12 @@ public interface PSPlanDao {
 	 * @throws SQLException
 	 */
 	int[] updateStageByPara(Map<String, String> para)throws SQLException;
+	
+	/**
+	 * 修改负责人
+	 * @param sno
+	 * @param charpno
+	 * @throws SQLException 
+	 */
+	public void updateCharP(String sno,String charpno) throws SQLException;
 }
