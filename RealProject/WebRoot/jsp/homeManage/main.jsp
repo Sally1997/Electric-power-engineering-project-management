@@ -128,7 +128,7 @@
     					  				}
     					  				
     					  			};
-    					  			req.open("get", "${pageContext.request.contextPath}/web/servlet/showTaskInfoById?currentPage="+task_cur+"&pageSize=5");
+    					  			req.open("get", "${pageContext.request.contextPath}/web/servlet/showTaskInfoById?currentPage="+task_cur+"&pageSize=5&time="+new Date().getTime());
     					  			req.send(null);
     					  		}
 								function task_refreshData(){
@@ -241,7 +241,7 @@
     					  				}
     					  				
     					  			};
-    					  			req.open("get", "${pageContext.request.contextPath}/web/servlet/showProjectInfoById?currentPage="+project_cur+"&pageSize=5");
+    					  			req.open("get", "${pageContext.request.contextPath}/web/servlet/showProjectInfoById?currentPage="+project_cur+"&pageSize=5&time="+new Date().getTime());
     					  			req.send(null);
     					  		}
 								function project_refreshData(){

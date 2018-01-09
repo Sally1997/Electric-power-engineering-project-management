@@ -42,7 +42,7 @@
  				}
  			}
  		};
- 		req.open("post", "/RealProject/web/servlet/uploadDocument");
+ 		req.open("post", "/RealProject/web/servlet/uploadDocument?time="+new Date().getTime());
  		req.send(formdata);
  		loadPageFlag=setTimeout('loadPage()',100);
  	}
@@ -205,7 +205,7 @@
 					
     			}
     	};
-    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+window.encodeURI(keywords)+"&ftype="+fType+"&currentPage="+1+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+window.encodeURI(keywords)+"&ftype="+fType+"&currentPage="+1+"&pageSize=5&time="+new Date().getTime());
     	req.send(null);
  	}
     function getFunction(cur){
@@ -242,7 +242,7 @@
 					}
     			}
     	};
-    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+window.encodeURI(keywords)+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5");
+    	req.open("post","/RealProject/web/servlet/findDocument?dtype="+dType+"&ptype="+ptype+"&dateFrom="+dateFrom+"&dateTo="+dateTo+"&keywords="+window.encodeURI(keywords)+"&ftype="+fType+"&currentPage="+cur+"&pageSize=5&time="+new Date().getTime());
     	req.send(null);
     }
  	

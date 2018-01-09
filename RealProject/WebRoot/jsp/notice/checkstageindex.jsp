@@ -341,7 +341,7 @@ function search_member(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype");
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype&time="+new Date().getTime());
 	
 	aja.send(null);
 }
@@ -413,7 +413,7 @@ function search_staff(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword));
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword)+"&time="+new Date().getTime());
 	
 	aja.send(null);
 }

@@ -17,19 +17,19 @@ function updateAuditDialog(e){
 	   			var state=document.getElementById("audit_auditstate");
 	   			var tmp=auditData[e].auditstate;
 	   			if(tmp=="0"){
-	   				state.className="text-danger";
+	   				state.style.color="blue";
 	   				state.innerHTML="未审批";
 	   				submit_audit.removeAttribute("disabled");
 	   				document.getElementById("top_audit").style.display="block";
 	   				document.getElementById("middle_audit").style.display="block";
-	   			}else if(tmp="1"){
-	   				state.className="text-danger";
+	   			}else if(tmp=="1"){
+	   				state.style.color="red";
 	   				state.innerHTML="不通过";
 	   				submit_audit.disabled="disabled";
 	   				document.getElementById("top_audit").style.display="none";
 	   				document.getElementById("middle_audit").style.display="none";
 	   			}else{
-	   				state.className="text-success";
+	   				state.style.color="green";
 	   				state.innerHTML="审批通过";
 	   				submit_audit.disabled="disabled";
 	   				document.getElementById("top_audit").style.display="none";
@@ -60,7 +60,7 @@ function submitFeeInfo(){
    						
    					}
    				};
-   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+window.encodeURI(document.getElementById("fee_cause").value));
+   				req.open("post", "/RealProject/web/servlet/submitFee?taskno="+taskinfo[project_pos].stagelist[stage_pos].tasklist[task_pos].taskno+"&task_feeaudit="+task_feeaudit+"&fee_cause="+window.encodeURI(document.getElementById("fee_cause").value)+"&time="+new Date().getTime());
    				req.send(null);
    			}
    		}
@@ -76,7 +76,7 @@ function submitFeeInfo(){
 				audit_auditstate="1";
 			
 			if(cause==""){
-				
+				alert("请输入审核信息");
 				return;
 			}
 			var req=new XMLHttpRequest();
@@ -95,7 +95,7 @@ function submitFeeInfo(){
 				}
 				
 			};
-			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+window.encodeURI(cause));
+			req.open("get", "/RealProject/web/servlet/submitAudit?fauditno="+fauditno+"&state="+audit_auditstate+"&cause="+window.encodeURI(cause)+"&time="+new Date().getTime());
 			req.send(null); 
 		}
    		function showAuditData(){
@@ -163,7 +163,7 @@ function submitFeeInfo(){
 					
 				}
 			};
-			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=4");
+			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=4&time="+new Date().getTime());
 			req.send(null);
   		}
 /**
@@ -185,7 +185,7 @@ function submitFeeInfo(){
    				}
    			};
    			
-   			req.open("post", "/RealProject/web/servlet/showWorkingTask?staffno="+staffno);
+   			req.open("post", "/RealProject/web/servlet/showWorkingTask?staffno="+staffno+"&time="+new Date().getTime());
    			req.send(null);
    			
    		}

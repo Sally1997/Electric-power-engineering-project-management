@@ -40,7 +40,7 @@
    				}
    			};
    			
-   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=5");
+   			req.open("post", "${pageContext.request.contextPath}/web/servlet/showPageFee?currentPage="+cur+"&pageSize=5&time="+new Date().getTime());
    			req.send(null);
 		}
 		function refreshData(){

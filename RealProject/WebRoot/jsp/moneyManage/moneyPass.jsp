@@ -38,7 +38,7 @@
 					}
 				};
 				
-				req.open("get", "${pageContext.request.contextPath}/web/servlet/showAuditPage?currentPage="+cur+"&pageSize=5");
+				req.open("get", "${pageContext.request.contextPath}/web/servlet/showAuditPage?currentPage="+cur+"&pageSize=5&time="+new Date().getTime());
 				req.send(null);
 		}
 		
@@ -81,7 +81,7 @@
 					
 				}
 			};
-			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=5");
+			req.open("get", "/RealProject/web/servlet/showAuditPage?currentPage=1&pageSize=5&time="+new Date().getTime());
 			req.send(null);
   		}
 		function refreshData(){

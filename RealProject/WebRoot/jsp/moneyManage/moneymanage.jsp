@@ -44,7 +44,7 @@
    				}
    			};
    			
-   			req.open("post", "/RealProject/web/servlet/showbudgetpage?currentPage="+cur+"&pageSize=3");
+   			req.open("post", "/RealProject/web/servlet/showbudgetpage?currentPage="+cur+"&pageSize=3&time="+new Date().getTime());
    			req.send(null);
    		}
    	</script>
@@ -91,9 +91,7 @@
     	        <div class="panel-heading">相关项目资金状况</div>
       	        <div class="panel-body">
        	        <div class="col-lg-12">
-       	            <span style="float: right">
-        	         <a href="#" style="margin-right: 15px" onclick = "document.getElementById('searchto').style.display='block';document.getElementById('fade').style.display='block'">查找..</a>
-                    </span>
+       	            
                 </div>
                 <div class="col-lg-12" style="margin-top: 20px;margin-left: 5%"> 
                     <div class="row">
