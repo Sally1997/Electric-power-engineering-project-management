@@ -153,12 +153,12 @@
       	        <div class="panel-body">
                 <div class="col-lg-12" >
 						<!-- 同意 -->
-					<form>
+					<form id="shiwoa">
 						<font >
 							<ul>
 							
 							<c:forEach items="${map.list }" var="l">
-								<li><input name="target" type="checkbox" value="${l.indexno }" />
+								<li><input name="indexbox" type="checkbox" value="${l.indexno }" />
 									${l.indexinfo }
 								</li>
 							</c:forEach>
@@ -176,7 +176,7 @@
 						</div> 
 						<div class="clear"></div>
 						</div>
-
+						
 						<!-- 审批意见 -->
 						<div id="start_date" class="block">
 						<div id="first_left">
@@ -437,8 +437,8 @@ function search_staff(){
 
 function submitAudit(){
 	alert("数据提交中……请等待服务器结果");
-	var fm = document.forms[0];
-	fm.action="${pageContext.request.contextPath }/web/servlet/stageIndexAudit?taskno=${map.taskno}&charpno=${map.charpno}";
+	var fm = document.getElementById("shiwoa");
+	fm.action="${pageContext.request.contextPath }/web/servlet/taskIndexAudit?taskno=${map.taskno}&charpno=${map.charpno}";
 	fm.method="post";
 	fm.submit();
 }

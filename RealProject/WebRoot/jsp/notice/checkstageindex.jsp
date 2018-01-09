@@ -141,7 +141,7 @@
       	        <div class="panel-body">
                 <div class="col-lg-12" >
 						<!-- 同意 -->
-					<form action="${pageContext.request.contextPath }/web/servlet/stageIndexAudit?stageno=${map.stageno}&charpno=${map.charpno }" method="post">
+					<form id="shiwoa">	
 						<font >
 							<ul>
 							
@@ -200,7 +200,6 @@
         <h4 class="modal-title" id="myModalLabel">人员查找</h4>
     </div>
     <div class="modal-body">
-    	<form action="" method="post" name="form2">
     	<div id="others" class="block">
 			<div class="hehe_left">
 			<span class="text">输入:</span>
@@ -212,8 +211,6 @@
 			</div>
 			<div class="clear"></div>
 			<br/>
-		</form>
-		<form action="" method="post" name="form3">
 			<table id = "member_table" class="table table-striped table-condensed" style="font-size: 15px">
  		    <tr>
 			    <th>选择</th>
@@ -237,7 +234,6 @@
 		    </tr> -->
 		    
 	        </table>
-		</form>
 		   
     </div>
     <div class="modal-footer">
@@ -425,7 +421,9 @@ function search_staff(){
 
 function submitAudit(){
 	alert("数据提交中……请等待服务器结果");
-	var fm = document.forms[0];
+	var fm = document.getElementById("shiwoa");
+	fm.action="${pageContext.request.contextPath }/web/servlet/taskIndexAudit?taskno=${map.taskno}&charpno=${map.charpno}";
+	fm.method="post";
 	fm.submit();
 }
 

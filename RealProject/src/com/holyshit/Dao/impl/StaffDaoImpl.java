@@ -95,9 +95,9 @@ public class StaffDaoImpl implements StaffDao {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT StaffNo,name,te,duty,notes FROM "+
 			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
-			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno)a "+
-			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno limit 0,10", 
-			new MapListHandler(),pno,userno);
+			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit 0,10", 
+			new MapListHandler(),pno,userno,pno);
 	}
 
 	@Override
@@ -106,9 +106,9 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.query("SELECT StaffNo,name,te,duty,notes FROM "+
 			"(SELECT staff.StaffNo,NAME,te,duty "+
 			"FROM staff LEFT JOIN psrelation ON "+
-			"psrelation.pno=? AND staff.staffno=psrelation.staffno)a "+
-			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) ORDER BY staffno limit 0,10",
-			new MapListHandler(),pno,userno);
+			"psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit 0,10",
+			new MapListHandler(),pno,userno,pno);
 	}
 	
 	@Override
@@ -117,11 +117,11 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.query("SELECT staffno,name,te,duty,notes FROM "+
 			"(SELECT staff.staffno,name,te,duty "+
 			"FROM staff LEFT JOIN psrelation ON "+
-			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo)a "+
-			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=?) "+
+			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) "+
 			"WHERE staffno LIKE ? OR NAME LIKE ? OR te LIKE ? "+
 			"OR duty LIKE ? OR notes LIKE ? ORDER BY staffno limit 0,10",
-			new MapListHandler(),pno,userno,"%"+keyword+"%","%"+keyword+"%",
+			new MapListHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
 	}
 
@@ -211,7 +211,7 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.query("SELECT StaffNo,NAME,te FROM staff "+
 			"WHERE staffno IN (SELECT staffno FROM asrelation "+
 			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
-			"OR te LIKE ?) limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
+			"OR te LIKE ?) AND staff.ENABLE='1' limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%");
 	}
 
