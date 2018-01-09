@@ -82,7 +82,7 @@ public class AuditDaoImpl implements AuditDao {
 	public Projaprlaudit selectPAAByMno(String mno) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT * FROM projaprlaudit WHERE paauditno IN (SELECT busno FROM inform WHERE mno=?)"
+		return qr.query("SELECT * FROM projaprlaudit WHERE paauditno =?"
 				, new BeanHandler<Projaprlaudit>(Projaprlaudit.class),mno);
 	}
 
