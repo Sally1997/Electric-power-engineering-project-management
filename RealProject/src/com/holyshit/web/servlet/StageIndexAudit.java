@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.Staff;
 import com.holyshit.service.AuditService;
+import com.holyshit.service.ProjectService;
 import com.holyshit.service.impl.AuditServiceImpl;
+import com.holyshit.service.impl.ProjectServiceImpl;
 
 public class StageIndexAudit extends HttpServlet {
 
@@ -39,7 +41,9 @@ public class StageIndexAudit extends HttpServlet {
 			info.setMtype("A10");
 		}
 		
-		
+		String pno = stageno.substring(0,5);
+		ProjectService ps = new ProjectServiceImpl();
+		ps.changeProjectStage(pno);
 		
 		info.setBusno(stageno);
 		info.setDstpno(charpno);

@@ -174,7 +174,7 @@ $(".innerUl").ProTree({
 						<input type="text" style="display:none" id="fozza_text" onblur="resetecho()">
             <!-- <span onclick="altercharp()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown"></span>
              -->
-            <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle = "modal" data-target= "#search"></span>
+            <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle = "modal"></span>
             
               <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><input type="text" name="fozza_change" size="15px;"/></li>
@@ -516,6 +516,20 @@ var aja = new XMLHttpRequest();
 
 //以下是选择用户功能
 function search_member(){
+	var djp = document.getElementById("CharP");
+
+	var judge = "${staff.name}(${staff.staffno})";
+	var tj = document.getElementById("dropdownMenu1");//data-target= "#search"
+	
+	if(judge!=djp.innerHTML){
+		tj.setAttribute("data-target", "");
+		alert("只有负责人才可以修改负责人!");
+		return;
+	}
+	else{
+		tj.setAttribute("data-target", "#search");
+	}
+
 	var tbody_t = document.getElementById("iamtbody");
 	var childs = tbody_t.childNodes;
 	for(var i=childs.length-1;i>=0;i--){
