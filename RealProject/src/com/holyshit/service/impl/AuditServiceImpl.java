@@ -96,8 +96,8 @@ public class AuditServiceImpl implements AuditService {
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).get("auditstate").equals("0")){
 				list.get(i).put("auditstate","否");
-				list.get(i).put("ifpassed", "否");
-				list.get(i).put("audittime", "null");
+				list.get(i).put("ifpassed", "-");
+				list.get(i).put("audittime", "-");
 			}
 			else if(list.get(i).get("auditstate").equals("1")){
 				list.get(i).put("auditstate","是");
