@@ -357,7 +357,7 @@ public class StaffServiceImpl implements StaffService{
 			int[] res2=ad.deleteAccount(staffs);
 			int[] res3=sd.deleteStaff(staffs);
 			for(int i=0;i<res1.length;i++){
-				if(res1[i]==0||res2[i]==0||res3[i]==0){
+				if(res1[i]!=0||res2[i]==0||res3[i]==0){
 					resFlag=false;
 					throw new SQLException();
 				}
