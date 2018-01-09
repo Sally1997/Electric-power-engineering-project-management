@@ -141,7 +141,7 @@
       	        <div class="panel-body">
                 <div class="col-lg-12" >
 						<!-- 同意 -->
-					<form>
+					<form action="${pageContext.request.contextPath }/web/servlet/stageIndexAudit?stageno=${map.stageno}&charpno=${map.charpno }" method="post">
 						<font >
 							<ul>
 							
@@ -426,8 +426,6 @@ function search_staff(){
 function submitAudit(){
 	alert("数据提交中……请等待服务器结果");
 	var fm = document.forms[0];
-	fm.action="${pageContext.request.contextPath }/web/servlet/stageIndexAudit?stageno=${map.stageno}&charpno=${map.charpno }";
-	fm.method="post";
 	fm.submit();
 }
 

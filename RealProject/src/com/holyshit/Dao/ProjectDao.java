@@ -120,6 +120,21 @@ public interface ProjectDao {
 	 * @throws SQLException 
 	 */
 	public Project selectProject(String pno) throws SQLException;
+	
+	/**
+	 * 更新项目进度
+	 * @param pno
+	 * @throws SQLException 
+	 */
+	public void updateProjectStage(String pno) throws SQLException;
+	
+	/**
+	 * 查找项目进度
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	public List<Object> selectProjectStage(String pno) throws SQLException;
 }  
 
 

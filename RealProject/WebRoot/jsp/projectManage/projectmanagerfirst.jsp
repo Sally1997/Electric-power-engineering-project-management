@@ -185,9 +185,6 @@
 				
 				
 
-            </div> 
-				<button type="button" class="btn btn-primary" style="float: right;"><a href="main.html"></a>返回</button>	
-    		</div>
 			</main>
     	</div>
     </div>

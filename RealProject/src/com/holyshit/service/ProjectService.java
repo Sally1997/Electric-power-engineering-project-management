@@ -88,4 +88,10 @@ public interface ProjectService {
 	 * @return
 	 */
 	public Project getProjectInfo(String pno);
+	
+	/**
+	 * 改变项目状态
+	 * @param pno
+	 */
+	public void changeProjectStage(String pno);
 }
