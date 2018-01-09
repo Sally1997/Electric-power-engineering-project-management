@@ -7,6 +7,7 @@ function getNextTaskPage(){
 			node1.className="";
 		}
 		task_cur++;
+		
 		if(task_cur==task_pageNum){
 			//进行数据获取
 			task_getTaskData();

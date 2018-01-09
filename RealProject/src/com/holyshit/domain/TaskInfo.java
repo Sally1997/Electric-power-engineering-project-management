@@ -96,5 +96,14 @@ public class TaskInfo {
 	public void setTaskno(String taskno) {
 		this.taskno = taskno;
 	}
+	@Override
+	public String toString() {
+		return "TaskInfo [pname=" + pname + ", sname=" + sname + ", taskname="
+				+ taskname + ", pno=" + pno + ", stageno=" + stageno
+				+ ", taskno=" + taskno + ", budget=" + budget + ", charpno="
+				+ charpno + ", ptaskno=" + ptaskno + ", ptasktype=" + ptasktype
+				+ ", stime=" + stime + ", etime=" + etime + ", tstate="
+				+ tstate + "]";
+	}
 	
 }
