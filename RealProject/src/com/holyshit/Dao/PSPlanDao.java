@@ -2,8 +2,10 @@ package com.holyshit.Dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.holyshit.domain.PSPlan;
+import com.holyshit.domain.StageTask;
 
 public interface PSPlanDao {
 	
@@ -37,4 +39,19 @@ public interface PSPlanDao {
 	 * @throws SQLException 
 	 */
 	List<Object> selectStageChargePerson(String sno) throws SQLException;
+	
+	/**
+	 * 获取所有的可能发生改变的阶段
+	 * @return
+	 * @throws SQLException
+	 */
+	List<PSPlan> selectAllMaybeChangeStage() throws SQLException;
+	
+	/**
+	 * 更新阶段的状态
+	 * @param para
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] updateStageByPara(Map<String, String> para)throws SQLException;
 }
