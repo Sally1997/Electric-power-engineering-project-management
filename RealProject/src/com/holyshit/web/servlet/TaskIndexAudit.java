@@ -30,19 +30,20 @@ public class TaskIndexAudit extends HttpServlet {
 		HttpSession session = request.getSession();
 		Staff staff = (Staff) session.getAttribute("staff");
 		
+		Inform info = new Inform();
+		
 		if(agree.equals("agree")){
 			agree="2";
+			info.setMtype("A6");
 		}
 		else{
 			agree="1";
+			info.setMtype("A9");
 		}
-		
-		Inform info = new Inform();
 		
 		info.setBusno(stageno);
 		info.setDstpno(charpno);
 		info.setSrcpno(staff.getStaffno());
-		info.setMtype("5");
 		info.setHasread("0");
 		
 		AuditService as = new AuditServiceImpl();
@@ -50,7 +51,7 @@ public class TaskIndexAudit extends HttpServlet {
 		
 		//跳转到信息表？
 		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
-		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet?type=1");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

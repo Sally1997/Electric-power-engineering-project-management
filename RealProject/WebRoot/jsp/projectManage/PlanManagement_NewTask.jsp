@@ -256,7 +256,6 @@ function addElement()
 	var vstartdate = form1.StartDate.value;
 	var venddate = form1.EndDate.value;
 	var vbudget = form1.budget.value;
-	
 	var xxx=true;
 	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	xxx = pppp.test(vbudget);
@@ -291,6 +290,10 @@ function addElement()
 		return;
 	}
 	else if(!xxx){
+		alert("预算金额非法输入格式!");
+		return;
+	}
+	else if(vbudget.length>8){
 		alert("预算金额非法输入格式!");
 		return;
 	}

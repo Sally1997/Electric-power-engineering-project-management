@@ -21,6 +21,7 @@ public class ShowIndexAudit extends HttpServlet {
 			throws ServletException, IOException {
 		//String mno = request.getParameter("mno");
 		String mno=request.getParameter("mno");
+		
 		Inform info = new Inform();
 		InformService is = new InformServiceImpl();
 		info = is.getInformByMno(mno);
