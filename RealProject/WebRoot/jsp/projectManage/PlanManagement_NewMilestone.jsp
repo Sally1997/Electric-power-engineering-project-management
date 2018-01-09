@@ -5,7 +5,7 @@
  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>PlanManagement_NewMilestone</title>
+    <title>新建阶段</title>
 	<%@include file="/head.jsp" %>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/fozza.css" type="text/css">
    
@@ -995,7 +995,7 @@ function search_staff(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+keyword);
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword));
 	
 	aja.send(null);
 }

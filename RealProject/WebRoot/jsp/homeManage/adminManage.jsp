@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>首页</title>
+<title>人员管理</title>
 <%@include file="/head.jsp"%>
 <script type="text/javascript">
 	menus[0].className = "active nav-current";
@@ -302,7 +302,7 @@
       					}
       				}
       			};
-      			req.open("get","/RealProject/web/servlet/addStaff?staffno="+addStaff_staffno+"&name="+addStaff_name+"&sex="+addStaff_sex+"&birthday="+addStaff_birthday+"&te="+addStaff_te+"&email="+addStaff_email+"&password="+addStaff_password);
+      			req.open("get","/RealProject/web/servlet/addStaff?staffno="+addStaff_staffno+"&name="+window.encodeURI(addStaff_name)+"&sex="+window.encodeURI(addStaff_sex)+"&birthday="+addStaff_birthday+"&te="+addStaff_te+"&email="+addStaff_email+"&password="+addStaff_password);
       			req.send(null);
       		}
       </script>
@@ -537,7 +537,7 @@
       				}
       			};
       			if(isSend){
-	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+editStaff_name+"&sex="+editStaff_sex+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password);
+	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+window.encodeURI(editStaff_name)+"&sex="+window.encodeURI(editStaff_sex)+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password);
 	      			req.send(null);
       			}
       		}

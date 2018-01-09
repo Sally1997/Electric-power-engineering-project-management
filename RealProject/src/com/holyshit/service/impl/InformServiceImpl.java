@@ -247,6 +247,7 @@ public class InformServiceImpl implements InformService {
 					jo.put("mdate", format);
 					jo.put("mtype",iFee.getMtype());
 					jo.put("pname", iFee.getPname());
+					jo.put("pno", iFee.getPno());
 					list.add(jo);
 				}
 			}

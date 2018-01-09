@@ -44,7 +44,7 @@ public class QualificationListServlet extends HttpServlet {
 		String a = "";
 		for(int i=0;i<Qualifications.size();i++)
 		{
-			a=a+"<tr><td><abbr title="+"大学时获得"+">"+Qualifications.get(i).getQualifdesc()+"</abbr></td></tr>";
+			a=a+"<tr><td>"+Qualifications.get(i).getQualifdesc()+"</td></tr>";
 			System.out.println(Qualifications.get(i).getQualifdesc());
 		}
 		response.setContentType("text/xml;charset=UTF-8");
