@@ -128,7 +128,7 @@
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">公告文件</label>
 				<div class="col-sm-8">
-		            <input type = "file" id="newsfile" multiple="multiple">
+		            <input type = "file" id="newsfile">
 				</div>
 			  </div>
           </form>

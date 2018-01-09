@@ -62,6 +62,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				String pname=p.getPname();
 				JSONObject project=new JSONObject();
 				project.put("pname", pname);
+				project.put("pno", p.getPno());
 				JSONArray stages=new JSONArray();
 				JSONArray hasaudit=new JSONArray();
 				JSONArray surplus=new JSONArray();

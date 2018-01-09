@@ -234,7 +234,7 @@
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">上传文件</label>
 				<div class="col-sm-8">
-		            <input type = "file" id="newfile" multiple="multiple">
+		            <input type = "file" id="newfile">
 				</div>
 			  </div>
           </form>
