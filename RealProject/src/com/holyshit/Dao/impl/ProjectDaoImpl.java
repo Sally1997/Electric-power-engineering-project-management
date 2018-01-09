@@ -155,6 +155,7 @@ public class ProjectDaoImpl implements ProjectDao {
 		return qr.query("SELECT COUNT(taskno) AS haha FROM stagetasks WHERE pno=? "+
 				"UNION SELECT COUNT(taskno) AS haha FROM stagetasks "+
 				"WHERE pno=? AND tstate IN('3','4')", new ColumnListHandler(),pno,pno);
+	}
 	
 	@Override
 	public List<Project> selectAllMaybeChangeProject() throws SQLException {
