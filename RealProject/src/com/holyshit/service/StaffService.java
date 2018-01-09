@@ -103,4 +103,11 @@ public interface StaffService {
 	 * @return
 	 */
 	boolean isExist(String staffno);
+	
+	/**
+	 * show公司下理想审核权限的人
+	 * @param keyword
+	 * @return
+	 */
+	List<Map<String,Object>> showStaffCanSetProject(String keyword);
 }

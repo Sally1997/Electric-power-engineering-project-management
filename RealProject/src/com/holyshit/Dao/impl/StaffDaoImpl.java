@@ -204,4 +204,15 @@ public class StaffDaoImpl implements StaffDao {
 		return qr.batch(ConnectionManager.getConnection(), "delete from staff where staffno=?",para);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectStaffCanSetProject(String keyword) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT StaffNo,NAME,te FROM staff "+
+			"WHERE staffno IN (SELECT staffno FROM asrelation "+
+			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
+			"OR te LIKE ?) limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
+			"%"+keyword+"%");
+	}
+
 }

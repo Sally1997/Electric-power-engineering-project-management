@@ -135,14 +135,9 @@ public class NewProjectServlet extends HttpServlet {
 			response.getWriter().write("<script type='text/javascript'>alert('服务器繁忙……上传失败!')</script>");
 		}*/
 		
-		boolean iffailed = ps.newPeojectManage(pro, psr, info, doc, pda);
-		if(iffailed){
-			response.getWriter().write("<script type='text/javascript'>alert('项目异常……新建失败!')</script>");
-		}
-		else{
-			response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
-		}
-		response.sendRedirect(request.getContextPath()+"/servlet/ShowProjectServlet");
+		ps.newPeojectManage(pro, psr, info, doc, pda);
+		response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/servlet/ShowProjectServlet");
 	}
 	
 	//上传文件处理
@@ -169,7 +164,7 @@ public class NewProjectServlet extends HttpServlet {
 			filename = uu +"_"+ filename;
 			
 			//创建一个本地目录 directory path 目录路径
-			String dp = "/var/ProjectData/ProjectFile";
+			 String dp = File.separator + "var" + File.separator + "ProjectData" + File.separator + "ProjectFile";
 			
 			//新建文件夹 store directory 存储路径
 			File sd = new File(dp);

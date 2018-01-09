@@ -37,6 +37,12 @@ public class StateConversion {
 			case "4":
 				list.get(i).setPstate("逾期竣工");
 				break;
+			case "y":
+				list.get(i).setPstate("审核通过");
+				break;
+			case "n":
+				list.get(i).setPstate("审核不通过");
+				break;
 			}
 		}
 	}

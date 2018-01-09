@@ -283,16 +283,16 @@
       			var projectbudget=document.getElementById("projectbudget");
       			var checkman=document.getElementById("checkman");
       			var file=document.getElementById("file");
-      			var stime = document.getElementsByName("stime");
-      			var etime = document.getElementsByName("etime");
+      			var stime = document.getElementsByName("stime")[0];
+      			var etime = document.getElementsByName("etime")[0];
       			
       			var others=document.getElementById("others");
       			
       			var x=true;
       			var p = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
       			x = p.test(projectbudget.value);
-      			
       			//进行验证
+      			
       			if(projectname.value==""){
       				alert("请输入项目名称!");
       				return false;
@@ -300,6 +300,10 @@
       			else if(checkman.value==""){
       				alert("请选择审批人!");
       				return false;
+      			}
+      			else if(checkman.value.length<15){
+      				alert("请选择正确的审批人!");
+      				return;
       			}
       			else if(!x){
       				alert("预算金额非法输入格式!");
@@ -309,10 +313,12 @@
       				alert("请上传项目相关文件!");
       				return false;
       			}
-      			else if(stime.value==""||etime.value==""){
+      			else if(stime.value==null||etime.value==null){
       				alert("请选择时间!");
       				return false;
       			}
+      			
+      			alert("数据提交中……请等待服务器结果");
       		}
       	
       </script>
@@ -337,7 +343,7 @@
 			<span class="text">输入:</span>
 			</div>
 			<div class="hehe_right">
-			<input type="text" id="getme" value="请输入关键字" name="goal" size="20px;">&nbsp;&nbsp;
+			<input type="text" id="getme" onfocus="cleartext()" value="请输入关键字" name="goal" size="20px;">&nbsp;&nbsp;
 			<input type = "button" name = "ok" class="btn btn-primary" value = "查找" onClick="search_staff()">
 			</div>
 			</div>
@@ -351,8 +357,6 @@
 			    <th>标号</th>
 			    <th>姓名</th>
 			    <th>联系方式</th>
-			    <th>职责</th>
-			    <th>备注</th>
 			    <!-- 编号，名字，电话号，职责，备注 -->
 		    </tr>
 		    <tbody id="iamtbody"></tbody>
@@ -449,8 +453,6 @@ function search_member(){
 				var nametxt = document.createTextNode(str[i].name);
 				var staffnotxt = document.createTextNode(str[i].staffno);
 				var tetxt = document.createTextNode(str[i].te);
-				var dutytxt = document.createTextNode(str[i].duty);
-				var notestxt = document.createTextNode(str[i].notes);
 				
 				//创建td节点
 				var td_radio = document.createElement("td");
@@ -462,16 +464,12 @@ function search_member(){
 				var td_staffno = document.createElement("td");
 				var td_name = document.createElement("td");
 				var td_te = document.createElement("td");
-				var td_duty = document.createElement("td");
-				var td_notes = document.createElement("td");
 				
 				//插入节点
 				td_radio.appendChild(td_input);
 				td_staffno.appendChild(staffnotxt);
 				td_name.appendChild(nametxt);
 				td_te.appendChild(tetxt);
-				td_duty.appendChild(dutytxt);
-				td_notes.appendChild(notestxt);
 				
 				//装在tr里面
 				var tr_t = document.createElement("tr");
@@ -479,8 +477,6 @@ function search_member(){
 				tr_t.appendChild(td_staffno);
 				tr_t.appendChild(td_name);
 				tr_t.appendChild(td_te);
-				tr_t.appendChild(td_duty);
-				tr_t.appendChild(td_notes);
 				
 				//把创建的tr都保存在tbody里面，方便每次删除
 				//tbody_t = document.getElementById("iamtbody");
@@ -493,7 +489,7 @@ function search_member(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype");
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype");
 	
 	aja.send(null);
 }
@@ -521,8 +517,6 @@ function search_staff(){
 				var nametxt = document.createTextNode(str[i].name);
 				var staffnotxt = document.createTextNode(str[i].staffno);
 				var tetxt = document.createTextNode(str[i].te);
-				var dutytxt = document.createTextNode(str[i].duty);
-				var notestxt = document.createTextNode(str[i].notes);
 				
 				//创建td节点
 				var td_radio = document.createElement("td");
@@ -534,16 +528,12 @@ function search_staff(){
 				var td_staffno = document.createElement("td");
 				var td_name = document.createElement("td");
 				var td_te = document.createElement("td");
-				var td_duty = document.createElement("td");
-				var td_notes = document.createElement("td");
 				
 				//插入节点
 				td_radio.appendChild(td_input);
 				td_staffno.appendChild(staffnotxt);
 				td_name.appendChild(nametxt);
 				td_te.appendChild(tetxt);
-				td_duty.appendChild(dutytxt);
-				td_notes.appendChild(notestxt);
 				
 				//装在tr里面
 				var tr_t = document.createElement("tr");
@@ -551,8 +541,6 @@ function search_staff(){
 				tr_t.appendChild(td_staffno);
 				tr_t.appendChild(td_name);
 				tr_t.appendChild(td_te);
-				tr_t.appendChild(td_duty);
-				tr_t.appendChild(td_notes);
 				
 				//把创建的tr都保存在tbody里面，方便每次删除
 				//tbody_t = document.getElementById("iamtbody");
@@ -565,7 +553,7 @@ function search_staff(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+keyword);
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?type=nptype&keyword="+keyword);
 	
 	aja.send(null);
 }
@@ -590,5 +578,12 @@ $(function () {
             $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
         });
     });
+    
+function cleartext(){
+	var cm = document.getElementById("getme");
+	if(cm.value=="请输入关键字"){
+		cm.value = "";
+	}
+}
 </script>
 </html>

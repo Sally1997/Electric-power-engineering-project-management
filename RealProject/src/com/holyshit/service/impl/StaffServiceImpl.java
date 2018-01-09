@@ -171,10 +171,10 @@ public class StaffServiceImpl implements StaffService{
 			list =  StaffDao.selectStaffInProject(pno, userno);
 			for(Map<String, Object> map:list){
 				if(map.get("duty")==null){
-					map.put("duty", "null");
+					map.put("duty", "");
 				}
 				if(map.get("notes")==null){
-					map.put("notes", "null");
+					map.put("notes", "");
 				}
 			}
 		} catch (SQLException e) {
@@ -191,10 +191,10 @@ public class StaffServiceImpl implements StaffService{
 			list =  StaffDao.selectStaffInCompany(pno, userno);
 			for(Map<String, Object> map:list){
 				if(map.get("duty")==null){
-					map.put("duty", "null");
+					map.put("duty", "-");
 				}
 				if(map.get("notes")==null){
-					map.put("notes", "null");
+					map.put("notes", "-");
 				}
 			}
 		} catch (SQLException e) {
@@ -212,10 +212,10 @@ public class StaffServiceImpl implements StaffService{
 			list =  StaffDao.selectStaffInCompany(pno, userno, keyword);
 			for(Map<String, Object> map:list){
 				if(map.get("duty")==null){
-					map.put("duty", "null");
+					map.put("duty", "-");
 				}
 				if(map.get("notes")==null){
-					map.put("notes", "null");
+					map.put("notes", "-");
 				}
 			}
 		} catch (SQLException e) {
@@ -391,5 +391,19 @@ public class StaffServiceImpl implements StaffService{
 		if(staff!=null)
 			return true;
 		return false;
+	}
+
+	@Override
+	public List<Map<String, Object>> showStaffCanSetProject(String keyword) {
+		// TODO Auto-generated method stub
+		StaffDao sd = new StaffDaoImpl();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			list = sd.selectStaffCanSetProject(keyword);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
