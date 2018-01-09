@@ -27,7 +27,9 @@ public class ProjectAuditServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("text/html", "charset=UTF-8");
 		//改变立项审核状态，插入下已审核的理想审核信息
 		//给下一审核人发酵系，
 		//如果立项成功，给项目经理发信息
@@ -43,21 +45,20 @@ public class ProjectAuditServlet extends HttpServlet {
 		Inform infox = new Inform();
 		InformService is = new InformServiceImpl();
 		
+		
+		//mno是理想审核表编号
 		String mno = request.getParameter("mno");
 		String aev = request.getParameter("agree");
 		String ai = request.getParameter("auditinfo");
 		String pc = request.getParameter("PersonInCharge");
 		
-		infox = is.getInformByMno(mno);
-		
+		System.out.println(mno);
 		if(aev.equals("agree")){
 			aev="2";
 		}
 		else{
 			aev="1";
 		}
-		
-		mno = infox.getBusno();
 		
 		AuditService as = new AuditServiceImpl();
 		ProjectService ps = new ProjectServiceImpl();
@@ -109,8 +110,9 @@ public class ProjectAuditServlet extends HttpServlet {
 			
 			as.changePAAInfo(mno, aev, ai, cpn);
 			//得到更改后的paa
+			System.out.println(mno);
 			paa1 = as.getPAAInfoByMno(mno);
-			
+			System.out.println(paa1.getPno());
 			String pno = paa1.getPno();
 			
 			StaffService ss = new StaffServiceImpl();
@@ -155,6 +157,7 @@ public class ProjectAuditServlet extends HttpServlet {
 			
 		//跳转到消息界面？？？？
 		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet");
 		//request.getRequestDispatcher("/")
 	}
 

@@ -18,8 +18,9 @@ public class TaskIndexAudit extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("text/html", "charset=UTF-8");
 		
 		String [] index = request.getParameterValues("indexbox");
 		String agree = request.getParameter("agree");
@@ -48,6 +49,8 @@ public class TaskIndexAudit extends HttpServlet {
 		as.StageIndexAudit(info, index);
 		
 		//跳转到信息表？
+		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet");
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
