@@ -98,21 +98,13 @@
 						</div>
 						<div class="clear"></div>
 						<div class="hehe_left"></div>
-						<div class="hehe_right">${error1 }</div>
+						<div class="hehe_right"><font color=red >${error1 }</font></div>
 						<div class="clear"></div>
 						</div>
 						
-						<div id="budget" class="block">
-						<div class="hehe_left">
-						<font class="text">拥有的权限：</font>
-						</div>
-						<div class="hehe_right">
-						<ul class="list-unstyled">
-						<c:forEach items="${alist}" var="a" >
-							<li>${a.pername}</li>
-						</c:forEach>
-						</ul>
-						</div>
+						
+						
+						
 				
 						<div id="budget" class="block">
 						<div class="hehe_left">
@@ -125,28 +117,51 @@
 							
 						</c:forEach>	
            				</ul>
-						<div class="dropup">
-            					<span style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            						<button type="button" class="btn btn-primary" >添加新的资格证</button>
-            					</span>
-              					<ul class="dropdown-menu"  style="min-width: 300px">
-                					<li><div class="row">
-										  <div class="col-lg-11 xumode">
-											<div class="input-group">
-											  <input type="tel" class="form-control" placeholder="填写资格证名称" name="qua">
-											  <span class="input-group-btn">
-												<button class="btn btn-default" type="submit" onclick="addqua()" >添加</button>
-											  </span>
-											</div>
-										  </div>
-										</div>
-								    </li>
-             					</ul>
-          				</div>	
-          				</div>
+           				<div class="hehe_right"><font color=red >${error2 }</font></div>
+           				<div class="clear"></div>
+           				 <span style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
+            			   <button type="button" class="btn btn-primary" onclick = "showchoice();return false;" >添加新的资格证</button></span>
+                			<span id = "showthechoice" style = "display:none;"><br/>
+                				<select name="qua" length = "40">
+                					<option value="教师资格证" >教师资格证</option>
+									<option value="英语六级" >英语六级</option>
+									<option value="建筑师二级" >建筑师二级</option>
+								</select>
+								<button type="submit" class="btn btn-primary" style="cursor: pointer;" onclick="addqua()">添加</button>
+                			</span>
+                			<script type="text/javascript">
+                			function showchoice()
+							{
+  								if(document.getElementById('showthechoice').style.display == 'none')
+  								{
+   									document.getElementById('showthechoice').style.display = 'block';
+  								}
+  								else
+  								{
+    								document.getElementById('showthechoice').style.display = 'none';
+  								}
+}
+							</script>
           				
+          				</div>
+						<div class="clear"></div>
 						</div>
 						
+						
+						
+						<div id="budget" class="block">
+						<div class="hehe_left">
+						<font class="text">拥有的权限：</font>
+						</div>
+						<div class="hehe_right">
+						<ul class="list-unstyled">
+						<li>${defaultauth}</li>
+						<c:forEach items="${aList}" var="a" >
+							<li>${a.pername}</li>
+						</c:forEach>
+						</ul>
+						</div>
+						</div>
 						
 						<div class="clear"></div>
 						</div>

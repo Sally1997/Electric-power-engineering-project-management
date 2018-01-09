@@ -10,6 +10,11 @@
  </head>
  <script type="text/javascript">
  	var jsonData="";
+ 	function updateSystem(a,b,c){
+  		var p = document.getElementsByName("sysinfomation")[0];
+  		p.action = "${pageContext.request.contextPath}/web/servlet/jumpSystemInfoServlet?type="+a+"&pno="+b+"&mno="+c;
+  		
+  	}
  </script>
  <body> 
     
@@ -56,23 +61,23 @@
 			    <c:forEach items="${systemsinfo}" var="s">
 			    <c:choose>
 			     <c:when test="${s.mtype=='S0'&&s.hasread=='0' }">
-				  <button type="button" class="list-group-item">您已经被拉入项目组<strong>${s.pname}</strong><span class="small">><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${s.pno}')">&nbsp;进入项目</a></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="updateSystem('1','${s.pno}','${s.mno }')">您已经被拉入项目组<strong>${s.pname}</strong><span class="small">><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${s.pno}')">&nbsp;进入项目</a></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
 				 </c:when>
 				  
 				 <c:when test="${s.mtype=='S1'&&s.hasread=='0' }">
-				  <button type="button" class="list-group-item">您已经被拉出项目组<strong>${s.pname}</strong><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="updateSystem('2','${s.pno}','${s.mno }')">您已经被拉出项目组<strong>${s.pname}</strong><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
 				 </c:when> 
 				 
 				 <c:when test="${s.mtype=='S2'&&s.hasread=='0' }">
-				  <button type="button" class="list-group-item">您的信息已被管理员修改><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/showUserCenterServlet')">&nbsp;进入个人中心查看</a></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="updateSystem('3','${s.pno}','${s.mno }')">您的信息已被管理员修改><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/showUserCenterServlet')">&nbsp;进入个人中心查看</a></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
 				 </c:when>
 				  
 				 <c:when test="${s.mtype=='S3'&&s.hasread=='0' }">
-				  <button type="button" class="list-group-item">您的密码已被管理员修改<span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="updateSystem('4','${s.pno}','${s.mno }')">您的密码已被管理员修改<span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
 				 </c:when> 
 				 
 				 <c:when test="${s.mtype=='S4'&&s.hasread=='0' }">
-				  <button type="button" class="list-group-item">您的权限已被管理员修改<span class="small"></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="updateSystem('5','${s.pno}','${s.mno }')">您的权限已被管理员修改<span class="small"></span><span class="list-group-item-text" style="float:right">${s.mdate}</span></button>
 				 </c:when> 
 				  
 			   </c:choose>

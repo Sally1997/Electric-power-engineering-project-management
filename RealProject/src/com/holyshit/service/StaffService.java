@@ -1,5 +1,6 @@
 package com.holyshit.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -110,4 +111,11 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> showStaffCanSetProject(String keyword);
+	
+	/**
+	 * 获取管理员信息
+	 * @return
+	 * 
+	 */
+	Staff findRootInfo();
 }

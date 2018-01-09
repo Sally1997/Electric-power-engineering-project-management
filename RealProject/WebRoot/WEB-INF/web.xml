@@ -312,6 +312,11 @@
     <servlet-name>AuditGeneralFileServlet</servlet-name>
     <servlet-class>com.holyshit.web.servlet.AuditGeneralFileServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetRootInfo</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetRootInfo</servlet-class>
+  </servlet>
+
 
 
 
@@ -561,6 +566,10 @@
   <servlet-mapping>
     <servlet-name>AuditGeneralFileServlet</servlet-name>
     <url-pattern>/web/servlet/auditGeneralFileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetRootInfo</servlet-name>
+    <url-pattern>/web/servlet/getRootInfo</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

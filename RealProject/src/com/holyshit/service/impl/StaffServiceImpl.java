@@ -406,4 +406,19 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return list;
 	}
+
+	@Override
+	public Staff findRootInfo() {
+		// TODO Auto-generated method stub
+		
+		StaffDao sd=new StaffDaoImpl();
+		Staff selectStaffById=null;
+		try {
+			selectStaffById = sd.selectStaffById("root");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return selectStaffById;
+	}
 }

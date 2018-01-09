@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.holyshit.domain.Authority;
 import com.holyshit.domain.Qualification;
 import com.holyshit.domain.Staff;
+import com.holyshit.service.AuthorityService;
 import com.holyshit.service.QualificationService;
 import com.holyshit.service.StaffService;
+import com.holyshit.service.impl.AuthorityServiceImpl;
 import com.holyshit.service.impl.QualificationServiceImpl;
 import com.holyshit.service.impl.StaffServiceImpl;
 
@@ -61,9 +64,20 @@ public class UpdateTeServlet extends HttpServlet {
 		Staff me = ss.findAStaff(staffno);
 		QualificationService qfs = new QualificationServiceImpl();
 		List<Qualification> qL = qfs.findAllQualifications(staffno);
+		AuthorityService as = new AuthorityServiceImpl();
+		List<Authority> aList = as.findAuthorityById(staffno);
+		String defaultauth = "";
+		if(aList.isEmpty())
+		{
+			defaultauth = "无特殊权限";
+			
+		}
+		request.setAttribute("defaultauth",defaultauth );	
+		request.setAttribute("aList",aList );
 		request.setAttribute("error1",error1);
 		request.setAttribute("me",me );
 		request.setAttribute("qL",qL );
+		
 		request.getRequestDispatcher("/jsp/projectManage/UserCenter.jsp").forward(request, response);
 	}
 
