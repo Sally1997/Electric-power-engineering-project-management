@@ -31,6 +31,11 @@ public class ShowStaffInfoServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("staff");
 		String userno = staff.getStaffno();
 		
+		String fp = request.getParameter("fp");
+		if(fp!=null){
+			int pagenum = Integer.parseInt(fp);
+		}
+		
 		//返回的字符串str
 		String str = "";
 		
@@ -40,7 +45,13 @@ public class ShowStaffInfoServlet extends HttpServlet {
 		
 		if(s.equals("ptype")){
 			//如果选择类型是空或者project type则
-			list = ss.showStaffInProject(pno, userno);
+			if(fp!=null){
+				list = ss.showStaffInProject(pno, userno);
+			}
+			else{
+				list = ss.showStaffInProject(pno, userno);
+			}
+			
 			String ja = JSONArray.fromObject(list).toString();
 			AutoNumber an = new AutoNumber();
 			str = an.transToArray(ja).toString();

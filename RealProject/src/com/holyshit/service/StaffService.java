@@ -52,6 +52,8 @@ public interface StaffService {
 	 */
 	List<Map<String,Object>> showStaffInProject(String pno,String userno);
 	
+	List<Map<String,Object>> showStaffInProject(String pno,String userno,int pagenum);
+	
 	/**\
 	 * show公司成员列表
 	 * @param pno

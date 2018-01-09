@@ -391,17 +391,17 @@
 				  </button> -->
 		</form>
 		   
-		  <!--  <li>
-					  <a href="javascript:getPrevious(showpage);" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					  </a>
+		  <div style="text-align: center" id="#">
+		           <ul class="pagination">
+					<li>
+						<span aria-hidden="true" onclick="pagedec()">&laquo;</span>
 					</li>
-					<li class="active"><a href="javascript:jmpPage(1)">1</a></li>
-			<li>
-					  <a href="javascript:getNext(showpage);" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					  </a>
-					</li> -->
+					  <li class="active"><a>第<span id="fooza_page">1</span>页</a></li>
+					<li>
+						<span aria-hidden="true" onclick="pageinr()">&raquo;</span>
+					</li>
+				    </ul>
+    	</div>
 		   
     </div>
     <div class="modal-footer">
@@ -614,5 +614,142 @@ function cleartext(){
 		cm.value = "";
 	}
 }
+
+function pageinr(){
+	var fp = parseInt(document.getElementById("fooza_page").innerHTML);
+	fp += 1;
+	
+	document.getElementById("fooza_page").innerHTML = fp;
+
+	var tbody_t = document.getElementById("iamtbody");
+	var childs = tbody_t.childNodes;
+	for(var i=childs.length-1;i>=0;i--){
+		tbody_t.removeChild(childs[i]);
+	}
+	
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&fp="+fp);
+	
+	aja.send(null);
+}
+
+function pagedec(){
+	var fp = document.getElementById("fooza_page").innerHTML;
+	if(fp=="1"){
+		return;
+	}
+	fp = parseInt(fp);
+	fp -= 1;
+	document.getElementById("fooza_page").innerHTML = fp;
+
+	var tbody_t = document.getElementById("iamtbody");
+	var childs = tbody_t.childNodes;
+	for(var i=childs.length-1;i>=0;i--){
+		tbody_t.removeChild(childs[i]);
+	}
+	
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&fp="+fp);
+	
+	aja.send(null);
+}
+
+
 </script>
 </html>
