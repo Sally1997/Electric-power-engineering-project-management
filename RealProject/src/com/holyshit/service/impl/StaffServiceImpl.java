@@ -191,10 +191,10 @@ public class StaffServiceImpl implements StaffService{
 			list =  StaffDao.selectStaffInCompany(pno, userno);
 			for(Map<String, Object> map:list){
 				if(map.get("duty")==null){
-					map.put("duty", "");
+					map.put("duty", "-");
 				}
 				if(map.get("notes")==null){
-					map.put("notes", "");
+					map.put("notes", "-");
 				}
 			}
 		} catch (SQLException e) {
@@ -212,10 +212,10 @@ public class StaffServiceImpl implements StaffService{
 			list =  StaffDao.selectStaffInCompany(pno, userno, keyword);
 			for(Map<String, Object> map:list){
 				if(map.get("duty")==null){
-					map.put("duty", "null");
+					map.put("duty", "-");
 				}
 				if(map.get("notes")==null){
-					map.put("notes", "null");
+					map.put("notes", "-");
 				}
 			}
 		} catch (SQLException e) {
