@@ -483,7 +483,7 @@
       				alert("请输入正确的11位手机号码");
       				return;
       			}
-      			var email_reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+      			var email_reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
       			
       			if(!email_reg.test(editStaff_email)){
       				alert("电子邮箱格式错误");
@@ -492,7 +492,7 @@
       			
       			var password_reg=/^[0-9A-z]{6,16}$/;
       			if((editStaff_password!="")&&(!password_reg.test(editStaff_password))){
-      				alert("请输入正确的密码格式:\n"+"    1.密码由数字，小写字母，大写字母中的一种或者几种类型组成\n"+"    2.密码长度最短为6位，最长为20位");
+      				alert("请输入正确的密码格式:\n"+"    1.密码由数字，小写字母，大写字母中的一种或者几种类型组成\n"+"    2.密码长度最短为6位，最长为16位");
       				return;
       			}
       			
