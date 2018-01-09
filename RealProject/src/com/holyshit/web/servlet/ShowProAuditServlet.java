@@ -20,7 +20,7 @@ public class ShowProAuditServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//String mno = request.getParameter("mno");
-		String mno = "6";
+		String mno=request.getParameter("mno");
 		InformService is = new InformServiceImpl();
 		Inform info = is.getInformByMno(mno);
 		

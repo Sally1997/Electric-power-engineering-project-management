@@ -127,7 +127,7 @@ public class InformDaoImpl implements InformDao {
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="SELECT mno,busno,mdate,mtype,pname FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A11' OR mtype='A12' OR mtype='A13') and hasread='0') a JOIN project ON a.busno=project.pno";
+		String sql="SELECT mno,busno,mdate,mtype,pname,project.pno FROM (SELECT mno,busno,mdate,mtype FROM inform WHERE dstpno='"+staffno+"' AND (mtype='A11' OR mtype='A12' OR mtype='A13') AND hasread='0') a JOIN projaprlaudit ON a.busno=projaprlaudit.paauditno JOIN project ON projaprlaudit.pno=project.pno";
 		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<InformProject>(InformProject.class));
 	}
 

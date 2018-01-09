@@ -8,6 +8,14 @@ public class InformProject {
 	private String mtype;
 	private Timestamp mdate;
 	private String pname;
+	private String pno;
+	
+	public String getPno() {
+		return pno;
+	}
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
 	public String getMno() {
 		return mno;
 	}
