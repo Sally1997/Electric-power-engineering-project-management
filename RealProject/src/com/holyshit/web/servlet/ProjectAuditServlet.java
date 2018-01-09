@@ -141,8 +141,8 @@ public class ProjectAuditServlet extends HttpServlet {
 		
 			
 		//跳转到消息界面？？？？
-		//response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
-		//response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet?type=1");
+		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
+		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet?type=1");
 		//request.getRequestDispatcher("/")
 	}
 
