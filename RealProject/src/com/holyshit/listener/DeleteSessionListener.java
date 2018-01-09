@@ -3,9 +3,11 @@ package com.holyshit.listener;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,6 +17,9 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSession;
 
 import com.holyshit.domain.Staff;
+import com.holyshit.domain.StageTask;
+import com.holyshit.service.StageTasksService;
+import com.holyshit.service.impl.StageTasksServiceImpl;
 
 public class DeleteSessionListener implements ServletContextListener{
 
@@ -92,9 +97,31 @@ public class DeleteSessionListener implements ServletContextListener{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				StageTasksService ss=new StageTasksServiceImpl();
+				List<StageTask> res = ss.findAllChangeState();
+				Map<String, String> para=new HashMap<String, String>();
+				for(StageTask task:res){
+					long curtime=new Date().getTime();
+					if((curtime>task.getEtime().getTime())){
+						//大于截至日期
+						para.put(task.getTaskno(),"2");
+					}else if((curtime>task.getStime().getTime())&&(!task.getTstate().equals("1"))){
+						para.put(task.getTaskno(),"1");
+					}
+				}
+				//刷新任务状态
+				if(para.size()>0){
+					StageTasksService sts=new StageTasksServiceImpl();
+					boolean flag = sts.refreshTaskState(para);
+					if(flag)
+						System.out.println("任务状态更新成功");
+					else {
+						System.out.println("任务状态更新失败");
+					}
+				}
 				
 			}
-		}, time, 1000*24*60*60);
+		}, 0, 60000);
 		
 		//定时更新阶段状态
 		//每晚12点

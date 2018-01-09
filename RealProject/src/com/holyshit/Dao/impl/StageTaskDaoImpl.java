@@ -152,4 +152,30 @@ public class StageTaskDaoImpl implements StageTaskDao {
 				tno);
 	}
 
+	@Override
+	public List<StageTask> selectAllMaybeChangeTask() throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="select * from stagetasks where tstate='0' or tstate='1'";
+		return qr.query(ConnectionManager.getConnection(), sql, new BeanListHandler<StageTask>(StageTask.class));
+	}
+
+	@Override
+	public int[] updateTaskByPara(Map<String, String> para) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		Object[][] hehe=new Object[para.size()][];
+		int i=0;
+		for(Map.Entry<String, String> entry:para.entrySet()){
+			hehe[i]=new Object[2];
+			hehe[i][1]=entry.getKey();
+			hehe[i][0]=entry.getValue();
+			i++;
+		}
+		
+		//批处理执行更新任务
+		String sql="update stagetasks set tstate=? where taskno=?";
+		return qr.batch(ConnectionManager.getConnection(), sql, hehe);
+	}
+
 }

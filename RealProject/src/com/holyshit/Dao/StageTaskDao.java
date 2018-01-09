@@ -130,4 +130,19 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	public List<Object> selectPTaskNo(String tno) throws SQLException;
+	
+	/**
+	 * 获取所有的状态可能发生改变的任务
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<StageTask> selectAllMaybeChangeTask() throws SQLException;
+	
+	/**
+	 * 更新任务状态
+	 * @param para
+	 * @return
+	 * @throws SQLException
+	 */
+	int[] updateTaskByPara(Map<String, String> para)throws SQLException;
 }
