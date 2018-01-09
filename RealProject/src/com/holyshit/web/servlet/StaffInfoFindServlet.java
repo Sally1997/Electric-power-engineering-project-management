@@ -38,7 +38,6 @@ public class StaffInfoFindServlet extends HttpServlet {
 		
 		//返回的字符串str
 		String str = "";
-		
 		//~~~~
 		StaffService ss = new StaffServiceImpl();
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
@@ -57,11 +56,20 @@ public class StaffInfoFindServlet extends HttpServlet {
 			AutoNumber an = new AutoNumber();
 			str = an.transToArray(ja).toString();
 		}*/
-		list = ss.queryStaffInCompany(pno, userno, keyword);
-		str = JSONArray.fromObject(list).toString();
-		String ja = JSONArray.fromObject(list).toString();
-		AutoNumber an = new AutoNumber();
-		str = an.transToArray(ja).toString();
+		if(s.equals("nptype")){
+			list = ss.showStaffCanSetProject(keyword);
+			str = JSONArray.fromObject(list).toString();
+			String ja = JSONArray.fromObject(list).toString();
+			AutoNumber an = new AutoNumber();
+			str = an.transToArray(ja).toString();
+		}
+		else{
+			list = ss.queryStaffInCompany(pno, userno, keyword);
+			str = JSONArray.fromObject(list).toString();
+			String ja = JSONArray.fromObject(list).toString();
+			AutoNumber an = new AutoNumber();
+			str = an.transToArray(ja).toString();
+		}
 		
 		//返回字符串
 		response.getWriter().write(str);

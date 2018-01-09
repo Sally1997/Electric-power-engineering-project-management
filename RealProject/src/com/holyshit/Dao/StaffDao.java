@@ -137,5 +137,13 @@ public interface StaffDao {
 	 * @throws SQLException
 	 */
 	int[] deleteStaff(String[] staffs)throws SQLException;
+	
+	/**
+	 * 搜索有立项权限的员工
+	 * @param keyword
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Map<String,Object>> selectStaffCanSetProject(String keyword) throws SQLException;
 }   
  

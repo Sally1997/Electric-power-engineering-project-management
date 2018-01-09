@@ -45,6 +45,12 @@ public class ShowStaffInfoServlet extends HttpServlet {
 			AutoNumber an = new AutoNumber();
 			str = an.transToArray(ja).toString();
 		}
+		else if(s.equals("nptype")){
+			list = ss.showStaffCanSetProject("");
+			String ja = JSONArray.fromObject(list).toString();
+			AutoNumber an = new AutoNumber();
+			str = an.transToArray(ja).toString();
+		}
 		else{
 			list = ss.showStaffInCompany(pno, userno);
 			//str = JSONArray.fromObject(list).toString();
