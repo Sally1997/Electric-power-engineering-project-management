@@ -406,4 +406,17 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return list;
 	}
+
+	@Override
+	public void addAStaff(PSRelation psr){
+		StaffDao StaffDao = new StaffDaoImpl();
+		try {
+			StaffDao.addAStaff(psr);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
 }

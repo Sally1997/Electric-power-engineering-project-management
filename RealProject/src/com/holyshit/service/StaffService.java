@@ -110,4 +110,10 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> showStaffCanSetProject(String keyword);
+	
+	/**
+	 * 添加人员关系表
+	 * @param psr
+	 */
+	void addAStaff(PSRelation psr);
 }

@@ -128,7 +128,7 @@
       	        <div class="panel-body">
                 <div class="col-lg-12" >
 						<!-- 同意 -->
-					<form>
+					<form id="fozza_form" action="${pageContext.request.contextPath }/web/servlet/projectAuditServlet?mno=${map.mno}" method="post">
 						<div id="responsible_per" class="block">
 						<div>
 						<div id="first_left">
@@ -268,7 +268,6 @@
         <h4 class="modal-title" id="myModalLabel">人员查找</h4>
     </div>
     <div class="modal-body">
-    	<form action="" method="post" name="form2">
     	<div id="others" class="block">
 			<div class="hehe_left">
 			<span class="text">输入:</span>
@@ -280,8 +279,6 @@
 			</div>
 			<div class="clear"></div>
 			<br/>
-		</form>
-		<form action="" method="post" name="form3">
 			<table id = "member_table" class="table table-striped table-condensed" style="font-size: 15px">
  		    <tr>
 			    <th>选择</th>
@@ -305,7 +302,6 @@
 		    </tr> -->
 		    
 	        </table>
-		</form>
 		   
     </div>
     <div class="modal-footer">
@@ -508,9 +504,8 @@ function submitAudit(){
 		}
 	}
 	alert("数据提交中……请等待服务器结果");
-	var fm = document.forms[0];
-	fm.action="${pageContext.request.contextPath }/web/servlet/projectAuditServlet?mno=${map.mno}";
-	fm.method="post";
+	var fm = document.getElementById("fozza_form");
+	
 	fm.submit();
 }
 

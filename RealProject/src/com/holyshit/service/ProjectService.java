@@ -74,4 +74,18 @@ public interface ProjectService {
 	 * @return
 	 */
 	boolean newPeojectManage(Project pro,PSRelation psr,Inform info,Document doc,PDocAudit pda);
+	
+	/**
+	 * 改变项目炸u那个太
+	 * @param pno
+	 * @param state
+	 */
+	public void changeProjectState(String pno,String state);
+	
+	/**
+	 * 获取项目信息
+	 * @param pno
+	 * @return
+	 */
+	public Project getProjectInfo(String pno);
 }

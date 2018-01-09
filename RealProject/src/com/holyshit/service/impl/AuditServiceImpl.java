@@ -160,6 +160,23 @@ public class AuditServiceImpl implements AuditService {
 			ConnectionManager.closeConnection();
 		}
 	}
+	
+	@Override
+	public void changePAAInfo(String mno, String auditstate, String auditadv) {
+		// TODO Auto-generated method stub
+		ConnectionManager.startTransaction();
+		AuditDao ad = new AuditDaoImpl();
+		try {
+			ad.updateProAuditInfo(mno, auditstate, auditadv);
+			ConnectionManager.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ConnectionManager.rollback();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
 
 	@Override
 	public Map<String, Object> getDocAuditInfo(String pdauditno) {
