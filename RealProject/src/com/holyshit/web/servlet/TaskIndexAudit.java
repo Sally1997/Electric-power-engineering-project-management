@@ -32,7 +32,6 @@ public class TaskIndexAudit extends HttpServlet {
 		HttpSession session = request.getSession();
 		Staff staff = (Staff) session.getAttribute("staff");
 		Inform info = new Inform();
-		System.out.println(agree+index[0]);
 		if(agree.equals("agree")){
 			agree="2";
 			info.setMtype("A6");

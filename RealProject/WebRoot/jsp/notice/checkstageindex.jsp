@@ -422,7 +422,7 @@ function search_staff(){
 function submitAudit(){
 	alert("数据提交中……请等待服务器结果");
 	var fm = document.getElementById("shiwoa");
-	fm.action="${pageContext.request.contextPath }/web/servlet/taskIndexAudit?taskno=${map.taskno}&charpno=${map.charpno}";
+	fm.action="${pageContext.request.contextPath }/web/servlet/taskIndexAudit?taskno=${map.stageno}&charpno=${map.charpno}";
 	fm.method="post";
 	fm.submit();
 }

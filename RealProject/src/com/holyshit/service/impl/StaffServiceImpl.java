@@ -184,6 +184,25 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return list;
 	}
+	public List<Map<String, Object>> showStaffInProject(String pno, String userno,int pagenum) {
+		StaffDao StaffDao = new StaffDaoImpl();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			list =  StaffDao.selectStaffInProject(pno, userno, pagenum);
+			for(Map<String, Object> map:list){
+				if(map.get("duty")==null){
+					map.put("duty", "-");
+				}
+				if(map.get("notes")==null){
+					map.put("notes", "-");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	@Override
 	public List<Map<String, Object>> showStaffInCompany(String pno, String userno) {
 		StaffDao StaffDao = new StaffDaoImpl();

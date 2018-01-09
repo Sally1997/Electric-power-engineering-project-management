@@ -99,6 +99,14 @@ public class StaffDaoImpl implements StaffDao {
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit 0,10", 
 			new MapListHandler(),pno,userno,pno);
 	}
+	public List<Map<String, Object>> selectStaffInProject(String pno, String userno,int pagenum) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT StaffNo,name,te,duty,notes FROM "+
+			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
+			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit ?,10", 
+			new MapListHandler(),pno,userno,pno,pagenum-1);
+	}
 
 	@Override
 	public List<Map<String, Object>> selectStaffInCompany(String pno, String userno) throws SQLException {
