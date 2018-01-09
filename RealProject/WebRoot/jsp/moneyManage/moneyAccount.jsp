@@ -49,24 +49,45 @@
 			for(var i=0;i<dataJson.length;i++){
 				
 				var tds=nodes[i+1].getElementsByTagName("td");
-				tds[0].innerHTML=dataJson[i].pname;
-				tds[1].innerHTML=dataJson[i].sname;
-				tds[2].innerHTML=dataJson[i].taskname;
-				tds[3].innerHTML=dataJson[i].appname;
+				//项目长度
+				var hehe_pname=dataJson[i].pname;
+				if(hehe_pname.length>20)
+					hehe_pname=hehe_pname.substr(0,20)+"...";
+				tds[0].innerHTML=hehe_pname;
+				tds[0].title=dataJson[i].pname;
+				
+				var hehe_sname=dataJson[i].sname;
+				if(hehe_sname.length>6)
+					hehe_sname=hehe_sname.substr(0,6)+"...";
+				tds[1].innerHTML=hehe_sname;
+				tds[1].title=dataJson[i].sname;
+				
+				var hehe_taskname=dataJson[i].taskname;
+				if(hehe_taskname.length>6)
+					hehe_taskname=hehe_taskname.substr(0,6)+"...";
+				tds[2].innerHTML=hehe_taskname;
+				tds[2].title=dataJson[i].taskname;
+				
+				var hehe_appname=dataJson[i].appname;
+				if(hehe_appname.length>6)
+					hehe_appname=hehe_appname.substr(0,6)+"...";
+				tds[3].innerHTML=hehe_appname;
+				tds[3].title=dataJson[i].appname;
+				
 				tds[4].innerHTML=dataJson[i].stime;
-				tds[5].innerHTML=dataJson[i].fee;
+				tds[5].innerHTML="￥"+dataJson[i].fee;
 				var state=dataJson[i].auditstate;
 				
 				if(state=="0"){
 					tds[6].innerHTML="未审批";
-					tds[6].className="text-danger";
+					tds[6].style.color="blue";
 				}
 				else if(state=="2"){
 					tds[6].innerHTML="审批通过";
-					tds[6].className="text-success";
+					tds[6].style.color="green";
 				}else{
 					tds[6].innerHTML="不通过";
-					tds[6].className="text-danger";
+					tds[6].style.color="red";
 				}
 			} 
 			for(var i=dataJson.length;i<5;i++){	
@@ -95,7 +116,7 @@
 					<tr>
 						<th>项目名称</th>
 						<th>项目阶段</th>
-						<th>任务阶段</th>
+						<th>任务名称</th>
 						<th>报销人</th>
 						<th>报账时间</th>
 						<th>报账金额</th>

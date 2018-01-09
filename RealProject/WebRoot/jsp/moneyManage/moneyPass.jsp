@@ -90,24 +90,45 @@
 			for(var i=0;i<auditData.length;i++){
 				
 				var tds=nodes[i+1].getElementsByTagName("td");
-				tds[0].innerHTML=auditData[i].pname;
-				tds[1].innerHTML=auditData[i].sname;
-				tds[2].innerHTML=auditData[i].taskname;
-				tds[3].innerHTML=auditData[i].appname;
+				//项目长度
+				var hehe_pname=auditData[i].pname;
+				if(hehe_pname.length>20)
+					hehe_pname=hehe_pname.substr(0,20)+"...";
+				tds[0].innerHTML=hehe_pname;
+				tds[0].title=auditData[i].pname;
+				
+				var hehe_sname=auditData[i].sname;
+				if(hehe_sname.length>6)
+					hehe_sname=hehe_sname.substr(0,6)+"...";
+				tds[1].innerHTML=hehe_sname;
+				tds[1].title=auditData[i].sname;
+				
+				var hehe_taskname=auditData[i].taskname;
+				if(hehe_taskname.length>6)
+					hehe_taskname=hehe_taskname.substr(0,6)+"...";
+				tds[2].innerHTML=hehe_taskname;
+				tds[2].title=auditData[i].taskname;
+				
+				var hehe_appname=auditData[i].appname;
+				if(hehe_appname.length>6)
+					hehe_appname=hehe_appname.substr(0,6)+"...";
+				tds[3].innerHTML=hehe_appname;
+				tds[3].title=auditData[i].appname;
+				
 				tds[4].innerHTML=auditData[i].stime;
-				tds[5].innerHTML="￥"+auditData[i].fee+"元";
+				tds[5].innerHTML="￥"+auditData[i].fee;
 				var state=auditData[i].auditstate;
+				
 				if(state=="0"){
 					tds[6].innerHTML="未审批";
-					tds[6].className="text-danger";
+					tds[6].style.color="blue";
 				}
 				else if(state=="2"){
 					tds[6].innerHTML="审批通过";
-					tds[6].className="text-success";
+					tds[6].style.color="green";
 				}else{
-					
 					tds[6].innerHTML="不通过";
-					tds[6].className="text-danger";
+					tds[6].style.color="red";
 				}
 				if(auditData[i].over==1){
 					tds[7].innerHTML="超标";
