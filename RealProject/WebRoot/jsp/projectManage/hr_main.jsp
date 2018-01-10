@@ -138,7 +138,7 @@
 			            		
 			    			}
 			  			}
-			  			xmlhttp.open("POST","${pageContext.request.contextPath}/web/servlet/qualificationListServlet?staffno="+str,true);
+			  			xmlhttp.open("POST","${pageContext.request.contextPath}/web/servlet/qualificationListServlet?staffno="+str+"&time="+new Date().getTime(),true);
 			  			xmlhttp.send();
 					}
 					</script>

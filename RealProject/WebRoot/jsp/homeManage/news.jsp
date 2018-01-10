@@ -35,7 +35,7 @@
 					}
 				};
 			
-			req.open("post", "${pageContext.request.contextPath}/web/servlet/showNoticePage?currentPage="+cur+"&pageSize=5");
+			req.open("post", "${pageContext.request.contextPath}/web/servlet/showNoticePage?currentPage="+cur+"&pageSize=5&time="+new Date().getTime());
 			req.send(null);
 		}
 		
@@ -77,7 +77,7 @@
 				}
 			};
 		
-		req.open("post", "${pageContext.request.contextPath}/web/servlet/showNoticePage?currentPage=1&pageSize=5");
+		req.open("post", "${pageContext.request.contextPath}/web/servlet/showNoticePage?currentPage=1&pageSize=5&time="+new Date().getTime());
 		req.send(null);
 			
 		}

@@ -302,7 +302,7 @@
       					}
       				}
       			};
-      			req.open("get","/RealProject/web/servlet/addStaff?staffno="+addStaff_staffno+"&name="+window.encodeURI(addStaff_name)+"&sex="+window.encodeURI(addStaff_sex)+"&birthday="+addStaff_birthday+"&te="+addStaff_te+"&email="+addStaff_email+"&password="+addStaff_password);
+      			req.open("get","/RealProject/web/servlet/addStaff?staffno="+addStaff_staffno+"&name="+window.encodeURI(addStaff_name)+"&sex="+window.encodeURI(addStaff_sex)+"&birthday="+addStaff_birthday+"&te="+addStaff_te+"&email="+addStaff_email+"&password="+addStaff_password+"&time="+new Date().getTime());
       			req.send(null);
       		}
       </script>
@@ -382,7 +382,7 @@
       				}
       				
       			};
-      			req.open("get", "/RealProject/web/servlet/setAuthority?staffno="+global_staff.staffno+"&list="+para);
+      			req.open("get", "/RealProject/web/servlet/setAuthority?staffno="+global_staff.staffno+"&list="+para+"&time="+new Date().getTime());
       			req.send(null);
       			
       		}
@@ -548,7 +548,7 @@
       				}
       			};
       			if(isSend){
-	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+window.encodeURI(editStaff_name)+"&sex="+window.encodeURI(editStaff_sex)+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password+"&changeFlag="+changeFlag);
+	      			req.open("get","/RealProject/web/servlet/editStaff?staffno="+editStaff_staffno+"&name="+window.encodeURI(editStaff_name)+"&sex="+window.encodeURI(editStaff_sex)+"&birthday="+editStaff_birthday+"&te="+editStaff_te+"&email="+editStaff_email+"&password="+editStaff_password+"&changeFlag="+changeFlag+"&time="+new Date().getTime());
 	      			req.send(null);
       			}
       		}
@@ -569,7 +569,7 @@
 						}
 					}
 				};
-				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+id+":");
+				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+id+":"+"&time="+new Date().getTime()");
 				req.send(null);
       		}
       		
@@ -661,7 +661,7 @@
 						}
 					}
 				};
-				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+ids);
+				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+ids+"&time="+new Date().getTime());
 				req.send(null);
 			});
 			//初始化修改按钮

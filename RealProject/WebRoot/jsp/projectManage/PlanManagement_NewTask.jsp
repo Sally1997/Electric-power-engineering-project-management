@@ -259,7 +259,17 @@ function addElement()
 	var xxx=true;
 	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	xxx = pppp.test(vbudget);
-	
+	var myDate = new Date().getTime();
+	var startTime=Date.parse(vstartdate);
+	var endTime=Date.parse(venddate);
+	if(startTime<myDate){
+		alert("任务的开始时间应当大于当前时间");
+		return;
+	}
+	if(startTime>endTime){
+		alert("任务开始时间应该小于截止时间");
+		return;
+	}
 	var yyy=true;
 	var vs = vstartdate.split("-");
 	var ve = venddate.split("-");
@@ -842,7 +852,7 @@ function search_member(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype&time="+new Date().getTime());
 	
 	aja.send(null);
 }
@@ -912,10 +922,10 @@ function choosepoc(poc){
 	}
 	
 	if(poc.value=="in"){
-		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
+		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype&time="+new Date().getTime());
 	}
 	else{
-		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype");
+		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype&time="+new Date().getTime());
 	}
 	aja.send(null);
 }
@@ -990,7 +1000,7 @@ function search_staff(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword));
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword)+"&time="+new Date().getTime());
 	
 	aja.send(null);
 }

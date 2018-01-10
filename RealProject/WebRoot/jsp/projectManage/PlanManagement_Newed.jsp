@@ -138,7 +138,7 @@ $(".innerUl").ProTree({
 			}
 		}
 		//创建连接
-		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+id);
+		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+id+"&time="+new Date().getTime());
 		//发送请求
 		aja.send(null);
   }
@@ -509,7 +509,7 @@ var aja = new XMLHttpRequest();
 			}
 		}
 		//创建连接
-		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+${s}[0].id);
+		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+${s}[0].id+"&time="+new Date().getTime());
 		//发送请求
 		aja.send(null);
 	}
@@ -594,7 +594,7 @@ function search_member(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype&time="+new Date().getTime());
 	
 	aja.send(null);
 }
@@ -664,10 +664,10 @@ function choosepoc(poc){
 	}
 	
 	if(poc.value=="in"){
-		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype");
+		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ptype&time="+new Date().getTime());
 	}
 	else{
-		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype");
+		aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?pno=${pno}&type=ctype&time="+new Date().getTime());
 	}
 	aja.send(null);
 }
@@ -742,7 +742,7 @@ function search_staff(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+keyword);
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword)+"&time="+new Date().getTime());
 	
 	aja.send(null);
 }

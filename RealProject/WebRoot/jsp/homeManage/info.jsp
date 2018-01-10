@@ -35,7 +35,7 @@
 					}
 				};
 			
-			req.open("get", "${pageContext.request.contextPath}/web/servlet/showDocumentPage?currentPage="+cur+"&pageSize=5");
+			req.open("get", "${pageContext.request.contextPath}/web/servlet/showDocumentPage?currentPage="+cur+"&pageSize=5&time="+new Date().getTime());
 			req.send(null);
 		}
 		
@@ -77,7 +77,7 @@
 				}
 			};
 		
-		req.open("get", "${pageContext.request.contextPath}/web/servlet/showDocumentPage?currentPage=1&pageSize=5");
+		req.open("get", "${pageContext.request.contextPath}/web/servlet/showDocumentPage?currentPage=1&pageSize=5&time="+new Date().getTime());
 		req.send(null);
 			
 		}

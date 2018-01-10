@@ -301,10 +301,10 @@ public class StageTasksServiceImpl implements StageTasksService{
 			staff = sd.isinproject(charpno, pno);
 			
 			if(no.length()==6){
-				ppd.updateCharP(charpno, no);
+				ppd.updateCharP(no, charpno);
 			}
 			else{
-				std.updateCharP(charpno, no);
+				std.updateCharP(no, charpno);
 			}
 			
 			if(staff==null){
@@ -317,6 +317,7 @@ public class StageTasksServiceImpl implements StageTasksService{
 			
 			ConnectionManager.commit();
 		} catch (SQLException e) {
+			System.out.println("异常了");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			ConnectionManager.rollback();

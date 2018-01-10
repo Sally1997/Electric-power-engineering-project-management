@@ -313,7 +313,7 @@
     			}
     		}
     	};
-    	req.open("get", "/RealProject/web/servlet/getInformList?type="+type);
+    	req.open("get", "/RealProject/web/servlet/getInformList?type="+type+"&time="+new Date().getTime());
     	req.send(null);
     }
     
