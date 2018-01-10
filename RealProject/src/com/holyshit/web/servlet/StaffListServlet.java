@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.holyshit.domain.PageBean;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StaffDuty;
+import com.holyshit.service.PermissionService;
 import com.holyshit.service.StaffService;
+import com.holyshit.service.impl.PermissionServiceImpl;
 import com.holyshit.service.impl.StaffServiceImpl;
 
 import java.io.IOException;
@@ -35,7 +37,12 @@ public class StaffListServlet extends HttpServlet {
 		{
 			CurrentPage = Integer.parseInt(currPage);
 		}
-		
+		PermissionService ps=new PermissionServiceImpl();
+		boolean res = ps.enableEnterHr(pno);
+		if(!res){
+			request.getRequestDispatcher("/jsp/projectManage/nothing.jsp").forward(request,response);
+			return;
+		}
 		StaffService ssi = new StaffServiceImpl();
 		PageBean pb = ssi.findAllStaffs(pno,CurrentPage,PageSize,noterno);
 		request.setAttribute("pb", pb);

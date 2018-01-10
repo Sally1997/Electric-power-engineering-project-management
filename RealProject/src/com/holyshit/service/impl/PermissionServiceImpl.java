@@ -123,4 +123,20 @@ public class PermissionServiceImpl implements PermissionService {
 		return false;
 	}
 
+	@Override
+	public boolean enableEnterHr(String pno) {
+		// TODO Auto-generated method stub
+		ProjectDao pd=new ProjectDaoImpl();
+		boolean flag=false;
+		try {
+			Project selectProject = pd.selectProject(pno);
+			if(selectProject!=null&&(!selectProject.getPstate().equals("0"))&&(!selectProject.getPstate().equals("n")))
+				flag=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

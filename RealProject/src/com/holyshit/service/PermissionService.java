@@ -38,4 +38,11 @@ public interface PermissionService {
 	 * @return
 	 */
 	boolean enableCheckDocument(String staffno);
+	
+	/**
+	 * 能否进入人员管理界面
+	 * @param pno
+	 * @return
+	 */
+	boolean enableEnterHr(String pno);
 }
