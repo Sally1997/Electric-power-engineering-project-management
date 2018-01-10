@@ -256,6 +256,7 @@ function addElement()
 	var venddate = form1.EndDate.value;
 	var vbudget = form1.budget.value;
 	
+	
 	var xxx=true;
 	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	xxx = pppp.test(vbudget);
@@ -264,7 +265,17 @@ function addElement()
 	var vs = vstartdate.split("-");
 	var ve = venddate.split("-");
 	
-	var myDate = new Date();
+	var myDate = new Date().getTime();
+	var startTime=Date.parse(vstartdate);
+	var endTime=Date.parse(venddate);
+	if(startTime<myDate){
+		alert("阶段的开始时间应当大于当前时间");
+		return;
+	}
+	if(startTime>endTime){
+		alert("项目开始时间应该小于截止时间");
+		return;
+	}
 	if(vs.length!=3||ve.length!=3){
 		hyt = false;
 	}
