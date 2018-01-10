@@ -107,6 +107,14 @@ public class StaffDaoImpl implements StaffDao {
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit ?,10", 
 			new MapListHandler(),pno,userno,pno,pagenum-1);
 	}
+	public List<Object> selectSIP(String pno,String userno) throws SQLException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,name,te,duty,notes FROM "+
+			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
+			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?))", 
+			new ColumnListHandler(),pno,userno,pno);
+	}
 
 	@Override
 	public List<Map<String, Object>> selectStaffInCompany(String pno, String userno) throws SQLException {
@@ -117,6 +125,24 @@ public class StaffDaoImpl implements StaffDao {
 			"psrelation.pno=? AND staff.staffno=psrelation.staffno AND staff.ENABLE='1')a "+
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit 0,10",
 			new MapListHandler(),pno,userno,pno);
+	}
+	public List<Map<String, Object>> selectStaffInCompany(String pno, String userno,int pagenum) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT StaffNo,name,te,duty,notes FROM "+
+			"(SELECT staff.StaffNo,NAME,te,duty "+
+			"FROM staff LEFT JOIN psrelation ON "+
+			"psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit ?,10",
+			new MapListHandler(),pno,userno,pno,pagenum);
+	}
+	public List<Object> selectSIC(String pno, String userno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,name,te,duty,notes FROM "+
+			"(SELECT staff.StaffNo,NAME,te,duty "+
+			"FROM staff LEFT JOIN psrelation ON "+
+			"psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?)b",
+			new ColumnListHandler(),pno,userno,pno);
 	}
 	
 	@Override
@@ -130,6 +156,30 @@ public class StaffDaoImpl implements StaffDao {
 			"WHERE staffno LIKE ? OR NAME LIKE ? OR te LIKE ? "+
 			"OR duty LIKE ? OR notes LIKE ? ORDER BY staffno limit 0,10",
 			new MapListHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
+			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
+	}
+	public List<Map<String, Object>> selectStaffInCompany(String pno, String userno,String keyword,int pagenum) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT staffno,name,te,duty,notes FROM "+
+			"(SELECT staff.staffno,name,te,duty "+
+			"FROM staff LEFT JOIN psrelation ON "+
+			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) "+
+			"WHERE staffno LIKE ? OR NAME LIKE ? OR te LIKE ? "+
+			"OR duty LIKE ? OR notes LIKE ? ORDER BY staffno limit ?,10",
+			new MapListHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
+			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%",pagenum);
+	}
+	public List<Object> selectSS(String pno, String userno,String keyword) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT COUNT(*) FROM (SELECT staffno,name,te,duty,notes FROM "+
+			"(SELECT staff.staffno,name,te,duty "+
+			"FROM staff LEFT JOIN psrelation ON "+
+			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo AND ENABLE='1')a "+
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) "+
+			"WHERE staffno LIKE ? OR NAME LIKE ? OR te LIKE ? "+
+			"OR duty LIKE ? OR notes LIKE ?)b",
+			new ColumnListHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
 	}
 
@@ -222,6 +272,25 @@ public class StaffDaoImpl implements StaffDao {
 			"OR te LIKE ?) limit 0,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%");
 	}
+	public List<Map<String, Object>> selectStaffCanSetProject(String keyword,int pagenum) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT StaffNo,NAME,te FROM staff "+
+			"WHERE staff.ENABLE='1' AND staffno IN (SELECT staffno FROM asrelation "+
+			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
+			"OR te LIKE ?) limit ?,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
+			"%"+keyword+"%",pagenum);
+	}
+	public List<Object> selectCountSCPP(String keyword) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,NAME,te FROM staff "+
+			"WHERE staff.ENABLE='1' AND staffno IN (SELECT staffno FROM asrelation "+
+			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
+			"OR te LIKE ?))b",new ColumnListHandler(),"%"+keyword+"%","%"+keyword+"%",
+			"%"+keyword+"%");
+	}
+	
 	/**
 	 * 切记，这个一定不要添加enable=‘1’
 	 */

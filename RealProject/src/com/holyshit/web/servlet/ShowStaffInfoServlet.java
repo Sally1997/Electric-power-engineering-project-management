@@ -32,8 +32,10 @@ public class ShowStaffInfoServlet extends HttpServlet {
 		String userno = staff.getStaffno();
 		
 		String fp = request.getParameter("fp");
+		int pagenum = 1;
 		if(fp!=null){
-			int pagenum = Integer.parseInt(fp);
+			pagenum = Integer.parseInt(fp);
+			System.out.println(fp);
 		}
 		
 		//返回的字符串str
@@ -46,7 +48,7 @@ public class ShowStaffInfoServlet extends HttpServlet {
 		if(s.equals("ptype")){
 			//如果选择类型是空或者project type则
 			if(fp!=null){
-				list = ss.showStaffInProject(pno, userno);
+				list = ss.showStaffInProject(pno, userno,pagenum);
 			}
 			else{
 				list = ss.showStaffInProject(pno, userno);
@@ -57,13 +59,23 @@ public class ShowStaffInfoServlet extends HttpServlet {
 			str = an.transToArray(ja).toString();
 		}
 		else if(s.equals("nptype")){
-			list = ss.showStaffCanSetProject("");
+			if(fp!=null){
+				list = ss.showStaffCanSetProject("",pagenum);
+			}
+			else{
+				list = ss.showStaffCanSetProject("");
+			}
 			String ja = JSONArray.fromObject(list).toString();
 			AutoNumber an = new AutoNumber();
 			str = an.transToArray(ja).toString();
 		}
 		else{
-			list = ss.showStaffInCompany(pno, userno);
+			if(fp!=null){
+				list = ss.showStaffInCompany(pno, userno,pagenum);
+			}
+			else{
+				list = ss.showStaffInCompany(pno, userno);
+			}
 			//str = JSONArray.fromObject(list).toString();
 			String ja = JSONArray.fromObject(list).toString();
 			AutoNumber an = new AutoNumber();

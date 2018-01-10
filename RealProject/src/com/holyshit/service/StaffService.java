@@ -61,6 +61,7 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> showStaffInCompany(String pno,String userno);
+	List<Map<String,Object>> showStaffInCompany(String pno,String userno,int pagenum);
 	
 	/**\
 	 * 搜索公司成员列表
@@ -69,6 +70,7 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> queryStaffInCompany(String pno,String userno,String keyword);
+	List<Map<String,Object>> queryStaffInCompany(String pno,String userno,String keyword,int pagenum);
 	
 	/**
 	 * 分页查询员工
@@ -113,6 +115,8 @@ public interface StaffService {
 	 * @return
 	 */
 	List<Map<String,Object>> showStaffCanSetProject(String keyword);
+	
+	List<Map<String,Object>> showStaffCanSetProject(String keyword,int pagenum);
 	
 	/**
 	 * 添加人员关系表

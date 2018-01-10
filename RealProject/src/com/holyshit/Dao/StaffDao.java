@@ -80,6 +80,8 @@ public interface StaffDao {
 	 */
 	List<Map<String,Object>> selectStaffInProject(String pno,String userno) throws SQLException;
 	List<Map<String,Object>> selectStaffInProject(String pno,String userno,int pagenum) throws SQLException;
+	List<Object> selectSIP(String pno,String userno) throws SQLException;
+	
 	/**
 	 * 从公司里面拉人
 	 * @param pno 项目编号
@@ -88,6 +90,8 @@ public interface StaffDao {
 	 * @throws SQLException 
 	 */
 	List<Map<String,Object>> selectStaffInCompany(String pno,String userno) throws SQLException;
+	List<Map<String,Object>> selectStaffInCompany(String pno,String userno,int pagenum) throws SQLException;
+	List<Object> selectSIC(String pno,String userno) throws SQLException;
 	
 	/**
 	 * 从公司里面搜索人员
@@ -97,6 +101,8 @@ public interface StaffDao {
 	 * @throws SQLException 
 	 */
 	List<Map<String,Object>> selectStaffInCompany(String pno,String userno,String keyword) throws SQLException;
+	List<Map<String,Object>> selectStaffInCompany(String pno,String userno,String keyword,int pagenum) throws SQLException;
+	List<Object> selectSS(String pno,String userno,String keyword) throws SQLException;
 	
 	/**
 	 * 分页查询所有的员工信息
@@ -145,6 +151,8 @@ public interface StaffDao {
 	 * @throws SQLException 
 	 */
 	List<Map<String,Object>> selectStaffCanSetProject(String keyword) throws SQLException;
+	List<Map<String,Object>> selectStaffCanSetProject(String keyword,int pagenum) throws SQLException;
+	List<Object> selectCountSCPP(String keyword) throws SQLException;
 	
 	/**
 	 * 查询人员注册时
