@@ -462,7 +462,7 @@ public class StaffServiceImpl implements StaffService{
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
 			Map<String,Object> map = new HashMap<String, Object>();
-			String pn = (String) sd.selectCountSCPP(keyword).get(0);
+			long pn = (long) sd.selectCountSCPP(keyword).get(0);
 			map.put("pagesize", pn);
 			list = sd.selectStaffCanSetProject(keyword);
 		} catch (SQLException e) {

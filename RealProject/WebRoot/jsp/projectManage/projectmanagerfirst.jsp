@@ -288,6 +288,13 @@
       			var p = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
       			x = p.test(projectbudget.value);
       			
+      			//对于时间进行验证
+      			var myDate=new Date().getTime();
+      			var startTime=Date.parse(document.getElementById("datetimepicker1").value);
+      			if(startTime<myDate){
+      				alert("项目的开始时间应在今天之后");
+      				return false;
+      			}
       			//进行验证
       			if(projectname.value==""){
       				alert("请输入项目名称!");
@@ -464,14 +471,14 @@ function give_option(){
 //以下是选择用户功能
 function search_member(){
 	var tbody_t = document.getElementById("iamtbody");
-	var childs = tbody_t.childNodes;
-	for(var i=childs.length-1;i>=0;i--){
-		tbody_t.removeChild(childs[i]);
-	}
+	
 	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
+			//消除闪屏
+			tbody_t.innerHTML="";
+			
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
@@ -622,10 +629,7 @@ function pageinr(){
 	document.getElementById("fooza_page").innerHTML = fp;
 
 	var tbody_t = document.getElementById("iamtbody");
-	var childs = tbody_t.childNodes;
-	for(var i=childs.length-1;i>=0;i--){
-		tbody_t.removeChild(childs[i]);
-	}
+	tbody_t.innerHTML="";
 	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){

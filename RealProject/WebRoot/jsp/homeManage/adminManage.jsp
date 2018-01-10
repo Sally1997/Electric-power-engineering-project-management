@@ -569,7 +569,7 @@
 						}
 					}
 				};
-				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+id+":"+"&time="+new Date().getTime()");
+				req.open("get", "/RealProject/web/servlet/deleteStaff?ids="+id+":"+"&time="+new Date().getTime());
 				req.send(null);
       		}
       		
