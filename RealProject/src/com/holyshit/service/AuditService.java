@@ -70,4 +70,11 @@ public interface AuditService {
 	 * @param str
 	 */
 	void StageIndexAudit(Inform info,String [] str);
+	
+	/**
+	 * 获得指标路径
+	 * @param indexno
+	 * @return
+	 */
+	String getIndexPath(String indexno);
 }

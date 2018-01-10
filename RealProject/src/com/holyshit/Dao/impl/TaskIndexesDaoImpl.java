@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import com.holyshit.Dao.TaskIndexesDao;
@@ -46,6 +47,13 @@ public class TaskIndexesDaoImpl implements TaskIndexesDao {
 		QueryRunner qr = new QueryRunner();
 		qr.update(ConnectionManager.getConnection(),"UPDATE taskindexes SET attachpath=? WHERE taskno=? "+
 				"AND indexinfo=?",path,no,indexinfo);
+	}
+
+	@Override
+	public TaskIndexs selectTaskIndexs(String indexno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT * FROM taskindexes WHERE indexno=?", 
+				new BeanHandler<TaskIndexs>(TaskIndexs.class),indexno);
 	}
 
 }

@@ -79,7 +79,7 @@
 							<ul>
 								<c:if test="${l.attachpath!=null }">
 								<li>${l.indexinfo }
-									<a href="${pageContext.request.contextPath }/web/servlet/downLoadIndex?dno=${l.attachpath }">
+									<a href="${pageContext.request.contextPath }/web/servlet/downLoadIndex?dno=${l.indexno }">
 									<span class="glyphicon glyphicon-download-alt" style="cursor: pointer;"></span></a>
 								</li>
 								</c:if>

@@ -36,4 +36,12 @@ public interface TaskIndexesDao {
 	 * @throws SQLException 
 	 */
 	void updateIndexAttachPath(String no,String indexinfo,String path) throws SQLException;
+	
+	/**
+	 * 获得指标信息
+	 * @param indexno
+	 * @return
+	 * @throws SQLException 
+	 */
+	TaskIndexs selectTaskIndexs(String indexno) throws SQLException;
 }

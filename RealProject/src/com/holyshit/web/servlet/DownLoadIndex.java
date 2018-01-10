@@ -1,13 +1,9 @@
 package com.holyshit.web.servlet;
 
-import java.beans.Encoder;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
@@ -15,9 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.holyshit.domain.Document;
-import com.holyshit.service.DocumentService;
-import com.holyshit.service.impl.DocumentServiceImpl;
+import com.holyshit.service.AuditService;
+import com.holyshit.service.impl.AuditServiceImpl;
 
 public class DownLoadIndex extends HttpServlet {
 
@@ -31,10 +26,12 @@ public class DownLoadIndex extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String path=request.getParameter("dno");
-		System.out.println(path);
-		System.out.println("??");
-		/*if(path==null){
+		String indexno = request.getParameter("dno");
+		AuditService as = new AuditServiceImpl();
+		
+		String path = as .getIndexPath(indexno);
+		
+		if(path==null){
 			request.getRequestDispatcher("/jsp/error/error_500.jsp").forward(request, response);
 			return;
 		}
@@ -60,7 +57,7 @@ public class DownLoadIndex extends HttpServlet {
 		}
 		//关闭流
 		out.close();
-		input.close();*/
+		input.close();
 	}
 
 }

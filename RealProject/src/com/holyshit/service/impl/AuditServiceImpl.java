@@ -263,4 +263,18 @@ public class AuditServiceImpl implements AuditService {
 		}
 	}
 
+	@Override
+	public String getIndexPath(String indexno) {
+		TaskIndexesDao tid = new TaskIndexesDaoImpl();
+		String path = null;
+		try {
+			path = tid.selectTaskIndexs(indexno).getAttachpath();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return path;
+				
+	}
+
 }
