@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
 import com.holyshit.service.PermissionService;
 import com.holyshit.service.ProjectService;
@@ -32,6 +33,8 @@ public class JudgeStageExist extends HttpServlet {
 			PermissionService permission=new PermissionServiceImpl();
 			boolean enableNewStage = permission.enableNewStage(pno, staff.getStaffno());
 			if(enableNewStage){
+				Project projectInfo = ps.getProjectInfo(pno);
+				request.setAttribute("projectInfo", projectInfo);
 				request.setAttribute("pno", pno);
 				request.getRequestDispatcher("/jsp/projectManage/PlanManagement_NewMilestone.jsp").forward(request, response);
 			}else{

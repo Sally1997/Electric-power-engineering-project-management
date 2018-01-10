@@ -44,8 +44,9 @@
 			    <th align="center">指标</th>
 
 		    </tr>
+		    
 	        </table>
-
+				<span style="color: red;font-size: 15px;margin-left: 40%">项目当前剩余预算为:<span id="otherBudget" style="color: green;"></span>元</span>
                 </div><!-- 剩下的你依次对齐吧。。。 -->
                 </div>
             </div> 
@@ -248,6 +249,7 @@
 <%@include file="/footer.jsp" %>
 </body>
 <script type="text/javascript">
+
 function addElement()
 {
 	var vname = form1.msname.value;
@@ -265,15 +267,15 @@ function addElement()
 	var vs = vstartdate.split("-");
 	var ve = venddate.split("-");
 	
-	var myDate = new Date().getTime();
+	var myDate =Date.parse("${projectInfo.stime}");
 	var startTime=Date.parse(vstartdate);
 	var endTime=Date.parse(venddate);
 	if(startTime<myDate){
-		alert("阶段的开始时间应当大于当前时间");
+		alert("阶段的开始时间应当在项目开始时间之后(项目开始时间:${projectInfo.stime})");
 		return;
 	}
 	if(startTime>endTime){
-		alert("项目开始时间应该小于截止时间");
+		alert("阶段开始时间应该小于截止时间");
 		return;
 	}
 	if(vs.length!=3||ve.length!=3){
@@ -309,10 +311,6 @@ function addElement()
 		alert("预算金额非法输入格式!");
 		return;
 	}
-	else if(vbudget.length>8){
-		alert("预算金额非法输入格式!");
-		return;
-	}
 	else if(yyy){
 		alert("日期格式错误!请重新检查!");
 		return;
@@ -322,7 +320,20 @@ function addElement()
 	for(var dj=0;dj<comfirm_sn.length;dj++){
 		if(vname==comfirm_sn[dj].value){
 			alert("重复的阶段名称");
+			return;
 		}
+	}
+	
+	
+	//对于金额进行验证
+	var hahaBudget=window.parseFloat(vbudget).toFixed(2);
+	var heheBudget=window.parseFloat(document.getElementById("otherBudget").innerHTML).toFixed(2);
+	if(hahaBudget > heheBudget){
+		alert("剩余预算不足");
+		return;
+	}else{
+		var subValue=heheBudget-hahaBudget;
+		document.getElementById("otherBudget").innerHTML=""+subValue.toFixed(2);
 	}
 	
 	var msname = document.createTextNode(vname);
@@ -764,6 +775,10 @@ function dsubmit(){
 		alert("请至少创建一个阶段!")
 		return;
 	}
+	if(document.getElementById("otherBudget")!="0.00"){
+		alert("您还有剩余的预算未使用");
+		return;
+	}
 	
 	var confirm_index = document.getElementsByName("indexcontent");
 	for(var i=0;i<confirm_index.length;i++){
@@ -1010,5 +1025,12 @@ function search_staff(){
 	
 	aja.send(null);
 }
+	//全局变量
+	//阶段总预算
+	var totalBudget=0.0;
+	var projectBudget=window.parseFloat("${projectInfo.pbudget}").toFixed(2);
+	window.onload=function(){
+		document.getElementById("otherBudget").innerHTML=""+projectBudget;
+	}
 </script>
 </html>

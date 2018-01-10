@@ -109,9 +109,9 @@ public class StaffDaoImpl implements StaffDao {
 	}
 	public List<Object> selectSIP(String pno,String userno) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,name,te,duty,notes FROM "+
+		return qr.query("SELECT COUNT(*) FROM (SELECT a.StaffNo,a.name,a.te,a.duty,staffnote.notes FROM "+
 			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
-			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
+			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1') a "+
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?))", 
 			new ColumnListHandler(),pno,userno,pno);
 	}
