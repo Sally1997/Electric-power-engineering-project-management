@@ -171,10 +171,10 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInProject(pno, userno);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null){
+				if(map.get("duty")==null||map.get("duty")==""){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null){
+				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
 				String pn = (String) StaffDao.selectSIP(pno, userno).get(0);
@@ -192,10 +192,10 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInProject(pno, userno, pagenum);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null){
+				if(map.get("duty")==null||map.get("duty")==""){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null){
+				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
 			}
@@ -212,10 +212,10 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null){
+				if(map.get("duty")==null||map.get("duty")==""){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null){
+				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
 				String pn = (String) StaffDao.selectSIC(pno, userno).get(0);
@@ -233,10 +233,10 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno,pagenum);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null){
+				if(map.get("duty")==null||map.get("duty")==""){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null){
+				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
 			}
@@ -254,10 +254,10 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno, keyword);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null){
+				if(map.get("duty")==null||map.get("duty")==""){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null){
+				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
 				String pn = (String) StaffDao.selectSS(pno, userno, keyword).get(0);
@@ -275,10 +275,10 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno, keyword,pagenum);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null){
+				if(map.get("duty")==null||map.get("duty")==""){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null){
+				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
 			}
