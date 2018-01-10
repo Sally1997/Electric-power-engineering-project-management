@@ -177,6 +177,8 @@ public class StaffServiceImpl implements StaffService{
 				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
+				String pn = (String) StaffDao.selectSIP(pno, userno).get(0);
+				map.put("pagesize", pn);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -216,6 +218,27 @@ public class StaffServiceImpl implements StaffService{
 				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
+				String pn = (String) StaffDao.selectSIC(pno, userno).get(0);
+				map.put("pagesize", pn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public List<Map<String, Object>> showStaffInCompany(String pno, String userno,int pagenum) {
+		StaffDao StaffDao = new StaffDaoImpl();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			list =  StaffDao.selectStaffInCompany(pno, userno,pagenum);
+			for(Map<String, Object> map:list){
+				if(map.get("duty")==null){
+					map.put("duty", "-");
+				}
+				if(map.get("notes")==null){
+					map.put("notes", "-");
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -230,6 +253,27 @@ public class StaffServiceImpl implements StaffService{
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno, keyword);
+			for(Map<String, Object> map:list){
+				if(map.get("duty")==null){
+					map.put("duty", "-");
+				}
+				if(map.get("notes")==null){
+					map.put("notes", "-");
+				}
+				String pn = (String) StaffDao.selectSS(pno, userno, keyword).get(0);
+				map.put("pagesize", pn);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public List<Map<String, Object>> queryStaffInCompany(String pno, String userno,String keyword,int pagenum) {
+		StaffDao StaffDao = new StaffDaoImpl();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			list =  StaffDao.selectStaffInCompany(pno, userno, keyword,pagenum);
 			for(Map<String, Object> map:list){
 				if(map.get("duty")==null){
 					map.put("duty", "-");
@@ -417,6 +461,9 @@ public class StaffServiceImpl implements StaffService{
 		StaffDao sd = new StaffDaoImpl();
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
+			Map<String,Object> map = new HashMap<String, Object>();
+			String pn = (String) sd.selectCountSCPP(keyword).get(0);
+			map.put("pagesize", pn);
 			list = sd.selectStaffCanSetProject(keyword);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -424,6 +471,19 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return list;
 	}
+	public List<Map<String, Object>> showStaffCanSetProject(String keyword,int pagenum) {
+		// TODO Auto-generated method stub
+		StaffDao sd = new StaffDaoImpl();
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			list = sd.selectStaffCanSetProject(keyword,pagenum);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 
 	@Override
 	public void addAStaff(PSRelation psr){

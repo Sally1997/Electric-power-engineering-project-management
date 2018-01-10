@@ -32,6 +32,13 @@ public class StaffInfoFindServlet extends HttpServlet {
 		Staff staff = (Staff) session.getAttribute("staff");
 		String userno = staff.getStaffno();
 		
+		String fp = request.getParameter("fp");
+		int pagenum = 1;
+		if(fp!=null){
+			pagenum = Integer.parseInt(fp);
+			System.out.println(fp);
+		}
+		
 		String keyword = request.getParameter("keyword");
 		//linux服务器出现问题，乱码 袁奇中的垃圾代码，不顶用
 		//keyword = new String(keyword.getBytes("ISO-8859-1"),"UTF-8"); 
@@ -42,29 +49,26 @@ public class StaffInfoFindServlet extends HttpServlet {
 		StaffService ss = new StaffServiceImpl();
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		
-		/*if(s.equals("ptype")){
-			//如果选择类型是空或者project type则
-			list = ss.showStaffInProject(pno, userno);
-			String ja = JSONArray.fromObject(list).toString();
-			AutoNumber an = new AutoNumber();
-			str = an.transToArray(ja).toString();
-		}
-		else{
-			list = ss.showStaffInCompany(pno, userno);
-			//str = JSONArray.fromObject(list).toString();
-			String ja = JSONArray.fromObject(list).toString();
-			AutoNumber an = new AutoNumber();
-			str = an.transToArray(ja).toString();
-		}*/
 		if(s.equals("nptype")){
-			list = ss.showStaffCanSetProject(keyword);
+			if(fp==null){
+				list = ss.showStaffCanSetProject(keyword);
+			}
+			else{
+				list = ss.showStaffCanSetProject(keyword,pagenum);
+			}
+			
 			str = JSONArray.fromObject(list).toString();
 			String ja = JSONArray.fromObject(list).toString();
 			AutoNumber an = new AutoNumber();
 			str = an.transToArray(ja).toString();
 		}
 		else{
-			list = ss.queryStaffInCompany(pno, userno, keyword);
+			if(fp==null){
+				list = ss.queryStaffInCompany(pno, userno, keyword);
+			}
+			else{
+				list = ss.queryStaffInCompany(pno, userno, keyword,pagenum);
+			}
 			str = JSONArray.fromObject(list).toString();
 			String ja = JSONArray.fromObject(list).toString();
 			AutoNumber an = new AutoNumber();

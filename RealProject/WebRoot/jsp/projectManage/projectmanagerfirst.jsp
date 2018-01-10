@@ -265,7 +265,7 @@
 			
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"">返回</button>
         <input type="submit" class="btn btn-primary" value="提交">
       </div>
      </form>
@@ -677,7 +677,6 @@ function pageinr(){
 	}
 	
 	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&fp="+fp);
-	
 	aja.send(null);
 }
 
@@ -690,12 +689,6 @@ function pagedec(){
 	fp -= 1;
 	document.getElementById("fooza_page").innerHTML = fp;
 
-	var tbody_t = document.getElementById("iamtbody");
-	var childs = tbody_t.childNodes;
-	for(var i=childs.length-1;i>=0;i--){
-		tbody_t.removeChild(childs[i]);
-	}
-	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
@@ -744,12 +737,13 @@ function pagedec(){
 			}
 		}
 	}
-	
 	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&fp="+fp);
 	
 	aja.send(null);
 }
 
-
+function test(){
+	alert(${map.pagesize});
+}
 </script>
 </html>

@@ -50,7 +50,10 @@ public class TaskIndexAudit extends HttpServlet {
 		info.setSrcpno(staff.getStaffno());
 		
 		AuditService as = new AuditServiceImpl();
-		as.StageIndexAudit(info, index);
+		
+		if(index!=null){
+			as.StageIndexAudit(info, index);
+		}
 		
 		//跳转到信息表？
 		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
