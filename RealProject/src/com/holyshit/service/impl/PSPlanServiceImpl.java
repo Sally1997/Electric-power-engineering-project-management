@@ -1,6 +1,8 @@
 package com.holyshit.service.impl;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +69,31 @@ public class PSPlanServiceImpl implements PSPlanService {
 			ConnectionManager.closeConnection();
 		}
 		return flag;
+	}
+
+	@Override
+	public Map<String, Object> findStageInfo(String stageno) {
+		// TODO Auto-generated method stub
+		PSPlanDao pd=new PSPlanDaoImpl();
+		PSPlan hehe=null;
+		double res=0;
+		try {
+			BigDecimal bg = pd.selectStageHasBudget(stageno);
+			if(bg!=null){
+				res=Double.parseDouble(bg.toString());
+			}
+			hehe = pd.selectPsPlanInfo(stageno);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		Map<String, Object> resMap=new HashMap<String, Object>();
+		resMap.put("entity", hehe);
+		resMap.put("hasbudget", res);
+		return resMap;
 	}
 
 }

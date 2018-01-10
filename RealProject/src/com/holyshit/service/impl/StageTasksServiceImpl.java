@@ -22,6 +22,7 @@ import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
 import com.holyshit.domain.Inform;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
@@ -324,6 +325,31 @@ public class StageTasksServiceImpl implements StageTasksService{
 		} finally{
 			ConnectionManager.closeConnection();
 		}
+	}
+
+	@Override
+	public Map<String, Object> findTaskInfoIncludeBudget(String taskno) {
+		// TODO Auto-generated method stub
+		StageTaskDao pd=new StageTaskDaoImpl();
+		StageTask hehe=null;
+		double res=0;
+		try {
+			BigDecimal bg = pd.selectTaskHasBudget(taskno);
+			if(bg!=null){
+				res=Double.parseDouble(bg.toString());
+			}
+			hehe = pd.selectStageTasks(taskno);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
+		}
+		Map<String, Object> resMap=new HashMap<String, Object>();
+		resMap.put("entity", hehe);
+		resMap.put("hasbudget", res);
+		return resMap;
 	}
 
 }

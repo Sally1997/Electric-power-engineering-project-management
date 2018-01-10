@@ -1,5 +1,11 @@
+<%@page import="com.holyshit.domain.StageTask"%>
+<%@page import="com.holyshit.service.impl.StageTasksServiceImpl"%>
+<%@page import="com.holyshit.service.StageTasksService"%>
+<%@page import="com.holyshit.domain.PSPlan"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.holyshit.service.impl.PSPlanServiceImpl"%>
+<%@page import="com.holyshit.service.PSPlanService"%>
 <!DOCTYPE html>
 <html>
  <head>
@@ -16,6 +22,19 @@
  </head>
  <body> 
    <% 
+ 		//查询任务或者阶段的信息
+		String ptn=request.getParameter("ptn");
+		if(ptn.length()==6){
+			//获取阶段信息
+			PSPlanService ps=new PSPlanServiceImpl();
+			Map<String,Object> pTask= ps.findStageInfo(ptn);
+			request.setAttribute("pTask", pTask);
+		}else if(ptn.length()==10){
+			//获取任务信息
+			StageTasksService ss=new StageTasksServiceImpl();
+			Map<String,Object> pTask= ss.findTaskInfoIncludeBudget(ptn);
+			request.setAttribute("pTask", pTask);
+		}
 		if(request.getParameter("pno")==null){
 	  		response.sendRedirect("/servlet/ShowProjectServlet");
 	  	} 
@@ -46,7 +65,7 @@
 
 		    </tr>
 	        </table>
-
+				<span style="color: red;font-size: 15px;margin-left: 40%">当前剩余预算为:<span id="otherBudget" style="color: green;">100</span>元</span>
                 </div><!-- 剩下的你依次对齐吧。。。 -->
                 </div>
             </div> 
@@ -259,17 +278,19 @@ function addElement()
 	var xxx=true;
 	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	xxx = pppp.test(vbudget);
-	var myDate = new Date().getTime();
+	
+	var myDate =Date.parse("${pTask['entity'].stime}");
 	var startTime=Date.parse(vstartdate);
 	var endTime=Date.parse(venddate);
 	if(startTime<myDate){
-		alert("任务的开始时间应当大于当前时间");
+		alert("任务的开始时间应当在阶段开始时间之后(项目开始时间:${pTask['entity'].stime})");
 		return;
 	}
 	if(startTime>endTime){
 		alert("任务开始时间应该小于截止时间");
 		return;
 	}
+	
 	var yyy=true;
 	var vs = vstartdate.split("-");
 	var ve = venddate.split("-");
@@ -316,7 +337,27 @@ function addElement()
 	for(var dj=0;dj<comfirm_sn.length;dj++){
 		if(vname==comfirm_sn[dj].value){
 			alert("重复的任务名称");
+			return;
 		}
+	}
+	
+	//对于金额进行验证
+	var hahaBudget=window.parseFloat(vbudget);
+	var heheBudget=window.parseFloat(document.getElementById("otherBudget").innerHTML);
+
+	if(hahaBudget > heheBudget){
+		alert("剩余预算不足");
+		return;
+	}else{
+		var subValue=heheBudget-hahaBudget;
+		document.getElementById("otherBudget").innerHTML=""+subValue.toFixed(2);
+	}
+	
+	//计算时间
+	var heheDate=Date.parse(venddate);
+	if(heheDate>Date.parse("${pTask['entity'].etime}")){
+		alert("任务截止日期不能超过截止日期:${pTask['entity'].etime}");
+		return;
 	}
 	
 	var msname = document.createTextNode(vname);
@@ -1003,6 +1044,10 @@ function search_staff(){
 	aja.open("get", "${pageContext.request.contextPath}/web/servlet/staffInfoFindServlet?pno=${pno}&type=ptype&keyword="+window.encodeURI(keyword)+"&time="+new Date().getTime());
 	
 	aja.send(null);
+}
+var shengyu=window.parseFloat("${pTask['entity'].budget}")-window.parseFloat("${pTask['hasbudget']}");
+window.onload=function(){
+	document.getElementById("otherBudget").innerHTML=shengyu.toFixed(2);
 }
 </script>
 </html>

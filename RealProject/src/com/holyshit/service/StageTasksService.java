@@ -111,4 +111,11 @@ public interface StageTasksService {
 	 * @param charpno
 	 */
 	public void changeCharP(String pno,String no,String charpno);
+	
+	/**
+	 * 查询任务的详细信息包括已经使用的预算信息
+	 * @param taskno
+	 * @return
+	 */
+	Map<String, Object> findTaskInfoIncludeBudget(String taskno);
 }

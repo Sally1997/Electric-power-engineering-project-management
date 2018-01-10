@@ -1,5 +1,6 @@
 package com.holyshit.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 //electric power engineering project management 
@@ -16,11 +17,6 @@ public class PSPlan {
 	private Date etime;
 	private String sstate;
 	private String budget;
-	
-	public String toString(){
-		return "stageno="+stageno+",charpno="+charpno+",pno="+pno+",sname="+sname
-				+ ",stime="+stime+",etime="+etime+",sstate="+sstate+",budget="+budget;
-	}
 	
 	public String getStageno() {
 		return stageno;

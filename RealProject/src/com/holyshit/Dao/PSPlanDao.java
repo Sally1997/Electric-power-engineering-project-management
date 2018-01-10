@@ -1,5 +1,6 @@
 package com.holyshit.Dao;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -62,4 +63,12 @@ public interface PSPlanDao {
 	 * @throws SQLException 
 	 */
 	public void updateCharP(String sno,String charpno) throws SQLException;
+	
+	/**
+	 * 查询阶段已使用预算信息
+	 * @param stageno
+	 * @return
+	 * @throws SQLException
+	 */
+	BigDecimal selectStageHasBudget(String stageno)throws SQLException;
 }

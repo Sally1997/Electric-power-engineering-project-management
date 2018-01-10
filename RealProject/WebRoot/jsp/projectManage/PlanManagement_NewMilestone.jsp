@@ -1,3 +1,6 @@
+<%@page import="com.holyshit.domain.PSPlan"%>
+<%@page import="com.holyshit.service.impl.PSPlanServiceImpl"%>
+<%@page import="com.holyshit.service.PSPlanService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,9 +19,10 @@
  </head>
  <body> 
    <% 
+   		
 		if(request.getParameter("pno")==null){
 	  		response.sendRedirect("/servlet/ShowProjectServlet");
-	  	} 
+	  	}
 	  	request.setAttribute("pno",request.getParameter("pno"));
  	%>
 	
@@ -326,8 +330,9 @@ function addElement()
 	
 	
 	//对于金额进行验证
-	var hahaBudget=window.parseFloat(vbudget).toFixed(2);
-	var heheBudget=window.parseFloat(document.getElementById("otherBudget").innerHTML).toFixed(2);
+	var hahaBudget=window.parseFloat(vbudget);
+	var heheBudget=window.parseFloat(document.getElementById("otherBudget").innerHTML);
+
 	if(hahaBudget > heheBudget){
 		alert("剩余预算不足");
 		return;
@@ -336,6 +341,12 @@ function addElement()
 		document.getElementById("otherBudget").innerHTML=""+subValue.toFixed(2);
 	}
 	
+	//计算时间
+	var heheDate=Date.parse(venddate);
+	if(heheDate>Date.parse("${projectInfo.etime}")){
+		alert("阶段截止日期不能超过项目截止日期:${projectInfo.etime}");
+		return;
+	}
 	var msname = document.createTextNode(vname);
 	var mngname = document.createTextNode(vcharp);
 	var StartDate = document.createTextNode(vstartdate);
@@ -775,11 +786,10 @@ function dsubmit(){
 		alert("请至少创建一个阶段!")
 		return;
 	}
-	if(document.getElementById("otherBudget")!="0.00"){
+	if(document.getElementById("otherBudget").innerHTML!="0.00"){
 		alert("您还有剩余的预算未使用");
 		return;
 	}
-	
 	var confirm_index = document.getElementsByName("indexcontent");
 	for(var i=0;i<confirm_index.length;i++){
 		if(confirm_index[i].value==""){
@@ -1028,6 +1038,7 @@ function search_staff(){
 	//全局变量
 	//阶段总预算
 	var totalBudget=0.0;
+	var LastendTime=0;
 	var projectBudget=window.parseFloat("${projectInfo.pbudget}").toFixed(2);
 	window.onload=function(){
 		document.getElementById("otherBudget").innerHTML=""+projectBudget;

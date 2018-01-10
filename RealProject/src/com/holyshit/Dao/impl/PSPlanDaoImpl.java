@@ -1,5 +1,6 @@
 package com.holyshit.Dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.domain.PSPlan;
@@ -88,6 +90,15 @@ public class PSPlanDaoImpl implements PSPlanDao {
 		System.out.println(sno);
 		qr.update(ConnectionManager.getConnection(),"UPDATE psplan SET charpno=? WHERE stageno=?",
 				charpno,sno);
+	}
+
+	@Override
+	public BigDecimal selectStageHasBudget(String stageno)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="SELECT SUM(stagetasks.budget) FROM (SELECT * FROM psplan WHERE StageNo=?) a JOIN stagetasks ON a.stageno=stagetasks.PTaskNo";
+		return (BigDecimal) qr.query(ConnectionManager.getConnection(),sql,new ScalarHandler(),stageno);
 	}
 
 }

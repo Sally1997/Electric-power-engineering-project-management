@@ -1,5 +1,6 @@
 package com.holyshit.domain;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class StageTask {

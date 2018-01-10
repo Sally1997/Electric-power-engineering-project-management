@@ -153,4 +153,12 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	public void updateCharP(String tno,String charpno) throws SQLException;
+	
+	/**
+	 * 查询任务已使用预算信息
+	 * @param taskno
+	 * @return
+	 * @throws SQLException
+	 */
+	BigDecimal selectTaskHasBudget(String taskno)throws SQLException;
 }

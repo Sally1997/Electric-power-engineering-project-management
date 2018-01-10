@@ -26,4 +26,11 @@ public interface PSPlanService {
 	 * @return
 	 */
 	boolean refreshStageState(Map<String, String> para);
+	
+	/**
+	 * 查询阶段的信息
+	 * @param stageno
+	 * @return
+	 */
+	Map<String, Object> findStageInfo(String stageno);
 }

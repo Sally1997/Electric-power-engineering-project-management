@@ -189,4 +189,13 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		StageTaskDaoImpl s=new StageTaskDaoImpl();
 	}
 
+	@Override
+	public BigDecimal selectTaskHasBudget(String taskno)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		String sql="SELECT SUM(stagetasks.budget) FROM (SELECT * FROM stagetasks WHERE taskNo=?) a JOIN stagetasks ON a.taskno=stagetasks.PTaskNo";
+		return (BigDecimal) qr.query(ConnectionManager.getConnection(), sql, new ScalarHandler(),taskno);
+	}
+
 }
