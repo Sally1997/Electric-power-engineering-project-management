@@ -51,10 +51,10 @@ public class ProjectAuditServlet extends HttpServlet {
 		String pc = request.getParameter("PersonInCharge");
 		
 		if(aev.equals("agree")){
-			aev="1";
+			aev="2";
 		}
 		else{
-			aev="2";
+			aev="1";
 		}
 		
 		AuditService as = new AuditServiceImpl();

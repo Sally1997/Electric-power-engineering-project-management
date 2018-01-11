@@ -177,7 +177,7 @@ public class StaffServiceImpl implements StaffService{
 				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
-				String pn = (String) StaffDao.selectSIP(pno, userno).get(0);
+				int pn = StaffDao.selectSIP(pno, userno);
 				map.put("pagesize", pn);
 			}
 		} catch (SQLException e) {
@@ -218,7 +218,7 @@ public class StaffServiceImpl implements StaffService{
 				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
-				String pn = (String) StaffDao.selectSIC(pno, userno).get(0);
+				int pn = StaffDao.selectSIC(pno, userno);
 				map.put("pagesize", pn);
 			}
 		} catch (SQLException e) {
@@ -260,7 +260,7 @@ public class StaffServiceImpl implements StaffService{
 				if(map.get("notes")==null||map.get("notes")==""){
 					map.put("notes", "-");
 				}
-				String pn = (String) StaffDao.selectSS(pno, userno, keyword).get(0);
+				int pn = StaffDao.selectSS(pno, userno, keyword);
 				map.put("pagesize", pn);
 			}
 		} catch (SQLException e) {
@@ -462,7 +462,7 @@ public class StaffServiceImpl implements StaffService{
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
 			Map<String,Object> map = new HashMap<String, Object>();
-			long pn = (long) sd.selectCountSCPP(keyword).get(0);
+			int pn = sd.selectCountSCPP(keyword);
 			map.put("pagesize", pn);
 			list = sd.selectStaffCanSetProject(keyword);
 		} catch (SQLException e) {

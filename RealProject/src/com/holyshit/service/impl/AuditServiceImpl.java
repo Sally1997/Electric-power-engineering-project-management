@@ -101,7 +101,7 @@ public class AuditServiceImpl implements AuditService {
 			}
 			else if(list.get(i).get("auditstate").equals("1")){
 				list.get(i).put("auditstate","是");
-				list.get(i).put("ifpassed", "是");
+				list.get(i).put("ifpassed", "否");
 				
 				//时间戳转字符串
 				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -111,7 +111,7 @@ public class AuditServiceImpl implements AuditService {
 			}
 			else{
 				list.get(i).put("auditstate","是");
-				list.get(i).put("ifpassed", "否");
+				list.get(i).put("ifpassed", "是");
 				
 				//时间戳转字符串
 				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

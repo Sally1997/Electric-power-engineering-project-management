@@ -107,13 +107,14 @@ public class StaffDaoImpl implements StaffDao {
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit ?,10", 
 			new MapListHandler(),pno,userno,pno,pagenum-1);
 	}
-	public List<Object> selectSIP(String pno,String userno) throws SQLException{
+	public int selectSIP(String pno,String userno) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT COUNT(*) FROM (SELECT a.StaffNo,a.name,a.te,a.duty,staffnote.notes FROM "+
+		long l =  (long) qr.query("SELECT COUNT(*) FROM (SELECT a.StaffNo,a.name,a.te,a.duty,staffnote.notes FROM "+
 			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
 			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1') a "+
-			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?))", 
-			new ColumnListHandler(),pno,userno,pno);
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?))b", 
+			new ScalarHandler(),pno,userno,pno);
+		return (int) l;
 	}
 
 	@Override
@@ -135,14 +136,15 @@ public class StaffDaoImpl implements StaffDao {
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit ?,10",
 			new MapListHandler(),pno,userno,pno,pagenum);
 	}
-	public List<Object> selectSIC(String pno, String userno) throws SQLException {
+	public int selectSIC(String pno, String userno) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,name,te,duty,notes FROM "+
+		long l = (long) qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,name,te,duty,notes FROM "+
 			"(SELECT staff.StaffNo,NAME,te,duty "+
 			"FROM staff LEFT JOIN psrelation ON "+
 			"psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?)b",
-			new ColumnListHandler(),pno,userno,pno);
+			new ScalarHandler(),pno,userno,pno);
+		return (int) l;
 	}
 	
 	@Override
@@ -170,17 +172,18 @@ public class StaffDaoImpl implements StaffDao {
 			new MapListHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%",pagenum);
 	}
-	public List<Object> selectSS(String pno, String userno,String keyword) throws SQLException {
+	public int selectSS(String pno, String userno,String keyword) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT COUNT(*) FROM (SELECT staffno,name,te,duty,notes FROM "+
+		long l = (long) qr.query("SELECT COUNT(*) FROM (SELECT staffno,name,te,duty,notes FROM "+
 			"(SELECT staff.staffno,name,te,duty "+
 			"FROM staff LEFT JOIN psrelation ON "+
 			"psrelation.pno=? AND staff.staffno=psrelation.StaffNo AND ENABLE='1')a "+
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) "+
 			"WHERE staffno LIKE ? OR NAME LIKE ? OR te LIKE ? "+
 			"OR duty LIKE ? OR notes LIKE ?)b",
-			new ColumnListHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
+			new ScalarHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%");
+		return (int) l;
 	}
 
 	@Override
@@ -281,14 +284,15 @@ public class StaffDaoImpl implements StaffDao {
 			"OR te LIKE ?) limit ?,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%",pagenum);
 	}
-	public List<Object> selectCountSCPP(String keyword) throws SQLException {
+	public int selectCountSCPP(String keyword) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,NAME,te FROM staff "+
+		long l = (long) qr.query("SELECT COUNT(*) FROM (SELECT StaffNo,NAME,te FROM staff "+
 			"WHERE staff.ENABLE='1' AND staffno IN (SELECT staffno FROM asrelation "+
 			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
-			"OR te LIKE ?))b",new ColumnListHandler(),"%"+keyword+"%","%"+keyword+"%",
+			"OR te LIKE ?))b",new ScalarHandler(),"%"+keyword+"%","%"+keyword+"%",
 			"%"+keyword+"%");
+		return (int) l;
 	}
 	
 	/**

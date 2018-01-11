@@ -25,6 +25,7 @@
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  
   </head>
   <body> 
  <section>
@@ -461,6 +462,13 @@ function give_option(){
 	var mng = document.getElementsByName("PersonInCharge")[0];  
 	for(var i=0;i<ccp.length;i++){
 		if(ccp[i].checked==true){
+			var fozza_cp = ccp[i].value;
+			var shabi = "${staff.name}(${staff.staffno})";
+			if(fozza_cp==shabi){
+				alert("您必须选取其他人为项目审核人!");
+				return;
+			}
+		
 			mng.value = ccp[i].value;
 			mng.style.display = "";
 			break;

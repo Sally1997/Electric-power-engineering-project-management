@@ -14,7 +14,11 @@
     <title>新建任务</title>
 	<%@include file="/head.jsp" %>
    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/fozza.css" type="text/css">
-   
+   <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/moment.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/moment/min/locales.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-datetimepicker/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+  
 	<script type="text/javascript">
 		menus[1].className="active nav-current";
 		menus[1].role="presentation";	
@@ -80,10 +84,10 @@
 						<!--阶段名称 -->
 						<div id="milestone_name" class="block">
 						<div class="hehe_left">
-						<font class="text">任务名称:</font><span style="color:red">&nbsp;*</span>
+						<span class="text">任务名称:</span><span style="color:red">&nbsp;*</span>
 						</div>
-						<div class="hehe_right">
-						<input type="text" name="msname" size="40px;">
+						<div class="hehe_right col-lg-4">
+						<input type="text" name="msname"  class="form-control">
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -93,9 +97,11 @@
 						<div class="hehe_left">
 						<font class="text">负责人：</font><span style="color:red">&nbsp;*</span>
 						</div>
-						<div class="hehe_right">
-						<input type="text" name="mngname" size="40px" disabled="disabled" style="display:none">
-						<button type = "button" class = "btn btn-primary" data-toggle = "modal" data-target= "#search" onclick="search_member()">查找</button>
+						<div class="hehe_right col-lg-4">
+						<div class="input-group">
+						<input type="text" name="mngname" style="display:none" readonly="readonly" class="form-control">
+						<span class="input-group-btn"><button class="btn btn-default" type="button" data-target= "#search" class = "btn btn-primary" data-toggle = "modal" onclick="search_member()">查找</button></span>
+						</div>
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -105,8 +111,13 @@
 						<div class="hehe_left">
 						<font class="text">开始日期：</font><span style="color:red">&nbsp;*</span>
 						</div>
-						<div class="hehe_right">
-						<input type="date" name="StartDate" size="40px;">
+						<div class="hehe_right col-lg-4">
+						<!-- <input type="date" name="StartDate" size="40px;" class="form-control"> -->
+						<!-- <div class='col-lg-3 col-lg-offset-4 col-sm-3 col-sm-offset-4'> -->
+										<div class="form-group">
+											<input type='text' name="StartDate" class="form-control" placeholder="选择时间范围" id='datetimepicker01'/>
+										</div>
+									  <!-- </div> -->
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -115,10 +126,15 @@
 						<!-- 截止日期 -->
 						<div id="end_time" class="block">
 						<div class="hehe_left">
-						<font class="text">截止日期：</font><span style="color:red">&nbsp;*</span>
+						<font class="text">截止日期：</font>
 						</div>
-						<div class="hehe_right">
-						<input type="date" name="EndDate" size="40px;">
+						<div class="hehe_right col-lg-4">
+						<!-- <input type="date" name="EndDate" size="40px;" class="form-control"> -->
+						<!-- <div class='col-lg-3 col-sm-3'> -->
+											<div class="form-group">
+												<input type='text' name="EndDate" class="form-control" placeholder="选择时间范围" id='datetimepicker02'/>
+												</div>
+									  <!-- </div> -->
 						</div>
 						<div class="clear"></div>
 						</div>
@@ -126,11 +142,17 @@
 						<!-- 预算 -->
 						<div id="budget" class="block">
 						<div class="hehe_left">
-						<font class="text">预算：</font><span style="color:red">&nbsp;*</span>
+						<font class="text">预算：</font>
 						</div>
-						<div class="hehe_right">
-						<input type="number" name="budget" size="40px;"><span>&nbsp;&nbsp;元</span>
-						</div>
+						<div class="hehe_right col-lg-4">
+                          
+                            <div class="input-group" >
+								<input type="number" name="budget"  class="form-control">
+								<span class="input-group-addon">元</span>
+								</div>
+                                           
+                            </div>
+                            
 						<div class="clear"></div>
 						</div>
 
@@ -1051,5 +1073,25 @@ var shengyu=window.parseFloat("${pTask['entity'].budget}")-window.parseFloat("${
 window.onload=function(){
 	document.getElementById("otherBudget").innerHTML=shengyu.toFixed(2);
 }
+
+$(function () {
+        $('#datetimepicker01').datetimepicker({
+			locale:'zh-cn',
+			viewMode:'days',
+			format:'YYYY-MM-DD'
+		});
+        $('#datetimepicker02').datetimepicker({
+            useCurrent: false,
+			locale:'zh-cn',
+			viewMode:'days',
+			format:'YYYY-MM-DD'
+        });
+        $("#datetimepicker01").on("dp.change", function (e) {
+            $('#datetimepicker02').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker02").on("dp.change", function (e) {
+            $('#datetimepicker01').data("DateTimePicker").maxDate(e.date);
+        });
+    });
 </script>
 </html>
