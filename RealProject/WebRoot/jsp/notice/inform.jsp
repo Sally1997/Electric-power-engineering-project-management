@@ -19,7 +19,7 @@
  <body> 
     
    	<!--主要内容-->
-    <section style="min-height: 100%">
+	<section style="min-height: 100%">
        <div class="container-fluid">
        <div class="row">
        <div class="col-lg-10 xumode">
@@ -38,16 +38,16 @@
 				<c:forEach items="${tasksinfo }" var="t">
 				<c:choose>
 				  <c:when test="${t.mtype=='T2'&&t.hasread=='0' }">
-				  <button type="button" class="list-group-item">您有<strong>新的任务</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span></span><span class="small">>>${t.taskname}></span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')" >&nbsp;查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')" >您有<strong>新的任务</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span></span><span class="small">>>${t.taskname}></span><span class="small">&nbsp;</span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
 				  </c:when>
 				  <c:when test="${t.mtype=='T0'&&t.hasread=='0' }">
-				  <button type="button" class="list-group-item">您有<strong>新的阶段任务</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}></span></span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')">&nbsp;查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')" >您有<strong>新的阶段任务</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}></span></span><span class="small">&nbsp;</span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
 				  </c:when>
 				  <c:when test="${t.mtype=='T3'&&t.hasread=='0' }">
-				  <button type="button" class="list-group-item" >您有<strong>新的任务(成为负责人)</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span></span><span class="small">>>${t.taskname}</span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')">&nbsp;>查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')" >您有<strong>新的任务(成为负责人)</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span></span><span class="small">>>${t.taskname}</span><span class="small">&nbsp;</span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
 				  </c:when>
 				  <c:when test="${t.mtype=='T1'&&t.hasread=='0' }">
-				  <button type="button" class="list-group-item" >您有<strong>新的阶段任务(成为负责人)</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span><span class="small"><a onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')">&nbsp;>查看</a></span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
+				  <button type="submit" class="list-group-item" onclick="window.open('${pageContext.request.contextPath }/web/servlet/canJumpProServlet?pno=${t.pno}&mno=${t.mno }')" >您有<strong>新的阶段任务(成为负责人)</strong><span class="small">&nbsp;>${t.pname}</span><span class="small">>>${t.sname}</span><span class="small">&nbsp;</span><span class="list-group-item-text" style="float:right">${t.mdate}</span></button>
 				  </c:when>
 				</c:choose>
 				</c:forEach>
@@ -86,6 +86,7 @@
 			 </form>
 
 			</div>
+				
 				
 				
 			<!-- 在下要处理的审批信息 -->
