@@ -19,19 +19,7 @@
  <body> 
     
    	<!--主要内容-->
-    <section style="min-height: 100%">
-       <div class="container-fluid">
-       <div class="row">
-       <div class="col-lg-10 xumode">
-					 <!-- Nav tabs -->
-		  <ul class="nav nav-tabs" role="tablist" id="myTab">
-			<li role="presentation"><a href="#taskinform" aria-controls="taskinform" role="tab" data-toggle="tab">任务消息&nbsp;<span class="badge">${task_num }</span></a></li>
-			<li role="presentation"><a href="#sysinform" aria-controls="sysinform" role="tab" data-toggle="tab">系统信息&nbsp;<span class="badge">${system_num }</span></a></li>
-			<li role="presentation"><a href="#checkinform" aria-controls="checkinform" role="tab" data-toggle="tab">审批消息&nbsp;<span class="badge">${audit_num }</span></a></li>
-		  </ul>
-
-		  <!-- Tab panes -->
-		 <section style="min-height: 100%">
+	<section style="min-height: 100%">
        <div class="container-fluid">
        <div class="row">
        <div class="col-lg-10 xumode">
