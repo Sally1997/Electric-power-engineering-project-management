@@ -332,7 +332,17 @@ function addElement()
 	//对于金额进行验证
 	var hahaBudget=window.parseFloat(vbudget);
 	var heheBudget=window.parseFloat(document.getElementById("otherBudget").innerHTML);
+	
+	
 
+	//计算时间
+	var heheDate=Date.parse(venddate);
+	if(heheDate>Date.parse("${projectInfo.etime}")){
+		alert("阶段截止日期不能超过项目截止日期:${projectInfo.etime}");
+		return;
+	}
+	
+	
 	if(hahaBudget > heheBudget){
 		alert("剩余预算不足");
 		return;
@@ -341,12 +351,6 @@ function addElement()
 		document.getElementById("otherBudget").innerHTML=""+subValue.toFixed(2);
 	}
 	
-	//计算时间
-	var heheDate=Date.parse(venddate);
-	if(heheDate>Date.parse("${projectInfo.etime}")){
-		alert("阶段截止日期不能超过项目截止日期:${projectInfo.etime}");
-		return;
-	}
 	var msname = document.createTextNode(vname);
 	var mngname = document.createTextNode(vcharp);
 	var StartDate = document.createTextNode(vstartdate);

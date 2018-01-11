@@ -21,14 +21,14 @@ public class SaveFileInCache extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+			request.setCharacterEncoding("UTF-8");
 		//获取文档id
 			String dno=request.getParameter("dno");
 			if(dno==null){
 				response.getWriter().write("error");
 				return;
 			}
-			
+			System.out.println("呵呵");
 			DocumentService ds=new DocumentServiceImpl();
 			Document doc = ds.findDocumentById(dno);
 			if(doc==null){
@@ -37,7 +37,6 @@ public class SaveFileInCache extends HttpServlet {
 			}
 			String filepath=doc.getDpath();
 			String filename=doc.getDtitle()+filepath.substring(filepath.lastIndexOf("."));
-			filename = new String(filename.getBytes(), "ISO-8859-1");
 			InputStream input=new FileInputStream(filepath);
 			
 			//新建临时文件，用于预览
@@ -52,7 +51,9 @@ public class SaveFileInCache extends HttpServlet {
 			request.getSession().setAttribute("previewFile", newfile);
 			
 			
-			if((!exist.exists())&&(lastname.equals("docx")||lastname.equals("doc")||lastname.equals("ppt")||lastname.equals("pptx")||lastname.equals("xls"))){
+			if((!exist.exists())){
+				//文件类型选择
+			
 				//新建文件
 				OutputStream outFile=new FileOutputStream(f.getPath()+File.separator+newfile);
 				int len=0;

@@ -341,6 +341,14 @@ function addElement()
 		}
 	}
 	
+
+	//计算时间
+	var heheDate=Date.parse(venddate);
+	if(heheDate>Date.parse("${pTask['entity'].etime}")){
+		alert("任务截止日期不能超过截止日期:${pTask['entity'].etime}");
+		return;
+	}
+	
 	//对于金额进行验证
 	var hahaBudget=window.parseFloat(vbudget);
 	var heheBudget=window.parseFloat(document.getElementById("otherBudget").innerHTML);
@@ -353,12 +361,6 @@ function addElement()
 		document.getElementById("otherBudget").innerHTML=""+subValue.toFixed(2);
 	}
 	
-	//计算时间
-	var heheDate=Date.parse(venddate);
-	if(heheDate>Date.parse("${pTask['entity'].etime}")){
-		alert("任务截止日期不能超过截止日期:${pTask['entity'].etime}");
-		return;
-	}
 	
 	var msname = document.createTextNode(vname);
 	var mngname = document.createTextNode(vcharp);

@@ -25,8 +25,9 @@ public class FindDocument extends HttpServlet {
 		String dateFrom=request.getParameter("dateFrom");
 		String dateTo=request.getParameter("dateTo");
 		String keywords=request.getParameter("keywords");
-		System.out.println(keywords);
+		
 		String ftype=request.getParameter("ftype");
+		System.out.println(ftype);
 		int cur=Integer.parseInt(request.getParameter("currentPage"));
 		int pageSize=Integer.parseInt(request.getParameter("pageSize"));
 		if(ptype==null||dtype==null||dateFrom==null||dateTo==null||keywords==null||ftype==null){
