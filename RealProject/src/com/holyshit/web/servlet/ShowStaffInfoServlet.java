@@ -68,6 +68,8 @@ public class ShowStaffInfoServlet extends HttpServlet {
 			String ja = JSONArray.fromObject(list).toString();
 			AutoNumber an = new AutoNumber();
 			str = an.transToArray(ja).toString();
+			
+			System.out.println(str);
 		}
 		else{
 			if(fp!=null){
