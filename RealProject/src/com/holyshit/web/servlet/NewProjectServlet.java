@@ -145,6 +145,8 @@ public class NewProjectServlet extends HttpServlet {
 		String filename = fileitem.getName();
 		String suffix = filename.substring(filename.lastIndexOf('.')+1);
 		String fname = filename.substring(filename.lastIndexOf(File.separator)+1, filename.lastIndexOf('.'));
+		
+		filename = fname + "." + suffix;
 		String path = new String();
 		doc.setDtitle(fname);
 		doc.setFtype(suffix);

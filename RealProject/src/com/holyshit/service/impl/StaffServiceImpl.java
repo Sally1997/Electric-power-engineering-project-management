@@ -178,6 +178,7 @@ public class StaffServiceImpl implements StaffService{
 					map.put("notes", "-");
 				}
 				int pn = StaffDao.selectSIP(pno, userno);
+				System.out.println("分页共"+pn+"页");
 				map.put("pagesize", pn);
 			}
 		} catch (SQLException e) {
@@ -219,6 +220,7 @@ public class StaffServiceImpl implements StaffService{
 					map.put("notes", "-");
 				}
 				int pn = StaffDao.selectSIC(pno, userno);
+				System.out.println("分页共"+pn+"页");
 				map.put("pagesize", pn);
 			}
 		} catch (SQLException e) {
@@ -261,6 +263,7 @@ public class StaffServiceImpl implements StaffService{
 					map.put("notes", "-");
 				}
 				int pn = StaffDao.selectSS(pno, userno, keyword);
+				System.out.println("分页共"+pn+"页");
 				map.put("pagesize", pn);
 			}
 		} catch (SQLException e) {
@@ -463,6 +466,7 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			Map<String,Object> map = new HashMap<String, Object>();
 			int pn = sd.selectCountSCPP(keyword);
+			System.out.println("分页共"+pn+"页");
 			map.put("pagesize", pn);
 			list = sd.selectStaffCanSetProject(keyword);
 		} catch (SQLException e) {
