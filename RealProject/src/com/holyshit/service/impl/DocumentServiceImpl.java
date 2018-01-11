@@ -80,14 +80,14 @@ public class DocumentServiceImpl implements DocumentService {
 
 	@Override
 	public Map<String, Object> findDocumentByContidtion(String ptype,String dtype,
-			String datefrom, String dateto, String keywords, String ftype,int cur,int pageSize) {
+			String datefrom, String dateto, String keywords, String ftype,int cur,int pageSize,String staffno) {
 		// TODO Auto-generated method stub
 		DocumentDao dd=new DocumentDaoImpl();
 		long totalSize=0;
 		List<DocumentInfo> docs=null;
 		try {
-			docs = dd.selectDocumentByCondition(ptype,dtype, datefrom, dateto, keywords, ftype, cur, pageSize);
-			totalSize=dd.totalNumWithCondition(ptype,dtype, datefrom, dateto, keywords, ftype);
+			docs = dd.selectDocumentByCondition(ptype,dtype, datefrom, dateto, keywords, ftype, cur, pageSize,staffno);
+			totalSize=dd.totalNumWithCondition(ptype,dtype, datefrom, dateto, keywords, ftype,staffno);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

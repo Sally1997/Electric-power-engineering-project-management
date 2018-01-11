@@ -47,9 +47,11 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>GetInformNumber</filter-name>
+    <url-pattern>/jsp/documentManage/document.jsp</url-pattern>
     <servlet-name>MainServlet</servlet-name>
     <servlet-name>ShowPageProjectBudget</servlet-name>
     <servlet-name>ShowProjectServlet</servlet-name>
+    <servlet-name>AuditGeneralFileServlet</servlet-name>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

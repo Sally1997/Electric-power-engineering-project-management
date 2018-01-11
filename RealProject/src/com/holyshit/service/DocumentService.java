@@ -51,7 +51,7 @@ public interface DocumentService {
 	 * @param ftype
 	 * @return
 	 */
-	Map<String, Object> findDocumentByContidtion(String ptype,String dtype,String datefrom,String dateto,String keywords,String ftype,int cur,int pageSize);
+	Map<String, Object> findDocumentByContidtion(String ptype,String dtype,String datefrom,String dateto,String keywords,String ftype,int cur,int pageSize,String staffno);
 	
 	
 	
