@@ -240,6 +240,7 @@ public class StageTasksServiceImpl implements StageTasksService{
 						tid.insertTaskIndexes(ti);
 					}
 				}
+				ConnectionManager.commit();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

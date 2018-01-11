@@ -142,7 +142,7 @@ public class StaffDaoImpl implements StaffDao {
 			"(SELECT staff.StaffNo,NAME,te,duty "+
 			"FROM staff LEFT JOIN psrelation ON "+
 			"psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
-			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?)b",
+			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?))b",
 			new ScalarHandler(),pno,userno,pno);
 		return (int) l;
 	}
