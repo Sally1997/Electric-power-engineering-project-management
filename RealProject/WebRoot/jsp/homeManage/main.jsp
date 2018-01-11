@@ -87,23 +87,34 @@
 						  <c:choose>
   							<c:when test="${task.tstate=='1' }">
     	                      <tr>
-							  <td title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
-							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
+							  <td title="${projectNames[hehe.index] }" name="myabbr" style="cursor: pointer;" onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${task.pno }')">${projectNames[hehe.index] }</td>
+							  <td title="${task.taskname }" style="cursor: pointer;" onclick="window.open('/RealProject/servlet/DTreeNodeServlet?pno=${task.pno}&taskno=${task.taskno }')" name="myabbr">${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
 							  <td class="text-success">正常进行中</td>	
+							  <input type="hidden" value="${hehe.index }">
 							  </tr>
 							</c:when>
 							<c:when test="${task.tstate=='2' }">
 							  <tr>
-						      <td onclick="window.open()" title="${projectNames[hehe.index] }" name="myabbr" >${projectNames[hehe.index] }<span class="badge">new</td>
-							  <td title="${task.taskname }" name="myabbr" >${task.taskname }</td>
+							  <td title="${projectNames[hehe.index] }" name="myabbr" style="cursor: pointer;" onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${task.pno }')">${projectNames[hehe.index] }</td>
+							  <td title="${task.taskname }" style="cursor: pointer;" onclick="window.open('/RealProject/servlet/DTreeNodeServlet?pno=${task.pno}&taskno=${task.taskno }')" name="myabbr">${task.taskname }</td>
 							  <td>${task.stime }</td>
 							  <td>${task.etime }</td>	
-							  <td class="text-danger">逾期进行中</td>	
+							  <td class="text-danger">逾期进行中</td>
+							  <input type="hidden" value="${hehe.index }">	
 							  </tr>
 							  </c:when>
   						  </c:choose>
+  						</c:forEach>
+  						<c:forEach begin="${fn:length(tasks)}" end="4" step="1">
+  							<tr>
+							  <td title="-" name="myabbr" >-<span class="hideIndex" style="display: none;"></span><span class="badge">new</td>
+							  <td title="-" name="myabbr" >-</td>
+							  <td>-</td>
+							  <td>-</td>	
+							  <td class="text-success">-</td>	
+							  </tr>
   						</c:forEach>
     	              </table>
     	              <div class="pagination" style="margin-left: 50%;" id="task_page">
@@ -136,13 +147,16 @@
 									var trs=tasktable.getElementsByTagName("tr");
 									for(var i=0;i<taskData.length;i++){
 										var tds=trs[i+1].getElementsByTagName("td");
-										
 										tds[0].title=taskData[i].pname;
 										tds[0].innerHTML=taskData[i].pname;
 										tds[1].innerHTML=taskData[i].taskname;
 										tds[1].title=taskData[i].taskname;
-										
-										
+										//设置函数 设置隐藏域的值
+										tds[1].parentNode.getElementsByTagName("input")[0].value=i;
+										tds[1].onclick=function(){
+											var index=window.parseInt(this.parentNode.getElementsByTagName("input")[0].value);
+											window.open("/RealProject/servlet/DTreeNodeServlet?pno="+taskData[index].pno+"&taskno="+taskData[index].taskno);
+										};
 										tds[2].innerHTML=taskData[i].stime;
 										tds[3].innerHTML=taskData[i].etime;
 										if(taskData[i].tstate==1){
@@ -186,7 +200,7 @@
 							<th>截止时间</th>
 							<th>状态</th>
 							</tr>
-							<c:forEach items="${projects }" var="project" begin="0" end="4">
+							<c:forEach items="${projects }" var="project" begin="0" end="4" varStatus="hehe">
 							
 							<c:choose>
 	  							<c:when test="${project.pstate=='1' }">
@@ -200,6 +214,8 @@
 							    <td>${project.stime }</td>
 							    <td>${project.etime }</td>
 								<td class="text-success">正在进行中</td>
+								<input type="hidden" value="${hehe.index }">
+								</tr>
 								</c:when>
 	  						</c:choose>
 	  						<c:choose>
@@ -214,6 +230,8 @@
 							    <td>${project.stime }</td>
 							    <td>${project.etime }</td>
 								<td class="text-danger">逾期进行中</td>
+								<input type="hidden" value="${hehe.index }">
+								</tr>
 								</c:when>
 	  						</c:choose>
 	  						
@@ -255,7 +273,13 @@
 										};
 										tds[0].title=projectData[i].pname;
 										tds[0].innerHTML=projectData[i].pname;
-										
+										//设置隐藏域的值
+										tds[0].parentNode.getElementsByTagName("input")[0].value=i;
+										tds[0].onclick=function(){
+											var index=window.parseInt(this.parentNode.getElementsByTagName("input")[0].value);
+											window.open("/RealProject/web/servlet/judgeStageExist?pno="+projectData[index].pno);
+											
+										};
 										processes[i].style.width=projectData[i].pstage*100+"%";
 										processes[i].innerHTML=(projectData[i].pstage*100).toFixed(1)+"%";
 										processes[i].style.display="block";
@@ -333,7 +357,8 @@
 	<script type="text/javascript"> 
     var mylist = document.getElementsByName("myabbr");
 	for (var i = 0; i < mylist.length; i++){
-		mylist[i].innerHTML = mylist[i].innerHTML.substring(0, 8)+"...";
+		if(mylist[i].innerHTML.length>8)
+			mylist[i].innerHTML = mylist[i].innerHTML.substring(0, 8)+"...";
 	}
 	</script>
 	

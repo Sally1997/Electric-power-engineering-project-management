@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.enterprise.context.RequestScoped;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,11 @@ public class DTreeNodeServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		String pn = request.getParameter("pno");
-		
+		String tskno=request.getParameter("taskno");
+		if(pn==null){
+			request.getRequestDispatcher("/jsp/error/error_500.jsp").forward(request, response);
+			return;
+		}
 		DTreeNodeService dtns = new DTreeNodeServiceImpl();
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		//获取到项目信息
@@ -36,6 +41,7 @@ public class DTreeNodeServlet extends HttpServlet {
 		//这里有一个问题，转发过去的json数组前台接收获取到的内容和解析ajax内容不太一样，这里先存疑
 		
 		request.setAttribute("s", s);
+		request.setAttribute("taskno", tskno);
 		request.getRequestDispatcher("/jsp/projectManage/PlanManagement_Newed.jsp").forward(request, response);
 	}
 
