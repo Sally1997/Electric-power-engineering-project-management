@@ -130,4 +130,12 @@ public interface StaffService {
 	 * 
 	 */
 	Staff findRootInfo();
+	
+	/**
+	 * 是否在项目人员
+	 * @param pno
+	 * @param staffno
+	 * @return
+	 */
+	boolean selectIfInProject(String pno,String staffno);
 }

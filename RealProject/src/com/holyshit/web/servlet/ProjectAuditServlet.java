@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.holyshit.Dao.PSRelationDao;
+import com.holyshit.Dao.impl.PSRelationDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Projaprlaudit;
@@ -49,16 +51,16 @@ public class ProjectAuditServlet extends HttpServlet {
 		String pc = request.getParameter("PersonInCharge");
 		
 		if(aev.equals("agree")){
-			aev="2";
+			aev="1";
 		}
 		else{
-			aev="1";
+			aev="2";
 		}
 		
 		AuditService as = new AuditServiceImpl();
 		ProjectService ps = new ProjectServiceImpl();
 		InformService infoser = new InformServiceImpl();
-		System.out.println(pc);
+		
 		if(pc==""){
 			as.changePAAInfo(mno, aev, ai);
 			//得到更改后的paa
@@ -109,10 +111,12 @@ public class ProjectAuditServlet extends HttpServlet {
 			String pno = paa1.getPno();
 			
 			StaffService ss = new StaffServiceImpl();
-			if(!ss.ifInProject(cpn)){
-				psr.setStaffno(cpn);
-				psr.setPno(pno);
-				psr.setDuty("负责人");
+			
+			//psr表
+			psr.setStaffno(cpn);
+			psr.setPno(pno);
+			psr.setDuty("负责人");
+			if(!ss.selectIfInProject(pno, cpn)){
 				ss.addAStaff(psr);
 			}
 			
