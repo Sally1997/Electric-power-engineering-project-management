@@ -19,7 +19,7 @@
 			}
 		}
 	};
-	req.open("post","${pageContext.request.contextPath}/web/servlet/saveFile?dno=<%=request.getParameter("dno")%>");
+	req.open("post","${pageContext.request.contextPath}/web/servlet/saveFile?dno=<%=request.getParameter("dno")%>&time="+new Date().getTime());
 	req.send(null);
 </script>
 </head>

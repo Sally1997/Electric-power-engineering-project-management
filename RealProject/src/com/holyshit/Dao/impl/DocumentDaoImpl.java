@@ -132,6 +132,8 @@ public class DocumentDaoImpl implements DocumentDao{
 			sql+=" ptype='"+ptype+"' and document.pno!='00000'";
 			
 		}
+		if(!dateTo.equals(""))
+			sql+=" and uploadtime<='"+dateTo+"'";
 		if(!dateFrom.equals(""))
 			sql+=" and uploadtime>='"+dateFrom+"'";
 		if(!keywords.equals(""))

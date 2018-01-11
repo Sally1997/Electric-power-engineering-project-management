@@ -281,7 +281,7 @@
       			
       			var password_reg=/^[0-9A-z]{6,16}$/;
       			if(!password_reg.test(addStaff_password)){
-      				alert("请输入正确的密码格式:\n"+"    1.密码由数字，小写字母，大写字母中的一种或者几种类型组成\n"+"    2.密码长度最短为6位，最长为20位");
+      				alert("请输入正确的密码格式:\n"+"    1.密码由数字，小写字母，大写字母中的一种或者几种类型组成\n"+"    2.密码长度最短为6位，最长为16位");
       				return;
       			}
       			if(addStaff_confirm!=addStaff_password){

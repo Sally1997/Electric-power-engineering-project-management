@@ -22,17 +22,17 @@ public class SaveFileInCache extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			request.setCharacterEncoding("UTF-8");
+			
 		//获取文档id
 			String dno=request.getParameter("dno");
 			if(dno==null){
-				response.getWriter().write("error");
+				response.getWriter().write("dnError");
 				return;
 			}
-			System.out.println("呵呵");
 			DocumentService ds=new DocumentServiceImpl();
 			Document doc = ds.findDocumentById(dno);
 			if(doc==null){
-				response.getWriter().write("error");
+				response.getWriter().write("findDocumentError");
 				return;
 			}
 			String filepath=doc.getDpath();
@@ -63,7 +63,6 @@ public class SaveFileInCache extends HttpServlet {
 				while((len=input.read(b))!=-1){
 					outFile.write(b, 0, len);
 				}
-				
 				//关闭流
 				outFile.close();
 			}

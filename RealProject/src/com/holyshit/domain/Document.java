@@ -81,5 +81,13 @@ public class Document {
 	public void setUloadpno(String uloadpno) {
 		this.uloadpno = uloadpno;
 	}
+	@Override
+	public String toString() {
+		return "Document [dno=" + dno + ", pno=" + pno + ", dtitle=" + dtitle
+				+ ", dpath=" + dpath + ", uploadtime=" + uploadtime
+				+ ", dloadtimes=" + dloadtimes + ", ftype=" + ftype
+				+ ", dtype=" + dtype + ", fsize=" + fsize + ", auditres="
+				+ auditres + ", uloadpno=" + uloadpno + "]";
+	}
 	
 }
