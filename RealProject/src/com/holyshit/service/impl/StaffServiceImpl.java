@@ -511,4 +511,18 @@ public class StaffServiceImpl implements StaffService{
 		}
 		return selectStaffById;
 	}
+
+	@Override
+	public boolean selectIfInProject(String pno, String staffno) {
+		// TODO Auto-generated method stub
+		PSRelationDao psrd = new PSRelationDaoImpl();
+		boolean x = true;
+		try {
+			x = psrd.selectIfInProject(pno, staffno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return x;
+	}
 }

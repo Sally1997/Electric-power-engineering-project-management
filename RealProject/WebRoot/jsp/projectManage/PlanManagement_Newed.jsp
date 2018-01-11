@@ -82,15 +82,21 @@ $(".innerUl").ProTree({
   callback: function(id) {
     //alert("你选择的id是" + id + "，名字是" + name);
     var tb = document.getElementById("thisBlock");
+    var ddm = document.getElementById("dropdownMenu1");
+    
     var bitch = document.getElementById("bitch");
     
     var fozza_dj_l = id.toString();
     if(fozza_dj_l.length==5){
     	tb.style.display = "none";
+    	ddm.style.display = "none";
+    	
     	bitch.style.display = "";
     }
     else{
     	tb.style.display = "";
+    	ddm.style.display = "";
+    	
     	bitch.style.display = "none";
     }
     
@@ -174,8 +180,7 @@ $(".innerUl").ProTree({
 						<input type="text" style="display:none" id="fozza_text" onblur="resetecho()">
             <!-- <span onclick="altercharp()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle="dropdown"></span>
              -->
-            <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;" id="dropdownMenu1" data-toggle = "modal"></span>
-            
+            <span onclick="search_member()" class="glyphicon glyphicon-pencil" style="cursor: pointer;display:none" id="dropdownMenu1" data-toggle = "modal"></span>
               <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <li><input type="text" name="fozza_change" size="15px;"/></li>
                 <li><input type = "button" style="float:right;" name = "altername" class="btn btn-primary" value = "修改" onclick="changename()"/></li>
