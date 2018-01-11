@@ -404,7 +404,7 @@
 					<li>
 						<span aria-hidden="true" onclick="pagedec()">&laquo;</span>
 					</li>
-					  <li class="active"><a>第<span id="fooza_page">1</span>页</a></li>
+					  <li class="active"><a>第<span id="fozza_page">1</span>页/共<span id="fozza_count">1</span>页</a></li>
 					<li>
 						<span aria-hidden="true" onclick="pageinr()">&raquo;</span>
 					</li>
@@ -454,6 +454,8 @@
 </script>
 
 <script type="text/javascript">
+var big_fp;
+
 //以下应该都是选择用户弹窗功能
 function give_option(){
 	var ccp = document.getElementsByName("choose_char_per");
@@ -480,7 +482,6 @@ function give_option(){
 function search_member(){
 	var tbody_t = document.getElementById("iamtbody");
 	
-	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
@@ -490,6 +491,13 @@ function search_member(){
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					var fc = document.getElementById("fozza_count");
+					fc.innerHTML = str[i].pagesize;
+					big_fp = fc.innerHTML;
+					break;
+				}
+			
 				//每个radio的value值
 				var v = str[i].name+"("+str[i].staffno+")";
 				
@@ -497,7 +505,6 @@ function search_member(){
 				var nametxt = document.createTextNode(str[i].name);
 				var staffnotxt = document.createTextNode(str[i].staffno);
 				var tetxt = document.createTextNode(str[i].te);
-				
 				//创建td节点
 				var td_radio = document.createElement("td");
 				var td_input = document.createElement("input");
@@ -631,10 +638,14 @@ function cleartext(){
 }
 
 function pageinr(){
-	var fp = parseInt(document.getElementById("fooza_page").innerHTML);
+	var fp = parseInt(document.getElementById("fozza_page").innerHTML);
+	
+	if(fp==big_fp){
+		return;
+	}
 	fp += 1;
 	
-	document.getElementById("fooza_page").innerHTML = fp;
+	document.getElementById("fozza_page").innerHTML = fp;
 
 	var tbody_t = document.getElementById("iamtbody");
 	tbody_t.innerHTML="";
@@ -693,13 +704,13 @@ function pageinr(){
 }
 
 function pagedec(){
-	var fp = document.getElementById("fooza_page").innerHTML;
+	var fp = document.getElementById("fozza_page").innerHTML;
 	if(fp=="1"){
 		return;
 	}
 	fp = parseInt(fp);
 	fp -= 1;
-	document.getElementById("fooza_page").innerHTML = fp;
+	document.getElementById("fozza_page").innerHTML = fp;
 
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
