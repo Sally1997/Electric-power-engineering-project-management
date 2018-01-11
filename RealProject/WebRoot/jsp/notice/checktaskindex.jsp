@@ -147,7 +147,7 @@
     		</div>
     		
     		<!-- 如果申请人id为当前用户编号，则不显示，不同则说明当前用户是审核人，其他人没有消息提醒 -->
-    		<c:if test="${staff.staffno!=map.staffno}">
+    		<c:if test="${staff.staffno!=map.charpno}">
 			<div class="col-lg-8 xumode">
    	        <div class="panel panel-primary">
     	        <div class="panel-heading">任务审批</div>

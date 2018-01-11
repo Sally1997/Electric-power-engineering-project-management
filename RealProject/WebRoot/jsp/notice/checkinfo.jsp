@@ -335,6 +335,13 @@ function give_option(){
 	var mng = document.getElementsByName("PersonInCharge")[0];  
 	for(var i=0;i<ccp.length;i++){
 		if(ccp[i].checked==true){
+			var fozza_cp = ccp[i].value;
+			var shabi = "${staff.name}(${staff.staffno})";
+			if(fozza_cp==shabi){
+				alert("您必须选取其他人为立项审批人!");
+				return;
+			}
+			
 			mng.value = ccp[i].value;
 			mng.style.display = "";
 			break;
