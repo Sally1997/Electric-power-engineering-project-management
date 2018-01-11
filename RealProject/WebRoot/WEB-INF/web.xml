@@ -322,6 +322,11 @@
     <servlet-name>ChangeTaskCharP</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ChangeTaskCharP</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetFeeAuditDetailByFauditno</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetFeeAuditDetailByFauditno</servlet-class>
+  </servlet>
+
 
 
 
@@ -581,6 +586,10 @@
   <servlet-mapping>
     <servlet-name>ChangeTaskCharP</servlet-name>
     <url-pattern>/web/servlet/changeTaskCharP</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetFeeAuditDetailByFauditno</servlet-name>
+    <url-pattern>/web/servlet/getFeeAuditDetailByFauditno</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

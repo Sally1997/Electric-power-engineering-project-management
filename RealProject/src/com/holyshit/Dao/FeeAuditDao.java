@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.holyshit.domain.FeeAudit;
+import com.holyshit.domain.FeeAuditInfo;
 import com.holyshit.domain.ProjectStageBudget;
 
 public interface FeeAuditDao {
@@ -94,4 +95,11 @@ public interface FeeAuditDao {
 	 * @throws SQLException
 	 */
 	FeeAudit selectLastFeeAuditByTaskNo(String taskno)throws SQLException;
+	
+	/**
+	 * 查询报账的详细信息
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 }

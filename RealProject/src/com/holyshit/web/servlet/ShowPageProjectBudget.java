@@ -26,6 +26,8 @@ public class ShowPageProjectBudget extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int cur=Integer.parseInt(request.getParameter("currentPage"));
 		int pagesize=Integer.parseInt(request.getParameter("pageSize"));
+		String type=request.getParameter("type");
+		String fauditno=request.getParameter("fauditno");
 		//获取用户id
 		HttpSession session=request.getSession();
 		String staffno = ((Staff)session.getAttribute("staff")).getStaffno();
@@ -34,6 +36,9 @@ public class ShowPageProjectBudget extends HttpServlet {
 		Map<String, Object> res=ms.showProjectMoneyPage(cur, pagesize, staffno);
 		
 		request.setAttribute("projects", res);
+		request.setAttribute("type", type);
+		request.setAttribute("fauditno", fauditno);
+		
 		//分发
 		request.getRequestDispatcher("/web/servlet/showPageFee?currentPage=1&pageSize=4").forward(request, response);
 	}

@@ -14,6 +14,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.holyshit.Dao.FeeAuditDao;
 import com.holyshit.domain.FeeAudit;
+import com.holyshit.domain.FeeAuditInfo;
 import com.holyshit.domain.ProjectStageBudget;
 import com.holyshit.utils.ConnectionManager;
 
@@ -96,5 +97,6 @@ public class FeeAuditDaoImpl implements FeeAuditDao{
 		String sql="SELECT * FROM feeaudit WHERE taskno=? ORDER BY stime DESC LIMIT 0,1";
 		return qr.query(ConnectionManager.getConnection(), sql, new BeanHandler<FeeAudit>(FeeAudit.class),taskno);
 	}
+
 
 }
