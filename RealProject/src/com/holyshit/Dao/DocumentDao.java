@@ -64,7 +64,7 @@ public interface DocumentDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	long totalNumWithCondition(String ptype,String dtype,String dateFrom,String dateTo,String keywords,String ftype)throws SQLException;
+	long totalNumWithCondition(String ptype,String dtype,String dateFrom,String dateTo,String keywords,String ftype,String staffno)throws SQLException;
 	/**
 	 * 根据条件查询文档
 	 * @param dtype
@@ -75,7 +75,7 @@ public interface DocumentDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<DocumentInfo> selectDocumentByCondition(String ptype,String dtype,String dateFrom,String dateTo,String keywords,String ftype,int cur,int pageSize)throws SQLException;
+	List<DocumentInfo> selectDocumentByCondition(String ptype,String dtype,String dateFrom,String dateTo,String keywords,String ftype,int cur,int pageSize,String staffno)throws SQLException;
 	/**
 	 * 查询上传文件的信息
 	 * @param dno

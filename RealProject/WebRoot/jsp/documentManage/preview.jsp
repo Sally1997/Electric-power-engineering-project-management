@@ -14,7 +14,7 @@
 				if(req.responseText=="ok"){
 					var base="https://view.officeapps.live.com/op/view.aspx?src=";
 		 			var src=encodeURIComponent("http://www.blackstar0412.cn/RealProject/tmp/${previewFile}");
-					location.href=base+src;
+		 			location.href=base+src; 
 				}
 			}
 		}

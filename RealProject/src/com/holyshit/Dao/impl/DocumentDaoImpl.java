@@ -79,23 +79,28 @@ public class DocumentDaoImpl implements DocumentDao{
 
 	@Override
 	public List<DocumentInfo> selectDocumentByCondition(String ptype,String dtype,
-			String dateFrom, String dateTo, String keywords, String ftype,int cur,int pageSize)
+			String dateFrom, String dateTo, String keywords, String ftype,int cur,int pageSize,String staffno
+			)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from document join project on document.pno=project.pno where auditres='2' and";
+		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from ";
+		
 		if(!dtype.equals("")){
-			sql+=" dtype='"+dtype+"'";
+			sql+=" document p join project on p.pno=project.pno where p.dtype='"+dtype+"'";
 		}else{
-			sql+=" ptype='"+ptype+"' and document.pno!='00000'";
+			//一个复杂的sql
+			sql+="(SELECT project.pno,project.pname,project.ptype,document.dno,document.dtitle,document.UloadPNo,document.UploadTime,document.DloadTimes,document.FType,document.FSize FROM document JOIN project ON document.pno=project.pno WHERE (project.pstate='3' OR project.pstate='4') AND auditres='2' union ";
+			sql+="SELECT b.pno,b.pname,b.ptype,document.dno,document.dtitle,document.UloadPNo,document.UploadTime,document.DloadTimes,document.FType,document.FSize FROM (SELECT a.pno,project.pname,project.ptype FROM (SELECT pno FROM psrelation WHERE staffno='"+staffno+"')a JOIN project ON a.pno=project.pno)b JOIN document ON b.pno=document.PNo WHERE document.auditres='2')p";
+			sql+=" where p.ptype='"+ptype+"'";
 			
 		}
 		if(!dateTo.equals(""))
-			sql+=" and uploadtime<='"+dateTo+"'";
+			sql+=" and p.uploadtime<='"+dateTo+"'";
 		if(!dateFrom.equals(""))
-			sql+=" and uploadtime>='"+dateFrom+"'";
+			sql+=" and p.uploadtime>='"+dateFrom+"'";
 		if(!keywords.equals(""))
-			sql+=" and dtitle like '%"+keywords+"%'";
+			sql+=" and p.dtitle like '%"+keywords+"%'";
 		if(!ftype.equals("")){
 			if(!ftype.equals("all")){
 				String[] types = ftype.split(":");
@@ -103,41 +108,45 @@ public class DocumentDaoImpl implements DocumentDao{
 				for(int i=0;i<types.length;i++)
 					if(i==0){
 						String[] cres = FileSuffixConvert.convert(types[i]);
-						sql+="ftype='"+cres[0]+"'";
+						sql+="p.ftype='"+cres[0]+"'";
 						for(int j=1;j<cres.length;j++)
-							sql+=" or ftype='"+cres[j]+"'";
+							sql+=" or p.ftype='"+cres[j]+"'";
 					}
 					else{
 						String[] cres = FileSuffixConvert.convert(types[i]);
 						for(int j=0;j<cres.length;j++)
-							sql+=" or ftype='"+cres[j]+"'";
+							sql+=" or p.ftype='"+cres[j]+"'";
 					}
 				sql+=" )";
 			}
 		}
-		sql+=" order by dloadtimes desc limit "+(cur-1)*pageSize+","+pageSize;
+		sql+=" order by p.dloadtimes desc limit "+(cur-1)*pageSize+","+pageSize;
 		return qr.query(ConnectionManager.getConnection(), sql,new BeanListHandler<DocumentInfo>(DocumentInfo.class));
 	}
 
 	@Override
 	public long totalNumWithCondition(String ptype,String dtype, String dateFrom,
-			String dateTo, String keywords, String ftype) throws SQLException {
+			String dateTo, String keywords, String ftype,String staffno) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
+		boolean flag=false;
+		String sql="select count(*) from ";
 		
-		String sql="select count(*) from document join project on document.pno=project.pno where auditres='2' and";
 		if(!dtype.equals("")){
-			sql+=" dtype='"+dtype+"'";
+			sql+=" document p join project on p.pno=project.pno where p.dtype='"+dtype+"'";
 		}else{
-			sql+=" ptype='"+ptype+"' and document.pno!='00000'";
+			//一个复杂的sql
+			sql+="(SELECT project.pno,project.pname,project.ptype,document.dno,document.dtitle,document.UloadPNo,document.UploadTime,document.DloadTimes,document.FType,document.FSize FROM document JOIN project ON document.pno=project.pno WHERE (project.pstate='3' OR project.pstate='4') AND auditres='2' union ";
+			sql+="SELECT b.pno,b.pname,b.ptype,document.dno,document.dtitle,document.UloadPNo,document.UploadTime,document.DloadTimes,document.FType,document.FSize FROM (SELECT a.pno,project.pname,project.ptype FROM (SELECT pno FROM psrelation WHERE staffno='"+staffno+"')a JOIN project ON a.pno=project.pno)b JOIN document ON b.pno=document.PNo WHERE document.auditres='2')p";
+			sql+=" where p.ptype='"+ptype+"'";
 			
 		}
 		if(!dateTo.equals(""))
-			sql+=" and uploadtime<='"+dateTo+"'";
+			sql+=" and p.uploadtime<='"+dateTo+"'";
 		if(!dateFrom.equals(""))
-			sql+=" and uploadtime>='"+dateFrom+"'";
+			sql+=" and p.uploadtime>='"+dateFrom+"'";
 		if(!keywords.equals(""))
-			sql+=" and dtitle like '%"+keywords+"%'";
+			sql+=" and p.dtitle like '%"+keywords+"%'";
 		if(!ftype.equals("")){
 			if(!ftype.equals("all")){
 				String[] types = ftype.split(":");
@@ -145,19 +154,18 @@ public class DocumentDaoImpl implements DocumentDao{
 				for(int i=0;i<types.length;i++)
 					if(i==0){
 						String[] cres = FileSuffixConvert.convert(types[i]);
-						sql+="ftype='"+cres[0]+"'";
+						sql+="p.ftype='"+cres[0]+"'";
 						for(int j=1;j<cres.length;j++)
-							sql+=" or ftype='"+cres[j]+"'";
+							sql+=" or p.ftype='"+cres[j]+"'";
 					}
 					else{
 						String[] cres = FileSuffixConvert.convert(types[i]);
 						for(int j=0;j<cres.length;j++)
-							sql+=" or ftype='"+cres[j]+"'";
+							sql+=" or p.ftype='"+cres[j]+"'";
 					}
 				sql+=" )";
 			}
 		}
-		
 		return (long) qr.query(ConnectionManager.getConnection(), sql,new ScalarHandler());
 	}
 
