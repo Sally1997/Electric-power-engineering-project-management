@@ -198,4 +198,12 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		return (BigDecimal) qr.query(ConnectionManager.getConnection(), sql, new ScalarHandler(),taskno);
 	}
 
+	@Override
+	public int updateTaskState(String tno, String tstate) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(),"UPDATE stagetasks SET tstate=? WHERE taskno=?",
+				tno,tstate);
+	}
+
 }

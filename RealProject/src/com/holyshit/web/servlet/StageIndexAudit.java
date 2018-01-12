@@ -51,12 +51,19 @@ public class StageIndexAudit extends HttpServlet {
 		info.setHasread("0");
 		
 		AuditService as = new AuditServiceImpl();
+
+		int ra = 0;
 		if(index!=null){
-			as.StageIndexAudit(info, index);
+			ra = as.StageIndexAudit(info, index,stageno,agree);
 		}
 		
 		//跳转到信息表？
-		response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
+		if(ra == 0){
+			response.getWriter().write("<script type='text/javascript'>alert('服务器好像出问题了，请找管理员!')</script>");
+		}
+		else{
+			response.getWriter().write("<script type='text/javascript'>alert('审核成功!')</script>");
+		}
 		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/web/servlet/shouInformServlet?type=1");
 	}
 

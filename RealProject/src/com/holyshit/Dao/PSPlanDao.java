@@ -71,4 +71,13 @@ public interface PSPlanDao {
 	 * @throws SQLException
 	 */
 	BigDecimal selectStageHasBudget(String stageno)throws SQLException;
+	
+	/**
+	 * 改变阶段状态
+	 * @param tno
+	 * @param tstate
+	 * @return
+	 * @throws SQLException 
+	 */
+	int updateStageState(String sno,String sstate) throws SQLException;
 }
