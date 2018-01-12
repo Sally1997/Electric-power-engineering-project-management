@@ -82,6 +82,15 @@ public class FeeAudit {
 	public void setStime(Timestamp stime) {
 		this.stime = stime;
 	}
+	@Override
+	public String toString() {
+		return "FeeAudit [fauditno=" + fauditno + ", applicantno="
+				+ applicantno + ", auditorno=" + auditorno + ", pno=" + pno
+				+ ", auditadv=" + auditadv + ", audittime=" + audittime
+				+ ", auditstate=" + auditstate + ", fee=" + fee
+				+ ", ofeereason=" + ofeereason + ", taskno=" + taskno
+				+ ", stime=" + stime + "]";
+	}
 	
 	
 }

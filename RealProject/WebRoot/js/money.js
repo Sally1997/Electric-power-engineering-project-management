@@ -566,14 +566,19 @@ function submitFeeInfo(){
    			document.getElementById("fee_appname").innerHTML=feeData[index].appname;
    			document.getElementById("fee_stime").innerHTML=feeData[index].stime;
    			document.getElementById("fee_fee").innerHTML="￥"+feeData[index].fee;
+   			document.getElementById("fee_auditadv").innerHTML=feeData[index].auditadv;
    			var code=feeData[index].auditstate;
    			if(code=="0"){
+   				document.getElementById("fee_auditadv").style.color="red";
+   				document.getElementById("fee_auditadv").innerHTML="请等待审核";
    				document.getElementById("fee_auditstate").innerHTML="未审核";
    				document.getElementById("fee_auditstate").className="text-danger";
    			}else if(code=="1"){
+   				document.getElementById("fee_auditadv").style.color="black";
    				document.getElementById("fee_auditstate").innerHTML="未通过";
    				document.getElementById("fee_auditstate").className="text-danger";
    			}else{
+   				document.getElementById("fee_auditadv").style.color="black";
    				document.getElementById("fee_auditstate").innerHTML="通过审核";
    				document.getElementById("fee_auditstate").className="text-success";
    			}

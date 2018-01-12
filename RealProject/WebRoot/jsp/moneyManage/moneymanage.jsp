@@ -63,12 +63,13 @@
       </div>
       <div>
         <table class="table table-striped table-condensed">
-        	<tr><td>报账项目</td><td id="fee_pname">项目A</td></tr>       	
-        	<tr><td>项目阶段</td><td id="fee_sname">阶段一</td></tr>
-        	<tr><td>项目任务</td><td id="fee_taskname">任务一</td></tr>
-			<tr><td>报账人</td><td id="fee_appname">甲</td></tr>
-        	<tr><td>报账时间</td><td id="fee_stime">2017-10-11</td></tr>        	
-        	<tr><td>报账金额</td><td id="fee_fee">￥50.00元</td></tr>
+        	<tr><td>报账项目</td><td id="fee_pname">-</td></tr>       	
+        	<tr><td>项目阶段</td><td id="fee_sname">-</td></tr>
+        	<tr><td>项目任务</td><td id="fee_taskname">-</td></tr>
+			<tr><td>报账人</td><td id="fee_appname">-</td></tr>
+        	<tr><td>报账时间</td><td id="fee_stime">-</td></tr>        	
+        	<tr><td>报账金额</td><td id="fee_fee">-</td></tr>
+        	<tr><td>审批意见</td><td id="fee_auditadv">-</td></tr>
             <tr><td>当前状态</td>
             <td class="text_danger"  id="fee_auditstate">未审批</td></tr>
         </table>
@@ -637,50 +638,79 @@
 	   		window.onload=function(){
 	   			var type="${type}";
 	   			var fauditno="${fauditno}";
-	   			if(type=="0"&&fauditno!=""){
+	   			//是否发送请求
+	   			if(type!=""&&fauditno!=""){
 	   				var req=new XMLHttpRequest();
 	   				req.onreadystatechange=function(){
 	   					if(req.readyState==4&&req.status==200){
 	   						jumpAuditData=eval("("+req.responseText+")");
-	   						//对于显示进行刷新
-	   						fauditno=jumpAuditData.fauditno;
-	   			   			var submit_audit=document.getElementById("submit_audit");
-	   			   			document.getElementById("audit_pname").innerHTML=jumpAuditData.pname;
-	   			   			document.getElementById("audit_sname").innerHTML=jumpAuditData.sname;
-	   			   			document.getElementById("audit_taskname").innerHTML=jumpAuditData.taskname;
-	   			   			document.getElementById("audit_appname").innerHTML=jumpAuditData.appname;
-	   			   			document.getElementById("audit_stime").innerHTML=jumpAuditData.stime;
-	   			   			document.getElementById("audit_fee").innerHTML=jumpAuditData.fee;
-	   			   			document.getElementById("audit_ofeereason").innerHTML=jumpAuditData.ofeereason;
-	   			   			
-	   			   			if(jumpAuditData.ofeereason=="")
-	   			   				document.getElementById("overCause").style.display="none";
-	   			   			else
-	   			   				document.getElementById("overCause").style.display="block";
-	   			   			var state=document.getElementById("audit_auditstate");
-	   			   			var tmp=jumpAuditData.auditstate;
-	   			   			if(tmp=="0"){
-	   			   				state.style.color="blue";
-	   			   				state.innerHTML="未审批";
-	   			   				submit_audit.removeAttribute("disabled");
-	   			   				document.getElementById("top_audit").style.display="block";
-	   			   				document.getElementById("middle_audit").style.display="block";
-	   			   			}else if(tmp=="1"){
-	   			   				state.style.color="red";
-	   			   				state.innerHTML="不通过";
-	   			   				submit_audit.disabled="disabled";
-	   			   				document.getElementById("top_audit").style.display="none";
-	   			   				document.getElementById("middle_audit").style.display="none";
-	   			   			}else{
-	   			   				state.style.color="green";
-	   			   				state.innerHTML="审批通过";
-	   			   				submit_audit.disabled="disabled";
-	   			   				document.getElementById("top_audit").style.display="none";
-	   			   				document.getElementById("middle_audit").style.display="none";
-	   			   			}
-	   						
-	   						//显示模态框
-	   						$("#acInfoPass").modal("show");
+	   						if(type=="0"){
+		   						//对于显示进行刷新
+		   						fauditno=jumpAuditData.fauditno;
+		   			   			var submit_audit=document.getElementById("submit_audit");
+		   			   			document.getElementById("audit_pname").innerHTML=jumpAuditData.pname;
+		   			   			document.getElementById("audit_sname").innerHTML=jumpAuditData.sname;
+		   			   			document.getElementById("audit_taskname").innerHTML=jumpAuditData.taskname;
+		   			   			document.getElementById("audit_appname").innerHTML=jumpAuditData.appname;
+		   			   			document.getElementById("audit_stime").innerHTML=jumpAuditData.stime;
+		   			   			document.getElementById("audit_fee").innerHTML=jumpAuditData.fee;
+		   			   			document.getElementById("audit_ofeereason").innerHTML=jumpAuditData.ofeereason;
+		   			   			if(jumpAuditData.ofeereason=="")
+		   			   				document.getElementById("overCause").style.display="none";
+		   			   			else{
+		   			   				document.getElementById("overCause").style.display="block";
+		   			   			}
+		   			   			var state=document.getElementById("audit_auditstate");
+		   			   			var tmp=jumpAuditData.auditstate;
+		   			   			if(tmp=="0"){
+		   			   				state.style.color="blue";
+		   			   				state.innerHTML="未审批";
+		   			   				submit_audit.removeAttribute("disabled");
+		   			   				document.getElementById("top_audit").style.display="block";
+		   			   				document.getElementById("middle_audit").style.display="block";
+		   			   			}else if(tmp=="1"){
+		   			   				state.style.color="red";
+		   			   				state.innerHTML="不通过";
+		   			   				submit_audit.disabled="disabled";
+		   			   				document.getElementById("top_audit").style.display="none";
+		   			   				document.getElementById("middle_audit").style.display="none";
+		   			   			}else{
+		   			   				state.style.color="green";
+		   			   				state.innerHTML="审批通过";
+		   			   				submit_audit.disabled="disabled";
+		   			   				document.getElementById("top_audit").style.display="none";
+		   			   				document.getElementById("middle_audit").style.display="none";
+		   			   			}
+		   						
+		   						//显示模态框
+		   						$("#acInfoPass").modal("show");
+	   						}else if(type=="1"){
+	   							document.getElementById("fee_pname").innerHTML=jumpAuditData.pname;
+	   				   			document.getElementById("fee_sname").innerHTML=jumpAuditData.sname;
+	   				   			document.getElementById("fee_taskname").innerHTML=jumpAuditData.taskname;
+	   				   			document.getElementById("fee_appname").innerHTML=jumpAuditData.appname;
+	   				   			document.getElementById("fee_stime").innerHTML=jumpAuditData.stime;
+	   				   			document.getElementById("fee_fee").innerHTML="￥"+jumpAuditData.fee;
+	   				   			document.getElementById("fee_auditadv").innerHTML=jumpAuditData.auditadv;
+	   				   			var code=jumpAuditData.auditstate;
+	   				   			if(code=="0"){
+	   				   				document.getElementById("fee_auditadv").style.color="red";
+	   				   				document.getElementById("fee_auditadv").innerHTML="请等待审核";
+	   				   				document.getElementById("fee_auditstate").innerHTML="未审核";
+	   				   				document.getElementById("fee_auditstate").className="text-danger";
+	   				   			}else if(code=="1"){
+	   				   				document.getElementById("fee_auditadv").style.color="black";
+	   				   				document.getElementById("fee_auditstate").innerHTML="未通过";
+	   				   				document.getElementById("fee_auditstate").className="text-danger";
+	   				   			}else{
+	   				   				document.getElementById("fee_auditadv").style.color="black";
+	   				   				document.getElementById("fee_auditstate").innerHTML="通过审核";
+	   				   				document.getElementById("fee_auditstate").className="text-success";
+	   				   			}
+	   				   			
+	   				   			//模态框显示
+	   				   			$("#acInfo").modal("show");
+	   						}
 	   					}
 	   				};
 	   				req.open("get","/RealProject/web/servlet/getFeeAuditDetailByFauditno?fauditno="+fauditno);

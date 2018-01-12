@@ -163,6 +163,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				fad.put("stime", format);
 				fad.put("fee", fa.getFee());
 				fad.put("auditstate", fa.getAuditstate());
+				fad.put("auditadv", fa.getAuditadv());
 				//压入数组
 				feeaudits.add(fad);	
 			}
@@ -444,12 +445,21 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			String format = sdf.format(new java.util.Date(fa.getStime().getTime()));
 			fad.put("stime", format);
 			fad.put("fee", fa.getFee());
+			fad.put("auditadv", fa.getAuditadv());
+			fad.put("ofeereason", fa.getOfeereason());
 			fad.put("auditstate", fa.getAuditstate());
+			if(fa.getOfeereason()==null){
+				fad.put("ofeereason", "");
+			}
+			if(fa.getAuditadv()==null){
+				fad.put("auditadv", "");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			ConnectionManager.closeConnection();
 		}
-		
 		return fad.toString();
 	}
 }

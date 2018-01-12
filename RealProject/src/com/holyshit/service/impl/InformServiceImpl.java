@@ -187,6 +187,7 @@ public class InformServiceImpl implements InformService {
 			if(flag3){
 				List<InformTaskIndex> res = inform.selectInformByTypeInTaskIndex(staffno);
 				for(InformTaskIndex iFee:res){
+					
 					JSONObject jo=new JSONObject();
 					jo.put("mno", iFee.getMno());
 					jo.put("busno", iFee.getBusno());
@@ -211,6 +212,7 @@ public class InformServiceImpl implements InformService {
 			}
 			if(flag4){
 				List<InformStageIndex> res = inform.selectInformByTypeInStageIndex(staffno);
+				
 				for(InformStageIndex iFee:res){
 					JSONObject jo=new JSONObject();
 					jo.put("mno", iFee.getMno());
