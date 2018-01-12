@@ -73,5 +73,5 @@ public interface ProjectStageSercvice {
 	 * @param info_list
 	 * @param info
 	 */
-	public void submitTask(String no,List<String> upload_list,List<String> info_list,Inform info);
+	public int submitTask(String no,List<String> upload_list,List<String> info_list,Inform info);
 }

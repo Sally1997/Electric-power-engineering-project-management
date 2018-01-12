@@ -80,4 +80,13 @@ public interface PSPlanDao {
 	 * @throws SQLException 
 	 */
 	int updateStageState(String sno,String sstate) throws SQLException;
+	
+	/**
+	 * 改变阶段审核状态
+	 * @param tno
+	 * @param tstate
+	 * @return
+	 * @throws SQLException 
+	 */
+	int updateStageAuditState(String sno,String astate) throws SQLException;
 }

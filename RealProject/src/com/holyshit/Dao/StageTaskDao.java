@@ -170,4 +170,13 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	int updateTaskState(String tno,String tstate) throws SQLException;
+	
+	/**
+	 * 改变任务审核状态
+	 * @param tno
+	 * @param tstate
+	 * @return
+	 * @throws SQLException 
+	 */
+	int updateTaskAuditState(String tno,String astate) throws SQLException;
 }

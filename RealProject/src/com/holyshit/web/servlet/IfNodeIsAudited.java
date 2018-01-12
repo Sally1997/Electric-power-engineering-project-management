@@ -32,7 +32,6 @@ public class IfNodeIsAudited extends HttpServlet {
 		}
 		str = JSONObject.fromObject(map).toString();
 		
-		System.out.println(str);
 		response.getWriter().write(str);
 	}
 

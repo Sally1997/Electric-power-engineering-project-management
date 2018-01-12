@@ -132,7 +132,7 @@ public interface InformDao {
 	int hasRead(String mno,String flag)throws SQLException;
 	
 	/**
-	 * 查询任务是否在审核状态
+	 * 查询任务是否在审核状态,auditstate 0是未审核，1是审核中，2是审核通过
 	 * @param tno
 	 * @return
 	 * @throws SQLException 

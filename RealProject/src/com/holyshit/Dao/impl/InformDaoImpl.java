@@ -154,14 +154,14 @@ public class InformDaoImpl implements InformDao {
 	public Map<String, Object> selectTaskIfAudited(String tno) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT hasread FROM inform WHERE busno=? AND mtype='A5'", new MapHandler(),tno);
+		return qr.query("SELECT auditstate,stime FROM stagetasks WHERE taskno=?", new MapHandler(),tno);
 	}
 
 	@Override
 	public Map<String, Object> selectStageIfAudited(String sno) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
-		return qr.query("SELECT hasread FROM inform WHERE busno=? AND mtype='A8'", new MapHandler(),sno);
+		return qr.query("SELECT auditstate,stime FROM psplan WHERE stageno=?", new MapHandler(),sno);
 	}
 
 	

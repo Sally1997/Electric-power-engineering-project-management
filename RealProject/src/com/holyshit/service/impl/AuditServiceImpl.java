@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
+import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.AuditService;
@@ -262,25 +264,52 @@ public class AuditServiceImpl implements AuditService {
 			for(int i=0;i<str.length;i++){
 				tid.updateIndexState(str[i], indexstate);
 			}
-			if(sstate == "2"){
-				String state = "y";
-				if(sno.length()==6){
+			
+			String state = null;//更新状态
+			String astate = null;//更新审核状态
+			
+			if(sno.length()==6){//当阶段
+				if(sstate=="2"){//如果审核通过
+					astate = "2";
+					long curtime=new Date().getTime();
+					PSPlan pp = ppd.selectPsPlanInfo(sno);
+					if((curtime>pp.getEtime().getTime())){//当前时间大于截止时间
+						state = "4";
+					}
+					else{
+						state = "3";
+					}
+					//审核完成更新状态
 					ra = ppd.updateStageState(sno, state);
 				}
 				else{
-					ra = std.updateTaskState(sno, state);
+					astate = "0";
 				}
+				ppd.updateStageAuditState(sno, astate);
 			}
-			else{
-				String state = "n";
-				if(sno.length()==6){
-					ra = ppd.updateStageState(sno, state);
-				}
-				else{
+			else{//当任务
+				if(sstate=="2"){//如果审核通过
+					astate = "2";
+					long curtime=new Date().getTime();
+					StageTask st = std.selectStageTasks(sno); 
+					if((curtime>st.getEtime().getTime())){//当前时间大于截止时间
+						state = "4";
+					}
+					else{
+						state = "3";
+					}
+					//审核完成更新状态
 					ra = std.updateTaskState(sno, state);
 				}
+				else{
+					astate = "0";
+				}
+				std.updateTaskAuditState(sno, astate);
 			}
 			
+			if(ra==0){
+				ConnectionManager.rollback();
+			}
 			ConnectionManager.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

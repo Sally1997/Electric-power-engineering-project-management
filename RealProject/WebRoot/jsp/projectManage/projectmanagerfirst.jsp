@@ -307,7 +307,7 @@
       			}
       			else if(checkman.value.length<15){
       				alert("请选择正确的审批人!");
-      				return;
+      				return false;
       			}
       			else if(!x){
       				alert("预算金额非法输入格式!");
