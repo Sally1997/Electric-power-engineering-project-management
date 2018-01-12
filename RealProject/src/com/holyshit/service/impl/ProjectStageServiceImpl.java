@@ -183,7 +183,7 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 	}
 
 	@Override
-	public void submitTask(String no, List<String> upload_list,
+	public int submitTask(String no, List<String> upload_list,
 			List<String> info_list, Inform info) {
 		// TODO Auto-generated method stub
 		InformDao id = new InformDaoImpl();
@@ -191,12 +191,29 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 		
 		ConnectionManager.startTransaction();
 		
+		int iwantu = 0;
+		
 		try {
 			for(int i=0;i<upload_list.size();i++){
 				tid.updateIndexAttachPath(no, info_list.get(i), upload_list.get(i));
 			}
 			id.insertInform(info);
-			ConnectionManager.commit();
+			
+			if(no.length()==6){//更新阶段审核状态
+				PSPlanDao ppd = new PSPlanDaoImpl();
+				iwantu = ppd.updateStageAuditState(no, "1");
+			}
+			else{//更新任务审核状态
+				StageTaskDao std = new StageTaskDaoImpl();
+				iwantu = std.updateTaskAuditState(no, "1");
+			}
+			
+			if(iwantu==0){
+				ConnectionManager.rollback();
+			}
+			else{
+				ConnectionManager.commit();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -204,7 +221,7 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 		} finally{
 			ConnectionManager.closeConnection();
 		}
-		
+		return iwantu;
 	}
 
 }

@@ -137,10 +137,16 @@ public class SubmitTaskServlet extends HttpServlet {
 		info.setSrcpno(cpn);
 		info.setDstpno(pn);
 		
-		pss.submitTask(no, upload_list, info_list, info);
+		int iwu = pss.submitTask(no, upload_list, info_list, info);
 		
 		//提交完成啦~跳回树状图把
-		response.getWriter().write("<script type='text/javascript'>alert('提交成功!')</script>");
+		if(iwu==0){
+			response.getWriter().write("<script type='text/javascript'>alert('服务器错误!请联系管理员')</script>");
+		}
+		else{
+			response.getWriter().write("<script type='text/javascript'>alert('提交成功!')</script>");
+		}
+		
 		response.setHeader("refresh", "0.5;url="+request.getContextPath()+"/servlet/DTreeNodeServlet?pno="+pno);
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

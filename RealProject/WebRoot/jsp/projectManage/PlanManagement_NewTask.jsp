@@ -462,45 +462,52 @@ function addElement()
 	
 	//任务名称
 	ci.setAttribute("name", "fozza_sn");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value", form1.msname.value);
 	cf.appendChild(ci);
 	
 	//给指标详情按钮添加事件
 	aa.setAttribute("onclick","javascript:ifclick('"+ci.value+"')");
 	
-	//发布人
+	//审核人
 	ci = document.createElement("input");
 	ci.setAttribute("name","fozza_cp");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.mngname.value);
 	cf.appendChild(ci);
 	
 	//开始日期
 	ci = document.createElement("input");
 	ci.setAttribute("name","fozza_st");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.StartDate.value);
 	cf.appendChild(ci);
 	
 	//结束日期
 	ci = document.createElement("input");
 	ci.setAttribute("name","fozza_et");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.EndDate.value);
 	cf.appendChild(ci);
 	
 	//预算
 	ci = document.createElement("input");
 	ci.setAttribute("name","fozza_bg");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value",form1.budget.value);
 	cf.appendChild(ci);
 	
 	//指标内容
 	ci = document.createElement("input");
 	ci.setAttribute("name", "indexcontent")
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value", "");
 	cf.appendChild(ci);
 	
 	//是否需要指标附件	
 	ci = document.createElement("input");
 	ci.setAttribute("name", "attachmentneed");
+	ci.setAttribute("type", "hidden");
 	ci.setAttribute("value", "");
 	cf.appendChild(ci);
 	

@@ -106,7 +106,16 @@ public class PSPlanDaoImpl implements PSPlanDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return qr.update(ConnectionManager.getConnection(),"UPDATE psplan SET sstate=? WHERE stageno=?",
-				sno,sstate);
+				sstate,sno);
+	}
+
+	@Override
+	public int updateStageAuditState(String sno, String astate)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(),"UPDATE psplan SET auditstate=? WHERE stageno=?",
+				astate,sno);
 	}
 
 }

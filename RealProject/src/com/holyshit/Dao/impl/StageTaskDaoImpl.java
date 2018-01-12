@@ -203,7 +203,16 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
 		return qr.update(ConnectionManager.getConnection(),"UPDATE stagetasks SET tstate=? WHERE taskno=?",
-				tno,tstate);
+				tstate,tno);
+	}
+
+	@Override
+	public int updateTaskAuditState(String tno, String astate)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(),"UPDATE stagetasks SET auditstate=? WHERE taskno=?",
+				astate,tno);
 	}
 
 }

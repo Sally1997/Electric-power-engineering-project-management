@@ -283,6 +283,12 @@ public class InformServiceImpl implements InformService {
 		Map<String,Object> map = new HashMap<String, Object>();
 		try {
 			map = id.selectStageIfAudited(sno);
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+			java.sql.Date sd1 = (java.sql.Date) map.get("stime");
+			String s1 = sdf.format(sd1);
+			map.put("stime", s1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -297,6 +303,12 @@ public class InformServiceImpl implements InformService {
 		Map<String,Object> map = new HashMap<String, Object>();
 		try {
 			map = id.selectTaskIfAudited(tno);
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+			java.sql.Date sd1 = (java.sql.Date) map.get("stime");
+			String s1 = sdf.format(sd1);
+			map.put("stime", s1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
