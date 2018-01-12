@@ -59,4 +59,18 @@ public interface InformService {
 	 * @return
 	 */
 	boolean readInform(String mno);
+	
+	/**
+	 * 姐u但是否在审核中
+	 * @param sno
+	 * @return
+	 */
+	public Map<String,Object> askStageIfAudited(String sno);
+	
+	/**
+	 * 任务是否在审核中
+	 * @param tno
+	 * @return
+	 */
+	public Map<String,Object> askTaskIfAudited(String tno);
 }

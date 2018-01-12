@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.inject.New;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -276,5 +274,33 @@ public class InformServiceImpl implements InformService {
 		if(res==1)
 			return true;
 		return false;
+	}
+
+	@Override
+	public Map<String, Object> askStageIfAudited(String sno) {
+		// TODO Auto-generated method stub
+		InformDao id = new InformDaoImpl();
+		Map<String,Object> map = new HashMap<String, Object>();
+		try {
+			map = id.selectStageIfAudited(sno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> askTaskIfAudited(String tno) {
+		// TODO Auto-generated method stub
+		InformDao id = new InformDaoImpl();
+		Map<String,Object> map = new HashMap<String, Object>();
+		try {
+			map = id.selectTaskIfAudited(tno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
 	}
 }
