@@ -30,7 +30,7 @@ public class NoticeDaoImpl implements NoticeDao {
 	public List<Notice> selectAllNoticeByPage(int cur,int pagesize) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(), "select * from notice order by pubtime desc limit ?,?", new BeanListHandler<Notice>(Notice.class),(cur-1)*pagesize,pagesize);
+		return qr.query(ConnectionManager.getConnection(), "select * from notice join staff on notice.pubpno=staff.staffno order by pubtime desc limit ?,?", new BeanListHandler<Notice>(Notice.class),(cur-1)*pagesize,pagesize);
 	}
 
 	@Override

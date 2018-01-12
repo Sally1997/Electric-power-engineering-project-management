@@ -8,6 +8,14 @@ public class Notice {
 	private String filepath;
 	private String pubpno;
 	private Date pubtime;
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getNoticeno() {
 		return noticeno;
 	}
@@ -38,4 +46,11 @@ public class Notice {
 	public void setPubtime(Date pubtime) {
 		this.pubtime = pubtime;
 	}
+	@Override
+	public String toString() {
+		return "Notice [noticeno=" + noticeno + ", noticetitle=" + noticetitle
+				+ ", filepath=" + filepath + ", pubpno=" + pubpno
+				+ ", pubtime=" + pubtime + ", name=" + name + "]";
+	}
+	
 }
