@@ -149,8 +149,17 @@
 										var tds=trs[i+1].getElementsByTagName("td");
 										tds[0].title=taskData[i].pname;
 										tds[0].innerHTML=taskData[i].pname;
+										//对长度进行截取
+										if(tds[0].innerHTML.length>8){
+											tds[0].innerHTML=tds[0].innerHTML.substr(0,8)+"...";
+										}
+										
+										
 										tds[1].innerHTML=taskData[i].taskname;
 										tds[1].title=taskData[i].taskname;
+										if(tds[1].innerHTML.length>8){
+											tds[1].innerHTML=tds[1].innerHTML.substr(0,8)+"...";
+										}
 										//设置函数 设置隐藏域的值
 										tds[1].parentNode.getElementsByTagName("input")[0].value=i;
 										tds[1].onclick=function(){
@@ -206,11 +215,15 @@
 	  							<c:when test="${project.pstate=='1' }">
 								<tr>
 							    <td onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${project.pno }')" title="${project.pname }" name="myabbr" >${project.pname }</td>
-							    <td><div class="progress">
-							    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;" name="processNum">
-							    ${project.pstage*100}%
+							    <td>
+							    <div class="progress" style="float: left;width: 80%">
+							    	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;" name="processNum"></div>
 							    </div>
-							    </div></td>
+							    <div style="float: left;width: 20%">
+							    	<span name="processHehe">${project.pstage*100 }%</span>
+							    </div>
+							    <div class="clear"></div>
+							    </td>
 							    <td>${project.stime }</td>
 							    <td>${project.etime }</td>
 								<td class="text-success">正在进行中</td>
@@ -222,11 +235,15 @@
 	  							<c:when test="${project.pstate=='2' }">
 								<tr>
 							    <td onclick="window.open('/RealProject/web/servlet/judgeStageExist?pno=${project.pno }')" title="${project.pname }" name="myabbr" >${project.pname }</td>
-							    <td><div class="progress">
-							    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: ${project.pstage*100}%;min-width: 2em;" name="processNum">
-							    ${project.pstage*100}%
+							   <td>
+							    <div class="progress" style="float: left;width: 80%">
+							    	<div class="progress-bar progress-bar-info" role="progressbar" style="width: ${project.pstage*100}%;" name="processNum"></div>
 							    </div>
-							    </div></td>
+							    <div style="float: left;width: 20%">
+							    	<span name="processHehe">${project.pstage*100 }%</span>
+							    </div>
+							    <div class="clear"></div>
+							    </td>
 							    <td>${project.stime }</td>
 							    <td>${project.etime }</td>
 								<td class="text-danger">逾期进行中</td>
@@ -235,7 +252,25 @@
 								</c:when>
 	  						</c:choose>
 	  						
-						  </c:forEach>   	          
+						  </c:forEach>  
+						  <c:forEach begin="${fn:length(projects)}" end="4" step="1">
+  							<tr>
+							    <td name="myabbr" >-</td>
+							   <td>
+							    <div class="progress" style="float: left;width: 80%">
+							    	<div class="progress-bar progress-bar-info" role="progressbar" style="width: 0%;" name="processNum"></div>
+							    </div>
+							    <div style="float: left;width: 20%">
+							    	<span name="processHehe">-</span>
+							    </div>
+							    <div class="clear"></div>
+							    </td>
+							    <td>-</td>
+							    <td>-</td>
+								<td>-</td>
+								<input type="hidden" value="">
+								</tr>
+  						</c:forEach> 	          
 						  </table>
 						  <div class="pagination" style="margin-left: 50%;" id="project_page">
 						        <a href="javascript:getPreProjectPage()" class="disabled">&laquo;</a>
@@ -273,6 +308,10 @@
 										};
 										tds[0].title=projectData[i].pname;
 										tds[0].innerHTML=projectData[i].pname;
+										
+										if(tds[0].innerHTML.length>8){
+											tds[0].innerHTML=tds[0].innerHTML.substr(0,8)+"...";
+										}
 										//设置隐藏域的值
 										tds[0].parentNode.getElementsByTagName("input")[0].value=i;
 										tds[0].onclick=function(){
@@ -281,8 +320,7 @@
 											
 										};
 										processes[i].style.width=projectData[i].pstage*100+"%";
-										processes[i].innerHTML=(projectData[i].pstage*100).toFixed(1)+"%";
-										processes[i].style.display="block";
+										document.getElementsByName("processHehe")[i].innerHTML=(window.parseFloat(projectData[i].pstage)*100).toFixed(1)+"%";
 										tds[2].innerHTML=projectData[i].stime;
 										tds[3].innerHTML=projectData[i].etime;
 										
@@ -297,9 +335,8 @@
 									for(var i=projectData.length;i<5;i++){
 										var tds=trs[i+1].getElementsByTagName("td");
 										tds[0].innerHTML="-";
-										processes[i].style.width="0";
-										processes[i].innerHTML="";
-										processes[i].style.display="none";
+										processes[i].style.width="0%";
+										document.getElementsByName("processHehe")[i].innerHTML="-";
 										tds[2].innerHTML="-";
 										tds[3].innerHTML="-";
 										tds[4].innerHTML="-";
