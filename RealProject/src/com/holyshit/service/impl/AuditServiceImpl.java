@@ -256,19 +256,19 @@ public class AuditServiceImpl implements AuditService {
 		StageTaskDao std = new StageTaskDaoImpl();
 		
 		String indexstate = "1";
-		
 		int ra = 0;
 		ConnectionManager.startTransaction();
 		try {
 			id.insertInform(info);
-			for(int i=0;i<str.length;i++){
+			/*for(int i=0;i<str.length;i++){
 				tid.updateIndexState(str[i], indexstate);
-			}
+			}*/
 			
 			String state = null;//更新状态
 			String astate = null;//更新审核状态
 			
 			if(sno.length()==6){//当阶段
+				
 				if(sstate=="2"){//如果审核通过
 					astate = "2";
 					long curtime=new Date().getTime();
@@ -307,9 +307,6 @@ public class AuditServiceImpl implements AuditService {
 				std.updateTaskAuditState(sno, astate);
 			}
 			
-			if(ra==0){
-				ConnectionManager.rollback();
-			}
 			ConnectionManager.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

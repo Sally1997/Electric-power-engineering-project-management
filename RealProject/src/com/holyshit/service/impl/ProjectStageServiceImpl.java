@@ -208,12 +208,7 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 				iwantu = std.updateTaskAuditState(no, "1");
 			}
 			
-			if(iwantu==0){
-				ConnectionManager.rollback();
-			}
-			else{
-				ConnectionManager.commit();
-			}
+			ConnectionManager.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

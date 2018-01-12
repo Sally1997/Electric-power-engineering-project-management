@@ -52,9 +52,7 @@ public class TaskIndexAudit extends HttpServlet {
 		AuditService as = new AuditServiceImpl();
 		
 		int ra = 0;
-		if(index!=null){
-			ra = as.StageIndexAudit(info, index,stageno,agree);
-		}
+		ra = as.StageIndexAudit(info, index,stageno,agree);
 		
 		//跳转到信息表？
 		if(ra == 0){

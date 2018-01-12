@@ -452,6 +452,8 @@ function give_option(){
 
 //以下是选择用户功能
 function search_member(){
+	document.getElementById("fozza_page").innerHTML = 1;
+	
 	var tbody_t = document.getElementById("iamtbody");
 	
 	var aja = new XMLHttpRequest();
