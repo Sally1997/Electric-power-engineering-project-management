@@ -565,8 +565,14 @@ var aja = new XMLHttpRequest();
 				p.style.display = "none";
 			}
 		}
-		//创建连接
-		aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+${s}[0].id+"&time="+new Date().getTime());
+		var tskno="${taskno}";
+		if(tskno!=""){
+			aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo=${taskno}&time="+new Date().getTime());
+		}else{
+			//创建连接
+			aja.open("get", "${pageContext.request.contextPath}/servlet/ShowNodeServlet?NodeNo="+${s}[0].id+"&time="+new Date().getTime());
+		}
+		
 		//发送请求
 		aja.send(null);
 	}

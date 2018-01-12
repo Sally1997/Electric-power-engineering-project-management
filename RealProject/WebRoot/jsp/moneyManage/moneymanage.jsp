@@ -633,8 +633,62 @@
 
 						</form>
         <script type="text/javascript">
-	   		//刷新审核框内容
-	   		
+        	var jumpAuditData="";
+	   		window.onload=function(){
+	   			var type="${type}";
+	   			var fauditno="${fauditno}";
+	   			if(type=="0"&&fauditno!=""){
+	   				var req=new XMLHttpRequest();
+	   				req.onreadystatechange=function(){
+	   					if(req.readyState==4&&req.status==200){
+	   						jumpAuditData=eval("("+req.responseText+")");
+	   						//对于显示进行刷新
+	   						fauditno=jumpAuditData.fauditno;
+	   			   			var submit_audit=document.getElementById("submit_audit");
+	   			   			document.getElementById("audit_pname").innerHTML=jumpAuditData.pname;
+	   			   			document.getElementById("audit_sname").innerHTML=jumpAuditData.sname;
+	   			   			document.getElementById("audit_taskname").innerHTML=jumpAuditData.taskname;
+	   			   			document.getElementById("audit_appname").innerHTML=jumpAuditData.appname;
+	   			   			document.getElementById("audit_stime").innerHTML=jumpAuditData.stime;
+	   			   			document.getElementById("audit_fee").innerHTML=jumpAuditData.fee;
+	   			   			document.getElementById("audit_ofeereason").innerHTML=jumpAuditData.ofeereason;
+	   			   			
+	   			   			if(jumpAuditData.ofeereason=="")
+	   			   				document.getElementById("overCause").style.display="none";
+	   			   			else
+	   			   				document.getElementById("overCause").style.display="block";
+	   			   			var state=document.getElementById("audit_auditstate");
+	   			   			var tmp=jumpAuditData.auditstate;
+	   			   			if(tmp=="0"){
+	   			   				state.style.color="blue";
+	   			   				state.innerHTML="未审批";
+	   			   				submit_audit.removeAttribute("disabled");
+	   			   				document.getElementById("top_audit").style.display="block";
+	   			   				document.getElementById("middle_audit").style.display="block";
+	   			   			}else if(tmp=="1"){
+	   			   				state.style.color="red";
+	   			   				state.innerHTML="不通过";
+	   			   				submit_audit.disabled="disabled";
+	   			   				document.getElementById("top_audit").style.display="none";
+	   			   				document.getElementById("middle_audit").style.display="none";
+	   			   			}else{
+	   			   				state.style.color="green";
+	   			   				state.innerHTML="审批通过";
+	   			   				submit_audit.disabled="disabled";
+	   			   				document.getElementById("top_audit").style.display="none";
+	   			   				document.getElementById("middle_audit").style.display="none";
+	   			   			}
+	   						
+	   						//显示模态框
+	   						$("#acInfoPass").modal("show");
+	   					}
+	   				};
+	   				req.open("get","/RealProject/web/servlet/getFeeAuditDetailByFauditno?fauditno="+fauditno);
+	   				req.send(null);
+	   			}
+	   		}	
+        
+        
         </script>
       </div>
       <div class="modal-footer">

@@ -2,6 +2,7 @@ package com.holyshit.service;
 
 import java.util.Map;
 
+import com.holyshit.domain.FeeAudit;
 import com.holyshit.domain.TaskInfo;
 
 import net.sf.json.JSONArray;
@@ -57,4 +58,11 @@ public interface MoneyManageService {
 	 * @return
 	 */
 	int doFeeAudit(String cause,String state,String fauditno);
+	
+	/**
+	 * 查询某个报账的详细信息
+	 * @param id
+	 * @return
+	 */
+	String findFeeauditById(String id);
 }

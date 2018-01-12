@@ -108,7 +108,7 @@
  			var t=documentData[i].ftype;
  			if(t=="docx"||t=="doc"||t=="docm"||t=="dotm"||t=="dotx"||t=="xlsx"||t=="xlsb"||t=="xls"||t=="xlsm"||t=="pptx"||t=="ppsx"||t=="ppt"||t=="pps"||t=="pptm"||t=="potm"||t=="ppam"||t=="potx"||t=="posm"){
  				//使用office预览
- 				nodes[i].href="javascript:window.open('/RealProject/jsp/documentManage/preview.jsp?dno="+documentData[i].dno+"')";
+ 				nodes[i].href="javascript:window.open('/RealProject/jsp/documentManage/preview.jsp?dno="+documentData[i].dno+"');void(0);";
  				
  			}else{
  				//直接下载 询问

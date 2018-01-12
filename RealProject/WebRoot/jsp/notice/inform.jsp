@@ -326,8 +326,11 @@
     			if(req.responseText=="ok"){
     				//进行跳转
     				//跳转到资金管理界面
-    				if(jsonData[index].mtype=="A0"||jsonData[index].mtype=="A1"||jsonData[index].mtype=="A2"){
-    					location.href="/RealProject/web/servlet/showbudgetpage?currentPage=1&pageSize=3";
+    				if(jsonData[index].mtype=="A0"){
+    					location.href="/RealProject/web/servlet/showbudgetpage?currentPage=1&pageSize=3&type=0&fauditno="+jsonData[index].busno;
+    				}
+    				if(jsonData[index].mtype=="A1"||jsonData[index].mtype=="A2"){
+    					location.href="/RealProject/web/servlet/showbudgetpage?currentPage=1&pageSize=3&type=1&fauditno="+jsonData[index].busno;
     				}
     				//跳转到文档管理界面
     				if(jsonData[index].mtype=="A3"||jsonData[index].mtype=="A4"){

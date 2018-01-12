@@ -323,6 +323,10 @@
     <servlet-class>com.holyshit.web.servlet.ChangeTaskCharP</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>GetFeeAuditDetailByFauditno</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetFeeAuditDetailByFauditno</servlet-class>
+ </servlet>
+ <servlet>
     <servlet-name>IfNodeIsAudited</servlet-name>
     <servlet-class>com.holyshit.web.servlet.IfNodeIsAudited</servlet-class>
   </servlet>
@@ -588,6 +592,10 @@
     <url-pattern>/web/servlet/changeTaskCharP</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>GetFeeAuditDetailByFauditno</servlet-name>
+    <url-pattern>/web/servlet/getFeeAuditDetailByFauditno</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
     <servlet-name>IfNodeIsAudited</servlet-name>
     <url-pattern>/web/servlet/ifNodeIsAudited</url-pattern>
   </servlet-mapping>

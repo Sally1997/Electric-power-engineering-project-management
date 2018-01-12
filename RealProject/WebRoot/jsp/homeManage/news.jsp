@@ -88,7 +88,7 @@
 			for(var i=0;i<noticeData.length;i++){
 				var tds=nodes[i+1].getElementsByTagName("td");
 				tds[0].innerHTML='<a href="${pageContext.request.contextPath}/web/servlet/lookNotice?noticeno='+noticeData[i].noticeno+'">'+noticeData[i].noticetitle+'</a>';
-				tds[1].innerHTML='管理员';
+				tds[1].innerHTML=noticeData[i].name;
 				tds[2].innerHTML=noticeData[i].pubtime;
 				
 			} 

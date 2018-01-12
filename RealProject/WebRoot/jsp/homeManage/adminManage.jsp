@@ -61,6 +61,14 @@
 
 
 <body>
+	<!-- 公告管理 -->
+	<div class="col-lg-12" style="text-align: right;margin-top: -20px;" >
+		<button type="button" onclick="window.open('${pageContext.request.contextPath}/jsp/homeManage/news.jsp')"
+			class="btn btn-primary">公告管理</button>
+	</div>
+	
+	
+	<!-- 主要内容 -->
 	<div class="panel-body" style="padding-bottom:0px;">
 		<div class="panel panel-default">
 			<div class="panel-heading">员工查询</div>

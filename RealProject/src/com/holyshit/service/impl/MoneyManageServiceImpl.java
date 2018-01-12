@@ -34,6 +34,7 @@ import com.holyshit.domain.FeeAudit;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.ProjectStageBudget;
+import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
 import com.holyshit.domain.TaskInfo;
 import com.holyshit.service.MoneyManageService;
@@ -417,5 +418,38 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			ConnectionManager.closeConnection();
 		}
 		return result;
+	}
+
+
+	@Override
+	public String findFeeauditById(String id) {
+		// TODO Auto-generated method stub
+		FeeAuditDao fd=new FeeAuditDaoImpl();
+		StageTaskDao std=new StageTaskDaoImpl();
+		StaffDao sd=new StaffDaoImpl();
+		JSONObject fad=new JSONObject();
+		FeeAudit fa=null;
+		TaskInfo t=null;
+		Staff staff=null;
+		try {
+			fa = fd.selectFeeAuditInfoById(id);
+			t = std.selectTaskInfoByTaskNo(fa.getTaskno());
+			staff = sd.selectStaffById(fa.getApplicantno());
+			
+			fad.put("pname", t.getPname());
+			fad.put("sname", t.getSname());
+			fad.put("taskname", t.getTaskname());
+			fad.put("appname", staff.getName());
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String format = sdf.format(new java.util.Date(fa.getStime().getTime()));
+			fad.put("stime", format);
+			fad.put("fee", fa.getFee());
+			fad.put("auditstate", fa.getAuditstate());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return fad.toString();
 	}
 }

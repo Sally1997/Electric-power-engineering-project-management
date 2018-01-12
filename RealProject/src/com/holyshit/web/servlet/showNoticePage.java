@@ -43,6 +43,7 @@ public class showNoticePage extends HttpServlet {
 			object.put("noticetitle", n.getNoticetitle());
 			object.put("pubtime", sdf.format(new Date(n.getPubtime().getTime())));
 			object.put("noticeno", n.getNoticeno());
+			object.put("name", n.getName());
 			notices.add(object);
 		}
 		//封装json
