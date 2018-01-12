@@ -65,11 +65,11 @@ public interface AuditService {
 	Map<String,Object> getIndexAudit(String taskno);
 	
 	/**
-	 * 改变指标表状态和更新信息表
+	 * 改变指标表状态和更新信息表h和任务状态
 	 * @param info
 	 * @param str
 	 */
-	void StageIndexAudit(Inform info,String [] str);
+	int StageIndexAudit(Inform info,String [] str,String sno,String sstate);
 	
 	/**
 	 * 获得指标路径

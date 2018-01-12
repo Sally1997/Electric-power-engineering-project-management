@@ -161,4 +161,13 @@ public interface StageTaskDao {
 	 * @throws SQLException
 	 */
 	BigDecimal selectTaskHasBudget(String taskno)throws SQLException;
+	
+	/**
+	 * 改变任务状态
+	 * @param tno
+	 * @param tstate
+	 * @return
+	 * @throws SQLException 
+	 */
+	int updateTaskState(String tno,String tstate) throws SQLException;
 }

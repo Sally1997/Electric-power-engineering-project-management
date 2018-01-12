@@ -362,41 +362,13 @@
 			<table id = "member_table" class="table table-striped table-condensed" style="font-size: 15px">
  		    <tr>
 			    <th>选择</th>
-			    <th>标号</th>
+			    <th>编号</th>
 			    <th>姓名</th>
 			    <th>联系方式</th>
 			    <!-- 编号，名字，电话号，职责，备注 -->
 		    </tr>
 		    <tbody id="iamtbody"></tbody>
-		    <!-- <tr>
-		    	<td>
-		    		<input name = "choose_char_per" type= "radio" value = "'开发人员'+'('+'201526010001'+')'" />
-		    	</td>
-			    <td>201526010001</td>
-			    <td>OO</td>
-			    <td>12222222221</td>
-			    <td>开发人员</td>
-			    <td>老大</td>
-		    </tr> -->
 	        </table>
-	       <!--  <ul class="pagination" style="padding-left:45%;">
-					<li>
-						<span aria-hidden="true">&laquo;</span>
-					</li>
-					  <li class="active">第${pb.currentPage}页/共${pb.totalPage}页</li>
-					<li>
-						<span aria-hidden="true">&raquo;</span>
-					</li>
-				  </ul> -->
-			 <!-- <button class="col-lg-12" style="text-align:center;">
-					<li>
-						<span aria-hidden="true">&laquo;</span>
-					</li>
-					  <li class="active">第${pb.currentPage}页/共${pb.totalPage}页</li>
-					<li>
-						<span aria-hidden="true">&raquo;</span>
-					</li>
-				  </button> -->
 		</form>
 		   
 		  <div style="text-align: center" id="#">
@@ -540,27 +512,32 @@ function search_member(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&time="+new Date().getTime());
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&time="+new Date().getTime()+"fp="+document.getElementById("fozza_page").innerHTML);
 	
 	aja.send(null);
 }
 
 function search_staff(){
-	var tbody_t = document.getElementById("iamtbody");
-	var childs = tbody_t.childNodes;
-	for(var i=childs.length-1;i>=0;i--){
-		tbody_t.removeChild(childs[i]);
-	}
-	
+	document.getElementById("fozza_page").innerHTML = 1;
 	var g = document.getElementById("getme");
 	var keyword = g.value;
 	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
+			var tbody_t = document.getElementById("iamtbody");
+			tbody_t.innerHTML="";
+	
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					var fc = document.getElementById("fozza_count");
+					fc.innerHTML = str[i].pagesize;
+					big_fp = fc.innerHTML;
+					break;
+				}
+				
 				//每个radio的value值
 				var v = str[i].name+"("+str[i].staffno+")";
 				
@@ -638,24 +615,27 @@ function cleartext(){
 }
 
 function pageinr(){
-	var fp = parseInt(document.getElementById("fozza_page").innerHTML);
-	
+	var fp = document.getElementById("fozza_page").innerHTML;
 	if(fp==big_fp){
 		return;
 	}
+	fp = parseInt(fp);
 	fp += 1;
 	
 	document.getElementById("fozza_page").innerHTML = fp;
 
-	var tbody_t = document.getElementById("iamtbody");
-	tbody_t.innerHTML="";
-	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
+			var tbody_t = document.getElementById("iamtbody");
+			tbody_t.innerHTML="";
+	
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					break;
+				}
 				//每个radio的value值
 				var v = str[i].name+"("+str[i].staffno+")";
 				
@@ -715,9 +695,15 @@ function pagedec(){
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
+			var tbody_t = document.getElementById("iamtbody");
+			tbody_t.innerHTML="";
+			
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					break;
+				}
 				//每个radio的value值
 				var v = str[i].name+"("+str[i].staffno+")";
 				

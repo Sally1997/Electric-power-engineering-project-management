@@ -273,7 +273,7 @@
 			<span class="text">输入:</span>
 			</div>
 			<div class="hehe_right">
-			<input type="text" id="getme" value="请输入关键字" name="goal" size="20px;">&nbsp;&nbsp;
+			<input type="text" id="getme" value="请输入关键字" onclick="cleartext()" name="goal" size="20px;">&nbsp;&nbsp;
 			<input type = "button" name = "ok" class="btn btn-primary" value = "查找" onClick="search_staff()">
 			</div>
 			</div>
@@ -282,7 +282,7 @@
 			<table id = "member_table" class="table table-striped table-condensed" style="font-size: 15px">
  		    <tr>
 			    <th>选择</th>
-			    <th>标号</th>
+			    <th>编号</th>
 			    <th>姓名</th>
 			    <th>联系方式</th>
 			    <!-- 编号，名字，电话号，职责，备注 -->
@@ -300,6 +300,18 @@
 		    </tr> -->
 		    
 	        </table>
+	        
+	     <div style="text-align: center" id="#">
+		           <ul class="pagination">
+					<li>
+						<span aria-hidden="true" onclick="pagedec()">&laquo;</span>
+					</li>
+					  <li class="active"><a>第<span id="fozza_page">1</span>页/共<span id="fozza_count">1</span>页</a></li>
+					<li>
+						<span aria-hidden="true" onclick="pageinr()">&raquo;</span>
+					</li>
+				    </ul>
+    	</div>
 		   
     </div>
     <div class="modal-footer">
@@ -314,6 +326,8 @@
 	 <%@include file="/footer.jsp" %>
 </body>
 <script type="text/javascript">
+var big_fp;
+
 function option(opt){
 	var fcp = document.getElementById("fozza_charp");
 	var fb = document.getElementById("fozza_block");
@@ -352,17 +366,23 @@ function give_option(){
 //以下是选择用户功能
 function search_member(){
 	var tbody_t = document.getElementById("iamtbody");
-	var childs = tbody_t.childNodes;
-	for(var i=childs.length-1;i>=0;i--){
-		tbody_t.removeChild(childs[i]);
-	}
 	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
+			//消除闪屏
+			tbody_t.innerHTML="";
+			
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					var fc = document.getElementById("fozza_count");
+					fc.innerHTML = str[i].pagesize;
+					big_fp = fc.innerHTML;
+					break;
+				}
+				
 				//每个radio的value值
 				var v = str[i].name+"("+str[i].staffno+")";
 				
@@ -406,27 +426,33 @@ function search_member(){
 		}
 	}
 	
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&time="+new Date().getTime());
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&time="+new Date().getTime()+"fp="+document.getElementById("fozza_page").innerHTML);
 	
 	aja.send(null);
 }
 
 function search_staff(){
-	var tbody_t = document.getElementById("iamtbody");
-	var childs = tbody_t.childNodes;
-	for(var i=childs.length-1;i>=0;i--){
-		tbody_t.removeChild(childs[i]);
-	}
-	
+	document.getElementById("fozza_page").innerHTML = 1;
+
 	var g = document.getElementById("getme");
 	var keyword = g.value;
 	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
+			var tbody_t = document.getElementById("iamtbody");
+			tbody_t.innerHTML="";
+	
 			var str = eval("("+aja.responseText+")");
 			
 			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					var fc = document.getElementById("fozza_count");
+					fc.innerHTML = str[i].pagesize;
+					big_fp = fc.innerHTML;
+					break;
+				}
+			
 				//每个radio的value值
 				var v = str[i].name+"("+str[i].staffno+")";
 				
@@ -498,5 +524,148 @@ function submitAudit(){
 	fm.submit();
 }
 
+function cleartext(){
+	var cm = document.getElementById("getme");
+	if(cm.value=="请输入关键字"){
+		cm.value = "";
+	}
+}
+
+function pageinr(){
+	var fp = document.getElementById("fozza_page").innerHTML;
+	if(fp==big_fp){
+		return;
+	}
+	fp = parseInt(fp);
+	fp += 1;
+	
+	document.getElementById("fozza_page").innerHTML = fp;
+
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var tbody_t = document.getElementById("iamtbody");
+			tbody_t.innerHTML="";
+	
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					break;
+				}
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&fp="+fp);
+	aja.send(null);
+}
+
+function pagedec(){
+	var fp = document.getElementById("fozza_page").innerHTML;
+	if(fp=="1"){
+		return;
+	}
+	fp = parseInt(fp);
+	fp -= 1;
+	document.getElementById("fozza_page").innerHTML = fp;
+
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var tbody_t = document.getElementById("iamtbody");
+			tbody_t.innerHTML="";
+			
+			var str = eval("("+aja.responseText+")");
+			
+			for(var i=0;i<str.length;i++){
+				if(i==str.length-1){
+					break;
+				}
+				//每个radio的value值
+				var v = str[i].name+"("+str[i].staffno+")";
+				
+				//分别创建姓名，编号，联系方式，职责和备注的五个文本节点
+				var nametxt = document.createTextNode(str[i].name);
+				var staffnotxt = document.createTextNode(str[i].staffno);
+				var tetxt = document.createTextNode(str[i].te);
+				
+				//创建td节点
+				var td_radio = document.createElement("td");
+				var td_input = document.createElement("input");
+				td_input.setAttribute("name", "choose_char_per");
+				td_input.setAttribute("value", v);
+				td_input.setAttribute("type", "radio");
+				
+				var td_staffno = document.createElement("td");
+				var td_name = document.createElement("td");
+				var td_te = document.createElement("td");
+				
+				//插入节点
+				td_radio.appendChild(td_input);
+				td_staffno.appendChild(staffnotxt);
+				td_name.appendChild(nametxt);
+				td_te.appendChild(tetxt);
+				
+				//装在tr里面
+				var tr_t = document.createElement("tr");
+				tr_t.appendChild(td_radio);
+				tr_t.appendChild(td_staffno);
+				tr_t.appendChild(td_name);
+				tr_t.appendChild(td_te);
+				
+				//把创建的tr都保存在tbody里面，方便每次删除
+				//tbody_t = document.getElementById("iamtbody");
+				tbody_t.appendChild(tr_t);
+				
+				//获取tableID
+				var table_t = document.getElementById("member_table");
+				table_t.appendChild(tbody_t);
+			}
+		}
+	}
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/showStaffInfoServlet?type=nptype&fp="+fp);
+	
+	aja.send(null);
+}
 </script>
 </html>

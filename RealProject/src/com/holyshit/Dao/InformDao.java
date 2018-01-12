@@ -2,6 +2,7 @@ package com.holyshit.Dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.InformDocument;
@@ -129,4 +130,20 @@ public interface InformDao {
 	 * @throws SQLException
 	 */
 	int hasRead(String mno,String flag)throws SQLException;
+	
+	/**
+	 * 查询任务是否在审核状态
+	 * @param tno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Map<String,Object> selectTaskIfAudited(String tno) throws SQLException;
+	
+	/**
+	 * 查询阶段是否在审核状态
+	 * @param tno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Map<String,Object> selectStageIfAudited(String sno) throws SQLException;
 }

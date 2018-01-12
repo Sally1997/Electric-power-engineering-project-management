@@ -101,4 +101,12 @@ public class PSPlanDaoImpl implements PSPlanDao {
 		return (BigDecimal) qr.query(ConnectionManager.getConnection(),sql,new ScalarHandler(),stageno);
 	}
 
+	@Override
+	public int updateStageState(String sno, String sstate) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return qr.update(ConnectionManager.getConnection(),"UPDATE psplan SET sstate=? WHERE stageno=?",
+				sno,sstate);
+	}
+
 }

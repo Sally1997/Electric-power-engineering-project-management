@@ -13,14 +13,19 @@ import net.sf.json.JSONObject;
 import com.holyshit.Dao.AuditDao;
 import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.InformDao;
+import com.holyshit.Dao.PSPlanDao;
+import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.TaskIndexesDao;
 import com.holyshit.Dao.impl.AuditDaoImpl;
 import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
+import com.holyshit.Dao.impl.PSPlanDaoImpl;
+import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
 import com.holyshit.domain.Projaprlaudit;
+import com.holyshit.domain.StageTask;
 import com.holyshit.service.AuditService;
 import com.holyshit.utils.AutoNumber;
 import com.holyshit.utils.ConnectionManager;
@@ -241,18 +246,41 @@ public class AuditServiceImpl implements AuditService {
 	}
 
 	@Override
-	public void StageIndexAudit(Inform info, String[] str) {
+	public int StageIndexAudit(Inform info, String[] str,String sno,String sstate) {
 		// TODO Auto-generated method stub
 		InformDao id = new InformDaoImpl();
 		TaskIndexesDao tid = new TaskIndexesDaoImpl();
+		PSPlanDao ppd = new PSPlanDaoImpl();
+		StageTaskDao std = new StageTaskDaoImpl();
+		
 		String indexstate = "1";
 		
+		int ra = 0;
 		ConnectionManager.startTransaction();
 		try {
 			id.insertInform(info);
 			for(int i=0;i<str.length;i++){
 				tid.updateIndexState(str[i], indexstate);
 			}
+			if(sstate == "2"){
+				String state = "y";
+				if(sno.length()==6){
+					ra = ppd.updateStageState(sno, state);
+				}
+				else{
+					ra = std.updateTaskState(sno, state);
+				}
+			}
+			else{
+				String state = "n";
+				if(sno.length()==6){
+					ra = ppd.updateStageState(sno, state);
+				}
+				else{
+					ra = std.updateTaskState(sno, state);
+				}
+			}
+			
 			ConnectionManager.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -261,6 +289,7 @@ public class AuditServiceImpl implements AuditService {
 		} finally{
 			ConnectionManager.closeConnection();
 		}
+		return ra;
 	}
 
 	@Override

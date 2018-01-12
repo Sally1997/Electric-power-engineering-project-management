@@ -423,67 +423,93 @@ function goServlet1(){
 
 //弹窗显示
 function popup(){
-	//提交和新建子任务是负责人的权限
-	var djp = document.getElementById("CharP");
-
-	var judge = "${staff.name}(${staff.staffno})";
-	var tj = document.getElementById("tijiao");//data-target="#handupDc"
-	
-	if(judge!=djp.innerHTML){
-		tj.setAttribute("data-target", "");
-		alert("只有负责人才可以提交任务!");
-		return;
-	}
-	else{
-		tj.setAttribute("data-target", "#handupDc");
-	}
-	//权限部分
-
-	//dg=dpcument.get 弹出的窗口
-	var dg = document.getElementById("pop_taskno");
-	//p代表获取值
-	var p = document.getElementById("task_name");
-	//隐藏域的值
-	var hiddenvalue = document.getElementsByName("ftask_no")[0];
-	dg.innerHTML = p.innerHTML;
-	hiddenvalue.value = p.innerHTML;
-	
-	
-	dg = document.getElementById("pop_taskname");
-	p = document.getElementById("TaskName");
-	hiddenvalue = document.getElementsByName("ftask_name")[0];
-	dg.innerHTML = p.innerHTML;
-	hiddenvalue.value = p.innerHTML;
-	
-	
-	dg = document.getElementById("pop_charpname");
-	hiddenvalue = document.getElementsByName("fchar_per")[0];
-	p = document.getElementById("CharP");
-	dg.innerHTML = p.innerHTML;
-	hiddenvalue.value = p.innerHTML;
-	
-	//根据指标数量动态生成上传文件按钮
-	p = document.getElementsByName("createli");
-	dg = document.getElementById("pop_index");
-	dg.innerHTML = "";
-	var bi = document.getElementById("bigindex");
-	var len = p.length;
-	//如果指标数量为0贼无需上传文件块
-	if(len==0){
-		bi.style.display = "none";
-	}
-	else{
-		bi.style.display = "";
-		for(var i=0; i<len; i++){
-			if(p[i].value=="1"){
-				dg.innerHTML += "<li>"+p[i].innerHTML+"<input type='file' name='indexfile'>"+
-					"<input type='hidden' value="+p[i].innerHTML+" name='index'></li>";
+	var links_ti = document.getElementById("task_name").innerHTML;
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			var str = eval("("+aja.responseText+")");
+			if(str!=null){
+				var hr = str.hasread;
+			}
+			if(hr==0){
+				alert("项目正在审核中!请勿重复提交!   ");
+				return;
+			}
+			else if(hr==1){
+				alert("项目已审核!");
+				return;
+			}
+			
+			//提交和新建子任务是负责人的权限
+			var djp = document.getElementById("CharP");
+		
+			var judge = "${staff.name}(${staff.staffno})";
+			var tj = document.getElementById("tijiao");//data-target="#handupDc"
+			
+			if(judge!=djp.innerHTML){
+				tj.setAttribute("data-target", "");
+				alert("只有负责人才可以提交任务!");
+				return;
 			}
 			else{
-				dg.innerHTML += "<li>"+p[i].innerHTML+"<div style='height:20px'></div>";
+				tj.setAttribute("data-target", "#handupDc");
+			}
+			//权限部分
+		
+			//dg=dpcument.get 弹出的窗口
+			var dg = document.getElementById("pop_taskno");
+			//p代表获取值
+			var p = document.getElementById("task_name");
+			//隐藏域的值
+			var hiddenvalue = document.getElementsByName("ftask_no")[0];
+			dg.innerHTML = p.innerHTML;
+			hiddenvalue.value = p.innerHTML;
+			
+			
+			dg = document.getElementById("pop_taskname");
+			p = document.getElementById("TaskName");
+			hiddenvalue = document.getElementsByName("ftask_name")[0];
+			dg.innerHTML = p.innerHTML;
+			hiddenvalue.value = p.innerHTML;
+			
+			
+			dg = document.getElementById("pop_charpname");
+			hiddenvalue = document.getElementsByName("fchar_per")[0];
+			p = document.getElementById("CharP");
+			dg.innerHTML = p.innerHTML;
+			hiddenvalue.value = p.innerHTML;
+			
+			//根据指标数量动态生成上传文件按钮
+			p = document.getElementsByName("createli");
+			dg = document.getElementById("pop_index");
+			dg.innerHTML = "";
+			var bi = document.getElementById("bigindex");
+			var len = p.length;
+			//如果指标数量为0贼无需上传文件块
+			if(len==0){
+				bi.style.display = "none";
+			}
+			else{
+				bi.style.display = "";
+				for(var i=0; i<len; i++){
+					if(p[i].value=="1"){
+						dg.innerHTML += "<li>"+p[i].innerHTML+"<input type='file' name='indexfile'>"+
+							"<input type='hidden' value="+p[i].innerHTML+" name='index'></li>";
+					}
+					else{
+						dg.innerHTML += "<li>"+p[i].innerHTML+"<div style='height:20px'></div>";
+					}
+				}
 			}
 		}
 	}
+	
+	
+	
+	//创建连接
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/ifNodeIsAudited?nodeno="+links_ti+"&time="+new Date().getTime());
+	//发送请求
+	aja.send(null);
 }
 
 //ajax获取节点信息

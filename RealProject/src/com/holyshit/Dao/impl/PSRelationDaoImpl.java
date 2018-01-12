@@ -18,7 +18,7 @@ public class PSRelationDaoImpl implements PSRelationDao {
 		Long l = (Long) qr.query("SELECT COUNT(*) FROM psrelation WHERE pno=? AND staffno=?",
 				new ScalarHandler(),pno,staffno);
 		boolean x = false;
-		if(l==1){
+		if(l>=1){
 			x=true;
 		}
 		return x;
