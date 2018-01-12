@@ -155,17 +155,6 @@
                 <div class="col-lg-12" >
 						<!-- 同意 -->
 					<form id="shiwoa">
-						<font >
-							<ul>
-							
-							<c:forEach items="${map.list }" var="l">
-								<li><input name="indexbox" type="checkbox" value="${l.indexno }" />
-									${l.indexinfo }
-								</li>
-							</c:forEach>
-							</ul>
-						</font>
-					
 						<div id="responsible_per" class="block">
 						<div>
 						<div id="first_left">

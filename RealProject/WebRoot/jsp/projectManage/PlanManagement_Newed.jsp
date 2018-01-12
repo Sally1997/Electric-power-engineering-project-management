@@ -428,7 +428,9 @@ function popup(){
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){
 			var str = eval("("+aja.responseText+")");
-			var hr = str.hasread;
+			if(str!=null){
+				var hr = str.hasread;
+			}
 			if(hr==0){
 				alert("项目正在审核中!请勿重复提交!   ");
 				return;
