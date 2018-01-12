@@ -867,6 +867,9 @@ function give_option(){
 }
 
 function search_member(){
+	document.getElementById("fozza_page").innerHTML = 1;
+	document.getElementsByName("where")[0].checked = "checked";
+	
 	var aja = new XMLHttpRequest();
 	aja.onreadystatechange = function(){
 		if(aja.readyState==4&&aja.status==200){

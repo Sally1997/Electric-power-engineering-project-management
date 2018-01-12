@@ -580,6 +580,9 @@ var aja = new XMLHttpRequest();
 
 //以下是选择用户功能
 function search_member(){
+	document.getElementById("fozza_page").innerHTML = 1;
+	document.getElementsByName("where")[0].checked = "checked";
+
 	var djp = document.getElementById("CharP");
 
 	var judge = "${staff.name}(${staff.staffno})";

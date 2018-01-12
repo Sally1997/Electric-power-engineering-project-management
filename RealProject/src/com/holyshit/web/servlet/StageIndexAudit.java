@@ -27,7 +27,6 @@ public class StageIndexAudit extends HttpServlet {
 		String agree = request.getParameter("agree");
 		String stageno = request.getParameter("stageno");
 		String charpno = request.getParameter("charpno");
-		
 		HttpSession session = request.getSession();
 		Staff staff = (Staff) session.getAttribute("staff");
 		
@@ -40,7 +39,6 @@ public class StageIndexAudit extends HttpServlet {
 			agree="1";
 			info.setMtype("A10");
 		}
-		
 		String pno = stageno.substring(0,5);
 		ProjectService ps = new ProjectServiceImpl();
 		ps.changeProjectStage(pno);
@@ -49,13 +47,10 @@ public class StageIndexAudit extends HttpServlet {
 		info.setDstpno(charpno);
 		info.setSrcpno(staff.getStaffno());
 		info.setHasread("0");
-		
 		AuditService as = new AuditServiceImpl();
-
+		
 		int ra = 0;
-		if(index!=null){
-			ra = as.StageIndexAudit(info, index,stageno,agree);
-		}
+		ra = as.StageIndexAudit(info, index,stageno,agree);
 		
 		//跳转到信息表？
 		if(ra == 0){
