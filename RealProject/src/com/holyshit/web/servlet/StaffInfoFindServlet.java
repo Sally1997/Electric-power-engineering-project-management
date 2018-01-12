@@ -36,7 +36,6 @@ public class StaffInfoFindServlet extends HttpServlet {
 		int pagenum = 1;
 		if(fp!=null){
 			pagenum = Integer.parseInt(fp);
-			System.out.println(fp);
 		}
 		
 		String keyword = request.getParameter("keyword");

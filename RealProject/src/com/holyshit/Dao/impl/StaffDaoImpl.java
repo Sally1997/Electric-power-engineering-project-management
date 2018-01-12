@@ -105,7 +105,7 @@ public class StaffDaoImpl implements StaffDao {
 			"(SELECT staff.staffno,NAME,te,duty FROM staff,psrelation "+
 			"WHERE psrelation.pno=? AND staff.staffno=psrelation.staffno AND staff.ENABLE='1')a "+
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit ?,10", 
-			new MapListHandler(),pno,userno,pno,pagenum-1);
+			new MapListHandler(),pno,userno,pno,(pagenum-1)*10);
 	}
 	public int selectSIP(String pno,String userno) throws SQLException{
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
@@ -134,7 +134,7 @@ public class StaffDaoImpl implements StaffDao {
 			"FROM staff LEFT JOIN psrelation ON "+
 			"psrelation.pno=? AND staff.staffno=psrelation.staffno AND ENABLE='1')a "+
 			"LEFT JOIN staffnote ON (staffno=notedno AND noterno=? AND staffnote.PNo=?) ORDER BY staffno limit ?,10",
-			new MapListHandler(),pno,userno,pno,pagenum);
+			new MapListHandler(),pno,userno,pno,(pagenum-1)*10);
 	}
 	public int selectSIC(String pno, String userno) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
@@ -170,7 +170,7 @@ public class StaffDaoImpl implements StaffDao {
 			"WHERE staffno LIKE ? OR NAME LIKE ? OR te LIKE ? "+
 			"OR duty LIKE ? OR notes LIKE ? ORDER BY staffno limit ?,10",
 			new MapListHandler(),pno,userno,pno,"%"+keyword+"%","%"+keyword+"%",
-			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%",pagenum);
+			"%"+keyword+"%","%"+keyword+"%","%"+keyword+"%",(pagenum-1)*10);
 	}
 	public int selectSS(String pno, String userno,String keyword) throws SQLException {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
@@ -282,7 +282,7 @@ public class StaffDaoImpl implements StaffDao {
 			"WHERE staff.ENABLE='1' AND staffno IN (SELECT staffno FROM asrelation "+
 			"WHERE perno='4') AND (staffno LIKE ? OR NAME LIKE ? "+
 			"OR te LIKE ?) limit ?,10",new MapListHandler(),"%"+keyword+"%","%"+keyword+"%",
-			"%"+keyword+"%",pagenum);
+			"%"+keyword+"%",(pagenum-1)*10);
 	}
 	public int selectCountSCPP(String keyword) throws SQLException {
 		// TODO Auto-generated method stub

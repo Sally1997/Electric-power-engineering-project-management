@@ -170,29 +170,31 @@ public class StaffServiceImpl implements StaffService{
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
 			list =  StaffDao.selectStaffInProject(pno, userno);
+			
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null||map.get("duty")==""){
+				if(map.get("duty")==null){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null||map.get("notes")==""){
+				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
-				int pn = StaffDao.selectSIP(pno, userno);
-				if(pn<10){
-					pn = 1;
+			}
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			int pn = StaffDao.selectSIP(pno, userno);
+			if(pn<10){
+				pn = 1;
+			}
+			else{
+				if(pn%10==0){
+					pn /= 10;
 				}
 				else{
-					if(pn%10==0){
-						pn /= 10;
-					}
-					else{
-						pn /= 10;
-						pn ++;
-					}
+					pn /= 10;
+					pn ++;
 				}
-				System.out.println("项目内人员分页共"+pn+"页");
-				map.put("pagesize", pn);
 			}
+			map1.put("pagesize", pn);
+			list.add(map1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,13 +207,29 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInProject(pno, userno, pagenum);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null||map.get("duty")==""){
+				if(map.get("duty")==null){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null||map.get("notes")==""){
+				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
 			}
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			int pn = StaffDao.selectSIP(pno, userno);
+			if(pn<10){
+				pn = 1;
+			}
+			else{
+				if(pn%10==0){
+					pn /= 10;
+				}
+				else{
+					pn /= 10;
+					pn ++;
+				}
+			}
+			map1.put("pagesize", pn);
+			list.add(map1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -225,19 +243,30 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null||map.get("duty")==""){
+				if(map.get("duty")==null){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null||map.get("notes")==""){
+				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
-				int pn = StaffDao.selectSIC(pno, userno);
-				pn /= 10;
-				if(pn>0){
-					pn++;
-				}
-				map.put("pagesize", pn);
 			}
+
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			int pn = StaffDao.selectSIC(pno, userno);
+			if(pn<10){
+				pn = 1;
+			}
+			else{
+				if(pn%10==0){
+					pn /= 10;
+				}
+				else{
+					pn /= 10;
+					pn ++;
+				}
+			}
+			map1.put("pagesize", pn);
+			list.add(map1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -250,13 +279,29 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno,pagenum);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null||map.get("duty")==""){
+				if(map.get("duty")==null){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null||map.get("notes")==""){
+				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
 			}
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			int pn = StaffDao.selectSIC(pno, userno);
+			if(pn<10){
+				pn = 1;
+			}
+			else{
+				if(pn%10==0){
+					pn /= 10;
+				}
+				else{
+					pn /= 10;
+					pn ++;
+				}
+			}
+			map1.put("pagesize", pn);
+			list.add(map1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -268,32 +313,36 @@ public class StaffServiceImpl implements StaffService{
 	public List<Map<String, Object>> queryStaffInCompany(String pno, String userno,String keyword) {
 		StaffDao StaffDao = new StaffDaoImpl();
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno, keyword);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null||map.get("duty")==""){
+				if(map.get("duty")==null){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null||map.get("notes")==""){
+				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
-				int pn = StaffDao.selectSS(pno, userno, keyword);
+			}
+			
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			int pn = StaffDao.selectSS(pno, userno, keyword);
 
-				if(pn<10){
-					pn = 1;
+			if(pn<10){
+				pn = 1;
+			}
+			else{
+				if(pn%10==0){
+					pn /= 10;
 				}
 				else{
-					if(pn%10==0){
-						pn /= 10;
-					}
-					else{
-						pn /= 10;
-						pn ++;
-					}
+					pn /= 10;
+					pn ++;
 				}
-				System.out.println("查询公司内分页共"+pn+"页");
-				map.put("pagesize", pn);
 			}
+			
+			map1.put("pagesize", pn);
+			list.add(map1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -306,13 +355,31 @@ public class StaffServiceImpl implements StaffService{
 		try {
 			list =  StaffDao.selectStaffInCompany(pno, userno, keyword,pagenum);
 			for(Map<String, Object> map:list){
-				if(map.get("duty")==null||map.get("duty")==""){
+				if(map.get("duty")==null){
 					map.put("duty", "-");
 				}
-				if(map.get("notes")==null||map.get("notes")==""){
+				if(map.get("notes")==null){
 					map.put("notes", "-");
 				}
 			}
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			int pn = StaffDao.selectSS(pno, userno, keyword);
+
+			if(pn<10){
+				pn = 1;
+			}
+			else{
+				if(pn%10==0){
+					pn /= 10;
+				}
+				else{
+					pn /= 10;
+					pn ++;
+				}
+			}
+			
+			map1.put("pagesize", pn);
+			list.add(map1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -506,7 +573,6 @@ public class StaffServiceImpl implements StaffService{
 					pn ++;
 				}
 			}
-			System.out.println("能立项的分页共"+pn+"页");
 			map.put("pagesize", pn);
 			list = sd.selectStaffCanSetProject(keyword);
 			list.add(map);
@@ -521,7 +587,23 @@ public class StaffServiceImpl implements StaffService{
 		StaffDao sd = new StaffDaoImpl();
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 		try {
+			Map<String,Object> map = new HashMap<String, Object>();
+			int pn = sd.selectCountSCPP(keyword);
+			if(pn<10){
+				pn = 1;
+			}
+			else{
+				if(pn%10==0){
+					pn /= 10;
+				}
+				else{
+					pn /= 10;
+					pn ++;
+				}
+			}
+			map.put("pagesize", pn);
 			list = sd.selectStaffCanSetProject(keyword,pagenum);
+			list.add(map);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
