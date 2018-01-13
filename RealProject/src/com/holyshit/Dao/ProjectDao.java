@@ -52,7 +52,7 @@ public interface ProjectDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	long selectWorkingProjectNumberById(String id) throws SQLException;
+	long selectCanBudgetProjectNumberById(String id) throws SQLException;
 	/**
 	 * 显示当前页的项目的信息
 	 * @param cur  当前页面

@@ -53,11 +53,10 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		JSONArray projectbudget=new JSONArray();
 		try {
 			//获取用户正在进行的项目数量 
-			totalSize=pd.selectWorkingProjectNumberById(id);
+			totalSize=pd.selectCanBudgetProjectNumberById(id);
 			
 			//获取当前页面3个项目的具体信息
 			projects=pd.showPage(cur, pagesize, id);
-			
 			for(Project p:projects){
 				//阶段已经使用  剩余预算  阶段超标
 				String pname=p.getPname();

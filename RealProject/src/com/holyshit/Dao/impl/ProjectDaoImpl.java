@@ -42,17 +42,17 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public long selectWorkingProjectNumberById(String id) throws SQLException {
+	public long selectCanBudgetProjectNumberById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return (Long) qr.query(ConnectionManager.getConnection(),"SELECT COUNT(*) FROM psrelation ps JOIN project pr ON ps.PNo=pr.PNo WHERE staffno=? AND (pstate='1' OR pstate='2')",new ScalarHandler(),id);
+		return (Long) qr.query(ConnectionManager.getConnection(),"SELECT COUNT(*) FROM psrelation ps JOIN project pr ON ps.PNo=pr.PNo WHERE staffno=? AND (pstate!='n' and pstate!='y')",new ScalarHandler(),id);
 	}
 
 	@Override
 	public List<Project> showPage(int cur, int pagesize,String id) throws SQLException {
 		// TODO Auto-generated method stub
 		QueryRunner qr=new QueryRunner();
-		return qr.query(ConnectionManager.getConnection(),"SELECT * FROM psrelation JOIN project WHERE psrelation.pno=project.pno AND staffno=? AND (pstate='1' OR pstate='2') LIMIT ?,?",new BeanListHandler<Project>(Project.class),id,(cur-1)*pagesize,pagesize);
+		return qr.query(ConnectionManager.getConnection(),"SELECT * FROM psrelation JOIN project WHERE psrelation.pno=project.pno AND staffno=? AND (pstate!='n' and pstate!='y' )  order by project.stime desc LIMIT ?,?",new BeanListHandler<Project>(Project.class),id,(cur-1)*pagesize,pagesize);
 	}
 
 	@Override
