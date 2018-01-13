@@ -15,12 +15,14 @@ import com.holyshit.Dao.AuditDao;
 import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.PSPlanDao;
+import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.TaskIndexesDao;
 import com.holyshit.Dao.impl.AuditDaoImpl;
 import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.PSPlanDaoImpl;
+import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
 import com.holyshit.domain.Inform;
@@ -254,6 +256,7 @@ public class AuditServiceImpl implements AuditService {
 		TaskIndexesDao tid = new TaskIndexesDaoImpl();
 		PSPlanDao ppd = new PSPlanDaoImpl();
 		StageTaskDao std = new StageTaskDaoImpl();
+		ProjectDao pd = new ProjectDaoImpl();
 		
 		String indexstate = "1";
 		int ra = 0;
@@ -300,6 +303,10 @@ public class AuditServiceImpl implements AuditService {
 					}
 					//审核完成更新状态
 					ra = std.updateTaskState(sno, state);
+					
+					//更新项目进度
+					String pno = sno.substring(0,5);
+					pd.updateProjectStage(pno);
 				}
 				else{
 					astate = "0";

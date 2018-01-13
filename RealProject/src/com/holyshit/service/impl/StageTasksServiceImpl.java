@@ -22,7 +22,6 @@ import com.holyshit.Dao.impl.StaffDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
 import com.holyshit.domain.Inform;
-import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Staff;
 import com.holyshit.domain.StageTask;
@@ -216,7 +215,7 @@ public class StageTasksServiceImpl implements StageTasksService{
 						psr.insertPSRelation(prArray[i]);
 						
 						Inform info = new Inform();
-						info.setBusno(tn);
+						info.setBusno(pno);
 						info.setSrcpno("root");
 						info.setDstpno(cpn);
 						info.setMtype("S0");
@@ -297,29 +296,54 @@ public class StageTasksServiceImpl implements StageTasksService{
 		PSPlanDao ppd = new PSPlanDaoImpl();
 		StageTaskDao std=new StageTaskDaoImpl();
 		StaffDao sd = new StaffDaoImpl();
+		PSRelationDao psrd = new PSRelationDaoImpl();
 		Staff staff = new Staff();
+		InformDao id = new InformDaoImpl();
 		
 		try {
-			staff = sd.isinproject(charpno, pno);
-			
 			if(no.length()==6){
 				ppd.updateCharP(no, charpno);
+				
+				//成为负责人消息
+				Inform info = new Inform();
+				info.setBusno(no);
+				info.setSrcpno("root");
+				info.setDstpno(charpno);
+				info.setMtype("T1");
+				//给负责人发送被拉进项目组的系统消息
+				id.insertInform(info);
 			}
 			else{
 				std.updateCharP(no, charpno);
+				
+				Inform info = new Inform();
+				info.setBusno(no);
+				info.setSrcpno("root");
+				info.setDstpno(charpno);
+				info.setMtype("T3");
+				//给负责人发送被拉进项目组的系统消息
+				id.insertInform(info);
 			}
 			
-			if(staff==null){
+			//如果不在项目组里就把该人员拉进项目组里面,并发送消息
+			if(!psrd.selectIfInProject(pno, charpno)){
 				PSRelation psr = new PSRelation();
 				psr.setDuty("负责人");
 				psr.setPno(pno);
 				psr.setStaffno(charpno);
 				sd.addAStaff(psr);
+				
+				Inform info = new Inform();
+				info.setBusno(pno);
+				info.setSrcpno("root");
+				info.setDstpno(charpno);
+				info.setMtype("S0");
+				//给负责人发送被拉进项目组的系统消息
+				id.insertInform(info);
 			}
 			
 			ConnectionManager.commit();
 		} catch (SQLException e) {
-			System.out.println("异常了");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			ConnectionManager.rollback();

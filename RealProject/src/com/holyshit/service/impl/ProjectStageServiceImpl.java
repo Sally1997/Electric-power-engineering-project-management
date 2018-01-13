@@ -96,7 +96,7 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 					psr.insertPSRelation(prArray[i]);
 					
 					Inform info = new Inform();
-					info.setBusno(sn);
+					info.setBusno(pno);
 					info.setSrcpno("root");
 					info.setDstpno(cpn);
 					info.setMtype("S0");
