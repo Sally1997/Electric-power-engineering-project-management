@@ -1,0 +1,27 @@
+/* 新建阶段审核人文本框 */
+.fozza2{
+	background-color: white;
+	border: 1px;
+	width: 296.56px;
+	position: absolute;
+	left: 35.68%;
+	top: 476.32px;
+	display: block;
+	z-index: 999;
+}
+
+/* 审核人下拉列表 */
+#fozza2{
+	cursor:default;
+}
+
+.fozza3{
+	background-color: white;
+	border: 1px;
+	width: 345.10px;
+	position: absolute;
+	left: 36.87%;
+	top: 233.42px;
+	display: block;
+	z-index: 999;
+}

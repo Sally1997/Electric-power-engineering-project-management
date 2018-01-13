@@ -1,0 +1,136 @@
+﻿@charset "utf-8";
+/* CSS Document */
+       
+       *{
+			font-family: "微软雅黑";
+		}
+		body{
+			font-family: "微软雅黑";
+		}
+		.blanding{
+			font-family: "微软雅黑";
+			font-size: 17px;
+			letter-spacing: 3px;
+			color: white;
+		}
+		.nav-current{
+		    border-bottom: 2px solid #333a56;
+		}
+		.digramchart{
+			height: 400px;
+			width: 700px;
+		}
+
+		table th{
+			text-align: center;
+		}
+		table td{
+			text-align: center;
+		}
+		.copyright{
+			background-image: url(/RealProject/image/topbk.png);
+			text-align: center;
+			font-family: "微软雅黑";
+			color: white;
+			font-size: 15px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			margin-top: 100px;
+			position:fixed;
+			bottom:0;
+			width:100%;
+		}
+		.xumode{
+			float:none;
+			margin: 20px auto;
+		}
+		.jimode{
+			margin-top: 20px;margin-left: 5%
+		}
+        header{
+			background-image: url(/RealProject/image/topbk.png);
+		}
+		.hehe_left{
+			padding-left: 50px;
+			float: left;
+			width: 200px;
+			height: 25px;
+		}
+		.hehe_right{
+			float: left;
+		}
+		.clear{
+			clear: both;
+		}
+        .block{
+			padding-top: 15px;
+		}
+		.more{
+			float: right;
+		    color: white;
+			cursor: pointer;
+        }
+		.noRight{
+			margin-left: 2%;
+			cursor: pointer;
+			color: #e8e8e8;
+			text-decoration: underline;
+		}
+        .fanGtd {
+		  padding: 8px;
+		  line-height: 1.42857143;
+		  vertical-align: top;
+		  border-top: 1px solid #ddd;
+		}
+		.fanGth {
+		  vertical-align: bottom;
+		  border-bottom: 2px solid #ddd;
+		}
+
+		.fanGtable:first-child tr:first-child td {
+		  border-top: 0;
+		}
+        .panel-middle{
+		  border-top: 1px solid #e5e5e5;
+        }
+        .docType{
+			background-color: rgba(123,130,146,1.00);
+			color: white; 
+			margin-top: 10%;
+			border-radius: 5%;
+			padding: 5%
+		}
+        .docTypeIcon{
+	        margin-right: 5%;
+        }
+		.docMargin{
+			margin-top: 2%;
+		}
+		.atLow{
+			position:fixed;
+			bottom:0;
+			width:100%;
+		}
+		.loadpagediv{  
+		    width:160px;  
+		    height:56px;  
+		    position: absolute;  
+		    top:50%; 
+			margin-left:-80px;
+			margin-top:-28px;
+		    left:50%;  
+		    background: url(https://m.baidu.com/static/search/ico_loading.gif) no-repeat;  
+		    z-index:9999;  
+		}
+		.fozza_a{
+			display:inline;
+		}
+		#first_left{
+			padding-left: 50px;
+			float: left;
+			width: 200px;
+			height: 25px;
+		}
+		#first_right{
+			float: left;
+		}

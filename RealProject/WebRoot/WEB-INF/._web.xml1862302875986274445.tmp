@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>RealProject</display-name>
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.holyshit.filter.LoginFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>MainPageFilter</filter-name>
+    <filter-class>com.holyshit.filter.MainPageFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>StaffListServletFilter</filter-name>
+    <filter-class>com.holyshit.filter.StaffListServletFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>GetInformNumber</filter-name>
+    <filter-class>com.holyshit.filter.GetInformNumber</filter-class>
+  </filter>
+  <filter>
+    <filter-name>InformFilter</filter-name>
+    <filter-class>com.holyshit.filter.InformFilter</filter-class>
+  </filter>
+  
+  
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+    <servlet-name>MainServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MainPageFilter</filter-name>
+    <servlet-name>MainServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>StaffListServletFilter</filter-name>
+    <url-pattern>/web/servlet/findAStaffServlet</url-pattern>
+    <servlet-name>StaffListServlet</servlet-name>
+    <servlet-name>HrMainJumpaddServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>GetInformNumber</filter-name>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-name>ShowPageProjectBudget</servlet-name>
+    <servlet-name>ShowProjectServlet</servlet-name>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>InformFilter</filter-name>
+    <url-pattern>/jsp/notice/inform.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+  
+  
+  
+  <listener>
+    <listener-class>com.holyshit.listener.CountLivingListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.holyshit.listener.DeleteSessionListener</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>ValidateCode</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ValidateCode</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StaffLogin</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffLogin</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ListNameNoServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ListNameNoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DTreeNodeServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DTreeNodeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MainServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.MainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SecurityLogout</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SecurityLogout</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowNodeServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowNodeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowPageProjectBudget</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowPageProjectBudget</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>showPageFee</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.showPageFee</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>InfoMoreServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.InfoMoreServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StaffListServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddAStaff</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.AddAStaff</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>HrMainJumpaddServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.HrMainJumpaddServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>showWorkingTask</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.showWorkingTask</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SubmitFee</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SubmitFee</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowAuditPage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowAuditPage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SubmitAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SubmitAudit</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SubmitTaskServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SubmitTaskServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DownLoadMessage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DownLoadMessage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UploadNotice</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.UploadNotice</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>showNoticePage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.showNoticePage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LookNotice</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.LookNotice</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowDocumentPage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowDocumentPage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>JudgeStageExist</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.JudgeStageExist</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StageServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TaskServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.TaskServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowStaffInfoServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowStaffInfoServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>FindDocument</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.FindDocument</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SaveFileInCache</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SaveFileInCache</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UploadDocument</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.UploadDocument</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EnableChangeCharge</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.EnableChangeCharge</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowProjectInfoById</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowProjectInfoById</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowProAuditServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowProAuditServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowTaskInfoById</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowTaskInfoById</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>TestBootstrap</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.TestBootstrap</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ShowStaffByPage</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowStaffByPage</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddStaff</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.AddStaff</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ProjectAuditServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ProjectAuditServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowDocAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowDocAudit</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DocAuditServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DocAuditServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>EditStaff</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.EditStaff</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DeleteStaff</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.DeleteStaff</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetAuthorityList</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetAuthorityList</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SetAuthority</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.SetAuthority</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowIndexAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ShowIndexAudit</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>StageIndexAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StageIndexAudit</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TaskIndexAudit</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.TaskIndexAudit</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetInformNumber</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetInformNumber</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetInformList</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.GetInformList</servlet-class>
+  </servlet>
+
+   <servlet>
+    <servlet-name>StaffInfoFindServlet</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.StaffInfoFindServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>ValidateCode</servlet-name>
+    <url-pattern>/web/servlet/validatecode</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffLogin</servlet-name>
+    <url-pattern>/web/servlet/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ListNameNoServlet</servlet-name>
+    <url-pattern>/servlet/ListNameNoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DTreeNodeServlet</servlet-name>
+    <url-pattern>/servlet/DTreeNodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MainServlet</servlet-name>
+    <url-pattern>/web/servlet/mainServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SecurityLogout</servlet-name>
+    <url-pattern>/web/servlet/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowNodeServlet</servlet-name>
+    <url-pattern>/servlet/ShowNodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowPageProjectBudget</servlet-name>
+    <url-pattern>/web/servlet/showbudgetpage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>showPageFee</servlet-name>
+    <url-pattern>/web/servlet/showPageFee</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InfoMoreServlet</servlet-name>
+    <url-pattern>/servlet/infoMoreServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddAStaff</servlet-name>
+    <url-pattern>/web/servlet/addAStaff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HrMainJumpaddServlet</servlet-name>
+    <url-pattern>/servlet/hrMainJumpaddServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffListServlet</servlet-name>
+    <url-pattern>/web/servlet/staffListServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>showWorkingTask</servlet-name>
+    <url-pattern>/web/servlet/showWorkingTask</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubmitFee</servlet-name>
+    <url-pattern>/web/servlet/submitFee</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowAuditPage</servlet-name>
+    <url-pattern>/web/servlet/showAuditPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubmitAudit</servlet-name>
+    <url-pattern>/web/servlet/submitAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SubmitTaskServlet</servlet-name>
+    <url-pattern>/web/servlet/submitTaskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DownLoadMessage</servlet-name>
+    <url-pattern>/web/servlet/downLoadMessage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadNotice</servlet-name>
+    <url-pattern>/web/servlet/uploadNotice</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>showNoticePage</servlet-name>
+    <url-pattern>/web/servlet/showNoticePage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LookNotice</servlet-name>
+    <url-pattern>/web/servlet/lookNotice</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowDocumentPage</servlet-name>
+    <url-pattern>/web/servlet/showDocumentPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>JudgeStageExist</servlet-name>
+    <url-pattern>/web/servlet/judgeStageExist</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StageServlet</servlet-name>
+    <url-pattern>/web/servlet/stageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TaskServlet</servlet-name>
+    <url-pattern>/web/servlet/taskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowStaffInfoServlet</servlet-name>
+    <url-pattern>/web/servlet/showStaffInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FindDocument</servlet-name>
+    <url-pattern>/web/servlet/findDocument</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SaveFileInCache</servlet-name>
+    <url-pattern>/web/servlet/saveFile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadDocument</servlet-name>
+    <url-pattern>/web/servlet/uploadDocument</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EnableChangeCharge</servlet-name>
+    <url-pattern>/web/servlet/enableChangeCharge</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowProjectInfoById</servlet-name>
+    <url-pattern>/web/servlet/showProjectInfoById</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowProAuditServlet</servlet-name>
+    <url-pattern>/web/servlet/showProAuditServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowTaskInfoById</servlet-name>
+    <url-pattern>/web/servlet/showTaskInfoById</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProjectAuditServlet</servlet-name>
+    <url-pattern>/web/servlet/projectAuditServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowDocAudit</servlet-name>
+    <url-pattern>/web/servlet/showDocAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DocAuditServlet</servlet-name>
+    <url-pattern>/web/servlet/docAuditServlet</url-pattern>
+  </servlet-mapping> 
+  <servlet-mapping>
+    <servlet-name>TestBootstrap</servlet-name>
+    <url-pattern>/web/servlet/testBootstrap</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowStaffByPage</servlet-name>
+    <url-pattern>/web/servlet/showStaffByPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddStaff</servlet-name>
+    <url-pattern>/web/servlet/addStaff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditStaff</servlet-name>
+    <url-pattern>/web/servlet/editStaff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteStaff</servlet-name>
+    <url-pattern>/web/servlet/deleteStaff</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetAuthorityList</servlet-name>
+    <url-pattern>/web/servlet/getAuthorityList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SetAuthority</servlet-name>
+    <url-pattern>/web/servlet/setAuthority</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowIndexAudit</servlet-name>
+    <url-pattern>/web/servlet/showIndexAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StageIndexAudit</servlet-name>
+    <url-pattern>/web/servlet/stageIndexAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TaskIndexAudit</servlet-name>
+    <url-pattern>/web/servlet/taskIndexAudit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetInformNumber</servlet-name>
+    <url-pattern>/web/servlet/getInformNumber</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetInformList</servlet-name>
+    <url-pattern>/web/servlet/getInformList</url-pattern>
+   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StaffInfoFindServlet</servlet-name>
+    <url-pattern>/web/servlet/staffInfoFindServlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/jsp/error/error_500.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/jsp/error/error_404.jsp</location>
+  </error-page>
+</web-app>

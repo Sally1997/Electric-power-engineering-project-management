@@ -1,0 +1,44 @@
+body{
+			background-image: url(/RealProject/image/indexbk.jpg);
+			font-family: "微软雅黑";
+			background-size: cover;
+			
+		}
+		main{
+			margin-top: 100px;
+		}
+		form{
+			margin-top: 20px;
+		}
+		form small{
+			font-weight: lighter;
+		}
+		.jumbotron h1{
+			color: white;
+			font-weight: lighter;
+			letter-spacing: 5px;
+		}
+		.jumbotron p{
+			color: white;
+			font-weight: lighter;
+		}
+		.round-img{
+			width:60px; 
+			height:60px; 
+			border-radius:50%;
+			line-height:60px; 
+			display:block; 
+			color:#585858; 
+		}
+		#img {
+        border-radius: 2px;
+        cursor: pointer;
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        top: 0;
+        }
+
+        #validateCode {
+        padding-left: 110px;
+        }
