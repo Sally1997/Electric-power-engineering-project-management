@@ -445,6 +445,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			String format = sdf.format(new java.util.Date(fa.getStime().getTime()));
 			fad.put("stime", format);
 			fad.put("fee", fa.getFee());
+			fad.put("fauditno", fa.getFauditno());
 			fad.put("auditadv", fa.getAuditadv());
 			fad.put("ofeereason", fa.getOfeereason());
 			fad.put("auditstate", fa.getAuditstate());

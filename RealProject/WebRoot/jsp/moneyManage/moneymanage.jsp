@@ -22,7 +22,9 @@
    		var taskinfo="";
    		var feeData=eval('('+'${fee["feeaudits"]}'+')');
    		var auditData;
-   		var fauditno;  //报账表编号 --审核
+   		
+   		var type="${type}";
+   		var fauditno="${fauditno}";  //报账表编号 --审核
    		//ajax请求
 
    		function getFunction(cur){
@@ -634,9 +636,8 @@
 			</div>
         <script type="text/javascript">
         	var jumpAuditData="";
+        	
 	   		window.onload=function(){
-	   			var type="${type}";
-	   			var fauditno="${fauditno}";
 	   			//是否发送请求
 	   			if(type!=""&&fauditno!=""){
 	   				var req=new XMLHttpRequest();

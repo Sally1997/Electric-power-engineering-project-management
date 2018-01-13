@@ -38,7 +38,6 @@ public class ShowPageProjectBudget extends HttpServlet {
 		request.setAttribute("projects", res);
 		request.setAttribute("type", type);
 		request.setAttribute("fauditno", fauditno);
-		
 		//分发
 		request.getRequestDispatcher("/web/servlet/showPageFee?currentPage=1&pageSize=4").forward(request, response);
 	}
