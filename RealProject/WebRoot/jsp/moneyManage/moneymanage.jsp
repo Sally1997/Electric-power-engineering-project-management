@@ -176,39 +176,39 @@
 			    <th> </th>
 		    </tr>
 		    <tr>
-			    <td align="center">项目A</td>
-			    <td align="center">甲</td>
-			    <td align="center">2017-10-11</td>
-			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
 			    <td align="center">
-			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+			    <span></span>
 			    </td>
 		    </tr>
 		    <tr>
-			    <td align="center">项目A</td>
-			    <td align="center">甲</td>
-			    <td align="center">2017-10-11</td>
-			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center" >-</td>
 			    <td align="center">			    
-			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+			    <span></span>
 		   		</td>
 		    </tr>
 		    <tr>
-			    <td align="center">项目A</td>
-			    <td align="center">甲</td>
-			    <td align="center">2017-10-11</td>
-			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
 			    <td align="center">			    
-			   <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+			   <span></span>
 		    	</td>
 		    </tr>
 		    <tr>
-			    <td align="center">项目A</td>
-			    <td align="center">甲</td>
-			    <td align="center">2017-10-11</td>
-			    <td align="center" style="color:red">未审批</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
+			    <td align="center">-</td>
 			    <td align="center">			    
-			    <span class="glyphicon glyphicon-info-sign" data-toggle="modal"  data-target="#acInfo" title="详细" style="cursor: pointer"></span>
+			    <span></span>
 		    	</td>
 		    </tr>
 			<script type="text/javascript">
@@ -282,39 +282,39 @@
 			    <th> </th>
 		    </tr>
 		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text_danger">未审批</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td  >-</td>
 			    <td >
-			    <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+			    <span></span>
 			    </td>
 		    </tr>
 		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text_danger">未审批</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td  >-</td>
 			    <td >			    
-			    <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+			    <span></span>
 			    </td>
 		    </tr>
 		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text_danger">未审批</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td>-</td>
 			    <td >			    
-			   <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+			   <span></span>
 		     </td>
 		    </tr>
 		    <tr>
-			    <td >项目A</td>
-			    <td >甲</td>
-			    <td >2017-10-11</td>
-			    <td  class="text_danger">未审批</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td >-</td>
+			    <td  >-</td>
 			    <td >			    
-			    <span class="glyphicon  glyphicon-check" data-toggle="modal"  data-target="#acInfoPass" title="详细" style="cursor: pointer"></span>
+			    <span></span>
 		     </td>
 		    </tr>
 			<script type="text/javascript">
@@ -596,43 +596,41 @@
 			 <div class="modal-header"><h4 class="modal-title">审批</h4></div>
 		  </div>
 
-		  <form id="middle_audit">
-							<div id="responsible_per" class="block">
-							<div>
+		  <div id="middle_audit">
+						<div id="responsible_per" class="block">
+								<div class="hehe_left">
+									<input type="radio" name="pass" value="2" checked
+										id="audit_pass">通过
+								</div>
+								<div class="hehe_right">
+									<input type="radio" name="pass" value="1">不通过
+								</div>
+							<div class="clear"></div>
+						</div>
+
+						<!-- 审批人 -->
+						<div id="end_date" class="block">
 							<div class="hehe_left">
-							<input type="radio" name="pass" value="2" checked id="audit_pass">通过
+								<font class="text">审批人:</font>
 							</div>
 							<div class="hehe_right">
-							<input type="radio" name="pass" value="1">不通过
+								<input type="text" name="" size="40px;" disabled
+									value="${staff.name }">
 							</div>
-							</div> 
 							<div class="clear"></div>
-							</div>
+						</div>
 
-							<!-- 审批人 -->
-							<div id="end_date" class="block">
+						<!-- 审批意见 -->
+						<div id="start_date" class="block">
 							<div class="hehe_left">
-							<font class="text">审批人:</font>
+								<font class="text">审批意见：</font>
 							</div>
 							<div class="hehe_right">
-							<input type="text" name="" size="40px;" disabled value="${staff.name }">
+								<textarea rows="5" cols="30" id="audit_cause"></textarea>
 							</div>
 							<div class="clear"></div>
-							</div>
-							
-							<!-- 审批意见 -->
-							<div id="start_date" class="block">
-							<div class="hehe_left">
-							<font class="text">审批意见：</font>
-							</div>
-							<div class="hehe_right">
-							<textarea rows="5" cols="30" id="audit_cause"></textarea>
-							</div>
-							<div class="clear"></div>
-							</div>
-
-
-						</form>
+						</div>
+			</div>
         <script type="text/javascript">
         	var jumpAuditData="";
 	   		window.onload=function(){
