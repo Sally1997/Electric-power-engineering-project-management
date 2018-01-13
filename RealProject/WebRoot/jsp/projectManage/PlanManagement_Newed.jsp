@@ -406,18 +406,62 @@ var big_fp;
 
 //新建子任务跳转
 function newChildTask(){
-	//提交和新建子任务是负责人的权限
-	var djp = document.getElementById("CharP");
-
-	var judge = "${staff.name}(${staff.staffno})";
-	
-	if(judge!=djp.innerHTML){
-		alert("只有负责人才可以新建子任务!");
-		return;
+	var links_ti = document.getElementById("task_name").innerHTML;
+	var which = null;
+	if(links_ti.length==6){
+		which = "此阶段";
+	}
+	else{
+		which = "此任务";
+	}
+	var aja = new XMLHttpRequest();
+	aja.onreadystatechange = function(){
+		if(aja.readyState==4&&aja.status==200){
+			//提交和新建子任务是负责人的权限
+			var djp = document.getElementById("CharP");
+		
+			var judge = "${staff.name}(${staff.staffno})";
+			var tj = document.getElementById("tijiao");//data-target="#handupDc"
+			
+			if(judge!=djp.innerHTML){
+				tj.setAttribute("data-target", "");
+				alert("只有负责人才可以新建子任务!");
+				return;
+			}
+			else{
+				tj.setAttribute("data-target", "#handupDc");
+			}
+			
+			//权限部分
+			var str = eval("("+aja.responseText+")");
+			
+			if(str.childnum=="1"){
+				tj.setAttribute("data-target", "");
+				alert(which+"已经新建了子任务!");
+				return;
+			}
+			else{
+				tj.setAttribute("data-target", "#handupDc");
+			}
+			
+			//提交和新建子任务是负责人的权限
+			var djp = document.getElementById("CharP");
+		
+			var judge = "${staff.name}(${staff.staffno})";
+			
+			if(judge!=djp.innerHTML){
+				alert("只有负责人才可以新建子任务!");
+				return;
+			}
+			
+		    window.location.href = "${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=${pno}&ptn="+links_ti;
+		}
 	}
 	
-    var links_ti = document.getElementById("task_name").innerHTML;
-    window.location.href = "${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=${pno}&ptn="+links_ti;
+	//创建连接
+	aja.open("get", "${pageContext.request.contextPath}/web/servlet/ifNodeIsAudited?nodeno="+links_ti+"&time="+new Date().getTime());
+	//发送请求
+	aja.send(null);
 }
 
 //提交表单
@@ -463,25 +507,36 @@ function popup(){
 			else{
 				tj.setAttribute("data-target", "#handupDc");
 			}
-			alert(111);
+			
 			//权限部分
 			var str = eval("("+aja.responseText+")");
 			var myDate=new Date().getTime();
 			var stime = Date.parse(str.stime);
 			if(stime>myDate){
+				tj.setAttribute("data-target", "");
 				alert(which+"还未开始!喝杯咖啡吧!");
 				return;
 			}
+			else{
+				tj.setAttribute("data-target", "#handupDc");
+			}
 			
-			hr = str.auditstate;
+			var hr = str.auditstate;
 			if(hr==1){
+				tj.setAttribute("data-target", "");
 				alert(which+"正在审核中!请耐心等待!");
 				return;
 			}
 			else if(hr==2){
+				tj.setAttribute("data-target", "");
 				alert(which+"已审核通过!请勿重复提交!");
 				return;
 			}
+			else{
+				tj.setAttribute("data-target", "#handupDc");
+			}
+			
+			
 			
 			//dg=dpcument.get 弹出的窗口
 			var dg = document.getElementById("pop_taskno");
@@ -530,7 +585,6 @@ function popup(){
 			}
 		}
 	}
-	
 	
 	
 	//创建连接
