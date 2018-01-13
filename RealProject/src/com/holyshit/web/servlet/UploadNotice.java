@@ -2,10 +2,13 @@ package com.holyshit.web.servlet;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -21,6 +24,7 @@ import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.input.ReaderInputStream;
 
 import com.holyshit.Dao.NoticeDao;
 import com.holyshit.domain.Staff;
@@ -44,6 +48,7 @@ public class UploadNotice extends HttpServlet {
 		System.out.println(realPath);
 		File path=new File(realPath);
 		path.setWritable(true, false);
+		File last=null;
 		
 		//设置上传单个文件的大小
 		ServletFileUpload fileUpload=new ServletFileUpload(dff);
@@ -55,6 +60,7 @@ public class UploadNotice extends HttpServlet {
 			String title=null;
 			String filename=null;
 			String filepath=null;
+		
 			String uuid=UUID.randomUUID().toString();
 			try {
 				try {
@@ -88,7 +94,7 @@ public class UploadNotice extends HttpServlet {
 					filepath=path+File.separator+uuid+".html";
 					try {
 						
-						File last = new File(path,uuid+".html");
+						last = new File(path,uuid+".html");
 						System.out.println("最终路径为"+last.toString());
 						last.setWritable(true,false);
 						item.write(last);
@@ -101,6 +107,22 @@ public class UploadNotice extends HttpServlet {
 				}
 			}
 			
+			//对于文件内容进行过滤
+			boolean errorFlag=false;
+			InputStreamReader inputStreamReader=new FileReader(last);
+			int len=0;
+			char [] buf=new char[1024];
+			while((len=inputStreamReader.read(buf))!=-1){
+				String key=String.valueOf(buf);
+				if((key.indexOf("script")!=-1)||(key.indexOf("eval")!=-1)){
+					errorFlag=true;
+					break;
+				}
+			}
+			if(errorFlag){
+				response.getWriter().write("发布失败,请勿包含敏感性关键字");
+				return;
+			}
 			//调用服务
 			NoticeService ns=new NoticeServiceImpl();
 			int res = ns.publishNotice(uuid,title, filepath, ((Staff)request.getSession().getAttribute("staff")).getStaffno(), new Date(new java.util.Date().getTime()));

@@ -652,6 +652,10 @@
 				var ids="";
 				var warning="您确定要删除一下员工么?\n";
 				for(var i=0;i<res.length;i++){
+					if(res[i].staffno=="root"){
+						alert("您无法删除超级用户");
+						return;
+					}
 					ids+=res[i].staffno+":";
 					warning+="    --"+res[i].staffno+":"+res[i].name+"\n";
 				}
@@ -683,6 +687,10 @@
 				}
 				if(res.length!=1){
 					alert("您一次只能修改一条记录");
+					return;
+				}
+				if(res[0].staffno=="root"){
+					alert("请到个人中心修改您的信息");
 					return;
 				}
 				//显示当前人员信息
@@ -775,19 +783,30 @@
                          },
                          events: {
                              'click .edit_staff': function(e, value, row, index) {  
+                            	 if(row.staffno=="root"){
+                           		  alert("您是超级管理员，请到个人中心修改自身信息");
+                           		  return;
+                           	 	 }
                             	//初始化全局变量staffno
                				  	 global_staff=row;
                                  showInfo(row);
                                  
                             },
                          	'click .delete_staff': function(e, value, row, index) {  
+                         	  if(row.staffno=="root"){
+                          		  alert("超级管理员无法删除");
+                          		  return;
+                          	  }
                          		//初始化全局变量staffno
               				 global_staff=row;
                              deleteStaff(row.staffno,row.name);
                              
                         },
                         'click .authority_staff': function(e, value, row, index) { 
-                        		
+                        	  if(row.staffno=="root"){
+                        		  alert("您是超级管理员，不受权限限制");
+                        		  return;
+                        	  }
                         	  //获取权限列表
                         	  var req=new XMLHttpRequest();
                         	  req.onreadystatechange=function(){

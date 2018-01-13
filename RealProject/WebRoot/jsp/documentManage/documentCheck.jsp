@@ -7,11 +7,6 @@
 <meta charset="utf-8">
 <title>项目资料</title>
 	<%@include file="/head.jsp" %>
-   <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-    <link href="public.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>  

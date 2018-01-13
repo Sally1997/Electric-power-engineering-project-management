@@ -25,6 +25,11 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public boolean enablePublicNotice(String staffno) {
 		// TODO Auto-generated method stub
+		//进行管理员识别，直接具有所有权限
+		if(staffno.equals("root"))
+			return true;
+		
+		
 		AuthorityDao ad=new AuthorityDaoImpl();
 		boolean res=false;
 		try {
@@ -41,6 +46,9 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public boolean enableDeleteAndAddStaff(String staffno,String pno) {
 		// TODO Auto-generated method stub
+		//进行管理员识别，直接具有所有权限
+		if(staffno.equals("root"))
+			return true;
 		boolean res=false;
 		ProjectDao pd=new ProjectDaoImpl();
 		String duty=null;
@@ -60,6 +68,10 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public boolean enableNewStage(String pno, String staffno) {
 		// TODO Auto-generated method stub
+		
+		//进行管理员识别，直接具有所有权限
+		if(staffno.equals("root"))
+			return true;
 		boolean res=false;
 		ProjectDao pd=new ProjectDaoImpl();
 		
@@ -81,6 +93,9 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public boolean enableChangeCharge(String staffno, String id) {
 		// TODO Auto-generated method stub
+		//进行管理员识别，直接具有所有权限
+		if(staffno.equals("root"))
+			return true;
 		int id_length=id.length();
 		boolean res=false;
 		try {
@@ -110,6 +125,9 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public boolean enableCheckDocument(String staffno) {
 		// TODO Auto-generated method stub
+		//进行管理员识别，直接具有所有权限
+		if(staffno.equals("root"))
+			return true;
 		AuthorityDao ad=new AuthorityDaoImpl();
 		int res=0;
 		try {
