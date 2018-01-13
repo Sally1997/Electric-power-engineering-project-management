@@ -92,7 +92,7 @@
               			<li><a href="${pageContext.request.contextPath }/web/servlet/showDocumentCheckServlet">文档审核&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-tag"></span></a></li>
               		</c:if>
               		<c:if test="${not empty enablePublicNotice }">
-              			<li><a href="javascript:$('#handupNews').modal('show')">发布公告&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="	glyphicon glyphicon-list-alt"></span></a></li>
+              			<li><a href="javascript:showNoitcePublish()">发布公告&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="	glyphicon glyphicon-list-alt"></span></a></li>
               		</c:if>
 			      </ul>
               </li>
@@ -116,7 +116,7 @@
       <div class="modal-body">
 		  <form class="form-horizontal">
 			  <div class="form-group">
-					<span style="color: red;position: relative;left: 10%;">提示：请上传正确的html文件</span>
+					<span style="color: red;position: relative;left: 10%;">提示：请上传正确的html文件,<span style="color: blue;">请勿包含script,eval等字眼!</span></span>
 			  </div>
 		  		<div class="form-group">
 				<label for="newsname" class="col-sm-2 control-label">公告主题</label>
@@ -141,6 +141,10 @@
   </div>
 </div>
 <script>
+function showNoitcePublish(){
+	$('#handupNews').modal('show');
+}
+
 //ajax请求上传文件
 function submitNotice(){
 	

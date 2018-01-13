@@ -101,6 +101,8 @@ public class UploadNotice extends HttpServlet {
 				}
 			}
 			
+			//对于文件内容进行过滤
+			
 			//调用服务
 			NoticeService ns=new NoticeServiceImpl();
 			int res = ns.publishNotice(uuid,title, filepath, ((Staff)request.getSession().getAttribute("staff")).getStaffno(), new Date(new java.util.Date().getTime()));
