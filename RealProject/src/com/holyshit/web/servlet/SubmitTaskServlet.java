@@ -2,6 +2,7 @@ package com.holyshit.web.servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,13 +13,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
+import com.holyshit.domain.Staff;
 import com.holyshit.service.ProjectStageSercvice;
 import com.holyshit.service.impl.ProjectStageServiceImpl;
 
@@ -30,6 +34,7 @@ public class SubmitTaskServlet extends HttpServlet {
 	List<String> upload_list = new ArrayList<String>();//文件路径
 	int k = 0;
 	List<String> info_list = new ArrayList<String>();//指标内容
+	List<Document> doc_list = new ArrayList<Document>();
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -49,6 +54,10 @@ public class SubmitTaskServlet extends HttpServlet {
 		String pn = null;//publisher no
 		Inform info = new Inform();
 		String pno = request.getParameter("pno");
+		
+		HttpSession session = request.getSession();
+		Staff staff = (Staff) session.getAttribute("staff");
+		String up = staff.getStaffno();
 		
 		//创建一个本地目录
 		String directorypath = File.separator + "var" + File.separator + "ProjectData" + File.separator + "ProjectFile";
@@ -85,7 +94,27 @@ public class SubmitTaskServlet extends HttpServlet {
 					}
 				}
 				else{//上传文件
+					Document doc = new Document();
+					
 					String filename = fileitem.getName();
+					String suffix = filename.substring(filename.lastIndexOf('.')+1);
+					String fname = filename.substring(filename.lastIndexOf(File.separator)+1, filename.lastIndexOf('.'));
+					
+					filename = fname + "." + suffix;
+					
+					doc.setDtitle(fname);
+					doc.setFtype(suffix);
+					doc.setUloadpno(up);
+					
+					doc.setDtype("1");//文件类型是使用文档
+					doc.setFsize((int) fileitem.getSize());//doc 8
+					
+					//设置时间戳，mdate取名错了，应该是mtime
+					Timestamp ts = new Timestamp(System.currentTimeMillis());
+					doc.setUploadtime(ts);//文档上传时间
+					
+					doc.setDloadtimes(0);
+					doc.setAuditres("0");
 					
 					//文件路径值
 					String path = directorypath;
@@ -93,7 +122,11 @@ public class SubmitTaskServlet extends HttpServlet {
 						path = null;
 					}
 					else{
-						filename = UUID.randomUUID().toString() + "_" + filename;
+						String uu = UUID.randomUUID().toString();
+						doc.setDno(uu);//doc 1
+						
+						filename = uu +"_"+ filename;
+						
 						String code = Integer.toHexString(filename.hashCode());
 						path += File.separator + code.charAt(0) + File.separator + code.charAt(1);
 						File file = new File(path);
@@ -109,6 +142,8 @@ public class SubmitTaskServlet extends HttpServlet {
 						}
 						
 						path += File.separator + filename;
+						doc.setDpath(path);
+						
 						upload_list.add(path);
 					}
 				}
