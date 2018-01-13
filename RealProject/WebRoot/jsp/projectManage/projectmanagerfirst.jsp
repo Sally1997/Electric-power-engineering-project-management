@@ -122,7 +122,7 @@
 		    </tr>
 
 			</c:forEach>
-			<c:forEach begin="${fn:length(info_map['pi_list']) }" end="4" step="1">
+			<c:forEach begin="${fn:length(info_map['pi_list'])}" end="4" step="1">
 		    <tr name="fozza_tr" style="display:''">
 			    <td align="left"><a href="#" name="pro_no">-</a></td>
 			    <td align="left">
