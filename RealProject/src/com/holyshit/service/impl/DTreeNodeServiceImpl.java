@@ -1,18 +1,18 @@
 package com.holyshit.service.impl;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.holyshit.Dao.DTreeDao;
+import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.impl.DTreeDaoImpl;
-import com.holyshit.domain.Project;
+import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.domain.PSPlan;
+import com.holyshit.domain.Project;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.DTreeNodeService;
 import com.holyshit.utils.ConnectionManager;
@@ -113,6 +113,12 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 			map.put("name", map1.get("name"));
 			map.put("budget", map1.get("budget"));
 			map.put("staffno", map1.get("staffno"));
+			
+			String pno = no.substring(0,5);
+			//查询项目是否完成
+			ProjectDao pd = new ProjectDaoImpl();
+			String pstate = (String) pd.ifProjectIsComplished(pno).get("pstate");
+			map.put("pstate", pstate);
 			
 			//时间转换 sql.date转换成util.date
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

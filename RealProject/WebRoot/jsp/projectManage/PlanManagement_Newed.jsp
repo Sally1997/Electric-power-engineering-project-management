@@ -80,26 +80,6 @@ $(".innerUl").ProTree({
   mouIconOpen: "glyphicon glyphicon-folder-open",//含多个标题的打开字体图标 
   mouIconClose:"glyphicon glyphicon-folder-close",//含多个标题的关闭的字体图标
   callback: function(id) {
-    //alert("你选择的id是" + id + "，名字是" + name);
-    var tb = document.getElementById("thisBlock");
-    var ddm = document.getElementById("dropdownMenu1");
-    
-    var bitch = document.getElementById("bitch");
-    
-    var fozza_dj_l = id.toString();
-    if(fozza_dj_l.length==5){
-    	tb.style.display = "none";
-    	ddm.style.display = "none";
-    	
-    	bitch.style.display = "";
-    }
-    else{
-    	tb.style.display = "";
-    	ddm.style.display = "";
-    	
-    	bitch.style.display = "none";
-    }
-    
     var aja = new XMLHttpRequest();
     aja.onreadystatechange = function(){
 			if(aja.readyState==4&&aja.status==200){
@@ -119,6 +99,35 @@ $(".innerUl").ProTree({
 				p.innerHTML = ss.etime;
 				p = document.getElementById("new_budget");
 				p.innerHTML = ss.budget;
+				//alert("你选择的id是" + id + "，名字是" + name);
+			    var tb = document.getElementById("thisBlock");
+			    var ddm = document.getElementById("dropdownMenu1");
+			    
+			    var bitch = document.getElementById("bitch");
+				//项目状态
+				if(ss.pstate=="3"||ss.pstate=="4"){
+					tb.style.display = "none";
+			    	ddm.style.display = "none";
+			    	
+			    	bitch.style.display = "";
+				}
+				else{
+				var fozza_dj_l = id.toString();
+					//阶段和任务才有按钮
+					if(fozza_dj_l.length==5){
+				    	tb.style.display = "none";
+				    	ddm.style.display = "none";
+				    	
+				    	bitch.style.display = "";
+				    }
+				    else{
+				    	tb.style.display = "";
+				    	ddm.style.display = "";
+				    	
+				    	bitch.style.display = "none";
+				    }
+				}
+    
 				if (ss.indexinfo == "") {
 					p = document.getElementsByName("new_fl")[0];
 					p.style.display = "none";
@@ -428,11 +437,8 @@ function newChildTask(){
 				alert("只有负责人才可以新建子任务!");
 				return;
 			}
-			else{
-				tj.setAttribute("data-target", "#handupDc");
-			}
 			
-			//权限部分
+			//确认是否具有新建功能
 			var str = eval("("+aja.responseText+")");
 			
 			if(str.childnum=="1"){
@@ -440,20 +446,16 @@ function newChildTask(){
 				alert(which+"已经新建了子任务!");
 				return;
 			}
-			else{
-				tj.setAttribute("data-target", "#handupDc");
-			}
 			
-			//提交和新建子任务是负责人的权限
-			var djp = document.getElementById("CharP");
-		
-			var judge = "${staff.name}(${staff.staffno})";
-			
-			if(judge!=djp.innerHTML){
-				alert("只有负责人才可以新建子任务!");
+			//状态已经完成的无法新建子任务
+			var fozza_zt_dj = str.state;
+			if(fozza_zt_dj=="3"||fozza_zt_dj=="4"){
+				tj.setAttribute("data-target", "");
+				alert(which+"已经完成!无法新建子任务!");
 				return;
 			}
 			
+			tj.setAttribute("data-target", "#handupDc");
 		    window.location.href = "${pageContext.request.contextPath }/jsp/projectManage/PlanManagement_NewTask.jsp?pno=${pno}&ptn="+links_ti;
 		}
 	}
@@ -504,9 +506,6 @@ function popup(){
 				alert("只有负责人才可以提交任务!");
 				return;
 			}
-			else{
-				tj.setAttribute("data-target", "#handupDc");
-			}
 			
 			//权限部分
 			var str = eval("("+aja.responseText+")");
@@ -516,9 +515,6 @@ function popup(){
 				tj.setAttribute("data-target", "");
 				alert(which+"还未开始!喝杯咖啡吧!");
 				return;
-			}
-			else{
-				tj.setAttribute("data-target", "#handupDc");
 			}
 			
 			var hr = str.auditstate;
@@ -532,11 +528,14 @@ function popup(){
 				alert(which+"已审核通过!请勿重复提交!");
 				return;
 			}
-			else{
-				tj.setAttribute("data-target", "#handupDc");
+			
+			if(str.iactc=="1"){
+				tj.setAttribute("data-target", "");
+				alert("请确认所有子任务是否提交!");
+				return;
 			}
 			
-			
+			tj.setAttribute("data-target", "#handupDc");
 			
 			//dg=dpcument.get 弹出的窗口
 			var dg = document.getElementById("pop_taskno");

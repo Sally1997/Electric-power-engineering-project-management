@@ -44,4 +44,12 @@ public interface TaskIndexesDao {
 	 * @throws SQLException 
 	 */
 	TaskIndexs selectTaskIndexs(String indexno) throws SQLException;
+	
+	/**
+	 * 查询指标文件路径
+	 * @param taskno
+	 * @return
+	 * @throws SQLException 
+	 */
+	List<Object> selectIndexPath(String taskno) throws SQLException;
 }

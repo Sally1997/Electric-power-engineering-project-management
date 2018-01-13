@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import com.holyshit.Dao.TaskIndexesDao;
@@ -54,6 +55,14 @@ public class TaskIndexesDaoImpl implements TaskIndexesDao {
 		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("SELECT * FROM taskindexes WHERE indexno=?", 
 				new BeanHandler<TaskIndexs>(TaskIndexs.class),indexno);
+	}
+
+	@Override
+	public List<Object> selectIndexPath(String taskno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT AttachPath FROM taskindexes WHERE taskno=? AND achReq='1';", 
+				new ColumnListHandler(),taskno);
 	}
 
 }

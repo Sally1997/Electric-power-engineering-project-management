@@ -295,6 +295,13 @@ public class InformServiceImpl implements InformService {
 			else{
 				map.put("childnum", "1");
 			}
+			
+			if(std.selectIfAllChildTaskComplished(sno)==0){
+				map.put("iactc", "0");
+			}
+			else{
+				map.put("iactc", "1");
+			}
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			
@@ -322,6 +329,13 @@ public class InformServiceImpl implements InformService {
 			}
 			else{
 				map.put("childnum", "1");
+			}
+			
+			if(std.selectIfAllChildTaskComplished(tno)==0){
+				map.put("iactc", "0");
+			}
+			else{
+				map.put("iactc", "1");
 			}
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

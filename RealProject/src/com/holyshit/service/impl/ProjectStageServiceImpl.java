@@ -4,18 +4,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.holyshit.Dao.DocumentDao;
 import com.holyshit.Dao.InformDao;
 import com.holyshit.Dao.PSPlanDao;
 import com.holyshit.Dao.PSRelationDao;
 import com.holyshit.Dao.ProjectDao;
 import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.TaskIndexesDao;
+import com.holyshit.Dao.impl.DocumentDaoImpl;
 import com.holyshit.Dao.impl.InformDaoImpl;
 import com.holyshit.Dao.impl.PSPlanDaoImpl;
 import com.holyshit.Dao.impl.PSRelationDaoImpl;
 import com.holyshit.Dao.impl.ProjectDaoImpl;
 import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.Dao.impl.TaskIndexesDaoImpl;
+import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.PSRelation;
@@ -91,8 +94,16 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 				ppd.insertStage(parray[i]);
 				id.insertInform(iArray[i]);
 				
+				boolean bibiji = true;
+				for(int j=0;j<=i;j++){//如果有相同的审核人
+					if(cpn==parray[j].getCharpno()){
+						bibiji = false;
+						break;
+					}
+				}
 				//如果不在项目组里就把该人员拉进项目组里面
-				if(!psr.selectIfInProject(pno, cpn)){
+				//如果不在项目组里就把该人员拉进项目组里面
+				if(bibiji&&!psr.selectIfInProject(pno, cpn)){
 					psr.insertPSRelation(prArray[i]);
 					
 					Inform info = new Inform();
@@ -184,7 +195,7 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 
 	@Override
 	public int submitTask(String no, List<String> upload_list,
-			List<String> info_list, Inform info) {
+			List<String> info_list, Inform info,List<Document> doc_list) {
 		// TODO Auto-generated method stub
 		InformDao id = new InformDaoImpl();
 		TaskIndexesDao tid = new TaskIndexesDaoImpl();
@@ -194,6 +205,11 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 		int iwantu = 0;
 		
 		try {
+			DocumentDao dd = new DocumentDaoImpl();
+			for(int i=0;i<doc_list.size();i++){
+				dd.insertDocument(doc_list.get(i));
+			}
+			
 			for(int i=0;i<upload_list.size();i++){
 				tid.updateIndexAttachPath(no, info_list.get(i), upload_list.get(i));
 			}

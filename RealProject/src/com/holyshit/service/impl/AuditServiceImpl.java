@@ -1,5 +1,6 @@
 package com.holyshit.service.impl;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,7 @@ import com.holyshit.domain.Inform;
 import com.holyshit.domain.PDocAudit;
 import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.Projaprlaudit;
+import com.holyshit.domain.Project;
 import com.holyshit.domain.StageTask;
 import com.holyshit.service.AuditService;
 import com.holyshit.utils.AutoNumber;
@@ -257,6 +259,8 @@ public class AuditServiceImpl implements AuditService {
 		PSPlanDao ppd = new PSPlanDaoImpl();
 		StageTaskDao std = new StageTaskDaoImpl();
 		ProjectDao pd = new ProjectDaoImpl();
+		List<Object> list = new ArrayList<Object>();
+		DocumentDao dd = new DocumentDaoImpl();
 		
 		//String indexstate = "1";
 		int ra = 0;
@@ -274,6 +278,14 @@ public class AuditServiceImpl implements AuditService {
 				
 				if(sstate=="2"){//如果审核通过
 					astate = "2";
+					
+					list = tid.selectIndexPath(sno);
+					for(int haha=0;haha<list.size();haha++){
+						String ipath = (String) list.get(haha);//指标文件路径
+						String dno = ipath.substring(ipath.lastIndexOf(File.separator)+1, ipath.lastIndexOf(File.separator)+37);
+						dd.updateDocAuditState("2", dno);
+					}
+					
 					long curtime=new Date().getTime();
 					PSPlan pp = ppd.selectPsPlanInfo(sno);
 					if((curtime>pp.getEtime().getTime())){//当前时间大于截止时间
@@ -284,6 +296,20 @@ public class AuditServiceImpl implements AuditService {
 					}
 					//审核完成更新状态
 					ra = ppd.updateStageState(sno, state);
+					
+					//如果所有阶段已经完成更新项目完成状态
+					String pno = sno.substring(0,5);
+					int usn = pd.selectUnfinishedState(pno);
+					if(usn==0){//如果未完成的项目数量是0
+						Project pro = pd.selectProject(pno);
+						if((curtime>pro.getEtime().getTime())){//当前时间大于截止时间
+							state = "4";
+						}
+						else{
+							state = "3";
+						}
+						pd.updateProjectState(pno, state);
+					}
 				}
 				else{
 					astate = "0";
@@ -293,6 +319,14 @@ public class AuditServiceImpl implements AuditService {
 			else{//当任务
 				if(sstate=="2"){//如果审核通过
 					astate = "2";
+					
+					list = tid.selectIndexPath(sno);
+					for(int haha=0;haha<list.size();haha++){
+						String ipath = (String) list.get(haha);//指标文件路径
+						String dno = ipath.substring(ipath.lastIndexOf(File.separator)+1, ipath.lastIndexOf(File.separator)+37);
+						dd.updateDocAuditState("2", dno);
+					}
+					
 					long curtime=new Date().getTime();
 					StageTask st = std.selectStageTasks(sno); 
 					if((curtime>st.getEtime().getTime())){//当前时间大于截止时间

@@ -2,6 +2,7 @@ package com.holyshit.service;
 
 import java.util.List;
 
+import com.holyshit.domain.Document;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PSPlan;
 import com.holyshit.domain.PSRelation;
@@ -73,5 +74,5 @@ public interface ProjectStageSercvice {
 	 * @param info_list
 	 * @param info
 	 */
-	public int submitTask(String no,List<String> upload_list,List<String> info_list,Inform info);
+	public int submitTask(String no,List<String> upload_list,List<String> info_list,Inform info,List<Document> doc_list);
 }

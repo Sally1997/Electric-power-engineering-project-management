@@ -111,7 +111,7 @@
 						<!-- 截止日期 -->
 						<div id="end_time" class="block">
 						<div class="hehe_left">
-						<font class="text">截止日期：</font>
+						<font class="text">截止日期：</font><span style="color:red">&nbsp;*</span>
 						</div>
 						<div class="hehe_right col-lg-4">
 						<!-- <input type="date" name="EndDate" size="40px;" class="form-control"> -->
@@ -127,7 +127,7 @@
 						<!-- 预算 -->
 						<div id="budget" class="block">
 						<div class="hehe_left">
-						<font class="text">预算：</font>
+						<font class="text">预算：</font><span style="color:red">&nbsp;*</span>
 						</div>
 						<div class="hehe_right col-lg-4">
                           
@@ -303,7 +303,7 @@ function addElement()
 	var pppp = /^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$/;
 	xxx = pppp.test(vbudget);
 	
-	var hyt = true;
+	var yyy=true;
 	var vs = vstartdate.split("-");
 	var ve = venddate.split("-");
 	
@@ -317,9 +317,6 @@ function addElement()
 	if(startTime>endTime){
 		alert("阶段开始时间应该小于截止时间");
 		return;
-	}
-	if(vs.length!=3||ve.length!=3){
-		hyt = false;
 	}
 	if(vs[0]<ve[0]){
 		yyy = false;

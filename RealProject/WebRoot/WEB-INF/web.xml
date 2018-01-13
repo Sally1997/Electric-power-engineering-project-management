@@ -334,6 +334,11 @@
     <servlet-name>ParentNodeCharP</servlet-name>
     <servlet-class>com.holyshit.web.servlet.ParentNodeCharP</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>IfTaskCanBeCreated</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.IfTaskCanBeCreated</servlet-class>
+  </servlet>
+
 
 
 
@@ -607,6 +612,10 @@
   <servlet-mapping>
     <servlet-name>ParentNodeCharP</servlet-name>
     <url-pattern>/web/servlet/parentNodeCharP</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>IfTaskCanBeCreated</servlet-name>
+    <url-pattern>/web/servlet/ifTaskCanBeCreated</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
