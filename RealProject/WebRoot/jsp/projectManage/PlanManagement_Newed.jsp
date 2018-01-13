@@ -235,7 +235,7 @@ $(".innerUl").ProTree({
             <div class="clear"></div>
             <div id="responsible_per" class="block">
             <div style="text-align: right;display:none"  id="thisBlock">
-              <button id="tijiao" type="button" class="btn btn-primary"data-toggle="modal" onclick="popup()">提交</button>
+              <button id="tijiao" type="button" class="btn btn-primary" data-toggle="modal" onclick="popup()">提交</button>
               <button type="button" class="btn btn-primary" data-toggle="modal" onclick="newChildTask()">新建子任务</button>
             </div>
             <div id="bitch" style="height:34px"></div>
