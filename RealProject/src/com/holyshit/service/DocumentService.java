@@ -70,7 +70,6 @@ public interface DocumentService {
 	 * @return
 	 */
 	Document findDocumentById(String id);
-	
 	List<Document> findallneededauditfile(String me);
 	
 	void auditfile(String type,String dno);

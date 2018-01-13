@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
 	        logger.warn("warn level");  
 	        logger.error("error level");  
 	        logger.fatal("fatal level"); 
-	        
+
 			ConnectionManager.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

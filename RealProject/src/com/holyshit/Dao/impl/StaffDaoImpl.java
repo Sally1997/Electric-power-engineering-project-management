@@ -27,7 +27,6 @@ public class StaffDaoImpl implements StaffDao {
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("select a.staffno from staff a,stagetasks b where a.StaffNo=b.CharPNo and b.PNo=?", pno, new BeanListHandler<Staff>(Staff.class));
 	}
-	
 	public Staff isinproject(String staffno,String pno) throws SQLException{
 		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
 		return qr.query("select * from psrelation where staffno=? and pno=?", new BeanHandler<Staff>(Staff.class), staffno,pno);

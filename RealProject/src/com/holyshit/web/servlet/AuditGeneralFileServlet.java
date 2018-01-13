@@ -46,7 +46,6 @@ public class AuditGeneralFileServlet extends HttpServlet {
 			}
 		}
 		
-		
 		request.getRequestDispatcher("/web/servlet/showDocumentCheckServlet").forward(request,response);
 	}
 

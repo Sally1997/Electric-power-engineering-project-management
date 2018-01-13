@@ -33,6 +33,7 @@ public class SecurityLogout extends HttpServlet {
 			Logger logger = LogManager.getLogger("mylog");
 			SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	        logger.info(staff.getStaffno()+"用户于"+df.format(new Date())+"时间退出系统");
+
 			if(resDe){
 				System.out.println("从人员链表删除"+staff.getStaffno());
 			}
