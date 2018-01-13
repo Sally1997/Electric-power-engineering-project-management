@@ -210,8 +210,15 @@ public class StageTasksServiceImpl implements StageTasksService{
 					std.insertTask((parray[i]));
 					id.insertInform(iArray[i]);
 					
+					boolean bibiji = true;
+					for(int j=0;j<i;j++){//如果有相同的审核人
+						if(cpn==parray[j].getCharpno()){
+							bibiji = false;
+							break;
+						}
+					}
 					//如果不在项目组里就把该人员拉进项目组里面
-					if(!psr.selectIfInProject(pno, cpn)){
+					if(bibiji&&!psr.selectIfInProject(pno, cpn)){
 						psr.insertPSRelation(prArray[i]);
 						
 						Inform info = new Inform();

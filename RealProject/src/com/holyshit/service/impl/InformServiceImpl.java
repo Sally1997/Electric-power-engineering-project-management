@@ -11,7 +11,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.holyshit.Dao.InformDao;
+import com.holyshit.Dao.StageTaskDao;
 import com.holyshit.Dao.impl.InformDaoImpl;
+import com.holyshit.Dao.impl.StageTaskDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.InformDocument;
 import com.holyshit.domain.InformFee;
@@ -282,9 +284,17 @@ public class InformServiceImpl implements InformService {
 	public Map<String, Object> askStageIfAudited(String sno) {
 		// TODO Auto-generated method stub
 		InformDao id = new InformDaoImpl();
+		StageTaskDao std = new StageTaskDaoImpl();
 		Map<String,Object> map = new HashMap<String, Object>();
 		try {
 			map = id.selectStageIfAudited(sno);
+			
+			if(std.selectNumOfChildNodes(sno)==0){
+				map.put("childnum", "0");
+			}
+			else{
+				map.put("childnum", "1");
+			}
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			
@@ -302,9 +312,17 @@ public class InformServiceImpl implements InformService {
 	public Map<String, Object> askTaskIfAudited(String tno) {
 		// TODO Auto-generated method stub
 		InformDao id = new InformDaoImpl();
+		StageTaskDao std = new StageTaskDaoImpl();
 		Map<String,Object> map = new HashMap<String, Object>();
 		try {
 			map = id.selectTaskIfAudited(tno);
+			
+			if(std.selectNumOfChildNodes(tno)==0){
+				map.put("childnum", "0");
+			}
+			else{
+				map.put("childnum", "1");
+			}
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			

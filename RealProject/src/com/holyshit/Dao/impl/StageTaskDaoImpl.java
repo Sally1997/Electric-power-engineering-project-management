@@ -215,4 +215,11 @@ public class StageTaskDaoImpl implements StageTaskDao {
 				astate,tno);
 	}
 
+	@Override
+	public int selectNumOfChildNodes(String tno) throws SQLException {
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		long l = (long) qr.query("SELECT COUNT(ptaskno) FROM stagetasks WHERE ptaskno=?", new ScalarHandler(1),tno);
+		return (int) l;
+	}
+
 }

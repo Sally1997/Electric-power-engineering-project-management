@@ -179,4 +179,12 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	int updateTaskAuditState(String tno,String astate) throws SQLException;
+	
+	/**
+	 * 查询子节点的个数
+	 * @param tno
+	 * @return
+	 * @throws SQLException 
+	 */
+	int selectNumOfChildNodes(String tno) throws SQLException;
 }
