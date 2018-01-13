@@ -10,12 +10,14 @@ import java.sql.SQLException;
 
 
 
+
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import com.holyshit.Dao.AccountDao;
 import com.holyshit.domain.Account;
 import com.holyshit.utils.ConnectionManager;
+import com.holyshit.utils.MD5Util;
 
 public class AccountDaoImpl implements AccountDao{
 
@@ -61,5 +63,4 @@ public class AccountDaoImpl implements AccountDao{
 		
 		return qr.batch(ConnectionManager.getConnection(), "delete from account where staffno=?", para);
 	}
-
 }
