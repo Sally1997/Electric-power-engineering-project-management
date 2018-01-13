@@ -199,5 +199,31 @@ public class DocumentServiceImpl implements DocumentService {
 			}
 		}
 	}
+	@Override
+	public String getPDocNo(String pno) {
+		// TODO Auto-generated method stub
+		DocumentDao dd=new DocumentDaoImpl();
+		String dno = null;
+		try {
+			dno = (String) dd.selectPDocNo(pno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dno;
+	}
+	@Override
+	public void changeDocAuditRes(String agree, String dno) {
+		// TODO Auto-generated method stub
+		DocumentDao dd=new DocumentDaoImpl();
+		try {
+			dd.updateDocAuditState(agree, dno);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			ConnectionManager.closeConnection();
+		}
+	}
 
 }

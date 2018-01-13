@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.holyshit.Dao.PSRelationDao;
-import com.holyshit.Dao.impl.PSRelationDaoImpl;
 import com.holyshit.domain.Inform;
 import com.holyshit.domain.PSRelation;
 import com.holyshit.domain.Projaprlaudit;
 import com.holyshit.domain.Project;
 import com.holyshit.domain.Staff;
 import com.holyshit.service.AuditService;
+import com.holyshit.service.DocumentService;
 import com.holyshit.service.InformService;
 import com.holyshit.service.ProjectService;
 import com.holyshit.service.StaffService;
 import com.holyshit.service.impl.AuditServiceImpl;
+import com.holyshit.service.impl.DocumentServiceImpl;
 import com.holyshit.service.impl.InformServiceImpl;
 import com.holyshit.service.impl.ProjectServiceImpl;
 import com.holyshit.service.impl.StaffServiceImpl;
@@ -68,7 +68,12 @@ public class ProjectAuditServlet extends HttpServlet {
 			
 			String pno = paa1.getPno();
 			
+			DocumentService ds = new DocumentServiceImpl();
+			String dno = ds.getPDocNo(pno);
+			
 			if(aev=="2"){
+				ds.changeDocAuditRes(aev, dno);
+				
 				aev = "y";
 				
 				ps.changeProjectState(pno, aev);
@@ -84,6 +89,8 @@ public class ProjectAuditServlet extends HttpServlet {
 				infoser.addInform(info1);
 			}
 			else{
+				ds.changeDocAuditRes(aev, dno);
+				
 				aev = "n";
 				
 				ps.changeProjectState(pno, aev);

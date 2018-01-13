@@ -122,4 +122,12 @@ public interface DocumentDao {
 	 * @throws SQLException 
 	 */
 	void updateDocAuditState(String agree,String dno) throws SQLException;
+	
+	/**
+	 * 查询项目表
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Object selectPDocNo(String pno) throws SQLException;
 }

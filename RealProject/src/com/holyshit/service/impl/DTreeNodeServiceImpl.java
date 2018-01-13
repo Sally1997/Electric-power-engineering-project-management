@@ -122,7 +122,7 @@ public class DTreeNodeServiceImpl implements DTreeNodeService {
 			map.put("stime", dd1);
 			java.sql.Date date2 = (java.sql.Date) map1.get("etime");
 			java.util.Date d2 = new java.util.Date(date2.getTime());
-			String dd2 = sdf.format(d1);
+			String dd2 = sdf.format(d2);
 			map.put("etime", dd2);
 			
 			//获取指标信息

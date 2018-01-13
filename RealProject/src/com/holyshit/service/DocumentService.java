@@ -1,7 +1,7 @@
 package com.holyshit.service;
 
 import java.sql.Date;
-
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -74,4 +74,19 @@ public interface DocumentService {
 	List<Document> findallneededauditfile();
 	
 	void auditfile(String type,String dno);
+	
+	/**
+	 * 查询项目表文档编号
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	String getPDocNo(String pno);
+	
+	/**
+	 * 改变文档状态
+	 * @param agree
+	 * @param dno
+	 */
+	public void changeDocAuditRes(String agree, String dno);
 }

@@ -258,7 +258,7 @@ public class AuditServiceImpl implements AuditService {
 		StageTaskDao std = new StageTaskDaoImpl();
 		ProjectDao pd = new ProjectDaoImpl();
 		
-		String indexstate = "1";
+		//String indexstate = "1";
 		int ra = 0;
 		ConnectionManager.startTransaction();
 		try {
