@@ -73,4 +73,19 @@ public interface DocumentService {
 	List<Document> findallneededauditfile(String me);
 	
 	void auditfile(String type,String dno);
+	
+	/**
+	 * 查询项目表文档编号
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	String getPDocNo(String pno);
+	
+	/**
+	 * 改变文档状态
+	 * @param agree
+	 * @param dno
+	 */
+	public void changeDocAuditRes(String agree, String dno);
 }

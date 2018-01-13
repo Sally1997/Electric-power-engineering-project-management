@@ -213,4 +213,11 @@ public class DocumentDaoImpl implements DocumentDao{
 				agree,dno);
 	}
 
+	@Override
+	public Object selectPDocNo(String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT pdocno FROM pdocaudit WHERE pno=?",new ScalarHandler(1),pno);
+	}
+
 }
