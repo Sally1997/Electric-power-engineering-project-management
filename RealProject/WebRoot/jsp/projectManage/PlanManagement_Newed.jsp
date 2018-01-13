@@ -463,6 +463,7 @@ function popup(){
 			else{
 				tj.setAttribute("data-target", "#handupDc");
 			}
+			alert(111);
 			//权限部分
 			var str = eval("("+aja.responseText+")");
 			var myDate=new Date().getTime();

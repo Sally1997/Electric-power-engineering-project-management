@@ -106,7 +106,7 @@
 		    <tr name="fozza_tr" style="display:''">
 			    <td align="left"><a href="javascript:window.location.href='/RealProject/web/servlet/judgeStageExist?pno=${pl.pno }'" name="pro_no">${pl.pno }</a></td>
 			    <td align="left">
-			    	<div class="dropdown"><span name="pro_pname">${pl.pname }</span>
+			    	<div class="dropdown"><span name="pro_pname" title="${pl.pname }">${pl.pname }</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="/RealProject/web/servlet/staffListServlet?pno=${pl.pno }">人员管理</a></li>
@@ -116,7 +116,7 @@
 				</td>
 
 			    <td align="left">${pl.name }</td>
-			    <td align="left">${pl.duty }</td>
+			    <td align="left" name="pro_duty" title="${pl.duty }">${pl.duty }</td>
 			    <td align="left" >${pl.ptype }</td>
 			    <td align="left">${pl.pstate }</td>
 		    </tr>
@@ -126,7 +126,7 @@
 		    <tr name="fozza_tr" style="display:''">
 			    <td align="left"><a href="#" name="pro_no">-</a></td>
 			    <td align="left">
-			    	<div class="dropdown"><span name="pro_pname">-</span>
+			    	<div class="dropdown"><span name="pro_pname" title="-">-</span>
   						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="#">人员管理</a></li>
@@ -136,13 +136,24 @@
 				</td>
 
 			    <td align="left">-</td>
-			    <td align="left">-</td>
+			    <td align="left" name="pro_duty" title="${pl.duty }">-</td>
 			    <td align="left" >-</td>
 			    <td align="left">-</td>
 		    </tr>
 
 			</c:forEach>
 	        </table> 
+	        <script type="text/javascript">
+	        	//对于项目长度进行控制
+	        	var names=document.getElementsByName("pro_pname");
+	        	var duties=document.getElementsByName("pro_duty");
+	        	for(var i=0;i<names.length;i++){
+	        		if(names[i].innerHTML.length>10)
+	        			names[i].innerHTML=names[i].innerHTML.substr(0,10)+"...";
+	        		if(duties[i].innerHTML.length>6)
+	        			duties[i].innerHTML=duties[i].innerHTML.substr(0,6)+"...";
+	        	}
+	        </script>
 					</div> 
                     </div>
                 </div>
