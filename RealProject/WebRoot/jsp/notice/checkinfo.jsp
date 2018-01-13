@@ -355,6 +355,9 @@ function give_option(){
 				alert("您必须选取其他人为立项审批人!");
 				return;
 			}
+			else if("${map.name }==${staff.name}"){
+				alert("您不能选择申请人为立项审批人!");
+			}
 			
 			mng.value = ccp[i].value;
 			mng.style.display = "";

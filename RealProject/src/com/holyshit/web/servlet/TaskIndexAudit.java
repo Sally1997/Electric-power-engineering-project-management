@@ -38,7 +38,7 @@ public class TaskIndexAudit extends HttpServlet {
 		}
 		else{
 			agree="1";
-			info.setMtype("A9");
+			info.setMtype("A7");
 		}
 		
 		String pno = stageno.substring(0,5);

@@ -33,7 +33,7 @@ public class StageIndexAudit extends HttpServlet {
 		Inform info = new Inform();
 		if(agree.equals("agree")){
 			agree="2";
-			info.setMtype("A7");
+			info.setMtype("A9");
 		}
 		else{
 			agree="1";
