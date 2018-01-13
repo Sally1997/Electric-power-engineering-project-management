@@ -330,6 +330,11 @@
     <servlet-name>IfNodeIsAudited</servlet-name>
     <servlet-class>com.holyshit.web.servlet.IfNodeIsAudited</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ParentNodeCharP</servlet-name>
+    <servlet-class>com.holyshit.web.servlet.ParentNodeCharP</servlet-class>
+  </servlet>
+
 
 
 
@@ -598,6 +603,10 @@
 <servlet-mapping>
     <servlet-name>IfNodeIsAudited</servlet-name>
     <url-pattern>/web/servlet/ifNodeIsAudited</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ParentNodeCharP</servlet-name>
+    <url-pattern>/web/servlet/parentNodeCharP</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

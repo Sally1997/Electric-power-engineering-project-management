@@ -350,13 +350,16 @@ function give_option(){
 	for(var i=0;i<ccp.length;i++){
 		if(ccp[i].checked==true){
 			var fozza_cp = ccp[i].value;
+			var hisname = ccp[i].value.split("(");
+			
 			var shabi = "${staff.name}(${staff.staffno})";
 			if(fozza_cp==shabi){
 				alert("您必须选取其他人为立项审批人!");
 				return;
 			}
-			else if("${map.name }==${staff.name}"){
+			else if("${map.name }"==hisname[0]){
 				alert("您不能选择申请人为立项审批人!");
+				return;
 			}
 			
 			mng.value = ccp[i].value;

@@ -834,6 +834,8 @@ function search_staff(){
 //选择按钮事件
 function give_option(){
 	var aja = new XMLHttpRequest();
+	var hyt = new XMLHttpRequest();
+	
 	var node = document.getElementById("task_name").innerHTML;
 	var rcpn = null;
 	
@@ -841,23 +843,40 @@ function give_option(){
 	//这个是弹窗的id
 	var ser = document.getElementsByName("search")[0];
 	var p = document.getElementById("CharP");  
+	
 	for(var i=0;i<ccp.length;i++){
 		if(ccp[i].checked==true){
-			p.innerHTML = ccp[i].value;
-			rcpn = ccp[i].value;
+			var cv = ccp[i].value;
+			hyt.onreadystatechange = function(){
+				if(hyt.readyState==4&&hyt.status==200){
+					var str = eval("("+hyt.responseText+")");
+					var mymy = str.name +"("+str.staffno+")";
+					if(mymy==cv){
+						alert("你不能选择发布人为负责人");
+						return;
+					}
+					
+					p.innerHTML = cv;
+					rcpn = cv;
+					
+					aja.onreadystatechange = function(){
+						if(aja.readyState==4&&aja.status==200){
+							alert(aja.responseText);
+						}
+					}
+					
+					alert("您将修改负责人为"+rcpn);
+					
+					aja.open("get", "${pageContext.request.contextPath}/web/servlet/changeTaskCharP?rcpn="+rcpn+"&node="+node);
+					aja.send(null);
+				}
+			}
 			break;
 		}
 	}
 	
-	aja.onreadystatechange = function(){
-		if(aja.readyState==4&&aja.status==200){
-			alert(aja.responseText);
-		}
-	}
-	
-	alert("您将修改负责人为"+rcpn);
-	aja.open("get", "${pageContext.request.contextPath}/web/servlet/changeTaskCharP?rcpn="+rcpn+"&node="+node);
-	aja.send(null);
+	hyt.open("get", "${pageContext.request.contextPath}/web/servlet/parentNodeCharP?&node="+node);
+	hyt.send(null);
 }
 
 function pageinr(){
