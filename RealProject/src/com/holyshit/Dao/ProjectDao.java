@@ -152,6 +152,14 @@ public interface ProjectDao {
 	 * @throws SQLException
 	 */
 	int[] updateProjectByPara(Map<String, String> para)throws SQLException;
+	
+	/**
+	 * 查询正在进行喜爱项目的数量
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectWorkingProjectNumberById(String id)throws SQLException;
 }  
 
 

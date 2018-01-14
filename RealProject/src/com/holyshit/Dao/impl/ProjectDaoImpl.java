@@ -181,4 +181,11 @@ public class ProjectDaoImpl implements ProjectDao {
 		String sql="update project set pstate=? where pno=?";
 		return qr.batch(ConnectionManager.getConnection(), sql, hehe);
 	}
+
+	@Override
+	public long selectWorkingProjectNumberById(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner();
+		return (Long) qr.query(ConnectionManager.getConnection(),"SELECT COUNT(*) FROM psrelation ps JOIN project pr ON ps.PNo=pr.PNo WHERE staffno=? AND (pstate='1' or pstate='2')",new ScalarHandler(),id);
+	}
 }
