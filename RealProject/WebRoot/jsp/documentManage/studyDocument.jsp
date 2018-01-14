@@ -175,7 +175,7 @@
        
     </section>
     
-    <!--  默认隐藏的内容:上传文件-->
+ <!--  默认隐藏的内容:上传文件-->
   <div class="modal fade" id="handupFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -188,7 +188,7 @@
 		  		<div class="form-group">
 				<label for="newsname" class="col-sm-2 control-label">文件主题</label>
 				<div class="col-sm-8">
-		            <input class="form-control" type = "text" id="newstitle">
+		            <input type="text" class="form-control" id="document_dtitle">
 				</div>
 			  </div>
 		  		<!-- 文件类型 -->
@@ -206,14 +206,14 @@
 			  	<div class="form-group">
 				<label for="addfile" class="col-sm-2 control-label">上传文件</label>
 				<div class="col-sm-8">
-		            <input type = "file" id="newfile" multiple="multiple">
+		            <input type = "file" id="newfile">
 				</div>
 			  </div>
           </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="submitFile();">上传</button>
+        <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="submitFile();">上传</button>
       </div>
     </div>
   </div>
