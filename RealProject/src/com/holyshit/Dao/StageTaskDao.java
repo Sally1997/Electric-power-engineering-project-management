@@ -187,4 +187,12 @@ public interface StageTaskDao {
 	 * @throws SQLException 
 	 */
 	int selectNumOfChildNodes(String tno) throws SQLException;
+	
+	/**
+	 * 查询未完成的子节点个数
+	 * @param ptaskno
+	 * @return
+	 * @throws SQLException 
+	 */
+	int selectIfAllChildTaskComplished(String ptaskno) throws SQLException;
 }

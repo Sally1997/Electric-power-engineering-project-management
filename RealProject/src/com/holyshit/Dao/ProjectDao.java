@@ -160,6 +160,21 @@ public interface ProjectDao {
 	 * @throws SQLException
 	 */
 	long selectWorkingProjectNumberById(String id)throws SQLException;
+	 * 查询未完成的项目阶段数量
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	int selectUnfinishedState(String pno) throws SQLException;
+	
+	/**
+	 * 项目是否完成
+	 * 马勒戈壁，回头看这个名字，妈的就是查状态好吧
+	 * @param pno
+	 * @return
+	 * @throws SQLException 
+	 */
+	Map<String,Object> ifProjectIsComplished(String pno) throws SQLException;
 }  
 
 

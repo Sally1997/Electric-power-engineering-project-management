@@ -102,19 +102,20 @@ public class SubmitTaskServlet extends HttpServlet {
 					
 					filename = fname + "." + suffix;
 					
-					doc.setDtitle(fname);
-					doc.setFtype(suffix);
-					doc.setUloadpno(up);
+					doc.setDtitle(fname);//1
+					doc.setFtype(suffix);//2
+					doc.setUloadpno(up);//3
+					doc.setPno(pno);
 					
-					doc.setDtype("1");//文件类型是使用文档
-					doc.setFsize((int) fileitem.getSize());//doc 8
+					doc.setDtype("1");//文件类型是使用文档 4
+					doc.setFsize((int) fileitem.getSize());//doc 5
 					
 					//设置时间戳，mdate取名错了，应该是mtime
 					Timestamp ts = new Timestamp(System.currentTimeMillis());
-					doc.setUploadtime(ts);//文档上传时间
+					doc.setUploadtime(ts);//文档上传时间 6 
 					
-					doc.setDloadtimes(0);
-					doc.setAuditres("0");
+					doc.setDloadtimes(0);//7
+					doc.setAuditres("0");//8
 					
 					//文件路径值
 					String path = directorypath;
@@ -123,7 +124,7 @@ public class SubmitTaskServlet extends HttpServlet {
 					}
 					else{
 						String uu = UUID.randomUUID().toString();
-						doc.setDno(uu);//doc 1
+						doc.setDno(uu);//doc 9
 						
 						filename = uu +"_"+ filename;
 						
@@ -142,9 +143,10 @@ public class SubmitTaskServlet extends HttpServlet {
 						}
 						
 						path += File.separator + filename;
-						doc.setDpath(path);
+						doc.setDpath(path);//10
 						
 						upload_list.add(path);
+						doc_list.add(doc);
 					}
 				}
 			}
@@ -172,7 +174,7 @@ public class SubmitTaskServlet extends HttpServlet {
 		info.setSrcpno(cpn);
 		info.setDstpno(pn);
 		
-		int iwu = pss.submitTask(no, upload_list, info_list, info);
+		int iwu = pss.submitTask(no, upload_list, info_list, info,doc_list);
 		
 		//提交完成啦~跳回树状图把
 		if(iwu==0){

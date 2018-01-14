@@ -222,4 +222,14 @@ public class StageTaskDaoImpl implements StageTaskDao {
 		return (int) l;
 	}
 
+	@Override
+	public int selectIfAllChildTaskComplished(String ptaskno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		long l = (long) qr.query("SELECT ((SELECT COUNT(*) AS COUNT FROM stagetasks WHERE ptaskno=?) "+
+				"-(SELECT COUNT(*) AS COUNT FROM stagetasks WHERE ptaskno=? AND tstate IN ('3','4'))) AS result",
+				new ScalarHandler(1),ptaskno,ptaskno);
+		return (int) l;
+	}
+
 }

@@ -126,7 +126,7 @@
 						<!-- 截止日期 -->
 						<div id="end_time" class="block">
 						<div class="hehe_left">
-						<font class="text">截止日期：</font>
+						<font class="text">截止日期：</font><span style="color:red">&nbsp;*</span>
 						</div>
 						<div class="hehe_right col-lg-4">
 						<!-- <input type="date" name="EndDate" size="40px;" class="form-control"> -->
@@ -142,7 +142,7 @@
 						<!-- 预算 -->
 						<div id="budget" class="block">
 						<div class="hehe_left">
-						<font class="text">预算：</font>
+						<font class="text">预算：</font><span style="color:red">&nbsp;*</span>
 						</div>
 						<div class="hehe_right col-lg-4">
                           

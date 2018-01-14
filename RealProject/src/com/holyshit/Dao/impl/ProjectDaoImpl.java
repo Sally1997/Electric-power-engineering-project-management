@@ -11,6 +11,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.holyshit.Dao.DTreeDao;
@@ -188,4 +189,20 @@ public class ProjectDaoImpl implements ProjectDao {
 		QueryRunner qr=new QueryRunner();
 		return (Long) qr.query(ConnectionManager.getConnection(),"SELECT COUNT(*) FROM psrelation ps JOIN project pr ON ps.PNo=pr.PNo WHERE staffno=? AND (pstate='1' or pstate='2')",new ScalarHandler(),id);
 	}
+	public int selectUnfinishedState(String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		long l = (long) qr.query("SELECT ((SELECT COUNT(*) AS COUNT FROM psplan WHERE pno=?) "+
+				"-(SELECT COUNT(*) AS COUNT FROM psplan WHERE pno=? AND sstate IN ('3','4'))) AS result",
+				new ScalarHandler(1),pno,pno);
+		return (int) l;
+	}
+
+	@Override
+	public Map<String, Object> ifProjectIsComplished(String pno) throws SQLException {
+		// TODO Auto-generated method stub
+		QueryRunner qr=new QueryRunner(C3P0Util.getDataSource());
+		return qr.query("SELECT pstate FROM project WHERE pno=?",new MapHandler(),pno);
+	}
+	
 }
