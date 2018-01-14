@@ -211,8 +211,8 @@ public class StageTasksServiceImpl implements StageTasksService{
 					id.insertInform(iArray[i]);
 					
 					boolean bibiji = true;
-					for(int j=0;j<i;j++){//如果有相同的审核人
-						if(cpn==parray[j].getCharpno()){
+					for(int j=0;j<i;j++){//如果有相同的审核人 1 1 2
+						if(cpn.equals(parray[j].getCharpno())){
 							bibiji = false;
 							break;
 						}
