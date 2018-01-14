@@ -36,13 +36,15 @@ public class CanJumpProServlet extends HttpServlet {
 		String pno = request.getParameter("pno");
 		String mno = request.getParameter("mno");
 		StaffService ss = new StaffServiceImpl();
+		InformService is = new InformServiceImpl();
 		int a = ss.isinproject(me, pno);
 		if(a==0)
 		{
-			request.getRequestDispatcher("/web/servlet/shouInformServlet").forward(request, response);
+			is.updatehasread(mno);
+			request.getRequestDispatcher("/web/servlet/shouInformServlet?type=1").forward(request, response);
 		}
 		else {
-			InformService is = new InformServiceImpl();
+			
 			is.updatehasread(mno);
 			request.setAttribute("pno", pno);
 			request.getRequestDispatcher("/web/servlet/staffListServlet").forward(request, response);
