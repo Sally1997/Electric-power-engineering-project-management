@@ -135,7 +135,7 @@ public class StageServlet extends HttpServlet {
 		
 		response.getWriter().write("<script type='text/javascript'>alert('新建成功!')</script>");
 		//分发转向
-		response.setHeader("refresh", "0.5;url=/RealProject/servlet/DTreeNodeServlet?pno="+pn);		
+		//response.setHeader("refresh", "0.5;url=/RealProject/servlet/DTreeNodeServlet?pno="+pn);		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

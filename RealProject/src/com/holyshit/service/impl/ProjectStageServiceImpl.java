@@ -95,14 +95,17 @@ public class ProjectStageServiceImpl implements ProjectStageSercvice {
 				id.insertInform(iArray[i]);
 				
 				boolean bibiji = true;
-				for(int j=0;j<=i;j++){//如果有相同的审核人
-					if(cpn==parray[j].getCharpno()){
+				//System.out.println("当前审核人是"+cpn);
+				for(int j=0;j<i;j++){//如果有相同的审核人
+					//System.out.println("第"+j+"个"+parray[j].getCharpno());
+					if(cpn.equals(parray[j].getCharpno())){//神他妈用了==
 						bibiji = false;
+						//System.out.println(bibiji+"~~重复了啊");
 						break;
 					}
 				}
 				//如果不在项目组里就把该人员拉进项目组里面
-				//如果不在项目组里就把该人员拉进项目组里面
+				//System.out.println(bibiji);
 				if(bibiji&&!psr.selectIfInProject(pno, cpn)){
 					psr.insertPSRelation(prArray[i]);
 					
