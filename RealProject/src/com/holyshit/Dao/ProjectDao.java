@@ -52,7 +52,7 @@ public interface ProjectDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	long selectWorkingProjectNumberById(String id) throws SQLException;
+	long selectCanBudgetProjectNumberById(String id) throws SQLException;
 	/**
 	 * 显示当前页的项目的信息
 	 * @param cur  当前页面
@@ -154,7 +154,13 @@ public interface ProjectDao {
 	int[] updateProjectByPara(Map<String, String> para)throws SQLException;
 	
 	/**
-	 * 查询未完成的项目阶段数量
+	 * 查询正在进行喜爱项目的数量
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
+	long selectWorkingProjectNumberById(String id)throws SQLException;
+	 /* 查询未完成的项目阶段数量
 	 * @param pno
 	 * @return
 	 * @throws SQLException 

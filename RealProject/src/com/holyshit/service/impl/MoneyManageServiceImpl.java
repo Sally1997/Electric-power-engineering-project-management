@@ -53,11 +53,10 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 		JSONArray projectbudget=new JSONArray();
 		try {
 			//获取用户正在进行的项目数量 
-			totalSize=pd.selectWorkingProjectNumberById(id);
+			totalSize=pd.selectCanBudgetProjectNumberById(id);
 			
 			//获取当前页面3个项目的具体信息
 			projects=pd.showPage(cur, pagesize, id);
-			
 			for(Project p:projects){
 				//阶段已经使用  剩余预算  阶段超标
 				String pname=p.getPname();
@@ -203,7 +202,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 					project=projects.getJSONObject(project_flag.get(task.getPno()));
 				}else {
 					project=new JSONObject();
-					project.put("pname", task.getPname());
+					String res1 = task.getPname().replace(" ", "");
+					project.put("pname", res1);
 					project.put("stagelist", new JSONArray());
 					project_flag.put(task.getPno(), projects.size());
 					projects.add(project);
@@ -216,7 +216,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 					stage=stages.getJSONObject(stage_flag.get(task.getStageno()));
 				}else {
 					stage=new JSONObject();
-					stage.put("sname", task.getSname());
+					String res2 = task.getSname().replace(" ", "");
+					stage.put("sname", res2);
 					stage.put("tasklist", new JSONArray());
 					stage_flag.put(task.getStageno(), stages.size());
 					stages.add(stage);
@@ -229,7 +230,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				BigDecimal hasused = std.selectFeeUsedByTaskno(task.getTaskno());
 				if(hasused!=null)
 					used=Double.parseDouble(hasused.toString());
-				atask.put("taskname", task.getTaskname());
+				String res3 = task.getTaskname().replace(" ", "");
+				atask.put("taskname", res3);
 				atask.put("taskno", task.getTaskno());
 				atask.put("budget", task.getBudget()-used);
 				manytask.add(atask);
@@ -445,6 +447,7 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 			String format = sdf.format(new java.util.Date(fa.getStime().getTime()));
 			fad.put("stime", format);
 			fad.put("fee", fa.getFee());
+			fad.put("fauditno", fa.getFauditno());
 			fad.put("auditadv", fa.getAuditadv());
 			fad.put("ofeereason", fa.getOfeereason());
 			fad.put("auditstate", fa.getAuditstate());

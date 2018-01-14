@@ -615,7 +615,6 @@ function submitFeeInfo(){
       			node.innerHTML=taskinfo[project_pos].stagelist[i].sname;
       			stage_select.appendChild(node);
       		}	
-      		
       	}
       	function showTask(){
       		//删除以前的

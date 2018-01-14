@@ -22,7 +22,9 @@
    		var taskinfo="";
    		var feeData=eval('('+'${fee["feeaudits"]}'+')');
    		var auditData;
-   		var fauditno;  //报账表编号 --审核
+   		
+   		var type="${type}";
+   		var fauditno="${fauditno}";  //报账表编号 --审核
    		//ajax请求
 
    		function getFunction(cur){
@@ -406,11 +408,12 @@
           				task_fee.disabled="disabled";
           				over_cause.disabled="disabled";
           			}else{
-          				for(var i=0;i<taskinfo.length;i++)
-          					if(taskinfo[i].pname==project_select.value){
+          				for(var i=0;i<taskinfo.length;i++){
+          					if(project_select.value==taskinfo[i].pname){
           						project_pos=i;
           						break;
           					}
+          				}
           				//取消禁止
           				stage_select.removeAttribute("disabled");
           				//刷新阶段
@@ -634,9 +637,8 @@
 			</div>
         <script type="text/javascript">
         	var jumpAuditData="";
+        	
 	   		window.onload=function(){
-	   			var type="${type}";
-	   			var fauditno="${fauditno}";
 	   			//是否发送请求
 	   			if(type!=""&&fauditno!=""){
 	   				var req=new XMLHttpRequest();

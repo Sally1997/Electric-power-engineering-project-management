@@ -56,8 +56,16 @@
  				
  			
  				nodes[1].innerHTML=nodes[1].innerHTML='<div class="dropdown"><span name="pro_pname">'+dataJson[i].pname+'</span><span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span><ul class="dropdown-menu" aria-labelledby="dropdownMenu1"><li><a href="/RealProject/web/servlet/staffListServlet?pno='+dataJson[i].pno+'">人员管理</a></li><li><a href="/RealProject/web/servlet/judgeStageExist?pno='+dataJson[i].pno+'">计划管理</a></li></ul></div>';
+ 				var spans=nodes[1].getElementsByTagName("span");
+ 				spans[0].title=dataJson[i].pname;
+ 				if(dataJson[i].pname.length>10)
+ 					spans[0].innerHTML=spans[0].innerHTML.substr(0,10)+"...";
+ 				
  				nodes[2].innerHTML=dataJson[i].name;
  				nodes[3].innerHTML=dataJson[i].duty;
+ 				if(nodes[3].innerHTML.length>6){
+ 					nodes[3].innerHTML=nodes[3].innerHTML.substr(0,6)+"...";
+ 				}
  				nodes[4].innerHTML=dataJson[i].ptype;
  				nodes[5].innerHTML=dataJson[i].pstate;
  			
@@ -127,7 +135,7 @@
 			    <td align="left"><a href="#" name="pro_no">-</a></td>
 			    <td align="left">
 			    	<div class="dropdown"><span name="pro_pname" title="-">-</span>
-  						<span class="glyphicon glyphicon-paperclip" style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
+  						<span  style="cursor: pointer;float:right;" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></span>
   						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     						<li><a href="#">人员管理</a></li>
     						<li><a href="#">计划管理</a></li>

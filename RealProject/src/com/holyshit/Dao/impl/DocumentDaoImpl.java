@@ -87,7 +87,7 @@ public class DocumentDaoImpl implements DocumentDao{
 		String sql="select dno,UloadPNo,DTitle,UploadTime,FType,PName,dloadtimes,ptype,fsize from ";
 		
 		if(!dtype.equals("")){
-			sql+=" document p join project on p.pno=project.pno where p.dtype='"+dtype+"'";
+			sql+=" document p join project on p.pno=project.pno where p.dtype='"+dtype+"' and auditres='2'";
 		}else{
 			//一个复杂的sql
 			sql+="(SELECT project.pno,project.pname,project.ptype,document.dno,document.dtitle,document.UloadPNo,document.UploadTime,document.DloadTimes,document.FType,document.FSize FROM document JOIN project ON document.pno=project.pno WHERE (project.pstate='3' OR project.pstate='4') AND auditres='2' union ";
@@ -133,7 +133,7 @@ public class DocumentDaoImpl implements DocumentDao{
 		String sql="select count(*) from ";
 		
 		if(!dtype.equals("")){
-			sql+=" document p join project on p.pno=project.pno where p.dtype='"+dtype+"'";
+			sql+=" document p join project on p.pno=project.pno where p.dtype='"+dtype+"' and auditres='2'";
 		}else{
 			//一个复杂的sql
 			sql+="(SELECT project.pno,project.pname,project.ptype,document.dno,document.dtitle,document.UloadPNo,document.UploadTime,document.DloadTimes,document.FType,document.FSize FROM document JOIN project ON document.pno=project.pno WHERE (project.pstate='3' OR project.pstate='4') AND auditres='2' union ";
