@@ -408,11 +408,12 @@
           				task_fee.disabled="disabled";
           				over_cause.disabled="disabled";
           			}else{
-          				for(var i=0;i<taskinfo.length;i++)
-          					if(taskinfo[i].pname==project_select.value){
+          				for(var i=0;i<taskinfo.length;i++){
+          					if(project_select.value==taskinfo[i].pname){
           						project_pos=i;
           						break;
           					}
+          				}
           				//取消禁止
           				stage_select.removeAttribute("disabled");
           				//刷新阶段

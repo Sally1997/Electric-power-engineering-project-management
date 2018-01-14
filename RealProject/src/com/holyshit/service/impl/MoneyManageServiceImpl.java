@@ -202,7 +202,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 					project=projects.getJSONObject(project_flag.get(task.getPno()));
 				}else {
 					project=new JSONObject();
-					project.put("pname", task.getPname());
+					String res1 = task.getPname().replace(" ", "");
+					project.put("pname", res1);
 					project.put("stagelist", new JSONArray());
 					project_flag.put(task.getPno(), projects.size());
 					projects.add(project);
@@ -215,7 +216,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 					stage=stages.getJSONObject(stage_flag.get(task.getStageno()));
 				}else {
 					stage=new JSONObject();
-					stage.put("sname", task.getSname());
+					String res2 = task.getSname().replace(" ", "");
+					stage.put("sname", res2);
 					stage.put("tasklist", new JSONArray());
 					stage_flag.put(task.getStageno(), stages.size());
 					stages.add(stage);
@@ -228,7 +230,8 @@ public class MoneyManageServiceImpl implements MoneyManageService {
 				BigDecimal hasused = std.selectFeeUsedByTaskno(task.getTaskno());
 				if(hasused!=null)
 					used=Double.parseDouble(hasused.toString());
-				atask.put("taskname", task.getTaskname());
+				String res3 = task.getTaskname().replace(" ", "");
+				atask.put("taskname", res3);
 				atask.put("taskno", task.getTaskno());
 				atask.put("budget", task.getBudget()-used);
 				manytask.add(atask);

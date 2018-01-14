@@ -160,7 +160,7 @@ public interface ProjectDao {
 	 * @throws SQLException
 	 */
 	long selectWorkingProjectNumberById(String id)throws SQLException;
-	 * 查询未完成的项目阶段数量
+	 /* 查询未完成的项目阶段数量
 	 * @param pno
 	 * @return
 	 * @throws SQLException 
